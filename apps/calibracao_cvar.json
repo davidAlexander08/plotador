@@ -1,0 +1,87 @@
+{
+    "estudo": "FEV21",
+    "nome_caso_referencia": "REE",
+    "casos": [
+        {
+            "nome": "REE",
+            "caminho": "FEV21/ree_25x35",
+            "cor": "rgba(0, 0, 0, 1.00)",
+            "marcador": "square"
+        },
+        {
+            "nome": "25x35",
+            "caminho": "FEV21/hib12_25x35",
+            "cor": "rgba(66, 179, 245, 0.25)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "25x40",
+            "caminho": "FEV21/hib12_25x40",
+            "cor": "rgba(66, 179, 245, 0.50)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "25x50",
+            "caminho": "FEV21/hib12_25x50",
+            "cor": "rgba(66, 179, 245, 0.75)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "25x60",
+            "caminho": "FEV21/hib12_25x60",
+            "cor": "rgba(66, 179, 245, 1.00)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "20x35",
+            "caminho": "FEV21/hib12_20x35",
+            "cor": "rgba(186, 237, 57, 0.25)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "20x40",
+            "caminho": "FEV21/hib12_20x40",
+            "cor": "rgba(186, 237, 57, 0.50)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "20x50",
+            "caminho": "FEV21/hib12_20x50",
+            "cor": "rgba(186, 237, 57, 0.75)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "20x60",
+            "caminho": "FEV21/hib12_20x60",
+            "cor": "rgba(186, 237, 57, 1.00)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "15x35",
+            "caminho": "FEV21/hib12_15x35",
+            "cor": "rgba(232, 142, 39, 0.25)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "15x40",
+            "caminho": "FEV21/hib12_15x40",
+            "cor": "rgba(232, 142, 39, 0.50)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "15x50",
+            "caminho": "FEV21/hib12_15x50",
+            "cor": "rgba(232, 142, 39, 0.75)",
+            "marcador": "diamond"
+        },
+        {
+            "nome": "15x60",
+            "caminho": "FEV21/hib12_15x60",
+            "cor": "rgba(232, 142, 39, 1.00)",
+            "marcador": "diamond"
+        }
+    ],
+    "usinas":[
+	{"nome":"JUPIA"}
+    ]
+}
