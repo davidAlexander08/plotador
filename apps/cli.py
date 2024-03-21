@@ -341,16 +341,12 @@ def analise_temporal(arquivo_json):
             print(espacial)
             if(espacial == "SBM"):
                 listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, sub.nome) for sub in submercados]
-                #for sub in submercados:
-                #    listaUnidadesGraficas.append(UnidadeSintese(sts.sintese, "estagios", sts.filtro, sub.nome))
             if(espacial == "REE"):
-                for ree in rees:
-                    listaUnidadesGraficas.append(UnidadeSintese(sts.sintese, "estagios", sts.filtro, ree.nome))
+                listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, ree.nome) for ree in rees]
             if(espacial == "SIN"):
-                listaUnidadesGraficas.append(UnidadeSintese(sts.sintese, "estagios", sts.filtro, None))
+                listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, None)]
             if(espacial == "UHE"):
-                for usi in usinas:
-                    listaUnidadesGraficas.append(UnidadeSintese(sts.sintese, "estagios", sts.filtro, usi.nome))
+                listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, usi.nome) for usi in usinas]
 
 
         
