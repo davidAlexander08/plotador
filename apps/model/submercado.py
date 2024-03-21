@@ -1,7 +1,7 @@
 from typing import Dict
 
 
-class SubmercadoAvalicao:
+class Submercado:
     """
     Classe base que representa um submercado do estudo
     que será utilizado para o cálculo de indicadores
