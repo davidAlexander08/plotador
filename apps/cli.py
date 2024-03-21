@@ -14,149 +14,6 @@ def cli():
     pass
 
 
-@click.command("backtest")
-@click.argument(
-    "arquivo_json",
-)
-@click.option(
-    "--download", default=False, help="realizar o download dos decks"
-)
-def backtest(arquivo_json, download):
-    """
-    Montagem e preparação de decks para backtest.
-    """
-    from apps.backtest.montador import MontadorBacktest
-    from datetime import datetime
-
-    if os.path.isfile(arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        # Lê dados de entrada
-        montador = MontadorBacktest(
-            dados["estudo"],
-            dados["bucket"],
-            dados["prefix"],
-            dados["programas"],
-            datetime.fromisoformat(dados["dataInicio"]),
-            datetime.fromisoformat(dados["dataFim"]),
-        )
-        if download:
-            montador.download()
-            montador.extrai()
-
-    else:
-        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-
-
-
-
-@click.command("analise-decomp")
-@click.argument(
-    "arquivo_json",
-)
-def analise_decomp(arquivo_json):
-    """
-    Calibração do CVaR.
-    """
-    from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-    from apps.calibracao_cvar.usina import UsinaAvalicao
-    from apps.calibracao_cvar.indicadores import IndicadoresCalibracaoCVAR
-    from apps.calibracao_cvar.indicadores_decomp import IndicadoresCalibracaoCVAR_Decomp
-    from apps.calibracao_cvar.graficos import GraficosCalibracaoCVAR
-    from apps.calibracao_cvar.unidade import UnidadeSintese
-
-    if os.path.isfile(arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        # Lê dados de entrada
-        estudo = dados["estudo"]
-        nome_caso_referencia = dados["nome_caso_referencia"]
-        # Cria objetos do estudo
-        casos = [CasoCalibracaoCVAR.from_dict(d) for d in dados["casos"]]
-        usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
-        
-        indicadores = IndicadoresCalibracaoCVAR(casos, nome_caso_referencia,usinas)
-        indicadores_decomp = IndicadoresCalibracaoCVAR_Decomp(casos, nome_caso_referencia,usinas)
-        graficos = GraficosCalibracaoCVAR(casos)
-        # Gera saídas do estudo
-        diretorio_saida = f"resultados/{estudo}/decomp"
-        os.makedirs(diretorio_saida, exist_ok=True)
-
-        indicadores_decomp.df_valores_medios_decomp.to_csv(
-            os.path.join(diretorio_saida, "tabela_valores_medios_decomp"+estudo+".csv"),
-            index=False,
-        )
-
-        indicadores.df_cref.to_csv(
-            os.path.join(diretorio_saida, "tabela_cref.csv"),
-            index=False,
-        )
-
-
-        unity = UnidadeSintese("EARPF_SIN_EST", "%", None,"Energia_Armazenada_Percentual_Final_SIN_CREF "+estudo)
-        df_dataInicial = indicadores_decomp.calcula_df_valores_medios_periodo_decomp(unity.sintese, None, "dataInicio")
-        df_valores_EARPF = indicadores_decomp.calcula_df_valores_medios_periodo_decomp(unity.sintese, None, "valor")
-        graficos.gera_graficos_linha_Decomp_CREF(df_dataInicial, df_valores_EARPF, indicadores.df_cref, "EARPF", unity.legendaEixoY, unity.titulo).write_image(
-            os.path.join(diretorio_saida, "Decomp_SIN_EARPF_CREF_Horizonte"+estudo+".png"),
-            width=800,
-            height=600
-            )
-   
-        graficos.gera_grafico_barra_primeira_semana_CREF_Decomp(df_dataInicial, df_valores_EARPF, indicadores.df_cref, "EARPF", unity.legendaEixoY, unity.titulo).write_image(
-            os.path.join(diretorio_saida, "Decomp_SIN_EARPF_CREF_Primeira_Semana"+estudo+".png"),
-            width=800,
-            height=600
-            )
-        
-        unity = UnidadeSintese("GTER_SIN_EST", "MWmes",  None, "Geração_Térmica_SIN_CREF "+estudo)
-        df_valores_GTER = indicadores_decomp.calcula_df_valores_medios_periodo_decomp(unity.sintese, None, "valor")
-        graficos.gera_graficos_linha_Decomp_CREF(df_dataInicial, df_valores_GTER, indicadores.df_cref, "GTER", unity.legendaEixoY, unity.titulo).write_image(
-            os.path.join(diretorio_saida, "Decomp_SIN_GT_CREF+estudo.png"),
-            width=800,
-            height=600
-            )
-        graficos.gera_grafico_barra_primeira_semana_CREF_Decomp(df_dataInicial, df_valores_GTER, indicadores.df_cref, "GTER", unity.legendaEixoY, unity.titulo).write_image(
-            os.path.join(diretorio_saida, "Decomp_SIN_GTER_CREF_Primeira_Semana"+estudo+".png"),
-            width=800,
-            height=600
-            )
-
-        mapaGraficos = graficos.gera_bar_decomp(
-            indicadores_decomp.df_valores_medios_decomp, 0, "Decomp - Primeira Semana "+estudo
-        )
-
-        for grafico in mapaGraficos:
-            mapaGraficos[grafico].write_image(
-                os.path.join(diretorio_saida, "Decomp_"+grafico+"_PrimeiraSemana"+estudo+".png"),
-                width=1120,
-                height=620,
-            )
-
-        mapaGraficos = graficos.gera_bar_decomp(
-            indicadores_decomp.df_valores_medios_decomp, -1, "Decomp - Segundo Mes "+estudo
-        )
-        for grafico in mapaGraficos:
-            mapaGraficos[grafico].write_image(
-                os.path.join(diretorio_saida, "Decomp_"+grafico + "_SegundoMes"+estudo+".png"),
-                width=1120,
-                height=620,
-            )
-
-        mapaGraficos = graficos.gera_bar_decomp(
-            indicadores_decomp.df_valores_medios_decomp, -2, "Decomp - Ultima Semana "+estudo
-        )
-        for grafico in mapaGraficos:
-            mapaGraficos[grafico].write_image(
-                os.path.join(diretorio_saida, "Decomp_"+grafico + "_UltimaSemana"+estudo+".png"),
-                width=1120,
-                height=620,
-            )
-
-    else:
-        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-
-
-
 @click.command("analise-pareto")
 @click.argument(
     "arquivo_json",
@@ -165,12 +22,12 @@ def analise_pareto(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-    from apps.calibracao_cvar.usina import UsinaAvalicao
-    from apps.calibracao_cvar.eco_indicadores import EcoIndicadores
-    from apps.calibracao_cvar.unidade import UnidadeSintese
-    from apps.calibracao_cvar.graficos import GraficosCalibracaoCVAR
-    from apps.calibracao_cvar.indicadores_medios import IndicadoresMedios
+    from apps.indicadores.caso import CasoCalibracaoCVAR
+    from apps.indicadores.usina import UsinaAvalicao
+    from apps.indicadores.eco_indicadores import EcoIndicadores
+    from apps.indicadores.unidade import UnidadeSintese
+    from apps.indicadores.graficos import GraficosCalibracaoCVAR
+    from apps.indicadores.indicadores_medios import IndicadoresMedios
     
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -306,31 +163,6 @@ def analise_pareto(arquivo_json):
 
 
 
-
-        #graficos.gera_pareto_fast(
-        #    indicadores_medios.retorna_df_concatenado("CTER_SIN_EST"), 
-        #    indicadores_medios.retorna_df_concatenado("EARMF_SIN_EST"),
-        #    indicadores_medios.retorna_df_std_concatenado("CTER_SIN_EST"),
-        #    indicadores_medios.retorna_df_std_concatenado("EARMF_SIN_EST"), 
-        #    "Custo GT (MiR$)",
-        #    "EARM Médio SIN (MWmes)",
-        #    #100,
-        #    #0,
-        #    None,
-        #    None,
-        #    #indicadores_medios.retorna_df_concatenado("CTER_SIN_EST")["valor"].max()*2,
-        #    #0,
-        #    None,
-        #    None,
-        #    "Fronteira de Pareto: EARPF Médio x Custo GT - "+estudo
-        #).write_image(
-        #    os.path.join(diretorio_saida, "Newave_pareto_CGT_EARP"+estudo+".png"),
-        #    width=800,
-        #    height=600,
-        #)
-
-
-
         #graficos.gera_pareto_fast(
         #    indicadores_medios.retorna_DF_cenario_medio_incremental_percentual("EARPF_SIN_EST", dropar = False),
         #    indicadores_medios.retorna_df_concatenado("CTER_SIN_EST"), 
@@ -372,23 +204,6 @@ def analise_pareto(arquivo_json):
         #    height=600,
         #)
 
-
-
-
-
-        
-        #graficos.gera_pareto_fast(
-        #    indicadores.df_custos_incrementais["delta_gt_mwmes"],
-        #    indicadores.df_custos_incrementais["earm_medio_final_perc"], 
-        #    "Ganho GT (MWmes)",
-        #    "EARM SIN Med (%)",
-        #    "Fronteira de Pareto: Ganho EARM x Ganho GT - "+estudo
-        #).write_image(
-        #    os.path.join(diretorio_saida, "pareto_ganhoEarm_ganhogt_fastPareto.png"),
-        #    width=800,
-        #    height=600,
-        #)
-
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
@@ -409,11 +224,11 @@ def eco_parquets(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-    from apps.calibracao_cvar.usina import UsinaAvalicao
-    from apps.calibracao_cvar.eco_indicadores import EcoIndicadores
-    from apps.calibracao_cvar.unidade import UnidadeSintese
-    from apps.calibracao_cvar.graficos import GraficosCalibracaoCVAR
+    from apps.indicadores.caso import CasoCalibracaoCVAR
+    from apps.indicadores.usina import UsinaAvalicao
+    from apps.indicadores.eco_indicadores import EcoIndicadores
+    from apps.indicadores.unidade import UnidadeSintese
+    from apps.indicadores.graficos import GraficosCalibracaoCVAR
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -494,11 +309,11 @@ def analise_temporal(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-    from apps.calibracao_cvar.usina import UsinaAvalicao
-    from apps.calibracao_cvar.indicadores_temporais import IndicadoresTemporais
-    from apps.calibracao_cvar.unidade import UnidadeSintese
-    from apps.calibracao_cvar.graficos import GraficosCalibracaoCVAR
+    from apps.indicadores.caso import CasoCalibracaoCVAR
+    from apps.indicadores.usina import UsinaAvalicao
+    from apps.indicadores.indicadores_temporais import IndicadoresTemporais
+    from apps.indicadores.unidade import UnidadeSintese
+    from apps.indicadores.graficos import GraficosCalibracaoCVAR
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -599,15 +414,7 @@ def analise_temporal(arquivo_json):
             width=800,
             height=600
             )
-        exit(1)
-       #unity = UnidadeSintese("GTER_SIN_EST", None, "MWmes", "Geração_Térmica_SIN_CREF "+estudo)
-       #df_unity = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-       #df_valores_GTER = indicadores.calcula_df_valores_medios_periodo(unity.nomeSintese, unity.argumentoSintese, "valor")
-       #graficos.gera_graficos_linha_Newave_CREF(df_dataInicial, df_valores_GTER, indicadores.df_cref, "GTER", unity.legendaEixo, unity.titulo, None).write_image(
-       # os.path.join(diretorio_saida, "SIN_GT_CREF"+estudo+".png"),
-       # width=800,
-       # height=600
-       # )
+
 
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
@@ -622,12 +429,12 @@ def analise_media(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-    from apps.calibracao_cvar.usina import UsinaAvalicao
-    from apps.calibracao_cvar.indicadores_medios import IndicadoresMedios
-    from apps.calibracao_cvar.indicadores_temporais import IndicadoresTemporais
-    from apps.calibracao_cvar.unidade import UnidadeSintese
-    from apps.calibracao_cvar.graficos import GraficosCalibracaoCVAR
+    from apps.indicadores.caso import CasoCalibracaoCVAR
+    from apps.indicadores.usina import UsinaAvalicao
+    from apps.indicadores.indicadores_medios import IndicadoresMedios
+    from apps.indicadores.indicadores_temporais import IndicadoresTemporais
+    from apps.indicadores.unidade import UnidadeSintese
+    from apps.indicadores.graficos import GraficosCalibracaoCVAR
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -720,11 +527,11 @@ def analise_anual(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-    from apps.calibracao_cvar.usina import UsinaAvalicao
-    from apps.calibracao_cvar.indicadores_anuais import IndicadoresAnuais
-    from apps.calibracao_cvar.unidade import UnidadeSintese
-    from apps.calibracao_cvar.graficos import GraficosCalibracaoCVAR
+    from apps.indicadores.caso import CasoCalibracaoCVAR
+    from apps.indicadores.usina import UsinaAvalicao
+    from apps.indicadores.indicadores_anuais import IndicadoresAnuais
+    from apps.indicadores.unidade import UnidadeSintese
+    from apps.indicadores.graficos import GraficosCalibracaoCVAR
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -912,11 +719,11 @@ def analise_cenarios(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-    from apps.calibracao_cvar.usina import UsinaAvalicao
-    from apps.calibracao_cvar.indicadores_cenarios import IndicadoresCenarios
-    from apps.calibracao_cvar.unidade import UnidadeSintese
-    from apps.calibracao_cvar.graficos import GraficosCalibracaoCVAR
+    from apps.indicadores.caso import CasoCalibracaoCVAR
+    from apps.indicadores.usina import UsinaAvalicao
+    from apps.indicadores.indicadores_cenarios import IndicadoresCenarios
+    from apps.indicadores.unidade import UnidadeSintese
+    from apps.indicadores.graficos import GraficosCalibracaoCVAR
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -1091,14 +898,13 @@ def analise_conjuntoCasos(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-    #from apps.calibracao_cvar.usina import UsinaAvalicao
-    from apps.calibracao_cvar.unidade import UnidadeSintese
-    from apps.calibracao_cvar.graficos import GraficosCalibracaoCVAR
-    from apps.calibracao_cvar.conjuntoCasos import ConjuntoCasoCalibracaoCVAR
-    from apps.calibracao_cvar.indicadores_medios import IndicadoresMedios
-    from apps.calibracao_cvar.indicadores_anuais import IndicadoresAnuais
-    from apps.calibracao_cvar.indicadores_temporais import IndicadoresTemporais
+    from apps.indicadores.caso import CasoCalibracaoCVAR
+    from apps.indicadores.unidade import UnidadeSintese
+    from apps.indicadores.graficos import GraficosCalibracaoCVAR
+    from apps.indicadores.conjuntoCasos import ConjuntoCasoCalibracaoCVAR
+    from apps.indicadores.indicadores_medios import IndicadoresMedios
+    from apps.indicadores.indicadores_anuais import IndicadoresAnuais
+    from apps.indicadores.indicadores_temporais import IndicadoresTemporais
     
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -1250,15 +1056,6 @@ def analise_conjuntoCasos(arquivo_json):
                 height=600,
             )   
 
-            #print(df_concatenado_anual["anos"].iloc[1])
-            #df_outros_anos = df_concatenado_temporal.loc[(df_concatenado_temporal["anos"] == df_concatenado_anual["anos"].iloc[1])]
-            #Log.log().info("Gerando grafico de médias do primeiro ano "+unity.titulo)
-            #fig = graficos.gera_grafico_linhas_diferentes_casos(df_outros_anos, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Outros_Anos")
-            #fig.write_image(
-            #    os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_outros_anos_"+estudo+".png"),
-            #    width=800,
-            #    height=600,
-            #)   
             mapaFig = graficos.subplot_gera_grafico_linha_casos(conjuntoCasos, mapaConjDF_Temporal, unity.legendaEixoY , unity.legendaEixoX, unity.titulo)
             for titulo in mapaFig:
                 mapaFig[titulo].write_image(
@@ -1271,11 +1068,6 @@ def analise_conjuntoCasos(arquivo_json):
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
 
-
-
-
-cli.add_command(backtest)
-cli.add_command(analise_decomp)
 cli.add_command(analise_pareto)
 cli.add_command(eco_parquets)
 cli.add_command(analise_temporal)
