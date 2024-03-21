@@ -8,8 +8,7 @@ class UnidadeSintese:
         self.df = df
         self.fitroColuna = fitroColuna
         self.filtroArgumento = filtroArgumento
-        self.__mapa_sintese_label_y =
-        {
+        self.__mapa_sintese_label_y =        {
             "GTER":"MWmes",
             "GHID":"MWmes",
             "QTUR":"m3/s",
