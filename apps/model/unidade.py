@@ -11,8 +11,10 @@ class UnidadeSintese:
 
     def label_y(self, sintese):
         operacional = sintese.split("_")[0]
-        return mapa_sintese_label_y[operacional]
-mapa_sintese_label_y ={
+        return self.mapa_sintese_label_y[operacional]
+
+
+self.mapa_sintese_label_y ={
     "GTER":"MWmes",
     "GHID":"MWmes",
     "QTUR":"m3/s",
