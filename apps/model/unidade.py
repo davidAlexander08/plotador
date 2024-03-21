@@ -9,7 +9,7 @@ class UnidadeSintese:
         espacial = sintese.split("_")[1]
         return self.__mapa_sintese_titulo[operacional]+" "+espacial
         
-    def __init__(self, sintese, legendaEixoX, titulo, fitroColuna = None, filtroArgumento = None, df = None):
+    def __init__(self, sintese, legendaEixoX, fitroColuna = None, filtroArgumento = None, df = None):
         self.sintese = sintese
         self.legendaEixoY = self.label_y(sintese)     
         self.legendaEixoX = legendaEixoX
