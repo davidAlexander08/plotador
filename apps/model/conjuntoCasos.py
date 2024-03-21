@@ -1,7 +1,7 @@
 from typing import Dict
 from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
 
-class ConjuntoCasoCalibracaoCVAR:
+class ConjuntoCasos:
     """
     Classe base que representa um caso de estudo
     que será utilizado para o cálculo de indicadores da
