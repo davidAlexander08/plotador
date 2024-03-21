@@ -247,13 +247,12 @@ def eco_parquets(arquivo_json):
         sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
 
         
-        eco_indicadores = EcoIndicadores(casos, nome_caso_referencia,usinas)
+        eco_indicadores = EcoIndicadores(casos)
         graficos = Graficos(casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/eco"
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        mapa_df = {}
         for sts in sinteses:
             Log.log().info("Gerando eco "+ sts.sintese +" para o estudo: "+ estudo)
             eco = eco_indicadores.retorna_df_concatenado(sts.sintese)
@@ -261,7 +260,7 @@ def eco_parquets(arquivo_json):
                 os.path.join(diretorio_saida, "eco_"+sts.sintese+"_"+estudo+".csv"),
                 index=False,
             )
-        exit(1)
+
         df_custos = eco_indicadores.retorna_df_concatenado("CUSTOS")
         #df_custos = df_custos.loc[(df_custos["mean"] != 0)] #Remove colunas com 0
         df_custos = df_custos.loc[(df_custos["mean"] > 10)] #Remove colunas menores que 10, pois nao sao significantes
