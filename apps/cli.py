@@ -224,11 +224,11 @@ def eco_parquets(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.indicadores.caso import CasoCalibracaoCVAR
-    from apps.indicadores.usina import UsinaAvalicao
+    from apps.model.caso import Caso
+    from apps.model.usina import UsinaAvalicao
     from apps.indicadores.eco_indicadores import EcoIndicadores
-    from apps.indicadores.unidade import UnidadeSintese
-    from apps.indicadores.graficos import GraficosCalibracaoCVAR
+    from apps.model.unidade import UnidadeSintese
+    from apps.model.graficos import Graficos
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -237,11 +237,11 @@ def eco_parquets(arquivo_json):
         estudo = dados["estudo"]
         nome_caso_referencia = dados["nome_caso_referencia"]
         # Cria objetos do estudo
-        casos = [CasoCalibracaoCVAR.from_dict(d) for d in dados["casos"]]
+        casos = [Caso.from_dict(d) for d in dados["casos"]]
         usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
         
         eco_indicadores = EcoIndicadores(casos, nome_caso_referencia,usinas)
-        graficos = GraficosCalibracaoCVAR(casos)
+        graficos = Graficos(casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/eco"
         os.makedirs(diretorio_saida, exist_ok=True)
@@ -309,11 +309,11 @@ def analise_temporal(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.indicadores.caso import CasoCalibracaoCVAR
-    from apps.indicadores.usina import UsinaAvalicao
+    from apps.model.caso import Caso
+    from apps.model.usina import UsinaAvalicao
     from apps.indicadores.indicadores_temporais import IndicadoresTemporais
     from apps.indicadores.unidade import UnidadeSintese
-    from apps.indicadores.graficos import GraficosCalibracaoCVAR
+    from apps.graficos.graficos import Graficos
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -322,10 +322,10 @@ def analise_temporal(arquivo_json):
         estudo = dados["estudo"]
         nome_caso_referencia = dados["nome_caso_referencia"]
         # Cria objetos do estudo
-        casos = [CasoCalibracaoCVAR.from_dict(d) for d in dados["casos"]]
+        casos = [Caso.from_dict(d) for d in dados["casos"]]
         usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
         indicadores_temporais = IndicadoresTemporais(casos, nome_caso_referencia,usinas)
-        graficos = GraficosCalibracaoCVAR(casos)
+        graficos = Graficos(casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/temporal"
         os.makedirs(diretorio_saida, exist_ok=True)
@@ -429,12 +429,12 @@ def analise_media(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.indicadores.caso import CasoCalibracaoCVAR
-    from apps.indicadores.usina import UsinaAvalicao
+    from apps.model.caso import Caso
+    from apps.model.usina import UsinaAvalicao
     from apps.indicadores.indicadores_medios import IndicadoresMedios
     from apps.indicadores.indicadores_temporais import IndicadoresTemporais
-    from apps.indicadores.unidade import UnidadeSintese
-    from apps.indicadores.graficos import GraficosCalibracaoCVAR
+    from apps.model.unidade import UnidadeSintese
+    from apps.graficos.graficos import Graficos
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -443,12 +443,12 @@ def analise_media(arquivo_json):
         estudo = dados["estudo"]
         nome_caso_referencia = dados["nome_caso_referencia"]
         # Cria objetos do estudo
-        casos = [CasoCalibracaoCVAR.from_dict(d) for d in dados["casos"]]
+        casos = [Caso.from_dict(d) for d in dados["casos"]]
         usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
         
         indicadores_medios = IndicadoresMedios(casos, nome_caso_referencia,usinas)
         indicadores_temporais = IndicadoresTemporais(casos, nome_caso_referencia,usinas)
-        graficos = GraficosCalibracaoCVAR(casos)
+        graficos = Graficos(casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/media"
         os.makedirs(diretorio_saida, exist_ok=True)
@@ -527,11 +527,11 @@ def analise_anual(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.indicadores.caso import CasoCalibracaoCVAR
-    from apps.indicadores.usina import UsinaAvalicao
+    from apps.model.caso import Caso
+    from apps.model.usina import UsinaAvalicao
     from apps.indicadores.indicadores_anuais import IndicadoresAnuais
-    from apps.indicadores.unidade import UnidadeSintese
-    from apps.indicadores.graficos import GraficosCalibracaoCVAR
+    from apps.model.unidade import UnidadeSintese
+    from apps.graficos.graficos import Graficos
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -719,11 +719,11 @@ def analise_cenarios(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.indicadores.caso import CasoCalibracaoCVAR
-    from apps.indicadores.usina import UsinaAvalicao
+    from apps.model.caso import Caso
+    from apps.model.usina import UsinaAvalicao
     from apps.indicadores.indicadores_cenarios import IndicadoresCenarios
-    from apps.indicadores.unidade import UnidadeSintese
-    from apps.indicadores.graficos import GraficosCalibracaoCVAR
+    from apps.model.unidade import UnidadeSintese
+    from apps.graficos.graficos import Graficos
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
@@ -732,10 +732,10 @@ def analise_cenarios(arquivo_json):
         estudo = dados["estudo"]
         nome_caso_referencia = dados["nome_caso_referencia"]
         # Cria objetos do estudo
-        casos = [CasoCalibracaoCVAR.from_dict(d) for d in dados["casos"]]
+        casos = [Caso.from_dict(d) for d in dados["casos"]]
         usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
         indicadores_cenarios = IndicadoresCenarios(casos, nome_caso_referencia,usinas)
-        graficos = GraficosCalibracaoCVAR(casos)
+        graficos = Graficos(casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/cenarios"
         os.makedirs(diretorio_saida, exist_ok=True)
@@ -898,10 +898,10 @@ def analise_conjuntoCasos(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.indicadores.caso import CasoCalibracaoCVAR
-    from apps.indicadores.unidade import UnidadeSintese
-    from apps.indicadores.graficos import GraficosCalibracaoCVAR
-    from apps.indicadores.conjuntoCasos import ConjuntoCasoCalibracaoCVAR
+    from apps.model.caso import Caso
+    from apps.model.unidade import UnidadeSintese
+    from apps.graficos.graficos import Graficos
+    from apps.model.conjuntoCasos import Conjunto
     from apps.indicadores.indicadores_medios import IndicadoresMedios
     from apps.indicadores.indicadores_anuais import IndicadoresAnuais
     from apps.indicadores.indicadores_temporais import IndicadoresTemporais
