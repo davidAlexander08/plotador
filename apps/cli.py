@@ -22,11 +22,11 @@ def analise_pareto(arquivo_json):
     """
     Calibração do CVaR.
     """
-    from apps.indicadores.caso import CasoCalibracaoCVAR
-    from apps.indicadores.usina import UsinaAvalicao
+    from apps.model.caso import CasoCalibracaoCVAR
+    from apps.model.usina import UsinaAvalicao
     from apps.indicadores.eco_indicadores import EcoIndicadores
-    from apps.indicadores.unidade import UnidadeSintese
-    from apps.indicadores.graficos import GraficosCalibracaoCVAR
+    from apps.model.unidade import UnidadeSintese
+    from apps.graficos.graficos import GraficosCalibracaoCVAR
     from apps.indicadores.indicadores_medios import IndicadoresMedios
     
     if os.path.isfile(arquivo_json):
@@ -228,7 +228,7 @@ def eco_parquets(arquivo_json):
     from apps.model.usina import UsinaAvalicao
     from apps.indicadores.eco_indicadores import EcoIndicadores
     from apps.model.unidade import UnidadeSintese
-    from apps.model.graficos import Graficos
+    from apps.graficos.graficos import Graficos
 
     if os.path.isfile(arquivo_json):
         with open(arquivo_json, "r") as f:
