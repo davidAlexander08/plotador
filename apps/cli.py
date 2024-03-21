@@ -337,29 +337,20 @@ def analise_temporal(arquivo_json):
         
         listaUnidadesGraficas = []
         for sts in sinteses:
-            grandeza = sts.sintese.split("_")[1]
-            print(grandeza)
+            espacial = sts.sintese.split("_")[1]
+            print(espacial)
+            
         exit(1)
         #for u in usinas:
             #listaUnidadesGraficas.append(UnidadeSintese("GHID_UHE_EST", "MWmes", "estagios" ,"Geracao_Hidreletrica_UHE_"+u.nome, "usina", u.nome))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "estagios" ,"Geração_Térmica_SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("GHID_SIN_EST", "MWmes", "estagios" ,"Geração_Hidrelétrica_SIN "))
-        #listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_SIN_EST", "m3/s", "estagios" ,"Violação de  Restrições de Defluência Mínima SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("VVMINOP_SIN_EST", "MWmed", "estagios" ,"Violação do Volume Mínimo Operativo SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("COP_SIN_EST", "R$", "estagios" ,"Custo De Operação SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("EARPF_SIN_EST", "%", "estagios" ,"Energia Armazenada Percentual Final SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("EARMF_SIN_EST", "MWmed", "estagios" ,"Energia Armazenada Final SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("EVER_SIN_EST", "MWmed", "estagios" ,"Energia Vertida SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "estagios" ,"Custo Marginal de Operação - Submercado Sudeste ", "submercado", "SUDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "estagios" ,"Custo Marginal de Operação - Submercado Nordeste ", "submercado", "NORDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "estagios" ,"Custo Marginal de Operação - Submercado Sul ", "submercado", "SUL"))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "estagios" ,"Custo Marginal de Operação - Submercado Norte ", "submercado", "NORTE"))
-        
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SBM_EST", "R$/MWh", "estagios" ,"Geração Térmica - Submercado Sudeste ", "submercado", "SUDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SBM_EST", "R$/MWh", "estagios" ,"Geração Térmica - Submercado Nordeste ", "submercado", "NORDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SBM_EST", "R$/MWh", "estagios" ,"Geração Térmica - Submercado Sul ", "submercado", "SUL"))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SBM_EST", "R$/MWh", "estagios" ,"Geração Térmica - Submercado Norte ", "submercado", "NORTE"))
-        #listaUnidadesGraficas.append(UnidadeSintese("EVER_SIN_EST", "MWmes", "estagios" , "Energia_Vertida_SIN "))
+        listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "estagios"))
+        listaUnidadesGraficas.append(UnidadeSintese("GHID_SIN_EST", "MWmes", "estagios"))
+        listaUnidadesGraficas.append(UnidadeSintese("COP_SIN_EST", "R$", "estagios" ))
+        listaUnidadesGraficas.append(UnidadeSintese("EARPF_SIN_EST", "%", "estagios" ))
+        listaUnidadesGraficas.append(UnidadeSintese("EARMF_SIN_EST", "MWmed", "estagios"))
+        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "estagios" ,"submercado", "SUDESTE"))
+        listaUnidadesGraficas.append(UnidadeSintese("GTER_SBM_EST", "R$/MWh", "estagios" , "submercado", "SUDESTE"))
+
         
         for unity in listaUnidadesGraficas:
             df_unity = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
