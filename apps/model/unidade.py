@@ -14,9 +14,9 @@ class UnidadeSintese:
         return self.mapa_sintese_label_y[operacional]
 
 
-self.mapa_sintese_label_y ={
-    "GTER":"MWmes",
-    "GHID":"MWmes",
-    "QTUR":"m3/s",
-    "QDEF":"m3/s"
-}
+    self.mapa_sintese_label_y ={
+        "GTER":"MWmes",
+        "GHID":"MWmes",
+        "QTUR":"m3/s",
+        "QDEF":"m3/s"
+    }
