@@ -11,6 +11,7 @@ class UnidadeSintese:
         self.__mapa_sintese_label_y =        {
             "GTER":"MWmes",
             "GHID":"MWmes",
+            "CMO":"R$/MWh",
             "QTUR":"m3/s",
             "QDEF":"m3/s"
         }
