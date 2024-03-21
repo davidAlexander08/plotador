@@ -336,6 +336,10 @@ def analise_temporal(arquivo_json):
         os.makedirs(diretorio_saida, exist_ok=True)
         
         listaUnidadesGraficas = []
+        for sts in sinteses:
+            grandeza = sts.split("_")[1]
+            print(grandeza)
+        exit(1)
         #for u in usinas:
             #listaUnidadesGraficas.append(UnidadeSintese("GHID_UHE_EST", "MWmes", "estagios" ,"Geracao_Hidreletrica_UHE_"+u.nome, "usina", u.nome))
         listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "estagios" ,"Geração_Térmica_SIN "))
