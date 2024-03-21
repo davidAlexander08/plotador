@@ -18,7 +18,7 @@ class Sintese:
             "UHE": "usina",
             "SIN": None
         }
-        self.sts = sts  
+        self.sintese = sts  
         self.filtro = self.retornaFiltro(sts)
 
 
