@@ -339,17 +339,18 @@ def analise_temporal(arquivo_json):
         for sts in sinteses:
             espacial = sts.sintese.split("_")[1]
             print(espacial)
-            
-        exit(1)
-        #for u in usinas:
-            #listaUnidadesGraficas.append(UnidadeSintese("GHID_UHE_EST", "MWmes", "estagios" ,"Geracao_Hidreletrica_UHE_"+u.nome, "usina", u.nome))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "estagios"))
-        listaUnidadesGraficas.append(UnidadeSintese("GHID_SIN_EST", "MWmes", "estagios"))
-        listaUnidadesGraficas.append(UnidadeSintese("COP_SIN_EST", "R$", "estagios" ))
-        listaUnidadesGraficas.append(UnidadeSintese("EARPF_SIN_EST", "%", "estagios" ))
-        listaUnidadesGraficas.append(UnidadeSintese("EARMF_SIN_EST", "MWmed", "estagios"))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "estagios" ,"submercado", "SUDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SBM_EST", "R$/MWh", "estagios" , "submercado", "SUDESTE"))
+            if(espacial == "SBM"):
+                for sub in submercados:
+                    listaUnidadesGraficas.append(UnidadeSintese(sts.sintese, "estagios", sts.filtro, sub.nome))
+            if(espacial == "REE"):
+                for ree in rees:
+                    listaUnidadesGraficas.append(UnidadeSintese(sts.sintese, "estagios", sts.filtro, ree.nome))
+            if(espacial == "SIN"):
+                listaUnidadesGraficas.append(UnidadeSintese(sts.sintese, "estagios", sts.filtro, None))
+            if(espacial == "UHE"):
+                for usi in usinas:
+                    listaUnidadesGraficas.append(UnidadeSintese(sts.sintese, "estagios", sts.filtro, usi.nome))
+
 
         
         for unity in listaUnidadesGraficas:
