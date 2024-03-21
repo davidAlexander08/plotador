@@ -8,9 +8,9 @@ class Sintese:
     e para geração de gráficos.
     """
 
-    def __init__(self, nome: str):
-        self.nome = nome  
+    def __init__(self, sintese: str):
+        self.sintese = sintese  
 
     @classmethod
     def from_dict(cls, d: Dict[str, str]):
-        return cls(d["nome"])
+        return cls(d["sintese"])
