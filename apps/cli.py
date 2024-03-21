@@ -314,6 +314,7 @@ def analise_temporal(arquivo_json):
     from apps.model.sintese import Sintese
     from apps.indicadores.indicadores_temporais import IndicadoresTemporais
     from apps.model.unidade import UnidadeSintese
+    from apps.model.argumento import Argumento
     from apps.graficos.graficos import Graficos
 
     if os.path.isfile(arquivo_json):
@@ -328,6 +329,9 @@ def analise_temporal(arquivo_json):
         rees = [Ree.from_dict(d) for d in dados["REE"]]
         submercados = [Submercado.from_dict(d) for d in dados["SBM"]]
         sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
+        arg_1 = [Argumento.from_dict(d) for d in dados["UHE"]]
+        arg_2 = [Argumento.from_dict(d) for d in dados["REE"]]
+        arg_3 = [Argumento.from_dict(d) for d in dados["SBM"]]
         
         indicadores_temporais = IndicadoresTemporais(casos)
         graficos = Graficos(casos)
@@ -338,10 +342,10 @@ def analise_temporal(arquivo_json):
         listaUnidadesGraficas = []
         for sts in sinteses:
             espacial = sts.sintese.split("_")[1]
-            if(espacial == "SBM"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, sub.nome) for sub in submercados]
-            if(espacial == "REE"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, ree.nome) for ree in rees]
+            if(espacial == "SBM"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, sub.nome) for sub in arg_3]
+            if(espacial == "REE"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, ree.nome) for ree in arg_2]
             if(espacial == "SIN"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, None)]
-            if(espacial == "UHE"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, usi.nome) for usi in usinas]
+            if(espacial == "UHE"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, usi.nome) for usi in arg_1]
         
         for unity in listaUnidadesGraficas:
             df_unity = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
