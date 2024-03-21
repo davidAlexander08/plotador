@@ -1,7 +1,7 @@
 from typing import Dict
 
 
-class SinteseAvalicao:
+class Sintese:
     """
     Classe base que representa uma sintese do estudo
     que será utilizado para o cálculo de indicadores
