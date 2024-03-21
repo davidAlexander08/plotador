@@ -7,8 +7,8 @@ import pandas as pd
 from inewave.newave import Dger
 from apps.utils.log import Log
 import os.path
-from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-from apps.calibracao_cvar.usina import UsinaAvalicao
+from apps.model.caso import Caso
+from apps.model.usina import UsinaAvalicao
 import warnings
 
 class IndicadoresCalibracaoCVAR_Decomp:
@@ -21,7 +21,7 @@ class IndicadoresCalibracaoCVAR_Decomp:
     DIR_SINTESE = "sintese"
 
     def __init__(
-        self, casos: List[CasoCalibracaoCVAR], nome_caso_referencia: str, usinas: List[UsinaAvalicao]
+        self, casos: List[Caso], nome_caso_referencia: str, usinas: List[UsinaAvalicao]
     ):
       warnings.simplefilter(action='ignore')
       self.__df_valores_medios_decomp = None
@@ -29,7 +29,7 @@ class IndicadoresCalibracaoCVAR_Decomp:
       self.usinas = usinas
 
     def __le_arquivo_sintese_caso_periodo_decomp(
-        self, caso: CasoCalibracaoCVAR, nome_sintese: str, segundoArgumento
+        self, caso: Caso, nome_sintese: str, segundoArgumento
         ) -> pd.DataFrame:
         
         caminho_caso = caso.caminho
@@ -51,7 +51,7 @@ class IndicadoresCalibracaoCVAR_Decomp:
             return dados
 
     def __gera_df_valores_medios_periodo_decomp(
-        self, caso: CasoCalibracaoCVAR, nome_sintese:str, segundoArgumento
+        self, caso: Caso, nome_sintese:str, segundoArgumento
     ) -> pd.DataFrame:
         nome_caso = caso.nome
         df_med = self.__le_arquivo_sintese_caso_periodo_decomp(caso, nome_sintese, segundoArgumento)
@@ -73,7 +73,7 @@ class IndicadoresCalibracaoCVAR_Decomp:
 
 
     def __le_arquivo_sintese_caso_decomp_SIN(
-        self, caso: CasoCalibracaoCVAR, nome_sintese: str
+        self, caso: Caso, nome_sintese: str
     ) -> np.ndarray:
         caminho_caso = caso.caminho
         arq_sintese = join(
@@ -85,7 +85,7 @@ class IndicadoresCalibracaoCVAR_Decomp:
         return df_teste.reset_index(drop = True)
 
     def __le_arquivo_sintese_caso_decomp_SBM(
-        self, caso: CasoCalibracaoCVAR, nome_sintese: str, submercado: str
+        self, caso: Caso, nome_sintese: str, submercado: str
     ) -> np.ndarray:
         caminho_caso = caso.caminho
         arq_sintese = join(
@@ -96,7 +96,7 @@ class IndicadoresCalibracaoCVAR_Decomp:
         df_teste = df_teste.round(1)
         return df_teste.reset_index(drop = True)
 
-    def __gera_df_valores_medios_caso_decomp(self, caso: CasoCalibracaoCVAR) -> pd.DataFrame:
+    def __gera_df_valores_medios_caso_decomp(self, caso: Caso) -> pd.DataFrame:
         nome_caso = caso.nome
         cmo_se_med = self.__le_arquivo_sintese_caso_decomp_SBM(
             caso, 
