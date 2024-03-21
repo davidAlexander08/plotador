@@ -1,7 +1,7 @@
 from typing import Dict
 
 
-class CasoCalibracaoCVAR:
+class Caso:
     """
     Classe base que representa um caso de estudo
     que será utilizado para o cálculo de indicadores da
