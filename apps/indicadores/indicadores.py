@@ -7,8 +7,8 @@ import pandas as pd
 from inewave.newave import Dger
 from apps.utils.log import Log
 import os.path
-from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-from apps.calibracao_cvar.usina import UsinaAvalicao
+from apps.model.caso import Caso
+from apps.model.usina import UsinaAvalicao
 import warnings
 
 class IndicadoresCalibracaoCVAR:
@@ -21,7 +21,7 @@ class IndicadoresCalibracaoCVAR:
     DIR_SINTESE = "sintese"
 
     def __init__(
-        self, casos: List[CasoCalibracaoCVAR], nome_caso_referencia: str, usinas: List[UsinaAvalicao]
+        self, casos: List[Caso], nome_caso_referencia: str, usinas: List[UsinaAvalicao]
     ):
         warnings.simplefilter(action='ignore')
         self.__criaCref()
@@ -53,7 +53,7 @@ class IndicadoresCalibracaoCVAR:
         self.__df_viol_incrementais_SIN_primeiro_ano_media_outros_anos = None
     
     def __le_arquivo_sintese_caso_SIN_geral(
-        self, caso: CasoCalibracaoCVAR, nome_sintese: str, coluna :str, cenario:str
+        self, caso: Caso, nome_sintese: str, coluna :str, cenario:str
     ) -> np.ndarray:
         caminho_caso = caso.caminho
         arq_sintese = join(
@@ -173,7 +173,7 @@ class IndicadoresCalibracaoCVAR:
         return IC
 
     def __gera_df_valores_medios_caso(
-        self, caso: CasoCalibracaoCVAR
+        self, caso: Caso
     ) -> pd.DataFrame:
         nome_caso = caso.nome
         caminho_caso = caso.caminho
@@ -296,7 +296,7 @@ class IndicadoresCalibracaoCVAR:
         return df
         
     def __retorna_df_2000_cenarios_acumulado_no_periodo(
-        self, caso: CasoCalibracaoCVAR, nome_sintese: str
+        self, caso: Caso, nome_sintese: str
     ) -> np.ndarray:
         caminho_caso = caso.caminho
         arq_sintese = join(
@@ -326,7 +326,7 @@ class IndicadoresCalibracaoCVAR:
         return df
         
     def __gera_df_custos_incrementais_caso(
-        self, caso: CasoCalibracaoCVAR
+        self, caso: Caso
     ) -> pd.DataFrame:
         taxa_desconto_anual = (
             Dger.read(join(caso.caminho, "dger.dat")).taxa_de_desconto / 100.0
@@ -425,7 +425,7 @@ class IndicadoresCalibracaoCVAR:
 
     
     def __le_arquivo_sintese_caso_periodo(
-        self, caso: CasoCalibracaoCVAR, nome_sintese: str, segundoArgumento
+        self, caso: Caso, nome_sintese: str, segundoArgumento
         ) -> pd.DataFrame:
         
         caminho_caso = caso.caminho
@@ -449,7 +449,7 @@ class IndicadoresCalibracaoCVAR:
 
 
     def __gera_df_valores_medios_periodo(
-        self, caso: CasoCalibracaoCVAR, nome_sintese:str, segundoArgumento
+        self, caso: Caso, nome_sintese:str, segundoArgumento
     ) -> pd.DataFrame:
         nome_caso = caso.nome
         df_med = self.__le_arquivo_sintese_caso_periodo(caso, nome_sintese, segundoArgumento)
@@ -484,7 +484,7 @@ class IndicadoresCalibracaoCVAR:
 
     
     def __le_arquivo_sintese_caso_SIN(
-        self, caso: CasoCalibracaoCVAR, nome_sintese: str
+        self, caso: Caso, nome_sintese: str
     ) -> np.ndarray:
         caminho_caso = caso.caminho
         arq_sintese = join(
@@ -495,7 +495,7 @@ class IndicadoresCalibracaoCVAR:
         return dados
 
     def __le_arquivo_sintese_caso_SBM(
-        self, caso: CasoCalibracaoCVAR, nome_sintese: str, submercado: str
+        self, caso: Caso, nome_sintese: str, submercado: str
     ) -> np.ndarray:
         caminho_caso = caso.caminho
         arq_sintese = join(
@@ -526,7 +526,7 @@ class IndicadoresCalibracaoCVAR:
         ) / np.timedelta64(1, "s")
         return datetime.utcfromtimestamp(timestamp)
 
-    def __calcula_earm_medio_mwh(self, caso: CasoCalibracaoCVAR) -> float:
+    def __calcula_earm_medio_mwh(self, caso: Caso) -> float:
         caminho_caso = caso.caminho
         df = pd.read_parquet(
             join(caminho_caso, self.DIR_SINTESE, "EARMF_SIN_EST.parquet.gzip")
@@ -540,7 +540,7 @@ class IndicadoresCalibracaoCVAR:
         earm_mwh = sum(np.multiply(earm_mwmes, dias_meses)) * 24
         return earm_mwh
 
-    def __calcula_gt_medio_mwh(self, caso: CasoCalibracaoCVAR) -> float:
+    def __calcula_gt_medio_mwh(self, caso: Caso) -> float:
         caminho_caso = caso.caminho
         df = pd.read_parquet(
             join(caminho_caso, self.DIR_SINTESE, "GTER_SIN_EST.parquet.gzip")
@@ -554,7 +554,7 @@ class IndicadoresCalibracaoCVAR:
         gt_mwh = sum(np.multiply(gt_mwmes, dias_meses)) * 24
         return gt_mwh
 
-    def __calcula_mercado_liquido_mwh(self, caso: CasoCalibracaoCVAR) -> float:
+    def __calcula_mercado_liquido_mwh(self, caso: Caso) -> float:
         mercado_mwh = self.__le_arquivo_sintese_caso_SIN(caso, "MERL_SIN_EST")
         return np.sum(mercado_mwh) * 740
 
@@ -1174,7 +1174,7 @@ class IndicadoresCalibracaoCVAR:
     
 
     def __le_arquivo_sintese_anual_caso_SIN(
-        self, caso: CasoCalibracaoCVAR, nome_sintese: str
+        self, caso: Caso, nome_sintese: str
     ) -> np.ndarray:
         caminho_caso = caso.caminho
         arq_sintese = join(
@@ -1199,7 +1199,7 @@ class IndicadoresCalibracaoCVAR:
 
 
     def __le_arquivo_sintese_anual_caso_SBM(
-        self, caso: CasoCalibracaoCVAR, nome_sintese: str, submercado: str
+        self, caso: Caso, nome_sintese: str, submercado: str
     ) -> np.ndarray:
         caminho_caso = caso.caminho
         arq_sintese = join(
@@ -1212,7 +1212,7 @@ class IndicadoresCalibracaoCVAR:
         df_teste = df_teste.round(1)
         return df_teste
     
-    def __gera_df_valores_anuais_medios_caso(self, caso: CasoCalibracaoCVAR) -> pd.DataFrame:
+    def __gera_df_valores_anuais_medios_caso(self, caso: Caso) -> pd.DataFrame:
         cmo_se_med = self.__le_arquivo_sintese_anual_caso_SBM(
             caso, "CMO_SBM_EST", "SUDESTE"
             )
