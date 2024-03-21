@@ -216,11 +216,11 @@ def analise_pareto(arquivo_json):
 
 
 
-@click.command("eco-parquets")
+@click.command("eco")
 @click.argument(
     "arquivo_json",
 )
-def eco_parquets(arquivo_json):
+def eco(arquivo_json):
     """
     Calibração do CVaR.
     """
@@ -1067,7 +1067,7 @@ def analise_conjuntoCasos(arquivo_json):
 
 
 cli.add_command(analise_pareto)
-cli.add_command(eco_parquets)
+cli.add_command(eco)
 cli.add_command(analise_temporal)
 cli.add_command(analise_media)
 cli.add_command(analise_anual)
