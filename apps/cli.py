@@ -299,7 +299,7 @@ def eco(arquivo_json):
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
 
-@click.command("analise-temporal")
+@click.command("temporal")
 @click.argument(
     "arquivo_json",
 )
