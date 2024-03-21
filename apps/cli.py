@@ -329,7 +329,7 @@ def analise_temporal(arquivo_json):
         submercados = [Submercado.from_dict(d) for d in dados["submercados"]]
         sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
         
-        indicadores_temporais = IndicadoresTemporais(casos, nome_caso_referencia,usinas)
+        indicadores_temporais = IndicadoresTemporais(casos)
         graficos = Graficos(casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/temporal"
