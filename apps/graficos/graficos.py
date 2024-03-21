@@ -13,7 +13,7 @@ from plotly.subplots import make_subplots
 pio.templates.default = "ggplot2"
 from apps.calibracao_cvar.unidade import UnidadeSintese
 
-class GraficosCalibracaoCVAR:
+class Graficos:
     """
     Realiza a geração dos gráficos utilizados na análise
     de escolha dos pares de CVaR para recalibração.
