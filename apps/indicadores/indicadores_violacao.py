@@ -7,8 +7,8 @@ import pandas as pd
 from inewave.newave import Dger
 from apps.utils.log import Log
 import os.path
-from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
-from apps.calibracao_cvar.usina import UsinaAvalicao
+from apps.model.caso import Caso
+from apps.model.usina import UsinaAvalicao
 import warnings
 
 class IndicadoresCalibracaoCVAR_Violacao:
@@ -21,7 +21,7 @@ class IndicadoresCalibracaoCVAR_Violacao:
     DIR_SINTESE = "sintese"
 
     def __init__(
-        self, casos: List[CasoCalibracaoCVAR], nome_caso_referencia: str, usinas: List[UsinaAvalicao]
+        self, casos: List[Caso], nome_caso_referencia: str, usinas: List[UsinaAvalicao]
     ):
         warnings.simplefilter(action='ignore')
         
