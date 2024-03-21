@@ -1,14 +1,10 @@
 from typing import List
 from os.path import join
-from datetime import datetime
-from calendar import monthrange
-import numpy as np
 import pandas as pd
 from inewave.newave import Dger
 from apps.utils.log import Log
 import os.path
 from apps.model.caso import Caso
-from apps.model.usina import UsinaAvalicao
 from apps.indicadores.eco_indicadores import EcoIndicadores
 import warnings
 
