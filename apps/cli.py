@@ -324,9 +324,9 @@ def analise_temporal(arquivo_json):
         nome_caso_referencia = dados["nome_caso_referencia"]
         # Cria objetos do estudo
         casos = [Caso.from_dict(d) for d in dados["casos"]]
-        usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
-        rees = [Ree.from_dict(d) for d in dados["rees"]]
-        submercados = [Submercado.from_dict(d) for d in dados["submercados"]]
+        usinas = [UsinaAvalicao.from_dict(d) for d in dados["UHE"]]
+        rees = [Ree.from_dict(d) for d in dados["REE"]]
+        submercados = [Submercado.from_dict(d) for d in dados["SBM"]]
         sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
         
         indicadores_temporais = IndicadoresTemporais(casos)
@@ -338,13 +338,10 @@ def analise_temporal(arquivo_json):
         listaUnidadesGraficas = []
         for sts in sinteses:
             espacial = sts.sintese.split("_")[1]
-            print(espacial)
             if(espacial == "SBM"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, sub.nome) for sub in submercados]
             if(espacial == "REE"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, ree.nome) for ree in rees]
             if(espacial == "SIN"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, None)]
             if(espacial == "UHE"): listaUnidadesGraficas += [UnidadeSintese(sts.sintese, "estagios", sts.filtro, usi.nome) for usi in usinas]
-
-
         
         for unity in listaUnidadesGraficas:
             df_unity = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
@@ -354,10 +351,9 @@ def analise_temporal(arquivo_json):
                 index=False,
             )
             Log.log().info("Gerando grafico "+unity.titulo)
-
             fig = graficos.gera_grafico_linha(df_unity, unity.legendaEixoY , unity.legendaEixoX, unity.titulo+"_"+estudo)
             fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_estagios"+estudo+".png"),
+                os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".png"),
                 width=800,
                 height=600,
             )
