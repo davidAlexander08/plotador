@@ -901,7 +901,7 @@ def analise_conjuntoCasos(arquivo_json):
     from apps.model.caso import Caso
     from apps.model.unidade import UnidadeSintese
     from apps.graficos.graficos import Graficos
-    from apps.model.conjuntoCasos import Conjunto
+    from apps.model.conjuntoCasos import ConjuntoCasos
     from apps.indicadores.indicadores_medios import IndicadoresMedios
     from apps.indicadores.indicadores_anuais import IndicadoresAnuais
     from apps.indicadores.indicadores_temporais import IndicadoresTemporais
