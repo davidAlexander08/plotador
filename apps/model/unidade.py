@@ -8,15 +8,16 @@ class UnidadeSintese:
         self.df = df
         self.fitroColuna = fitroColuna
         self.filtroArgumento = filtroArgumento
-
+        self.__mapa_sintese_label_y =
+        {
+            "GTER":"MWmes",
+            "GHID":"MWmes",
+            "QTUR":"m3/s",
+            "QDEF":"m3/s"
+        }
     def label_y(self, sintese):
         operacional = sintese.split("_")[0]
-        return self.mapa_sintese_label_y[operacional]
+        return self.__mapa_sintese_label_y[operacional]
 
 
-    self.mapa_sintese_label_y ={
-        "GTER":"MWmes",
-        "GHID":"MWmes",
-        "QTUR":"m3/s",
-        "QDEF":"m3/s"
-    }
+
