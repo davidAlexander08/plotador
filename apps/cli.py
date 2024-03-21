@@ -255,15 +255,13 @@ def eco_parquets(arquivo_json):
 
         mapa_df = {}
         for sts in sinteses:
-            mapa_df["eco_"+sts.sintese]=eco_indicadores.retorna_df_concatenado(sts.sintese)
-        
-        for eco in mapa_df:
-            Log.log().info("Gerando eco "+ eco +" para o estudo: "+ estudo)
-            mapa_df[eco].to_csv(
-                os.path.join(diretorio_saida, eco+"_"+estudo+".csv"),
+            Log.log().info("Gerando eco "+ sts.sintese +" para o estudo: "+ estudo)
+            eco = eco_indicadores.retorna_df_concatenado(sts.sintese)
+            eco.to_csv(
+                os.path.join(diretorio_saida, "eco_"+sts.sintese+"_"+estudo+".csv"),
                 index=False,
             )
-            
+        exit(1)
         df_custos = eco_indicadores.retorna_df_concatenado("CUSTOS")
         #df_custos = df_custos.loc[(df_custos["mean"] != 0)] #Remove colunas com 0
         df_custos = df_custos.loc[(df_custos["mean"] > 10)] #Remove colunas menores que 10, pois nao sao significantes
