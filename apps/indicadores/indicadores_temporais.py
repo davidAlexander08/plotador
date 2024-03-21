@@ -22,15 +22,12 @@ class IndicadoresTemporais:
     DIR_SINTESE = "sintese"
 
     def __init__(
-        self, casos: List[Caso], nome_caso_referencia: str, usinas: List[UsinaAvalicao]
-    ):
+        self, casos: List[Caso] ):
         warnings.simplefilter(action='ignore')
         
         self.casos = casos
-        self.usinas = usinas
-        self.nome_caso_referencia = nome_caso_referencia
         self.__df_cref = None
-        self.eco_indicadores = EcoIndicadores(casos, nome_caso_referencia,usinas)
+        self.eco_indicadores = EcoIndicadores(casos)
 
     def retorna_df_concatenado_medio_2_mes(self,sintese, coluna = None, argumento_filtro = None):
         mapa = self.retorna_mapaDF_cenario_medio(sintese, coluna, argumento_filtro)
