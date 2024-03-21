@@ -12,16 +12,14 @@ class Sintese:
         return self.__mapa_filtro[espacial]
         
     def __init__(self, sts: str):
-        self.sts = sts  
-        self.filtro = self.retornaFiltro(sts)
-        
         self.__mapa_filtro = {
             "SBM": "submercado",
             "REE": "ree",
             "UHE": "usina",
             "SIN": None
         }
-        
+        self.sts = sts  
+        self.filtro = self.retornaFiltro(sts)
 
 
     @classmethod
