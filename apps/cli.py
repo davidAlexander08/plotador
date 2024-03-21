@@ -254,14 +254,8 @@ def eco_parquets(arquivo_json):
         os.makedirs(diretorio_saida, exist_ok=True)
 
         mapa_df = {}
-        mapa_df["eco_GTER_SIN_EST"]=eco_indicadores.retorna_df_concatenado("GTER_SIN_EST")
-        mapa_df["eco_GHID_SIN_EST"]=eco_indicadores.retorna_df_concatenado("GHID_SIN_EST")
-        mapa_df["eco_VDEFMIN_SIN_EST"]=eco_indicadores.retorna_df_concatenado("VDEFMIN_SIN_EST")
-        mapa_df["eco_COP_SIN_EST"]=eco_indicadores.retorna_df_concatenado("COP_SIN_EST")
-        mapa_df["eco_EARPF_SIN_EST"]=eco_indicadores.retorna_df_concatenado("EARPF_SIN_EST")
-        mapa_df["eco_CMO_SBM_EST"]=eco_indicadores.retorna_df_concatenado("CMO_SBM_EST")
-        mapa_df["eco_EVER_SIN_EST"]=eco_indicadores.retorna_df_concatenado("EVER_SIN_EST")
-        mapa_df["eco_CUSTOS"]=eco_indicadores.retorna_df_concatenado("CUSTOS")
+        for sts in sinteses:
+            mapa_df["eco_"+sts.sintese]=eco_indicadores.retorna_df_concatenado(sts.sintese)
         
         for eco in mapa_df:
             Log.log().info("Gerando eco "+ eco +" para o estudo: "+ estudo)
