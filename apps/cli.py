@@ -226,6 +226,9 @@ def eco_parquets(arquivo_json):
     """
     from apps.model.caso import Caso
     from apps.model.usina import UsinaAvalicao
+    from apps.model.ree import Ree
+    from apps.model.submercado import Submercado
+    from apps.model.sintese import Sintese
     from apps.indicadores.eco_indicadores import EcoIndicadores
     from apps.model.unidade import UnidadeSintese
     from apps.graficos.graficos import Graficos
@@ -239,6 +242,10 @@ def eco_parquets(arquivo_json):
         # Cria objetos do estudo
         casos = [Caso.from_dict(d) for d in dados["casos"]]
         usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
+        rees = [Ree.from_dict(d) for d in dados["rees"]]
+        submercados = [Submercado.from_dict(d) for d in dados["submercados"]]
+        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
+
         
         eco_indicadores = EcoIndicadores(casos, nome_caso_referencia,usinas)
         graficos = Graficos(casos)
