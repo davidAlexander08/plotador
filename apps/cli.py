@@ -337,7 +337,7 @@ def analise_temporal(arquivo_json):
         
         listaUnidadesGraficas = []
         for sts in sinteses:
-            grandeza = sts.split("_")[1]
+            grandeza = sts.sintese.split("_")[1]
             print(grandeza)
         exit(1)
         #for u in usinas:
