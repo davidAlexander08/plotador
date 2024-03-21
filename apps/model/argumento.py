@@ -15,5 +15,7 @@ class Argumento:
     @classmethod
     def from_dict(cls, d: Dict[str, str]):
         key = list(d.keys())[0]
-        print(str(key))
+        print(key)
+        print(d)
+        print(d[key])
         return cls(d[key]["nome"], key)
