@@ -15,7 +15,7 @@ class Sintese:
         self.mapa_filtro = {
             "SBM": "submercado",
             "REE": "ree",
-            "UHE": "usina"
+            "UHE": "usina",
             "SIN": None
         }
     def retornaFiltro(self, sintese):
