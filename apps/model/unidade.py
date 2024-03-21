@@ -11,9 +11,7 @@ class UnidadeSintese:
         
     def __init__(self, sintese, legendaEixoX, fitroColuna = None, filtroArgumento = None, df = None):
         self.sintese = sintese
-        self.legendaEixoY = self.label_y(sintese)     
         self.legendaEixoX = legendaEixoX
-        self.titulo = self.titulo_fig(sintese) if filtroArgumento == None else self.titulo_fig(sintese) + " " + filtroArgumento
         self.df = df
         self.fitroColuna = fitroColuna
         self.filtroArgumento = filtroArgumento
@@ -41,6 +39,7 @@ class UnidadeSintese:
             "VVMINOP":"Viol. VMINOP",
         }
 
-
+        self.legendaEixoY = self.label_y(sintese)     
+        self.titulo = self.titulo_fig(sintese) if filtroArgumento == None else self.titulo_fig(sintese) + " " + filtroArgumento
 
 
