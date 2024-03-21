@@ -7,13 +7,13 @@ class Sintese:
     que será utilizado para o cálculo de indicadores
     e para geração de gráficos.
     """
-    def retornaFiltro(self, sintese):
-        espacial = sintese.split("_")[1]
+    def retornaFiltro(self, sts):
+        espacial = sts.split("_")[1]
         return self.__mapa_filtro[espacial]
         
-    def __init__(self, sintese: str):
-        self.sintese = sintese  
-        self.filtro = self.retornaFiltro(sintese)
+    def __init__(self, sts: str):
+        self.sts = sts  
+        self.filtro = self.retornaFiltro(sts)
         
         self.__mapa_filtro = {
             "SBM": "submercado",
