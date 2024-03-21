@@ -13,7 +13,7 @@ class UnidadeSintese:
         self.sintese = sintese
         self.legendaEixoY = self.label_y(sintese)     
         self.legendaEixoX = legendaEixoX
-        self.titulo = self.titulo_fig(sintese)
+        self.titulo = self.titulo_fig(sintese) if filtroArgumento = None else self.titulo_fig(sintese) + " " + filtroArgumento
         self.df = df
         self.fitroColuna = fitroColuna
         self.filtroArgumento = filtroArgumento
