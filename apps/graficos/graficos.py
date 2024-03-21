@@ -1,7 +1,7 @@
 from typing import List
 import pandas as pd
 
-from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
+from apps.model.caso import Caso
 from apps.utils.log import Log
 
 import plotly.graph_objects as go
@@ -11,7 +11,7 @@ from plotly.subplots import make_subplots
 
 
 pio.templates.default = "ggplot2"
-from apps.calibracao_cvar.unidade import UnidadeSintese
+from apps.model.unidade import UnidadeSintese
 
 class Graficos:
     """
