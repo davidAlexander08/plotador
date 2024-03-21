@@ -11,9 +11,13 @@ class UnidadeSintese:
         self.__mapa_sintese_label_y =        {
             "GTER":"MWmes",
             "GHID":"MWmes",
+            "EARPF":"%",
+            "COP":"R$",
+            "EARMF":"MWmes",
             "CMO":"R$/MWh",
             "QTUR":"m3/s",
-            "QDEF":"m3/s"
+            "QDEF":"m3/s",
+            "VVMINOP":"MWmed",
         }
     def label_y(self, sintese):
         operacional = sintese.split("_")[0]
