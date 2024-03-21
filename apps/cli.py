@@ -325,13 +325,13 @@ def analise_temporal(arquivo_json):
         nome_caso_referencia = dados["nome_caso_referencia"]
         # Cria objetos do estudo
         casos = [Caso.from_dict(d) for d in dados["casos"]]
-        usinas = [UsinaAvalicao.from_dict(d) for d in dados["UHE"]]
-        rees = [Ree.from_dict(d) for d in dados["REE"]]
-        submercados = [Submercado.from_dict(d) for d in dados["SBM"]]
+        #usinas = [UsinaAvalicao.from_dict(d) for d in dados["UHE"]]
+        #rees = [Ree.from_dict(d) for d in dados["REE"]]
+        #submercados = [Submercado.from_dict(d) for d in dados["SBM"]]
         sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        arg_1 = [Argumento.from_dict(d) for d in dados["UHE"]]
-        arg_2 = [Argumento.from_dict(d) for d in dados["REE"]]
-        arg_3 = [Argumento.from_dict(d) for d in dados["SBM"]]
+        arg = [Argumento.from_dict(d) for d in dados["argumentos"]]
+        #arg_2 = [Argumento.from_dict(d) for d in dados["REE"]]
+        #arg_3 = [Argumento.from_dict(d) for d in dados["SBM"]]
         
         indicadores_temporais = IndicadoresTemporais(casos)
         graficos = Graficos(casos)
