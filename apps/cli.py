@@ -356,15 +356,10 @@ def analise_temporal(arquivo_json):
                         os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".csv"),
                         index=False,
                     )
-                    Log.log().info("Gerando grafico eco"+unity.titulo)
+                    Log.log().info("Gerando grafico eco "+unity.titulo)
                     fig = graficos.gera_grafico_linha(df_unity, unity.legendaEixoY , unity.legendaEixoX, unity.titulo+"_"+estudo)
-                    fig.write_image(
-                        os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".png"),
-                        width=800,
-                        height=600,
-                    )
-        
-        
+                    graficos.exportar(fig, diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".png"):
+                    
                     df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
                     Log.log().info("Gerando tabela 2 mes "+unity.titulo)
                     df_unity_2_mes.to_csv(
