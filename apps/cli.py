@@ -356,7 +356,7 @@ def analise_temporal(arquivo_json):
                         os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".csv"),
                         index=False,
                     )
-                    Log.log().info("Gerando grafico "+unity.titulo)
+                    Log.log().info("Gerando grafico eco"+unity.titulo)
                     fig = graficos.gera_grafico_linha(df_unity, unity.legendaEixoY , unity.legendaEixoX, unity.titulo+"_"+estudo)
                     fig.write_image(
                         os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".png"),
@@ -366,13 +366,12 @@ def analise_temporal(arquivo_json):
         
         
                     df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-                    
-                    Log.log().info("Gerando tabela "+unity.titulo)
+                    Log.log().info("Gerando tabela 2 mes "+unity.titulo)
                     df_unity_2_mes.to_csv(
                         os.path.join(diretorio_saida, "eco_"+unity.titulo+"_2_mes_"+estudo+".csv"),
                         index=False,
                     )
-                    Log.log().info("Gerando grafico "+unity.titulo)
+                    Log.log().info("Gerando grafico 2 mes"+unity.titulo)
                     fig = graficos.gera_grafico_barra(df_unity_2_mes["valor"], df_unity_2_mes["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"2_mes")
                     fig.write_image(
                         os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_2_mes_"+estudo+".png"),
