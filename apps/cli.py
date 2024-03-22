@@ -348,7 +348,7 @@ def analise_temporal(arquivo_json):
             espacial = sts.sintese.split("_")[1]
             for arg in args:
                 if(espacial == arg.chave):
-                    unity = UnidadeSintese(sts.sintese, "estagios", sts.filtro, sub.nome)
+                    unity = UnidadeSintese(sts.sintese, "estagios", sts.filtro, arg.nome)
                 #for unity in listaUnidadesGraficas:
                     df_unity = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
                     Log.log().info("Gerando tabela "+unity.titulo)
