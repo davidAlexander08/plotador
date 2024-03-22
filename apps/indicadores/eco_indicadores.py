@@ -14,7 +14,7 @@ class EcoIndicadores:
     para recalibração.
     """
 
-    DIR_SINTESE = "sintese"
+    
 
     def __init__(  self, casos: List[Caso] ):
         warnings.simplefilter(action='ignore')
