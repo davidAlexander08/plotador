@@ -8,13 +8,6 @@ from apps.indicadores.abstractIndicadores import AbstractIndicadores
 import warnings
 
 class EcoIndicadores:
-    """indicadores.df_custos_incrementais.to_csv
-    Calcula os indicadores que são utilizados nas visualizações
-    dos paretos para a escolha dos pares de CVaR candidatos
-    para recalibração.
-    """
-
-    
 
     def __init__(  self, casos: List[Caso] ):
         warnings.simplefilter(action='ignore')
@@ -41,6 +34,12 @@ class EcoIndicadores:
             df["caso"] = c.nome
             dict[c] = df
         return dict
+
+    def exportar(self, df, diretorio_saida, nome_arquivo, imprimeIndex = False):
+        Log.log().info("Gerando tabela "+nome_arquivo)
+        df.to_csv( os.path.join(diretorio_saida, 
+                                nome_arquivo+".csv"), 
+                  index= imprimeIndex )
 
 
 
