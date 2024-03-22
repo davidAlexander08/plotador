@@ -340,7 +340,7 @@ def analise_temporal(arquivo_json):
             for arg in args:
                 if(espacial == arg.chave):
                     unity = UnidadeSintese(sts.sintese, "estagios", sts.filtro, arg.nome)
-                    diretorio_saida_arg = diretorio_saida+"/"+arg.nome
+                    diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
                     
                     df_unity = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
