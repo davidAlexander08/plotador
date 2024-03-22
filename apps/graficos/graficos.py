@@ -43,6 +43,7 @@ class Graficos:
         ]
 
     def exportar(self, figura, diretorio_saida, nome_arquivo):
+        Log.log().info("Gerando grafico "+nome_arquivo)
         figura.write_image(
             os.path.join(diretorio_saida, nome_arquivo+".png"),
             width=800,
