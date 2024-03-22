@@ -9,7 +9,7 @@ from apps.indicadores.eco_indicadores import EcoIndicadores
 import warnings
  
 class IndicadoresTemporais(EcoIndicadores):
-    DIR_SINTESE = "sintese"
+    #DIR_SINTESE = "sintese"
     def __init__(
         self, casos: List[Caso] ):
         warnings.simplefilter(action='ignore')
