@@ -3,7 +3,7 @@ import pandas as pd
 
 from apps.model.caso import Caso
 from apps.utils.log import Log
-
+import os
 import plotly.graph_objects as go
 import plotly.io as pio
 import plotly.express as px
