@@ -4,6 +4,7 @@ import pandas as pd
 from apps.utils.log import Log
 import os.path
 from apps.model.caso import Caso
+from apps.indicadores.abstractIndicadores import AbstractIndicadores
 import warnings
 
 class EcoIndicadores:
@@ -18,6 +19,7 @@ class EcoIndicadores:
     def __init__(  self, casos: List[Caso] ):
         warnings.simplefilter(action='ignore')
         self.casos = casos
+        AbstractIndicadores.__init__(self)
         
     def retorna_df_concatenado(self,sintese):
         return pd.concat(self.retornaMapaDF(sintese))
