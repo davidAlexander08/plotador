@@ -304,13 +304,8 @@ def eco(arquivo_json):
     "arquivo_json",
 )
 def analise_temporal(arquivo_json):
-    """
-    Calibração do CVaR.
-    """
+
     from apps.model.caso import Caso
-    from apps.model.usina import UsinaAvalicao
-    from apps.model.ree import Ree
-    from apps.model.submercado import Submercado
     from apps.model.sintese import Sintese
     from apps.indicadores.indicadores_temporais import IndicadoresTemporais
     from apps.model.unidade import UnidadeSintese
