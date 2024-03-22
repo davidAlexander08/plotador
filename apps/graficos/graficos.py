@@ -42,7 +42,11 @@ class Graficos:
             "black",
         ]
 
-
+    def exportar(self, figura, diretorio_saida, nome_arquivo):
+        figura.write_image(
+            os.path.join(diretorio_saida, nome_arquivo+".png"),
+            width=800,
+            height=600)
 
     def gera_graficos_linha_mean_p10_p90_CREF(self,
         df: pd.DataFrame,
