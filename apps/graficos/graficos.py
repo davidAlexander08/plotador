@@ -1033,7 +1033,6 @@ class Graficos:
         aproximacao:int,
         titulo:str
     ) -> go.Figure:
-        Log.log().info("Gerando grafico "+titulo)
         fig = go.Figure()
         fig.add_trace(
             go.Bar(
