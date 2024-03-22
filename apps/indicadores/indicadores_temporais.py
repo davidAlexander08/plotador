@@ -7,23 +7,17 @@ import os.path
 from apps.model.caso import Caso
 from apps.indicadores.eco_indicadores import EcoIndicadores
 import warnings
-
-class IndicadoresTemporais:
-    """indicadores.df_custos_incrementais.to_csv
-    Calcula os indicadores que são utilizados nas visualizações
-    dos paretos para a escolha dos pares de CVaR candidatos
-    para recalibração.
-    """
-
+ 
+class IndicadoresTemporais(EcoIndicadores):
     DIR_SINTESE = "sintese"
-
     def __init__(
         self, casos: List[Caso] ):
         warnings.simplefilter(action='ignore')
         
         self.casos = casos
         self.__df_cref = None
-        self.eco_indicadores = EcoIndicadores(casos)
+        #self.eco_indicadores = EcoIndicadores(casos)
+        EcoIndicadores.__init__(self, casos)
 
     def retorna_df_concatenado_medio_2_mes(self,sintese, coluna = None, argumento_filtro = None):
         mapa = self.retorna_mapaDF_cenario_medio(sintese, coluna, argumento_filtro)
@@ -42,7 +36,8 @@ class IndicadoresTemporais:
         return dict
 
     def retorna_mapaDF_cenario_medio(self,sintese, coluna = None, argumento_filtro = None):
-        eco_mapa = self.eco_indicadores.retornaMapaDF(sintese)
+        #eco_mapa = self.eco_indicadores.retornaMapaDF(sintese)
+        eco_mapa = self.retornaMapaDF(sintese)
         mapa_temporal = {}
         if( (coluna is None) & (argumento_filtro is None) ):
             return self.__retorna_mapa_media_parquet(eco_mapa)
