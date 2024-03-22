@@ -16,7 +16,6 @@ class IndicadoresTemporais(EcoIndicadores):
         
         self.casos = casos
         self.__df_cref = None
-        #self.eco_indicadores = EcoIndicadores(casos)
         EcoIndicadores.__init__(self, casos)
 
     def retorna_df_concatenado_medio_2_mes(self,sintese, coluna = None, argumento_filtro = None):
@@ -36,7 +35,6 @@ class IndicadoresTemporais(EcoIndicadores):
         return dict
 
     def retorna_mapaDF_cenario_medio(self,sintese, coluna = None, argumento_filtro = None):
-        #eco_mapa = self.eco_indicadores.retornaMapaDF(sintese)
         eco_mapa = self.retornaMapaDF(sintese)
         mapa_temporal = {}
         if( (coluna is None) & (argumento_filtro is None) ):
