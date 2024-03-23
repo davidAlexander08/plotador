@@ -12,7 +12,7 @@ from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.indicadores.eco_indicadores import EcoIndicadores
 import warnings
 
-class IndicadoresMedios:
+class IndicadoresMedios(EcoIndicadores):
     """indicadores.df_custos_incrementais.to_csv
     Calcula os indicadores que são utilizados nas visualizações
     dos paretos para a escolha dos pares de CVaR candidatos
@@ -28,7 +28,7 @@ class IndicadoresMedios:
         self.casos = casos
         self.nome_caso_referencia = nome_caso_referencia
         self.indicadores_temporais = IndicadoresTemporais(casos)
-        self.eco_indicadores = EcoIndicadores(casos)
+        EcoIndicadores.__init__(self, casos)
     
     def retorna_mapa_media_parquet(self, mapa):
         dict = {}
@@ -64,7 +64,7 @@ class IndicadoresMedios:
             
     def retorna_mapaDF_std_cenarios(self, sintese, coluna = None, argumento_filtro = None):
         mapa = {}
-        mapa = self.eco_indicadores.retornaMapaDF(sintese)
+        mapa = self.retornaMapaDF(sintese)
         if( (coluna is not None) & (argumento_filtro is not None) ):
             for c in self.casos: mapa[c] = mapa[c].loc[mapa[c][coluna] == argumento_filtro]
         for c in self.casos:
