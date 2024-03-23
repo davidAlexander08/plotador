@@ -719,15 +719,14 @@ def analise_cenarios(arquivo_json):
 
 
 
-@click.command("analise-conjuntoCasos")
+@click.command("conjuntoCasos")
 @click.argument(
     "arquivo_json",
 )
 def analise_conjuntoCasos(arquivo_json):
-    """
-    Calibração do CVaR.
-    """
+
     from apps.model.caso import Caso
+    from apps.model.sintese import Sintese
     from apps.model.unidade import UnidadeSintese
     from apps.graficos.graficos import Graficos
     from apps.model.conjuntoCasos import ConjuntoCasos
@@ -742,156 +741,95 @@ def analise_conjuntoCasos(arquivo_json):
         estudo = dados["estudo"]
         conjuntoCasos = [ConjuntoCasoCalibracaoCVAR.from_dict(d) for d in dados["conjuntos"]]
         nome_caso_referencia = ""
-        usinas = []
+
+        casos = [Caso.from_dict(d) for d in dados["casos"]]
+        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
+        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/conjunto"
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        listaUnidadesGraficas = []
-        #listaUnidadesGraficas.append(UnidadeSintese("EXC_SIN_EST", "MWmes", "casos" ,"Excesso_SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "casos" ,"Geração_Térmica_SIN "))
-        #listaUnidadesGraficas.append(UnidadeSintese("DEF_SIN_EST", "MWmes", "casos" ,"Deficit_SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("GHID_SIN_EST", "MWmes", "casos" ,"Geração_Hidrelétrica_SIN "))
-        #listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_SIN_EST", "hm3", "casos" ,"Violação_Defluência_Minima_SIN_mean "))
-        #listaUnidadesGraficas.append(UnidadeSintese("COP_SIN_EST", "R$", "casos" ,"Custo_De_Operação_SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("EARPF_SIN_EST", "%", "casos" ,"Energia_Armazenada_Percentual_Final_SIN "))
-        #listaUnidadesGraficas.append(UnidadeSintese("EARMF_SIN_EST", "MWmes", "casos" ,"Energia_Armazenada_Final_SIN "))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "casos" ,"CMO_Sudeste ", "submercado", "SUDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "casos" ,"CMO_Nordeste ", "submercado", "NORDESTE"))        
-        #listaUnidadesGraficas.append(UnidadeSintese("EVER_SIN_EST", "MWmes", "casos" , "Energia_Vertida_SIN_mean "))
-
-        for unity in listaUnidadesGraficas:
-            listaConjDF = []
-            listaConjDF_Anual = []
-            listaConjDF_Temporal_Primeiro_Mes = []
-            listaConjDF_Temporal_Segundo_Mes = []
-            mapaConjDF_Temporal = {}
-            listaNomes = []
-            mapCores = {}
-            for conjunto in conjuntoCasos:
-                indicador_conj_medio = IndicadoresMedios(conjunto.casos, nome_caso_referencia,usinas)
-                indicadores_anuais = IndicadoresAnuais(conjunto.casos, nome_caso_referencia,usinas)
-                indicadores_temporais = IndicadoresTemporais(conjunto.casos, nome_caso_referencia,usinas)
-                graficos = GraficosCalibracaoCVAR(conjunto.casos)
+        for sts in sinteses:
+            espacial = sts.sintese.split("_")[1]
+            for arg in args:
+                if(espacial == arg.chave):
+                    unity = UnidadeSintese(sts.sintese, "estagios", sts.filtro, arg.nome)
+                    diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
+                    os.makedirs(diretorio_saida_arg, exist_ok=True)
                 
-                
-                df_unity = indicador_conj_medio.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-                df_unity = df_unity.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
-                #df_unity["conjunto"] = conjunto.nome
+                    listaConjDF = []
+                    listaConjDF_Anual = []
+                    listaConjDF_Temporal_Primeiro_Mes = []
+                    listaConjDF_Temporal_Segundo_Mes = []
+                    mapaConjDF_Temporal = {}
+                    listaNomes = []
+                    mapCores = {}
+                    for conjunto in conjuntoCasos:
+                        indicador_conj_medio = IndicadoresMedios(conjunto.casos, nome_caso_referencia)
+                        indicadores_anuais = IndicadoresAnuais(conjunto.casos, nome_caso_referencia)
+                        indicadores_temporais = IndicadoresTemporais(conjunto.casos)
+                        graficos = Graficos(conjunto.casos)
+                        
+                        
+                        df_unity = indicador_conj_medio.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                        df_unity = df_unity.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
+                        #df_unity["conjunto"] = conjunto.nome
+        
+                        df_anual = indicadores_anuais.retorna_df_concatenado_acumulado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                        df_anual = df_anual.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
+        
+                        df_temporal = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                        df_temporal = df_temporal.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
+        
+                        df_temporal_primeiro_mes = df_temporal.loc[df_temporal["estagio"] == 1 ].reset_index(drop = True)
+                        df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
+                        listaConjDF.append(df_unity)
+                        listaConjDF_Anual.append(df_anual)
+                        listaConjDF_Temporal_Primeiro_Mes.append(df_temporal_primeiro_mes)
+                        listaConjDF_Temporal_Segundo_Mes.append(df_temporal_segundo_mes)
+                        mapaConjDF_Temporal[conjunto.nome]  = df_temporal
+                        
+                        listaNomes.append(conjunto.nome)
+                        mapCores[conjunto.nome] = conjunto.cor
+        
+                    df_concat = pd.concat(listaConjDF, axis=1)
+                    df_concatenado = df_concat.loc[:,~df_concat.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
+        
+                    df_concat_anual = pd.concat(listaConjDF_Anual, axis=1)
+                    df_concatenado_anual = df_concat_anual.loc[:,~df_concat_anual.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
+        
+                    df_concat_temporal_primeiro_mes = pd.concat(listaConjDF_Temporal_Primeiro_Mes, axis=1)
+                    df_concatenado_temporal_primeiro_mes = df_concat_temporal_primeiro_mes.loc[:,~df_concat_temporal_primeiro_mes.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
+                    
+                    df_concat_temporal_segundo_mes = pd.concat(listaConjDF_Temporal_Segundo_Mes, axis=1)
+                    df_concatenado_temporal_segundo_mes = df_concat_temporal_segundo_mes.loc[:,~df_concat_temporal_segundo_mes.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
 
-                df_anual = indicadores_anuais.retorna_df_concatenado_acumulado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-                df_anual = df_anual.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
-
-                df_temporal = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-                df_temporal = df_temporal.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
-
-                df_temporal_primeiro_mes = df_temporal.loc[df_temporal["estagio"] == 1 ].reset_index(drop = True)
-                df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
-                listaConjDF.append(df_unity)
-                listaConjDF_Anual.append(df_anual)
-                listaConjDF_Temporal_Primeiro_Mes.append(df_temporal_primeiro_mes)
-                listaConjDF_Temporal_Segundo_Mes.append(df_temporal_segundo_mes)
-                mapaConjDF_Temporal[conjunto.nome]  = df_temporal
-                
-                listaNomes.append(conjunto.nome)
-                mapCores[conjunto.nome] = conjunto.cor
-
-            df_concat = pd.concat(listaConjDF, axis=1)
-            df_concatenado = df_concat.loc[:,~df_concat.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
-
-            df_concat_anual = pd.concat(listaConjDF_Anual, axis=1)
-            df_concatenado_anual = df_concat_anual.loc[:,~df_concat_anual.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
-
-            df_concat_temporal_primeiro_mes = pd.concat(listaConjDF_Temporal_Primeiro_Mes, axis=1)
-            df_concatenado_temporal_primeiro_mes = df_concat_temporal_primeiro_mes.loc[:,~df_concat_temporal_primeiro_mes.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
-            
-            df_concat_temporal_segundo_mes = pd.concat(listaConjDF_Temporal_Segundo_Mes, axis=1)
-            df_concatenado_temporal_segundo_mes = df_concat_temporal_segundo_mes.loc[:,~df_concat_temporal_segundo_mes.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
-
-            Log.log().info("Gerando tabela "+unity.titulo)
-            df_concatenado.to_csv(
-                os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".csv"),
-                index=False,
-            )
-            
-            Log.log().info("Gerando tabela Anual "+unity.titulo)
-            df_concatenado_anual.to_csv(
-                os.path.join(diretorio_saida, "eco_"+unity.titulo+"_media_anual_"+estudo+".csv"),
-                index=False,
-            )
-            
-            Log.log().info("Gerando tabela Temporal Primeiro Mes "+unity.titulo)
-            df_concatenado_temporal_primeiro_mes.to_csv(
-                os.path.join(diretorio_saida, "eco_"+unity.titulo+"_media_primeiro_mes_"+estudo+".csv"),
-                index=False,
-            )
-
-            Log.log().info("Gerando tabela Temporal Segundo Mes "+unity.titulo)
-            df_concatenado_temporal_segundo_mes.to_csv(
-                os.path.join(diretorio_saida, "eco_"+unity.titulo+"_media_segundo_mes_"+estudo+".csv"),
-                index=False,
-            )
-            
-            
-            Log.log().info("Gerando grafico "+unity.titulo)
-            fig = graficos.gera_grafico_linhas_diferentes_casos(df_concatenado, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo)
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+estudo+".png"),
-                width=800,
-                height=600,
-            )            
-            fig.write_html(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+estudo+".html")
-            )  
-    
-            
-            df_primeiro_ano = df_concatenado_anual.loc[(df_concatenado_anual["anos"] == df_concatenado_anual["anos"].iloc[0])]
-            Log.log().info("Gerando grafico de médias do primeiro ano "+unity.titulo)
-            fig = graficos.gera_grafico_linhas_diferentes_casos(df_primeiro_ano, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Primeiro_Ano")
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_primeiro_ano_"+estudo+".png"),
-                width=800,
-                height=600,
-            )    
-
-            
-            df_outros_anos = df_concatenado_anual.loc[(df_concatenado_anual["anos"] == df_concatenado_anual["anos"].iloc[1])]
-            Log.log().info("Gerando grafico de médias do primeiro ano "+unity.titulo)
-            fig = graficos.gera_grafico_linhas_diferentes_casos(df_outros_anos, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Outros_Anos")
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_outros_anos_"+estudo+".png"),
-                width=800,
-                height=600,
-            )   
+                    indicador_conj_medio.exportar(df_concatenado, diretorio_saida_arg,  "conj_med_"+unity.titulo+"_"+estudo)
+                    indicadores_anuais.exportar(df_concatenado_anual, diretorio_saida_arg,  "conj_anual_"+unity.titulo+"_"+estudo)
+                    indicadores_temporais.exportar(df_concatenado_temporal_primeiro_mes, diretorio_saida_arg,  "primeiro_mes_"+unity.titulo+"_"+estudo)
+                    indicadores_temporais.exportar(df_concatenado_temporal_segundo_mes, diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+estudo)
 
 
-
-
-            
-            Log.log().info("Gerando grafico de médias do primeiro mes  "+unity.titulo)
-            fig = graficos.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_primeiro_mes, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Primeiro_Mes")
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_primeiro_mes_"+estudo+".png"),
-                width=800,
-                height=600,
-            )   
-
-            
-            Log.log().info("Gerando grafico de médias do segundo mes "+unity.titulo)
-            fig = graficos.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_segundo_mes, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Segundo_Mes")
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_segundo_mes_"+estudo+".png"),
-                width=800,
-                height=600,
-            )   
-
-            mapaFig = graficos.subplot_gera_grafico_linha_casos(conjuntoCasos, mapaConjDF_Temporal, unity.legendaEixoY , unity.legendaEixoX, unity.titulo)
-            for titulo in mapaFig:
-                mapaFig[titulo].write_image(
-                    os.path.join(diretorio_saida, titulo+".png"),
-                    width=2000,
-                    height=900,
-                )   
+                    fig = graficos.gera_grafico_linhas_diferentes_casos(df_concatenado, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo)
+                    graficos.exportar(fig, diretorio_saida_arg, "conj_medias_"+unity.titulo+"_"+estudo)
+                    
+                    df_primeiro_ano = df_concatenado_anual.loc[(df_concatenado_anual["anos"] == df_concatenado_anual["anos"].iloc[0])]
+                    fig = graficos.gera_grafico_linhas_diferentes_casos(df_primeiro_ano, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Primeiro_Ano")
+                    graficos.exportar(fig, diretorio_saida_arg, "conj_anual_"+unity.titulo+"_primeiro_ano_"+estudo)
+                    
+                    df_outros_anos = df_concatenado_anual.loc[(df_concatenado_anual["anos"] == df_concatenado_anual["anos"].iloc[1])]
+                    fig = graficos.gera_grafico_linhas_diferentes_casos(df_outros_anos, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Outros_Anos")
+                    graficos.exportar(fig, diretorio_saida_arg, "conj_anual_"+unity.titulo+"_outros_anos_"+estudo)
+                    
+                    fig = graficos.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_primeiro_mes, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Primeiro_Mes")
+                    graficos.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_primeiro_mes_"+estudo)
+                    
+                    fig = graficos.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_segundo_mes, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Segundo_Mes")
+                    graficos.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_segundo_mes_"+estudo)
+        
+                    mapaFig = graficos.subplot_gera_grafico_linha_casos(conjuntoCasos, mapaConjDF_Temporal, unity.legendaEixoY , unity.legendaEixoX, unity.titulo)
+                    for titulo in mapaFig:
+                        graficos.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+estudo, 2000, 900)
             
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
