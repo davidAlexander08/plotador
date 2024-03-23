@@ -413,8 +413,7 @@ def analise_media(arquivo_json):
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/media"
         os.makedirs(diretorio_saida, exist_ok=True)
-
-       for sts in sinteses:
+        for sts in sinteses:
             espacial = sts.sintese.split("_")[1]
             for arg in args:
                 if(espacial == arg.chave):
