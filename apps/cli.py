@@ -463,7 +463,7 @@ def analise_anual(arquivo_json):
         sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
         args = [Argumento.from_dict(d) for d in dados["argumentos"]]
         indicadores_anuais = IndicadoresAnuais(casos, nome_caso_referencia)
-        graficos = GraficosCalibracaoCVAR(casos)
+        graficos = Graficos(casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/anual"
         os.makedirs(diretorio_saida, exist_ok=True)
