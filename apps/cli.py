@@ -739,7 +739,7 @@ def analise_conjuntoCasos(arquivo_json):
             dados = json.load(f)
         # Lê dados de entrada
         estudo = dados["estudo"]
-        conjuntoCasos = [ConjuntoCasoCalibracaoCVAR.from_dict(d) for d in dados["conjuntos"]]
+        conjuntoCasos = [ConjuntoCasos.from_dict(d) for d in dados["conjuntos"]]
         nome_caso_referencia = ""
 
         casos = [Caso.from_dict(d) for d in dados["casos"]]
