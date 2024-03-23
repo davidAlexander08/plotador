@@ -8,11 +8,10 @@ from inewave.newave import Dger
 from apps.utils.log import Log
 import os.path
 from apps.model.caso import Caso
-from apps.model.usina import UsinaAvalicao
 from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 import warnings
 
-class IndicadoresAnuais:
+class IndicadoresAnuais(IndicadoresTemporais):
     """indicadores.df_custos_incrementais.to_csv
     Calcula os indicadores que são utilizados nas visualizações
     dos paretos para a escolha dos pares de CVaR candidatos
@@ -22,15 +21,13 @@ class IndicadoresAnuais:
     DIR_SINTESE = "sintese"
 
     def __init__(
-        self, casos: List[Caso], nome_caso_referencia: str, usinas: List[UsinaAvalicao]
+        self, casos: List[Caso], nome_caso_referencia: str
     ):
         warnings.simplefilter(action='ignore')
         
         self.casos = casos
-        self.usinas = usinas
         self.nome_caso_referencia = nome_caso_referencia
-        self.indicadores_temporais = IndicadoresTemporais(casos, nome_caso_referencia,usinas)
-
+        IndicadoresTemporais.__init__(self, casos)
 
 
     def retorna_mapa_media_anual_parquet(self, mapa):
@@ -52,7 +49,7 @@ class IndicadoresAnuais:
         return pd.concat(self.retorna_mapa_media_df_anual_acumulado(self.retorna_mapaDF_cenario_anual_medio(sintese, coluna, argumento_filtro)) )
 
     def retorna_mapaDF_cenario_anual_medio(self,sintese, coluna = None, argumento_filtro = None):
-        mapa_temporal = self.indicadores_temporais.retorna_mapaDF_cenario_medio(sintese)
+        mapa_temporal = self.retorna_mapaDF_cenario_medio(sintese)
         mapa_anual = {}
         if( (coluna is None) & (argumento_filtro is None) ):
             mapa_anual = self.retorna_mapa_media_anual_parquet(mapa_temporal) 
