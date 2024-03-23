@@ -382,19 +382,18 @@ def analise_temporal(arquivo_json):
 
 
 
-@click.command("analise-media")
+@click.command("media")
 @click.argument(
     "arquivo_json",
 )
 def analise_media(arquivo_json):
-    """
-    Calibração do CVaR.
-    """
+
     from apps.model.caso import Caso
-    from apps.model.usina import UsinaAvalicao
+    from apps.model.sintese import Sintese
     from apps.indicadores.indicadores_medios import IndicadoresMedios
     from apps.indicadores.indicadores_temporais import IndicadoresTemporais
     from apps.model.unidade import UnidadeSintese
+    from apps.model.argumento import Argumento
     from apps.graficos.graficos import Graficos
 
     if os.path.isfile(arquivo_json):
@@ -405,74 +404,35 @@ def analise_media(arquivo_json):
         nome_caso_referencia = dados["nome_caso_referencia"]
         # Cria objetos do estudo
         casos = [Caso.from_dict(d) for d in dados["casos"]]
-        usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
+        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
+        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
         
-        indicadores_medios = IndicadoresMedios(casos, nome_caso_referencia,usinas)
-        indicadores_temporais = IndicadoresTemporais(casos, nome_caso_referencia,usinas)
+        indicadores_medios = IndicadoresMedios(casos)
+        indicadores_temporais = IndicadoresTemporais(casos)
         graficos = Graficos(casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/media"
         os.makedirs(diretorio_saida, exist_ok=True)
-        
-        listaUnidadesGraficas = []
-        for u in usinas:
-            listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_UHE_EST", "hm3", "casos" ,"Violacao_Defl_Min_Media_UHE_"+u.nome, "usina", u.nome))
-            listaUnidadesGraficas.append(UnidadeSintese("VGHMIN_UHE_EST", "hm3", "casos" ,"Violacao_Ger_Min_Media_UHE_"+u.nome, "usina", u.nome))
-            
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "casos" ,"Geração_Térmica_SIN_mean "))
-        listaUnidadesGraficas.append(UnidadeSintese("GHID_SIN_EST", "MWmes", "casos" ,"Geração_Hidrelétrica_SIN_mean "))
-        listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_SIN_EST", "hm3", "casos" ,"Violação_Defluência_Minima_SIN_mean "))
-        listaUnidadesGraficas.append(UnidadeSintese("COP_SIN_EST", "R$", "casos" ,"Custo_De_Operação_SIN_mean "))
-        listaUnidadesGraficas.append(UnidadeSintese("EARPF_SIN_EST", "%", "casos" ,"Energia_Armazenada_Percentual_Final_SIN_mean "))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "casos" ,"CMO_Sudeste_mean ", "submercado", "SUDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "casos" ,"CMO_Nordeste_mean ", "submercado", "NORDESTE"))        
-        listaUnidadesGraficas.append(UnidadeSintese("EVER_SIN_EST", "MWmes", "casos" , "Energia_Vertida_SIN_mean "))
-        
-        for unity in listaUnidadesGraficas:
-            df_unity = indicadores_medios.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-            Log.log().info("Gerando tabela "+unity.titulo)
-            df_unity.to_csv(
-                os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".csv"),
-                index=False,
-            )
-            Log.log().info("Gerando grafico "+unity.titulo)
-            
-            fig = graficos.gera_grafico_barra(df_unity["valor"], df_unity["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo)
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_estagios"+estudo+".png"),
-                width=800,
-                height=600,
-            )
 
-        listaUnidadesGraficas = []
-        for u in usinas:
-            listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_UHE_EST", "hm3", "casos" ,"Violacao_Defl_Min_Media_Incr_UHE_"+u.nome, "usina", u.nome))
-            listaUnidadesGraficas.append(UnidadeSintese("VGHMIN_UHE_EST", "hm3", "casos" ,"Violacao_Ger_Min_Media_Incr_UHE_"+u.nome, "usina", u.nome))
-            
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "casos" ,"Geração_Térmica_SIN_mean_Incr "))
-        listaUnidadesGraficas.append(UnidadeSintese("GHID_SIN_EST", "MWmes", "casos" ,"Geração_Hidrelétrica_SIN_mean_Incr "))
-        listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_SIN_EST", "hm3", "casos" ,"Violação_Defluência_Minima_SIN_mean_Incr "))
-        listaUnidadesGraficas.append(UnidadeSintese("COP_SIN_EST", "R$", "casos" ,"Custo_De_Operação_SIN_mean_Incr "))
-        listaUnidadesGraficas.append(UnidadeSintese("EARPF_SIN_EST", "%", "casos" ,"Energia_Armazenada_Percentual_Final_SIN_mean_Incr "))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "casos" ,"CMO_Sudeste_mean_Incr ", "submercado", "SUDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "casos" ,"CMO_Nordeste_mean_Incr ", "submercado", "NORDESTE"))        
-        listaUnidadesGraficas.append(UnidadeSintese("EVER_SIN_EST", "MWmes", "casos" , "Energia_Vertida_SIN_mean_Incr "))
-        
-        for unity in listaUnidadesGraficas:
-            df_unity = indicadores_medios.retorna_DF_cenario_medio_incremental_percentual(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-            Log.log().info("Gerando tabela "+unity.titulo)
-            df_unity.to_csv(
-                os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".csv"),
-                index=False,
-            )
-            Log.log().info("Gerando grafico "+unity.titulo)
-            
-            fig = graficos.gera_grafico_barra(df_unity["valor"], df_unity["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo)
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+estudo+".png"),
-                width=800,
-                height=600,
-            )
+       for sts in sinteses:
+            espacial = sts.sintese.split("_")[1]
+            for arg in args:
+                if(espacial == arg.chave):
+                    unity = UnidadeSintese(sts.sintese, "estagios", sts.filtro, arg.nome)
+                    diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
+                    os.makedirs(diretorio_saida_arg, exist_ok=True)
+                   
+                    df_unity = indicadores_medios.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    indicadores_medios.exportar(df_unity, diretorio_saida_arg,  "medias_"+unity.titulo+"_"+estudo)
+
+                    fig = graficos.gera_grafico_barra(df_unity["valor"], df_unity["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo)
+                    graficos.exportar(fig, diretorio_saida_arg, "medias_"+unity.titulo+"_"+estudo)
+
+                    df_unity_incr = indicadores_medios.retorna_DF_cenario_medio_incremental_percentual(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    indicadores_medios.exportar(df_unity_incr, diretorio_saida_arg, "medias_incr_"+unity.titulo+"_"+estudo)
+                    
+                    fig = graficos.gera_grafico_barra(df_unity_incr["valor"], df_unity_incr["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo)
+                    graficos.exportar(fig, diretorio_saida_arg, "medias_incr_"+unity.titulo+"_"+estudo)
     
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
