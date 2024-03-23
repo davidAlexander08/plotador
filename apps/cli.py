@@ -439,18 +439,17 @@ def analise_media(arquivo_json):
 
 
 
-@click.command("analise-anual")
+@click.command("anual")
 @click.argument(
     "arquivo_json",
 )
 def analise_anual(arquivo_json):
-    """
-    Calibração do CVaR.
-    """
+
     from apps.model.caso import Caso
-    from apps.model.usina import UsinaAvalicao
+    from apps.model.sintese import Sintese
     from apps.indicadores.indicadores_anuais import IndicadoresAnuais
     from apps.model.unidade import UnidadeSintese
+    from apps.model.argumento import Argumento
     from apps.graficos.graficos import Graficos
 
     if os.path.isfile(arquivo_json):
@@ -460,170 +459,80 @@ def analise_anual(arquivo_json):
         estudo = dados["estudo"]
         nome_caso_referencia = dados["nome_caso_referencia"]
         # Cria objetos do estudo
-        casos = [CasoCalibracaoCVAR.from_dict(d) for d in dados["casos"]]
-        usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
-        indicadores_anuais = IndicadoresAnuais(casos, nome_caso_referencia,usinas)
+        casos = [Caso.from_dict(d) for d in dados["casos"]]
+        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
+        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
+        indicadores_anuais = IndicadoresAnuais(casos, nome_caso_referencia)
         graficos = GraficosCalibracaoCVAR(casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/anual"
         os.makedirs(diretorio_saida, exist_ok=True)
 
+        for sts in sinteses:
+            espacial = sts.sintese.split("_")[1]
+            for arg in args:
+                if(espacial == arg.chave):
+                    unity = UnidadeSintese(sts.sintese, "estagios", sts.filtro, arg.nome)
+                    diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
+                    os.makedirs(diretorio_saida_arg, exist_ok=True)
 
-        # GRAFICOS ANOS DISCRETIZADOS
-        listaUnidadesGraficas = []
-        for u in usinas:
-            listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_UHE_EST", "hm3", "casos" ,"Violacao_Defl_Min_Media_Anual_UHE_"+u.nome, "usina", u.nome))
-            listaUnidadesGraficas.append(UnidadeSintese("VGHMIN_UHE_EST", "hm3", "casos" ,"Violacao_Ger_Min_Media_Anual_UHE_"+u.nome, "usina", u.nome))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "casos" ,"Geração_Térmica_SIN_media_anual "))
-        listaUnidadesGraficas.append(UnidadeSintese("GHID_SIN_EST", "MWmes", "casos" ,"Geração_Hidrelétrica_SIN_media_anual "))
-        listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_SIN_EST", "hm3", "casos" ,"Violação_Defluência_Minima_SIN_media_anual "))
-        listaUnidadesGraficas.append(UnidadeSintese("COP_SIN_EST", "R$", "casos" ,"Custo_De_Operação_SIN_media_anual "))
-        listaUnidadesGraficas.append(UnidadeSintese("EARPF_SIN_EST", "%", "casos" ,"Energia_Armazenada_Percentual_Final_SIN_media_anual "))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "casos" ,"CMO_Sudeste_media_anual ", "submercado", "SUDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "casos" ,"CMO_Nordeste_media_anual ", "submercado", "NORDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("EVER_SIN_EST", "MWmes", "casos" , "Energia_Vertida_SIN_media_anual "))
+                    df = indicadores_anuais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    indicadores_anuais.exportar(df, diretorio_saida_arg,  "anual_"+unity.titulo+"_"+estudo)
+
+                    ## GRAFICOS ANOS DISCRETIZADOS
+                    fig = graficos.gera_grafico_barras_diferentes(df, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_anos_discretizados")
+                    graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_anos_discretizados_"+estudo)
+
+                    df_unity = indicadores_anuais.retorna_DF_cenario_anual_medio_incremental_percentual(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    indicadores_anuais.exportar(df_unity, diretorio_saida_arg,  "anual_incr_"+unity.titulo+"_"+estudo)
+                
+                    #ANOS DISCRETIZADOS INCREMENTAL
+                    fig = graficos.gera_grafico_barras_diferentes(df_unity, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_incremental")
+                    graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_anos_discretizados_incremental_"+estudo)
+
+                    ## PRIMEIRO ANO INCREMENTAL
+                    fig = graficos.gera_grafico_barras_diferentes(
+                        df_unity.loc[(df_unity["anos"] == df_unity["anos"].iloc[0])], 
+                        "anos", 
+                        "valor", 
+                        "caso",  
+                        unity.legendaEixoX, 
+                        unity.legendaEixoY, 
+                        2, 
+                        unity.titulo+"_incremental"
+                    )
+                    graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_primeiro_ano_incremental_"+estudo)
         
-        for unity in listaUnidadesGraficas:
-            df = indicadores_anuais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-            
-            Log.log().info("Gerando tabela "+unity.titulo)
-            df.to_csv(
-                os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".csv"),
-                index=False,
-            )
-            Log.log().info("Gerando grafico "+unity.titulo)
+                    df_unity = indicadores_anuais.retorna_df_concatenado_acumulado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    indicadores_anuais.exportar(df_unity, diretorio_saida_arg,  "anual_acum_"+unity.titulo+"_"+estudo)
+                    
+                    ## GRAFICOS PRIMEIRO ANO
+                    df = df_unity.loc[(df_unity["anos"] == df_unity["anos"].iloc[0])]
+                    fig = graficos.gera_grafico_barra(df["valor"], df["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_primeiro_ano")
+                    graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_primeiro_ano_"+estudo)
 
-            ## GRAFICOS ANOS DISCRETIZADOS
+                    ## OUTROS ANOS
+                    df = df_unity.loc[(df_unity["anos"] != df_unity["anos"].iloc[0])]
+                    fig = graficos.gera_grafico_barra(df["valor"], df["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_outros_anos")
+                    graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_outros_anos_"+estudo)
 
-            fig = graficos.gera_grafico_barras_diferentes(df, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_anos_discretizados")
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_anos_discretizados_"+estudo+".png"),
-                width=800,
-                height=600,
-            )
-
-
-        ### INCREMENTAL ANOS DISCRETIZADOS
-        listaUnidadesGraficas = []
-        for u in usinas:
-            listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_UHE_EST", "hm3", "casos" ,"Violacao_Defl_Min_Media_Anual_Incr_UHE_"+u.nome, "usina", u.nome))
-            listaUnidadesGraficas.append(UnidadeSintese("VGHMIN_UHE_EST", "hm3", "casos" ,"Violacao_Ger_Min_Media_Anual_Incr_UHE_"+u.nome, "usina", u.nome))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "casos" ,"Geração_Térmica_SIN_media_anual_incremental "))
-        for unity in listaUnidadesGraficas:
-            df_unity = indicadores_anuais.retorna_DF_cenario_anual_medio_incremental_percentual(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-            Log.log().info("Gerando tabela "+unity.titulo)
-            df_unity.to_csv(os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".csv"),index=False)
-            Log.log().info("Gerando grafico "+unity.titulo)
-            #ANOS DISCRETIZADOS INCREMENTAL
-            graficos.gera_grafico_barras_diferentes(
-                df_unity, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_incremental"
-                                                   ).write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_anos_discretizados_incremental_"+estudo+".png"),
-                width=800,
-                height=600,
-            )
-
-            ## PRIMEIRO ANO INCREMENTAL
-            graficos.gera_grafico_barras_diferentes(
-                df_unity.loc[(df_unity["anos"] == df_unity["anos"].iloc[0])], 
-                "anos", 
-                "valor", 
-                "caso",  
-                unity.legendaEixoX, 
-                unity.legendaEixoY, 
-                2, 
-                unity.titulo+"_incremental"
-            ).write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_primeiro_ano_incremental_"+estudo+".png"),
-                width=800,
-                height=600,
-            )
+                    ## GRAFICOS ANO E OUTROS ANOS DISCRETIZADOS
+                    fig = graficos.gera_grafico_barras_diferentes(df_unity, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_primeiro_ano_outros_anos")
+                    graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_primeiro_ano_e_outros_anos_"+estudo)
+                            
+                    df_unity = indicadores_anuais.retorna_DF_cenario_anual_acumulado_medio_incremental_percentual(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    indicadores_anuais.exportar(df_unity, diretorio_saida_arg,  "anual_acum_incr_"+unity.titulo+"_"+estudo)
         
-        ### ANUAL E OUTROS ANOS
-        listaUnidadesGraficas = []
-        for u in usinas:
-            listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_UHE_EST", "hm3", "casos" ,"Violacao_Defl_Min_Media_Anual_Acum_UHE_"+u.nome, "usina", u.nome))
-            listaUnidadesGraficas.append(UnidadeSintese("VGHMIN_UHE_EST", "hm3", "casos" ,"Violacao_Ger_Min_Media_Anual_Acum_UHE_"+u.nome, "usina", u.nome))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "casos" ,"Geração_Térmica_SIN_media_anual_acumulada "))
-        listaUnidadesGraficas.append(UnidadeSintese("GHID_SIN_EST", "MWmes", "casos" ,"Geração_Hidrelétrica_SIN_media_anual_acumulada "))
-        listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_SIN_EST", "hm3", "casos" ,"Violação_Defluência_Minima_SIN_media_anual_acumulada "))
-        listaUnidadesGraficas.append(UnidadeSintese("COP_SIN_EST", "R$", "casos" ,"Custo_De_Operação_SIN_media_anual_acumulada "))
-        listaUnidadesGraficas.append(UnidadeSintese("EARPF_SIN_EST", "%", "casos" ,"Energia_Armazenada_Percentual_Final_SIN_media_anual_acumulada "))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "casos" ,"CMO_Sudeste_media_anual_acumulada ", "submercado", "SUDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("CMO_SBM_EST", "R$/MWh", "casos" ,"CMO_Nordeste_media_anual_acumulada ", "submercado", "NORDESTE"))
-        listaUnidadesGraficas.append(UnidadeSintese("EVER_SIN_EST", "MWmes", "casos" , "Energia_Vertida_SIN_media_anual_acumulada "))
+                    #ANOS DISCRETIZADOS INCREMENTAL
+                    fig = graficos.gera_grafico_barras_diferentes(df_unity, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_incremental")
+                    graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_anos_discretizados_incremental_"+estudo)
         
-        for unity in listaUnidadesGraficas:
-            df_unity = indicadores_anuais.retorna_df_concatenado_acumulado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-            Log.log().info("Gerando tabela "+unity.titulo)
-            df_unity.to_csv(
-                os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".csv"),
-                index=False,
-            )
-            Log.log().info("Gerando grafico "+unity.titulo)
+                    ## PRIMEIRO ANO INCREMENTAL
+                    df = df_unity.loc[(df_unity["anos"] != df_unity["anos"].iloc[0])]
+                    fig = graficos.gera_grafico_barras_diferentes(df, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_incremental")
+                    graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_outros_anos_incremental_"+estudo)
 
-            ## GRAFICOS PRIMEIRO ANO
-            df = df_unity.loc[(df_unity["anos"] == df_unity["anos"].iloc[0])]
-            fig = graficos.gera_grafico_barra(df["valor"], df["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_primeiro_ano")
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_primeiro_ano_"+estudo+".png"),
-                width=800,
-                height=600,
-            )
-
-            ## OUTROS ANOS
-            df = df_unity.loc[(df_unity["anos"] != df_unity["anos"].iloc[0])]
-            fig = graficos.gera_grafico_barra(df["valor"], df["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_primeiro_ano")
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_outros_anos_"+estudo+".png"),
-                width=800,
-                height=600,
-            )
-
-            ## GRAFICOS ANO E OUTROS ANOS DISCRETIZADOS
-            fig = graficos.gera_grafico_barras_diferentes(df_unity, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_primeiro_ano_outros_anos")
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_primeiro_ano_e_outros_anos_"+estudo+".png"),
-                width=800,
-                height=600,
-            )
-
-
-        ### INCREMENTAL OUTROS ANOS
-        listaUnidadesGraficas = []
-        for u in usinas:
-            listaUnidadesGraficas.append(UnidadeSintese("VDEFMIN_UHE_EST", "hm3", "casos" ,"Violacao_Defl_Min_Media_Anual_Acum_Incr_UHE_"+u.nome, "usina", u.nome))
-            listaUnidadesGraficas.append(UnidadeSintese("VGHMIN_UHE_EST", "hm3", "casos" ,"Violacao_Ger_Min_Media_Anual_Acum_Incr_UHE_"+u.nome, "usina", u.nome))
-        listaUnidadesGraficas.append(UnidadeSintese("GTER_SIN_EST", "MWmes", "casos" ,"Geração_Térmica_SIN_media_anual_incremental_acumulado "))
-        for unity in listaUnidadesGraficas:
-            df_unity = indicadores_anuais.retorna_DF_cenario_anual_acumulado_medio_incremental_percentual(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
-            Log.log().info("Gerando tabela "+unity.titulo)
-            df_unity.to_csv(
-                os.path.join(diretorio_saida, "eco_"+unity.titulo+"_"+estudo+".csv"),
-                index=False,
-            )
-            Log.log().info("Gerando grafico "+unity.titulo)
-
-
-            #ANOS DISCRETIZADOS INCREMENTAL
-            fig = graficos.gera_grafico_barras_diferentes(df_unity, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_incremental")
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_anos_discretizados_incremental_"+estudo+".png"),
-                width=800,
-                height=600,
-            )
-
-            ## PRIMEIRO ANO INCREMENTAL
-            df = df_unity.loc[(df_unity["anos"] != df_unity["anos"].iloc[0])]
-            fig = graficos.gera_grafico_barras_diferentes(df, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_incremental")
-            fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+unity.titulo+"_"+"_outros_anos_incremental_"+estudo+".png"),
-                width=800,
-                height=600,
-            )
-            
-
-            
+                        
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
