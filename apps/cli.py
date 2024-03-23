@@ -742,7 +742,6 @@ def analise_conjuntoCasos(arquivo_json):
         conjuntoCasos = [ConjuntoCasos.from_dict(d) for d in dados["conjuntos"]]
         nome_caso_referencia = ""
 
-        casos = [Caso.from_dict(d) for d in dados["casos"]]
         sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
         args = [Argumento.from_dict(d) for d in dados["argumentos"]]
         # Gera saídas do estudo
