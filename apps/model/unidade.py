@@ -9,12 +9,12 @@ class UnidadeSintese:
         espacial = sintese.split("_")[1]
         return self.__mapa_sintese_titulo[operacional]+" "+espacial
         
-    def __init__(self, sintese, legendaEixoX, fitroColuna = None, filtroArgumento = None, df = None):
-        self.sintese = sintese
+    def __init__(self, sintese, legendaEixoX, argumento, df = None):
+        self.sintese = sintese.sintese
         self.legendaEixoX = legendaEixoX
         self.df = df
-        self.fitroColuna = fitroColuna
-        self.filtroArgumento = filtroArgumento
+        self.fitroColuna = sintese.filtro
+        self.filtroArgumento = argumento.nome
         self.__mapa_sintese_label_y =        {
             "GTER":"MWmes",
             "GHID":"MWmes",
@@ -39,7 +39,7 @@ class UnidadeSintese:
             "VVMINOP":"Viol. VMINOP",
         }
 
-        self.legendaEixoY = self.label_y(sintese)     
-        self.titulo = self.titulo_fig(sintese) if filtroArgumento == None else self.titulo_fig(sintese) + " " + filtroArgumento
+        self.legendaEixoY = self.label_y(sintese.sintese)     
+        self.titulo = self.titulo_fig(sintese.sintese) if argumento.nome == None else self.titulo_fig(sintese.sintese) + " " + argumento.nome
 
 
