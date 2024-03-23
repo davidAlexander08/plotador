@@ -1,5 +1,5 @@
 from typing import Dict
-from apps.calibracao_cvar.caso import CasoCalibracaoCVAR
+from apps.model.caso import Caso
 
 class ConjuntoCasos:
     """
@@ -12,7 +12,7 @@ class ConjuntoCasos:
         self.nome = nome
         self.cor = cor
         print(dados)
-        self.casos = [CasoCalibracaoCVAR.from_dict(d) for d in dados]
+        self.casos = [Caso.from_dict(d) for d in dados]
 
     @classmethod
     def from_dict(cls, d: Dict[str, str]):
