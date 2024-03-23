@@ -8,7 +8,6 @@ from inewave.newave import Dger
 from apps.utils.log import Log
 import os.path
 from apps.model.caso import Caso
-from apps.model.usina import UsinaAvalicao
 from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.indicadores.eco_indicadores import EcoIndicadores
 import warnings
@@ -23,15 +22,13 @@ class IndicadoresMedios:
     DIR_SINTESE = "sintese"
 
     def __init__(
-        self, casos: List[Caso], nome_caso_referencia: str, usinas: List[UsinaAvalicao]
-    ):
+        self, casos: List[Caso], nome_caso_referencia: str    ):
         warnings.simplefilter(action='ignore')
         
         self.casos = casos
-        self.usinas = usinas
         self.nome_caso_referencia = nome_caso_referencia
-        self.indicadores_temporais = IndicadoresTemporais(casos, nome_caso_referencia,usinas)
-        self.eco_indicadores = EcoIndicadores(casos, nome_caso_referencia,usinas)
+        self.indicadores_temporais = IndicadoresTemporais(casos)
+        self.eco_indicadores = EcoIndicadores(casos)
     
     def retorna_mapa_media_parquet(self, mapa):
         dict = {}
