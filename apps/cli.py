@@ -334,7 +334,7 @@ def analise_temporal(arquivo_json):
             espacial = sts.sintese.split("_")[1]
             for arg in args:
                 if(espacial == arg.chave):
-                    unity = UnidadeSintese(sts.sintese, "estagios", sts.filtro, arg.nome)
+                    unity = UnidadeSintese(sts, "estagios", arg)
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
                     
@@ -753,7 +753,7 @@ def analise_conjuntoCasos(arquivo_json):
             espacial = sts.sintese.split("_")[1]
             for arg in args:
                 if(espacial == arg.chave):
-                    unity = UnidadeSintese(sts.sintese, "estagios", sts.filtro, arg.nome)
+                    unity = UnidadeSintese(sts, "estagios", arg)
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
                 
