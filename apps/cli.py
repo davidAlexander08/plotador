@@ -729,6 +729,7 @@ def analise_conjuntoCasos(arquivo_json):
     from apps.model.sintese import Sintese
     from apps.model.unidade import UnidadeSintese
     from apps.graficos.graficos import Graficos
+    from apps.model.argumento import Argumento
     from apps.model.conjuntoCasos import ConjuntoCasos
     from apps.indicadores.indicadores_medios import IndicadoresMedios
     from apps.indicadores.indicadores_anuais import IndicadoresAnuais
