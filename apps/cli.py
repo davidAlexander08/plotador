@@ -407,7 +407,7 @@ def analise_media(arquivo_json):
         sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
         args = [Argumento.from_dict(d) for d in dados["argumentos"]]
         
-        indicadores_medios = IndicadoresMedios(casos)
+        indicadores_medios = IndicadoresMedios(casos, nome_caso_referencia)
         indicadores_temporais = IndicadoresTemporais(casos)
         graficos = Graficos(casos)
         # Gera saídas do estudo
