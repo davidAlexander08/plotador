@@ -338,14 +338,12 @@ def analise_temporal(arquivo_json):
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
                     
-                    #df_unity = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
                     df_unity = indicadores_temporais.retorna_df_concatenado(unity)
                     indicadores_temporais.exportar(df_unity, diretorio_saida_arg,  "eco_"+unity.titulo+"_"+estudo)
                     
                     fig = graficos.gera_grafico_linha(df_unity, unity.legendaEixoY , unity.legendaEixoX, unity.titulo+"_"+estudo)
                     graficos.exportar(fig, diretorio_saida_arg, "eco_"+unity.titulo+"_"+estudo)
                     
-                    #df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
                     df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
                     indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  "eco_"+unity.titulo+"_2_mes_"+estudo)
                     
@@ -423,13 +421,13 @@ def analise_media(arquivo_json):
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
                    
-                    df_unity = indicadores_medios.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    df_unity = indicadores_medios.retorna_df_concatenado(unity)
                     indicadores_medios.exportar(df_unity, diretorio_saida_arg,  "medias_"+unity.titulo+"_"+estudo)
 
                     fig = graficos.gera_grafico_barra(df_unity["valor"], df_unity["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo)
                     graficos.exportar(fig, diretorio_saida_arg, "medias_"+unity.titulo+"_"+estudo)
 
-                    df_unity_incr = indicadores_medios.retorna_DF_cenario_medio_incremental_percentual(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    df_unity_incr = indicadores_medios.retorna_DF_cenario_medio_incremental_percentual(unity)
                     indicadores_medios.exportar(df_unity_incr, diretorio_saida_arg, "medias_incr_"+unity.titulo+"_"+estudo)
                     
                     fig = graficos.gera_grafico_barra(df_unity_incr["valor"], df_unity_incr["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo)
