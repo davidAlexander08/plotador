@@ -32,15 +32,20 @@ class Temporal:
             listaUnidadesGraficas = []
             for sts in sinteses:
                 espacial = sts.sintese.split("_")[1]
-                #if(espacial == "SIN"):
-                #    arg = Argumento(None, None)
-                #    unity = UnidadeSintese(sts, "estagios", arg)
+                if(espacial == "SIN"):
+                    arg = Argumento(None, None)
+                    unity = UnidadeSintese(sts, "estagios", arg)
+                        diretorio_saida_arg = diretorio_saida+"/SIN
+                        os.makedirs(diretorio_saida_arg, exist_ok=True)
+                        self.executa(unity,diretorio_saida_arg )
+                    
                 for arg in args:
                     if((espacial == arg.chave)):
                         unity = UnidadeSintese(sts, "estagios", arg)
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
                         self.executa(unity,diretorio_saida_arg )
+                        
         else:
             raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
