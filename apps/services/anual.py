@@ -8,7 +8,7 @@ from apps.model.argumento import Argumento
 import os
 import json
 
-class Temporal:
+class Anual:
 
 
     def __init__(self, arquivo_json):
