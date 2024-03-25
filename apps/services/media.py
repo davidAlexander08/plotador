@@ -13,40 +13,38 @@ class Media:
 
 
     def __init__(self, arquivo_json):
-      if os.path.isfile(arquivo_json):
-          with open(arquivo_json, "r") as f:
-              dados = json.load(f)
-          # Lê dados de entrada
-          self.estudo = dados["estudo"]
-          self.nome_caso_referencia = dados["nome_caso_referencia"]
-          # Cria objetos do estudo
-          casos = [Caso.from_dict(d) for d in dados["casos"]]
-          sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-          args = [Argumento.from_dict(d) for d in dados["argumentos"]]
-          
-          self.indicadores_medios = IndicadoresMedios(casos, self.nome_caso_referencia)
-          self.indicadores_temporais = IndicadoresTemporais(casos)
-          self.graficos = Graficos(casos)
-          # Gera saídas do estudo
-          diretorio_saida = f"resultados/{self.estudo}/media"
-          os.makedirs(diretorio_saida, exist_ok=True)
-          for sts in sinteses:
-              espacial = sts.sintese.split("_")[1]
-              if(espacial == "SIN"):
-                  arg = Argumento(None, None)
-                  diretorio_saida_arg = diretorio_saida+"/"+espacial
-                  os.makedirs(diretorio_saida_arg, exist_ok=True)
-                  unity = UnidadeSintese(sts, "estagios", arg)
-                  self.executa(unity,diretorio_saida_arg )
-              else:
-                for arg in args:
-                    if(espacial == arg.chave):
-                        unity = UnidadeSintese(sts, "estagios", arg)
-                        diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
-                        os.makedirs(diretorio_saida_arg, exist_ok=True)
-                        self.executa(unity,diretorio_saida_arg )
-      else:
-          raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+      with open(arquivo_json, "r") as f:
+          dados = json.load(f)
+      # Lê dados de entrada
+      self.estudo = dados["estudo"]
+      self.nome_caso_referencia = dados["nome_caso_referencia"]
+      # Cria objetos do estudo
+      casos = [Caso.from_dict(d) for d in dados["casos"]]
+      sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
+      args = [Argumento.from_dict(d) for d in dados["argumentos"]]
+      
+      self.indicadores_medios = IndicadoresMedios(casos, self.nome_caso_referencia)
+      self.indicadores_temporais = IndicadoresTemporais(casos)
+      self.graficos = Graficos(casos)
+      # Gera saídas do estudo
+      diretorio_saida = f"resultados/{self.estudo}/media"
+      os.makedirs(diretorio_saida, exist_ok=True)
+      for sts in sinteses:
+          espacial = sts.sintese.split("_")[1]
+          if(espacial == "SIN"):
+              arg = Argumento(None, None)
+              diretorio_saida_arg = diretorio_saida+"/"+espacial
+              os.makedirs(diretorio_saida_arg, exist_ok=True)
+              unity = UnidadeSintese(sts, "estagios", arg)
+              self.executa(unity,diretorio_saida_arg )
+          else:
+            for arg in args:
+                if(espacial == arg.chave):
+                    unity = UnidadeSintese(sts, "estagios", arg)
+                    diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
+                    os.makedirs(diretorio_saida_arg, exist_ok=True)
+                    self.executa(unity,diretorio_saida_arg )
+
                         
 
     def executa(self, unity, diretorio_saida_arg):
