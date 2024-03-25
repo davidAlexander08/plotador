@@ -771,14 +771,14 @@ def analise_conjuntoCasos(arquivo_json):
                         graficos = Graficos(conjunto.casos)
                         
                         
-                        df_unity = indicador_conj_medio.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                        df_unity = indicador_conj_medio.retorna_df_concatenado(unity )
                         df_unity = df_unity.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
                         #df_unity["conjunto"] = conjunto.nome
         
-                        df_anual = indicadores_anuais.retorna_df_concatenado_acumulado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                        df_anual = indicadores_anuais.retorna_df_concatenado_acumulado(unity )
                         df_anual = df_anual.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
         
-                        df_temporal = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                        df_temporal = indicadores_temporais.retorna_df_concatenado(unity )
                         df_temporal = df_temporal.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
         
                         df_temporal_primeiro_mes = df_temporal.loc[df_temporal["estagio"] == 1 ].reset_index(drop = True)
