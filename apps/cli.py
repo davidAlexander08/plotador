@@ -334,11 +334,12 @@ def analise_temporal(arquivo_json):
         listaUnidadesGraficas = []
         for sts in sinteses:
             espacial = sts.sintese.split("_")[1]
+            #if(espacial == "SIN"):
+            #    arg = Argumento(None, None)
+            #    unity = UnidadeSintese(sts, "estagios", arg)
             for arg in args:
-                if((espacial == arg.chave) or (espacial == "SIN")):
+                if((espacial == arg.chave)):
                     unity = UnidadeSintese(sts, "estagios", arg)
-                    print(sts.filtro)
-                    print(arg.nome)
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
                     
