@@ -9,22 +9,22 @@ import os
 import json
 
 class Temporal:
-        
+
+
     def __init__(self, arquivo_json):
     
         if os.path.isfile(arquivo_json):
             with open(arquivo_json, "r") as f:
                 dados = json.load(f)
             # Lê dados de entrada
-            estudo = dados["estudo"]
-            nome_caso_referencia = dados["nome_caso_referencia"]
+            self.estudo = dados["estudo"]
             # Cria objetos do estudo
             casos = [Caso.from_dict(d) for d in dados["casos"]]
             sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
             args = [Argumento.from_dict(d) for d in dados["argumentos"]]
             
-            indicadores_temporais = IndicadoresTemporais(casos)
-            graficos = Graficos(casos)
+            self.indicadores_temporais = IndicadoresTemporais(casos)
+            self.graficos = Graficos(casos)
             # Gera saídas do estudo
             diretorio_saida = f"resultados/{estudo}/temporal"
             os.makedirs(diretorio_saida, exist_ok=True)
@@ -40,21 +40,28 @@ class Temporal:
                         unity = UnidadeSintese(sts, "estagios", arg)
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
-                        
-                        df_unity = indicadores_temporais.retorna_df_concatenado(unity)
-                        indicadores_temporais.exportar(df_unity, diretorio_saida_arg,  "eco_"+unity.titulo+"_"+estudo)
-                        
-                        fig = graficos.gera_grafico_linha(df_unity, unity, "valor" , "index", unity.titulo+"_"+estudo)
-                        graficos.exportar(fig, diretorio_saida_arg, "eco_"+unity.titulo+"_"+estudo)
-                        
-                        df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
-                        indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  "eco_"+unity.titulo+"_2_mes_"+estudo)
-                        
-                        fig = graficos.gera_grafico_barra(df_unity_2_mes["valor"], df_unity_2_mes["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"2_mes")
-                        graficos.exportar(fig, diretorio_saida_arg, unity.titulo+"_2_mes_"+estudo)
-    
-    
-            
+                        executa(unity,diretorio_saida_arg )
+        else:
+            raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
+    def executa(self, unity, diretorio_saida_arg):
+        df_unity = self.indicadores_temporais.retorna_df_concatenado(unity)
+        self.indicadores_temporais.exportar(df_unity, diretorio_saida_arg,  "eco_"+unity.titulo+"_"+self.estudo)
+        
+        fig = self.graficos.gera_grafico_linha(df_unity, unity, "valor" , "index", unity.titulo+"_"+self.estudo)
+        self.graficos.exportar(fig, diretorio_saida_arg, "eco_"+unity.titulo+"_"+self.estudo)
+        
+        df_unity_2_mes = self.indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
+        self.indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  "eco_"+unity.titulo+"_2_mes_"+self.estudo)
+        
+        fig = self.graficos.gera_grafico_barra(df_unity_2_mes["valor"], df_unity_2_mes["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"2_mes")
+        self.graficos.exportar(fig, diretorio_saida_arg, unity.titulo+"_2_mes_"+self.estudo)
+
+
+
+
+
+
             #unity = UnidadeSintese("EARPF_SIN_EST", None, "%", "Energia_Armazenada_Percentual_Final_SIN_CREF "+estudo)
             #df_unity = indicadores_temporais.retorna_df_concatenado(unity)
             #graficos.gera_graficos_linha_Newave_CREF(df_unity, indicadores_temporais.df_cref, "EARPF", unity.legendaEixoY, unity.titulo, None).write_image(
@@ -79,7 +86,3 @@ class Temporal:
             #    height=600
             #    )
     
-    
-        else:
-            raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-            
