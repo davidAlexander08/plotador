@@ -16,6 +16,7 @@ class Sintese:
             "SBM": "submercado",
             "REE": "ree",
             "UHE": "usina",
+            "BCA": "bacia",
             "SIN": None
         }
         self.sintese = sts  
