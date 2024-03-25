@@ -12,42 +12,39 @@ class Temporal:
 
 
     def __init__(self, arquivo_json):
-    
-        if os.path.isfile(arquivo_json):
-            with open(arquivo_json, "r") as f:
-                dados = json.load(f)
-            # Lê dados de entrada
-            self.estudo = dados["estudo"]
-            # Cria objetos do estudo
-            casos = [Caso.from_dict(d) for d in dados["casos"]]
-            sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-            args = [Argumento.from_dict(d) for d in dados["argumentos"]]
-            
-            self.indicadores_temporais = IndicadoresTemporais(casos)
-            self.graficos = Graficos(casos)
-            # Gera saídas do estudo
-            diretorio_saida = f"resultados/{self.estudo}/temporal"
-            os.makedirs(diretorio_saida, exist_ok=True)
-            
-            listaUnidadesGraficas = []
-            for sts in sinteses:
-                espacial = sts.sintese.split("_")[1]
-                if(espacial == "SIN"):
-                    arg = Argumento(None, None)
-                    diretorio_saida_arg = diretorio_saida+"/"+espacial
-                    os.makedirs(diretorio_saida_arg, exist_ok=True)
-                    unity = UnidadeSintese(sts, "estagios", arg)
-                    self.executa(unity,diretorio_saida_arg )
-                else:
-                    for arg in args:
-                        if(espacial == arg.chave):
-                            diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
-                            os.makedirs(diretorio_saida_arg, exist_ok=True)
-                            unity = UnidadeSintese(sts, "estagios", arg)
-                            self.executa(unity,diretorio_saida_arg )
+        with open(arquivo_json, "r") as f:
+            dados = json.load(f)
+        # Lê dados de entrada
+        self.estudo = dados["estudo"]
+        # Cria objetos do estudo
+        casos = [Caso.from_dict(d) for d in dados["casos"]]
+        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
+        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
+        
+        self.indicadores_temporais = IndicadoresTemporais(casos)
+        self.graficos = Graficos(casos)
+        # Gera saídas do estudo
+        diretorio_saida = f"resultados/{self.estudo}/temporal"
+        os.makedirs(diretorio_saida, exist_ok=True)
+        
+        listaUnidadesGraficas = []
+        for sts in sinteses:
+            espacial = sts.sintese.split("_")[1]
+            if(espacial == "SIN"):
+                arg = Argumento(None, None)
+                diretorio_saida_arg = diretorio_saida+"/"+espacial
+                os.makedirs(diretorio_saida_arg, exist_ok=True)
+                unity = UnidadeSintese(sts, "estagios", arg)
+                self.executa(unity,diretorio_saida_arg )
+            else:
+                for arg in args:
+                    if(espacial == arg.chave):
+                        diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
+                        os.makedirs(diretorio_saida_arg, exist_ok=True)
+                        unity = UnidadeSintese(sts, "estagios", arg)
+                        self.executa(unity,diretorio_saida_arg )
                         
-        else:
-            raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
 
     def executa(self, unity, diretorio_saida_arg):
         df_unity = self.indicadores_temporais.retorna_df_concatenado(unity)
