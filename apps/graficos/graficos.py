@@ -823,7 +823,7 @@ class Graficos:
         fig = go.Figure()
         for c in self.casos:
             dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-            print(dfY, " ", titulo)
+            #print(dfY, " ", titulo)
             dfY = dfY.reset_index(drop = False)
             fig.add_trace(
                 go.Scatter(
