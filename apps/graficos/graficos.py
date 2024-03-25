@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 import plotly.io as pio
 import plotly.express as px
 from plotly.subplots import make_subplots
-
+from apps.model.unidade import UnidadeSintese
 
 pio.templates.default = "ggplot2"
 from apps.model.unidade import UnidadeSintese
@@ -48,6 +48,19 @@ class Graficos:
             os.path.join(diretorio_saida, nome_arquivo+".png"),
             width=W,
             height=H)
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     def gera_graficos_linha_mean_p10_p90_CREF(self,
         df: pd.DataFrame,
@@ -151,48 +164,6 @@ class Graficos:
         fig.update_xaxes(title="estagios")
         fig.update_yaxes(title=unidade)
         return fig
-
-    
-    #def gera_pareto_fast(
-    #    self,
-    #    eixo_x: pd.DataFrame,
-    #    eixo_y: pd.DataFrame,
-    #    erro_x :pd.DataFrame,
-    #    erro_y:pd.DataFrame,
-    #    label_x: str,
-    #    label_y: str,
-    #    limSupY: int,
-    #    limInfY:int,
-    #    titulo: str,
-    #    
-    #) -> go.Figure:
-    #    Log.log().info("Gerando pareto - "+titulo)
-    #    fig = go.Figure()
-    #    for c in self.casos:
-    #        fig.add_trace(
-    #            go.Scatter(
-    #                x=[eixo_x.at[c.nome]],
-    #                y=[eixo_y.at[c.nome]],
-    #                error_x=dict(type='data', array= erro_x),
-    #                error_y=dict(type='data', array= erro_y),
-    #                mode="markers+text",
-    #                text=c.nome,
-    #                marker_color=c.cor,
-    #                marker_symbol=c.marcador,
-    #                showlegend=False,
-    #            )
-    #        )
-    #    fig.update_traces(textposition="top right")
-    #    fig.update_traces(marker_size=20)
-    #    fig.update_layout(title=titulo)
-    #    fig.update_xaxes(title=label_x)
-    #    fig.update_yaxes(title=label_y)   
-    #
-    #    if(limSupY is not None):
-    #        fig.update_layout(yaxis_range=[limInfY,limSupY])
-    #    return fig
-
-
 
     def gera_pareto_fast(
         self,
@@ -813,25 +784,87 @@ class Graficos:
         fig.update_yaxes(title=unidade)
         return fig
 
+    #def gera_grafico_linha(
+    #    self,
+    #    df: pd.DataFrame,
+    #    legendaEixoY:str,
+    #    legendaEixoX:str,
+    #    titulo: str,
+    #) -> go.Figure:
+    #    fig = go.Figure()
+    #    for c in self.casos:
+    #        dfY = df.loc[df["caso"] == c.nome]["valor"].reset_index(drop=True)
+    #        fig.add_trace(
+    #            go.Scatter(
+    #                x = dfY.index,
+    #                y = dfY,
+    #                name = c.nome,
+    #                line = dict(color = c.cor),
+    #                showlegend=True,
+    #            )
+    #        )
+    #    fig.update_layout(title=titulo)
+    #    fig.update_xaxes(title=legendaEixoX)
+    #    fig.update_yaxes(title=legendaEixoY)
+    #    fig.update_layout(legend=dict(title_font_family="Times New Roman",
+    #                          font=dict(size= 11)
+    #    ))
+    #    return fig
+
+
     def gera_grafico_linha(
         self,
         df: pd.DataFrame,
+        unidade: UnidadeSintese,
+        coly,
+        colx,
+        titulo
+    ) -> go.Figure:
+        fig = go.Figure()
+        for c in self.casos:
+            dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
+            dfY = dfY.reset_index(drop = False)
+            fig.add_trace(
+                go.Scatter(
+                    #x = dfY.index,
+                    x = dfY[colx],
+                    y = dfY[coly],
+                    name = c.nome,
+                    line = dict(color = c.cor),
+                    showlegend=True,
+                )
+            )
+        fig.update_layout(title= titulo)
+        fig.update_xaxes(title=unidade.legendaEixoX )
+        fig.update_yaxes(title=unidade.legendaEixoY  )
+        fig.update_layout(legend=dict(title_font_family="Times New Roman",
+                              font=dict(size= 11)
+        ))
+        return fig
+
+
+    def gera_grafico_linhas_diferentes(
+        self,
+        df,
+        lista_df,
+        mapFormatLine,
         legendaEixoY:str,
         legendaEixoX:str,
         titulo: str,
     ) -> go.Figure:
         fig = go.Figure()
         for c in self.casos:
-            dfY = df.loc[df["caso"] == c.nome]["valor"].reset_index(drop=True)
-            fig.add_trace(
-                go.Scatter(
-                    x = dfY.index,
-                    y = dfY,
-                    name = c.nome,
-                    line = dict(color = c.cor),
-                    showlegend=True,
+            for elemento in lista_df:
+                dfY = df.loc[(df["caso"] == c.nome)][elemento].reset_index(drop=True)
+                fig.add_trace(
+                    go.Scatter(
+                        x = dfY.index,
+                        y = dfY,
+                        name = c.nome+"_"+elemento,
+                        line = dict(color = c.cor, dash= mapFormatLine[elemento]),
+                        showlegend=True,
+                    )
                 )
-            )
         fig.update_layout(title=titulo)
         fig.update_xaxes(title=legendaEixoX)
         fig.update_yaxes(title=legendaEixoY)
@@ -839,6 +872,7 @@ class Graficos:
                               font=dict(size= 11)
         ))
         return fig
+    
 
     def gera_grafico_linha_casos(
         self,
@@ -923,35 +957,7 @@ class Graficos:
         return mapaFiguras
             
 
-    def gera_grafico_linhas_diferentes(
-        self,
-        df,
-        lista_df,
-        mapFormatLine,
-        legendaEixoY:str,
-        legendaEixoX:str,
-        titulo: str,
-    ) -> go.Figure:
-        fig = go.Figure()
-        for c in self.casos:
-            for elemento in lista_df:
-                dfY = df.loc[(df["caso"] == c.nome)][elemento].reset_index(drop=True)
-                fig.add_trace(
-                    go.Scatter(
-                        x = dfY.index,
-                        y = dfY,
-                        name = c.nome+"_"+elemento,
-                        line = dict(color = c.cor, dash= mapFormatLine[elemento]),
-                        showlegend=True,
-                    )
-                )
-        fig.update_layout(title=titulo)
-        fig.update_xaxes(title=legendaEixoX)
-        fig.update_yaxes(title=legendaEixoY)
-        fig.update_layout(legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= 11)
-        ))
-        return fig
+
 
 
     def gera_grafico_linhas_diferentes_casos(
