@@ -2,10 +2,10 @@
 
 
 {
-    "estudo": "FCF_Externa",
+    "estudo": "FCF_Externa_TESTE_GRAFICADOR",
 	"conjuntos": [
 		{
-			"nome_conj":"BackTest", 
+			"nome_conj":"REE", 
 			"cor_conj": "rgba(0, 0, 0, 1.00)",
 			"casos": [
 				{
@@ -84,78 +84,78 @@
 			]
 		},
 		{
-			"nome_conj":"BackTest_FCFExt", 
+			"nome_conj":"REE_FCFExt", 
 			"cor_conj": "rgba(255, 0, 0, 1)",
 			"casos": [
 				{
 					"nome": "JAN",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_01",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_01_rv0",
 					"cor": "rgba(0, 0, 0, 1.00)",
 					"marcador": "square"
 				},
 				{
 					"nome": "FEV",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_02",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_02_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "MAR",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_03",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_03_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "ABR",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_04",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_04_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "MAI",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_05",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_05_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "JUN",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_06",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_06_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "JUL",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_07",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_07_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "AGO",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_08",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_08_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "SET",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_09",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_09_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "OUT",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_10",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_10_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "NOV",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_11",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_11_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "DEZ",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_12",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_12_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				}
@@ -163,7 +163,7 @@
 			]
 		},
 		{
-			"nome_conj":"BackTest_FCFExt_Quad", 
+			"nome_conj":"REE_FCFExt_Quad", 
 			"cor_conj": "rgba(0, 0, 255, 1)",
 			"casos": [
 				{
@@ -174,19 +174,19 @@
 				},
 				{
 					"nome": "FEV",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_02",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_02_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "MAR",
-					"caminho": "2021_FCF_Externa_Quadrimestral_Backtest/caso_2021_03",
+					"caminho": "2021_Backtest_FCF_Ext_Quadrimestral/c_2021_03_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "ABR",
-					"caminho": "2021_FCF_Externa_Quadrimestral_Backtest/caso_2021_04",
+					"caminho": "2021_Backtest_FCF_Ext_Quadrimestral/c_2021_04_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
@@ -198,19 +198,19 @@
 				},
 				{
 					"nome": "JUN",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_06",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_06_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "JUL",
-					"caminho": "2021_FCF_Externa_Quadrimestral_Backtest/caso_2021_07",
+					"caminho": "2021_Backtest_FCF_Ext_Quadrimestral/c_2021_07_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "AGO",
-					"caminho": "2021_FCF_Externa_Quadrimestral_Backtest/caso_2021_08",
+					"caminho": "2021_Backtest_FCF_Ext_Quadrimestral/c_2021_08_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
@@ -222,24 +222,40 @@
 				},
 				{
 					"nome": "OUT",
-					"caminho": "2021_FCF_Externa_Backtest/caso_2021_10",
+					"caminho": "2021_Backtest_FCF_Ext/c_2021_10_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "NOV",
-					"caminho": "2021_FCF_Externa_Quadrimestral_Backtest/caso_2021_11",
+					"caminho": "2021_Backtest_FCF_Ext_Quadrimestral/c_2021_11_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				},
 				{
 					"nome": "DEZ",
-					"caminho": "2021_FCF_Externa_Quadrimestral_Backtest/caso_2021_12",
+					"caminho": "2021_Backtest_FCF_Ext_Quadrimestral/c_2021_12_rv0",
 					"cor": "rgba(255, 255, 0, 1)",
 					"marcador": "circle"
 				}
 		 
 			]
 		}
-	]
+	],
+    "argumentos":[
+		{"UHE":"JUPIA"},
+		{"UHE":"FURNAS"},
+		{"REE":"PARANA"},
+		{"SBM":"SUDESTE"},
+		{"SBM":"NORDESTE"}
+    ],
+    "sinteses":[
+	{"sintese":"GTER_SIN_EST"},
+	{"sintese":"GTER_SBM_EST"},
+	{"sintese":"CMO_SBM_EST"},
+	{"sintese":"GHID_SIN_EST"},
+	{"sintese":"GHID_REE_EST"},
+	{"sintese":"QTUR_UHE_EST"},
+	{"sintese":"QDEF_UHE_EST"}
+    ]
 }
