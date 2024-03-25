@@ -49,9 +49,9 @@ class IndicadoresMedios(EcoIndicadores):
             
     def retorna_mapaDF_cenario_medio(self, unidade):
         if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
-            return self.retorna_mapa_media_parquet(self.retorna_mapaDF_cenario_medio_temporal(unidade))
+            return self.retorna_mapa_media_parquet(self.indicadores_temporais.retorna_mapaDF_cenario_medio_temporal(unidade))
         else:
-            mapa = self.retorna_mapaDF_cenario_medio_temporal(unidade)
+            mapa = self.indicadores_temporais.retorna_mapaDF_cenario_medio_temporal(unidade)
             for c in self.casos: mapa[c] = mapa[c].loc[mapa[c][unidade.fitroColuna] == unidade.filtroArgumento]
             return self.retorna_mapa_media_parquet(mapa)           
 
