@@ -5,6 +5,8 @@ from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
+import os
+
 class Temporal:
         
     def __init__(self):
