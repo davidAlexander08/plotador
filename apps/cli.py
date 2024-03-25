@@ -337,21 +337,23 @@ def analise_temporal(arquivo_json):
                     unity = UnidadeSintese(sts, "estagios", arg)
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
+                    gera(unity)
                     
-                    df_unity = indicadores_temporais.retorna_df_concatenado(unity)
-                    indicadores_temporais.exportar(df_unity, diretorio_saida_arg,  "eco_"+unity.titulo+"_"+estudo)
-                    
-                    fig = graficos.gera_grafico_linha(df_unity, unity.legendaEixoY , unity.legendaEixoX, unity.titulo+"_"+estudo)
-                    graficos.exportar(fig, diretorio_saida_arg, "eco_"+unity.titulo+"_"+estudo)
-                    
-                    df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
-                    indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  "eco_"+unity.titulo+"_2_mes_"+estudo)
-                    
-                    fig = graficos.gera_grafico_barra(df_unity_2_mes["valor"], df_unity_2_mes["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"2_mes")
-                    graficos.exportar(fig, diretorio_saida_arg, unity.titulo+"_2_mes_"+estudo)
+
 
         
+    def gera(untiy):
+        df_unity = indicadores_temporais.retorna_df_concatenado(unity)
+        indicadores_temporais.exportar(df_unity, diretorio_saida_arg,  "eco_"+unity.titulo+"_"+estudo)
         
+        fig = graficos.gera_grafico_linha(df_unity, unity.legendaEixoY , unity.legendaEixoX, unity.titulo+"_"+estudo)
+        graficos.exportar(fig, diretorio_saida_arg, "eco_"+unity.titulo+"_"+estudo)
+        
+        df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
+        indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  "eco_"+unity.titulo+"_2_mes_"+estudo)
+        
+        fig = graficos.gera_grafico_barra(df_unity_2_mes["valor"], df_unity_2_mes["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"2_mes")
+        graficos.exportar(fig, diretorio_saida_arg, unity.titulo+"_2_mes_"+estudo)
         #unity = UnidadeSintese("EARPF_SIN_EST", None, "%", "Energia_Armazenada_Percentual_Final_SIN_CREF "+estudo)
         #df_unity = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
         #graficos.gera_graficos_linha_Newave_CREF(df_unity, indicadores_temporais.df_cref, "EARPF", unity.legendaEixoY, unity.titulo, None).write_image(
