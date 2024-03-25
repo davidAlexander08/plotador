@@ -293,6 +293,8 @@ def eco(arquivo_json):
             height=600,
         )
 
+        
+
 
 
     else:
@@ -341,7 +343,7 @@ def analise_temporal(arquivo_json):
                     df_unity = indicadores_temporais.retorna_df_concatenado(unity)
                     indicadores_temporais.exportar(df_unity, diretorio_saida_arg,  "eco_"+unity.titulo+"_"+estudo)
                     
-                    fig = graficos.gera_grafico_linha(df_unity, unity.legendaEixoY , unity.legendaEixoX, unity.titulo+"_"+estudo)
+                    fig = graficos.gera_grafico_linha(df_unity, "valor" , "index", unity.titulo+"_"+estudo)
                     graficos.exportar(fig, diretorio_saida_arg, "eco_"+unity.titulo+"_"+estudo)
                     
                     df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
