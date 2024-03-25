@@ -19,7 +19,7 @@ class IndicadoresTemporais(EcoIndicadores):
         EcoIndicadores.__init__(self, casos)
 
     #def retorna_df_concatenado_medio_2_mes(self,sintese, coluna = None, argumento_filtro = None):
-     def retorna_df_concatenado_medio_2_mes(self, unidade:UnidadeSintese ):       
+    def retorna_df_concatenado_medio_2_mes(self, unidade:UnidadeSintese ):       
         #mapa = self.retorna_mapaDF_cenario_medio(sintese, coluna, argumento_filtro)
         mapa = self.retorna_mapaDF_cenario_medio(unidade)
         for c in self.casos:
