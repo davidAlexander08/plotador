@@ -337,6 +337,8 @@ def analise_temporal(arquivo_json):
             for arg in args:
                 if((espacial == arg.chave) or (espacial == "SIN")):
                     unity = UnidadeSintese(sts, "estagios", arg)
+                    print(sts.filtro)
+                    print(arg.nome)
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
                     
