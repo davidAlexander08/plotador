@@ -40,7 +40,7 @@ class Temporal:
                         unity = UnidadeSintese(sts, "estagios", arg)
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
-                        executa(unity,diretorio_saida_arg )
+                        self.executa(unity,diretorio_saida_arg )
         else:
             raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
