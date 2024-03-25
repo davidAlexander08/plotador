@@ -50,7 +50,7 @@ class IndicadoresAnuais(IndicadoresTemporais):
         return pd.concat(self.retorna_mapa_media_df_anual_acumulado(self.retorna_mapaDF_cenario_anual_medio(unidade)) )
 
     def retorna_mapaDF_cenario_anual_medio(self, unidade):
-        mapa_temporal = self.retorna_mapaDF_cenario_medio(unidade.sintese)
+        mapa_temporal = self.retorna_mapaDF_cenario_medio(unidade)
         mapa_anual = {}
         if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
             mapa_anual = self.retorna_mapa_media_anual_parquet(mapa_temporal) 
