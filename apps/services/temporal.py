@@ -34,6 +34,7 @@ class Temporal:
                 espacial = sts.sintese.split("_")[1]
                 if(espacial == "SIN"):
                     arg = Argumento(None, None)
+                    print(sts.sintese)
                     unity = UnidadeSintese(sts, "estagios", arg)
                     diretorio_saida_arg = diretorio_saida+"/SIN"
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
