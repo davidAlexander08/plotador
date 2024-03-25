@@ -17,9 +17,7 @@ class Pareto:
         self.estudo = dados["estudo"]
         self.nome_caso_referencia = dados["nome_caso_referencia"]
         # Cria objetos do estudo
-        casos = [CasoCalibracaoCVAR.from_dict(d) for d in dados["casos"]]
-        usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
-        
+        casos = [Caso.from_dict(d) for d in dados["casos"]]        
         indicadores_medios = IndicadoresMedios(casos, self.nome_caso_referencia)
         self.graficos = Graficos(casos)
         # Gera saídas do estudo
