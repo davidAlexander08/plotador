@@ -9,7 +9,7 @@ from apps.model.argumento import Argumento
 import os
 import json
 
-class Temporal:
+class Media:
 
 
     def __init__(self, arquivo_json):
