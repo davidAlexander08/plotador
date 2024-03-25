@@ -6,6 +6,7 @@ from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 import os
+import json
 
 class Temporal:
         
