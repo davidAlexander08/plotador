@@ -338,7 +338,8 @@ def analise_temporal(arquivo_json):
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
                     
-                    df_unity = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    #df_unity = indicadores_temporais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    df_unity = indicadores_temporais.retorna_df_concatenado(unity)
                     indicadores_temporais.exportar(df_unity, diretorio_saida_arg,  "eco_"+unity.titulo+"_"+estudo)
                     
                     fig = graficos.gera_grafico_linha(df_unity, unity.legendaEixoY , unity.legendaEixoX, unity.titulo+"_"+estudo)
