@@ -345,7 +345,8 @@ def analise_temporal(arquivo_json):
                     fig = graficos.gera_grafico_linha(df_unity, unity.legendaEixoY , unity.legendaEixoX, unity.titulo+"_"+estudo)
                     graficos.exportar(fig, diretorio_saida_arg, "eco_"+unity.titulo+"_"+estudo)
                     
-                    df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    #df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    df_unity_2_mes = indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
                     indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  "eco_"+unity.titulo+"_2_mes_"+estudo)
                     
                     fig = graficos.gera_grafico_barra(df_unity_2_mes["valor"], df_unity_2_mes["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"2_mes")
