@@ -335,6 +335,7 @@ def analise_temporal(arquivo_json):
         for sts in sinteses:
             espacial = sts.sintese.split("_")[1]
             for arg in args:
+                print(arg.chave)
                 if((espacial == arg.chave) or (arg.chave == None)):
                     unity = UnidadeSintese(sts, "estagios", arg)
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
