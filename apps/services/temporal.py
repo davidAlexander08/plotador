@@ -26,7 +26,7 @@ class Temporal:
             self.indicadores_temporais = IndicadoresTemporais(casos)
             self.graficos = Graficos(casos)
             # Gera saídas do estudo
-            diretorio_saida = f"resultados/{estudo}/temporal"
+            diretorio_saida = f"resultados/{self.estudo}/temporal"
             os.makedirs(diretorio_saida, exist_ok=True)
             
             listaUnidadesGraficas = []
