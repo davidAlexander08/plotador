@@ -331,7 +331,7 @@ def analise_media(arquivo_json):
     "arquivo_json",
 )
 def analise_anual(arquivo_json):
-    from apps.services.media import Anual
+    from apps.services.anual import Anual
     if os.path.isfile(arquivo_json):
         Anual(arquivo_json)             
     else:
