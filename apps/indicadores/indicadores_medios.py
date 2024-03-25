@@ -10,6 +10,7 @@ import os.path
 from apps.model.caso import Caso
 from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.indicadores.eco_indicadores import EcoIndicadores
+from apps.model.unidade import UnidadeSintese
 import warnings
 
 class IndicadoresMedios(EcoIndicadores):
@@ -42,31 +43,31 @@ class IndicadoresMedios(EcoIndicadores):
         return dict
 
 
-    def retorna_df_concatenado(self,sintese, coluna = None, argumento_filtro = None):
-        return pd.concat(self.retorna_mapaDF_cenario_medio(sintese, coluna, argumento_filtro))
+    def retorna_df_concatenado(self, unidade):
+        return pd.concat(self.retorna_mapaDF_cenario_medio(unidade))
             
             
-    def retorna_mapaDF_cenario_medio(self,sintese, coluna = None, argumento_filtro = None):
-        if( (coluna is None) & (argumento_filtro is None) ):
-            return self.retorna_mapa_media_parquet(self.indicadores_temporais.retorna_mapaDF_cenario_medio(sintese))
+    def retorna_mapaDF_cenario_medio(self, unidade):
+        if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
+            return self.retorna_mapa_media_parquet(self.retorna_mapaDF_cenario_medio_temporal(unidade))
         else:
-            mapa = self.indicadores_temporais.retorna_mapaDF_cenario_medio(sintese)
-            for c in self.casos: mapa[c] = mapa[c].loc[mapa[c][coluna] == argumento_filtro]
+            mapa = self.retorna_mapaDF_cenario_medio_temporal(unidade)
+            for c in self.casos: mapa[c] = mapa[c].loc[mapa[c][unidade.fitroColuna] == unidade.filtroArgumento]
             return self.retorna_mapa_media_parquet(mapa)           
 
     
-    def retorna_df_std_concatenado(self,sintese, coluna = None, argumento_filtro = None):
-        MAP = self.retorna_mapaDF_std_cenarios(sintese, coluna, argumento_filtro)
+    def retorna_df_std_concatenado(self, unidade):
+        MAP = self.retorna_mapaDF_std_cenarios(unidade)
         print(MAP)
         concat = pd.concat(self.retorna_mapa_std_parquet(MAP))
         print("concat: ", concat)
         return concat
             
-    def retorna_mapaDF_std_cenarios(self, sintese, coluna = None, argumento_filtro = None):
+    def retorna_mapaDF_std_cenarios(self, unidade):
         mapa = {}
-        mapa = self.retornaMapaDF(sintese)
-        if( (coluna is not None) & (argumento_filtro is not None) ):
-            for c in self.casos: mapa[c] = mapa[c].loc[mapa[c][coluna] == argumento_filtro]
+        mapa = self.retornaMapaDF(unidade)
+        if( (unidade.fitroColuna is not None) & (unidade.filtroArgumento is not None) ):
+            for c in self.casos: mapa[c] = mapa[c].loc[mapa[c][unidade.fitroColuna] == unidade.filtroArgumento]
         for c in self.casos:
             mapa[c] =  mapa[c].loc[:, mapa[c].columns!='dataInicio']
             mapa[c] =  mapa[c].loc[:, mapa[c].columns!='dataFim']
@@ -94,15 +95,15 @@ class IndicadoresMedios(EcoIndicadores):
         return dict
 
 
-    def retorna_DF_std_incremental_percentual(self, sintese, coluna = None, argumento_filtro = None, dropar = True):
-        mapa = self.retorna_mapaDF_cenario_medio(sintese, coluna, argumento_filtro)
+    def retorna_DF_std_incremental_percentual(self, unidade, dropar = True):
+        mapa = self.retorna_mapaDF_cenario_medio(unidade)
         df = self.retorna_DF_incremental(mapa, dropar)
         df["valor"] = df["valor"]*0
         return df
         
         
-    def retorna_DF_cenario_medio_incremental_percentual(self, sintese, coluna = None, argumento_filtro = None, dropar = True):
-        mapa = self.retorna_mapaDF_cenario_medio(sintese, coluna, argumento_filtro)
+    def retorna_DF_cenario_medio_incremental_percentual(self, unidade, dropar = True):
+        mapa = self.retorna_mapaDF_cenario_medio(unidade)
         return self.retorna_DF_incremental(mapa, dropar)
 
     def retorna_DF_incremental(self, mapa, dropar):
