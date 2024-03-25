@@ -18,7 +18,7 @@ class Pareto:
         self.nome_caso_referencia = dados["nome_caso_referencia"]
         # Cria objetos do estudo
         casos = [Caso.from_dict(d) for d in dados["casos"]]        
-        indicadores_medios = IndicadoresMedios(casos, self.nome_caso_referencia)
+        self.indicadores_medios = IndicadoresMedios(casos, self.nome_caso_referencia)
         self.graficos = Graficos(casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/pareto"
