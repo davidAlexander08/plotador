@@ -14,7 +14,7 @@ def cli():
     pass
 
 
-@click.command("analise-pareto")
+@click.command("pareto")
 @click.argument(
     "arquivo_json",
 )
