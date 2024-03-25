@@ -9,7 +9,7 @@ import os
 
 class Temporal:
         
-    def __init__(self):
+    def __init__(self, arquivo_json):
     
         if os.path.isfile(arquivo_json):
             with open(arquivo_json, "r") as f:
