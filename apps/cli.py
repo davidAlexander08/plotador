@@ -478,14 +478,14 @@ def analise_anual(arquivo_json):
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
 
-                    df = indicadores_anuais.retorna_df_concatenado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    df = indicadores_anuais.retorna_df_concatenado(unity )
                     indicadores_anuais.exportar(df, diretorio_saida_arg,  "anual_"+unity.titulo+"_"+estudo)
 
                     ## GRAFICOS ANOS DISCRETIZADOS
                     fig = graficos.gera_grafico_barras_diferentes(df, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_anos_discretizados")
                     graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_anos_discretizados_"+estudo)
 
-                    df_unity = indicadores_anuais.retorna_DF_cenario_anual_medio_incremental_percentual(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    df_unity = indicadores_anuais.retorna_DF_cenario_anual_medio_incremental_percentual(unity )
                     indicadores_anuais.exportar(df_unity, diretorio_saida_arg,  "anual_incr_"+unity.titulo+"_"+estudo)
                 
                     #ANOS DISCRETIZADOS INCREMENTAL
@@ -505,7 +505,7 @@ def analise_anual(arquivo_json):
                     )
                     graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_primeiro_ano_incremental_"+estudo)
         
-                    df_unity = indicadores_anuais.retorna_df_concatenado_acumulado(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    df_unity = indicadores_anuais.retorna_df_concatenado_acumulado(unity )
                     indicadores_anuais.exportar(df_unity, diretorio_saida_arg,  "anual_acum_"+unity.titulo+"_"+estudo)
                     
                     ## GRAFICOS PRIMEIRO ANO
@@ -522,7 +522,7 @@ def analise_anual(arquivo_json):
                     fig = graficos.gera_grafico_barras_diferentes(df_unity, "anos", "valor", "caso",  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"_primeiro_ano_outros_anos")
                     graficos.exportar(fig, diretorio_saida_arg, "anual_"+unity.titulo+"_primeiro_ano_e_outros_anos_"+estudo)
                             
-                    df_unity = indicadores_anuais.retorna_DF_cenario_anual_acumulado_medio_incremental_percentual(unity.sintese, unity.fitroColuna , unity.filtroArgumento )
+                    df_unity = indicadores_anuais.retorna_DF_cenario_anual_acumulado_medio_incremental_percentual(unity )
                     indicadores_anuais.exportar(df_unity, diretorio_saida_arg,  "anual_acum_incr_"+unity.titulo+"_"+estudo)
         
                     #ANOS DISCRETIZADOS INCREMENTAL
