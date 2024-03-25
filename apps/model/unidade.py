@@ -40,30 +40,6 @@ class UnidadeSintese:
             "EXC":    ("MWmes", "Excesso"),
         }
 
-        #self.__mapa_sintese_titulo =        {
-        #    "GTER":"Geração Térmica",
-        #    "GHID":"Geração Hidrelétrica",
-        #    "EARPF":"Energ. Armz. Perc.",
-        #    "COP":"Custo de Oper.",
-        #    "EARMF":"Energ. Armz.",
-        #    "CMO":"Custo Marg.",
-        #    "QTUR":"Vaz. Turb.",
-        #    "QDEF":"Vaz. Defl.",
-        #    "VVMINOP":"Viol. VMINOP",
-        #    "CDEF":"Custo de Deficit",
-        #    "CONVERGENCIA":"Convergencia",
-        #    "CTER":"Custo Térmica",
-        #    "DEF":"Deficit",
-        #    "EARPI":"Energ. Armz. Perc Ini.",
-        #    "EARMI": "Energ. Armz. Ini.",
-        #    "EEVAP":"Energ. Evap.",
-        #    "ENAA":"Energ. Natu. Afl.",
-        #    "ENAAF":"Energ. Natu. Afl. Final",
-        #    "EVER":"Energ. Vertida",
-        #    "EVER":"Energ. Vertida Final",
-        #    "EXC":"Excesso",
-        #}
-
         self.legendaEixoY = self.label_y(sintese.sintese)     
         self.titulo = self.titulo_fig(sintese.sintese) if argumento.nome == None else self.titulo_fig(sintese.sintese) + " " + argumento.nome
 
