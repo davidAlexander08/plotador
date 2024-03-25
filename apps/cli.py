@@ -21,7 +21,7 @@ def cli():
 def analise_pareto(arquivo_json):
     from apps.services.pareto import Pareto
     if os.path.isfile(arquivo_json):
-    Pareto(arquivo_json)
+        Pareto(arquivo_json)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
