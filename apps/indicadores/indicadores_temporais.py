@@ -6,6 +6,7 @@ from apps.utils.log import Log
 import os.path
 from apps.model.caso import Caso
 from apps.indicadores.eco_indicadores import EcoIndicadores
+from apps.model.unidade import UnidadeSintese
 import warnings
  
 class IndicadoresTemporais(EcoIndicadores):
@@ -17,14 +18,18 @@ class IndicadoresTemporais(EcoIndicadores):
         self.__df_cref = None
         EcoIndicadores.__init__(self, casos)
 
-    def retorna_df_concatenado_medio_2_mes(self,sintese, coluna = None, argumento_filtro = None):
-        mapa = self.retorna_mapaDF_cenario_medio(sintese, coluna, argumento_filtro)
+    #def retorna_df_concatenado_medio_2_mes(self,sintese, coluna = None, argumento_filtro = None):
+     def retorna_df_concatenado_medio_2_mes(self, unidade:UnidadeSintese ):       
+        #mapa = self.retorna_mapaDF_cenario_medio(sintese, coluna, argumento_filtro)
+        mapa = self.retorna_mapaDF_cenario_medio(unidade)
         for c in self.casos:
             mapa[c] = mapa[c].loc[mapa[c]["estagio"] == 2]
         return pd.concat(mapa)
     
-    def retorna_df_concatenado(self,sintese, coluna = None, argumento_filtro = None):
-        return pd.concat(self.retorna_mapaDF_cenario_medio(sintese, coluna, argumento_filtro))
+    #def retorna_df_concatenado(self,sintese, coluna = None, argumento_filtro = None):
+    def retorna_df_concatenado(self, unidade):
+        #return pd.concat(self.retorna_mapaDF_cenario_medio(sintese, coluna, argumento_filtro))
+        return pd.concat(self.retorna_mapaDF_cenario_medio(unidade))
     
     def __retorna_mapa_media_parquet(self, mapa):
         dict = {}
@@ -33,13 +38,18 @@ class IndicadoresTemporais(EcoIndicadores):
             dict[c] = df.loc[df["cenario"] == "mean"].reset_index(drop = True)
         return dict
 
-    def retorna_mapaDF_cenario_medio(self,sintese, coluna = None, argumento_filtro = None):
-        eco_mapa = self.retornaMapaDF(sintese)
+    #def retorna_mapaDF_cenario_medio(self,sintese, coluna = None, argumento_filtro = None):
+    def retorna_mapaDF_cenario_medio(self, unidade):
+       # eco_mapa = self.retornaMapaDF(sintese)
+        eco_mapa = self.retornaMapaDF(unidade.sintese)
         mapa_temporal = {}
-        if( (coluna is None) & (argumento_filtro is None) ):
+       # if( (coluna is None) & (argumento_filtro is None) ):
+       #     return self.__retorna_mapa_media_parquet(eco_mapa)
+        if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
             return self.__retorna_mapa_media_parquet(eco_mapa)
         else:
-            for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][coluna] == argumento_filtro]
+            #for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][coluna] == argumento_filtro]
+            for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.fitroColuna] == unidade.filtroArgumento]
             mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa) 
         return mapa_temporal
 
