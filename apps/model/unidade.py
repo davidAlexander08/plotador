@@ -18,7 +18,7 @@ class UnidadeSintese:
         self.filtroArgumento = argumento.nome
         self.__mapa_sintese =        {
             "GTER":    ("MWmes","Geração Térmica"),
-            "GHID":    ("MWmes","Geração Térmica"),
+            "GHID":    ("MWmes","Geração Hidrelétrica"),
             "EARPF":    ("%","Energ. Armz. Perc."),
             "COP":    ("R$","Custo de Oper."),
             "EARMF":    ("MWmes","Energ. Armz. Final"),
