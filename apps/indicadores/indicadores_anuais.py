@@ -9,6 +9,7 @@ from apps.utils.log import Log
 import os.path
 from apps.model.caso import Caso
 from apps.indicadores.indicadores_temporais import IndicadoresTemporais
+from apps.model.unidade import UnidadeSintese
 import warnings
 
 class IndicadoresAnuais(IndicadoresTemporais):
@@ -42,19 +43,19 @@ class IndicadoresAnuais(IndicadoresTemporais):
             dict[c] = df_anual
         return dict
 
-    def retorna_df_concatenado(self,sintese, coluna = None, argumento_filtro = None):
-        return pd.concat(self.retorna_mapaDF_cenario_anual_medio(sintese, coluna, argumento_filtro))
+    def retorna_df_concatenado(self, unidade):
+        return pd.concat(self.retorna_mapaDF_cenario_anual_medio(unidade))
         
-    def retorna_df_concatenado_acumulado(self,sintese, coluna = None, argumento_filtro = None):
-        return pd.concat(self.retorna_mapa_media_df_anual_acumulado(self.retorna_mapaDF_cenario_anual_medio(sintese, coluna, argumento_filtro)) )
+    def retorna_df_concatenado_acumulado(self, unidade):
+        return pd.concat(self.retorna_mapa_media_df_anual_acumulado(self.retorna_mapaDF_cenario_anual_medio(unidade)) )
 
-    def retorna_mapaDF_cenario_anual_medio(self,sintese, coluna = None, argumento_filtro = None):
-        mapa_temporal = self.retorna_mapaDF_cenario_medio(sintese)
+    def retorna_mapaDF_cenario_anual_medio(self, unidade):
+        mapa_temporal = self.retorna_mapaDF_cenario_medio(unidade.sintese)
         mapa_anual = {}
-        if( (coluna is None) & (argumento_filtro is None) ):
+        if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
             mapa_anual = self.retorna_mapa_media_anual_parquet(mapa_temporal) 
         else:
-            for c in self.casos: mapa_temporal[c] = mapa_temporal[c].loc[mapa_temporal[c][coluna] == argumento_filtro]
+            for c in self.casos: mapa_temporal[c] = mapa_temporal[c].loc[mapa_temporal[c][unidade.fitroColuna] == unidade.filtroArgumento]
             mapa_anual = self.retorna_mapa_media_anual_parquet(mapa_temporal) 
         return mapa_anual
 
@@ -81,12 +82,12 @@ class IndicadoresAnuais(IndicadoresTemporais):
             dict[c] = df_anual_primeiro_ano_outros_anos
         return dict
 
-    def retorna_DF_cenario_anual_acumulado_medio_incremental_percentual(self, sintese, coluna = None, argumento_filtro = None):
-        mapa_anual = self.retorna_mapa_media_df_anual_acumulado(self.retorna_mapaDF_cenario_anual_medio(sintese, coluna, argumento_filtro))
+    def retorna_DF_cenario_anual_acumulado_medio_incremental_percentual(self, unidade):
+        mapa_anual = self.retorna_mapa_media_df_anual_acumulado(self.retorna_mapaDF_cenario_anual_medio(unidade))
         return self.retorna_DF_incremental(mapa_anual)
 
-    def retorna_DF_cenario_anual_medio_incremental_percentual(self, sintese, coluna = None, argumento_filtro = None):
-        mapa_anual = self.retorna_mapaDF_cenario_anual_medio(sintese, coluna, argumento_filtro)
+    def retorna_DF_cenario_anual_medio_incremental_percentual(self, unidade):
+        mapa_anual = self.retorna_mapaDF_cenario_anual_medio(unidade)
         return self.retorna_DF_incremental(mapa_anual)
 
     def retorna_DF_incremental(self, mapa_anual):
