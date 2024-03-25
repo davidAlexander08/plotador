@@ -310,7 +310,7 @@ def analise_temporal(arquivo_json):
 
     from apps.services.temporal import Temporal
 
-    exec_temporal = Temporal()
+    exec_temporal = Temporal(arquivo_json)
 
 
 
