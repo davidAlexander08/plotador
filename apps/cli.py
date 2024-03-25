@@ -307,8 +307,10 @@ def eco(arquivo_json):
 )
 def analise_temporal(arquivo_json):
     from apps.services.temporal import Temporal
-    Temporal(arquivo_json)
-
+    if os.path.isfile(arquivo_json):
+        Temporal(arquivo_json)
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
 
 @click.command("media")
@@ -317,8 +319,10 @@ def analise_temporal(arquivo_json):
 )
 def analise_media(arquivo_json):
     from apps.services.media import Media
-    Media(arquivo_json)
-
+    if os.path.isfile(arquivo_json):
+        Media(arquivo_json)
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
 
 
