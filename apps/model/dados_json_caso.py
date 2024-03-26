@@ -6,7 +6,7 @@ from apps.services.meta_data import Configuracao
 import os
 import json
 
-class Data_json_caso:
+class Dados_json_caso:
 
     def __init__(self, arquivo_json):
 
