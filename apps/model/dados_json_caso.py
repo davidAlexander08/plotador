@@ -25,7 +25,7 @@ class Dados_json_caso(MetaData):
         with open(arquivo_json, "r") as f:
             dados = json.load(f)
         self.estudo = dados["estudo"]
-        print("nome_caso_")
+        print("nome_caso_referencia" in dados)
         self.nome_caso_referencia = dados["nome_caso_referencia"]
         self.casos = [Caso.from_dict(d) for d in dados["casos"]]
         
