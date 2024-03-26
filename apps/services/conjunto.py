@@ -8,6 +8,7 @@ from apps.model.conjuntoCasos import ConjuntoCasos
 from apps.indicadores.indicadores_medios import IndicadoresMedios
 from apps.indicadores.indicadores_anuais import IndicadoresAnuais
 from apps.indicadores.indicadores_temporais import IndicadoresTemporais
+import pandas as pd
 import os
 import json
 
