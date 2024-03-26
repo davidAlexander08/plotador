@@ -6,6 +6,7 @@ from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 import plotly.graph_objects as go
+import pandas as pd
 
 import os
 import json
