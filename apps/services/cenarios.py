@@ -49,6 +49,8 @@ class Cenarios:
                             unity_for = UnidadeSintese(sts, "casos", arg)
                             unity_sf = UnidadeSintese(sts, "casos", arg)
                             self.executa((unity_for, unity_sf),diretorio_saida_arg )
+            else:
+                print("SINTESES NAO VALIDAS PARA ANALISE DE CENARIOS")
 
         
     def executa(self, par_unity):
