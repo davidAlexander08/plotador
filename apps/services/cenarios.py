@@ -78,6 +78,8 @@ class Cenarios:
         for c in self.casos:
             df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
             df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
+            print(df_caso_fw)
+            print(df_caso_sf)
             fig = go.Figure()
             lista_estagios = df_caso_sf["estagio"].unique()
             lista_iter = df_caso_fw["iteracao"].unique()
