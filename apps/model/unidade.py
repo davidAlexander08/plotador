@@ -5,12 +5,12 @@ from apps.model.metaData import MetaData
 class UnidadeSintese (MetaData):  
     def label_y(self, sintese):
         operacional = sintese.split("_")[0]
-        return self.__mapa_sintese[operacional][0]
+        return self.mapa_sintese[operacional][0]
 
     def titulo_fig(self, sintese):
         operacional = sintese.split("_")[0]
         espacial = sintese.split("_")[1]
-        return self.__mapa_sintese[operacional][1]+" "+espacial
+        return self.mapa_sintese[operacional][1]+" "+espacial
         
     def __init__(self, sintese, legendaEixoX, argumento, df = None):
         MetaData.__init__(self)

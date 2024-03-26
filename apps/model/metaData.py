@@ -62,7 +62,7 @@ class MetaData:
             "UHE": self.lista_usinas_principais
         }
 
-        self.__mapa_sintese =        {
+        self.mapa_sintese =        {
             "GTER":    ("MWmes","Geração Térmica"),
             "GHID":    ("MWmes","Geração Hidrelétrica"),
             "EARPF":    ("%","Energ. Armz. Perc."),
