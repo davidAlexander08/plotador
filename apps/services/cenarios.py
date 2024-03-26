@@ -53,7 +53,7 @@ class Cenarios:
                 print("SINTESE: ",sts.sintese," NAO VALIDA PARA ANALISE DE CENARIOS")
 
         
-    def executa(self, par_unity):
+    def executa(self, par_unity, diretorio_saida_arg):
         df_fw = self.indicadores_cenarios.retorna_df_concatenado(par_unity[0].sintese, par_unity[0].fitroColuna , par_unity[0].filtroArgumento )
         df_sf = self.indicadores_cenarios.retorna_df_concatenado(par_unity[1].sintese, par_unity[1].fitroColuna , par_unity[1].filtroArgumento )
 
