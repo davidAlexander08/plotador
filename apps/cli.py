@@ -4,6 +4,7 @@ import json
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
+from apps.model.conjuntoCasos import ConjuntoCasos
 from apps.utils.log import Log
 @click.group()
 def cli():
