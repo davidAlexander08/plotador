@@ -73,7 +73,49 @@ class Cenarios:
         self.indicadores_cenarios.exportar(df_fw , diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_for+"_"+self.estudo+".csv" )
         self.indicadores_cenarios.exportar(df_sf , diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_sf+"_"+self.estudo+".csv" )
 
-        
+
+        #BOXPLOT, SOMA TODOS OS ESTAGIOS, ITER 1, ITER (1-MAX) JUNTOS, SF
+        for c in self.casos:
+            df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
+            df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
+            fig = go.Figure()
+            lista_estagios = df_caso_sf["estagio"].unique()
+            lista_iter = df_caso_fw["iteracao"].unique()
+
+            df_iter_fw = df_caso_fw.loc[(df_caso_fw["iteracao"] == 1)]
+            if(filtro_for_1_arg == ""):
+                df_iter_fw = df_iter_fw.drop(['dataInicio', 'dataFim',"caso"], axis=1)
+            else:
+                df_iter_fw = df_iter_fw.drop(['dataInicio', 'dataFim',filtro_for_1_arg,"caso"], axis=1)
+            df = df_iter_fw.groupby(['cenario']).sum()
+            fig.add_trace(go.Box(y=df["valor"], name="iter_1", marker_color="rgba(0,0,255,1.0)"))
+            lista_df = []
+            for iter in lista_iter:
+                df_iter_fw = df_caso_fw.loc[(df_caso_fw["iteracao"] == iter)]
+                if(filtro_for_1_arg == ""):
+                    df_iter_fw = df_iter_fw.drop(['dataInicio', 'dataFim',"caso"], axis=1)
+                else:
+                    df_iter_fw = df_iter_fw.drop(['dataInicio', 'dataFim',filtro_for_1_arg,"caso"], axis=1)
+                df = df_iter_fw.groupby(['cenario']).sum()
+                lista_df.append(df)
+            df_iter_1_max = pd.concat(lista_df)
+            fig.add_trace(go.Box(y=df_iter_1_max["valor"], name="1-"+str(max(lista_iter)), marker_color="rgba(0,0,255,1.0)"))
+                
+            if(filtro_for_1_arg == ""):
+                df_caso_sf = df_caso_sf.drop(['dataInicio', 'dataFim',"caso"], axis=1)
+            else:
+                df_caso_sf = df_caso_sf.drop(['dataInicio', 'dataFim',filtro_for_1_arg,"caso"], axis=1)
+            df_sf_2 = df_caso_sf.groupby(['cenario']).sum()
+            fig.add_trace(go.Box(y=df_sf_2["valor"], name="SF", marker_color="rgba(255,0,0,1.0)"))
+            fig.update_layout(    title="Iteracoes soma todos estágios 1, 1-"+str(max(lista_iter))+", sf "+filtro_for_1_arg+"_"+filtro_for,    showlegend=False)
+            #fig.update_layout(yaxis_range=[500000,2000000])
+            self.graficos.exportar(fig, diretorio_saida_arg, filtro_for_1_arg+"_"+filtro_for+"_"+c.nome+"_iter_1_1_"+str(max(lista_iter))+"_sf_soma_todos_estagios_"+self.estudo+".png")
+
+
+
+
+
+
         #SOMA DE TODOS OS ESTAGIOS, TODAS ITERACOES NO EIXO X
         for c in self.casos:
             df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
