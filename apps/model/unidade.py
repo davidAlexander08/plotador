@@ -25,6 +25,7 @@ class UnidadeSintese:
             "CMO":    ("R$/MWh","Custo Marg."),
             "QTUR":    ("m3/s", "Vaz. Turb."),
             "QDEF":    ("m3/s", "Vaz. Defl."),
+            "QINC":    ("m3/s", "Vaz. Incr."),
             "VVMINOP":    ("MWmed", "Viol. VMINOP"),
             "CDEF":    ("10^6 R$", "Custo de Deficit"),
             "CONVERGENCIA":    ("10^3 R$", "Convergencia"),
