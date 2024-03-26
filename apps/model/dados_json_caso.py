@@ -38,10 +38,40 @@ class Dados_json_caso:
             "CEN": self.default_sts_CEN
         }
 
-        self.lista_submercados = (["SUDESTE", "NORDESTE", "NORTE", "SUL"], "submercado")
-        self.lista_rees = (['BMONTE', 'IGUACU', 'ITAIPU', 'MADEIRA', 'MAN-AP', 'NORDESTE', 'NORTE', 'PARANA', 'PRNPANEMA', 'SUDESTE', 'SUL', 'TPIRES'],"ree")
-        self.lista_usinas_principais = (["NOVA PONTE", "EMBORCACAO", "SAO SIMAO", "FURNAS", "MARIMBONDO", "A. VERMELHA", "I. SOLTEIRA", "JUPIA", "P. PRIMAVERA",
-                                        "A.A. LAYDNER", "G.B. MUNHOZ", "MACHADINHO", "TRES MARIAS", "SOBRADINHO", "ITAPARICA", "SERRA MESA", "TUCURUI"], "usina")
+        chave_sbm = "submercado"
+        self.lista_submercados = [Argumento("SUDESTE", chave_sbm), Argumento("NORDESTE",chave_sbm), Argumento("NORTE", chave_sbm), Argumento("SUL", chave_sbm)]
+        chave_ree = "ree"
+        self.lista_rees = [Argumento('BMONTE', chave_ree),
+                            Argumento('IGUACU', chave_ree),
+                            Argumento('ITAIPU', chave_ree),
+                            Argumento('MADEIRA', chave_ree),
+                            Argumento('MAN-AP', chave_ree),
+                            Argumento('NORDESTE', chave_ree),
+                            Argumento('NORTE', chave_ree),
+                            Argumento('PARANA', chave_ree),
+                            Argumento('PRNPANEMA', chave_ree),
+                            Argumento('SUDESTE', chave_ree),
+                            Argumento('SUL', chave_ree),
+                            Argumento('TPIRES', chave_ree)]
+        chave_usina = "usina"
+        self.lista_usinas_principais = [Argumento("NOVA PONTE", chave_usina),
+                                        Argumento("EMBORCACAO", chave_usina),
+                                        Argumento("SAO SIMAO", chave_usina),
+                                        Argumento("FURNAS", chave_usina),
+                                        Argumento("MARIMBONDO", chave_usina),
+                                        Argumento("A. VERMELHA", chave_usina),
+                                        Argumento("I. SOLTEIRA", chave_usina),
+                                        Argumento("JUPIA", chave_usina),
+                                        Argumento("P. PRIMAVERA",chave_usina),
+                                        Argumento("A.A. LAYDNER", chave_usina),
+                                        Argumento("G.B. MUNHOZ", chave_usina),
+                                        Argumento("MACHADINHO", chave_usina),
+                                        Argumento("TRES MARIAS", chave_usina),
+                                        Argumento("SOBRADINHO", chave_usina),
+                                        Argumento("ITAPARICA", chave_usina),
+                                        Argumento("SERRA MESA", chave_usina),
+                                        Argumento("TUCURUI",    chave_usina  ),
+                                        ]
         
         self.mapa_argumentos = {
             "TODOS": self.lista_submercados+self.lista_rees+self.lista_usinas_principais,
