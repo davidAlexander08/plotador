@@ -5,7 +5,7 @@ from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 from apps.model.conjuntoCasos import ConjuntoCasos
-from apps.services.meta_data import Configuracao
+from apps.model.dados_json_caso import Configuracao
 from apps.model.dados_json_caso import Dados_json_caso
 from apps.utils.log import Log
 @click.group()
