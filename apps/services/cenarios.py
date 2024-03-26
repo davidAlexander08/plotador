@@ -65,11 +65,12 @@ class Cenarios:
         filtro_for = par_unity[0].filtroArgumento if par_unity[0].filtroArgumento is not None else "SIN" 
         filtro_sf = par_unity[1].filtroArgumento if par_unity[1].filtroArgumento is not None else "SIN" 
 
+        df_fw =  df_fw[df_fw[['cenario']].apply(lambda x: x[0].isdigit(), axis=1)]
+        df_sf =  df_sf[df_sf[['cenario']].apply(lambda x: x[0].isdigit(), axis=1)]
+
         self.indicadores_cenarios.exportar(df_fw , diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_for+"_"+self.estudo+".csv" )
         self.indicadores_cenarios.exportar(df_sf , diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_sf+"_"+self.estudo+".csv" )
 
-        df_fw =  df_fw[df_fw[['cenario']].apply(lambda x: x[0].isdigit(), axis=1)]
-        df_sf =  df_sf[df_sf[['cenario']].apply(lambda x: x[0].isdigit(), axis=1)]
         
         #SOMA DE TODOS OS ESTAGIOS, TODAS ITERACOES NO EIXO X
         Log.log().info("Gerando gráfico soma dos estágios para cada iteração ")
@@ -94,11 +95,7 @@ class Cenarios:
             df_sf_2 = df_caso_sf.groupby(['cenario']).sum()
             fig.add_trace(go.Box(y=df_sf_2["valor"], name="SF", marker_color="rgba(255,0,0,1.0)"))
             fig.update_layout(    title="Iteração para soma de todos os Estagios "+filtro_for_1_arg+"_"+filtro_for,    showlegend=False)
-            fig.write_image(
-                os.path.join(diretorio_saida_arg, filtro_for_1_arg+"_"+filtro_for+"_"+c.nome+"_soma_todos_estagios_"+self.estudo+".png"),
-                width=800,
-                height=600,
-            )     
+            self.graficos.exportar(fig, diretorio_saida_arg, filtro_for_1_arg+"_"+filtro_for+"_"+c.nome+"_soma_todos_estagios_"+self.estudo+".png")
 
 
 
@@ -119,11 +116,7 @@ class Cenarios:
                 lista_y = df_filtered_iter_sf["valor"]
                 fig.add_trace(go.Box(y=lista_y, name="SF", marker_color="rgba(255,0,0,1.0)"))
                 fig.update_layout(    title="Iterações para o Estágio "+str(est)+" "+filtro_for_1_arg+"_"+filtro_for,    showlegend=False)
-                fig.write_image(
-                    os.path.join(diretorio_saida_arg, filtro_for_1_arg+"_"+filtro_for+"_"+c.nome+"_estagio_FW_SF_"+str(est)+"_"+self.estudo+".png"),
-                    width=800,
-                    height=600,
-                )    
+                self.graficos.exportar(fig, diretorio_saida_arg, filtro_for_1_arg+"_"+filtro_for+"_"+c.nome+"_estagio_FW_SF_"+str(est)+"_"+self.estudo+".png")
 
 
 
@@ -147,11 +140,7 @@ class Cenarios:
                 lista_y = df_caso_sf["valor"]
                 fig.add_trace(go.Box(y=lista_y, name="SF", marker_color="rgba(255,0,0,1.0)"))
                 fig.update_layout(    title="Estágios para Iteração "+str(iter)+" "+filtro_for_1_arg+"_"+filtro_for,    showlegend=False)
-                fig.write_image(
-                    os.path.join(diretorio_saida_arg, filtro_for_1_arg+"_"+filtro_for+"_"+c.nome+"_iteracao_FW_SF_"+str(iter)+"_"+self.estudo+".png"),
-                    width=800,
-                    height=600,
-                )     
+                self.graficos.exportar(fig, diretorio_saida_arg, filtro_for_1_arg+"_"+filtro_for+"_"+c.nome+"_iteracao_FW_SF_"+str(iter)+"_"+self.estudo+".png")
 
             
 
