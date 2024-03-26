@@ -22,11 +22,11 @@ class Dados_json_caso:
 
         self.default_sts_cenarios_ending = ["FOR", "SF"]
 
-        self.default_sts_SIN = ["COP_SIN_EST", "CTER_SIN_EST","EARPF_SIN_EST", "EVER_SIN_EST", "GHID_SIN_EST", "GTER_SIN_EST"]
-        self.default_sts_SBM = ["CMO_SBM_EST", "EARPF_SBM_EST", "EVER_SBM_EST", "GHID_SBM_EST", "GTER_SBM_EST"]
-        self.default_sts_REE = ["EARPF_REE_EST", "EVER_REE_EST", "GHID_REE_EST"]
-        self.default_sts_UHE = ["GHID_UHE_EST", "QAFL_UHE_EST", "QDEF_UHE_EST", "QVER_UHE_EST", "QTUR_UHE_EST", "VARMF_UHE_EST"]
-        self.default_sts_CEN = ["ENAA_SIN_SF", "ENAA_SBM_SF", "ENAA_REE_SF", "QINC_SIN_SF", "QINC_SBM_SF", "QINC_REE_SF", "QINC_UHE_SF"]
+        self.default_sts_SIN = [Sintese("COP_SIN_EST"), Sintese("CTER_SIN_EST"),Sintese("EARPF_SIN_EST"), Sintese("EVER_SIN_EST"), Sintese("GHID_SIN_EST"), Sintese("GTER_SIN_EST")]
+        self.default_sts_SBM = [Sintese("CMO_SBM_EST"), Sintese("EARPF_SBM_EST"), Sintese("EVER_SBM_EST"), Sintese("GHID_SBM_EST"), Sintese("GTER_SBM_EST")]
+        self.default_sts_REE = [Sintese("EARPF_REE_EST"), Sintese("EVER_REE_EST"), Sintese("GHID_REE_EST")]
+        self.default_sts_UHE = [Sintese("GHID_UHE_EST"), Sintese("QAFL_UHE_EST"), Sintese("QDEF_UHE_EST"), Sintese("QVER_UHE_EST"), Sintese("QTUR_UHE_EST"), Sintese("VARMF_UHE_EST")]
+        self.default_sts_CEN = [Sintese("ENAA_SIN_SF"), Sintese("ENAA_SBM_SF"), Sintese("ENAA_REE_SF"), Sintese("QINC_SIN_SF"), Sintese("QINC_SBM_SF"), Sintese("QINC_REE_SF"), Sintese("QINC_UHE_SF")]
 
         self.mapa_sinteses = {
             "TODOS": self.default_sts_SIN + self.default_sts_SBM + self.default_sts_REE + self.default_sts_UHE,
@@ -80,8 +80,6 @@ class Dados_json_caso:
             "UHE": self.lista_usinas_principais
         }
 
-        print(self.mapa_argumentos)
-
         with open(arquivo_json, "r") as f:
             dados = json.load(f)
         self.estudo = dados["estudo"]
@@ -91,26 +89,16 @@ class Dados_json_caso:
         sts = [Sintese.from_dict(d) for d in dados["sinteses"]]
         argum = [Argumento.from_dict(d) for d in dados["argumentos"]]
 
-        self.config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]
-
+        config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]
         config_sintese = self.config.sintese.replace(" ", "")
         config_arg = self.config.argumento.replace(" ", "")
-
         if(config_sintese == ""):
             self.sinteses = sts
         else:
-            lista = []
-            lista_strings = self.mapa_sinteses[config_sintese]
-            for elem in lista_strings:
-                lista.append(Sintese(elem))
-            self.sinteses = lista
+            self.sinteses = self.mapa_sinteses[config_sintese]
 
         if(config_arg == ""):
             self.args = argum
         else:
-            lista = []
-            lista_strings = self.mapa_argumentos[config_arg]
-            for elem in lista_strings:
-                lista.append(Argumento(elem[0], elem[1]))
-            self.sinteses = lista
+            self.sinteses = self.mapa_argumentos[config_arg]
 
