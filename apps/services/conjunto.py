@@ -43,8 +43,8 @@ class Conjunto:
                     listaNomes = []
                     mapCores = {}
                     for conjunto in self.conjuntoCasos:
-                        indicador_conj_medio = IndicadoresMedios(conjunto.casos, nome_caso_referencia)
-                        indicadores_anuais = IndicadoresAnuais(conjunto.casos, nome_caso_referencia)
+                        indicador_conj_medio = IndicadoresMedios(conjunto.casos, self.nome_caso_referencia)
+                        indicadores_anuais = IndicadoresAnuais(conjunto.casos, self.nome_caso_referencia)
                         indicadores_temporais = IndicadoresTemporais(conjunto.casos)
                         graficos = Graficos(conjunto.casos)
                         
