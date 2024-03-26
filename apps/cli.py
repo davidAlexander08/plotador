@@ -96,16 +96,17 @@ def analise_cenarios(arquivo_json):
 def analise_conjuntoCasos(arquivo_json):
     from apps.services.conjunto import Conjunto
     if os.path.isfile(arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        # Lê dados de entrada
-        estudo = dados["estudo"]
-        conjuntoCasos = [ConjuntoCasos.from_dict(d) for d in dados["conjuntos"]]
-        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
-        config = [Configuracao.from_dict(d) for d in dados["configuracao"]]
+        data = Dados_json_caso(arquivo_json)
+        #with open(arquivo_json, "r") as f:
+        #    dados = json.load(f)
+        ## Lê dados de entrada
+        #estudo = dados["estudo"]
+        #conjuntoCasos = [ConjuntoCasos.from_dict(d) for d in dados["conjuntos"]]
+        #sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
+        #args = [Argumento.from_dict(d) for d in dados["argumentos"]]
+        #config = [Configuracao.from_dict(d) for d in dados["configuracao"]]
 
-        Conjunto(estudo,conjuntoCasos,sinteses, args)
+        Conjunto(data.estudo,data.conjuntoCasos,data.sinteses, data.args)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
