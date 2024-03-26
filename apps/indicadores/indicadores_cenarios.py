@@ -22,7 +22,7 @@ class IndicadoresCenarios(EcoIndicadores):
 
 
     def mapa_df_cenario(self, unidade):
-      eco_mapa  = self.retornaMapaDF(unidade)
+      eco_mapa  = self.retornaMapaDF(unidade.sintese)
       mapa_temporal = {}
       if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
           return eco_mapa
