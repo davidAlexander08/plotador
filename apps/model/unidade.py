@@ -11,6 +11,8 @@ class UnidadeSintese:
         return self.__mapa_sintese[operacional][1]+" "+espacial
         
     def __init__(self, sintese, legendaEixoX, argumento, df = None):
+        self.sts = sintese
+        self.arg = argumento
         self.sintese = sintese.sintese
         self.legendaEixoX = legendaEixoX
         self.df = df
