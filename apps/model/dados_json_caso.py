@@ -5,7 +5,7 @@ from apps.model.conjuntoCasos import ConjuntoCasos
 from apps.services.meta_data import Configuracao
 import os
 import json
-
+from typing import Dict
 class Dados_json_caso:
 
     def __init__(self, arquivo_json):
