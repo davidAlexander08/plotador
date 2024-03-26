@@ -5,6 +5,8 @@ from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 from apps.model.conjuntoCasos import ConjuntoCasos
+from apps.services.meta_data import Configuracao
+from app.model.data_json_caso import Data_json_caso
 from apps.utils.log import Log
 @click.group()
 def cli():
@@ -34,13 +36,8 @@ def analise_pareto(arquivo_json):
 def eco(arquivo_json):
     from apps.services.eco import Eco
     if os.path.isfile(arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        # Lê dados de entrada
-        estudo = dados["estudo"]
-        casos = [Caso.from_dict(d) for d in dados["casos"]]
-        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        Eco(estudo, casos, sinteses)
+        data = Data_json_caso(arquivo_json)
+        Eco(data.estudo, data.casos, data.sinteses)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
@@ -51,13 +48,8 @@ def eco(arquivo_json):
 def analise_temporal(arquivo_json):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        estudo = dados["estudo"]
-        casos = [Caso.from_dict(d) for d in dados["casos"]]
-        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
-        Temporal(estudo, casos, sinteses, args)
+        data = Data_json_caso(arquivo_json)
+        Temporal(data.estudo, data.casos, data.sinteses, data.args)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
@@ -68,14 +60,8 @@ def analise_temporal(arquivo_json):
 def analise_media(arquivo_json):
     from apps.services.media import Media
     if os.path.isfile(arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        estudo = dados["estudo"]
-        nome_caso_referencia = dados["nome_caso_referencia"]
-        casos = [Caso.from_dict(d) for d in dados["casos"]]
-        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
-        Media(estudo, nome_caso_referencia, casos, sinteses, args)
+        data = Data_json_caso(arquivo_json)
+        Media(data.estudo, data.nome_caso_referencia, data.casos, data.sinteses, data.args)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
@@ -86,15 +72,8 @@ def analise_media(arquivo_json):
 def analise_anual(arquivo_json):
     from apps.services.anual import Anual
     if os.path.isfile(arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        estudo = dados["estudo"]
-        nome_caso_referencia = dados["nome_caso_referencia"]
-        casos = [Caso.from_dict(d) for d in dados["casos"]]
-        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
-
-        Anual(estudo, nome_caso_referencia, casos, sinteses, args )             
+        data = Data_json_caso(arquivo_json)
+        Anual(data.estudo, data.nome_caso_referencia, data.casos, data.sinteses, data.args )             
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
@@ -105,14 +84,8 @@ def analise_anual(arquivo_json):
 def analise_cenarios(arquivo_json):
     from apps.services.cenarios import Cenarios
     if os.path.isfile(arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        estudo = dados["estudo"]
-        casos = [Caso.from_dict(d) for d in dados["casos"]]
-        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
-
-        Cenarios(estudo, casos, sinteses, args)
+        data = Data_json_caso(arquivo_json)
+        Cenarios(data.estudo, data.casos, data.sinteses, data.args)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
@@ -130,6 +103,8 @@ def analise_conjuntoCasos(arquivo_json):
         conjuntoCasos = [ConjuntoCasos.from_dict(d) for d in dados["conjuntos"]]
         sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
         args = [Argumento.from_dict(d) for d in dados["argumentos"]]
+        config = [Configuracao.from_dict(d) for d in dados["configuracao"]]
+
         Conjunto(estudo,conjuntoCasos,sinteses, args)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")

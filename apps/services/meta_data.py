@@ -15,9 +15,7 @@ class Meta:
 
     def __init__(self, dados):
 
-        self.config = [Configuracao.from_dict(d) for d in dados["configuracao"]]
         
-
 
         self.default_sts_cenarios_ending = ["FOR", "SF"]
 
