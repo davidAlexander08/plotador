@@ -34,7 +34,6 @@ class Dados_json_caso(MetaData):
         config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]
         config_sintese = config.sintese.replace(" ", "")
         config_arg = config.argumento.replace(" ", "")
-        print(config_arg)
         if(config_sintese == ""):
             self.sinteses = sts
         else:
@@ -43,5 +42,8 @@ class Dados_json_caso(MetaData):
         if(config_arg == ""):
             self.args = argum
         else:
+            print("ENTROU")
+            for elem in self.mapa_argumentos[config_arg]:
+                print(elem.nome)
             self.args = self.mapa_argumentos[config_arg]
 
