@@ -42,5 +42,5 @@ class Dados_json_caso(MetaData):
         if(config_arg == ""):
             self.args = argum
         else:
-            self.sinteses = self.mapa_argumentos[config_arg]
+            self.args = self.mapa_argumentos[config_arg]
 
