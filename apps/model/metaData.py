@@ -74,6 +74,7 @@ class MetaData:
             "QINC":    ("m3/s", "Vaz. Incr."),
             "QVER":    ("m3/s", "Vaz. Vert."),
             "QAFL":    ("m3/s", "Vaz. Afl."),
+            "VARMF":    ("hm3", "Vol. Armz."),
             "VVMINOP":    ("MWmed", "Viol. VMINOP"),
             "CDEF":    ("10^6 R$", "Custo de Deficit"),
             "CONVERGENCIA":    ("10^3 R$", "Convergencia"),
