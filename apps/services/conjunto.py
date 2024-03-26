@@ -42,7 +42,7 @@ class Conjunto:
                     mapaConjDF_Temporal = {}
                     listaNomes = []
                     mapCores = {}
-                    for conjunto in conjuntoCasos:
+                    for conjunto in self.conjuntoCasos:
                         indicador_conj_medio = IndicadoresMedios(conjunto.casos, nome_caso_referencia)
                         indicadores_anuais = IndicadoresAnuais(conjunto.casos, nome_caso_referencia)
                         indicadores_temporais = IndicadoresTemporais(conjunto.casos)
@@ -105,7 +105,7 @@ class Conjunto:
                     fig = graficos.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_segundo_mes, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Segundo_Mes")
                     graficos.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_segundo_mes_"+estudo)
         
-                    mapaFig = graficos.subplot_gera_grafico_linha_casos(conjuntoCasos, mapaConjDF_Temporal, unity.legendaEixoY , unity.legendaEixoX, unity.titulo)
+                    mapaFig = graficos.subplot_gera_grafico_linha_casos(self.conjuntoCasos, mapaConjDF_Temporal, unity.legendaEixoY , unity.legendaEixoX, unity.titulo)
                     for titulo in mapaFig:
                         graficos.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+estudo, 2000, 900)
       
