@@ -61,3 +61,30 @@ class MetaData:
             "REE": self.lista_rees,
             "UHE": self.lista_usinas_principais
         }
+
+        self.__mapa_sintese =        {
+            "GTER":    ("MWmes","Geração Térmica"),
+            "GHID":    ("MWmes","Geração Hidrelétrica"),
+            "EARPF":    ("%","Energ. Armz. Perc."),
+            "COP":    ("R$","Custo de Oper."),
+            "EARMF":    ("MWmes","Energ. Armz. Final"),
+            "CMO":    ("R$/MWh","Custo Marg."),
+            "QTUR":    ("m3/s", "Vaz. Turb."),
+            "QDEF":    ("m3/s", "Vaz. Defl."),
+            "QINC":    ("m3/s", "Vaz. Incr."),
+            "QVER":    ("m3/s", "Vaz. Vert."),
+            "QAFL":    ("m3/s", "Vaz. Afl."),
+            "VVMINOP":    ("MWmed", "Viol. VMINOP"),
+            "CDEF":    ("10^6 R$", "Custo de Deficit"),
+            "CONVERGENCIA":    ("10^3 R$", "Convergencia"),
+            "CTER":    ("10^6 R$", "Custo Térmica"),
+            "DEF":    ("MWmes", "Deficit"),
+            "EARPI":    ("%", "Energ. Armz. Perc Ini."),
+            "EARMI":    ("MWmes", "Energ. Armz. Ini."),
+            "EEVAP":    ("MWmes", "Energ. Evap."),
+            "ENAA":    ("MWmes", "Energ. Natu. Afl."),
+            "ENAAF":    ("MWmes", "Energ. Natu. Afl. Final"),
+            "EVER":    ("MWmes", "Energ. Vertida"),
+            "EVERF":    ("MWmes", "Energ. Vertida Final"),
+            "EXC":    ("MWmes", "Excesso"),
+        }
