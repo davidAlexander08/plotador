@@ -2,8 +2,6 @@ import click
 import os
 import json
 from apps.utils.log import Log
-import pandas as pd
-import plotly.graph_objects as go
 @click.group()
 def cli():
     """
@@ -12,7 +10,6 @@ def cli():
     da CPAMP pelo ONS.
     """
     pass
-
 
 @click.command("pareto")
 @click.argument(
@@ -25,8 +22,6 @@ def analise_pareto(arquivo_json):
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
-
-
 @click.command("eco")
 @click.argument(
     "arquivo_json",
@@ -37,7 +32,6 @@ def eco(arquivo_json):
         Eco(arquivo_json)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-
 
 @click.command("temporal")
 @click.argument(
@@ -50,7 +44,6 @@ def analise_temporal(arquivo_json):
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
-
 @click.command("media")
 @click.argument(
     "arquivo_json",
@@ -61,8 +54,6 @@ def analise_media(arquivo_json):
         Media(arquivo_json)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-
-
 
 @click.command("anual")
 @click.argument(
@@ -75,10 +66,6 @@ def analise_anual(arquivo_json):
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
-
-
-
-
 @click.command("cenarios")
 @click.argument(
     "arquivo_json",
@@ -89,8 +76,6 @@ def analise_cenarios(arquivo_json):
         Cenarios(arquivo_json)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-
-
 
 @click.command("conjunto")
 @click.argument(

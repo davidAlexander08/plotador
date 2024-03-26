@@ -43,6 +43,11 @@ class Conjunto:
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
                         unity = UnidadeSintese(sts, "estagios", arg)
                         self.executa(unity,diretorio_saida_arg )
+
+
+
+
+                        
     def executa(self, unity, diretorio_saida_arg):
         
     
