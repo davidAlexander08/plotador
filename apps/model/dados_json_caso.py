@@ -35,7 +35,7 @@ class Dados_json_caso:
             "SBM": self.default_sts_SBM,
             "REE": self.default_sts_REE,
             "UHE": self.default_sts_UHE,
-            "CEN": self.defaut_sts_CEN
+            "CEN": self.default_sts_CEN
         }
 
         self.lista_submercados = (["SUDESTE", "NORDESTE", "NORTE", "SUL"], "submercado")
