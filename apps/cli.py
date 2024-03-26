@@ -6,7 +6,7 @@ from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 from apps.model.conjuntoCasos import ConjuntoCasos
 from apps.services.meta_data import Configuracao
-from app.model.data_json_caso import Data_json_caso
+from apps.model.data_json_caso import Data_json_caso
 from apps.utils.log import Log
 @click.group()
 def cli():
