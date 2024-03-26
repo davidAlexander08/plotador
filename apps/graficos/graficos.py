@@ -72,7 +72,7 @@ class Graficos:
     ) -> go.Figure:
         Log.log().info("Gerando grafico "+titulo)
         fig = go.Figure()
-        print(df)
+        #print(df)
         for c in self.casos:
             fig.add_trace(
                 go.Scatter(
@@ -922,7 +922,7 @@ class Graficos:
         contador_titulo = 0
         for caso in mapaConjuntoCasos[list(mapaConjuntoCasos.keys())[0]]["caso"].unique():
             show = True if contador_titulo == 0 else False
-            print(caso)
+            #print(caso)
             listaCasos = []
             for conjunto in conjuntoCasos:
                 df_caso = mapaConjuntoCasos[conjunto.nome].loc[mapaConjuntoCasos[conjunto.nome]["caso"] == caso].copy()
