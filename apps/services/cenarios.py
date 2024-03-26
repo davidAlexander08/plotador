@@ -65,11 +65,8 @@ class Cenarios:
         filtro_for = par_unity[0].filtroArgumento if par_unity[0].filtroArgumento is not None else "SIN" 
         filtro_sf = par_unity[1].filtroArgumento if par_unity[1].filtroArgumento is not None else "SIN" 
 
-        Log.log().info("Gerando tabela "+par_unity[0].titulo)
-        df_fw.to_csv(os.path.join(diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_for+"_"+self.estudo+".csv"),     index=False)
-
-        Log.log().info("Gerando tabela "+par_unity[1].titulo)
-        df_sf.to_csv(os.path.join(diretorio_saida_arg, "eco_sf_"+par_unity[1].titulo+"_"+filtro_sf+"_"+self.estudo+".csv"),      index=False)
+        self.indicadores_cenarios.exportar(df_fw , diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_for+"_"+self.estudo+".csv" )
+        self.indicadores_cenarios.exportar(df_sf , diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_sf+"_"+self.estudo+".csv" )
 
         df_fw =  df_fw[df_fw[['cenario']].apply(lambda x: x[0].isdigit(), axis=1)]
         df_sf =  df_sf[df_sf[['cenario']].apply(lambda x: x[0].isdigit(), axis=1)]
