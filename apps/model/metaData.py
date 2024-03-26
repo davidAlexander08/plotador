@@ -20,9 +20,9 @@ class MetaData:
             "CEN": self.default_sts_CEN
         }
 
-        chave_sbm = "submercado"
+        chave_sbm = "SBM"
         self.lista_submercados = [Argumento("SUDESTE", chave_sbm), Argumento("NORDESTE",chave_sbm), Argumento("NORTE", chave_sbm), Argumento("SUL", chave_sbm)]
-        chave_ree = "ree"
+        chave_ree = "REE"
         self.lista_rees = [Argumento('BMONTE', chave_ree),
                             Argumento('IGUACU', chave_ree),
                             Argumento('ITAIPU', chave_ree),
@@ -35,7 +35,7 @@ class MetaData:
                             Argumento('SUDESTE', chave_ree),
                             Argumento('SUL', chave_ree),
                             Argumento('TPIRES', chave_ree)]
-        chave_usina = "usina"
+        chave_usina = "UHE"
         self.lista_usinas_principais = [Argumento("NOVA PONTE", chave_usina),
                                         Argumento("EMBORCACAO", chave_usina),
                                         Argumento("SAO SIMAO", chave_usina),
