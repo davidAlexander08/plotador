@@ -73,7 +73,6 @@ class Cenarios:
 
         
         #SOMA DE TODOS OS ESTAGIOS, TODAS ITERACOES NO EIXO X
-        Log.log().info("Gerando gráfico soma dos estágios para cada iteração ")
         for c in casos:
             df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
             df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
@@ -100,7 +99,6 @@ class Cenarios:
 
 
         #FIXANDO O ESTAGIO, TODAS ITERACOES NO EIXO X
-        Log.log().info("Gerando gráfico fixado em um estágio para todas iterações ")
         for c in casos:
             df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
             df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
@@ -122,7 +120,6 @@ class Cenarios:
 
 
         # FIXANDO ITERACAO E VARIANDO ESTAGIO
-        Log.log().info("Gerando gráfico fixado em uma iteração para todos estágios ")
         for c in casos:
             df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
             df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
