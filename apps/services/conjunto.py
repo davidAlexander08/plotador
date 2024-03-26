@@ -16,7 +16,7 @@ class Conjunto:
 
 
     def __init__(self, estudo, conjunto, sinteses, args):
-        self.conjunto = conjunto
+        self.conjuntoCasos = conjunto
         self.estudo = estudo
         self.nome_caso_referencia = ""
         # Gera saídas do estudo
