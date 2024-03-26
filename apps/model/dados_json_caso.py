@@ -90,8 +90,8 @@ class Dados_json_caso:
         argum = [Argumento.from_dict(d) for d in dados["argumentos"]]
 
         config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]
-        config_sintese = self.config.sintese.replace(" ", "")
-        config_arg = self.config.argumento.replace(" ", "")
+        config_sintese = config.sintese.replace(" ", "")
+        config_arg = config.argumento.replace(" ", "")
         if(config_sintese == ""):
             self.sinteses = sts
         else:
