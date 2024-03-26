@@ -83,32 +83,32 @@ class Conjunto:
                     df_concat_temporal_segundo_mes = pd.concat(listaConjDF_Temporal_Segundo_Mes, axis=1)
                     df_concatenado_temporal_segundo_mes = df_concat_temporal_segundo_mes.loc[:,~df_concat_temporal_segundo_mes.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
 
-                    indicador_conj_medio.exportar(df_concatenado, diretorio_saida_arg,  "conj_med_"+unity.titulo+"_"+estudo)
-                    indicadores_anuais.exportar(df_concatenado_anual, diretorio_saida_arg,  "conj_anual_"+unity.titulo+"_"+estudo)
-                    indicadores_temporais.exportar(df_concatenado_temporal_primeiro_mes, diretorio_saida_arg,  "primeiro_mes_"+unity.titulo+"_"+estudo)
-                    indicadores_temporais.exportar(df_concatenado_temporal_segundo_mes, diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+estudo)
+                    indicador_conj_medio.exportar(df_concatenado, diretorio_saida_arg,  "conj_med_"+unity.titulo+"_"+self.estudo)
+                    indicadores_anuais.exportar(df_concatenado_anual, diretorio_saida_arg,  "conj_anual_"+unity.titulo+"_"+self.estudo)
+                    indicadores_temporais.exportar(df_concatenado_temporal_primeiro_mes, diretorio_saida_arg,  "primeiro_mes_"+unity.titulo+"_"+self.estudo)
+                    indicadores_temporais.exportar(df_concatenado_temporal_segundo_mes, diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
 
 
                     fig = graficos.gera_grafico_linhas_diferentes_casos(df_concatenado, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo)
-                    graficos.exportar(fig, diretorio_saida_arg, "conj_medias_"+unity.titulo+"_"+estudo)
+                    graficos.exportar(fig, diretorio_saida_arg, "conj_medias_"+unity.titulo+"_"+self.estudo)
                     
                     df_primeiro_ano = df_concatenado_anual.loc[(df_concatenado_anual["anos"] == df_concatenado_anual["anos"].iloc[0])]
                     fig = graficos.gera_grafico_linhas_diferentes_casos(df_primeiro_ano, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Primeiro_Ano")
-                    graficos.exportar(fig, diretorio_saida_arg, "conj_anual_"+unity.titulo+"_primeiro_ano_"+estudo)
+                    graficos.exportar(fig, diretorio_saida_arg, "conj_anual_"+unity.titulo+"_primeiro_ano_"+self.estudo)
                     
                     df_outros_anos = df_concatenado_anual.loc[(df_concatenado_anual["anos"] == df_concatenado_anual["anos"].iloc[1])]
                     fig = graficos.gera_grafico_linhas_diferentes_casos(df_outros_anos, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Outros_Anos")
-                    graficos.exportar(fig, diretorio_saida_arg, "conj_anual_"+unity.titulo+"_outros_anos_"+estudo)
+                    graficos.exportar(fig, diretorio_saida_arg, "conj_anual_"+unity.titulo+"_outros_anos_"+self.estudo)
                     
                     fig = graficos.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_primeiro_mes, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Primeiro_Mes")
-                    graficos.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_primeiro_mes_"+estudo)
+                    graficos.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_primeiro_mes_"+self.estudo)
                     
                     fig = graficos.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_segundo_mes, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Segundo_Mes")
-                    graficos.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_segundo_mes_"+estudo)
+                    graficos.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_segundo_mes_"+self.estudo)
         
                     mapaFig = graficos.subplot_gera_grafico_linha_casos(self.conjuntoCasos, mapaConjDF_Temporal, unity.legendaEixoY , unity.legendaEixoX, unity.titulo)
                     for titulo in mapaFig:
-                        graficos.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+estudo, 2000, 900)
+                        graficos.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, 2000, 900)
       
 
 
