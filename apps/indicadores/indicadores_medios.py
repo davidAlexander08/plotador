@@ -58,9 +58,9 @@ class IndicadoresMedios(EcoIndicadores):
     
     def retorna_df_std_concatenado(self, unidade):
         MAP = self.retorna_mapaDF_std_cenarios(unidade)
-        print(MAP)
+        #print(MAP)
         concat = pd.concat(self.retorna_mapa_std_parquet(MAP))
-        print("concat: ", concat)
+        #print("concat: ", concat)
         return concat
             
     def retorna_mapaDF_std_cenarios(self, unidade):
