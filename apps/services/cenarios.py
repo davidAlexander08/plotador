@@ -12,28 +12,18 @@ import os
 import json
 
 class Cenarios:
-    def __init__(self, arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        # Lê dados de entrada
-        self.estudo = dados["estudo"]
-        # Cria objetos do estudo
-        self.casos = [Caso.from_dict(d) for d in dados["casos"]]
+    def __init__(self, estudo, casos, sintese, args):
+        self.estudo = estudo
+        self.casos = casos
         self.indicadores_cenarios = IndicadoresCenarios(self.casos)
         self.graficos = Graficos(self.casos)
-        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
-        # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/cenarios"
         os.makedirs(diretorio_saida, exist_ok=True)
-        lista_ree = ['BMONTE', 'IGUACU', 'ITAIPU', 'MADEIRA', 'MAN-AP', 'NORDESTE', 'NORTE', 'PARANA', 'PRNPANEMA', 'SUDESTE', 'SUL', 'TPIRES']
-        lista_sbm = ["NORDESTE", "NORTE", "SUDESTE", "SUL"]
-        lista_par_enaa = []
-        sinteses_validas = ["FOR", "SF"]
+
         for sts in sinteses:
             prefixo_cenarios = sts.sintese.split("_")[2]
             prefixo_grandeza = sts.sintese.split("_")[0]
-            if(prefixo_cenarios in sinteses_validas):
+            if(prefixo_cenarios in ["FOR", "SF"]):
                 espacial = sts.sintese.split("_")[1]
                 sts_for = Sintese(prefixo_grandeza+"_"+espacial+"_FOR")
                 sts_sf = Sintese(prefixo_grandeza+"_"+espacial+"_SF")

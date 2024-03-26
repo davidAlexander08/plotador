@@ -9,19 +9,9 @@ import os
 import json
 
 class Eco:
-    def __init__(self, arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        # Lê dados de entrada
-        estudo = dados["estudo"]
-        nome_caso_referencia = dados["nome_caso_referencia"]
-        # Cria objetos do estudo
-        casos = [Caso.from_dict(d) for d in dados["casos"]]
-        usinas = [UsinaAvalicao.from_dict(d) for d in dados["usinas"]]
-        rees = [Ree.from_dict(d) for d in dados["rees"]]
-        submercados = [Submercado.from_dict(d) for d in dados["submercados"]]
-        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-
+    def __init__(self, estudo, casos, sinteses):
+        self.estudo = estudo
+        self.casos = casos
         
         eco_indicadores = EcoIndicadores(casos)
         graficos = Graficos(casos)

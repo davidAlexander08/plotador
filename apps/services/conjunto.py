@@ -15,15 +15,10 @@ import json
 class Conjunto:
 
 
-    def __init__(self, arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        # Lê dados de entrada
-        self.estudo = dados["estudo"]
-        self.conjuntoCasos = [ConjuntoCasos.from_dict(d) for d in dados["conjuntos"]]
+    def __init__(self, estudo, conjunto, sinteses, args):
+        self.conjunto = conjunto
+        self.estudo = estudo
         self.nome_caso_referencia = ""
-        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/conjunto"
         os.makedirs(diretorio_saida, exist_ok=True)
@@ -47,7 +42,7 @@ class Conjunto:
 
 
 
-                        
+
     def executa(self, unity, diretorio_saida_arg):
         
     

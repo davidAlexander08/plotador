@@ -11,18 +11,11 @@ import json
 class Temporal:
 
 
-    def __init__(self, arquivo_json):
-        with open(arquivo_json, "r") as f:
-            dados = json.load(f)
-        # Lê dados de entrada
-        self.estudo = dados["estudo"]
-        # Cria objetos do estudo
-        casos = [Caso.from_dict(d) for d in dados["casos"]]
-        sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        args = [Argumento.from_dict(d) for d in dados["argumentos"]]
-        
-        self.indicadores_temporais = IndicadoresTemporais(casos)
-        self.graficos = Graficos(casos)
+    def __init__(self, estudo, casos, sinteses,args):
+        self.estudo = estudo
+        self.casos = casos
+        self.indicadores_temporais = IndicadoresTemporais(self.casos)
+        self.graficos = Graficos(self.casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/temporal"
         os.makedirs(diretorio_saida, exist_ok=True)

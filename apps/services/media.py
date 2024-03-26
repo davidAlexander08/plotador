@@ -12,17 +12,10 @@ import json
 class Media:
 
 
-    def __init__(self, arquivo_json):
-      with open(arquivo_json, "r") as f:
-          dados = json.load(f)
-      # Lê dados de entrada
-      self.estudo = dados["estudo"]
-      self.nome_caso_referencia = dados["nome_caso_referencia"]
-      # Cria objetos do estudo
-      casos = [Caso.from_dict(d) for d in dados["casos"]]
-      sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
-      args = [Argumento.from_dict(d) for d in dados["argumentos"]]
-      
+    def __init__(self, estudo, nome_caso_referencia, casos, sinteses, args):
+      self.estudo = estudo
+      self.nome_caso_referencia = nome_caso_referencia
+      self.casos = casos      
       self.indicadores_medios = IndicadoresMedios(casos, self.nome_caso_referencia)
       self.indicadores_temporais = IndicadoresTemporais(casos)
       self.graficos = Graficos(casos)
