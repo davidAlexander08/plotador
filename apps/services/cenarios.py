@@ -15,9 +15,9 @@ class Cenarios:
         # Lê dados de entrada
         self.estudo = dados["estudo"]
         # Cria objetos do estudo
-        casos = [Caso.from_dict(d) for d in dados["casos"]]
-        self.indicadores_cenarios = IndicadoresCenarios(casos)
-        self.graficos = Graficos(casos)
+        self.casos = [Caso.from_dict(d) for d in dados["casos"]]
+        self.indicadores_cenarios = IndicadoresCenarios(self.casos)
+        self.graficos = Graficos(self.casos)
         sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
         args = [Argumento.from_dict(d) for d in dados["argumentos"]]
         # Gera saídas do estudo
@@ -73,7 +73,7 @@ class Cenarios:
 
         
         #SOMA DE TODOS OS ESTAGIOS, TODAS ITERACOES NO EIXO X
-        for c in casos:
+        for c in self.casos:
             df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
             df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
             fig = go.Figure()
@@ -99,7 +99,7 @@ class Cenarios:
 
 
         #FIXANDO O ESTAGIO, TODAS ITERACOES NO EIXO X
-        for c in casos:
+        for c in self.casos:
             df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
             df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
             lista_estagios = df_caso_sf["estagio"].unique()
@@ -120,7 +120,7 @@ class Cenarios:
 
 
         # FIXANDO ITERACAO E VARIANDO ESTAGIO
-        for c in casos:
+        for c in self.casos:
             df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
             df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
             it_min = df_caso_fw["iteracao"].min()   
