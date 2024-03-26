@@ -17,6 +17,7 @@ class Dados_json_caso:
         self.casos = [Caso.from_dict(d) for d in dados["casos"]]
         self.sinteses = [Sintese.from_dict(d) for d in dados["sinteses"]]
         self.args = [Argumento.from_dict(d) for d in dados["argumentos"]]
+        print(dados["configuracao"])
         self.config = [Configuracao.from_dict(d) for d in dados["configuracao"]]
         print(self.config.sintese)
 
