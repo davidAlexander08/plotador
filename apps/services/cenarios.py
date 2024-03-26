@@ -40,7 +40,8 @@ class Cenarios:
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
                     unity_for = UnidadeSintese(sts_for, "", arg)
                     unity_sf = UnidadeSintese(sts_sf, "", arg)
-                    self.executa((unity_for, unity_sf),diretorio_saida_arg )
+                    par = (unity_for, unity_sf)
+                    self.executa(par,diretorio_saida_arg )
                 else:
                     for arg in args:
                         if(espacial == arg.chave):
@@ -48,7 +49,8 @@ class Cenarios:
                             os.makedirs(diretorio_saida_arg, exist_ok=True)
                             unity_for = UnidadeSintese(sts, "casos", arg)
                             unity_sf = UnidadeSintese(sts, "casos", arg)
-                            self.executa((unity_for, unity_sf),diretorio_saida_arg )
+                            par = (unity_for, unity_sf)
+                            self.executa(par,diretorio_saida_arg )
             else:
                 print("SINTESE: ",sts.sintese," NAO VALIDA PARA ANALISE DE CENARIOS")
 
