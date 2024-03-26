@@ -49,6 +49,8 @@ def analise_temporal(arquivo_json):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
+        for arg in data.args:
+            print(arg.nome)
         Temporal(data.estudo, data.casos, data.sinteses, data.args)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")

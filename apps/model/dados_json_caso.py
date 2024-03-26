@@ -42,8 +42,5 @@ class Dados_json_caso(MetaData):
         if(config_arg == ""):
             self.args = argum
         else:
-            print("ENTROU")
-            for elem in self.mapa_argumentos[config_arg]:
-                print(elem.nome)
             self.args = self.mapa_argumentos[config_arg]
 
