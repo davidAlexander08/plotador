@@ -34,6 +34,7 @@ class Dados_json_caso(MetaData):
         config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]
         config_sintese = config.sintese.replace(" ", "")
         config_arg = config.argumento.replace(" ", "")
+        print(config_arg)
         if(config_sintese == ""):
             self.sinteses = sts
         else:
