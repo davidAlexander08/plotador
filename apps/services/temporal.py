@@ -32,6 +32,7 @@ class Temporal:
             else:
                 for arg in args:
                     print(arg.chave)
+                    print(espacial)
                     if(espacial == arg.chave):
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
