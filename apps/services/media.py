@@ -13,12 +13,10 @@ class Media:
 
 
     def __init__(self, data):
-      self.estudo = data.estudo
-      self.nome_caso_referencia = data.nome_caso_referencia
-      self.casos = data.casos      
-      self.indicadores_medios = IndicadoresMedios(casos, self.nome_caso_referencia)
-      self.indicadores_temporais = IndicadoresTemporais(casos)
-      self.graficos = Graficos(casos)
+      self.estudo = data.estudo    
+      self.indicadores_medios = IndicadoresMedios(data.casos   , data.nome_caso_referencia)
+      self.indicadores_temporais = IndicadoresTemporais(data.casos   )
+      self.graficos = Graficos(data.casos   )
       # Gera saídas do estudo
       diretorio_saida = f"resultados/{self.estudo}/media"
       os.makedirs(diretorio_saida, exist_ok=True)
