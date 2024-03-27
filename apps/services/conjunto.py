@@ -58,10 +58,7 @@ class Conjunto:
         for conjunto in self.conjuntoCasos:
             indicador_conj_medio = IndicadoresMedios(conjunto.casos, self.nome_caso_referencia)
             indicadores_anuais = IndicadoresAnuais(conjunto.casos, self.nome_caso_referencia)
-            indicadores_temporais = IndicadoresTemporais(conjunto.casos)
-            graficos = Graficos(conjunto.casos)
-            
-            
+            indicadores_temporais = IndicadoresTemporais(conjunto.casos)            
             
             df_unity = indicador_conj_medio.retorna_df_concatenado(unity )
             df_unity = df_unity.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
