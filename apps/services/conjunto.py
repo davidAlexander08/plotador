@@ -81,7 +81,7 @@ class Conjunto:
             
             #listaNomes.append(conjunto.nome)
             #mapCores[conjunto.nome] = conjunto.cor
-        exit(1)
+
         df_concat = pd.concat(listaConjDF, axis=1)
         df_concatenado = df_concat.loc[:,~df_concat.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
         indicador_conj_medio.exportar(df_concatenado, diretorio_saida_arg,  "conj_med_"+unity.titulo+"_"+self.estudo)
@@ -90,7 +90,7 @@ class Conjunto:
         df_concatenado_temporal_segundo_mes = df_concat_temporal_segundo_mes.loc[:,~df_concat_temporal_segundo_mes.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
         print("df_concatenado_temporal_segundo_mes: ", df_concatenado_temporal_segundo_mes)
         indicadores_temporais.exportar(df_concatenado_temporal_segundo_mes, diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
-        
+        exit(1)
         fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concatenado, listaNomes, mapCores, unity, unity.titulo)
         self.graficosConjunto.exportar(fig, diretorio_saida_arg, "conj_medias_"+unity.titulo+"_"+self.estudo)
 
