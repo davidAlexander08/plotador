@@ -62,7 +62,7 @@ class GraficosConjunto:
 
         for elemento in lista_df:
             dfY = df[elemento].reset_index(drop=True)
-            print(dfY)
+            print(dfY.max())
             fig.add_trace(
                 go.Scatter(
                     x = df[colX],
