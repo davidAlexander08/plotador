@@ -36,15 +36,24 @@ class Dados_json_caso(MetaData):
             self.conjuntoCasos = [ConjuntoCasos.from_dict(d) for d in dados["conjuntos"]]
         else:
             print("ERRO: CASOS OU CONJUNTOS DECLARADOS COM ERRO NO JSON")
-
         
-        
-        sts = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        argum = [Argumento.from_dict(d) for d in dados["argumentos"]]
+        if("sinteses" in dados):
+            sts = [Sintese.from_dict(d) for d in dados["sinteses"]]
+        else:
+            sts = ""
+        if("argumentos" in dados):
+            argum = [Argumento.from_dict(d) for d in dados["argumentos"]]
+        else:
+            argum = ""
 
-        config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]
-        config_sintese = config.sintese.replace(" ", "")
-        config_arg = config.argumento.replace(" ", "")
+        if(("configuracao") in dados):
+            config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]
+            config_sintese = config.sintese.replace(" ", "")
+            config_arg = config.argumento.replace(" ", "")
+        else:
+            config_sintese = ""
+            config_arg = ""
+
         if(config_sintese == ""):
             self.sinteses = sts
         else:
@@ -55,3 +64,8 @@ class Dados_json_caso(MetaData):
         else:
             self.args = self.mapa_argumentos[config_arg]
 
+        if(config_sintese == "" and sts == ""):
+            self.sinteses = self.mapa_sinteses["TODOS"]
+
+        if(config_arg == "" and argum == ""):
+            self.args = self.mapa_argumentos["TODOS"]
