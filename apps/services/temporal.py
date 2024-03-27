@@ -20,7 +20,6 @@ class Temporal:
         diretorio_saida = f"resultados/{self.estudo}/temporal"
         os.makedirs(diretorio_saida, exist_ok=True)
         
-        listaUnidadesGraficas = []
         for sts in data.sinteses:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
@@ -41,16 +40,16 @@ class Temporal:
 
     def executa(self, unity, diretorio_saida_arg):
         df_unity = self.indicadores_temporais.retorna_df_concatenado(unity)
-        self.indicadores_temporais.exportar(df_unity, diretorio_saida_arg,  "eco_"+unity.titulo+"_"+self.estudo)
+        self.indicadores_temporais.exportar(df_unity, diretorio_saida_arg,  unity.titulo+"_temporal_"+self.estudo)
         
-        fig = self.graficos.gera_grafico_linha(df_unity, unity, "valor" , "index", unity.titulo+"_"+self.estudo)
-        self.graficos.exportar(fig, diretorio_saida_arg, "eco_"+unity.titulo+"_"+self.estudo)
+        fig = self.graficos.gera_grafico_linha(unity, df_unity, unity.titulo+"_"+self.estudo)
+        self.graficos.exportar(fig, diretorio_saida_arg, +unity.titulo+"_temporal_"+self.estudo)
         
         df_unity_2_mes = self.indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
-        self.indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  "eco_"+unity.titulo+"_2_mes_"+self.estudo)
+        self.indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  unity.titulo+"_temporal_2_mes_"+self.estudo)
         
         fig = self.graficos.gera_grafico_barra(df_unity_2_mes["valor"], df_unity_2_mes["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"2_mes")
-        self.graficos.exportar(fig, diretorio_saida_arg, unity.titulo+"_2_mes_"+self.estudo)
+        self.graficos.exportar(fig, diretorio_saida_arg, unity.titulo+"_temporal_2_mes_"+self.estudo)
 
 
 

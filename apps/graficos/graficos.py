@@ -814,16 +814,15 @@ class Graficos:
 
     def gera_grafico_linha(
         self,
-        df: pd.DataFrame,
         unidade: UnidadeSintese,
-        coly,
-        colx,
-        titulo
-    ) -> go.Figure:
+        df: pd.DataFrame,
+        titulo,
+        coly = "valor",
+        colx = "index") -> go.Figure:
+
         fig = go.Figure()
         for c in self.casos:
             dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-            #print(dfY, " ", titulo)
             dfY = dfY.reset_index(drop = False)
             fig.add_trace(
                 go.Scatter(
