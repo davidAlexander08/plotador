@@ -31,8 +31,8 @@ class Cenarios:
                     arg = Argumento(None, None)
                     diretorio_saida_arg = diretorio_saida+"/"+espacial
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
-                    unity_for = UnidadeSintese(sts_for, "", arg)
-                    unity_sf = UnidadeSintese(sts_sf, "", arg)
+                    unity_for = UnidadeSintese(sts_for, "", arg, tamanho_texto = data.tamanho_texto)
+                    unity_sf = UnidadeSintese(sts_sf, "", arg, tamanho_texto = data.tamanho_texto)
                     par = (unity_for, unity_sf)
                     self.executa(par,diretorio_saida_arg )
                 else:
@@ -40,8 +40,8 @@ class Cenarios:
                         if(espacial == arg.chave):
                             diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                             os.makedirs(diretorio_saida_arg, exist_ok=True)
-                            unity_for = UnidadeSintese(sts_for, "casos", arg)
-                            unity_sf = UnidadeSintese(sts_sf, "casos", arg)
+                            unity_for = UnidadeSintese(sts_for, "casos", arg, tamanho_texto = data.tamanho_texto)
+                            unity_sf = UnidadeSintese(sts_sf, "casos", arg, tamanho_texto = data.tamanho_texto)
                             par = (unity_for, unity_sf)
                             self.executa(par,diretorio_saida_arg )
             else:

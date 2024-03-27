@@ -28,12 +28,12 @@ class Media:
               arg = Argumento(None, None)
               diretorio_saida_arg = diretorio_saida+"/"+espacial
               os.makedirs(diretorio_saida_arg, exist_ok=True)
-              unity = UnidadeSintese(sts, "estagios", arg)
+              unity = UnidadeSintese(sts, "estagios", arg, tamanho_texto = data.tamanho_texto)
               self.executa(unity,diretorio_saida_arg )
           else:
             for arg in data.args:
                 if(espacial == arg.chave):
-                    unity = UnidadeSintese(sts, "estagios", arg)
+                    unity = UnidadeSintese(sts, "estagios", arg, tamanho_texto = data.tamanho_texto)
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
                     self.executa(unity,diretorio_saida_arg )
