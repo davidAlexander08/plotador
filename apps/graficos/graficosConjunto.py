@@ -56,8 +56,7 @@ class GraficosConjunto:
         fig.update_xaxes(title=legendaEixoX)
         fig.update_yaxes(title=legendaEixoY)
         fig.update_layout(legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= 11)),
-                              yaxis=dict(range=[limInf,limSup])
+                              font=dict(size= 11))
                         )
         return fig
 
