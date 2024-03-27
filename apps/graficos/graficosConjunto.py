@@ -59,9 +59,9 @@ class GraficosConjunto:
         fig.update_layout(title=titulo)
         fig.update_xaxes(title=unidade.legendaEixoX)
         fig.update_yaxes(title=unidade.legendaEixoY)
-        fig.update_layout(legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= unidade.tamanho_texto)),
-                              yaxis=dict(range=[limInf,limSup])
+        fig.update_layout(legend=dict(title_font_family="Times New Roman", font=dict(size= unidade.tamanho_texto)),
+                          title=dict(title_font_family="Times New Roman",font=dict(size= unidade.tamanho_texto)),
+                          yaxis=dict(range=[limInf,limSup]) 
                         )
         return fig
 
@@ -106,7 +106,8 @@ class GraficosConjunto:
                 fig_subplot.layout.annotations[contador_titulo].update(text=caso.nome)
                 contador_titulo += 1
 
-        fig_subplot.update_layout(title = titulo, legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= unidade.tamanho_texto)))
+        fig_subplot.update_layout(title = titulo, legend=dict(title_font_family="Times New Roman", font=dict(size= unidade.tamanho_texto)),
+                                                  title=dict(title_font_family="Times New Roman",font=dict(size= unidade.tamanho_texto))
+                                 )
         mapaFiguras["subplot"+titulo] = fig_subplot
         return mapaFiguras
