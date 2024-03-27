@@ -30,9 +30,14 @@ class Dados_json_caso(MetaData):
         else:
             self.nome_caso_referencia = ""
         
-        print("casos" in dados)
+        if("casos" in dados):
+            self.casos = [Caso.from_dict(d) for d in dados["casos"]]
+        elif("conjunto" in dados):
+            self.conjuntoCasos = [ConjuntoCasos.from_dict(d) for d in dados["conjuntos"]]
+        else:
+            print("ERRO: CASOS OU CONJUNTOS DECLARADOS COM ERRO NO JSON")
 
-        self.casos = [Caso.from_dict(d) for d in dados["casos"]]
+        
         
         sts = [Sintese.from_dict(d) for d in dados["sinteses"]]
         argum = [Argumento.from_dict(d) for d in dados["argumentos"]]
