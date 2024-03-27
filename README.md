@@ -79,7 +79,12 @@ Exemplo Configuração padrão - Válida para análises ECO, TEMPORAL, MEDIA, AN
             "marcador": "diamond"
         }
     ],
-    "configuracao":"Personalizado",
+    "configuracao": [
+		{
+			"sintese":"UHE",
+			"argumento":"UHE"
+		}
+    ],
     "argumentos":[
 		{"UHE":"JUPIA"},
 		{"UHE":"FURNAS"},
@@ -261,6 +266,12 @@ Exemplo Configuração padrão - Válida para análises CONJUNTOS
 			]
 		}
 	],
+    "configuracao": [
+		{
+			"sintese":"UHE",
+			"argumento":"UHE"
+		}
+    ],
     "argumentos":[
 		{"UHE":"JUPIA"},
 		{"UHE":"FURNAS"},
