@@ -31,14 +31,14 @@ class Conjunto:
                 arg = Argumento(None, None)
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
-                unity = UnidadeSintese(sts, "estagios", arg, data.lim_sup, data.lim_inf)
+                unity = UnidadeSintese(sts, "caso", arg, data.lim_sup, data.lim_inf)
                 self.executa(unity,diretorio_saida_arg )
             else:
                 for arg in data.args:
                     if(espacial == arg.chave):
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
-                        unity = UnidadeSintese(sts, "estagios", arg, data.lim_sup, data.lim_inf)
+                        unity = UnidadeSintese(sts, "caso", arg, data.lim_sup, data.lim_inf)
                         self.executa(unity,diretorio_saida_arg )
 
 
@@ -99,7 +99,7 @@ class Conjunto:
         indicadores_temporais.exportar(df_concatenado_temporal_segundo_mes, diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
 
 
-        fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concatenado, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo)
+        fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concatenado, "caso", listaNomes, mapCores, unity.titulo)
         self.graficosConjunto.exportar(fig, diretorio_saida_arg, "conj_medias_"+unity.titulo+"_"+self.estudo)
         
         #df_primeiro_ano = df_concatenado_anual.loc[(df_concatenado_anual["anos"] == df_concatenado_anual["anos"].iloc[0])]
@@ -113,7 +113,7 @@ class Conjunto:
         #fig = graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_primeiro_mes, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Primeiro_Mes")
         #graficosConjunto.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_primeiro_mes_"+self.estudo)
         
-        fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_segundo_mes, "caso", listaNomes, mapCores, unity.legendaEixoY, unity.legendaEixoX, unity.titulo+"_Segundo_Mes")
+        fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_segundo_mes, "caso", listaNomes, mapCores, unity.titulo+"_Segundo_Mes")
         self.graficosConjunto.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_segundo_mes_"+self.estudo)
 
         mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(self.conjuntoCasos, mapaConjDF_Temporal, unity.legendaEixoY , unity.legendaEixoX, unity.titulo)

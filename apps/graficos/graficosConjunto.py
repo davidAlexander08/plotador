@@ -33,11 +33,33 @@ class GraficosConjunto:
         colX,
         lista_df,
         mapaCores,
-        legendaEixoY:str,
-        legendaEixoX:str,
+        unidade,
         titulo: str,
     ) -> go.Figure:
         fig = go.Figure()
+
+        if(unidade.limInf is True):
+            limInf = 0
+            for elemento in lista_df:
+                dfY = df[elemento].reset_index(drop=True)
+                val = dfY[coly].max() 
+                if(limInf > val):
+                    limInf = val
+        else:
+            limInf = None
+
+
+        if(unidade.limSup is True):
+            limSup = 0
+            for elemento in lista_df:
+                dfY = df[elemento].reset_index(drop=True)
+                val = dfY[coly].max() 
+                if(limSup < val):
+                    limSup = val*1.1
+        else:
+            limSup = None
+
+
         for elemento in lista_df:
             print(df)
             dfY = df[elemento].reset_index(drop=True)
@@ -51,10 +73,11 @@ class GraficosConjunto:
                 )
             )
         fig.update_layout(title=titulo)
-        fig.update_xaxes(title=legendaEixoX)
-        fig.update_yaxes(title=legendaEixoY)
+        fig.update_xaxes(title=unidade.legendaEixoX)
+        fig.update_yaxes(title=unidade.legendaEixoY)
         fig.update_layout(legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= 11))
+                              font=dict(size= 11)),
+                              yaxis=dict(range=[limInf,limSup])
                         )
         return fig
 
