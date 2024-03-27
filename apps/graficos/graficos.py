@@ -810,64 +810,6 @@ class Graficos:
     #                          font=dict(size= 11)
     #    ))
     #    return fig
-
-
-    def gera_grafico_linha(
-        self,
-        unidade: UnidadeSintese,
-        df: pd.DataFrame,
-        titulo,
-        coly = "valor",
-        colx = "index") -> go.Figure:
-        fig = go.Figure()
-
-        if(unidade.limInf is True):
-            limInf = 0
-            for c in self.casos:
-                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-                val = dfY[coly].max() 
-                if(limInf > val):
-                    limInf = val
-        else:
-            limInf = None
-
-
-        if(unidade.limSup is True):
-            limSup = 0
-            for c in self.casos:
-                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-                val = dfY[coly].max() 
-                if(limSup < val):
-                    limSup = val
-        else:
-            limSup = None
-
-        
-
-        for c in self.casos:
-            dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-            dfY = dfY.reset_index(drop = False)
-            fig.add_trace(
-                go.Scatter(
-                    #x = dfY.index,
-                    x = dfY[colx],
-                    y = dfY[coly],
-                    name = c.nome,
-                    line = dict(color = c.cor),
-                    showlegend=True,
-                )
-            )
-        fig.update_layout(title= titulo)
-        fig.update_xaxes(title=unidade.legendaEixoX )
-        fig.update_yaxes(title=unidade.legendaEixoY  )
-        fig.update_layout(yaxis=dict(range=[-4,4]))
-        fig.update_layout(legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= 11)),
-                              yaxis=dict(range=[limInf,limSup])
-        )
-        return fig
-
-
     def gera_grafico_linhas_diferentes(
         self,
         df,
@@ -897,36 +839,94 @@ class Graficos:
                               font=dict(size= 11)
         ))
         return fig
-    
 
-    def gera_grafico_linha_casos(
+    def gera_grafico_linha(
         self,
-        conjuntoCasos,
+        unidade: UnidadeSintese,
         df: pd.DataFrame,
-        legendaEixoY:str,
-        legendaEixoX:str,
-        titulo: str,
-    ) -> go.Figure:
+        titulo,
+        coly = "valor",
+        colx = "index") -> go.Figure:
         fig = go.Figure()
-        casos_df = df["caso"].unique()
-        for conj in conjuntoCasos:
-            dfY = df.loc[df["caso"] == conj.nome]["valor"].reset_index(drop=True)
+
+        if(unidade.limInf is True):
+            limInf = 0
+            for c in self.casos:
+                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
+                val = dfY[coly].max() 
+                if(limInf > val):
+                    limInf = val
+        else:
+            limInf = None
+
+
+        if(unidade.limSup is True):
+            limSup = 0
+            for c in self.casos:
+                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
+                val = dfY[coly].max() 
+                if(limSup < val):
+                    limSup = val*1.1
+        else:
+            limSup = None
+
+        
+
+        for c in self.casos:
+            dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
+            dfY = dfY.reset_index(drop = False)
             fig.add_trace(
                 go.Scatter(
-                    x = dfY.index,
-                    y = dfY,
-                    name = conj.nome,
-                    line = dict(color = conj.cor),
+                    #x = dfY.index,
+                    x = dfY[colx],
+                    y = dfY[coly],
+                    name = c.nome,
+                    line = dict(color = c.cor),
                     showlegend=True,
                 )
             )
-        fig.update_layout(title=titulo)
-        fig.update_xaxes(title=legendaEixoX)
-        fig.update_yaxes(title=legendaEixoY)
+        fig.update_layout(title= titulo)
+        fig.update_xaxes(title=unidade.legendaEixoX )
+        fig.update_yaxes(title=unidade.legendaEixoY  )
+        fig.update_layout(yaxis=dict(range=[-4,4]))
         fig.update_layout(legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= 11)
-        ))
+                              font=dict(size= 11)),
+                              yaxis=dict(range=[limInf,limSup])
+        )
         return fig
+
+
+
+    
+
+    #def gera_grafico_linha_casos(
+    #    self,
+    #    conjuntoCasos,
+    #    df: pd.DataFrame,
+    #    legendaEixoY:str,
+    #    legendaEixoX:str,
+    #    titulo: str,
+    #) -> go.Figure:
+    #    fig = go.Figure()
+    #    casos_df = df["caso"].unique()
+    #    for conj in conjuntoCasos:
+    #        dfY = df.loc[df["caso"] == conj.nome]["valor"].reset_index(drop=True)
+    #        fig.add_trace(
+    #            go.Scatter(
+    #                x = dfY.index,
+    #                y = dfY,
+    #                name = conj.nome,
+    #                line = dict(color = conj.cor),
+    #                showlegend=True,
+    #            )
+    #        )
+    #    fig.update_layout(title=titulo)
+    #    fig.update_xaxes(title=legendaEixoX)
+    #    fig.update_yaxes(title=legendaEixoY)
+    #    fig.update_layout(legend=dict(title_font_family="Times New Roman",
+    #                          font=dict(size= 11)
+    #    ))
+    #    return fig
 
     def subplot_gera_grafico_linha_casos(
         self,
