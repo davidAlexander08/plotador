@@ -824,6 +824,7 @@ class Graficos:
         if(unidade.limInf is True):
             limInf = 0
             for c in self.casos:
+                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
                 val = dfY[coly].max() 
                 if(limInf > val):
                     limInf = val
@@ -834,6 +835,7 @@ class Graficos:
         if(unidade.limSup is True):
             limSup = 0
             for c in self.casos:
+                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
                 val = dfY[coly].max() 
                 if(limSup < val):
                     limSup = val
