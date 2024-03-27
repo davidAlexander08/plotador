@@ -60,17 +60,17 @@ class Conjunto:
             indicadores_temporais = IndicadoresTemporais(conjunto.casos)            
             
             df_unity = indicador_conj_medio.retorna_df_concatenado(unity )
-            df_unity = df_unity.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
+            #df_unity = df_unity.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
             df_unity["conjunto"] = conjunto.nome
 
             #df_anual = indicadores_anuais.retorna_df_concatenado_acumulado(unity )
             #df_anual = df_anual.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
 
             df_temporal = indicadores_temporais.retorna_df_concatenado(unity )
-            df_temporal = df_temporal.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
+            #df_temporal = df_temporal.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
             df_temporal["conjunto"] = conjunto.nome
             print(df_temporal)
-            df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
+            #df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
             df_temporal_segundo_mes["conjunto"] = conjunto.nome
             print(df_temporal_segundo_mes)
 
