@@ -70,7 +70,7 @@ class Conjunto:
             #df_temporal = df_temporal.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
             df_temporal["conjunto"] = conjunto.nome
             print(df_temporal)
-            #df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
+            df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
             df_temporal_segundo_mes["conjunto"] = conjunto.nome
             print(df_temporal_segundo_mes)
 
