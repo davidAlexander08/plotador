@@ -10,7 +10,7 @@ class Sintese:
     def retornaFiltro(self, sts): 
         espacial = sts.split("_")[1]
         return self.__mapa_filtro[espacial]
-        
+         
     def __init__(self, sts: str):
         self.__mapa_filtro = {
             "SBM": "submercado",
