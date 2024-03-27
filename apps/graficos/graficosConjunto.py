@@ -80,11 +80,11 @@ class GraficosConjunto:
         subplot_col = 4
         subplot_lin = 3
         fig_subplot = make_subplots(rows=subplot_lin, cols=subplot_col,subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
-        contador_col = 1
-        contador_lin = 1
-        contador_titulo = 0
         for conj in self.conjuntoCasos:
             df_conj = mapaConjuntoCasos[conj.nome]
+            contador_col = 1
+            contador_lin = 1
+            contador_titulo = 0
             show = True if contador_titulo == 0 else False
             for caso in conj.casos:
                 dfY = df_conj.loc[df_conj["caso"] == caso.nome]["valor"].reset_index(drop=True)
