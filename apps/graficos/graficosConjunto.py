@@ -24,53 +24,94 @@ class GraficosConjunto:
             os.path.join(diretorio_saida, nome_arquivo+".png"),
             width=W,
             height=H)
-
+        
+    #def gera_grafico_linhas_diferentes_casos(
+    #    self,
+    #    df,
+    #    lista_df,
+    #    mapaCores,
+    #    unidade,
+    #    titulo: str,
+    #    colX = "caso",
+    #) -> go.Figure:
+    #    fig = go.Figure()
+    #
+    #    if(unidade.limInf is True):
+    #        limInf = 0
+    #        for elemento in lista_df:
+    #            dfY = df[elemento].reset_index(drop=True)
+    #            val = dfY.max() 
+    #            if(limInf > val):
+    #                limInf = val
+    #    else:
+    #        limInf = None
+    #    
+    #    
+    #    if(unidade.limSup is True):
+    #        limSup = 0
+    #        for elemento in lista_df:
+    #            dfY = df[elemento].reset_index(drop=True)
+    #            val = dfY.max() 
+    #            if(limSup < val):
+    #                limSup = val*1.1
+    #    else:
+    #        limSup = None
+    #
+    #
+    #    for elemento in lista_df:
+    #        dfY = df[elemento].reset_index(drop=True)
+    #        fig.add_trace(
+    #            go.Scatter(
+    #                x = df[colX],
+    #                y = dfY,
+    #                name = elemento,
+    #                line = dict(color = mapaCores[elemento]),
+    #                showlegend=True,
+    #            )
+    #        )
+    #    fig.update_layout(title=titulo)
+    #    fig.update_xaxes(title=unidade.legendaEixoX)
+    #    fig.update_yaxes(title=unidade.legendaEixoY)
+    #    fig.update_layout(legend=dict(title_font_family="Times New Roman",
+    #                          font=dict(size= 11)),
+    #                          yaxis=dict(range=[limInf,limSup])
+    #                    )
+    #    return fig
 
 
     def gera_grafico_linhas_diferentes_casos(
         self,
         df,
-        lista_df,
-        mapaCores,
         unidade,
         titulo: str,
+        colY = "valor",
         colX = "caso",
     ) -> go.Figure:
         fig = go.Figure()
+        lista_casos = df["caso"].unique()
+        lista_conjuntos = df["conjunto"].unique()
 
         if(unidade.limInf is True):
-            limInf = 0
-            for elemento in lista_df:
-                dfY = df[elemento].reset_index(drop=True)
-                val = dfY.max() 
-                if(limInf > val):
-                    limInf = val
+            limInf = 0 if df["valor"].min() > 0 else df["valor"].min()*1.1
         else:
             limInf = None
-        
-        
-        if(unidade.limSup is True):
-            limSup = 0
-            for elemento in lista_df:
-                dfY = df[elemento].reset_index(drop=True)
-                val = dfY.max() 
-                if(limSup < val):
-                    limSup = val*1.1
-        else:
-            limSup = None
 
+        limSup = df["valor"].max()*1.1 if unidade.limSup is True else None 
 
-        for elemento in lista_df:
-            dfY = df[elemento].reset_index(drop=True)
-            fig.add_trace(
+        for conj in self.conjuntoCasos:
+            df_conj = df.loc[(df["conjunto"] == conj.nome)]
+            for caso in conj.casos:
+                df_caso = df_conj.loc[(df_conj["caso"] == caso.nome)]
+                fig.add_trace(
                 go.Scatter(
-                    x = df[colX],
-                    y = dfY,
-                    name = elemento,
-                    line = dict(color = mapaCores[elemento]),
+                    x = df_caso[colX],
+                    y = df_caso[colY],
+                    name = caso.nome,
+                    line = dict(color = conj.cor),
                     showlegend=True,
                 )
             )
+
         fig.update_layout(title=titulo)
         fig.update_xaxes(title=unidade.legendaEixoX)
         fig.update_yaxes(title=unidade.legendaEixoY)
