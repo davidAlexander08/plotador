@@ -32,7 +32,7 @@ class Dados_json_caso(MetaData):
         
         if("casos" in dados):
             self.casos = [Caso.from_dict(d) for d in dados["casos"]]
-        elif("conjunto" in dados):
+        elif("conjuntos" in dados):
             self.conjuntoCasos = [ConjuntoCasos.from_dict(d) for d in dados["conjuntos"]]
         else:
             print("ERRO: CASOS OU CONJUNTOS DECLARADOS COM ERRO NO JSON")
