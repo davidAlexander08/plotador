@@ -85,6 +85,7 @@ class GraficosConjunto:
         contador_titulo = 0
         for conj in self.conjuntoCasos:
             df_conj = mapaConjuntoCasos[conj.nome]
+            show = True if contador_titulo == 0 else False
             for caso in conj.casos:
                 dfY = df_conj.loc[df_conj["caso"] == caso.nome]["valor"].reset_index(drop=True)
                 dfY = dfY.reset_index(drop = False)
