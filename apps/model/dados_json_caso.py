@@ -25,10 +25,7 @@ class Dados_json_caso(MetaData):
         with open(arquivo_json, "r") as f:
             dados = json.load(f)
         self.estudo = dados["estudo"]
-        if("nome_caso_referencia" in dados):
-            self.nome_caso_referencia = dados["nome_caso_referencia"]
-        else:
-            self.nome_caso_referencia = ""
+        self.nome_caso_referencia = dados["nome_caso_referencia"] if "nome_caso_referencia" in dados else ""
         
         if("casos" in dados):
             self.casos = [Caso.from_dict(d) for d in dados["casos"]]
@@ -37,14 +34,9 @@ class Dados_json_caso(MetaData):
         else:
             print("ERRO: CASOS OU CONJUNTOS DECLARADOS COM ERRO NO JSON")
         
-        if("sinteses" in dados):
-            sts = [Sintese.from_dict(d) for d in dados["sinteses"]]
-        else:
-            sts = ""
-        if("argumentos" in dados):
-            argum = [Argumento.from_dict(d) for d in dados["argumentos"]]
-        else:
-            argum = ""
+        sts = [Sintese.from_dict(d) for d in dados["sinteses"]] if "sinteses" in dados else ""
+        argum = [Argumento.from_dict(d) for d in dados["argumentos"]] if "argumentos" in dados else ""
+
 
         if(("configuracao") in dados):
             config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]
@@ -54,15 +46,9 @@ class Dados_json_caso(MetaData):
             config_sintese = ""
             config_arg = ""
 
-        if(config_sintese == ""):
-            self.sinteses = sts
-        else:
-            self.sinteses = self.mapa_sinteses[config_sintese]
+        self.sinteses = sts if config_sintese == "" else self.mapa_sinteses[config_sintese]
+        self.args = argum if config_arg == "" else self.mapa_argumentos[config_arg]
 
-        if(config_arg == ""):
-            self.args = argum
-        else:
-            self.args = self.mapa_argumentos[config_arg]
 
         if(config_sintese == "" and sts == ""):
             self.sinteses = self.mapa_sinteses["TODOS"]
