@@ -14,9 +14,7 @@ class Anual:
 
     def __init__(self, data):
         self.estudo = data.estudo
-        self.nome_caso_referencia = data.nome_caso_referencia
-        self.casos = data.casos
-        self.indicadores_anuais = IndicadoresAnuais(casos, self.nome_caso_referencia)
+        self.indicadores_anuais = IndicadoresAnuais(data.casos, data.nome_caso_referencia)
         self.graficos = Graficos(casos)
         diretorio_saida = f"resultados/{self.estudo}/anual"
         os.makedirs(diretorio_saida, exist_ok=True)
