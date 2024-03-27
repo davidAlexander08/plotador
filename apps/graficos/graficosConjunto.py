@@ -100,17 +100,15 @@ class GraficosConjunto:
 
         for conj in self.conjuntoCasos:
             df_conj = df.loc[(df["conjunto"] == conj.nome)]
-            for caso in conj.casos:
-                df_caso = df_conj.loc[(df_conj["caso"] == caso.nome)]
-                fig.add_trace(
-                go.Scatter(
-                    x = df_caso[colX],
-                    y = df_caso[colY],
-                    name = caso.nome,
-                    line = dict(color = conj.cor),
-                    showlegend=True,
-                )
+            fig.add_trace(
+            go.Scatter(
+                x = df_conj[colX],
+                y = df_conj[colY],
+                name = conj.nome,
+                line = dict(color = conj.cor),
+                showlegend=True,
             )
+        )
 
         fig.update_layout(title=titulo)
         fig.update_xaxes(title=unidade.legendaEixoX)
