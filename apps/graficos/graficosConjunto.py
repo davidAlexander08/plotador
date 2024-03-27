@@ -39,8 +39,8 @@ class GraficosConjunto:
     ) -> go.Figure:
         fig = go.Figure()
         for elemento in lista_df:
+            print(df)
             dfY = df[elemento].reset_index(drop=True)
-            print("ele: ", elemento, " " , dfY)
             fig.add_trace(
                 go.Scatter(
                     x = df[colX],
