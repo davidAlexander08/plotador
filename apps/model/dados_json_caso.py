@@ -3,6 +3,7 @@ from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 from apps.model.conjuntoCasos import ConjuntoCasos
 from apps.model.metaData import MetaData
+from apps.model.configuracao import Configuracao
 import os
 import json
 from typing import Dict
