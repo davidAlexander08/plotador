@@ -222,7 +222,7 @@ class Graficos:
         fig.update_yaxes(title=unidade.legendaEixoY  )
         fig.update_layout(yaxis=dict(range=[-4,4]))
         fig.update_layout(legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= 11)),
+                              font=dict(size= unidade.tamanho_texto)),
                               yaxis=dict(range=[limInf,limSup])
         )
         return fig

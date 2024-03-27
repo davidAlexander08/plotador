@@ -31,14 +31,14 @@ class Conjunto:
                 arg = Argumento(None, None)
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
-                unity = UnidadeSintese(sts, "caso", arg, data.lim_sup, data.lim_inf)
+                unity = UnidadeSintese(sts, "caso", arg, data.lim_sup, data.lim_inf, data.tamanho_texto)
                 self.executa(unity,diretorio_saida_arg )
             else:
                 for arg in data.args:
                     if(espacial == arg.chave):
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
-                        unity = UnidadeSintese(sts, "caso", arg, data.lim_sup, data.lim_inf)
+                        unity = UnidadeSintese(sts, "caso", arg, data.lim_sup, data.lim_inf, data.tamanho_texto)
                         self.executa(unity,diretorio_saida_arg )
 
 
@@ -61,7 +61,7 @@ class Conjunto:
 
             #df_anual = indicadores_anuais.retorna_df_concatenado_acumulado(unity )
             #df_temporal["conjunto"] = conjunto.nome
-            
+
             df_temporal = indicadores_temporais.retorna_df_concatenado(unity )
             df_temporal["conjunto"] = conjunto.nome
             df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)

@@ -21,7 +21,8 @@ class Dados_json_caso(MetaData):
             dados = json.load(f)
         self.estudo = dados["estudo"]
         self.nome_caso_referencia = dados["nome_caso_referencia"] if "nome_caso_referencia" in dados else ""
-        
+        self.tamanho_texto = int(dados["tamanho_texto"]) if "tamanho_texto" in dados else 11
+
         if("casos" in dados):
             self.casos = [Caso.from_dict(d) for d in dados["casos"]]
         elif("conjuntos" in dados):
