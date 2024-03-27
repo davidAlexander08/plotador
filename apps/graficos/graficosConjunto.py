@@ -38,6 +38,9 @@ class GraficosConjunto:
         titulo: str,
     ) -> go.Figure:
         fig = go.Figure()
+
+        print(lista_df)
+
         for elemento in lista_df:
             dfY = df[elemento].reset_index(drop=True)
             fig.add_trace(
@@ -53,8 +56,9 @@ class GraficosConjunto:
         fig.update_xaxes(title=legendaEixoX)
         fig.update_yaxes(title=legendaEixoY)
         fig.update_layout(legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= 11)
-        ))
+                              font=dict(size= 11)),
+                              yaxis=dict(range=[limInf,limSup])
+                        )
         return fig
 
 
