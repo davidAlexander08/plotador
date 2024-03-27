@@ -30,11 +30,11 @@ class GraficosConjunto:
     def gera_grafico_linhas_diferentes_casos(
         self,
         df,
-        colX,
         lista_df,
         mapaCores,
         unidade,
         titulo: str,
+        colX = "caso",
     ) -> go.Figure:
         fig = go.Figure()
 
@@ -84,10 +84,8 @@ class GraficosConjunto:
 
     def subplot_gera_grafico_linha_casos(
         self,
-        conjuntoCasos,
         mapaConjuntoCasos,
-        legendaEixoY:str,
-        legendaEixoX:str,
+        unidade,
         titulo: str,
     ) -> go.Figure:
         mapaFiguras = {}
@@ -102,7 +100,7 @@ class GraficosConjunto:
             show = True if contador_titulo == 0 else False
             #print(caso)
             listaCasos = []
-            for conjunto in conjuntoCasos:
+            for conjunto in self.conjuntoCasos:
                 df_caso = mapaConjuntoCasos[conjunto.nome].loc[mapaConjuntoCasos[conjunto.nome]["caso"] == caso].copy()
                 df_caso = df_caso.rename(columns={conjunto.nome: "valor"}).reset_index(drop = True)
                 df_caso["caso"] = conjunto.nome
@@ -121,8 +119,8 @@ class GraficosConjunto:
                         line = dict(color = conj.cor),
                         showlegend=show,
                     ), row = contador_lin, col = contador_col    )
-                fig_subplot.update_xaxes(title=legendaEixoX, row = contador_lin, col = contador_col )
-                fig_subplot.update_yaxes(title=legendaEixoY, row = contador_lin, col = contador_col )
+                fig_subplot.update_xaxes(title=unidade.legendaEixoX, row = contador_lin, col = contador_col )
+                fig_subplot.update_yaxes(title=unidade.legendaEixoY, row = contador_lin, col = contador_col )
             fig_subplot.layout.annotations[contador_titulo].update(text=caso)
             contador_titulo += 1
             contador_col += 1
