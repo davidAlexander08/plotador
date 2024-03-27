@@ -820,6 +820,28 @@ class Graficos:
         coly = "valor",
         colx = "index") -> go.Figure:
         fig = go.Figure()
+
+        if(unidade.limInf is True):
+            limInf = 0
+            for c in self.casos:
+                val = dfY[coly].max() 
+                if(limInf > val):
+                    limInf = val
+        else:
+            limInf = None
+
+
+        if(unidade.limSup is True):
+            limSup = 0
+            for c in self.casos:
+                val = dfY[coly].max() 
+                if(limSup < val):
+                    limSup = val
+        else:
+            limSup = None
+
+        
+
         for c in self.casos:
             dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
             dfY = dfY.reset_index(drop = False)
@@ -836,8 +858,10 @@ class Graficos:
         fig.update_layout(title= titulo)
         fig.update_xaxes(title=unidade.legendaEixoX )
         fig.update_yaxes(title=unidade.legendaEixoY  )
+        fig.update_layout(yaxis=dict(range=[-4,4]))
         fig.update_layout(legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= 11)
+                              font=dict(size= 11,
+                              yaxis=dict(range=[limInf,limSup]))
         ))
         return fig
 
