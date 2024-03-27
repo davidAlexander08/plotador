@@ -47,8 +47,8 @@ casos - É uma lista de casos, em que cada caso tem suas próprias característi
     cor: cor da linha do gráfico para o caso,
     marcador: marcador para os gráficos de pareto do caso. 
 configuração: Caso o usuário deseje escolher alguma configuração de análise dentre as configurações padrões, deverá preencher este campo, caso contrário deixe-o vazio. Algumas das configurações padrões são:
-    - sintese: 
-    - argumentos:
+    - sintese: TODOS, OPER (SIN e SBM), SIN, SBM, REE, UHE
+    - argumentos: TODOS, SBM, REE, UHE
 
 argumentos: Caso o campo configuração esteja vazio, são lidos os argumentos do campo argumentos, os quais podem ser:
     - UHE: usinas hidrelétricas
