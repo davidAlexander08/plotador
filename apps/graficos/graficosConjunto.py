@@ -88,6 +88,7 @@ class GraficosConjunto:
         unidade,
         titulo: str,
     ) -> go.Figure:
+        
         mapaFiguras = {}
         len_map = len(self.conjuntoCasos[0].casos)
         subplot_col = 4
@@ -107,8 +108,6 @@ class GraficosConjunto:
                 listaCasos.append(df_caso)
             df_concat_casos = pd.concat(listaCasos)
 
-            #fig = self.gera_grafico_linha_casos(conjuntoCasos, df_concat_casos, legendaEixoY , legendaEixoX, titulo+"_"+caso)
-            #mapaFiguras[titulo+"_"+caso] = fig
             for conj in self.conjuntoCasos:
                 dfY = df_concat_casos.loc[df_concat_casos["caso"] == conj.nome]["valor"].reset_index(drop=True)
                 fig_subplot.add_trace(
