@@ -105,8 +105,8 @@ class GraficosConjunto:
                 fig_subplot.layout.annotations[contador_titulo].update(text=caso.nome)
                 contador_titulo += 1
 
-        fig_subplot.update_layout(title = dict(text = titulo,font=dict(size= unidade.tamanho_texto)),
-                                  legend=dict(font=dict(size= unidade.tamanho_texto))
-                                 )
+        fig_subplot.update_layout(title = titulo, 
+                                  font=dict(size= unidade.tamanho_texto)
+                                  )
         mapaFiguras["subplot"+titulo] = fig_subplot
         return mapaFiguras
