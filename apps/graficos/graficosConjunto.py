@@ -25,60 +25,6 @@ class GraficosConjunto:
             width=W,
             height=H)
         
-    #def gera_grafico_linhas_diferentes_casos(
-    #    self,
-    #    df,
-    #    lista_df,
-    #    mapaCores,
-    #    unidade,
-    #    titulo: str,
-    #    colX = "caso",
-    #) -> go.Figure:
-    #    fig = go.Figure()
-    #
-    #    if(unidade.limInf is True):
-    #        limInf = 0
-    #        for elemento in lista_df:
-    #            dfY = df[elemento].reset_index(drop=True)
-    #            val = dfY.max() 
-    #            if(limInf > val):
-    #                limInf = val
-    #    else:
-    #        limInf = None
-    #    
-    #    
-    #    if(unidade.limSup is True):
-    #        limSup = 0
-    #        for elemento in lista_df:
-    #            dfY = df[elemento].reset_index(drop=True)
-    #            val = dfY.max() 
-    #            if(limSup < val):
-    #                limSup = val*1.1
-    #    else:
-    #        limSup = None
-    #
-    #
-    #    for elemento in lista_df:
-    #        dfY = df[elemento].reset_index(drop=True)
-    #        fig.add_trace(
-    #            go.Scatter(
-    #                x = df[colX],
-    #                y = dfY,
-    #                name = elemento,
-    #                line = dict(color = mapaCores[elemento]),
-    #                showlegend=True,
-    #            )
-    #        )
-    #    fig.update_layout(title=titulo)
-    #    fig.update_xaxes(title=unidade.legendaEixoX)
-    #    fig.update_yaxes(title=unidade.legendaEixoY)
-    #    fig.update_layout(legend=dict(title_font_family="Times New Roman",
-    #                          font=dict(size= 11)),
-    #                          yaxis=dict(range=[limInf,limSup])
-    #                    )
-    #    return fig
-
-
     def gera_grafico_linhas_diferentes_casos(
         self,
         df,
@@ -126,47 +72,75 @@ class GraficosConjunto:
         mapaConjuntoCasos,
         unidade,
         titulo: str,
+        colY = "valor",
+        colX = "index"
     ) -> go.Figure:
         
         mapaFiguras = {}
-        len_map = len(self.conjuntoCasos[0].casos)
         subplot_col = 4
         subplot_lin = 3
         fig_subplot = make_subplots(rows=subplot_lin, cols=subplot_col,subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
         contador_col = 1
         contador_lin = 1
         contador_titulo = 0
-        for caso in mapaConjuntoCasos[list(mapaConjuntoCasos.keys())[0]]["caso"].unique():
-            show = True if contador_titulo == 0 else False
-            #print(caso)
-            listaCasos = []
-            for conjunto in self.conjuntoCasos:
-                df_caso = mapaConjuntoCasos[conjunto.nome].loc[mapaConjuntoCasos[conjunto.nome]["caso"] == caso].copy()
-                df_caso = df_caso.rename(columns={conjunto.nome: "valor"}).reset_index(drop = True)
-                df_caso["caso"] = conjunto.nome
-                listaCasos.append(df_caso)
-            df_concat_casos = pd.concat(listaCasos)
-
-            for conj in self.conjuntoCasos:
-                dfY = df_concat_casos.loc[df_concat_casos["caso"] == conj.nome]["valor"].reset_index(drop=True)
+        for conj in self.conjuntoCasos:
+            df_conj = mapaConjuntoCasos[conj.nome]
+            for caso in conj.casos:
+                dfY = df_conj.loc[df_conj["caso"] == caso.nome]["valor"].reset_index(drop=True)
+                dfY = dfY.reset_index(drop = False)
                 fig_subplot.add_trace(
                     go.Scatter(
-                        x = dfY.index,
-                        y = dfY,
+                        x = dfY[colX],
+                        y = dfY[colY],
                         name = conj.nome,
                         line = dict(color = conj.cor),
                         showlegend=show,
                     ), row = contador_lin, col = contador_col    )
                 fig_subplot.update_xaxes(title=unidade.legendaEixoX, row = contador_lin, col = contador_col )
                 fig_subplot.update_yaxes(title=unidade.legendaEixoY, row = contador_lin, col = contador_col )
-            fig_subplot.layout.annotations[contador_titulo].update(text=caso)
-            contador_titulo += 1
-            contador_col += 1
-            if(contador_col == subplot_col+1):
-                contador_col = 1
-                contador_lin += 1
+                contador_col += 1
+                if(contador_col == subplot_col+1):
+                    contador_col = 1
+                    contador_lin += 1
+                fig_subplot.layout.annotations[contador_titulo].update(text=caso)
+                contador_titulo += 1
 
         fig_subplot.update_layout(title = titulo, legend=dict(title_font_family="Times New Roman",
                               font=dict(size= 11)))
         mapaFiguras["subplot"+titulo] = fig_subplot
+
+
+        #for caso in mapaConjuntoCasos[list(mapaConjuntoCasos.keys())[0]]["caso"].unique():
+        #    show = True if contador_titulo == 0 else False
+        #    #print(caso)
+        #    listaCasos = []
+        #    for conjunto in self.conjuntoCasos:
+        #        df_caso = mapaConjuntoCasos[conjunto.nome].loc[mapaConjuntoCasos[conjunto.nome]["caso"] == caso].copy()
+        #        df_caso = df_caso.rename(columns={conjunto.nome: "valor"}).reset_index(drop = True)
+        #        df_caso["caso"] = conjunto.nome
+        #        listaCasos.append(df_caso)
+        #    df_concat_casos = pd.concat(listaCasos)
+        #
+        #    for conj in self.conjuntoCasos:
+        #        dfY = df_concat_casos.loc[df_concat_casos["caso"] == conj.nome]["valor"].reset_index(drop=True)
+        #        fig_subplot.add_trace(
+        #            go.Scatter(
+        #                x = dfY.index,
+        #                y = dfY,
+        #                name = conj.nome,
+        #                line = dict(color = conj.cor),
+        #                showlegend=show,
+        #            ), row = contador_lin, col = contador_col    )
+        #        fig_subplot.update_xaxes(title=unidade.legendaEixoX, row = contador_lin, col = contador_col )
+        #        fig_subplot.update_yaxes(title=unidade.legendaEixoY, row = contador_lin, col = contador_col )
+        #    fig_subplot.layout.annotations[contador_titulo].update(text=caso)
+        #    contador_titulo += 1
+        #    contador_col += 1
+        #    if(contador_col == subplot_col+1):
+        #        contador_col = 1
+        #        contador_lin += 1
+        #
+        #fig_subplot.update_layout(title = titulo, legend=dict(title_font_family="Times New Roman",
+        #                      font=dict(size= 11)))
+        #mapaFiguras["subplot"+titulo] = fig_subplot
         return mapaFiguras
