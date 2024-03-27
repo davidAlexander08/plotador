@@ -38,31 +38,31 @@ class GraficosConjunto:
     ) -> go.Figure:
         fig = go.Figure()
 
-        if(unidade.limInf is True):
-            limInf = 0
-            for elemento in lista_df:
-                dfY = df[elemento].reset_index(drop=True)
-                val = dfY[coly].max() 
-                if(limInf > val):
-                    limInf = val
-        else:
-            limInf = None
-
-
-        if(unidade.limSup is True):
-            limSup = 0
-            for elemento in lista_df:
-                dfY = df[elemento].reset_index(drop=True)
-                val = dfY[coly].max() 
-                if(limSup < val):
-                    limSup = val*1.1
-        else:
-            limSup = None
+        #if(unidade.limInf is True):
+        #    limInf = 0
+        #    for elemento in lista_df:
+        #        dfY = df[elemento].reset_index(drop=True)
+        #        val = dfY[coly].max() 
+        #        if(limInf > val):
+        #            limInf = val
+        #else:
+        #    limInf = None
+        #
+        #
+        #if(unidade.limSup is True):
+        #    limSup = 0
+        #    for elemento in lista_df:
+        #        dfY = df[elemento].reset_index(drop=True)
+        #        val = dfY[coly].max() 
+        #        if(limSup < val):
+        #            limSup = val*1.1
+        #else:
+        #    limSup = None
 
 
         for elemento in lista_df:
-            print(df)
             dfY = df[elemento].reset_index(drop=True)
+            print(dfY)
             fig.add_trace(
                 go.Scatter(
                     x = df[colX],
