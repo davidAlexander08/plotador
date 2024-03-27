@@ -16,7 +16,7 @@ class Conjunto:
 
 
     def __init__(self, data):
-        self.conjuntoCasos = data.conjunto
+        self.conjuntoCasos = data.conjuntoCasos
         self.estudo = data.estudo
         self.nome_caso_referencia = ""
         # Gera saídas do estudo
