@@ -85,8 +85,8 @@ class GraficosConjunto:
             contador_col = 1
             contador_lin = 1
             contador_titulo = 0
-            show = True if contador_titulo == 0 else False
             for caso in conj.casos:
+                show = True if contador_titulo == 0 else False
                 dfY = df_conj.loc[df_conj["caso"] == caso.nome]["valor"].reset_index(drop=True)
                 dfY = dfY.reset_index(drop = False)
                 fig_subplot.add_trace(
