@@ -59,8 +59,8 @@ class GraficosConjunto:
         fig.update_layout(title=titulo)
         fig.update_xaxes(title=unidade.legendaEixoX)
         fig.update_yaxes(title=unidade.legendaEixoY)
-        fig.update_layout(font=dict(size= unidade.tamanho_texto)),
-                          yaxis=dict(range=[limInf,limSup]) 
+        fig.update_layout(font=dict(size= unidade.tamanho_texto), 
+                          yaxis=dict(range=[limInf,limSup])  
                         )
         return fig
 
