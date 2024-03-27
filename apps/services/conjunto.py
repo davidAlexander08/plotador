@@ -47,27 +47,22 @@ class Conjunto:
 
     def executa(self, unity, diretorio_saida_arg):
         
-    
         listaConjDF = []
         #listaConjDF_Anual = []
         listaConjDF_Temporal_Segundo_Mes = []
         mapaConjDF_Temporal = {}
-        #listaNomes = []
-        #mapCores = {}
         for conjunto in self.conjuntoCasos:
             indicador_conj_medio = IndicadoresMedios(conjunto.casos, self.nome_caso_referencia)
             indicadores_anuais = IndicadoresAnuais(conjunto.casos, self.nome_caso_referencia)
             indicadores_temporais = IndicadoresTemporais(conjunto.casos)            
             
             df_unity = indicador_conj_medio.retorna_df_concatenado(unity )
-            #df_unity = df_unity.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
             df_unity["conjunto"] = conjunto.nome
 
             #df_anual = indicadores_anuais.retorna_df_concatenado_acumulado(unity )
-            #df_anual = df_anual.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
-
+            #df_temporal["conjunto"] = conjunto.nome
+            
             df_temporal = indicadores_temporais.retorna_df_concatenado(unity )
-            #df_temporal = df_temporal.rename(columns={"valor": conjunto.nome}).reset_index(drop = True)
             df_temporal["conjunto"] = conjunto.nome
             df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
             df_temporal_segundo_mes["conjunto"] = conjunto.nome
@@ -77,26 +72,17 @@ class Conjunto:
             listaConjDF_Temporal_Segundo_Mes.append(df_temporal_segundo_mes)
             mapaConjDF_Temporal[conjunto.nome]  = df_temporal
             
-            #listaNomes.append(conjunto.nome)
-            #mapCores[conjunto.nome] = conjunto.cor
-
-        #df_concat = pd.concat(listaConjDF, axis=1)
-        #df_concatenado = df_concat.loc[:,~df_concat.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
         df_concat = pd.concat(listaConjDF)
         indicador_conj_medio.exportar(df_concat, diretorio_saida_arg,  "conj_med_"+unity.titulo+"_"+self.estudo)
 
-        #df_concat_temporal_segundo_mes = pd.concat(listaConjDF_Temporal_Segundo_Mes, axis=1)
-        #df_concatenado_temporal_segundo_mes = df_concat_temporal_segundo_mes.loc[:,~df_concat_temporal_segundo_mes.columns.duplicated()].copy()   #df_concat.T.drop_duplicates().T
         df_concat_temporal_segundo_mes = pd.concat(listaConjDF_Temporal_Segundo_Mes)
         print("df_concat_temporal_segundo_mes: ", df_concat_temporal_segundo_mes)
         indicadores_temporais.exportar(df_concat_temporal_segundo_mes, diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
 
 
-        #fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concatenado, listaNomes, mapCores, unity, unity.titulo)
         fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concat, unity, unity.titulo)
         self.graficosConjunto.exportar(fig, diretorio_saida_arg, "conj_medias_"+unity.titulo+"_"+self.estudo)
 
-        #fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concatenado_temporal_segundo_mes, listaNomes, mapCores, unity, unity.titulo+"_Segundo_Mes")
         fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concat_temporal_segundo_mes, unity, unity.titulo+"_Segundo_Mes")
         self.graficosConjunto.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_segundo_mes_"+self.estudo)
 

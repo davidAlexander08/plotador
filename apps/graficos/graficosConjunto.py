@@ -109,39 +109,4 @@ class GraficosConjunto:
         fig_subplot.update_layout(title = titulo, legend=dict(title_font_family="Times New Roman",
                               font=dict(size= 11)))
         mapaFiguras["subplot"+titulo] = fig_subplot
-
-
-        #for caso in mapaConjuntoCasos[list(mapaConjuntoCasos.keys())[0]]["caso"].unique():
-        #    show = True if contador_titulo == 0 else False
-        #    #print(caso)
-        #    listaCasos = []
-        #    for conjunto in self.conjuntoCasos:
-        #        df_caso = mapaConjuntoCasos[conjunto.nome].loc[mapaConjuntoCasos[conjunto.nome]["caso"] == caso].copy()
-        #        df_caso = df_caso.rename(columns={conjunto.nome: "valor"}).reset_index(drop = True)
-        #        df_caso["caso"] = conjunto.nome
-        #        listaCasos.append(df_caso)
-        #    df_concat_casos = pd.concat(listaCasos)
-        #
-        #    for conj in self.conjuntoCasos:
-        #        dfY = df_concat_casos.loc[df_concat_casos["caso"] == conj.nome]["valor"].reset_index(drop=True)
-        #        fig_subplot.add_trace(
-        #            go.Scatter(
-        #                x = dfY.index,
-        #                y = dfY,
-        #                name = conj.nome,
-        #                line = dict(color = conj.cor),
-        #                showlegend=show,
-        #            ), row = contador_lin, col = contador_col    )
-        #        fig_subplot.update_xaxes(title=unidade.legendaEixoX, row = contador_lin, col = contador_col )
-        #        fig_subplot.update_yaxes(title=unidade.legendaEixoY, row = contador_lin, col = contador_col )
-        #    fig_subplot.layout.annotations[contador_titulo].update(text=caso)
-        #    contador_titulo += 1
-        #    contador_col += 1
-        #    if(contador_col == subplot_col+1):
-        #        contador_col = 1
-        #        contador_lin += 1
-        #
-        #fig_subplot.update_layout(title = titulo, legend=dict(title_font_family="Times New Roman",
-        #                      font=dict(size= 11)))
-        #mapaFiguras["subplot"+titulo] = fig_subplot
         return mapaFiguras
