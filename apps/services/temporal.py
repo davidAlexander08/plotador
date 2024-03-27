@@ -11,9 +11,9 @@ import json
 class Temporal:
 
 
-    def __init__(self, estudo, casos, sinteses,args):
-        self.estudo = estudo
-        self.casos = casos
+    def __init__(self, data):
+        self.estudo = data.estudo
+        self.casos = data.casos
         self.indicadores_temporais = IndicadoresTemporais(self.casos)
         self.graficos = Graficos(self.casos)
         # Gera saídas do estudo
@@ -21,7 +21,7 @@ class Temporal:
         os.makedirs(diretorio_saida, exist_ok=True)
         
         listaUnidadesGraficas = []
-        for sts in sinteses:
+        for sts in data.sinteses:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
                 arg = Argumento(None, None)
@@ -30,7 +30,7 @@ class Temporal:
                 unity = UnidadeSintese(sts, "estagios", arg)
                 self.executa(unity,diretorio_saida_arg )
             else:
-                for arg in args:
+                for arg in data.args:
                     if(espacial == arg.chave):
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)

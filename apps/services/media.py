@@ -12,17 +12,17 @@ import json
 class Media:
 
 
-    def __init__(self, estudo, nome_caso_referencia, casos, sinteses, args):
-      self.estudo = estudo
-      self.nome_caso_referencia = nome_caso_referencia
-      self.casos = casos      
+    def __init__(self, data):
+      self.estudo = data.estudo
+      self.nome_caso_referencia = data.nome_caso_referencia
+      self.casos = data.casos      
       self.indicadores_medios = IndicadoresMedios(casos, self.nome_caso_referencia)
       self.indicadores_temporais = IndicadoresTemporais(casos)
       self.graficos = Graficos(casos)
       # Gera saídas do estudo
       diretorio_saida = f"resultados/{self.estudo}/media"
       os.makedirs(diretorio_saida, exist_ok=True)
-      for sts in sinteses:
+      for sts in data.sinteses:
           espacial = sts.sintese.split("_")[1]
           if(espacial == "SIN"):
               arg = Argumento(None, None)
@@ -31,7 +31,7 @@ class Media:
               unity = UnidadeSintese(sts, "estagios", arg)
               self.executa(unity,diretorio_saida_arg )
           else:
-            for arg in args:
+            for arg in data.args:
                 if(espacial == arg.chave):
                     unity = UnidadeSintese(sts, "estagios", arg)
                     diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome

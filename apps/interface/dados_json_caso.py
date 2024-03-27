@@ -4,6 +4,7 @@ from apps.model.argumento import Argumento
 from apps.model.conjuntoCasos import ConjuntoCasos
 from apps.interface.metaData import MetaData
 from apps.model.configuracao import Configuracao
+from apps.model.limites import Limites
 import os
 import json
 from typing import Dict
@@ -31,6 +32,17 @@ class Dados_json_caso(MetaData):
         sts = [Sintese.from_dict(d) for d in dados["sinteses"]] if "sinteses" in dados else ""
         argum = [Argumento.from_dict(d) for d in dados["argumentos"]] if "argumentos" in dados else ""
 
+        if(("limites") in dados):
+            lim = [Limites.from_dict(d) for d in dados["limites"]][0]
+            lim_sup = True if lim.superior.replace(" ", "") == "True" else False
+            lim_inf = True if lim.inferior.replace(" ", "") == "True" else False
+            
+        else:
+            lim_sup = False
+            lim_inf = False
+            
+        print("lim_sup: ", lim_sup)
+        print("lim_inf: ", lim_inf)
 
         if(("configuracao") in dados):
             config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]

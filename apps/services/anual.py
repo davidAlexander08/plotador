@@ -5,22 +5,23 @@ from apps.indicadores.indicadores_anuais import IndicadoresAnuais
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
+from apps.interface.dados_json_caso import Dados_json_caso
 import os
 import json
 
 class Anual:
 
 
-    def __init__(self, estudo, nome_caso_referencia, casos, sinteses, args):
-        self.estudo = estudo
-        self.nome_caso_referencia = nome_caso_referencia
-        self.casos = casos
+    def __init__(self, data):
+        self.estudo = data.estudo
+        self.nome_caso_referencia = data.nome_caso_referencia
+        self.casos = data.casos
         self.indicadores_anuais = IndicadoresAnuais(casos, self.nome_caso_referencia)
         self.graficos = Graficos(casos)
         diretorio_saida = f"resultados/{self.estudo}/anual"
         os.makedirs(diretorio_saida, exist_ok=True)
       
-        for sts in sinteses:
+        for sts in data.sinteses:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
                 arg = Argumento(None, None)
@@ -29,7 +30,7 @@ class Anual:
                 unity = UnidadeSintese(sts, "estagios", arg)
                 self.executa(unity,diretorio_saida_arg )
             else:
-                for arg in args:
+                for arg in data.args:
                     if(espacial == arg.chave):
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)

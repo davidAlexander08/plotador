@@ -9,9 +9,9 @@ import os
 import json
 
 class Eco:
-    def __init__(self, estudo, casos, sinteses):
-        self.estudo = estudo
-        self.casos = casos
+    def __init__(self, data):
+        self.estudo = data.estudo
+        self.casos = data.casos
         
         eco_indicadores = EcoIndicadores(casos)
         graficos = Graficos(casos)
@@ -19,7 +19,7 @@ class Eco:
         diretorio_saida = f"resultados/{estudo}/eco"
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        for sts in sinteses:
+        for sts in data.sinteses:
             Log.log().info("Gerando eco "+ sts.sintese +" para o estudo: "+ estudo)
             eco = eco_indicadores.retorna_df_concatenado(sts.sintese)
             eco.to_csv(

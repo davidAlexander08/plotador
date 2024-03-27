@@ -61,7 +61,7 @@ class MetaData:
             "REE": self.lista_rees,
             "UHE": self.lista_usinas_principais
         }
-
+        #####   UNIDADE EIXO Y, TITULO GRAFICO,  LIMITE INFERIOR EIXO Y, LIMITE INFERIOR EIXO X
         self.mapa_sintese =        {
             "GTER":    ("MWmes","Geração Térmica"),
             "GHID":    ("MWmes","Geração Hidrelétrica"),

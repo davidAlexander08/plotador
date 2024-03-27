@@ -15,15 +15,15 @@ import json
 class Conjunto:
 
 
-    def __init__(self, estudo, conjunto, sinteses, args):
-        self.conjuntoCasos = conjunto
-        self.estudo = estudo
+    def __init__(self, data):
+        self.conjuntoCasos = data.conjunto
+        self.estudo = data.estudo
         self.nome_caso_referencia = ""
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/conjunto"
         os.makedirs(diretorio_saida, exist_ok=True)
       
-        for sts in sinteses:
+        for sts in data.sinteses:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
                 arg = Argumento(None, None)
@@ -32,7 +32,7 @@ class Conjunto:
                 unity = UnidadeSintese(sts, "estagios", arg)
                 self.executa(unity,diretorio_saida_arg )
             else:
-                for arg in args:
+                for arg in data.args:
                     if(espacial == arg.chave):
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)

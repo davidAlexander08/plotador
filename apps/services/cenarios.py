@@ -12,15 +12,15 @@ import os
 import json
 
 class Cenarios:
-    def __init__(self, estudo, casos, sintese, args):
-        self.estudo = estudo
-        self.casos = casos
+    def __init__(self, data):
+        self.estudo = data.estudo
+        self.casos = data.casos
         self.indicadores_cenarios = IndicadoresCenarios(self.casos)
         self.graficos = Graficos(self.casos)
         diretorio_saida = f"resultados/{self.estudo}/cenarios"
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        for sts in sinteses:
+        for sts in data.sinteses:
             prefixo_cenarios = sts.sintese.split("_")[2]
             prefixo_grandeza = sts.sintese.split("_")[0]
             if(prefixo_cenarios in ["FOR", "SF"]):
@@ -36,7 +36,7 @@ class Cenarios:
                     par = (unity_for, unity_sf)
                     self.executa(par,diretorio_saida_arg )
                 else:
-                    for arg in args:
+                    for arg in data.args:
                         if(espacial == arg.chave):
                             diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                             os.makedirs(diretorio_saida_arg, exist_ok=True)
