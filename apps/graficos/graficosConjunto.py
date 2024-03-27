@@ -103,7 +103,7 @@ class GraficosConjunto:
                 if(contador_col == subplot_col+1):
                     contador_col = 1
                     contador_lin += 1
-                fig_subplot.layout.annotations[contador_titulo].update(text=caso)
+                fig_subplot.layout.annotations[contador_titulo].update(text=caso.nome)
                 contador_titulo += 1
 
         fig_subplot.update_layout(title = titulo, legend=dict(title_font_family="Times New Roman",
