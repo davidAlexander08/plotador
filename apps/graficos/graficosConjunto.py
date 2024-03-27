@@ -68,7 +68,7 @@ class GraficosConjunto:
         titulo: str,
     ) -> go.Figure:
         mapaFiguras = {}
-        len_map = len(self.casos)
+        len_map = len(self.conjuntoCasos[0].casos)
         subplot_col = 4
         subplot_lin = 3
         fig_subplot = make_subplots(rows=subplot_lin, cols=subplot_col,subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
