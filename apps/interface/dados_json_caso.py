@@ -41,8 +41,8 @@ class Dados_json_caso(MetaData):
             self.lim_sup = False
             self.lim_inf = False
             
-        print("lim_sup: ", lim_sup)
-        print("lim_inf: ", lim_inf)
+        print("lim_sup: ", self.lim_sup)
+        print("lim_inf: ", self.lim_inf)
 
         if(("configuracao") in dados):
             config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]
