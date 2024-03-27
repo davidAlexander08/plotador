@@ -221,10 +221,9 @@ class Graficos:
         fig.update_xaxes(title=unidade.legendaEixoX )
         fig.update_yaxes(title=unidade.legendaEixoY  )
         fig.update_layout(yaxis=dict(range=[-4,4]))
-        fig.update_layout(legend=dict(font=dict(size= unidade.tamanho_texto)),
-                              title=dict(font=dict(size= unidade.tamanho_texto)),
-                              yaxis=dict(range=[limInf,limSup])
-        )
+        fig.update_layout(font=dict(size= unidade.tamanho_texto), 
+                            yaxis=dict(range=[limInf,limSup])
+                        ) 
         return fig
 
 
