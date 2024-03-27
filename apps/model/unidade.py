@@ -1,7 +1,7 @@
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 from apps.interface.metaData import MetaData
-
+ 
 class UnidadeSintese (MetaData):  
     def label_y(self, sintese):
         operacional = sintese.split("_")[0]
@@ -12,7 +12,7 @@ class UnidadeSintese (MetaData):
         espacial = sintese.split("_")[1]
         return self.mapa_sintese[operacional][1]+" "+espacial
         
-    def __init__(self, sintese, legendaEixoX, argumento, df = None):
+    def __init__(self, sintese, legendaEixoX, argumento, limSup = False, limInf = False, df = None ):
         MetaData.__init__(self)
         self.sts = sintese
         self.arg = argumento
@@ -21,6 +21,8 @@ class UnidadeSintese (MetaData):
         self.df = df
         self.fitroColuna = sintese.filtro
         self.filtroArgumento = argumento.nome
+        self.limSup = limSup
+        self.limInf = limInf
 
 
         self.legendaEixoY = self.label_y(sintese.sintese)     

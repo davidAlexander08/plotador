@@ -819,7 +819,6 @@ class Graficos:
         titulo,
         coly = "valor",
         colx = "index") -> go.Figure:
-
         fig = go.Figure()
         for c in self.casos:
             dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)

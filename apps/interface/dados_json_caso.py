@@ -34,12 +34,12 @@ class Dados_json_caso(MetaData):
 
         if(("limites") in dados):
             lim = [Limites.from_dict(d) for d in dados["limites"]][0]
-            lim_sup = True if lim.superior.replace(" ", "") == "True" else False
-            lim_inf = True if lim.inferior.replace(" ", "") == "True" else False
+            self.lim_sup = True if lim.superior.replace(" ", "") == "True" else False
+            self.lim_inf = True if lim.inferior.replace(" ", "") == "True" else False
             
         else:
-            lim_sup = False
-            lim_inf = False
+            self.lim_sup = False
+            self.lim_inf = False
             
         print("lim_sup: ", lim_sup)
         print("lim_inf: ", lim_inf)
