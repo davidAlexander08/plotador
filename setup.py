@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-long_description = "cpamp"
+long_description = "graficador-newave"
 
 requirements = []
 with open("requirements.txt", "r") as fh:
@@ -8,11 +8,11 @@ with open("requirements.txt", "r") as fh:
 
 
 setup(
-    name="cpamp",
-    version="1.0.0",
-    author="Rogerio Alves",
-    author_email="rogerioalves.ee@gmail.com",
-    description="cpamp",
+    name="graficador-newave",
+    version="0.0.0",
+    author="David Alexander",
+    author_email="david.tbsilva@gmail.com",
+    description="graficador-newave",
     long_description=long_description,
     install_requires=requirements,
     packages=find_packages(),
@@ -24,6 +24,6 @@ setup(
     ],
     entry_points="""
         [console_scripts]
-        cpamp=main:main
+        graficador-newave=main:main
     """,
 )
