@@ -11,4 +11,4 @@ class Figura():
         self.fig = make_subplots(rows=row, cols=col)
     
     def add_trace(self, goObject, col = 1, lin = 1):
-        self.fig.add_trace(goObject, col, lin)
+        self.fig.add_trace(goObject, row = lin , col = col)
