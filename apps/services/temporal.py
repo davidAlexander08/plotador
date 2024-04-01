@@ -30,7 +30,8 @@ class Temporal:
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 uArg = UnidadeArgumental(None,1,1,0)
                 unity = UnidadeSintese(sts, "estagios", uArg, data.lim_sup, data.lim_inf, data.tamanho_texto)
-                conj = ConjuntoUnidadeSintese([unity], 1,1)
+                arg = Argumento(None, None, "SIN")
+                conj = ConjuntoUnidadeSintese([unity], arg)
                 self.executa(conj,diretorio_saida_arg )
             else:
                 for arg in data.args:
