@@ -36,10 +36,10 @@ class Argumento:
         for nome in listaNomes:
             print(nome, " col: ", col, " lin: ", lin, " ", pTitulo)
             self.uArg = UnidadeArgumental(nome,col, lin, pTitulo)
-            lin += 1
+            col += 1
             if(col == coord_max[0]):
-                lin = 1
-                col += 1
+                col = 1
+                lin += 1
             pTitulo += 1
 
 
