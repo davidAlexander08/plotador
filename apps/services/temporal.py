@@ -35,6 +35,7 @@ class Temporal:
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
                         listaUnity = []
                         for nome in arg.listaNomes:
+                            print(nome)
                             unity = UnidadeSintese(sts, "estagios", nome, data.lim_sup, data.lim_inf, data.tamanho_texto)
                             listaUnity.append(unity)
                         self.executa(listaUnity,diretorio_saida_arg )
