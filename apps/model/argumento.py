@@ -32,16 +32,17 @@ class Argumento:
         if(len(listaNomes) == 14): coord_max = (4,4)
         if(len(listaNomes) == 15): coord_max = (4,4)
         if(len(listaNomes) == 16): coord_max = (4,4)
-
+        listaUArg = []
         for nome in listaNomes:
             print(nome, " col: ", col, " lin: ", lin, " ", pTitulo)
-            self.uArg = UnidadeArgumental(nome,col, lin, pTitulo)
+            uArg = UnidadeArgumental(nome,col, lin, pTitulo)
+            listaUArg.append(uArg)
             col += 1
             if(col > coord_max[0]):
                 col = 1
                 lin += 1
             pTitulo += 1
-
+        self.listaUArg = listaUArg
 
 
     @classmethod
