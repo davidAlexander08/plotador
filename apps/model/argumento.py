@@ -8,14 +8,15 @@ class Argumento:
     e para geração de gráficos.
     """
 
-    def __init__(self, nome: str, chave:str):
-        self.nome = nome  
+    def __init__(self, listaNomes, chave):
+        self.listaNomes = listaNomes  
         self.chave = chave
 
     @classmethod
     def from_dict(cls, d: Dict[str, str]):
         key = list(d.keys())[0]
         arg = d[key]
-        print(key)
-        print(arg)
-        return cls(arg, key)
+        if isinstance(arg, list):
+           return cls(arg, key)
+        else:
+            return cls([arg], key)
