@@ -52,10 +52,10 @@ class Dados_json_caso(MetaData):
         self.args = argum if grupo_parquet == "" else self.mapa_argumentos[grupo_parquet.replace(" ", "")]
 
 
-        if(config_sintese == "" and sts == ""):
+        if(grupo_parquet == "" and sts == ""):
             self.sinteses = self.mapa_sinteses["TODOS"]
         
-        if(config_arg == "" and argum == ""):
+        if(grupo_parquet == "" and argum == ""):
             self.args = self.mapa_argumentos["TODOS"]
 
         #if(("configuracao") in dados):
