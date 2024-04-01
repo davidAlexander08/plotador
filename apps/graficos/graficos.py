@@ -183,6 +183,7 @@ class Graficos:
         #fig = go.Figure()
 
         fig = Figura(conjUnity.col_max, conjUnity.lin_max)
+        print("col: ", conjUnity.col_max, " lin: ", conjUnity.lin_max)
         for unity in mapa:  
             df = mapa[unity]
             if(unity.limInf is True):
