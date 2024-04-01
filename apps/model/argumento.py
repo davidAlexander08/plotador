@@ -43,9 +43,13 @@ class Argumento:
                     lin += 1
                 pTitulo += 1
             self.listaUArg = listaUArg
+            self.max_col = coord_max[0]
+            self.max_lin = coord_max[1]
         else:
             self.listaUArg = None
-
+            self.max_col = 1
+            self.max_lin = 1
+            
     @classmethod
     def from_dict(cls, d: Dict[str, str]):
         key = list(d.keys())[0]

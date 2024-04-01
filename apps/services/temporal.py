@@ -1,5 +1,6 @@
 from typing import Dict
 from apps.model.unidade import UnidadeSintese
+from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from apps.graficos.graficos import Graficos
 from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.model.caso import Caso
@@ -29,25 +30,24 @@ class Temporal:
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 uArg = UnidadeArgumental(None,1,1,0)
                 unity = UnidadeSintese(sts, "estagios", uArg, data.lim_sup, data.lim_inf, data.tamanho_texto)
-                listaUnity = [unity]
-                self.executa(listaUnity,diretorio_saida_arg )
+                conj = ConjuntoUnidadeSintese([unity], 1,1)
+                self.executa(conj,diretorio_saida_arg )
             else:
                 for arg in data.args:
                     if(espacial == arg.chave):
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
-                        listaUnity = []
-                        for uArg in arg.listaUArg:
-                            print(nome)
-                            unity = UnidadeSintese(sts, "estagios", uArg, data.lim_sup, data.lim_inf, data.tamanho_texto)
-                            listaUnity.append(unity)
-                        self.executa(listaUnity,diretorio_saida_arg )
+                        lista_unity = []
+                        for uarg in arg.listaUArg:
+                            lista_unity.append(UnidadeSintese(sts, "estagios", uarg, data.lim_sup, data.lim_inf, data.tamanho_texto) )
+                        conj = ConjuntoUnidadeSintese(lista_unity, arg.max_col , arg.max_lin)
+                        self.executa(conj,diretorio_saida_arg )
                         
 
 
-    def executa(self, listaUnity, diretorio_saida_arg):
+    def executa(self, conjUnity, diretorio_saida_arg):
         mapa_temporal = {}
-        for unity in listaUnity:
+        for unity in conjUnity.listaUnidades:
             mapa_temporal[unity] = self.indicadores_temporais.retorna_df_concatenado(unity)
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  unity.titulo+"_temporal_"+self.estudo)
         

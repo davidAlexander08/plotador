@@ -15,12 +15,13 @@ class UnidadeSintese (MetaData):
     def __init__(self, sintese, legendaEixoX, uArg, limSup = False, limInf = False, tamanho_texto = 11, df = None ):
         MetaData.__init__(self)
         self.sts = sintese
-        self.uArg = uArg
+        self.arg = uArg
         self.sintese = sintese.sintese
         self.legendaEixoX = legendaEixoX
         self.df = df
         self.fitroColuna = sintese.filtro
         self.filtroArgumento = uArg.nome
+        #self.listaArgumentos = arg.listaUArg
         self.limSup = limSup
         self.limInf = limInf
         self.tamanho_texto = tamanho_texto

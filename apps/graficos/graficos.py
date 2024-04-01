@@ -207,19 +207,20 @@ class Graficos:
 
         
 
-        for c in self.casos:
-            dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-            dfY = dfY.reset_index(drop = False)
-            fig.add_trace(
-                go.Scatter(
-                    #x = dfY.index,
-                    x = dfY[colx],
-                    y = dfY[coly],
-                    name = c.nome,
-                    line = dict(color = c.cor),
-                    showlegend=True,
+            for c in self.casos:
+                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
+                dfY = dfY.reset_index(drop = False)
+                fig.add_trace(
+                    go.Scatter(
+                        #x = dfY.index,
+                        x = dfY[colx],
+                        y = dfY[coly],
+                        name = c.nome,
+                        line = dict(color = c.cor),
+                        showlegend=True,
+                    ), unity.uArg.col,
+                    unity.uArg.lin
                 )
-            )
         fig.fig.update_layout(title= titulo)
         fig.fig.update_xaxes(title=unidade.legendaEixoX )
         fig.fig.update_yaxes(title=unidade.legendaEixoY  )
