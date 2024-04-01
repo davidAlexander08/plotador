@@ -49,7 +49,7 @@ class Dados_json_caso(MetaData):
         argum = [Argumento.from_dict(d) for d in dados["argumentos"]] if "argumentos" in dados else ""
 
         self.sinteses = sts if grupo_parquet == "" else self.mapa_sinteses[grupo_parquet.replace(" ", "")]
-        self.args = argum if grupo_parquet == "" else self.mapa_argumentos[grupo_parquet.replace(" ", "")]
+        self.args = self.mapa_argumentos[grupo_parquet.replace(" ", "")] if argum == "" else argum
 
 
         if(grupo_parquet == "" and sts == ""):
