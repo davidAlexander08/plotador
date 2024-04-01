@@ -34,7 +34,7 @@ class Argumento:
             if(len(listaNomes) == 16): coord_max = (4,4)
             listaUArg = []
             for nome in listaNomes:
-                print(nome, " col: ", col, " lin: ", lin, " ", pTitulo)
+                #print(nome, " col: ", col, " lin: ", lin, " ", pTitulo)
                 uArg = UnidadeArgumental(nome,col, lin, pTitulo)
                 listaUArg.append(uArg)
                 col += 1
@@ -49,7 +49,7 @@ class Argumento:
             self.listaUArg = None
             self.max_col = 1
             self.max_lin = 1
-            
+
     @classmethod
     def from_dict(cls, d: Dict[str, str]):
         key = list(d.keys())[0]
