@@ -218,8 +218,8 @@ class Graficos:
                         name = c.nome,
                         line = dict(color = c.cor),
                         showlegend=True,
-                    ), unity.uArg.col,
-                    unity.uArg.lin
+                    ), unity.arg.col,
+                    unity.arg.lin
                 )
         fig.fig.update_layout(title= titulo)
         fig.fig.update_xaxes(title=unidade.legendaEixoX )
