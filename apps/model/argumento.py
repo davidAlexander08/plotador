@@ -16,4 +16,6 @@ class Argumento:
     def from_dict(cls, d: Dict[str, str]):
         key = list(d.keys())[0]
         arg = d[key]
+        print(key)
+        print(arg)
         return cls(arg, key)
