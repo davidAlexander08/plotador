@@ -175,13 +175,14 @@ class Graficos:
 
     def gera_grafico_linha(
         self,
+        conjUnity,
         mapa, 
         titulo,
         coly = "valor",
         colx = "index") -> go.Figure:
         #fig = go.Figure()
 
-        fig = Figura()
+        fig = Figura(conjUnity.col_max, conjUnity.lin_max)
         for unity in mapa:  
             df = mapa[unity]
             if(unity.limInf is True):
