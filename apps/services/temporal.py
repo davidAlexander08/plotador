@@ -40,7 +40,7 @@ class Temporal:
                         lista_unity = []
                         for uarg in arg.listaUArg:
                             lista_unity.append(UnidadeSintese(sts, "estagios", uarg, data.lim_sup, data.lim_inf, data.tamanho_texto) )
-                        conj = ConjuntoUnidadeSintese(lista_unity, arg.max_col , arg.max_lin)
+                        conj = ConjuntoUnidadeSintese(lista_unity, arg)
                         self.executa(conj,diretorio_saida_arg )
                         
 

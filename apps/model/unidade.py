@@ -28,6 +28,6 @@ class UnidadeSintese (MetaData):
 
 
         self.legendaEixoY = self.label_y(sintese.sintese)     
-        self.titulo = self.titulo_fig(sintese.sintese) if uArg.nome == None else self.titulo_fig(sintese.sintese) + "_"+ uArg.nome
+        self.titulo = self.titulo_fig(sintese.sintese)+" SIN" if uArg.nome == None else self.titulo_fig(sintese.sintese) + "_"+ uArg.nome
 
 

@@ -182,8 +182,8 @@ class Graficos:
         colx = "index") -> go.Figure:
         #fig = go.Figure()
 
-        fig = Figura(conjUnity.col_max, conjUnity.lin_max)
-        print("col: ", conjUnity.col_max, " lin: ", conjUnity.lin_max)
+        fig = Figura(conjUnity.arg.max_col, conjUnity.arg.max_lin)
+        print("col: ", conjUnity.arg.max_col, " lin: ", conjUnity.arg.max_lin)
         for unity in mapa:  
             df = mapa[unity]
             if(unity.limInf is True):
@@ -229,6 +229,7 @@ class Graficos:
             #print(unity.arg.t , " ", unity.arg.nome)
             if(len(mapa.keys()) > 1):
                 fig.fig.layout.annotations[unity.arg.t].update(text=unity.arg.nome) 
+                
         fig.fig.update_layout(title= titulo)
         #fig.fig.update_layout(yaxis=dict(range=[-4,4]))
         #fig.fig.update_layout(font=dict(size= unidade.tamanho_texto), 
