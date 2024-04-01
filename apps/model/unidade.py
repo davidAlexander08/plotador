@@ -20,7 +20,7 @@ class UnidadeSintese (MetaData):
         self.legendaEixoX = legendaEixoX
         self.df = df
         self.fitroColuna = sintese.filtro
-        self.filtroArgumento = argumento.nome
+        self.filtroArgumento = argumento.listaNome
         self.limSup = limSup
         self.limInf = limInf
         self.tamanho_texto = tamanho_texto
