@@ -5,6 +5,8 @@ from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
+from apps.model.unidadeArgumental import UnidadeArgumental
+
 import os
 import json
 
@@ -25,7 +27,8 @@ class Temporal:
                 arg = Argumento(None, None)
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
-                unity = UnidadeSintese(sts, "estagios", None, data.lim_sup, data.lim_inf, data.tamanho_texto)
+                uArg = UnidadeArgumental(None,1,1,0)
+                unity = UnidadeSintese(sts, "estagios", uArg, data.lim_sup, data.lim_inf, data.tamanho_texto)
                 listaUnity = [unity]
                 self.executa(listaUnity,diretorio_saida_arg )
             else:
