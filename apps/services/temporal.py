@@ -25,7 +25,7 @@ class Temporal:
                 arg = Argumento(None, None)
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
-                unity = UnidadeSintese(sts, "estagios", arg, data.lim_sup, data.lim_inf, data.tamanho_texto)
+                unity = UnidadeSintese(sts, "estagios", None, data.lim_sup, data.lim_inf, data.tamanho_texto)
                 listaUnity = [unity]
                 self.executa(listaUnity,diretorio_saida_arg )
             else:
