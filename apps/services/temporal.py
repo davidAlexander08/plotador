@@ -25,7 +25,7 @@ class Temporal:
         for sts in data.sinteses:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
-                arg = Argumento(None, None)
+                arg = Argumento(None, None, "SIN")
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 uArg = UnidadeArgumental(None,1,1,0)
