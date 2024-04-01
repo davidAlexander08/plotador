@@ -42,7 +42,7 @@ class Graficos:
             "black",
         ]
 
-    def exportar(self, figura, diretorio_saida, nome_arquivo, W = 800, H = 600):
+    def exportar(self, figura, diretorio_saida, nome_arquivo, W = 1200, H = 1000):
         Log.log().info("Gerando grafico "+nome_arquivo)
         figura.write_image(
             os.path.join(diretorio_saida, nome_arquivo+".png"),
@@ -229,7 +229,7 @@ class Graficos:
             #print(unity.arg.t , " ", unity.arg.nome)
             if(len(mapa.keys()) > 1):
                 fig.fig.layout.annotations[unity.arg.t].update(text=unity.arg.nome) 
-                
+
         fig.fig.update_layout(title= titulo)
         #fig.fig.update_layout(yaxis=dict(range=[-4,4]))
         #fig.fig.update_layout(font=dict(size= unidade.tamanho_texto), 
