@@ -12,15 +12,15 @@ class UnidadeSintese (MetaData):
         espacial = sintese.split("_")[1]
         return self.mapa_sintese[operacional][1]+" "+espacial
         
-    def __init__(self, sintese, legendaEixoX, nomeArgumento, limSup = False, limInf = False, tamanho_texto = 11, df = None ):
+    def __init__(self, sintese, legendaEixoX, uArg, limSup = False, limInf = False, tamanho_texto = 11, df = None ):
         MetaData.__init__(self)
         self.sts = sintese
-        #self.arg = argumento
+        self.uArg = uArg
         self.sintese = sintese.sintese
         self.legendaEixoX = legendaEixoX
         self.df = df
         self.fitroColuna = sintese.filtro
-        self.filtroArgumento = nomeArgumento
+        self.filtroArgumento = uArg.nome
         self.limSup = limSup
         self.limInf = limInf
         self.tamanho_texto = tamanho_texto
