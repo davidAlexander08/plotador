@@ -224,8 +224,10 @@ class Graficos:
         
             fig.fig.update_xaxes(title=unity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
             fig.fig.update_yaxes(title=unity.legendaEixoY, row = unity.arg.lin , col = unity.arg.col) 
-            sub_title = "SIN" if unity.arg.nome is None else unity.arg.nome
-            fig.fig.layout.annotations[unity.arg.t].update(text=sub_title) 
+            print(mapa.keys())
+            if(len(mapa.keys()) > 1):
+                sub_title = "SIN" if unity.arg.nome is None else unity.arg.nome
+                fig.fig.layout.annotations[unity.arg.t].update(text=sub_title) 
         fig.fig.update_layout(title= titulo)
         #fig.fig.update_layout(yaxis=dict(range=[-4,4]))
         #fig.fig.update_layout(font=dict(size= unidade.tamanho_texto), 
