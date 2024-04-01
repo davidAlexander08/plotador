@@ -219,7 +219,7 @@ class Graficos:
                         y = dfY[coly],
                         name = c.nome,
                         line = dict(color = c.cor),
-                        showlegend=True,
+                        showlegend=unity.arg.show,
                     ), coluna = unity.arg.col,
                     linha = unity.arg.lin
                 )
