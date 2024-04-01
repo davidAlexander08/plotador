@@ -30,7 +30,7 @@ class Temporal:
             else:
                 for arg in data.args:
                     if(espacial == arg.chave):
-                        diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
+                        diretorio_saida_arg = diretorio_saida+"/"+arg.chave
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
                         unity = UnidadeSintese(sts, "estagios", arg, data.lim_sup, data.lim_inf, data.tamanho_texto)
                         self.executa(unity,diretorio_saida_arg )
