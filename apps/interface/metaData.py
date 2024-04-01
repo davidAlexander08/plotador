@@ -21,14 +21,14 @@ class MetaData:
         }
 
         chave_sbm = "SBM"
-        self.lista_submercados = [Argumento(["SUDESTE","NORDESTE","NORTE","SUL"], chave_sbm)] 
+        self.lista_submercados = [Argumento(["SUDESTE","NORDESTE","NORTE","SUL"], chave_sbm, "Submercados")] 
         chave_ree = "REE"
-        self.lista_rees = [Argumento(['BMONTE','IGUACU','ITAIPU','MADEIRA','MAN-AP','NORDESTE'], chave_ree), 
-                            Argumento(['PRNPANEMA','SUDESTE','SUL','TPIRES','NORTE','PARANA'], chave_ree)]
+        self.lista_rees = [Argumento(['BMONTE','IGUACU','ITAIPU','MADEIRA','MAN-AP','NORDESTE'], chave_ree, "REEs 1"), 
+                            Argumento(['PRNPANEMA','SUDESTE','SUL','TPIRES','NORTE','PARANA'], chave_ree, "REEs 2")]
         chave_usina = "UHE"
-        self.lista_usinas_principais = [Argumento(["NOVA PONTE", "EMBORCACAO", "SAO SIMAO", "FURNAS", "MARIMBONDO", "A. VERMELHA"], chave_usina),
-                                        Argumento(["I. SOLTEIRA", "JUPIA", "P. PRIMAVERA", "A.A. LAYDNER", "G.B. MUNHOZ","MACHADINHO"], chave_usina),
-                                        Argumento(["TRES MARIAS", "SOBRADINHO", "ITAPARICA", "SERRA MESA", "TUCURUI", "B MONTE"],    chave_usina  ),
+        self.lista_usinas_principais = [Argumento(["NOVA PONTE", "EMBORCACAO", "SAO SIMAO", "FURNAS", "MARIMBONDO", "A. VERMELHA"], chave_usina, "Usinas 1"),
+                                        Argumento(["I. SOLTEIRA", "JUPIA", "P. PRIMAVERA", "A.A. LAYDNER", "G.B. MUNHOZ","MACHADINHO"], chave_usina, "Usinas 2"),
+                                        Argumento(["TRES MARIAS", "SOBRADINHO", "ITAPARICA", "SERRA MESA", "TUCURUI", "B MONTE"],    chave_usina  , "Usinas 3"),
                                         ]
         
         self.mapa_argumentos = {
