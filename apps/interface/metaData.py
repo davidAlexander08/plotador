@@ -57,9 +57,12 @@ class MetaData:
         
         self.mapa_argumentos = {
             "TODOS": self.lista_submercados+self.lista_rees+self.lista_usinas_principais,
+            "OPER": self.lista_submercados,
+            "SIN" : None,
             "SBM": self.lista_submercados,
             "REE": self.lista_rees,
-            "UHE": self.lista_usinas_principais
+            "UHE": self.lista_usinas_principais,
+            "CEN": self.lista_submercados+self.lista_rees+self.lista_usinas_principais
         }
         #####   UNIDADE EIXO Y, TITULO GRAFICO,  LIMITE INFERIOR EIXO Y, LIMITE INFERIOR EIXO X
         self.mapa_sintese =        {
