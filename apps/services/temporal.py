@@ -28,20 +28,14 @@ class Temporal:
                 arg = Argumento(None, None, "SIN")
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
-                uArg = UnidadeArgumental(None,1,1,0)
-                unity = UnidadeSintese(sts, "estagios", uArg, data.lim_sup, data.lim_inf, data.tamanho_texto)
-                arg = Argumento(None, None, "SIN")
-                conj = ConjuntoUnidadeSintese([unity], arg)
+                conj = ConjuntoUnidadeSintese(sts, Argumento(None, None, "SIN"), "estagios", data.lim_sup, data.lim_inf, data.tamanho_texto)
                 self.executa(conj,diretorio_saida_arg )
             else:
                 for arg in data.args:
                     if(espacial == arg.chave):
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
-                        lista_unity = []
-                        for uarg in arg.listaUArg:
-                            lista_unity.append(UnidadeSintese(sts, "estagios", uarg, data.lim_sup, data.lim_inf, data.tamanho_texto) )
-                        conj = ConjuntoUnidadeSintese(lista_unity, arg)
+                        conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.lim_sup, data.lim_inf, data.tamanho_texto)
                         self.executa(conj,diretorio_saida_arg )
                         
 
@@ -52,7 +46,7 @@ class Temporal:
             mapa_temporal[unity] = self.indicadores_temporais.retorna_df_concatenado(unity)
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  unity.titulo+"_temporal_"+self.estudo)
         
-        fig = self.graficos.gera_grafico_linha(conjUnity, mapa_temporal, "Temporal_"+self.estudo)
+        fig = self.graficos.gera_grafico_linha(conjUnity, mapa_temporal, conjUnity.arg.nome+" Temporal "+self.estudo)
         self.graficos.exportar(fig, diretorio_saida_arg, "temporal_"+self.estudo)
         
         #df_unity_2_mes = self.indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)

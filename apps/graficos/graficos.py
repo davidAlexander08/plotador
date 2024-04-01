@@ -231,7 +231,6 @@ class Graficos:
                 fig.fig.layout.annotations[unity.arg.t].update(text=unity.arg.nome) 
 
         fig.fig.update_layout(title= titulo)
-        #fig.fig.update_layout(yaxis=dict(range=[-4,4]))
         #fig.fig.update_layout(font=dict(size= unidade.tamanho_texto), 
         #                    yaxis=dict(range=[limInf,limSup])
         #                ) 

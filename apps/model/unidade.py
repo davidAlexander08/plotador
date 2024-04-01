@@ -1,33 +1,11 @@
-from apps.model.sintese import Sintese
-from apps.model.argumento import Argumento
-from apps.interface.metaData import MetaData
- 
-class UnidadeSintese (MetaData):  
-    def label_y(self, sintese):
-        operacional = sintese.split("_")[0]
-        return self.mapa_sintese[operacional][0]
+from apps.model.unidadeArgumental import UnidadeArgumental 
 
-    def titulo_fig(self, sintese):
-        operacional = sintese.split("_")[0]
-        espacial = sintese.split("_")[1]
-        return self.mapa_sintese[operacional][1]+" "+espacial
-        
-    def __init__(self, sintese, legendaEixoX, uArg, limSup = False, limInf = False, tamanho_texto = 11, df = None ):
-        MetaData.__init__(self)
-        self.sts = sintese
+class UnidadeSintese ():  
+    def __init__(self, filtroColuna, uArg):
         self.arg = uArg
-        self.sintese = sintese.sintese
-        self.legendaEixoX = legendaEixoX
-        self.df = df
-        self.fitroColuna = sintese.filtro
+        self.fitroColuna = filtroColuna
         self.filtroArgumento = uArg.nome
-        #self.listaArgumentos = arg.listaUArg
-        self.limSup = limSup
-        self.limInf = limInf
-        self.tamanho_texto = tamanho_texto
-
-
-        self.legendaEixoY = self.label_y(sintese.sintese)     
-        self.titulo = self.titulo_fig(sintese.sintese)+" SIN" if uArg.nome == None else self.titulo_fig(sintese.sintese) + "_"+ uArg.nome
+        self.titulo = "SIN" if uArg.nome == None else uArg.nome
+            
 
 
