@@ -37,7 +37,7 @@ class Argumento:
             print(nome, " col: ", col, " lin: ", lin, " ", pTitulo)
             self.uArg = UnidadeArgumental(nome,col, lin, pTitulo)
             col += 1
-            if(col == coord_max[0]):
+            if(col > coord_max[0]):
                 col = 1
                 lin += 1
             pTitulo += 1
