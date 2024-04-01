@@ -51,7 +51,7 @@ class Temporal:
             mapa_temporal[unity] = self.indicadores_temporais.retorna_df_concatenado(unity)
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  unity.titulo+"_temporal_"+self.estudo)
         
-        fig = self.graficos.gera_grafico_linha(mapa_temporal, "Temporal_"+self.estudo)
+        fig = self.graficos.gera_grafico_linha(conjUnity, mapa_temporal, "Temporal_"+self.estudo)
         self.graficos.exportar(fig, diretorio_saida_arg, "temporal_"+self.estudo)
         
         #df_unity_2_mes = self.indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
