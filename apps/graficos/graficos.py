@@ -220,8 +220,8 @@ class Graficos:
                         name = c.nome,
                         line = dict(color = c.cor),
                         showlegend=True,
-                    ), unity.arg.col,
-                    unity.arg.lin
+                    ), coluna = unity.arg.col,
+                    linha = unity.arg.lin
                 )
         
             fig.fig.update_xaxes(title=unity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
