@@ -221,13 +221,15 @@ class Graficos:
                     ), unity.arg.col,
                     unity.arg.lin
                 )
+        
+            fig.fig.update_xaxes(title=unity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
+            fig.fig.update_yaxes(title=unity.legendaEixoY, row = unity.arg.lin , col = unity.arg.col) 
+            fig.fig.layout.annotations[unity.arg.t].update(text=unity.arg.nome) 
         fig.fig.update_layout(title= titulo)
-        fig.fig.update_xaxes(title=unidade.legendaEixoX )
-        fig.fig.update_yaxes(title=unidade.legendaEixoY  )
-        fig.fig.update_layout(yaxis=dict(range=[-4,4]))
-        fig.fig.update_layout(font=dict(size= unidade.tamanho_texto), 
-                            yaxis=dict(range=[limInf,limSup])
-                        ) 
+        #fig.fig.update_layout(yaxis=dict(range=[-4,4]))
+        #fig.fig.update_layout(font=dict(size= unidade.tamanho_texto), 
+        #                    yaxis=dict(range=[limInf,limSup])
+        #                ) 
         return fig.fig
 
 
