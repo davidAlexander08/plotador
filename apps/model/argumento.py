@@ -1,5 +1,5 @@
 from typing import Dict
-
+from apps.model.unidadeArgumental import UnidadeArgumental
 
 class Argumento:
     """
@@ -11,6 +11,36 @@ class Argumento:
     def __init__(self, listaNomes, chave):
         self.listaNomes = listaNomes  
         self.chave = chave
+
+        col = 1
+        lin = 1
+        pTitulo = 0
+        coord_max = (1,1)
+        if(len(listaNomes ==  2)): coord_max = (2,1)
+        if(len(listaNomes ==  3)): coord_max = (2,2)
+        if(len(listaNomes ==  4)): coord_max = (2,2)
+        if(len(listaNomes ==  5)): coord_max = (3,2)
+        if(len(listaNomes ==  6)): coord_max = (3,2)
+        if(len(listaNomes ==  7)): coord_max = (3,3)
+        if(len(listaNomes ==  8)): coord_max = (3,3)
+        if(len(listaNomes ==  9)): coord_max = (3,3)
+        if(len(listaNomes == 10)): coord_max = (4,3)
+        if(len(listaNomes == 11)): coord_max = (4,3)
+        if(len(listaNomes == 12)): coord_max = (4,3)
+        if(len(listaNomes == 13)): coord_max = (4,4)
+        if(len(listaNomes == 14)): coord_max = (4,4)
+        if(len(listaNomes == 15)): coord_max = (4,4)
+        if(len(listaNomes == 16)): coord_max = (4,4)
+
+        for nome in listaNomes:
+            self.uArg = UnidadeArgumental(nome,col, lin, pTitulo)
+            lin += 1
+            if(col == coord_max[0]):
+                lin = 1
+                col += 1
+            pTitulo += 1
+
+
 
     @classmethod
     def from_dict(cls, d: Dict[str, str]):

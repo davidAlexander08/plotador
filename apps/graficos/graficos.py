@@ -175,35 +175,35 @@ class Graficos:
 
     def gera_grafico_linha(
         self,
-        unidade: UnidadeSintese,
-        df: pd.DataFrame,
+        mapa, 
         titulo,
         coly = "valor",
         colx = "index") -> go.Figure:
         #fig = go.Figure()
 
         fig = Figura()
+        for unity in mapa:  
+            df = mapa[unity]
+            if(unity.limInf is True):
+                limInf = 0
+                for c in self.casos:
+                    dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
+                    val = dfY[coly].max() 
+                    if(limInf > val):
+                        limInf = val
+            else:
+                limInf = None
 
-        if(unidade.limInf is True):
-            limInf = 0
-            for c in self.casos:
-                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-                val = dfY[coly].max() 
-                if(limInf > val):
-                    limInf = val
-        else:
-            limInf = None
 
-
-        if(unidade.limSup is True):
-            limSup = 0
-            for c in self.casos:
-                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-                val = dfY[coly].max() 
-                if(limSup < val):
-                    limSup = val*1.1
-        else:
-            limSup = None
+            if(unity.limSup is True):
+                limSup = 0
+                for c in self.casos:
+                    dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
+                    val = dfY[coly].max() 
+                    if(limSup < val):
+                        limSup = val*1.1
+            else:
+                limSup = None
 
         
 
