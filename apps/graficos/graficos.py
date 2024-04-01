@@ -9,6 +9,7 @@ import plotly.io as pio
 import plotly.express as px
 from plotly.subplots import make_subplots
 from apps.model.unidade import UnidadeSintese
+from apps.graficos.figura import Figura
 
 pio.templates.default = "ggplot2"
 
@@ -179,7 +180,9 @@ class Graficos:
         titulo,
         coly = "valor",
         colx = "index") -> go.Figure:
-        fig = go.Figure()
+        #fig = go.Figure()
+
+        fig = Figura()
 
         if(unidade.limInf is True):
             limInf = 0
@@ -217,14 +220,14 @@ class Graficos:
                     showlegend=True,
                 )
             )
-        fig.update_layout(title= titulo)
-        fig.update_xaxes(title=unidade.legendaEixoX )
-        fig.update_yaxes(title=unidade.legendaEixoY  )
-        fig.update_layout(yaxis=dict(range=[-4,4]))
-        fig.update_layout(font=dict(size= unidade.tamanho_texto), 
+        fig.fig.update_layout(title= titulo)
+        fig.fig.update_xaxes(title=unidade.legendaEixoX )
+        fig.fig.update_yaxes(title=unidade.legendaEixoY  )
+        fig.fig.update_layout(yaxis=dict(range=[-4,4]))
+        fig.fig.update_layout(font=dict(size= unidade.tamanho_texto), 
                             yaxis=dict(range=[limInf,limSup])
                         ) 
-        return fig
+        return fig.fig
 
 
 

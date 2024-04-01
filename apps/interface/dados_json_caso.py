@@ -40,12 +40,9 @@ class Dados_json_caso(MetaData):
         else:
             self.lim_sup = False
             self.lim_inf = False
-            
-        print("lim_sup: ", self.lim_sup)
-        print("lim_inf: ", self.lim_inf)
 
         grupo_parquet = dados["grupo_parquet"] if "grupo_parquet" in dados else ""
-        sts = [Sintese.from_dict(d) for d in dados["sinteses"]] if "sinteses" in dados else ""
+        sts = [Sintese.from_dict(d) for d in dados["parquets"]] if "parquets" in dados else ""
         argum = [Argumento.from_dict(d) for d in dados["argumentos"]] if "argumentos" in dados else ""
 
         self.sinteses = sts if grupo_parquet == "" else self.mapa_sinteses[grupo_parquet.replace(" ", "")]
@@ -57,22 +54,3 @@ class Dados_json_caso(MetaData):
         
         if(grupo_parquet == "" and argum == ""):
             self.args = self.mapa_argumentos["TODOS"]
-
-        #if(("configuracao") in dados):
-        #    config = [Configuracao.from_dict(d) for d in dados["configuracao"]][0]
-        #    config_sintese = config.sintese.replace(" ", "")
-        #    #config_arg = config.argumento.replace(" ", "")
-        #else:
-        #    config_sintese = ""
-        #    config_arg = ""
-
-        #self.sinteses = sts if config_sintese == "" else self.mapa_sinteses[config_sintese]
-        #self.args = argum if config_arg == "" else self.mapa_argumentos[config_arg]
-        #self.args = argum if config_arg == "" else self.mapa_argumentos[config_sintese]
-
-
-        #if(config_sintese == "" and sts == ""):
-        #    self.sinteses = self.mapa_sinteses["TODOS"]
-        #
-        #if(config_arg == "" and argum == ""):
-        #    self.args = self.mapa_argumentos["TODOS"]
