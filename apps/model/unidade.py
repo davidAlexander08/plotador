@@ -27,6 +27,6 @@ class UnidadeSintese (MetaData):
 
 
         self.legendaEixoY = self.label_y(sintese.sintese)     
-        self.titulo = self.titulo_fig(sintese.sintese) if argumento.nome == None else self.titulo_fig(sintese.sintese) + " " + argumento.nome
+        self.titulo = self.titulo_fig(sintese.sintese) if argumento.listaNomes == None else self.titulo_fig(sintese.sintese) + " " + argumento.nome
 
 
