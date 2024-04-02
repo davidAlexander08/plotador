@@ -13,7 +13,7 @@ class Figura():
         for unity in conjUnity.listaUnidades:
             for trace in mapaGO[unity]:
                 print(trace.y)
-                lim_sup = max(trace.y)
+                lim_sup = max(trace.y) if len(trace.y) is not 0 else 0
                 lim_inf = min(trace.y)
                 self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col)
             self.fig.update_xaxes(title=conjUnity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
