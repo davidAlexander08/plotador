@@ -186,7 +186,7 @@ class Graficos:
         print("col: ", conjUnity.arg.max_col, " lin: ", conjUnity.arg.max_lin)
         for unity in mapa:  
             df = mapa[unity]
-            if(unity.limInf is True):
+            if(conjUnity.limInf is True):
                 limInf = 0
                 for c in self.casos:
                     dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
@@ -197,7 +197,7 @@ class Graficos:
                 limInf = None
 
 
-            if(unity.limSup is True):
+            if(conjUnity.limSup is True):
                 limSup = 0
                 for c in self.casos:
                     dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
