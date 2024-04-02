@@ -37,15 +37,22 @@ class Dados_json_caso(MetaData):
             self.limites = True if lim.replace(" ", "") == "True" else False
             
         else:
-            self.lim_sup = False
-            self.lim_inf = False
+            self.limites = False
 
         grupo_parquet = dados["grupo_parquet"] if "grupo_parquet" in dados else ""
-        sts = [Sintese.from_dict(d) for d in dados["parquets"]] if "parquets" in dados else ""
-        argum = [Argumento.from_dict(d) for d in dados["argumentos"]] if "argumentos" in dados else ""
 
-        self.sinteses = self.mapa_sinteses[grupo_parquet.replace(" ", "")] if sts == "" else sts 
+
+        sts = [Sintese.from_dict(d) for d in dados["parquets"]] if "parquets" in dados else ""
+        self.sinteses = self.mapa_sinteses[grupo_parquet.replace(" ", "")] if sts == "" else sts
+
+
+        argum = [Argumento.from_dict(d) for d in dados["argumentos"]] if "argumentos" in dados else ""
         self.args = self.mapa_argumentos[grupo_parquet.replace(" ", "")] if argum == "" else argum
+
+        caminho_externo = dados["arquivo_externo"] if "arquivo_externo" in dados else ""
+        with open(caminho_externo, "r") as d:
+            dados_externo = json.load(d)
+            print(dados_externo)
 
 
         if(grupo_parquet == "" and sts == ""):
