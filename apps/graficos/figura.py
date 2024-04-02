@@ -32,8 +32,8 @@ class Figura():
             self.fig.update_layout(title= titulo)
 
         limSup = lim_sup if conjUnity.limites is True else None
-        limInf_aux = lim_inf if conjUnity.limites is True else None
-        limInf = 0 if limInf_aux > 0 else limInf_aux
+        if(conjUnity.limites):
+            limInf = 0 if lim_inf > 0 else lim_inf
         
         self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto))  
         self.fig.update_yaxes(range=[limInf,limSup])
