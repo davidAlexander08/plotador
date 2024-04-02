@@ -51,11 +51,12 @@ class Temporal:
         figura = Figura(conjUnity, mapaGO, conjUnity.titulo+" Temporal "+self.estudo)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
         
+        print(mapa_temporal.keys()[-1])
         ultimo_estagio = max(mapa_temporal[mapa_temporal.keys()[-1]]["estagios"])
         print(ultimo_estagio)
         estagios = [1, 2, ultimo_estagio]
 
-        
+
         ## 2 ESTAGIO
         mapa_2_estagio = {}
         for unity in conjUnity.listaUnidades:
