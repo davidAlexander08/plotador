@@ -10,16 +10,6 @@ class Figura():
     def __init__(self, conjUnity , mapaGO, titulo):
         self.titulo = titulo
         self.fig = make_subplots(rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
-        #Descobrindo Limites
-        #for unity in conjUnity.listaUnidades:
-        #    for trace in mapaGO[unity]:
-        #        lim_sup = max(trace.y)
-        #        lim_inf = min(trace.y)
-        #limSup = lim_sup if conjUnity.limSup is True else None
-        #limInf_aux = lim_inf if conjUnity.limInf is True else None
-        #limInf = 0 if limInf_aux > 0 else limInf_aux
-        #print("limInf: ", limInf, " limSup: ", limSup)
-
         for unity in conjUnity.listaUnidades:
             for trace in mapaGO[unity]:
                 lim_sup = max(trace.y)
