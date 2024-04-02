@@ -52,19 +52,18 @@ class Temporal:
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
         
         ultimo_estagio = max(mapa_temporal[list(mapa_temporal.keys())[0]]["estagio"])
-        print(ultimo_estagio)
-        estagios = [1, 2, ultimo_estagio]
-
-
-        ## 2 ESTAGIO
-        mapa_2_estagio = {}
-        for unity in conjUnity.listaUnidades:
-            mapa_2_estagio[unity] = mapa_temporal[unity].loc[mapa_temporal[unity]["estagio"] == 2]
-            self.indicadores_temporais.exportar(mapa_2_estagio[unity], diretorio_saida_arg,  unity.titulo+"_temporal_2_estagio_"+self.estudo)
-                
-        mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_2_estagio, conjUnity.titulo+" 2 estagio "+self.estudo)
-        figura = Figura(conjUnity, mapaGO, conjUnity.titulo+" 2 estagio "+self.estudo)
-        self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
+        mapaEst = {1:" Primeiro Est",
+                   2:" Segundo Est",
+                   ultimo_estagio:" Ultimo Est"}
+        for est in mapaEst:
+            mapa_estagio = {}
+            for unity in conjUnity.listaUnidades:
+                mapa_estagio[unity] = mapa_temporal[unity].loc[mapa_temporal[unity]["estagio"] == est]
+                self.indicadores_temporais.exportar(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+unity.titulo+"_temporal_"+self.estudo)
+                    
+            mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+self.estudo)
+            figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.titulo+self.estudo)
+            self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 
 
         #df_unity_2_mes = self.indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
