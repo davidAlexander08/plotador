@@ -45,14 +45,17 @@ class Dados_json_caso(MetaData):
         sts = [Sintese.from_dict(d) for d in dados["parquets"]] if "parquets" in dados else ""
         self.sinteses = self.mapa_sinteses[grupo_parquet.replace(" ", "")] if sts == "" else sts
 
-
+        #VERIFICA SE EXISTE ARGUMENTO DO ARQUIVO
         argum = [Argumento.from_dict(d) for d in dados["argumentos"]] if "argumentos" in dados else ""
+
+        #VERIFICA SE EXISTE ARGUMENTO DO ARQUIVO EXTERNO
         caminho_externo = dados["arquivo_externo"] if "arquivo_externo" in dados else None
         if(caminho_externo is not None):
             with open(caminho_externo, "r") as cam:
                 dados_externo = json.load(cam)
                 argum = [Argumento.from_dict(d) for d in dados_externo["argumentos"]] if "argumentos" in dados_externo else ""
-        
+                print(argum)
+        #DEFINE SE UTILIZA ARGUMENTOS DEFINIDOS OU DEFAULT
         self.args = self.mapa_argumentos[grupo_parquet.replace(" ", "")] if argum == "" else argum
 
 
