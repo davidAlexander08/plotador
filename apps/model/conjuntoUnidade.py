@@ -2,7 +2,7 @@ from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 from apps.interface.metaData import MetaData
 from apps.model.unidade import UnidadeSintese
-
+from apps.model.unidadeArgumental import UnidadeArgumental
 class ConjuntoUnidadeSintese (MetaData):  
 
     def __init__(self, sintese, arg, legendaEixoX, limSup = False, limInf = False, tamanho_texto = 11):
