@@ -16,9 +16,12 @@ class ConjuntoUnidadeSintese (MetaData):
         self.titulo = self.titulo_fig(sintese.sintese)+" SIN" if arg.listaNomes is None else self.titulo_fig(sintese.sintese) + "_"+ arg.nome
         self.legendaEixoY = self.label_y(sintese.sintese) 
 
-        self.listaUnidades = []
-        for uarg in arg.listaUArg:
-            self.listaUnidades.append(UnidadeSintese(sintese.filtro, uarg) )
+        if(arg.listaUArg is not None):
+            self.listaUnidades = []
+            for uarg in arg.listaUArg:
+                self.listaUnidades.append(UnidadeSintese(sintese.filtro, uarg) )
+        else:
+            self.listaUnidades = [UnidadeSintese(None, UnidadeArgumental(None)) ]
 
     def label_y(self, sintese):
         operacional = sintese.split("_")[0]

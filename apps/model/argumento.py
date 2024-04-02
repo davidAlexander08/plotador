@@ -1,6 +1,6 @@
 from typing import Dict
 from apps.model.unidadeArgumental import UnidadeArgumental
-
+ 
 class Argumento:
     """
     Classe base que representa um argumento do estudo
