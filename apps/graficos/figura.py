@@ -11,7 +11,8 @@ class Figura():
         self.titulo = titulo
         self.fig = make_subplots(rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
         for unity in conjUnity.listaUnidades:
-            self.fig.add_trace(mapaGO[unity], row = unity.arg.lin, col = unity.arg.col)
+            for trace in mapaGO[unity]:
+                self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col)
             self.fig.update_xaxes(title=conjUnity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
             self.fig.update_yaxes(title=conjUnity.legendaEixoY, row = unity.arg.lin , col = unity.arg.col) 
             if(len(conjUnity.listaUnidades) > 1):
