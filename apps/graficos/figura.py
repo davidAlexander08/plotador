@@ -18,9 +18,9 @@ class Figura():
             if(len(conjUnity.listaUnidades) > 1):
                 self.fig.layout.annotations[unity.arg.t].update(text=unity.arg.nome) 
             self.fig.update_layout(title= titulo)
-            self.fig.update_layout(font=dict(size= unidade.tamanho_texto), 
-                                yaxis=dict(range=[limInf,limSup])
-                            ) 
+            #self.fig.update_layout(font=dict(size= unidade.tamanho_texto), 
+            #                    yaxis=dict(range=[limInf,limSup])
+            #                ) 
 
     def getFig(self):
         return self.fig
