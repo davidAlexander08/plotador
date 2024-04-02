@@ -52,17 +52,17 @@ class Temporal:
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
         
         ultimo_estagio = max(mapa_temporal[list(mapa_temporal.keys())[0]]["estagio"])
-        mapaEst = {1:" Primeiro Est",
-                   2:" Segundo Est",
-                   ultimo_estagio:" Ultimo Est"}
+        mapaEst = {1:" Primeiro Est ",
+                   2:" Segundo Est ",
+                   ultimo_estagio:" Ultimo Est "}
         for est in mapaEst:
             mapa_estagio = {}
             for unity in conjUnity.listaUnidades:
                 mapa_estagio[unity] = mapa_temporal[unity].loc[mapa_temporal[unity]["estagio"] == est]
-                self.indicadores_temporais.exportar(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+unity.titulo+"_temporal_"+self.estudo)
+                self.indicadores_temporais.exportar(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+conjUnity.sintese.sintese+self.estudo)
                     
             mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+self.estudo)
-            figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.titulo+self.estudo)
+            figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+self.estudo)
             self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 
 
