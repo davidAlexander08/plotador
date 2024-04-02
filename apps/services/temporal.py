@@ -29,14 +29,14 @@ class Temporal:
                 arg = Argumento(None, None, "SIN")
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
-                conj = ConjuntoUnidadeSintese(sts, Argumento(None, None, "SIN"), "estagios", data.lim_sup, data.lim_inf, data.tamanho_texto)
+                conj = ConjuntoUnidadeSintese(sts, Argumento(None, None, "SIN"), "estagios", data.limites, data.tamanho_texto)
                 self.executa(conj,diretorio_saida_arg )
             else:
                 for arg in data.args:
                     if(espacial == arg.chave):
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
-                        conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.lim_sup, data.lim_inf, data.tamanho_texto)
+                        conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
                         self.executa(conj,diretorio_saida_arg )
                         
 
