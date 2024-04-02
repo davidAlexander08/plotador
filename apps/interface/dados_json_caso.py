@@ -51,8 +51,7 @@ class Dados_json_caso(MetaData):
         if(caminho_externo is not None):
             with open(caminho_externo, "r") as d:
                 dados_externo = json.load(d)
-                print(dados_externo)
-                argum = [Argumento.from_dict(d) for d in dados["argumentos"]] if "argumentos" in dados else ""
+                argum = [Argumento.from_dict(d) for d in dados_externo["argumentos"]] if "argumentos" in dados_externo else ""
         
         self.args = self.mapa_argumentos[grupo_parquet.replace(" ", "")] if argum == "" else argum
 
