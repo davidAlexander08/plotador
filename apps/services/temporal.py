@@ -27,7 +27,7 @@ class Temporal:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
                 conj = ConjuntoUnidadeSintese(sts, Argumento(None, None, "SIN"), "estagios", data.limites, data.tamanho_texto)
-                diretorio_saida_arg = diretorio_saida+"/SIN/"arg.nome
+                diretorio_saida_arg = diretorio_saida+"/SIN/"+arg.nome
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 self.executa(conj,diretorio_saida_arg )
             else:
