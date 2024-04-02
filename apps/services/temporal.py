@@ -52,7 +52,7 @@ class Temporal:
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
         
         print(mapa_temporal.keys())
-        ultimo_estagio = max(mapa_temporal[mapa_temporal.keys()[-1]]["estagios"])
+        ultimo_estagio = max(mapa_temporal[mapa_temporal.keys()[0]]["estagios"])
         print(ultimo_estagio)
         estagios = [1, 2, ultimo_estagio]
 
