@@ -180,48 +180,9 @@ class Graficos:
         titulo,
         coly = "valor",
         colx = "index") -> go.Figure:
-        #fig = go.Figure()
-
-        #fig = Figura(conjUnity.arg.max_col, conjUnity.arg.max_lin)
-        #print("col: ", conjUnity.arg.max_col, " lin: ", conjUnity.arg.max_lin)
         mapaGO = {}
         for unity in mapa:  
             df = mapa[unity]
-            #if(conjUnity.limInf is True):
-            #    limInf = 0
-            #    for c in self.casos:
-            #        dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-            #        val = dfY[coly].max() 
-            #        if(limInf > val):
-            #            limInf = val
-            #else:
-            #    limInf = None
-            #
-            #
-            #if(conjUnity.limSup is True):
-            #    limSup = 0
-            #    for c in self.casos:
-            #        dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-            #        val = dfY[coly].max() 
-            #        if(limSup < val):
-            #            limSup = val*1.1
-            #else:
-            #    limSup = None
-
-            #for c in self.casos:
-            #    dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-            #    dfY = dfY.reset_index(drop = False)
-            #    fig.add_trace(
-            #        go.Scatter(
-            #            #x = dfY.index,
-            #            x = dfY[colx],
-            #            y = dfY[coly],
-            #            name = c.nome,
-            #            line = dict(color = c.cor),
-            #            showlegend=unity.arg.show,
-            #        ), coluna = unity.arg.col,
-            #        linha = unity.arg.lin
-            #    )
             listaGO = []
             for c in self.casos:
                 dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
@@ -234,63 +195,82 @@ class Graficos:
                         showlegend=unity.arg.show))
 
             mapaGO[unity] = listaGO
-
-            #fig.fig.update_xaxes(title=conjUnity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
-            #fig.fig.update_yaxes(title=conjUnity.legendaEixoY, row = unity.arg.lin , col = unity.arg.col) 
-            #print(unity.arg.t , " ", unity.arg.nome)
-            #if(len(mapa.keys()) > 1):
-            #    fig.fig.layout.annotations[unity.arg.t].update(text=unity.arg.nome) 
-
-        #fig.fig.update_layout(title= titulo)
-        #fig.fig.update_layout(font=dict(size= unidade.tamanho_texto), 
-        #                    yaxis=dict(range=[limInf,limSup])
-        #                ) 
-        #return fig.fig
         return mapaGO
-
-
-
-
-            
 
 
 
     def gera_grafico_barra(
         self,
-        dfY: pd.DataFrame,
-        dfX,
-        eixoX:str,
-        eixoY:str,
-        aproximacao:int,
-        titulo:str
-    ) -> go.Figure:
-        fig = go.Figure()
-        fig.add_trace(
-            go.Bar(
-                x=dfX,
-                y=dfY,
-                marker_color="#00a6ff",
-                showlegend=False
-            )
-        )
-        fig.add_trace(
-            go.Scatter(
-                x=dfX,
-                y=dfY,
-                text=dfY.round(aproximacao),
-                mode="text",
-                textposition="top center",
-                textfont=dict(
-                    size=12,
-                ),
-                showlegend=False,
-            )
-        )
+        conjUnity,
+        mapa,
+        titulo:str,
+        aproximacao = 1,
+        coly = "valor",
+        colx = "caso",
+        ) -> go.Figure:
 
-        fig.update_xaxes(title_text=eixoX)
-        fig.update_yaxes(title_text=eixoY)
-        fig.update_layout(title=titulo)
-        return fig
+        mapaGO = {}
+        for unity in mapa:  
+            df = mapa[unity]
+            listaGO = []
+            listaGO.append(go.Bar(
+            x=df[colx],
+            y=df[coly],
+            marker_color="#00a6ff",
+            showlegend=False
+            ))
+
+            listaGO.append(go.Scatter(
+            x=df[colx],
+            y=df[coly],
+            text=dfY.round(aproximacao),
+            mode="text",
+            textposition="top center",
+            textfont=dict(
+                size=12,
+            ),
+            showlegend=False,
+            ))
+
+                #listaGO.append(go.Scatter( 
+                #        x = dfY[colx],
+                #        y = dfY[coly],
+                #        name = c.nome,
+                #        line = dict(color = c.cor),
+                #        showlegend=unity.arg.show))
+
+            mapaGO[unity] = listaGO
+        return mapaGO
+
+
+
+        #fig = go.Figure()
+        #fig.add_trace(
+        #    go.Bar(
+        #        x=dfX,
+        #        y=dfY,
+        #        marker_color="#00a6ff",
+        #        showlegend=False
+        #    )
+        #)
+        #fig.add_trace(
+        #    go.Scatter(
+        #        x=dfX,
+        #        y=dfY,
+        #        text=dfY.round(aproximacao),
+        #        mode="text",
+        #        textposition="top center",
+        #        textfont=dict(
+        #            size=12,
+        #        ),
+        #        showlegend=False,
+        #    )
+        #)
+        #
+        #fig.update_xaxes(title_text=eixoX)
+        #fig.update_yaxes(title_text=eixoY)
+        #fig.update_layout(title=titulo)
+        #return fig
 
 
 

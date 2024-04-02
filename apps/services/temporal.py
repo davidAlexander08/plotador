@@ -46,14 +46,20 @@ class Temporal:
         for unity in conjUnity.listaUnidades:
             mapa_temporal[unity] = self.indicadores_temporais.retorna_df_concatenado(unity)
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  unity.titulo+"_temporal_"+self.estudo)
-        
-        #fig = self.graficos.gera_grafico_linha(conjUnity, mapa_temporal, conjUnity.titulo+" Temporal "+self.estudo)
-        #self.graficos.exportar(fig, diretorio_saida_arg, conjUnity.titulo+"_temporal_"+self.estudo)
-        
+                
         mapaGO = self.graficos.gera_grafico_linha(conjUnity, mapa_temporal, conjUnity.titulo+" Temporal "+self.estudo)
         figura = Figura(conjUnity, mapaGO, conjUnity.titulo+" Temporal "+self.estudo)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
         
+        mapa_2_estagio = {}
+        for unity in conjUnity.listaUnidades:
+            mapa_2_estagio[unity] = self.indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
+            self.indicadores_temporais.exportar(mapa_2_estagio[unity], diretorio_saida_arg,  unity.titulo+"_temporal_2_estagio_"+self.estudo)
+                
+        mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_2_estagio, conjUnity.titulo+" 2 estagio "+self.estudo)
+        figura = Figura(conjUnity, mapaGO, conjUnity.titulo+" 2 estagio "+self.estudo)
+        self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
+
 
         #df_unity_2_mes = self.indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
         #self.indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  unity.titulo+"_temporal_2_mes_"+self.estudo)
