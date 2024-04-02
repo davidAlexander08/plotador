@@ -7,6 +7,7 @@ from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 from apps.model.unidadeArgumental import UnidadeArgumental
+from apps.graficos.figura import Figura
 
 import os
 import json
