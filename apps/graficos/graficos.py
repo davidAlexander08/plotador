@@ -223,7 +223,7 @@ class Graficos:
             listaGO.append(go.Scatter(
             x=df[colx],
             y=df[coly],
-            text=dfY.round(aproximacao),
+            text=df[coly].round(aproximacao),
             mode="text",
             textposition="top center",
             textfont=dict(
