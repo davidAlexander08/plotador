@@ -19,9 +19,9 @@ class ConjuntoUnidadeSintese (MetaData):
         if(arg.listaUArg is not None):
             self.listaUnidades = []
             for uarg in arg.listaUArg:
-                self.listaUnidades.append(UnidadeSintese(sintese.filtro, uarg) )
+                self.listaUnidades.append(UnidadeSintese(sintese, uarg) )
         else:
-            self.listaUnidades = [UnidadeSintese(None, UnidadeArgumental(None)) ]
+            self.listaUnidades = [UnidadeSintese(sintese, UnidadeArgumental(None)) ]
 
     def label_y(self, sintese):
         operacional = sintese.split("_")[0]
