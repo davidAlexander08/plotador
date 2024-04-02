@@ -39,7 +39,7 @@ class Temporal:
                         self.executa(conj,diretorio_saida_arg )
                         
 
-
+ 
     def executa(self, conjUnity, diretorio_saida_arg):
         mapa_temporal = {}
         for unity in conjUnity.listaUnidades:
@@ -47,7 +47,7 @@ class Temporal:
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  unity.titulo+"_temporal_"+self.estudo)
         
         fig = self.graficos.gera_grafico_linha(conjUnity, mapa_temporal, conjUnity.arg.nome+" Temporal "+self.estudo)
-        self.graficos.exportar(fig, diretorio_saida_arg, "temporal_"+self.estudo)
+        self.graficos.exportar(fig, diretorio_saida_arg, conjUnity.arg.nome+"_temporal_"+self.estudo)
         
         #df_unity_2_mes = self.indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
         #self.indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  unity.titulo+"_temporal_2_mes_"+self.estudo)
