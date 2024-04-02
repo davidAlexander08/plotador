@@ -57,9 +57,8 @@ class Dados_json_caso(MetaData):
 
 
         #DEFINE SE UTILIZA ARGUMENTOS DEFINIDOS OU DEFAULT
-                print(argum)
         self.args = self.mapa_argumentos[grupo_parquet.replace(" ", "")] if argum == "" else argum
-
+        print(self.args[0].nome)
 
         if(grupo_parquet == "" and sts == ""):
             self.sinteses = self.mapa_sinteses["TODOS"]
