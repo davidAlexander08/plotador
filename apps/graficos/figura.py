@@ -12,6 +12,7 @@ class Figura():
         self.fig = make_subplots(rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
         for unity in conjUnity.listaUnidades:
             for trace in mapaGO[unity]:
+                print(max(trace.y))
                 lim_sup = max(trace.y)
                 lim_inf = min(trace.y)
                 self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col)
