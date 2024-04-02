@@ -51,9 +51,10 @@ class Temporal:
         figura = Figura(conjUnity, mapaGO, conjUnity.titulo+" Temporal "+self.estudo)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
         
+        ## 2 ESTAGIO
         mapa_2_estagio = {}
         for unity in conjUnity.listaUnidades:
-            mapa_2_estagio[unity] = self.indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
+            mapa_2_estagio[unity] = mapa_temporal[unity].loc[mapa_temporal[unity]["estagio"] == 2]
             self.indicadores_temporais.exportar(mapa_2_estagio[unity], diretorio_saida_arg,  unity.titulo+"_temporal_2_estagio_"+self.estudo)
                 
         mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_2_estagio, conjUnity.titulo+" 2 estagio "+self.estudo)
