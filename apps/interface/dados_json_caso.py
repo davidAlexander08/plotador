@@ -41,7 +41,7 @@ class Dados_json_caso(MetaData):
 
         grupo_parquet = dados["grupo_parquet"] if "grupo_parquet" in dados else ""
 
-
+        print(dados["parquets"])
         sts = [Sintese.from_dict(d) for d in dados["parquets"]] if "parquets" in dados else ""
         self.sinteses = self.mapa_sinteses[grupo_parquet.replace(" ", "")] if sts == "" else sts
 
