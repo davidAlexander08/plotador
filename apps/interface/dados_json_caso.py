@@ -42,7 +42,15 @@ class Dados_json_caso(MetaData):
         grupo_parquet = dados["grupo_parquet"] if "grupo_parquet" in dados else ""
 
         print(dados["parquets"])
-        sts = [Sintese.from_dict(d) for d in dados["parquets"]] if "parquets" in dados else ""
+        if("parquets" in dados):
+            lista_sinteses = []
+            for sintese in dados["parquets"]:
+                lista_sinteses.append(Sintese(sintese))
+            sts = lista_sinteses
+        else:
+            sts = ""
+        
+        #sts = [Sintese.from_dict(d) for d in dados["parquets"]] if "parquets" in dados else ""
         self.sinteses = self.mapa_sinteses[grupo_parquet.replace(" ", "")] if sts == "" else sts
 
         #VERIFICA SE EXISTE ARGUMENTO DO ARQUIVO
