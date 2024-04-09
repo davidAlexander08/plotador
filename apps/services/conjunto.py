@@ -31,14 +31,14 @@ class Conjunto:
                 arg = Argumento(None, None, "SIN")
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
-                unity = UnidadeSintese(sts, "caso", arg, data.lim_sup, data.lim_inf, data.tamanho_texto)
+                unity = UnidadeSintese(sts, args, "caso", data.limites, data.tamanho_texto)
                 self.executa(unity,diretorio_saida_arg )
             else:
                 for arg in data.args:
                     if(espacial == arg.chave):
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
-                        unity = UnidadeSintese(sts, "caso", arg, data.lim_sup, data.lim_inf, data.tamanho_texto)
+                        unity = UnidadeSintese(sts, args, "caso", data.limites, data.tamanho_texto)
                         self.executa(unity,diretorio_saida_arg )
 
 
