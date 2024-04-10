@@ -60,7 +60,7 @@ class Conjunto:
             listaMedia = []
             for conjunto in self.conjuntoCasos:
                 indicadores_temporais = IndicadoresTemporais(conjunto.casos)  
-                indicadores_medios = IndicadoresMedios(conjunto.casos)   
+                indicadores_medios = IndicadoresMedios(conjunto.casos, self.nome_caso_referencia)   
                         
 
                 df_temporal = indicadores_temporais.retorna_df_concatenado(unity)
