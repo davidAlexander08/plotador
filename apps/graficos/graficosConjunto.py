@@ -37,13 +37,6 @@ class GraficosConjunto:
         lista_casos = df["caso"].unique()
         lista_conjuntos = df["conjunto"].unique()
 
-        if(unidade.limInf is True):
-            limInf = 0 if df["valor"].min() > 0 else df["valor"].min()*1.1
-        else:
-            limInf = None
-
-        limSup = df["valor"].max()*1.1 if unidade.limSup is True else None 
-
         for conj in self.conjuntoCasos:
             df_conj = df.loc[(df["conjunto"] == conj.nome)]
             fig.add_trace(
