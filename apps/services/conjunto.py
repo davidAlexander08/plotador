@@ -64,7 +64,6 @@ class Conjunto:
                 df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
                 df_temporal_segundo_mes["conjunto"] = conjunto.nome
 
-                listaTemporal.append(df_temporal)
                 listaTemporal_2_mes.append(df_temporal_segundo_mes)
 
             mapaTemporal[conjunto.nome] = df_temporal
