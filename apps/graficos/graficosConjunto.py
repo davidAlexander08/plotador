@@ -60,23 +60,24 @@ class GraficosConjunto:
         
     def gera_grafico_linhas_diferentes_casos(
         self,
-        df,
+        mapa,
         conjuntoUnidade,
-        unidade,
         colY = "valor",
         colX = "caso" ):
         mapaGO = {}
-        listaGO = []
-        for conj in self.conjuntoCasos:
-            df_conj = df.loc[(df["conjunto"] == conj.nome)]
-            listaGO.append(go.Scatter(
-                                x = df_conj[colX],
-                                y = df_conj[colY],
-                                name = conj.nome,
-                                line = dict(color = conj.cor),
-                                showlegend=True,
-                            )
-            )
+        for unity in mapa:  
+            df = mapa[unity]
+            listaGO = []
+            for conj in self.conjuntoCasos:
+                df_conj = df.loc[(df["conjunto"] == conj.nome)]
+                listaGO.append(go.Scatter(
+                                    x = df_conj[colX],
+                                    y = df_conj[colY],
+                                    name = conj.nome,
+                                    line = dict(color = conj.cor),
+                                    showlegend=True,
+                                )
+                )
         mapaGO[unidade] = listaGO
         return mapaGO
 

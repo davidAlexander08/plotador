@@ -177,9 +177,8 @@ class Graficos:
         self,
         conjUnity,
         mapa, 
-        titulo,
         coly = "valor",
-        colx = "index") -> go.Figure:
+        colx = "index") :
         mapaGO = {}
         for unity in mapa:  
             df = mapa[unity]
