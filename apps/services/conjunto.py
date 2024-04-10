@@ -70,8 +70,8 @@ class Conjunto:
             mapaTemporal[unity] = pd.concat(listaTemporal)
             mapaTemporal_2_mes[unity] = pd.concat(listaTemporal_2_mes)
             
-            indicadores_temporais.exportar(pd.concat(listaTemporal), diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
-            indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "temporal_"+unity.titulo+"_"+self.estudo)
+            indicadores_temporais.exportar(pd.concat(listaTemporal), diretorio_saida_arg,  "temporal_"+unity.titulo+"_"+self.estudo)
+            indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
 
             #fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concat_temporal_segundo_mes, unity, unity.titulo+"_Segundo_Mes")
             #self.graficosConjunto.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_segundo_mes_"+self.estudo)
