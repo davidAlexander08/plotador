@@ -6,7 +6,7 @@ class UnidadeSintese ():
         self.fitroColuna = sintese.filtro
         self.sintese = sintese.sintese
         self.filtroArgumento = uArg.nome
-        self.titulo = "SIN" if uArg.nome == None else uArg.nome 
+        self.titulo = " " if self.arg.nome is None else self.arg.nome 
             
 
 
