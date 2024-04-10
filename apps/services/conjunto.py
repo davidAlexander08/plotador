@@ -83,8 +83,3 @@ class Conjunto:
             #mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaConjDF_Temporal, unity, unity.titulo)
             #for titulo in mapaFig:
             #    self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, 2000, 900)
-
-
-        for unity in conjUnity.listaUnidades:
-            #listaConjDF_Temporal_Segundo_Mes = []
-            #mapaConjDF_Temporal = {}
