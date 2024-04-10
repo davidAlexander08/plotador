@@ -53,12 +53,15 @@ class Conjunto:
 
         
         mapaTemporal_2_mes = {}
+        mapaMedio = {}
         for unity in conjUnity.listaUnidades:
-            print(unity.sintese)
             mapaTemporal = {}
             listaTemporal_2_mes = []
+            listaMedia = []
             for conjunto in self.conjuntoCasos:
-                indicadores_temporais = IndicadoresTemporais(conjunto.casos)            
+                indicadores_temporais = IndicadoresTemporais(conjunto.casos)  
+                indicadores_medios = IndicadoresMedios(conjunto.casos)   
+                        
 
                 df_temporal = indicadores_temporais.retorna_df_concatenado(unity)
                 df_temporal["conjunto"] = conjunto.nome
@@ -69,6 +72,9 @@ class Conjunto:
                 df_temporal_segundo_mes["conjunto"] = conjunto.nome
                 listaTemporal_2_mes.append(df_temporal_segundo_mes)
 
+                df_medio = indicadores_medios.retorna_df_concatenado(unity)
+                df_medio["conjunto"] = conjunto.nome
+                listaMedia.append(df_medio)
                 
 
             indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+unity.titulo+"_"+self.estudo)
@@ -82,11 +88,14 @@ class Conjunto:
             mapaTemporal_2_mes[unity] = pd.concat(listaTemporal_2_mes)
             indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
 
-            
+            mapaMedio[unity] = pd.concat(listaMedia)
+            indicadores_medios.exportar(pd.concat(listaMedia), diretorio_saida_arg,  "media_"+unity.titulo+"_"+self.estudo)
 
 
         mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_2_mes)
         figura = Figura(conjUnity, mapaGO, "Segundo Mes "+conjUnity.titulo+self.estudo)
         self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 
-
+        mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaMedio)
+        figura = Figura(conjUnity, mapaGO, "Media "+conjUnity.titulo+self.estudo)
+        self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
