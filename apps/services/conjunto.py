@@ -60,6 +60,7 @@ class Conjunto:
 
         for unity in conjUnity.listaUnidades:
             print(unity.arg.nome)
+            print(unity.sintese)
             listaConjDF = []
             listaConjDF_Temporal_Segundo_Mes = []
             mapaConjDF_Temporal = {}
