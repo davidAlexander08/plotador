@@ -74,7 +74,8 @@ class Conjunto:
             indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+unity.titulo+"_"+self.estudo)
             print( conjUnity.titulo)
             print(unity.arg.titulo)
-            mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+" "+unity.arg.titulo+" "+self.estudo)
+            print(unity.titulo)
+            mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+" "+unity.titulo+" "+self.estudo)
             for titulo in mapaFig:
                 self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, 2000, 900)
 
