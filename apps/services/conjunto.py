@@ -49,10 +49,10 @@ class Conjunto:
 
 
     def executa(self, conjUnity, diretorio_saida_arg):
-        mapa_temporal = {}
-        for unity in conjUnity.listaUnidades:
-            mapa_temporal[unity] = self.indicadores_temporais.retorna_df_concatenado(unity)
-            self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "temporal "+unity.titulo+" "+self.estudo)
+        #mapa_temporal = {}
+        #for unity in conjUnity.listaUnidades:
+        #    mapa_temporal[unity] = self.indicadores_temporais.retorna_df_concatenado(unity)
+        #    self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "temporal "+unity.titulo+" "+self.estudo)
                 
         mapaGO = self.graficos.gera_grafico_linha(conjUnity, mapa_temporal, "Temporal "+conjUnity.titulo+self.estudo)
         figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
