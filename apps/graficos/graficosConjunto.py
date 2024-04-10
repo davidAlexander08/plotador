@@ -66,16 +66,18 @@ class GraficosConjunto:
         colY = "valor",
         colX = "caso" ):
         mapaGO = {}
-
+        listaGO = []
         for conj in self.conjuntoCasos:
             df_conj = df.loc[(df["conjunto"] == conj.nome)]
-            mapaGO[unidade] = go.Scatter(
+            listaGO.append(go.Scatter(
                                 x = df_conj[colX],
                                 y = df_conj[colY],
                                 name = conj.nome,
                                 line = dict(color = conj.cor),
                                 showlegend=True,
                             )
+            )
+        mapaGO[unidade] = listaGO
         return mapaGO
 
     def subplot_gera_grafico_linha_casos(
