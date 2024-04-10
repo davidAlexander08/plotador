@@ -77,13 +77,13 @@ class Conjunto:
                 listaMedia.append(df_medio)
                 
 
-            indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+unity.titulo+"_"+self.estudo)
+            indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
             mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+" "+unity.titulo+" "+self.estudo)
             for titulo in mapaFig:
                 self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, 2000, 900)
 
             mapaTemporal_2_mes[unity] = pd.concat(listaTemporal_2_mes)
-            indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
+            indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_mes_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
 
             mapaMedio[unity] = pd.concat(listaMedia)
             indicadores_medios.exportar(pd.concat(listaMedia), diretorio_saida_arg,  "media_"+unity.titulo+"_"+self.estudo)
