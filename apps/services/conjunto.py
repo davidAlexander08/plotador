@@ -61,18 +61,22 @@ class Conjunto:
 
                 df_temporal = indicadores_temporais.retorna_df_concatenado(unity)
                 df_temporal["conjunto"] = conjunto.nome
+                mapaTemporal[conjunto.nome] = df_temporal
+
+
                 df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
                 df_temporal_segundo_mes["conjunto"] = conjunto.nome
-
                 listaTemporal_2_mes.append(df_temporal_segundo_mes)
 
-            mapaTemporal[conjunto.nome] = df_temporal
-            mapaTemporal_2_mes[unity] = pd.concat(listaTemporal_2_mes)
-            
+                
+
             indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+unity.titulo+"_"+self.estudo)
+            fig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+self.estudo)
+
+            mapaTemporal_2_mes[unity] = pd.concat(listaTemporal_2_mes)
             indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
 
-            fig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+self.estudo)
+            
             #for titulo in mapaFig:
             #    self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, 2000, 900)
 
