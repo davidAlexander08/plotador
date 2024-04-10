@@ -5,4 +5,5 @@ class UnidadeArgumental ():
         self.lin = lin
         self.t = posTitulo
         self.nome = nome
+        self.titulo = nome if self.nome is None else "SIN"
         self.show = True if posTitulo == 0 else False
