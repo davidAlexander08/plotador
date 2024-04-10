@@ -62,7 +62,9 @@ class GraficosConjunto:
         self,
         df,
         conjuntoUnidade,
-        unidade ):
+        unidade,
+        coly = "valor",
+        colx = "caso" ):
         mapaGO = {}
 
         for conj in self.conjuntoCasos:
