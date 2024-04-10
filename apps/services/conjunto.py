@@ -29,7 +29,7 @@ class Conjunto:
         for sts in data.sinteses:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
-                args = Argumento(None, None, "SIN")
+                arg = Argumento(None, None, "SIN")
                 conj = ConjuntoUnidadeSintese(sts,arg , "estagios", data.limites, data.tamanho_texto)
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
