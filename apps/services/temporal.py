@@ -41,7 +41,7 @@ class Temporal:
                         
 
  
-    def executa(self, conjUnity, diretorio_saida_arg):
+    def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
         for unity in conjUnity.listaUnidades:
             mapa_temporal[unity] = self.indicadores_temporais.retorna_df_concatenado(unity)
