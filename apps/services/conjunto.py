@@ -80,8 +80,8 @@ class Conjunto:
                 listaConjDF_Temporal_Segundo_Mes.append(df_temporal_segundo_mes)
                 mapaConjDF_Temporal[conjunto.nome]  = df_temporal
                 
-            df_concat = pd.concat(listaConjDF)
-            indicador_conj_medio.exportar(df_concat, diretorio_saida_arg,  "conj_med_"+unity.titulo+"_"+self.estudo)
+            #df_concat = pd.concat(listaConjDF)
+            #indicador_conj_medio.exportar(df_concat, diretorio_saida_arg,  "conj_med_"+unity.titulo+"_"+self.estudo)
 
             df_concat_temporal_segundo_mes = pd.concat(listaConjDF_Temporal_Segundo_Mes)
             print("df_concat_temporal_segundo_mes: ", df_concat_temporal_segundo_mes)
