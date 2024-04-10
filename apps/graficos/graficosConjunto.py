@@ -25,39 +25,56 @@ class GraficosConjunto:
             width=W,
             height=H)
         
+    #def gera_grafico_linhas_diferentes_casos(
+    #    self,
+    #    df,
+    #    unidade,
+    #    titulo: str,
+    #    colY = "valor",
+    #    colX = "caso",
+    #) -> go.Figure:
+    #    #fig = go.Figure()
+    #    lista_casos = df["caso"].unique()
+    #    lista_conjuntos = df["conjunto"].unique()#
+    #
+    #    for conj in self.conjuntoCasos:
+    #        df_conj = df.loc[(df["conjunto"] == conj.nome)]
+    #        fig.add_trace(
+    #        go.Scatter(
+    #            x = df_conj[colX],
+    #            y = df_conj[colY],
+    #            name = conj.nome,
+    #            line = dict(color = conj.cor),
+    #            showlegend=True,
+    #        )
+    #    )#
+    #
+    #    fig.update_layout(title=titulo)
+    #    #fig.update_xaxes(title=unidade.legendaEixoX)
+    #    #fig.update_yaxes(title=unidade.legendaEixoY)
+    #    #fig.update_layout(font=dict(size= unidade.tamanho_texto), 
+    #    #                  yaxis=dict(range=[limInf,limSup])  
+    #    #                )
+    #    return fig
+
+        
     def gera_grafico_linhas_diferentes_casos(
         self,
         df,
-        unidade,
-        titulo: str,
-        colY = "valor",
-        colX = "caso",
-    ) -> go.Figure:
-        fig = go.Figure()
-        lista_casos = df["caso"].unique()
-        lista_conjuntos = df["conjunto"].unique()
+        conjuntoUnidade,
+        unidade ):
+        mapaGO = {}
 
         for conj in self.conjuntoCasos:
             df_conj = df.loc[(df["conjunto"] == conj.nome)]
-            fig.add_trace(
-            go.Scatter(
-                x = df_conj[colX],
-                y = df_conj[colY],
-                name = conj.nome,
-                line = dict(color = conj.cor),
-                showlegend=True,
-            )
-        )
-
-        fig.update_layout(title=titulo)
-        #fig.update_xaxes(title=unidade.legendaEixoX)
-        #fig.update_yaxes(title=unidade.legendaEixoY)
-        #fig.update_layout(font=dict(size= unidade.tamanho_texto), 
-        #                  yaxis=dict(range=[limInf,limSup])  
-        #                )
-        return fig
-
-
+            mapaGO[unidade] = go.Scatter(
+                                x = df_conj[colX],
+                                y = df_conj[colY],
+                                name = conj.nome,
+                                line = dict(color = conj.cor),
+                                showlegend=True,
+                            )
+        return mapaGO
 
     def subplot_gera_grafico_linha_casos(
         self,

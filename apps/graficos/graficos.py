@@ -55,7 +55,7 @@ class Graficos:
     def gera_pareto_fast(
         self,
         eixo_x: pd.DataFrame,
-        eixo_y: pd.DataFrame,
+        eixo_y: pd.DataFrame, 
         erro_x :pd.DataFrame,
         erro_y:pd.DataFrame,
         label_x: str,

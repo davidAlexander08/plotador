@@ -91,11 +91,15 @@ class Conjunto:
             #fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concat, unity, unity.titulo)
             #self.graficosConjunto.exportar(fig, diretorio_saida_arg, "conj_medias_"+unity.titulo+"_"+self.estudo)
 
-            fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concat_temporal_segundo_mes, unity, unity.titulo+"_Segundo_Mes")
-            self.graficosConjunto.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_segundo_mes_"+self.estudo)
+            #fig = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(df_concat_temporal_segundo_mes, unity, unity.titulo+"_Segundo_Mes")
+            #self.graficosConjunto.exportar(fig, diretorio_saida_arg, "conj_temporal_"+unity.titulo+"_segundo_mes_"+self.estudo)
 
-            mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaConjDF_Temporal, unity, unity.titulo)
-            for titulo in mapaFig:
-                self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, 2000, 900)
+        mapaGO = self.graficos.gera_grafico_linha(df_concat_temporal_segundo_mes, unity, mapa_temporal)
+        figura = Figura(conjUnity, mapaGO, "Segundo Mes "+conjUnity.titulo+self.estudo)
+        self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
+
+            #mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaConjDF_Temporal, unity, unity.titulo)
+            #for titulo in mapaFig:
+            #    self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, 2000, 900)
 
 
