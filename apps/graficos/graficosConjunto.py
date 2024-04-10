@@ -80,7 +80,54 @@ class GraficosConjunto:
             mapaGO[unity] = listaGO
         return mapaGO
 
+
     def subplot_gera_grafico_linha_casos(
+        self,
+        mapaConjuntoCasos,
+        conjUnity, 
+        unidade,
+        titulo: str,
+        colY = "valor",
+        colX = "index"
+    ) -> go.Figure:
+        
+        mapaFiguras = {}
+        subplot_col = 4
+        subplot_lin = 3
+        fig_subplot = make_subplots(rows=subplot_lin, cols=subplot_col,subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
+        for conj in self.conjuntoCasos:
+            df_conj = mapaConjuntoCasos[conj.nome]
+            contador_col = 1
+            contador_lin = 1
+            contador_titulo = 0
+            for caso in conj.casos:
+                show = True if contador_titulo == 0 else False
+                dfY = df_conj.loc[df_conj["caso"] == caso.nome]["valor"].reset_index(drop=True)
+                dfY = dfY.reset_index(drop = False)
+                fig_subplot.add_trace(
+                    go.Scatter(
+                        x = dfY[colX],
+                        y = dfY[colY],
+                        name = conj.nome,
+                        line = dict(color = conj.cor),
+                        showlegend=show,
+                    ), row = contador_lin, col = contador_col    )
+                fig_subplot.update_xaxes(title=conjUnity.legendaEixoX, row = contador_lin, col = contador_col )
+                fig_subplot.update_yaxes(title=conjUnity.legendaEixoY, row = contador_lin, col = contador_col )
+                contador_col += 1
+                if(contador_col == subplot_col+1):
+                    contador_col = 1
+                    contador_lin += 1
+                fig_subplot.layout.annotations[contador_titulo].update(text=caso.nome)
+                contador_titulo += 1
+
+        fig_subplot.update_layout(title = titulo, 
+                                  font=dict(size= conjUnity.tamanho_texto)
+                                  )
+        mapaFiguras["subplot"+titulo] = fig_subplot
+        return mapaFiguras
+
+    def subplot_gera_grafico_linha_casos_TESTE(
         self,
         mapaConjuntoCasos,
         unidade,

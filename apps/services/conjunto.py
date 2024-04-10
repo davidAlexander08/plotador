@@ -51,10 +51,10 @@ class Conjunto:
 
     def executa(self, conjUnity, diretorio_saida_arg):
 
-        mapaTemporal = {}
+        
         mapaTemporal_2_mes = {}
         for unity in conjUnity.listaUnidades:
-            listaTemporal = []
+            mapaTemporal = {}
             listaTemporal_2_mes = []
             for conjunto in self.conjuntoCasos:
                 indicadores_temporais = IndicadoresTemporais(conjunto.casos)            
@@ -67,16 +67,18 @@ class Conjunto:
                 listaTemporal.append(df_temporal)
                 listaTemporal_2_mes.append(df_temporal_segundo_mes)
 
-            mapaTemporal[unity] = pd.concat(listaTemporal)
+            mapaTemporal[conjunto.nome] = df_temporal
             mapaTemporal_2_mes[unity] = pd.concat(listaTemporal_2_mes)
             
-            indicadores_temporais.exportar(pd.concat(listaTemporal), diretorio_saida_arg,  "temporal_"+unity.titulo+"_"+self.estudo)
+            indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+unity.titulo+"_"+self.estudo)
             indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
+
+            fig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+self.estudo)
+            #for titulo in mapaFig:
+            #    self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, 2000, 900)
 
         mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_2_mes)
         figura = Figura(conjUnity, mapaGO, "Segundo Mes "+conjUnity.titulo+self.estudo)
         self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 
-            #mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaConjDF_Temporal, unity, unity.titulo)
-            #for titulo in mapaFig:
-            #    self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, 2000, 900)
+
