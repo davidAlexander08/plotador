@@ -54,8 +54,8 @@ class Conjunto:
         mapaTemporal = {}
         mapaTemporal_2_mes = {}
         for unity in conjUnity.listaUnidades:
-            listaTemporal = {}
-            listaTemporal_2_mes = {}
+            listaTemporal = []
+            listaTemporal_2_mes = []
             for conjunto in self.conjuntoCasos:
                 indicadores_temporais = IndicadoresTemporais(conjunto.casos)            
 
