@@ -175,7 +175,6 @@ class Graficos:
 
     def gera_grafico_linha(
         self,
-        conjUnity,
         mapa, 
         coly = "valor",
         colx = "index") :

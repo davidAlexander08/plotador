@@ -61,7 +61,6 @@ class GraficosConjunto:
     def gera_grafico_linhas_diferentes_casos(
         self,
         mapa,
-        conjuntoUnidade,
         colY = "valor",
         colX = "caso" ):
         mapaGO = {}
@@ -78,7 +77,7 @@ class GraficosConjunto:
                                     showlegend=True,
                                 )
                 )
-        mapaGO[unidade] = listaGO
+            mapaGO[unity] = listaGO
         return mapaGO
 
     def subplot_gera_grafico_linha_casos(

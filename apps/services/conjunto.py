@@ -73,7 +73,7 @@ class Conjunto:
             indicadores_temporais.exportar(pd.concat(listaTemporal), diretorio_saida_arg,  "temporal_"+unity.titulo+"_"+self.estudo)
             indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_mes_"+unity.titulo+"_"+self.estudo)
 
-        mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_2_mes, conjUnity)
+        mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_2_mes)
         figura = Figura(conjUnity, mapaGO, "Segundo Mes "+conjUnity.titulo+self.estudo)
         self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 

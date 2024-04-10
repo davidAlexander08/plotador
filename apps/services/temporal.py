@@ -47,7 +47,7 @@ class Temporal:
             mapa_temporal[unity] = self.indicadores_temporais.retorna_df_concatenado(unity)
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "temporal "+unity.titulo+" "+self.estudo)
                 
-        mapaGO = self.graficos.gera_grafico_linha(conjUnity, mapa_temporal)
+        mapaGO = self.graficos.gera_grafico_linha(mapa_temporal)
         figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
         
