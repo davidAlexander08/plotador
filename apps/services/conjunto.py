@@ -71,12 +71,12 @@ class Conjunto:
                 #df_unity = indicador_conj_medio.retorna_df_concatenado(unity )
                 #df_unity["conjunto"] = conjunto.nome
 
-                df_temporal = indicadores_temporais.retorna_df_concatenado(unity )
+                df_temporal = indicadores_temporais.retorna_df_concatenado(unity)
                 df_temporal["conjunto"] = conjunto.nome
                 df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
                 df_temporal_segundo_mes["conjunto"] = conjunto.nome
 
-                listaConjDF.append(df_unity)
+                #listaConjDF.append(df_unity)
                 listaConjDF_Temporal_Segundo_Mes.append(df_temporal_segundo_mes)
                 mapaConjDF_Temporal[conjunto.nome]  = df_temporal
                 
