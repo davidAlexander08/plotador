@@ -74,7 +74,7 @@ class GraficosConjunto:
                                     y = df_conj[colY],
                                     name = conj.nome,
                                     line = dict(color = conj.cor),
-                                    showlegend=True,
+                                    showlegend=unity.arg.show,
                                 )
                 )
             mapaGO[unity] = listaGO
