@@ -54,6 +54,7 @@ class Conjunto:
         
         mapaTemporal_2_mes = {}
         for unity in conjUnity.listaUnidades:
+            print(unity.sintese)
             mapaTemporal = {}
             listaTemporal_2_mes = []
             for conjunto in self.conjuntoCasos:
