@@ -12,7 +12,7 @@ class ConjuntoUnidadeSintese (MetaData):
         self.legendaEixoX = legendaEixoX
         self.limites = limites
         self.tamanho_texto = tamanho_texto
-        self.titulo = self.titulo_fig(sintese.sintese)+" SIN" if arg.listaNomes is None else self.titulo_fig(sintese.sintese) + "_"+ arg.nome
+        self.titulo = self.titulo_fig(sintese.sintese) if arg.listaNomes is None else self.titulo_fig(sintese.sintese) + "_"+ arg.nome
         self.legendaEixoY = self.label_y(sintese.sintese) 
 
         if(arg.listaUArg is not None):
