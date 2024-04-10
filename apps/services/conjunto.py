@@ -59,6 +59,7 @@ class Conjunto:
         #self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 
         for unity in conjUnity.listaUnidades:
+            print(unity.arg.nome)
             listaConjDF = []
             listaConjDF_Temporal_Segundo_Mes = []
             mapaConjDF_Temporal = {}
