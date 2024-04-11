@@ -67,4 +67,5 @@ class MetaData:
             "EVER":    ("MWmes", "Energ. Vertida"),
             "EVERF":    ("MWmes", "Energ. Vertida Final"),
             "EXC":    ("MWmes", "Excesso"),
+            "CFU":  ("R$", "Custo Futuro")
         }
