@@ -53,10 +53,12 @@ class Conjunto:
 
         
         mapaTemporal_2_mes = {}
+        mapaTemporal_1_est = {}
         mapaMedio = {}
         for unity in conjUnity.listaUnidades:
             mapaTemporal = {}
             listaTemporal_2_mes = []
+            listaTemporal_1_est = []
             listaMedia = []
             for conjunto in self.conjuntoCasos:
                 indicadores_temporais = IndicadoresTemporais(conjunto.casos)  
@@ -72,6 +74,10 @@ class Conjunto:
                 df_temporal_segundo_mes["conjunto"] = conjunto.nome
                 listaTemporal_2_mes.append(df_temporal_segundo_mes)
 
+                df_temporal_primeiro_est = df_temporal.loc[df_temporal["estagio"] == 1 ].reset_index(drop = True)
+                df_temporal_primeiro_est["conjunto"] = conjunto.nome
+                listaTemporal_1_est.append(df_temporal_primeiro_est)
+
                 df_medio = indicadores_medios.retorna_df_concatenado(unity)
                 df_medio["conjunto"] = conjunto.nome
                 listaMedia.append(df_medio)
@@ -83,16 +89,23 @@ class Conjunto:
                 self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, 2000, 900)
 
             mapaTemporal_2_mes[unity] = pd.concat(listaTemporal_2_mes)
-            indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_mes_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
+            indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_est_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
+
+            mapaTemporal_1_est[unity] = pd.concat(listaTemporal_1_est)
+            indicadores_temporais.exportar(pd.concat(listaTemporal_1_est), diretorio_saida_arg,  "primeiro_est_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
 
             mapaMedio[unity] = pd.concat(listaMedia)
             indicadores_medios.exportar(pd.concat(listaMedia), diretorio_saida_arg,  "media_"+unity.titulo+"_"+self.estudo)
 
+        mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_1_est)
+        figura = Figura(conjUnity, mapaGO, "Primeiro Est "+conjUnity.titulo+self.estudo)
+        self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 
         mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_2_mes)
-        figura = Figura(conjUnity, mapaGO, "Segundo Mes "+conjUnity.titulo+self.estudo)
+        figura = Figura(conjUnity, mapaGO, "Segundo Est "+conjUnity.titulo+self.estudo)
         self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 
         mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaMedio)
         figura = Figura(conjUnity, mapaGO, "Media "+conjUnity.titulo+self.estudo)
         self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
+
