@@ -114,6 +114,18 @@ def analise_operacional(arquivo_json):
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
 
+@click.command("fcf")
+@click.argument(
+    "arquivo_json",
+)
+def analise_fcf(arquivo_json):
+    from apps.services.fcf import FCF
+    if os.path.isfile(arquivo_json):
+        data = Dados_json_caso(arquivo_json)
+        FCF(data)          
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
 cli.add_command(analise_pareto)
 cli.add_command(eco)
 cli.add_command(analise_temporal)
@@ -122,3 +134,4 @@ cli.add_command(analise_anual)
 cli.add_command(analise_conjuntoCasos)
 cli.add_command(analise_cenarios)
 cli.add_command(analise_operacional)
+cli.add_command(analise_fcf)
