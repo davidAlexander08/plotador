@@ -56,16 +56,18 @@ class Cenarios(MetaData):
 
     def executa(self, conj, diretorio_saida_arg):
         for unity in conj.listaUnidades:
-            u_fw = UnidadeSintese(conj.sintese,unity.arg )
-            u_sf = UnidadeSintese(conj.sintese,unity.arg )
+            prefixo_grandeza = conj.sintese.split("_")[0]
+            espacial = conj.sintese.split("_")[1]
+
+            u_fw = UnidadeSintese(prefixo_grandeza+"_"+espacial+"_FOR",unity.arg )
+            u_sf = UnidadeSintese(prefixo_grandeza+"_"+espacial+"_SF",unity.arg )
             
             #df_fw = self.indicadores_cenarios.retorna_df_concatenado(par_unity[0])
             #df_sf = self.indicadores_cenarios.retorna_df_concatenado(par_unity[1])
 
             df_fw = self.indicadores_cenarios.retorna_df_concatenado(u_fw)
             df_sf = self.indicadores_cenarios.retorna_df_concatenado(u_sf)
-            print(df_fw)
-            print(df_sf)
+
 
             filtro_for_1_arg = u_fw.fitroColuna if u_fw.fitroColuna is not None else "" 
             filtro_sf_1_arg = u_sf.fitroColuna if u_sf.fitroColuna is not None else "" 
