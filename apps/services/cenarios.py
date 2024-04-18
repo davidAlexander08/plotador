@@ -8,7 +8,7 @@ from apps.model.argumento import Argumento
 import plotly.graph_objects as go
 import pandas as pd
 from scipy import stats
-from interface.metaData import MetaData
+from apps.interface.metaData import MetaData
 import os
 import json
 
