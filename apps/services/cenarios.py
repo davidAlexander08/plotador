@@ -78,8 +78,10 @@ class Cenarios(MetaData):
             self.indicadores_cenarios.exportar(df_sf , diretorio_saida_arg, "eco_for_"+u_sf.titulo+"_"+filtro_sf+"_"+self.estudo+".csv" )
 
             for c in self.casos:
-                print(c.caminho)
-                df = Vazoes(c.caminho+"/vazoes.dat").vazoes
+                
+                caminho_vazoes = c.caminho+"/vazoes.dat"
+                print(caminho_vazoes)
+                df = Vazoes(caminho_vazoes).vazoes
                 print(df)
             #    df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
             #    df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
