@@ -65,17 +65,17 @@ class Cenarios(MetaData):
             df_fw = self.indicadores_cenarios.retorna_df_concatenado(u_fw)
             df_sf = self.indicadores_cenarios.retorna_df_concatenado(u_sf)
 
-            filtro_for_1_arg = par_unity[0].fitroColuna if par_unity[0].fitroColuna is not None else "" 
-            filtro_sf_1_arg = par_unity[1].fitroColuna if par_unity[1].fitroColuna is not None else "" 
+            filtro_for_1_arg = u_fw.fitroColuna if u_fw.fitroColuna is not None else "" 
+            filtro_sf_1_arg = u_sf.fitroColuna if u_sf.fitroColuna is not None else "" 
 
-            filtro_for = par_unity[0].filtroArgumento if par_unity[0].filtroArgumento is not None else "SIN" 
-            filtro_sf = par_unity[1].filtroArgumento if par_unity[1].filtroArgumento is not None else "SIN" 
+            filtro_for = u_fw.filtroArgumento if u_fw.filtroArgumento is not None else "SIN" 
+            filtro_sf = u_sf.filtroArgumento if u_sf.filtroArgumento is not None else "SIN" 
 
             df_fw =  df_fw[df_fw[['cenario']].apply(lambda x: x[0].isdigit(), axis=1)]
             df_sf =  df_sf[df_sf[['cenario']].apply(lambda x: x[0].isdigit(), axis=1)]
 
-            self.indicadores_cenarios.exportar(df_fw , diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_for+"_"+self.estudo+".csv" )
-            self.indicadores_cenarios.exportar(df_sf , diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_sf+"_"+self.estudo+".csv" )
+            self.indicadores_cenarios.exportar(df_fw , diretorio_saida_arg, "eco_for_"+u_fw.titulo+"_"+filtro_for+"_"+self.estudo+".csv" )
+            self.indicadores_cenarios.exportar(df_sf , diretorio_saida_arg, "eco_for_"+u_sf.titulo+"_"+filtro_sf+"_"+self.estudo+".csv" )
 
             #for c in self.casos:
             #    sample1 = XXX
