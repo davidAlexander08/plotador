@@ -79,7 +79,7 @@ class Cenarios(MetaData):
 
             for c in self.casos:
                 
-                caminho_vazoes = c.caminho+"/vazaos.dat"
+                caminho_vazoes = c.caminho+"/vazoes.dat"
                 print(caminho_vazoes)
                 df = Vazoes(caminho_vazoes).vazoes
                 print(df)
