@@ -10,6 +10,7 @@ import pandas as pd
 from scipy import stats
 from apps.interface.metaData import MetaData
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
+from inewave.newave import Vazoes
 
 import os
 import json
@@ -76,7 +77,10 @@ class Cenarios(MetaData):
             self.indicadores_cenarios.exportar(df_fw , diretorio_saida_arg, "eco_for_"+u_fw.titulo+"_"+filtro_for+"_"+self.estudo+".csv" )
             self.indicadores_cenarios.exportar(df_sf , diretorio_saida_arg, "eco_for_"+u_sf.titulo+"_"+filtro_sf+"_"+self.estudo+".csv" )
 
-            #for c in self.casos:
+            for c in self.casos:
+                print(c.caminho)
+                df = Vazoes(c.caminho)
+                print(df)
             #    df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
             #    df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
             #    lista_estagios = df_caso_sf["estagio"].unique()
