@@ -7,11 +7,12 @@ from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 import plotly.graph_objects as go
 import pandas as pd
-
+from scipy import stats
+from interface.metaData import MetaData
 import os
 import json
 
-class Cenarios:
+class Cenarios(MetaData):
     def __init__(self, data):
         self.estudo = data.estudo
         self.casos = data.casos
@@ -20,7 +21,7 @@ class Cenarios:
         diretorio_saida = f"resultados/{self.estudo}/cenarios"
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        for sts in data.sinteses:
+        for sts in self.default_sts_CEN:
             prefixo_cenarios = sts.sintese.split("_")[2]
             prefixo_grandeza = sts.sintese.split("_")[0]
             if(prefixo_cenarios in ["FOR", "SF"]):
@@ -64,6 +65,10 @@ class Cenarios:
         self.indicadores_cenarios.exportar(df_fw , diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_for+"_"+self.estudo+".csv" )
         self.indicadores_cenarios.exportar(df_sf , diretorio_saida_arg, "eco_for_"+par_unity[0].titulo+"_"+filtro_sf+"_"+self.estudo+".csv" )
 
+        #for c in self.casos:
+        #    sample1 = XXX
+        #    sample2 = XXX
+        #    stats.ks_2samp(sample1, sample2)
 
         #BOXPLOT, SOMA TODOS OS ESTAGIOS, ITER 1, ITER (1-MAX) JUNTOS, SF
         for c in self.casos:
