@@ -14,6 +14,7 @@ import json
 
 class Cenarios(MetaData):
     def __init__(self, data):
+        MetaData.__init__(self)
         self.estudo = data.estudo
         self.casos = data.casos
         self.indicadores_cenarios = IndicadoresCenarios(self.casos)
