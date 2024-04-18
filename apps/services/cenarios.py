@@ -56,8 +56,8 @@ class Cenarios(MetaData):
 
     def executa(self, conj, diretorio_saida_arg):
         for unity in conj.listaUnidades:
-            prefixo_grandeza = conj.sintese.split("_")[0]
-            espacial = conj.sintese.split("_")[1]
+            prefixo_grandeza = conj.sintese.sintese.split("_")[0]
+            espacial = conj.sintese.sintese.split("_")[1]
 
             u_fw = UnidadeSintese(prefixo_grandeza+"_"+espacial+"_FOR",unity.arg )
             u_sf = UnidadeSintese(prefixo_grandeza+"_"+espacial+"_SF",unity.arg )
