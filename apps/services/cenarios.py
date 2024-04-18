@@ -59,8 +59,8 @@ class Cenarios(MetaData):
             prefixo_grandeza = conj.sintese.sintese.split("_")[0]
             espacial = conj.sintese.sintese.split("_")[1]
 
-            u_fw = UnidadeSintese(Sintese(prefixo_grandeza+"_"+espacial+"_FOR",unity.arg) )
-            u_sf = UnidadeSintese(Sintese(prefixo_grandeza+"_"+espacial+"_SF",unity.arg) )
+            u_fw = UnidadeSintese(Sintese(prefixo_grandeza+"_"+espacial+"_FOR"),unity.arg )
+            u_sf = UnidadeSintese(Sintese(prefixo_grandeza+"_"+espacial+"_SF"),unity.arg)
             
             #df_fw = self.indicadores_cenarios.retorna_df_concatenado(par_unity[0])
             #df_sf = self.indicadores_cenarios.retorna_df_concatenado(par_unity[1])
