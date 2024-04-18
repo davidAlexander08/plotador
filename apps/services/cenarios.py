@@ -9,6 +9,8 @@ import plotly.graph_objects as go
 import pandas as pd
 from scipy import stats
 from apps.interface.metaData import MetaData
+from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
+
 import os
 import json
 
@@ -25,12 +27,6 @@ class Cenarios(MetaData):
         print("Apenas serao considerados as seguintes sinteses nesse modulo: ")
         for elemento in self.default_sts_CEN:
             print(elemento.sintese)
-
-        print("Serao considerados todos os argumentos nesse modulo")
-        for argumento in self.mapa_argumentos["TODOS"]:
-            print(argumento.nome)
-        
-
 
         for sts in self.default_sts_CEN:
             prefixo_cenarios = sts.sintese.split("_")[2]
