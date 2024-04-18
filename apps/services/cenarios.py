@@ -79,7 +79,7 @@ class Cenarios(MetaData):
 
             for c in self.casos:
                 print(c.caminho)
-                df = Vazoes(c.caminho)
+                df = Vazoes(c.caminho).vazoes
                 print(df)
             #    df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
             #    df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
