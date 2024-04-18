@@ -22,7 +22,8 @@ class Cenarios(MetaData):
         os.makedirs(diretorio_saida, exist_ok=True)
 
         print("Apenas serao considerados as seguintes sinteses nesse modulo: ")
-        print(self.default_sts_CEN)
+        for elemento in self.default_sts_CEN:
+            print(elemento.sintese)
 
         for sts in self.default_sts_CEN:
             prefixo_cenarios = sts.sintese.split("_")[2]
