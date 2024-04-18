@@ -64,6 +64,8 @@ class Cenarios(MetaData):
 
             df_fw = self.indicadores_cenarios.retorna_df_concatenado(u_fw)
             df_sf = self.indicadores_cenarios.retorna_df_concatenado(u_sf)
+            print(df_fw)
+            print(df_sf)
 
             filtro_for_1_arg = u_fw.fitroColuna if u_fw.fitroColuna is not None else "" 
             filtro_sf_1_arg = u_sf.fitroColuna if u_sf.fitroColuna is not None else "" 
