@@ -50,9 +50,7 @@ class Cenarios(MetaData):
                             self.executa(conj,diretorio_saida_arg )
             else:
                 print("SINTESE: ",sts.sintese," NAO VALIDA PARA ANALISE DE CENARIOS")
-                #sts_for = Sintese(prefixo_grandeza+"_"+espacial+"_FOR")
-                #sts_sf = Sintese(prefixo_grandeza+"_"+espacial+"_SF")
-                   # par = (unity_for, unity_sf)
+
 
     def executa(self, conj, diretorio_saida_arg):
         for unity in conj.listaUnidades:
@@ -62,9 +60,6 @@ class Cenarios(MetaData):
             u_fw = UnidadeSintese(Sintese(prefixo_grandeza+"_"+espacial+"_FOR"),unity.arg )
             u_sf = UnidadeSintese(Sintese(prefixo_grandeza+"_"+espacial+"_SF"),unity.arg)
             
-            #df_fw = self.indicadores_cenarios.retorna_df_concatenado(par_unity[0])
-            #df_sf = self.indicadores_cenarios.retorna_df_concatenado(par_unity[1])
-
             df_fw = self.indicadores_cenarios.retorna_df_concatenado(u_fw)
             df_sf = self.indicadores_cenarios.retorna_df_concatenado(u_sf)
 
@@ -82,9 +77,16 @@ class Cenarios(MetaData):
             self.indicadores_cenarios.exportar(df_sf , diretorio_saida_arg, "eco_for_"+u_sf.titulo+"_"+filtro_sf+"_"+self.estudo+".csv" )
 
             #for c in self.casos:
-            #    sample1 = XXX
-            #    sample2 = XXX
-            #    stats.ks_2samp(sample1, sample2)
+            #    df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
+            #    df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
+            #    lista_estagios = df_caso_sf["estagio"].unique()
+            #    for est in lista_estagios:
+            #        lista_iter = df_caso_fw["iteracao"].unique()
+            #        for iter in lista_iter:
+            #            
+            #            sample1 = XXX
+            #            sample2 = XXX
+            #            stats.ks_2samp(sample1, sample2)
 
             #BOXPLOT, SOMA TODOS OS ESTAGIOS, ITER 1, ITER (1-MAX) JUNTOS, SF
             for c in self.casos:
