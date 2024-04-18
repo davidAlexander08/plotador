@@ -26,6 +26,12 @@ class Cenarios(MetaData):
         for elemento in self.default_sts_CEN:
             print(elemento.sintese)
 
+        print("Serao considerados todos os argumentos nesse modulo")
+        for argumento in self.mapa_argumentos["TODOS"]:
+            print(argumento.nome)
+        
+
+
         for sts in self.default_sts_CEN:
             prefixo_cenarios = sts.sintese.split("_")[2]
             prefixo_grandeza = sts.sintese.split("_")[0]
@@ -34,20 +40,20 @@ class Cenarios(MetaData):
                 sts_for = Sintese(prefixo_grandeza+"_"+espacial+"_FOR")
                 sts_sf = Sintese(prefixo_grandeza+"_"+espacial+"_SF")
                 if(espacial == "SIN"):
-                    arg = Argumento(None, None)
-                    diretorio_saida_arg = diretorio_saida+"/"+espacial
+                    arg = Argumento(None, None, "SIN")
+                    diretorio_saida_arg = diretorio_saida+"/"+arg.nome
                     os.makedirs(diretorio_saida_arg, exist_ok=True)
-                    unity_for = UnidadeSintese(sts_for, "", arg, tamanho_texto = data.tamanho_texto)
-                    unity_sf = UnidadeSintese(sts_sf, "", arg, tamanho_texto = data.tamanho_texto)
+                    unity_for = ConjuntoUnidadeSintese(sts_for,arg , "casos", data.limites, data.tamanho_texto)
+                    unity_sf = ConjuntoUnidadeSintese(sts_sf,arg , "casos", data.limites, data.tamanho_texto)
                     par = (unity_for, unity_sf)
                     self.executa(par,diretorio_saida_arg )
                 else:
                     for arg in data.args:
                         if(espacial == arg.chave):
-                            diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
+                            diretorio_saida_arg = diretorio_saida+"/"+arg.nome
                             os.makedirs(diretorio_saida_arg, exist_ok=True)
-                            unity_for = UnidadeSintese(sts_for, "casos", arg, tamanho_texto = data.tamanho_texto)
-                            unity_sf = UnidadeSintese(sts_sf, "casos", arg, tamanho_texto = data.tamanho_texto)
+                            unity_for = ConjuntoUnidadeSintese(sts_for, arg, "casos", data.limites, data.tamanho_texto)
+                            unity_sf = ConjuntoUnidadeSintese(sts_sf, arg, "casos", data.limites, data.tamanho_texto)
                             par = (unity_for, unity_sf)
                             self.executa(par,diretorio_saida_arg )
             else:
