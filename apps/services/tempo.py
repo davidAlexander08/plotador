@@ -31,7 +31,7 @@ class Tempo:
             lista_color.append(caso.cor)
 
         fig = self.graficos.gera_grafico_barras_diferentes(df_temp, colX = "etapa", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "horas",
-         aproximacao = 2, titulo = "Tempo de processamento", color = lista_color)
+         aproximacao = 2, titulo = "Tempo de processamento", lista_cor = lista_color)
         self.graficos.exportar(fig, diretorio_saida, "Tempo")
                         
 
