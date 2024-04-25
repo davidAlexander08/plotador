@@ -27,6 +27,9 @@ class Tempo:
         sts = Sintese("TEMPO")
         arg = Argumento(["Calculo da Politica"], "","Calculo da Politica")
         conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
+        mapa = {}
+        for unity in conjUnity.listaUnidades:
+            print(unity.sintese)
         df_tempo = self.eco_indicadores.retorna_df_concatenado("TEMPO")
         print(df_tempo)
 
