@@ -24,7 +24,6 @@ class Tempo:
         diretorio_saida = f"resultados/{self.estudo}/tempo"
         os.makedirs(diretorio_saida, exist_ok=True)
         
-        sts = Sintese("TEMPO")
         df_tempo = self.eco_indicadores.retorna_df_concatenado("TEMPO")
         print(df_tempo)
 
