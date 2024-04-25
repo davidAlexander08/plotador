@@ -282,8 +282,9 @@ class Graficos:
         eixoY:str,
         aproximacao:int,
         titulo:str,
-        colors = self.pre_defined_colors
+        lista_cor = []
     ) -> go.Figure:
+        colors = self.pre_defined_colors if (len(lista_cor) == 0 ) else lista_cor
         Log.log().info("Gerando grafico "+titulo)
         fig = go.Figure()
         indiceCor = 0
