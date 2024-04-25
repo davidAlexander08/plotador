@@ -24,7 +24,8 @@ class ConjuntoUnidadeSintese (MetaData):
 
     def label_y(self, sintese):
         operacional = sintese.split("_")[0]
-        return self.mapa_sintese[operacional][0]
+        labely = self.mapa_sintese[operacional][0] if len(sintese.split("_")) > 1 else ""
+        return labely
 
     def titulo_fig(self, sintese):
         operacional = sintese.split("_")[0] 
