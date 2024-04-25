@@ -126,6 +126,18 @@ def analise_fcf(arquivo_json):
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
+@click.command("tempo")
+@click.argument(
+    "arquivo_json",
+)
+def analise_tempo(arquivo_json):
+    from apps.services.tempo import Tempo
+    if os.path.isfile(arquivo_json):
+        data = Dados_json_caso(arquivo_json)
+        Tempo(data)          
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
 cli.add_command(analise_pareto)
 cli.add_command(eco)
 cli.add_command(analise_temporal)
@@ -135,3 +147,4 @@ cli.add_command(analise_conjuntoCasos)
 cli.add_command(analise_cenarios)
 cli.add_command(analise_operacional)
 cli.add_command(analise_fcf)
+cli.add_command(analise_tempo)
