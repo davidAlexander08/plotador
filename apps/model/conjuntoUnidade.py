@@ -27,6 +27,6 @@ class ConjuntoUnidadeSintese (MetaData):
         return self.mapa_sintese[operacional][0]
 
     def titulo_fig(self, sintese):
-        operacional = sintese.split("_")[0]
-        espacial = sintese.split("_")[1]
+        operacional = sintese.split("_")[0] 
+        espacial = sintese.split("_")[1] if len(sintese.split("_")) > 1 else ""
         return self.mapa_sintese[operacional][1]+" "+espacial 
