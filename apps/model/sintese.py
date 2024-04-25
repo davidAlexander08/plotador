@@ -20,7 +20,7 @@ class Sintese:
             "SIN": None
         }
         self.sintese = sts  
-        self.filtro = self.retornaFiltro(sts)
+        self.filtro = self.retornaFiltro(sts) if len(sts.split("_")) > 1 else ""
 
 
     @classmethod

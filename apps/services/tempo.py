@@ -24,14 +24,17 @@ class Tempo:
         diretorio_saida = f"resultados/{self.estudo}/tempo"
         os.makedirs(diretorio_saida, exist_ok=True)
         
+        sts = Sintese("TEMPO")
+        arg = Argumento(["Calculo da Politica"], chave_usina, "Calculo da Politica")
+        conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
         df_tempo = self.eco_indicadores.retorna_df_concatenado("TEMPO")
         print(df_tempo)
 
+        #mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+" "+self.estudo)
+        #figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo)
+        #self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 
                     #conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
-                    #diretorio_saida_arg = diretorio_saida+"/"+arg.nome
-                    #os.makedirs(diretorio_saida_arg, exist_ok=True)
-                    #self.executa(conj,diretorio_saida_arg )
                         
 
  
