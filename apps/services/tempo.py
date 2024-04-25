@@ -35,7 +35,7 @@ class Tempo:
 
         mapaGO = self.graficos.gera_grafico_barra(conj, mapa, "Tempo Calculo da Politica"+self.estudo, coly = "tempo", colx = "etapa")
         figura = Figura(conj, mapaGO, conj.sintese.sintese+" "+self.estudo)
-        self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
+        self.graficos.exportar(figura.fig, diretorio_saida, figura.titulo)
 
                     #conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
                         
