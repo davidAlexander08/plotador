@@ -26,7 +26,12 @@ class Tempo:
         
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
         df_temp["tempo"] = df_temp["tempo"] /(60*60)
-        fig = self.graficos.gera_grafico_barras_diferentes(df_temp, colX = "etapa", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "horas", aproximacao = 2, titulo = "Tempo de processamento" )
+        lista_color = []
+        for caso in data.casos:
+            lista_color.append(caso.cor)
+
+        fig = self.graficos.gera_grafico_barras_diferentes(df_temp, colX = "etapa", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "horas",
+         aproximacao = 2, titulo = "Tempo de processamento", color = lista_color)
         self.graficos.exportar(fig, diretorio_saida, "Tempo")
                         
 

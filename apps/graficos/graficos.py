@@ -281,7 +281,8 @@ class Graficos:
         eixoX:str,
         eixoY:str,
         aproximacao:int,
-        titulo:str
+        titulo:str,
+        colors = self.pre_defined_colors
     ) -> go.Figure:
         Log.log().info("Gerando grafico "+titulo)
         fig = go.Figure()
@@ -297,7 +298,7 @@ class Graficos:
                     textfont=dict(
                         size=15,
                     ),
-                    marker_color=self.pre_defined_colors[indiceCor],
+                    marker_color=colors[indiceCor],
                     showlegend=True
                 )
             )
