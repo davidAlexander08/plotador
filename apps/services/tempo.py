@@ -33,11 +33,12 @@ class Tempo:
             mapa[unity] = self.eco_indicadores.retorna_df_concatenado("TEMPO")
             print(mapa[unity])
 
-        mapaGO = self.graficos.gera_grafico_barra(conj, mapa, "Tempo Calculo da Politica"+self.estudo, coly = "tempo", colx = "etapa")
-        figura = Figura(conj, mapaGO, conj.sintese.sintese+" "+self.estudo)
-        self.graficos.exportar(figura.fig, diretorio_saida, figura.titulo)
-
-                    #conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
+        #mapaGO = self.graficos.gera_grafico_barra(conj, mapa, "Tempo Calculo da Politica"+self.estudo, coly = "tempo", colx = "etapa")
+        #figura = Figura(conj, mapaGO, conj.sintese.sintese+" "+self.estudo)
+        #self.graficos.exportar(figura.fig, diretorio_saida, figura.titulo)
+        df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+        fig = gera_grafico_barras_diferentes(df_temp, colX = "etapa", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "segundos", aproximacao = 2, titulo = "Tempo de processamento" )
+        self.graficos.exportar(fig, diretorio_saida, "Tempo")
                         
 
  
