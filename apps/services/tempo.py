@@ -30,12 +30,12 @@ class Tempo:
         mapa = {}
         for unity in conj.listaUnidades:
             print(unity.sintese)
-        df_tempo = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-        print(df_tempo)
+            mapa[unity] = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+            print(mapa[unity])
 
-        #mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+" "+self.estudo)
-        #figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo)
-        #self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
+        mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa, "Tempo Calculo da Politica"+self.estudo)
+        figura = Figura(conjUnity, mapaGO, conjUnity.sintese.sintese+" "+self.estudo)
+        self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 
                     #conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
                         
