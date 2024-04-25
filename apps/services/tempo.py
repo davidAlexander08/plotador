@@ -29,8 +29,8 @@ class Tempo:
         lista_color = []
         for caso in data.casos:
             lista_color.append(caso.cor)
-
-        fig = self.graficos.gera_grafico_barras_diferentes(df_temp, colX = "etapa", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "horas",
+        print(df_temp)
+        fig = self.graficos.gera_grafico_barras_diferentes(df_temp, colX = "etapa", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "minutos",
          aproximacao = 2, titulo = "Tempo de processamento", lista_cor = lista_color)
         self.graficos.exportar(fig, diretorio_saida, "Tempo"+self.estudo)
                         
