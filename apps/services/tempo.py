@@ -18,7 +18,7 @@ class Tempo:
     #Faz gráficos de tempo de execução apenas
     def __init__(self, data):
         self.estudo = data.estudo
-        self.eco_indicadores = EcoIndicadores(casos)
+        self.eco_indicadores = EcoIndicadores(data.casos)
         self.graficos = Graficos(data.casos)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/tempo"
