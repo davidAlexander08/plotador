@@ -9,7 +9,7 @@ from apps.model.argumento import Argumento
 from apps.model.unidadeArgumental import UnidadeArgumental
 from apps.graficos.figura import Figura
 from apps.indicadores.eco_indicadores import EcoIndicadores
-
+import pandas as pd
 import os
 import json
 
@@ -33,7 +33,7 @@ class Tempo:
         temp = []
         temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
         temp.append(df_temp.loc[(df_temp["etapa"] == "Tempo Total")])
-        df = pd.concat(temp)
+        df = pd.concat(temp).reset_index(drop = True)
         print(df)
         fig = self.graficos.gera_grafico_barras_diferentes(df, colX = "etapa", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "minutos",
          aproximacao = 2, titulo = "Tempo de processamento", lista_cor = lista_color)
