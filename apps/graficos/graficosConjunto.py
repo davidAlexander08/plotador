@@ -18,7 +18,7 @@ class GraficosConjunto:
         self.conjuntoCasos = conjuntoCasos
 
 
-    def exportar(self, figura, diretorio_saida, nome_arquivo, W = 2000, H = 1400):
+    def exportar(self, figura, diretorio_saida, nome_arquivo, W = 2400, H = 1400):
         Log.log().info("Gerando grafico "+nome_arquivo)
         figura.write_image(
             os.path.join(diretorio_saida, nome_arquivo+".png"),
