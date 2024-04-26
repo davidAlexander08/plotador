@@ -39,7 +39,7 @@ class Tempo:
         self.eco_indicadores.exportar(df, diretorio_saida,"Tempo"+self.estudo )
 
         fig = self.graficos.gera_grafico_barras_diferentes(df, colX = "etapa", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "minutos",
-         aproximacao = 2, titulo = "Tempo de processamento", lista_cor = lista_color)
+         aproximacao = 2, titulo = "Tempo de processamento"+"_"+self.estudo, lista_cor = lista_color)
         self.graficos.exportar(fig, diretorio_saida, "Tempo"+self.estudo)
                         
 
