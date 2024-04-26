@@ -297,7 +297,7 @@ class Graficos:
                     textposition = "outside",
                     name = cat,
                     textfont=dict(
-                        size=20,
+                        size=30,
                     ),
                     marker_color=colors[indiceCor],
                     showlegend=True
@@ -309,7 +309,7 @@ class Graficos:
 
         fig.update_xaxes(title_text=eixoX)
         fig.update_yaxes(title_text=eixoY)
-        fig.update_layout(font=dict(size= 25))
+        fig.update_layout(font=dict(size= 30))
         fig.update_layout(title=titulo)
         return fig
 
