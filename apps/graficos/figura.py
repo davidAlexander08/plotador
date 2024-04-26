@@ -16,7 +16,8 @@ class Figura():
                 lim_inf = min(trace.y) if len(trace.y) is not 0 else 0
                 self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col)
             self.fig.update_xaxes(title=conjUnity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
-            self.fig.update_yaxes(title=conjUnity.legendaEixoY, row = unity.arg.lin , col = unity.arg.col) 
+            if(unity.arg.lin == 1 and unity.arg.col == 1):
+                self.fig.update_yaxes(title=conjUnity.legendaEixoY, row = unity.arg.lin , col = unity.arg.col) 
             if(len(conjUnity.listaUnidades) > 1):
                 self.fig.layout.annotations[unity.arg.t].update(text=unity.arg.nome) 
             self.fig.update_layout(title= titulo)
