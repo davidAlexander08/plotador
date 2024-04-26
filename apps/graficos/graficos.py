@@ -309,6 +309,7 @@ class Graficos:
 
         fig.update_xaxes(title_text=eixoX)
         fig.update_yaxes(title_text=eixoY)
+        fig.update_layout(font=dict(size= 20))
         fig.update_layout(title=titulo)
         return fig
 
