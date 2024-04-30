@@ -37,7 +37,7 @@ class IndicadoresTemporais(EcoIndicadores):
 
     def retorna_mapaDF_cenario_medio_temporal(self, unidade):
         eco_mapa = self.retornaMapaDF(unidade.sintese)
-        print(eco_mapa)
+        print(unidade.sintese)
         mapa_temporal = {}
         if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
             return self.__retorna_mapa_media_parquet(eco_mapa)
