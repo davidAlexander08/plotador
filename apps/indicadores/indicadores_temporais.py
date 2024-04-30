@@ -31,12 +31,13 @@ class IndicadoresTemporais(EcoIndicadores):
         dict = {}
         for c in self.casos:
             df = mapa[c]
-            print(df)
+            #print(df)
             dict[c] = df.loc[df["cenario"] == "mean"].reset_index(drop = True)
         return dict
 
     def retorna_mapaDF_cenario_medio_temporal(self, unidade):
         eco_mapa = self.retornaMapaDF(unidade.sintese)
+        print(eco_mapa)
         mapa_temporal = {}
         if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
             return self.__retorna_mapa_media_parquet(eco_mapa)
