@@ -31,6 +31,7 @@ class IndicadoresTemporais(EcoIndicadores):
         dict = {}
         for c in self.casos:
             df = mapa[c]
+            print(df)
             dict[c] = df.loc[df["cenario"] == "mean"].reset_index(drop = True)
         return dict
 
