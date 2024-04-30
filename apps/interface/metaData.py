@@ -70,4 +70,5 @@ class MetaData:
             "CFU":  ("R$", "Custo Futuro"),
             "VAGUA":  ("R$", "Valor Agua"),
             "VAGUAI":  ("R$", "Valor Agua Incr.")
+            "VVER":("hm3","Volume Vertido")
         }
