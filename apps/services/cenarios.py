@@ -110,8 +110,8 @@ class Cenarios(MetaData):
                         lista_estagios = df_caso_sf["estagio"].unique()
                         for est in lista_estagios:
                             lista_iter = df_caso_fw["iteracao"].unique()
-                            df_caso_sf_est = df_caso_sf.loc[df_caso_sf["estagio"] == est]
-                            data = df_caso_sf_est["dataInicio"].iloc[0]
+                            df_caso_fw = df_caso_sf.loc[df_caso_sf["estagio"] == est]
+                            data = df_caso_fw["dataInicio"].iloc[0]
                             exit(1)
                             print(df_caso_sf_est)
                             for it in lista_iter:
