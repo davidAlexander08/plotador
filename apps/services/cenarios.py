@@ -128,7 +128,6 @@ class Cenarios(MetaData):
                                 #lista_est_fig.append(est)
                                 #lista_iter_fig.append(it)
                                 #lista_pvalue_fig.append(A.pvalue)
-                        fig.add_trace(go.Scatter(x = est, y = it, mode = "markers", marker_color="rgba(0,0,0,"+str(A.pvalue)+")" , symbol = "square"))
                         fig.update_layout(    title="P Valor KW",    showlegend=False)
                         self.graficos.exportar(fig, diretorio_saida_arg, "P_Valor_"+self.estudo+".png")
 
