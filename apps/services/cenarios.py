@@ -121,7 +121,8 @@ class Cenarios(MetaData):
                         sample1 = df_caso_sf_est["valor"].tolist()
                         sample2 = df_caso_fw_iter_est["valor"].tolist()
                         A = stats.ks_2samp(sample1, sample2)
-                        print(A)
+                        print(A.pvalue)
+                        exit(1)
 
 
             #BOXPLOT, SOMA TODOS OS ESTAGIOS, ITER 1, ITER (1-MAX) JUNTOS, SF
