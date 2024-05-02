@@ -264,6 +264,7 @@ class Cenarios(MetaData):
         df_vazoes = pd.DataFrame(columns=["posto", "ano", "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"])
         while True:
             chunk = f.read(4)
+            print(chunk)
             if not chunk:
                 break
             number = int.from_bytes(chunk, byteorder='little')
