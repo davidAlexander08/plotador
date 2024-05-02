@@ -278,7 +278,7 @@ class Cenarios(MetaData):
         f.close()
 
         
-        for posto in range(1, 2):
+        for posto in range(1, POSTOS+1):
             ano = 1931
             for a in range(0,int(len(dic[posto])/12)-1):
                 lista = []
