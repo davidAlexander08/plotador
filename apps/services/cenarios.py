@@ -104,24 +104,22 @@ class Cenarios(MetaData):
                             df_posto = df_posto.drop(["posto",'ano', 'caso'], axis=1)
                             df_ini = df_ini + df_posto
                         
-                            print(df_ini)
-                        
-                            
-                        exit(1)
+                        print(df_ini)
 
 
 
-            #    df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
-            #    df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
-            #    lista_estagios = df_caso_sf["estagio"].unique()
-            #    for est in lista_estagios:
-            #        lista_iter = df_caso_fw["iteracao"].unique()
-            #        for iter in lista_iter:
-            #            
-            #            sample1 = XXX
-            #            sample2 = XXX
-            #            stats.ks_2samp(sample1, sample2)
-
+                df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
+                df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
+                lista_estagios = df_caso_sf["estagio"].unique()
+                for est in lista_estagios:
+                    lista_iter = df_caso_fw["iteracao"].unique()
+                    df_caso_sf_est = df_caso_sf.loc[df_caso_sf["estagio"] == est]
+                    for it in lista_iter:
+                        df_caso_fw_iter_est = df_caso_fw.loc[(df_caso_fw["estagio"] == est) & (df_caso_fw["iteracao"] == it)]
+                        sample1 = df_caso_sf_est.tolist()
+                        sample2 = df_caso_fw_iter_est.tolist()
+                        A = stats.ks_2samp(sample1, sample2)
+                        print(A)
 
 
             #BOXPLOT, SOMA TODOS OS ESTAGIOS, ITER 1, ITER (1-MAX) JUNTOS, SF
