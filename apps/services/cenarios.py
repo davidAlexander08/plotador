@@ -129,11 +129,12 @@ class Cenarios(MetaData):
                         df_caso_sf = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
                         lista_estagios = df_caso_sf["estagio"].unique()
                         for est in lista_estagios:
-                            df_caso_sf = df_caso_sf.loc[df_caso_sf["estagio"] == est]
-                            data = df_caso_sf["dataInicio"].iloc[0].month
+                            df_caso_sf_est = df_caso_sf.loc[df_caso_sf["estagio"] == est]
+                            print(df_caso_sf_est)
+                            data = df_caso_sf_est["dataInicio"].iloc[0].month
                             df_hist = df_ini[map_mes[data]]
                             sample1 = df_hist.values.tolist()
-                            sample2 = df_caso_sf["valor"].tolist()
+                            sample2 = df_caso_sf_est["valor"].tolist()
                             A = stats.ks_2samp(sample1, sample2)
                             print("est: ", est, " pvalor: ", A.pvalue)
                             fig.add_trace(go.Scatter(x = [est], y = [51], mode = "markers", marker_color="rgba(255,0,0,"+str(1 - round(A.pvalue,5))+")" , marker=dict(symbol="square", size=15)))
