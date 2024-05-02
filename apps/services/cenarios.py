@@ -52,49 +52,6 @@ class Cenarios(MetaData):
             else:
                 print("SINTESE: ",sts.sintese," NAO VALIDA PARA ANALISE DE CENARIOS")
 
-    def le_vazoes(self, arq):
-        f = open(arq, mode="rb")
-        POSTOS = 320
-        dic = {}
-        posto = 1
-        df_vazoes = pd.DataFrame(columns=["posto", "ano", "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"])
-        while True:
-            chunk = f.read(4)
-            if not chunk:
-                break
-            number = int.from_bytes(chunk, byteorder='little')
-            if dic.get(posto) is None:
-                dic[posto] = []
-                dic[posto].append(number)
-            else:
-                dic[posto].append(number)
-            posto = posto + 1
-            if(posto == POSTOS+1):
-                posto = 1
-        f.close()
-
-        ano = 1931
-        for posto in range(1, POSTOS+1):
-            for a in range(0,int(len(dic[posto])/12)):
-                lista = []
-                new_row = pd.DataFrame({"posto": posto,
-                                        "ano": ano,
-                                        "JAN": dic[posto][0+ a*12],
-                                        "FEV": dic[posto][1+ a*12],
-                                        "MAR": dic[posto][2+ a*12],
-                                        "ABR": dic[posto][3+ a*12],
-                                        "MAI": dic[posto][4+ a*12],
-                                        "JUN": dic[posto][5+ a*12],
-                                        "JUL": dic[posto][6+ a*12],
-                                        "AGO": dic[posto][7+ a*12],
-                                        "SET": dic[posto][8+ a*12],
-                                        "OUT": dic[posto][9+ a*12],
-                                        "NOV": dic[posto][10+ a*12],
-                                        "DEZ": dic[posto][11+ a*12]},
-                                        index = [0])
-                df_vazoes = pd.concat([df_vazoes.loc[:],new_row]).reset_index(drop=True)
-                ano = ano + 1
-            print("Leitura Vazoes Posto: ", posto)
 
     def executa(self, conj, diretorio_saida_arg):
         for unity in conj.listaUnidades:
@@ -120,10 +77,26 @@ class Cenarios(MetaData):
             self.indicadores_cenarios.exportar(df_fw , diretorio_saida_arg, "eco_for_"+u_fw.titulo+"_"+filtro_for+"_"+self.estudo+".csv" )
             self.indicadores_cenarios.exportar(df_sf , diretorio_saida_arg, "eco_for_"+u_sf.titulo+"_"+filtro_sf+"_"+self.estudo+".csv" )
 
-            for c in self.casos:
-                arquivo_vazoes = c.caminho+"/vazoes.dat"
-                df = self.le_vazoes(arquivo_vazoes)
-                print(df)
+            df_vazoes = pd.DataFrame()
+            if(u_fw.filtroArgumento is None):
+                if(df_vazoes.empty):
+                    lista_df = []
+                    for c in self.casos:
+                        arquivo_vazoes = c.caminho+"/vazoes.dat"
+                        df = self.le_vazoes(arquivo_vazoes)
+                        df["caso"] = c.nome
+                        lista_df.append(df)
+                    df_vazoes = pd.concat(lista_df)
+                    print(df_vazoes)
+            
+            df_vazoes_SIN = pd.DataFrame()
+            if(u_fw.filtroArgumento is None):
+                if(df_vazoes_SIN.empty):
+                    lista_df = []
+                    for c in self.casos:
+                        df_c = df_vazoes.loc[df_vazoes["caso"] == c.nome]
+                        anos = df_c["ano"].unique()
+                        print(anos)
 
 
 
@@ -137,6 +110,8 @@ class Cenarios(MetaData):
             #            sample1 = XXX
             #            sample2 = XXX
             #            stats.ks_2samp(sample1, sample2)
+
+
 
             #BOXPLOT, SOMA TODOS OS ESTAGIOS, ITER 1, ITER (1-MAX) JUNTOS, SF
             for c in self.casos:
@@ -278,3 +253,48 @@ class Cenarios(MetaData):
        #     sintese_sf = UnidadeSintese("QINC_UHE_SF", "hm3", "casos" ,"QINC_UHE_SF_"+u.nome, "usina", u.nome)
        #     par_enaa_uhe = (sintese_fw, sintese_sf)
        #     lista_par_enaa.append(par_enaa_uhe)
+
+
+    def le_vazoes(self, arq):
+        f = open(arq, mode="rb")
+        POSTOS = 320
+        dic = {}
+        posto = 1
+        df_vazoes = pd.DataFrame(columns=["posto", "ano", "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"])
+        while True:
+            chunk = f.read(4)
+            if not chunk:
+                break
+            number = int.from_bytes(chunk, byteorder='little')
+            if dic.get(posto) is None:
+                dic[posto] = []
+                dic[posto].append(number)
+            else:
+                dic[posto].append(number)
+            posto = posto + 1
+            if(posto == POSTOS+1):
+                posto = 1
+        f.close()
+
+        ano = 1931
+        for posto in range(1, POSTOS+1):
+            for a in range(0,int(len(dic[posto])/12)):
+                lista = []
+                new_row = pd.DataFrame({"posto": posto,
+                                        "ano": ano,
+                                        "JAN": dic[posto][0+ a*12],
+                                        "FEV": dic[posto][1+ a*12],
+                                        "MAR": dic[posto][2+ a*12],
+                                        "ABR": dic[posto][3+ a*12],
+                                        "MAI": dic[posto][4+ a*12],
+                                        "JUN": dic[posto][5+ a*12],
+                                        "JUL": dic[posto][6+ a*12],
+                                        "AGO": dic[posto][7+ a*12],
+                                        "SET": dic[posto][8+ a*12],
+                                        "OUT": dic[posto][9+ a*12],
+                                        "NOV": dic[posto][10+ a*12],
+                                        "DEZ": dic[posto][11+ a*12]},
+                                        index = [0])
+                df_vazoes = pd.concat([df_vazoes.loc[:],new_row]).reset_index(drop=True)
+                ano = ano + 1
+            print("Leitura Vazoes Posto: ", posto)
