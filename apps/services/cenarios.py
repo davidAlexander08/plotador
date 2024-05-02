@@ -300,7 +300,4 @@ class Cenarios(MetaData):
                 df_vazoes = pd.concat([df_vazoes.loc[:],new_row]).reset_index(drop=True)
                 ano = ano + 1
             print("Leitura Vazoes Posto: ", posto)
-        print(df_vazoes)
-        print(df_vazoes.loc[df_vazoes["posto"] == 1])
-        exit(1)
-        return df_vazoes
+       return df_vazoes
