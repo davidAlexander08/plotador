@@ -119,7 +119,7 @@ class Cenarios(MetaData):
                             #print(df_caso_fw_est)
                             #print(df_hist)
                             for it in lista_iter:
-                                if((est == 1) and it ==1):
+                                if((est == 1) and (it == 1)):
                                     b_show = True
                                 else:
                                     False
@@ -142,8 +142,10 @@ class Cenarios(MetaData):
                             sample2 = df_caso_sf_est["valor"].tolist()
                             A = stats.ks_2samp(sample1, sample2)
                             print("est: ", est, " pvalor: ", A.pvalue)
-                            fig.add_trace(go.Scatter(x = [est], y = [51], mode = "markers", marker_color="rgba(255,0,0,"+str(1 - round(A.pvalue,5))+")" , marker=dict(symbol="square", size=15), name = "SF", showlegend = b_show))
-                        fig.update_layout(    title="P Valor KW2 SF-FW-Hist",    showlegend=False)
+                            fig.add_trace(go.Scatter(x = [est], y = [0], mode = "markers", marker_color="rgba(255,0,0,"+str(1 - round(A.pvalue,5))+")" , marker=dict(symbol="square", size=15), name = "SF", showlegend = b_show))
+                        fig.update_layout(    title="P Valor KW2 SF-FW-Hist",    showlegend=True)
+                        fig.update_xaxes(title_text='Estagio')
+                        fig.update_yaxes(title_text='Iteracao')
                         self.graficos.exportar(fig, diretorio_saida_arg, "P_Valor_Hist_FW_SF_"+self.estudo+".png")
 
 
