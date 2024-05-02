@@ -83,9 +83,8 @@ class Cenarios(MetaData):
                     lista_df = []
                     for c in self.casos:
                         arquivo_vazoes = c.caminho+"/vazoes.dat"
+                        print(arquivo_vazoes)
                         df = self.le_vazoes(arquivo_vazoes)
-                        print(c.nome)
-                        print(df)
                         df["caso"] = c.nome
                         lista_df.append(df)
                     df_vazoes = pd.concat(lista_df)
