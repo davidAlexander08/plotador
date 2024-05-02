@@ -98,15 +98,14 @@ class Cenarios(MetaData):
                         df_c = df_vazoes.loc[df_vazoes["caso"] == c.nome]
                         postos = df_c["posto"].unique()
                         df_ini = df_vazoes.loc[df_vazoes["posto"] == 1]*0
-                        
                         df_ini = df_ini.drop(["posto",'ano', 'caso'], axis=1)
-                        print(df_ini)
-                        print(postos)
                         for posto in postos:
                             df_posto = df_vazoes.loc[df_vazoes["posto"] == posto].reset_index(drop = True)
                             df_posto = df_posto.drop(["posto",'ano', 'caso'], axis=1)
                             df_ini = df_ini + df_posto
-                            print(df_ini)
+                        
+                        print(df_ini)
+                        
                             
                         exit(1)
 
@@ -289,7 +288,7 @@ class Cenarios(MetaData):
         f.close()
 
         
-        for posto in range(1, 3):#POSTOS+1):
+        for posto in range(1, POSTOS+1):
             ano = 1931
             for a in range(0,int(len(dic[posto])/12)-1):
                 lista = []
