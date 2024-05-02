@@ -128,7 +128,7 @@ class Cenarios(MetaData):
                                 sample2 = df_caso_fw_iter_est["valor"].tolist()
                                 A = stats.ks_2samp(sample1, sample2)
                                 print("est: ", est, " it: ", it, " pvalor: ", A.pvalue)
-                                fig.add_trace(go.Scatter(x = [est], y = [it], mode = "markers", marker_color="rgba(0,0,0,"+str(1 - round(A.pvalue,5))+")" , marker=dict(symbol="square", size=15), name = "FW", show = b_show))
+                                fig.add_trace(go.Scatter(x = [est], y = [it], mode = "markers", marker_color="rgba(0,0,0,"+str(1 - round(A.pvalue,5))+")" , marker=dict(symbol="square", size=15)), name = "FW", showlegend = b_show)
 
                         df_caso_sf = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
                         lista_estagios = df_caso_sf["estagio"].unique()
@@ -142,7 +142,7 @@ class Cenarios(MetaData):
                             sample2 = df_caso_sf_est["valor"].tolist()
                             A = stats.ks_2samp(sample1, sample2)
                             print("est: ", est, " pvalor: ", A.pvalue)
-                            fig.add_trace(go.Scatter(x = [est], y = [51], mode = "markers", marker_color="rgba(255,0,0,"+str(1 - round(A.pvalue,5))+")" , marker=dict(symbol="square", size=15), name = "SF", show = b_show))
+                            fig.add_trace(go.Scatter(x = [est], y = [51], mode = "markers", marker_color="rgba(255,0,0,"+str(1 - round(A.pvalue,5))+")" , marker=dict(symbol="square", size=15)), name = "SF", showlegend = b_show)
                         fig.update_layout(    title="P Valor KW2 SF-FW-Hist",    showlegend=False)
                         self.graficos.exportar(fig, diretorio_saida_arg, "P_Valor_Hist_FW_SF_"+self.estudo+".png")
 
