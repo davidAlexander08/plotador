@@ -106,10 +106,12 @@ class Cenarios(MetaData):
                         
                         print(df_ini)
                         fig = go.Figure()
-                        mapa_coordenada_p_valor = {}
                         df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
                         df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
                         lista_estagios = df_caso_sf["estagio"].unique()
+                        lista_est_fig = []
+                        lista_iter_fig = []
+                        lista_pvalue_fig = []
                         for est in lista_estagios:
                             lista_iter = df_caso_fw["iteracao"].unique()
                             df_caso_sf_est = df_caso_sf.loc[df_caso_sf["estagio"] == est]
@@ -121,8 +123,12 @@ class Cenarios(MetaData):
                                 sample2 = df_caso_fw_iter_est["valor"].tolist()
                                 A = stats.ks_2samp(sample1, sample2)
                                 print("est: ", est, " it: ", it, " pvalor: ", A.pvalue)
-                                fig.add_trace(go.Scatter(x = int(est), y = int(it), mode = "markers", marker_color="rgba(0,0,0,"+str(A.pvalue)+")" , symbol = "square"))
-                                mapa_coordenada_p_valor[(est,it)] = A.pvalue
+                                fig.add_trace(go.Scatter(x = [est], y = [it], mode = "markers", marker_color="rgba(0,0,0,"+str(A.pvalue)+")" , symbol = "square"))
+
+                                #lista_est_fig.append(est)
+                                #lista_iter_fig.append(it)
+                                #lista_pvalue_fig.append(A.pvalue)
+                        fig.add_trace(go.Scatter(x = est, y = it, mode = "markers", marker_color="rgba(0,0,0,"+str(A.pvalue)+")" , symbol = "square"))
                         fig.update_layout(    title="P Valor KW",    showlegend=False)
                         self.graficos.exportar(fig, diretorio_saida_arg, "P_Valor_"+self.estudo+".png")
 
