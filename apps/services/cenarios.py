@@ -96,6 +96,14 @@ class Cenarios(MetaData):
                     lista_df = []
                     for c in self.casos:
                         df_c = df_vazoes.loc[df_vazoes["caso"] == c.nome]
+                        postos = df_c["posto"].unique()
+                        df_ini = df_vazoes.loc[df_vazoes["posto"] == 1]*0
+                        print(df_ini)
+                        for posto in postos:
+                            df_posto = df_vazoes.loc[df_vazoes["posto"] == posto]
+                            df_ini = df_ini + df_posto
+                            print(df_ini)
+                            exit(1)
                         anos = df_c["ano"].unique()
                         print(anos)
 
