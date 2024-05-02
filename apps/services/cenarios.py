@@ -119,7 +119,6 @@ class Cenarios(MetaData):
                             print(data.month)
                             df_hist = df_ini[map_mes[data.month]]
                             print(df_hist)
-                            print(df_caso_sf_est)
                             for it in lista_iter:
                                 df_caso_fw_iter_est = df_caso_fw.loc[(df_caso_fw["estagio"] == est) & (df_caso_fw["iteracao"] == it)]
                                 print(df_caso_fw_iter_est)
