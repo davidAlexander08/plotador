@@ -126,7 +126,7 @@ class Cenarios(MetaData):
                                 sample2 = df_caso_fw_iter_est["valor"].tolist()
                                 A = stats.ks_2samp(sample1, sample2)
                                 print("est: ", est, " it: ", it, " pvalor: ", A.pvalue)
-                                fig.add_trace(go.Scatter(x = [est], y = [it], mode = "markers", marker_color="rgba(0,0,0,"+str(A.pvalue)+")" , marker=dict(symbol="square", size=15)))
+                                fig.add_trace(go.Scatter(x = [est], y = [it], mode = "markers", marker_color="rgba(0,0,0,"+str(round(A.pvalue,3))+")" , marker=dict(symbol="square", size=15)))
 
                                 #lista_est_fig.append(est)
                                 #lista_iter_fig.append(it)
