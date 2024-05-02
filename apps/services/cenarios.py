@@ -280,7 +280,7 @@ class Cenarios(MetaData):
         
         for posto in range(1, 2):
             ano = 1931
-            for a in range(0,int(len(dic[posto])/12)):
+            for a in range(0,int(len(dic[posto])/12)-1):
                 lista = []
                 new_row = pd.DataFrame({"posto": posto,
                                         "ano": ano,
