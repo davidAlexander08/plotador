@@ -105,7 +105,7 @@ class Cenarios(MetaData):
                             df_ini = df_ini + df_posto
                         
                         print(df_ini)
-                        fig = Figure()
+                        fig = go.Figure()
                         mapa_coordenada_p_valor = {}
                         df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
                         df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
