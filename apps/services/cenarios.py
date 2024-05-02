@@ -104,7 +104,7 @@ class Cenarios(MetaData):
                             df_posto = df_posto.drop(["posto",'ano', 'caso'], axis=1)
                             df_ini = df_ini + df_posto
                         
-                        print(df_ini)
+                            print(df_ini)
                         
                             
                         exit(1)
