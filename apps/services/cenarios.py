@@ -103,8 +103,35 @@ class Cenarios(MetaData):
                             df_posto = df_vazoes.loc[df_vazoes["posto"] == posto].reset_index(drop = True)
                             df_posto = df_posto.drop(["posto",'ano', 'caso'], axis=1)
                             df_ini = df_ini + df_posto
-                        
                         print(df_ini)
+
+                        fig = go.Figure()
+                        df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
+                        lista_estagios = df_caso_sf["estagio"].unique()
+                        for est in lista_estagios:
+                            lista_iter = df_caso_fw["iteracao"].unique()
+                            df_caso_sf_est = df_caso_sf.loc[df_caso_sf["estagio"] == est]
+                            data = df_caso_sf_est["dataInicio"].iloc[0]
+                            exit(1)
+                            print(df_caso_sf_est)
+                            for it in lista_iter:
+                                df_caso_fw_iter_est = df_caso_fw.loc[(df_caso_fw["estagio"] == est) & (df_caso_fw["iteracao"] == it)]
+                                print(df_caso_fw_iter_est)
+                                sample1 = df_caso_sf_est["valor"].tolist()
+                                sample2 = df_caso_fw_iter_est["valor"].tolist()
+                                A = stats.ks_2samp(sample1, sample2)
+                                print("est: ", est, " it: ", it, " pvalor: ", A.pvalue)
+                                fig.add_trace(go.Scatter(x = [est], y = [it], mode = "markers", marker_color="rgba(0,0,0,"+str(A.pvalue)+")" , marker=dict(symbol="square", size=15)))
+
+                                #lista_est_fig.append(est)
+                                #lista_iter_fig.append(it)
+                                #lista_pvalue_fig.append(A.pvalue)
+                        fig.update_layout(    title="P Valor KW",    showlegend=False)
+                        self.graficos.exportar(fig, diretorio_saida_arg, "P_Valor_"+self.estudo+".png")
+
+
+
+                        
                         fig = go.Figure()
                         df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
                         df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
