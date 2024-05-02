@@ -119,12 +119,11 @@ class Cenarios(MetaData):
                             print(data.month)
                             df_hist = df_ini[map_mes[data.month]]
                             print(df_hist)
-                            exit(1)
                             print(df_caso_sf_est)
                             for it in lista_iter:
                                 df_caso_fw_iter_est = df_caso_fw.loc[(df_caso_fw["estagio"] == est) & (df_caso_fw["iteracao"] == it)]
                                 print(df_caso_fw_iter_est)
-                                sample1 = df_caso_sf_est["valor"].tolist()
+                                sample1 = df_hist.values.tolist()
                                 sample2 = df_caso_fw_iter_est["valor"].tolist()
                                 A = stats.ks_2samp(sample1, sample2)
                                 print("est: ", est, " it: ", it, " pvalor: ", A.pvalue)
@@ -133,11 +132,11 @@ class Cenarios(MetaData):
                                 #lista_est_fig.append(est)
                                 #lista_iter_fig.append(it)
                                 #lista_pvalue_fig.append(A.pvalue)
-                        fig.update_layout(    title="P Valor KW",    showlegend=False)
-                        self.graficos.exportar(fig, diretorio_saida_arg, "P_Valor_"+self.estudo+".png")
+                        fig.update_layout(    title="P Valor KW2 FW-Hist",    showlegend=False)
+                        self.graficos.exportar(fig, diretorio_saida_arg, "P_Valor_Hist_FW_"+self.estudo+".png")
 
 
-
+                        exit(1)
                         
                         fig = go.Figure()
                         df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
