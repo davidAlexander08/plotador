@@ -82,6 +82,7 @@ class Cenarios(MetaData):
                 if(df_vazoes.empty):
                     lista_df = []
                     for c in self.casos:
+                        print(c.nome)
                         arquivo_vazoes = c.caminho+"/vazoes.dat"
                         df = self.le_vazoes(arquivo_vazoes)
                         df["caso"] = c.nome
