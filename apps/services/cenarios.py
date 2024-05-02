@@ -99,8 +99,10 @@ class Cenarios(MetaData):
                         postos = df_c["posto"].unique()
                         df_ini = df_vazoes.loc[df_vazoes["posto"] == 1]*0
                         print(df_ini)
+                        
                         for posto in postos:
                             df_posto = df_vazoes.loc[df_vazoes["posto"] == posto].reset_index(drop = True)
+                            df_posto = df_posto.drop(["posto",'ano', 'caso'], axis=1)
                             df_ini = df_ini + df_posto
                             print(df_ini)
                             
