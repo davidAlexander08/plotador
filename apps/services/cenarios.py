@@ -107,10 +107,10 @@ class Cenarios(MetaData):
 
                         fig = go.Figure()
                         df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
-                        lista_estagios = df_caso_sf["estagio"].unique()
+                        lista_estagios = df_caso_fw["estagio"].unique()
                         for est in lista_estagios:
                             lista_iter = df_caso_fw["iteracao"].unique()
-                            df_caso_fw = df_caso_sf.loc[df_caso_sf["estagio"] == est]
+                            df_caso_fw = df_caso_fw.loc[df_caso_fw["estagio"] == est]
                             data = df_caso_fw["dataInicio"].iloc[0]
                             exit(1)
                             print(df_caso_sf_est)
