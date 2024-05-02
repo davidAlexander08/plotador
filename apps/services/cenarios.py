@@ -278,7 +278,6 @@ class Cenarios(MetaData):
         f.close()
 
         ano = 1931
-        print(dic)
         for posto in range(1, POSTOS+1):
             for a in range(0,int(len(dic[posto])/12)):
                 lista = []
@@ -300,3 +299,4 @@ class Cenarios(MetaData):
                 df_vazoes = pd.concat([df_vazoes.loc[:],new_row]).reset_index(drop=True)
                 ano = ano + 1
             print("Leitura Vazoes Posto: ", posto)
+        return df_vazoes
