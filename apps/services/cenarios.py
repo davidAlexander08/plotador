@@ -135,7 +135,7 @@ class Cenarios(MetaData):
                         for est in lista_estagios:
                             b_show = True if est == 1 else False
                             df_caso_sf_est = df_caso_sf.loc[df_caso_sf["estagio"] == est]
-                            print(df_caso_sf_est)
+                            #print(df_caso_sf_est)
                             data = df_caso_sf_est["dataInicio"].iloc[0].month
                             df_hist = df_ini[map_mes[data]]
                             sample1 = df_hist.values.tolist()
