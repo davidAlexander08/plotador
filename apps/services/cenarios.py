@@ -112,6 +112,8 @@ class Cenarios(MetaData):
                             lista_iter = df_caso_fw["iteracao"].unique()
                             df_caso_fw = df_caso_fw.loc[df_caso_fw["estagio"] == est]
                             data = df_caso_fw["dataInicio"].iloc[0]
+                            print(data)
+                            print(data.month)
                             exit(1)
                             print(df_caso_sf_est)
                             for it in lista_iter:
