@@ -120,7 +120,8 @@ class Cenarios(MetaData):
                                 sample1 = df_caso_sf_est["valor"].tolist()
                                 sample2 = df_caso_fw_iter_est["valor"].tolist()
                                 A = stats.ks_2samp(sample1, sample2)
-                                fig.add_trace(go.Scatter(x = est, y = it, mode = "markers", marker_color="rgba(0,0,0,"+str(A.pvalue)+")" , symbol = "square"))
+                                print("est: "+ est+ " it: "+ it+ " pvalor: "+ A.pvalue)
+                                fig.add_trace(go.Scatter(x = int(est), y = int(it), mode = "markers", marker_color="rgba(0,0,0,"+str(A.pvalue)+")" , symbol = "square"))
                                 mapa_coordenada_p_valor[(est,it)] = A.pvalue
                         fig.update_layout(    title="P Valor KW",    showlegend=False)
                         self.graficos.exportar(fig, diretorio_saida_arg, "P_Valor_"+self.estudo+".png")
