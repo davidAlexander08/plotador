@@ -117,7 +117,6 @@ class Cenarios(MetaData):
                             print(df_caso_fw_est)
                             data = df_caso_fw_est["dataInicio"].iloc[0].month
                             print(data)
-                            print(data.month)
                             df_hist = df_ini[map_mes[data.month]]
                             print(df_hist)
                             for it in lista_iter:
