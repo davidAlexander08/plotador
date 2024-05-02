@@ -41,7 +41,7 @@ class Dados_json_caso(MetaData):
 
         grupo_parquet = dados["grupo_parquet"] if "grupo_parquet" in dados else ""
 
-        print(dados["parquets"])
+        print(dados)
         if("parquets" in dados):
             lista_sinteses = []
             for sintese in dados["parquets"]:
