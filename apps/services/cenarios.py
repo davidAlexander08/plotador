@@ -105,6 +105,9 @@ class Cenarios(MetaData):
                             df_ini = df_ini + df_posto
                         print(df_ini)
 
+                        map_mes = {1:"JAN", 2:"FEV", 3:"MAR", 4:"ABR",5:"MAI",6:"JUN",7:"JUL",8:"AGO",9:"SET",
+                                    10:"OUT",11:"NOV",12:"DEZ"}
+
                         fig = go.Figure()
                         df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
                         lista_estagios = df_caso_fw["estagio"].unique()
@@ -114,6 +117,8 @@ class Cenarios(MetaData):
                             data = df_caso_fw["dataInicio"].iloc[0]
                             print(data)
                             print(data.month)
+                            df_hist = df_ini[map_mes[data.month]]
+                            print(df_hist)
                             exit(1)
                             print(df_caso_sf_est)
                             for it in lista_iter:
