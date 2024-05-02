@@ -113,24 +113,21 @@ class Cenarios(MetaData):
                         lista_estagios = df_caso_fw["estagio"].unique()
                         for est in lista_estagios:
                             lista_iter = df_caso_fw["iteracao"].unique()
-                            df_caso_fw = df_caso_fw.loc[df_caso_fw["estagio"] == est]
-                            data = df_caso_fw["dataInicio"].iloc[0]
+                            df_caso_fw_est = df_caso_fw.loc[df_caso_fw["estagio"] == est]
+                            print(df_caso_fw_est)
+                            data = df_caso_fw_est["dataInicio"].iloc[0].month
                             print(data)
                             print(data.month)
                             df_hist = df_ini[map_mes[data.month]]
                             print(df_hist)
                             for it in lista_iter:
-                                df_caso_fw_iter_est = df_caso_fw.loc[(df_caso_fw["estagio"] == est) & (df_caso_fw["iteracao"] == it)]
+                                df_caso_fw_iter_est = df_caso_fw_est.loc[(df_caso_fw_est["iteracao"] == it)]
                                 print(df_caso_fw_iter_est)
                                 sample1 = df_hist.values.tolist()
                                 sample2 = df_caso_fw_iter_est["valor"].tolist()
                                 A = stats.ks_2samp(sample1, sample2)
                                 print("est: ", est, " it: ", it, " pvalor: ", A.pvalue)
                                 fig.add_trace(go.Scatter(x = [est], y = [it], mode = "markers", marker_color="rgba(0,0,0,"+str(round(A.pvalue,3))+")" , marker=dict(symbol="square", size=15)))
-
-                                #lista_est_fig.append(est)
-                                #lista_iter_fig.append(it)
-                                #lista_pvalue_fig.append(A.pvalue)
                         fig.update_layout(    title="P Valor KW2 FW-Hist",    showlegend=False)
                         self.graficos.exportar(fig, diretorio_saida_arg, "P_Valor_Hist_FW_"+self.estudo+".png")
 
