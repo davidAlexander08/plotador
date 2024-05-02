@@ -122,7 +122,7 @@ class Cenarios(MetaData):
                                 if((est == 1) and (it == 1)):
                                     b_show = True
                                 else:
-                                    False
+                                    b_show = False
                                 df_caso_fw_iter_est = df_caso_fw_est.loc[(df_caso_fw_est["iteracao"] == it)]
                                 sample1 = df_hist.values.tolist()
                                 sample2 = df_caso_fw_iter_est["valor"].tolist()
