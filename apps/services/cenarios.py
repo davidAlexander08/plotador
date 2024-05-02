@@ -118,8 +118,8 @@ class Cenarios(MetaData):
                     for it in lista_iter:
                         df_caso_fw_iter_est = df_caso_fw.loc[(df_caso_fw["estagio"] == est) & (df_caso_fw["iteracao"] == it)]
                         print(df_caso_fw_iter_est)
-                        sample1 = df_caso_sf_est.tolist()
-                        sample2 = df_caso_fw_iter_est.tolist()
+                        sample1 = df_caso_sf_est["valor"].tolist()
+                        sample2 = df_caso_fw_iter_est["valor"].tolist()
                         A = stats.ks_2samp(sample1, sample2)
                         print(A)
 
