@@ -105,24 +105,26 @@ class Cenarios(MetaData):
                             df_ini = df_ini + df_posto
                         
                         print(df_ini)
+                        fig = Figure()
+                        mapa_coordenada_p_valor = {}
+                        df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
+                        df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
+                        lista_estagios = df_caso_sf["estagio"].unique()
+                        for est in lista_estagios:
+                            lista_iter = df_caso_fw["iteracao"].unique()
+                            df_caso_sf_est = df_caso_sf.loc[df_caso_sf["estagio"] == est]
+                            print(df_caso_sf_est)
+                            for it in lista_iter:
+                                df_caso_fw_iter_est = df_caso_fw.loc[(df_caso_fw["estagio"] == est) & (df_caso_fw["iteracao"] == it)]
+                                print(df_caso_fw_iter_est)
+                                sample1 = df_caso_sf_est["valor"].tolist()
+                                sample2 = df_caso_fw_iter_est["valor"].tolist()
+                                A = stats.ks_2samp(sample1, sample2)
+                                fig.add_trace(go.Scatter(x = est, y = it, mode = "markers", marker_color="rgba(0,0,0,"+str(A.pvalue)+")" , symbol = "square"))
+                                mapa_coordenada_p_valor[(est,it)] = A.pvalue
+                        fig.update_layout(    title="P Valor KW",    showlegend=False)
+                        self.graficos.exportar(fig, diretorio_saida_arg, "P_Valor_"+self.estudo+".png")
 
-
-
-                df_caso_fw = df_fw.loc[(df_fw["caso"] == c.nome)].copy()
-                df_caso_sf = df_sf.loc[(df_sf["caso"] == c.nome)].copy()
-                lista_estagios = df_caso_sf["estagio"].unique()
-                for est in lista_estagios:
-                    lista_iter = df_caso_fw["iteracao"].unique()
-                    df_caso_sf_est = df_caso_sf.loc[df_caso_sf["estagio"] == est]
-                    print(df_caso_sf_est)
-                    for it in lista_iter:
-                        df_caso_fw_iter_est = df_caso_fw.loc[(df_caso_fw["estagio"] == est) & (df_caso_fw["iteracao"] == it)]
-                        print(df_caso_fw_iter_est)
-                        sample1 = df_caso_sf_est["valor"].tolist()
-                        sample2 = df_caso_fw_iter_est["valor"].tolist()
-                        A = stats.ks_2samp(sample1, sample2)
-                        print(A.pvalue)
-                        exit(1)
 
 
             #BOXPLOT, SOMA TODOS OS ESTAGIOS, ITER 1, ITER (1-MAX) JUNTOS, SF
