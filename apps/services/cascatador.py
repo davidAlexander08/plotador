@@ -126,7 +126,7 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
-        dist = 10
+        dist = 15
         square = 3
 
         if(len(pais) == 0):
