@@ -79,8 +79,9 @@ class Cascatador(MetaData):
                 t.right(angle)
                 t.fd(steps)
 
-            t.screen.mainloop()
-
+            cv = t.getcanvas()
+            cv.postscript(file="file_name.ps", colormode='color')
+            t.done()
 
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
