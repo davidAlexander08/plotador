@@ -23,34 +23,35 @@ class Cascatador(MetaData):
         self.graficos = Graficos(self.casos)
         diretorio_saida = f"resultados/{self.estudo}/cascatador"
         os.makedirs(diretorio_saida, exist_ok=True)
-
         for c in self.casos:
             arquivo_confhd = c.caminho+"/confhd.dat"
             d_usi = Confhd.read(arquivo_confhd).usinas
             print(d_usi)
+            lista_Nos = []
+            for index, row in self.d_usi.iterrows()::
+                no = Node()
+                pais =              []
+                no.pais =           []
+                no.filhos =         None
+                no.codigo =         row["codigo_usina"]
+                no.nome =           row["nome_usina"]
+                no.posto =          row["posto"]
+                no.codigo_jusante = row["codigo_usina_jusante"] 
+                no.ree =            row["ree"] 
+                lista_Nos.append(no)
+            print(lista_Nos)
+            exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
             print(usinas_mar)
-            exit(1)
-            first = nome_usinas[0]
-            mapa_cascatas = {}
-            #while True:
-                
-            
-            print(nome_usinas)
-
         print(d_usi)
         exit(1)
 
-        df_vazoes = pd.DataFrame()
-        if(u_fw.filtroArgumento is None):
-            if(df_vazoes.empty):
-                lista_df = []
-                for c in self.casos:
-                    arquivo_vazoes = c.caminho+"/vazoes.dat"
-                    print(arquivo_vazoes)
-                    df = self.le_vazoes(arquivo_vazoes)
-                    df["caso"] = c.nome
-                    lista_df.append(df)
-                df_vazoes = pd.concat(lista_df)
-                print(df_vazoes)
-
+class Node():
+    def __init__(self):
+        self.pais = []
+        self.filhos = []
+        self.codigo = None 
+        self.nome = None 
+        self.posto = None
+        self.codigo_jusante = None 
+        self.ree = None 
