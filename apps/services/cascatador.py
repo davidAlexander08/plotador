@@ -55,7 +55,7 @@ class Cascatador(MetaData):
                     
                 filho = d_usi.loc[d_usi["codigo_usina"] == cod_usi]
                 if(filho["codigo_usina_jusante"].iloc[0] != 0):
-                    no_filho = mapa_codigo_nos[filho["codigo_usina"].iloc[0]] 
+                    no_filho = mapa_codigo_nos[filho["codigo_usina_jusante"].iloc[0]] 
                     print("usina: ", cod_usi, "filho: ", no_filho.codigo)
                     lista_nos_filhos.append(no_filho)
                 lista_no_aux.remove(cod_usi)
@@ -63,25 +63,9 @@ class Cascatador(MetaData):
                 no.pais = lista_nos_pais
                 no.filhos = lista_nos_filhos
                 contador += 1
-            exit(1)
 
-            for cod in mapa_codigo_nos:
-                no = mapa_codigo_nos[cod]
-                print("usi: ", cod)
-                if(len(no.pais) != 0):
-                    for pai in no.pais:
-                        print("pai: ", pai, " cod: ", pai.codigo)
-                else:
-                    print("Usina de Cabeceira")
 
-                if(len(no.filhos) != 0):
-                    for filho in no.filhos:
-                        print("filho: ", filho, " cod: ", filho.codigo)
-                else:
-                    print("Usina MAR")
 
-            exit(1)
-            print(lista_Nos)
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
             print(usinas_mar)
