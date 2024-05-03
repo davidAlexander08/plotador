@@ -42,7 +42,6 @@ class Cascatador(MetaData):
 
             #usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
             lista_no_aux = list(mapa_codigo_nos.keys())
-            print(lista_no_aux)
             contador = 0
             print(lista_no_aux)
             for cod_usi in lista_no_aux:
@@ -63,7 +62,6 @@ class Cascatador(MetaData):
                 no = mapa_codigo_nos[cod_usi]
                 no.pais = lista_nos_pais
                 no.filhos = lista_nos_filhos
-                lista_no_aux.remove(cod_usi)
                 contador += 1
             print(lista_no_aux)
 
