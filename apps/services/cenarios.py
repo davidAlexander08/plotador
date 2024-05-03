@@ -92,7 +92,8 @@ class Cenarios(MetaData):
 
                     #TESTE
                     df_teste = Vazoes.read(arquivo_vazoes).vazoes
-                    print(df_teste)
+                    print("TESTE VAZOES: ", df_teste)
+                    exit(1)
             
             df_vazoes_SIN = pd.DataFrame()
             if(u_fw.filtroArgumento is None):
