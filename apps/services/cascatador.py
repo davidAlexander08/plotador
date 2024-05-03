@@ -73,7 +73,7 @@ class Cascatador(MetaData):
                     lista_cod_cabeceiras.append(key)
     
 
-            img = Image.new(mode='RGB', size=(1000, 1200 ), color='white')
+            img = Image.new(mode='RGB', size=(1000, 1200 ), color='black')
 
             draw = ImageDraw.Draw(img)
             draw.polygon([(800, 275), (800, 450), (300, 450) ])
