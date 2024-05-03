@@ -136,6 +136,7 @@ class Cascatador(MetaData):
         pais = no.getPais()
         contador_anterior = contador
         for pai in pais:
+            if(len(pai.getPais()) == 0): contador -= 1
             contador +=1
             print("no: ", no.nome, " pai: ", pai.nome, " contador: ", contador)
             self.encontra_pai_com_mais_pais(pai, mapa, contador)
