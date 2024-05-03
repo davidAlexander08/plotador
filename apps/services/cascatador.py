@@ -116,8 +116,7 @@ class Cascatador(MetaData):
         nivel += 1
         contador = 0
         for pai in pais:
-            self.define_n_nivel(no, pais)
-            pai.x = 10 + pai.n_nivel
+            self.define_x(no, pais)
             pai.y = nivel
             print("cod: ", pai.codigo, " nivel: ", nivel)
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], mode = "markers", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
@@ -126,29 +125,30 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, nivel)
 
     def define_n_nivel(self, no,  pais):
+
         if(len(pais) == 0):
             pass
         if(len(pais) == 1):
             for pai in pais:
-                pai.n_nivel = no.n_nivel
+                pai.x = no.x
         if(len(pais) == 2):
-            pais[0].n_nivel = no.n_nivel -1
-            pais[1].n_nivel = no.n_nivel + 1
+            pais[0].x = no.x -1
+            pais[1].x = no.x + 1
         if(len(pais) == 3):
-            pais[0].n_nivel = no.n_nivel -1
-            pais[1].n_nivel = no.n_nivel
-            pais[2].n_nivel = no.n_nivel + 1
+            pais[0].x = no.x -1
+            pais[1].x = no.x
+            pais[2].x = no.x + 1
         if(len(pais) == 4):
-            pais[0].n_nivel = no.n_nivel  -2
-            pais[1].n_nivel = no.n_nivel  -1
-            pais[2].n_nivel = no.n_nivel + 1
-            pais[3].n_nivel = no.n_nivel + 2
+            pais[0].x = no.x  -2
+            pais[1].x = no.x  -1
+            pais[2].x = no.x + 1
+            pais[3].x = no.x + 2
         if(len(pais) == 5):
-            pais[0].n_nivel = no.n_nivel  -2
-            pais[1].n_nivel = no.n_nivel  -1
-            pais[2].n_nivel = no.n_nivel 
-            pais[3].n_nivel = no.n_nivel  + 1
-            pais[4].n_nivel = no.n_nivel  + 2
+            pais[0].x = no.x  -2
+            pais[1].x = no.x  -1
+            pais[2].x = no.x 
+            pais[3].x = no.x  + 1
+            pais[4].x = no.x  + 2
 
 
     #def desenha_circulo(self,draw ,no, nivel):
@@ -175,7 +175,6 @@ class Node():
         self.codigo_jusante = None 
         self.ree = None 
         self.nivel = None
-        self.n_nivel = None
         self.x = None 
         self.y = None
 
