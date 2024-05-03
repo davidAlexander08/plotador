@@ -63,8 +63,6 @@ class Cascatador(MetaData):
                 no.pais = lista_nos_pais
                 no.filhos = lista_nos_filhos
                 contador += 1
-                if(contador == 5):
-                    exit(1)
             exit(1)
 
             for cod in mapa_codigo_nos:
