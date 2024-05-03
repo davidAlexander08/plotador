@@ -125,7 +125,7 @@ class Cascatador(MetaData):
 
     def define_x(self, no,  pais):
         contador = 0
-        no_com_mais_pais = self.encontra_pai_com_mais_pais(no, contador)
+        no_com_mais_pais = self.encontra_pai_com_mais_pais(no)
         print("no: ", no.nome, " no_seguinte: ", no_com_mais_pais.nome)
         for pai in pais:
             pai.x = 10
