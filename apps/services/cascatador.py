@@ -10,7 +10,7 @@ import pandas as pd
 from scipy import stats
 from apps.interface.metaData import MetaData
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
-from inewave.newave.confhd import Confhd
+from inewave.newave import Confhd
 import os
 import json
 
