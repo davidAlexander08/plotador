@@ -78,7 +78,7 @@ class Cascatador(MetaData):
             draw = ImageDraw.Draw(img)
             a = 10
             x_sup = 800
-            draw.regular_polygon((500,500,10), 3, rotation=0, fill="blue", outline=None, width=1)
+            draw.regular_polygon((500,500,50), 3, rotation=180, fill="blue", outline=None, width=1)
             
             draw.polygon([(800, 275), (800, 450), (300, 363) ])
 
