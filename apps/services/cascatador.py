@@ -139,7 +139,7 @@ class Cascatador(MetaData):
         for pai in pais:
             contador += 1
             mapa[contador] = mapa[contador_anterior].append(pai.nome)
-            encontra_pai_com_mais_pais(pai, mapa, contador)
+            self.encontra_pai_com_mais_pais(pai, mapa, contador)
         
 
 
