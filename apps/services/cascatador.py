@@ -40,7 +40,7 @@ class Cascatador(MetaData):
                 mapa_codigo_nos[no.codigo] = no
 
             #usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
-            lista_no_aux = mapa_codigo_nos.keys()
+            lista_no_aux = list(mapa_codigo_nos.keys())
             print(lista_no_aux)
             for no in lista_no_aux:
                 print(no)
