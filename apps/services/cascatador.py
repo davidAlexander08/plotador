@@ -98,7 +98,7 @@ class Cascatador(MetaData):
             im.thumbnail(thumb)
 
             # save image
-            im.save(diretorio_saida+"/im.png')
+            im.save(diretorio_saida+"/im.png")
 
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
