@@ -30,15 +30,22 @@ class Cascatador(MetaData):
             lista_Nos = []
             for index, row in d_usi.iterrows():
                 no = Node()
-                pais =              []
                 no.pais =           []
-                no.filhos =         None
+                no.filhos =         row["codigo_usina_jusante"] 
                 no.codigo =         row["codigo_usina"]
                 no.nome =           row["nome_usina"]
                 no.posto =          row["posto"]
-                no.codigo_jusante = row["codigo_usina_jusante"] 
                 no.ree =            row["ree"] 
+                no.nivel =          None
                 lista_Nos.append(no)
+
+            #usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
+            lista_no_aux = lista_Nos
+            for no in lista_no_aux:
+                pais = d_usi.loc[d_usi["codigo_usina_jusante"] == no.codigo]
+                lista_no_aux.remove(no)
+                print("codigo: ", no.codigo, " pais: ", pais)
+            exit(1)
             print(lista_Nos)
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
@@ -55,3 +62,4 @@ class Node():
         self.posto = None
         self.codigo_jusante = None 
         self.ree = None 
+        self.nivel = None
