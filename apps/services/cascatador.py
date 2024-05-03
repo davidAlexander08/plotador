@@ -27,7 +27,14 @@ class Cascatador(MetaData):
         for c in self.casos:
             arquivo_confhd = c.caminho+"/confhd.dat"
             d_usi = Confhd.read(arquivo_confhd).usinas
-            nome_usinas = d_usi["nome_usina"].unique()
+            usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
+            print(usinas_mar)
+            exit(1)
+            first = nome_usinas[0]
+            mapa_cascatas = {}
+            while True:
+                d_usi["codigo_usina_jusante"] == 
+                
             
             print(nome_usinas)
 
