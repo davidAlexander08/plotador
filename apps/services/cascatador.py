@@ -80,21 +80,27 @@ class Cascatador(MetaData):
                     print("MAR: ", key)
                     lista_cod_mar.append(key)
 
-            #Cabeceira 1
-            #key_cab = lista_cod_cabeceiras[3]
+            no_cabeceira = lista_cod_mar[0]
+            nivel = 0
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(x = 10, y = nivel, mode = "markers", marker_color="rgba(0,0,0,1.0)" , marker=dict(symbol="triangle", size=15)))
+            self.add_scatter_graph(fig, no_cabeceira, nivel)
+            fig.update_layout(title="Cascata")
+            self.graficos.exportar(fig, diretorio_saida, "cascata"+self.estudo+".png")
 
-            img = Image.new(mode='RGB', size=(2500, 2500 ), color='black')
-            draw = ImageDraw.Draw(img)
 
-            lista_cod_mar = [lista_cod_mar[0]]
-            for key_cab in lista_cod_mar:
-                no_cabeceira = mapa_codigo_nos[key_cab]
-                nivel = 0
-                print("cod: ", no_cabeceira.codigo, " nivel: ", nivel)
-                self.desenha_circulo(draw, no_cabeceira, nivel)
-                
-            # save image
-            img.save(diretorio_saida+"/im.png")
+            #img = Image.new(mode='RGB', size=(2500, 2500 ), color='black')
+            #draw = ImageDraw.Draw(img)
+            #
+            #lista_cod_mar = [lista_cod_mar[0]]
+            #for key_cab in lista_cod_mar:
+            #    no_cabeceira = mapa_codigo_nos[key_cab]
+            #    nivel = 0
+            #    print("cod: ", no_cabeceira.codigo, " nivel: ", nivel)
+            #    self.desenha_circulo(draw, no_cabeceira, nivel)
+            #    
+            ## save image
+            #img.save(diretorio_saida+"/im.png")
 
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
@@ -103,21 +109,33 @@ class Cascatador(MetaData):
         exit(1)
 
 
-    def desenha_circulo(self,draw ,no, nivel):
+    def add_scatter_graph(self,fig ,no, nivel):
         pais = no.getPais()
         nivel += 1
+        contador = 0
         for pai in pais:
+            n_nivel = contador if len(pais) > 0 else 0
+            contador += 1
             print("cod: ", pai.codigo, " nivel: ", nivel)
-            x = 500
-            y = 2000
-            draw.regular_polygon((x, y - 100*nivel,50), 3, rotation=180, fill="blue", outline=None, width=1)
-            draw.text((x, y - 100*nivel,50), pai.nome)
-            self.desenha_circulo(draw, pai, nivel)
+            fig.add_trace(go.Scatter(x = 10 + n_nivel, y = nivel, mode = "markers", marker_color="rgba(0,0,0,1.0)" , marker=dict(symbol="square", size=15)))
+            self.add_scatter_graph(fig, pai, nivel)
+
+    #def desenha_circulo(self,draw ,no, nivel):
+    #    pais = no.getPais()
+    #    nivel += 1
+    #    for pai in pais:
+    #        print("cod: ", pai.codigo, " nivel: ", nivel)
+    #        x = 500 
+    #        y = 2000 - 100*nivel
+    #        draw.regular_polygon((x, y,50), 3, rotation=180, fill="blue", outline=None, width=1)
+    #        draw.text((x, y,50), pai.nome)
+    #        self.desenha_circulo(draw, pai, nivel)
     
 
 
 class Node():
     def __init__(self):
+
         self.pais = []
         self.filhos = []
         self.codigo = None 
@@ -126,6 +144,7 @@ class Node():
         self.codigo_jusante = None 
         self.ree = None 
         self.nivel = None
+        self.n_nivel = None
 
     def getPais(self):
         return self.pais
