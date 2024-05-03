@@ -84,10 +84,10 @@ class Cascatador(MetaData):
             no_cabeceira.x = 0
             no_cabeceira.y = 0
             fig = go.Figure()
-            fig.add_trace(go.Scatter(x = [no_cabeceira.x], y = [no_cabeceira.y], text =[no_cabeceira.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
+            fig.add_trace(go.Scatter(x = [no_cabeceira.x], y = [no_cabeceira.y], textfont=dict( size=11), text =[no_cabeceira.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
             self.add_scatter_graph(fig, no_cabeceira, no_cabeceira.y)
             fig.update_layout(title="Cascata", showlegend = False)
-            self.graficos.exportar(fig, diretorio_saida, "cascata"+self.estudo, W = 2500, H = 2200)
+            self.graficos.exportar(fig, diretorio_saida, "cascata"+self.estudo, W = 1500, H = 1200)
 
 
             #img = Image.new(mode='RGB', size=(2500, 2500 ), color='black')
@@ -118,7 +118,7 @@ class Cascatador(MetaData):
             pai.y = nivel
             self.define_x(no, pais)
             print("cod: ", pai.codigo, " nivel: ", pai.y)
-            fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
+            fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=11), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
             fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
 
