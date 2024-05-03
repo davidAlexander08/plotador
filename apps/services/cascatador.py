@@ -140,7 +140,7 @@ class Cascatador(MetaData):
             contador += 1
             print("contador: ", contador, " mapa: ", mapa)
             mapa[contador] = mapa[contador_anterior].append(pai.nome)
-            self.recursao(pai, mapa, contador)
+            self.encontra_pai_com_mais_pais(pai, mapa, contador)
         
 
 
