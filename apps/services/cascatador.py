@@ -83,7 +83,7 @@ class Cascatador(MetaData):
             no_cabeceira = lista_cod_mar[0]
             nivel = 0
             fig = go.Figure()
-            fig.add_trace(go.Scatter(x = 10, y = nivel, mode = "markers", marker_color="rgba(0,0,0,1.0)" , marker=dict(symbol="triangle-down", size=15)))
+            fig.add_trace(go.Scatter(x = [10], y = [nivel], mode = "markers", marker_color="rgba(0,0,0,1.0)" , marker=dict(symbol="triangle-down", size=15)))
             self.add_scatter_graph(fig, no_cabeceira, nivel)
             fig.update_layout(title="Cascata")
             self.graficos.exportar(fig, diretorio_saida, "cascata"+self.estudo+".png")
@@ -117,7 +117,7 @@ class Cascatador(MetaData):
             n_nivel = contador if len(pais) > 0 else 0
             contador += 1
             print("cod: ", pai.codigo, " nivel: ", nivel)
-            fig.add_trace(go.Scatter(x = 10 + n_nivel, y = nivel, mode = "markers", marker_color="rgba(0,0,0,1.0)" , marker=dict(symbol="square", size=15)))
+            fig.add_trace(go.Scatter(x = [10 + n_nivel], y = [nivel], mode = "markers", marker_color="rgba(0,0,0,1.0)" , marker=dict(symbol="square", size=15)))
             self.add_scatter_graph(fig, pai, nivel)
 
     #def desenha_circulo(self,draw ,no, nivel):
