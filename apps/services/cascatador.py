@@ -124,21 +124,23 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
+        
         contador = 0
-        no_com_mais_pais = self.encontra_pai_com_mais_pais(no)
+        mapa[contador] = [no.nome]
+        no_com_mais_pais = self.encontra_pai_com_mais_pais(no, mapa, contador)
         print("no: ", no.nome, " no_seguinte: ", no_com_mais_pais.nome)
         for pai in pais:
             pai.x = 10
 
-    def encontra_pai_com_mais_pais(self, no):
+    def encontra_pai_com_mais_pais(self, no, mapa, contador):
+        print(mapa)
         pais = no.getPais()
-        if(len(no.pais) == 0):
-            print("no: ", no.nome)
-
-        for ino in pais:
-            if(len(ino.pais) != 0):
-                self.encontra_pai_com_mais_pais(ino)
-
+        contador_anterior = contador
+        for pai in pais:
+            contador += 1
+            mapa[contador] = mapa[contador_anterior].append(pai.nome)
+            encontra_pai_com_mais_pais(pai, mapa, contador)
+        
 
 
 
