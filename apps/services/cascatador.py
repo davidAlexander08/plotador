@@ -62,10 +62,17 @@ class Cascatador(MetaData):
             for cod in mapa_codigo_nos:
                 no = mapa_codigo_nos[cod]
                 print("usi: ", cod)
-                for pai in no.pais:
-                    print("pai: ", pai, " cod: ", pai.codigo)
-                for filho in no.filhos:
-                    print("filho: ", filho, " cod: ", filho.codigo)
+                if(len(no.pais) != 0):
+                    for pai in no.pais:
+                        print("pai: ", pai, " cod: ", pai.codigo)
+                else:
+                    print("Usina de Cabeceira")
+
+                if(len(no.filhos) != 0):
+                    for filho in no.filhos:
+                        print("filho: ", filho, " cod: ", filho.codigo)
+                else:
+                    print("Usina MAR")
 
             exit(1)
             print(lista_Nos)
