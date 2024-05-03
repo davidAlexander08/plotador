@@ -121,24 +121,20 @@ class Cascatador(MetaData):
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=11), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
             fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
-
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
-        no_com_mais_pais = self.encontra_pai_com_mais_pais(no)
+        contador = 0
+        no_com_mais_pais = self.encontra_pai_com_mais_pais(no, contador)
         print("no: ", no.nome, " no_seguinte: ", no_com_mais_pais.nome)
         for pai in pais:
             pai.x = 10
 
     def encontra_pai_com_mais_pais(self, no):
-        print("no: ", no.nome)
         pais = no.getPais()
-        if(len(pais) == 0):
-            return no
+        print("no: ", no.nome)
         for ino in pais:
-            if(len(ino.pais) == 0):
-                pass
-            else:
+            if(len(ino.pais) != 0):
                 self.encontra_pai_com_mais_pais(ino)
 
 
