@@ -13,6 +13,7 @@ from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from inewave.newave import Confhd
 import os
 import json
+from turtle import *
 
 class Cascatador(MetaData):
     def __init__(self, data):
@@ -64,11 +65,23 @@ class Cascatador(MetaData):
                 contador += 1
 
             #PEGANDO MONTANTES
+            lista_cod_cabeceiras = []
             for key in mapa_codigo_nos:
                 no = mapa_codigo_nos[key]
                 if(len(no.pais) == 0):
                     print("CABECEIRA: ", key)
+                    lista_cod_cabeceiras.append(key)
     
+            t = Turtle()
+            for i in range(100):
+                steps = int(random() * 100)
+                angle = int(random() * 360)
+                t.right(angle)
+                t.fd(steps)
+
+            t.screen.mainloop()
+
+
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
             print(usinas_mar)
