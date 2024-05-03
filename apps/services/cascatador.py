@@ -77,9 +77,9 @@ class Cascatador(MetaData):
 
             draw = ImageDraw.Draw(img)
             draw.polygon([(800, 275), (800, 450), (300, 450) ])
-            
+
             # save image
-            im.save(diretorio_saida+"/im.png")
+            img.save(diretorio_saida+"/im.png")
 
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
