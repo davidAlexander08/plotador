@@ -65,10 +65,10 @@ class Cascatador(MetaData):
                 contador += 1
 
             #PEGANDO MONTANTES
-            for key in mapa_codigo_nos:
-                no = mapa_codigo_nos[key]
-                if(len(no.pais) == 0):
-                    print("CABECEIRA: ", key)
+            #for key in mapa_codigo_nos:
+                #no = mapa_codigo_nos[key]
+                #if(len(no.pais) == 0):
+                    #print("CABECEIRA: ", key)
     
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
