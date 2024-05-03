@@ -72,15 +72,19 @@ class Cascatador(MetaData):
                     print("CABECEIRA: ", key)
                     lista_cod_cabeceiras.append(key)
     
+            #Cabeceira 1
+            key_cab = lista_cod_cabeceiras[0]
 
             img = Image.new(mode='RGB', size=(1000, 1200 ), color='black')
-
             draw = ImageDraw.Draw(img)
-            a = 10
-            x_sup = 800
-            draw.regular_polygon((500,500,50), 3, rotation=180, fill="blue", outline=None, width=1)
-            
-            draw.polygon([(800, 275), (800, 450), (300, 363) ])
+
+            no_cabeceira = mapa_codigo_nos[key_cab]
+            nivel = 0
+            print("cod: ", no_cabeceira.codigo, " nivel: ", nivel)
+            self.desenha_circulo(no_cabeceira, nivel)
+                
+
+                
 
             # save image
             img.save(diretorio_saida+"/im.png")
@@ -90,6 +94,17 @@ class Cascatador(MetaData):
             print(usinas_mar)
         print(d_usi)
         exit(1)
+
+
+    def desenha_circulo(self,no, nivel):
+        filhos = no.getFilhos()
+        for filho in filhos:
+            print("cod: ", filho.codigo, " nivel: ", nivel)
+            #draw.regular_polygon((1000- 100*nivel,1000 - 100*nivel,50), 3, rotation=180, fill="blue", outline=None, width=1)
+            nivel += 1
+            self.desenha_circulo(filho, nivel)
+    
+
 
 class Node():
     def __init__(self):
@@ -101,3 +116,6 @@ class Node():
         self.codigo_jusante = None 
         self.ree = None 
         self.nivel = None
+
+    def getFilhos(self):
+        return self.filhos
