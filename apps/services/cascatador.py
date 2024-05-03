@@ -41,10 +41,9 @@ class Cascatador(MetaData):
                 mapa_codigo_nos[no.codigo] = no
 
             #usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
-            lista_no_aux = list(mapa_codigo_nos.keys())
+            #lista_no_aux = list(mapa_codigo_nos.keys())
             contador = 0
-            print(lista_no_aux)
-            for cod_usi in lista_no_aux:
+            for cod_usi in mapa_codigo_nos:
                 lista_nos_pais = []
                 lista_nos_filhos = []
                 pais = d_usi.loc[d_usi["codigo_usina_jusante"] == cod_usi]
@@ -63,13 +62,12 @@ class Cascatador(MetaData):
                 no.pais = lista_nos_pais
                 no.filhos = lista_nos_filhos
                 contador += 1
-            print(lista_no_aux)
 
             #PEGANDO MONTANTES
-            #for key in mapa_codigo_nos:
-                #no = mapa_codigo_nos[key]
-                #if(len(no.pais) == 0):
-                    #print("CABECEIRA: ", key)
+            for key in mapa_codigo_nos:
+                no = mapa_codigo_nos[key]
+                if(len(no.pais) == 0):
+                    print("CABECEIRA: ", key)
     
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
