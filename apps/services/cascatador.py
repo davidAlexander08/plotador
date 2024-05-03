@@ -127,6 +127,7 @@ class Cascatador(MetaData):
 
     def define_x(self, no,  pais):
         dist = 10
+        square = 3
 
         if(len(pais) == 0):
             pass
@@ -134,23 +135,23 @@ class Cascatador(MetaData):
             for pai in pais:
                 pai.x = no.x
         if(len(pais) == 2):
-            pais[0].x = no.x -2*(dist-no.y)
-            pais[1].x = no.x +2*(dist-no.y)
+            pais[0].x = no.x -square*(dist-no.y)
+            pais[1].x = no.x +square*(dist-no.y)
         if(len(pais) == 3):
-            pais[0].x = no.x -2*(dist-no.y)
+            pais[0].x = no.x -square*(dist-no.y)
             pais[1].x = no.x
-            pais[2].x = no.x +2*(dist-no.y)
+            pais[2].x = no.x +square*(dist-no.y)
         if(len(pais) == 4):
-            pais[0].x = no.x  -4*(dist-no.y)
-            pais[1].x = no.x  -2*(dist-no.y)
-            pais[2].x = no.x + 2*(dist-no.y)
-            pais[3].x = no.x + 4*(dist-no.y)
+            pais[0].x = no.x  -square*2*(dist-no.y)
+            pais[1].x = no.x  -square*(dist-no.y)
+            pais[2].x = no.x + square*(dist-no.y)
+            pais[3].x = no.x + square*2*(dist-no.y)
         if(len(pais) == 5):
-            pais[0].x = no.x  -4*(dist-no.y)
-            pais[1].x = no.x  -2*(dist-no.y)
+            pais[0].x = no.x  -square*2*(dist-no.y)
+            pais[1].x = no.x  -square*(dist-no.y)
             pais[2].x = no.x 
-            pais[3].x = no.x  + 2*(dist-no.y)
-            pais[4].x = no.x  + 4*(dist-no.y)
+            pais[3].x = no.x  + square*(dist-no.y)
+            pais[4].x = no.x  + square*2*(dist-no.y)
 
 
     #def desenha_circulo(self,draw ,no, nivel):
