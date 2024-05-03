@@ -64,6 +64,7 @@ class Cascatador(MetaData):
                 no.pais = lista_nos_pais
                 no.filhos = lista_nos_filhos
                 contador += 1
+            print(lista_no_aux)
 
             #PEGANDO MONTANTES
             #for key in mapa_codigo_nos:
