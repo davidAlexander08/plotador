@@ -89,6 +89,10 @@ class Cenarios(MetaData):
                         lista_df.append(df)
                     df_vazoes = pd.concat(lista_df)
                     print(df_vazoes)
+
+                    #TESTE
+                    df_teste = Vazoes.read(arquivo_vazoes).vazoes
+                    print(df_teste)
             
             df_vazoes_SIN = pd.DataFrame()
             if(u_fw.filtroArgumento is None):
