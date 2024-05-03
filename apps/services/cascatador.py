@@ -125,29 +125,30 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
+        dist = 100 if no.y == 0 else 100/(no.y+1)
         if(len(pais) == 0):
             pass
         if(len(pais) == 1):
             for pai in pais:
                 pai.x = no.x
         if(len(pais) == 2):
-            pais[0].x = no.x + (20 - no.y*2)
-            pais[1].x = no.x - (20 - no.y*2)
+            pais[0].x = no.x + dist
+            pais[1].x = no.x - dist
         if(len(pais) == 3):
-            pais[0].x = no.x + (20 - no.y*2)
+            pais[0].x = no.x + dist
             pais[1].x = no.x
-            pais[2].x = no.x - (20 - no.y*2)
+            pais[2].x = no.x - dist
         if(len(pais) == 4):
-            pais[0].x = no.x  + (20 - no.y*2)
-            pais[1].x = no.x  + (20 - no.y*2)
-            pais[2].x = no.x  - (20 - no.y*2)
-            pais[3].x = no.x  - (20 - no.y*2)
+            pais[0].x = no.x  + dist*2
+            pais[1].x = no.x  + dist
+            pais[2].x = no.x  - dist
+            pais[3].x = no.x  - dist*2
         if(len(pais) == 5):
-            pais[0].x = no.x  + (20 - no.y*2)
-            pais[1].x = no.x  + (20 - no.y*2)
+            pais[0].x = no.x  + dist*2
+            pais[1].x = no.x  + dist
             pais[2].x = no.x 
-            pais[3].x = no.x  - (20 - no.y*2)
-            pais[4].x = no.x  - (20 - no.y*2)
+            pais[3].x = no.x  - dist
+            pais[4].x = no.x  - dist*2
 
 
     #def desenha_circulo(self,draw ,no, nivel):
