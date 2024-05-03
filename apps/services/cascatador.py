@@ -43,11 +43,12 @@ class Cascatador(MetaData):
             lista_no_aux = mapa_codigo_nos.keys()
             print(lista_no_aux)
             for no in lista_no_aux:
-                pais = d_usi.loc[d_usi["codigo_usina_jusante"] == no.codigo]
+                print(no)
+                pais = d_usi.loc[d_usi["codigo_usina_jusante"] == no]
                 #for pai in pais:
                     #no_pai = 
                 lista_no_aux.remove(no)
-                print("codigo: ", no.codigo, " nome: ", no.nome, " pais: ", pais)
+                #print("codigo: ", no.codigo, " nome: ", no.nome, " pais: ", pais)
             exit(1)
             print(lista_Nos)
             exit(1)
