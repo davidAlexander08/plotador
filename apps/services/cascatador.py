@@ -125,45 +125,22 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
-        #if(no.y <= 3):
-        dist = 100 if no.y  == 0 else (100*(0.8**(no.y)))
+        no_com_mais_pais = self.encontra_pai_com_mais_pais(no)
+        print("no: ", no.nome, " no_seguinte: ", no_com_mais_pais.nome)
+        for pai in pais:
+            pai.x = 10
 
+    def encontra_pai_com_mais_pais(self, no):
+        pais = no.getPais()
         if(len(pais) == 0):
-            pass
-        if(len(pais) == 1):
-            for pai in pais:
-                pai.x = no.x
-        if(len(pais) == 2):
-            pais[0].x = no.x + dist
-            pais[1].x = no.x - dist
-        if(len(pais) == 3):
-            pais[0].x = no.x + dist
-            pais[1].x = no.x
-            pais[2].x = no.x - dist
-        if(len(pais) == 4):
-            pais[0].x = no.x  + dist*2
-            pais[1].x = no.x  + dist
-            pais[2].x = no.x  - dist
-            pais[3].x = no.x  - dist*2
-        if(len(pais) == 5):
-            pais[0].x = no.x  + dist*2
-            pais[1].x = no.x  + dist
-            pais[2].x = no.x 
-            pais[3].x = no.x  - dist
-            pais[4].x = no.x  - dist*2
+            return no
+        for ino in pais:
+            if(len(ino.pais) == 0):
+                pass
+            else:
+                self.encontra_pai_com_mais_pais(ino)
 
 
-    #def desenha_circulo(self,draw ,no, nivel):
-    #    pais = no.getPais()
-    #    nivel += 1
-    #    for pai in pais:
-    #        print("cod: ", pai.codigo, " nivel: ", nivel)
-    #        x = 500 
-    #        y = 2000 - 100*nivel
-    #        draw.regular_polygon((x, y,50), 3, rotation=180, fill="blue", outline=None, width=1)
-    #        draw.text((x, y,50), pai.nome)
-    #        self.desenha_circulo(draw, pai, nivel)
-    
 
 
 class Node():
