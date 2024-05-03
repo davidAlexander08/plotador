@@ -133,7 +133,7 @@ class Cascatador(MetaData):
             pai.x = 10
 
     def encontra_pai_com_mais_pais(self, no, mapa, contador):
-        print(mapa)
+        print("contador: ", contador, " mapa: ", mapa)
         pais = no.getPais()
         contador_anterior = contador
         for pai in pais:
