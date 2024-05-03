@@ -73,7 +73,7 @@ class Cascatador(MetaData):
                     lista_cod_cabeceiras.append(key)
     
             #Cabeceira 1
-            key_cab = lista_cod_cabeceiras[1]
+            key_cab = lista_cod_cabeceiras[3]
 
             img = Image.new(mode='RGB', size=(1000, 1200 ), color='black')
             draw = ImageDraw.Draw(img)
