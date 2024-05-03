@@ -122,7 +122,7 @@ class Cascatador(MetaData):
 
     def define_n_nivel(self, pais):
         if(len(pais) == 0):
-            continue
+            pass
         if(len(pais) == 1):
             for pai in pais:
                 pai.n_nivel = 0
