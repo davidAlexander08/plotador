@@ -54,9 +54,18 @@ class Cascatador(MetaData):
                 no_filho = mapa_codigo_nos[codigo_filho]
                 lista_nos_filhos.append(no_filho)
                 lista_no_aux.remove(cod_usi)
-                print("usi: ", cod_usi, " pais: ", lista_nos_pais, " filhos: ", lista_nos_filhos)
-                exit(1)
-                #print("codigo: ", no.codigo, " nome: ", no.nome, " pais: ", pais)
+                no = mapa_codigo_nos[cod_usi]
+                no.pais = lista_nos_pais
+                no.filhos = lista_nos_filhos
+
+            for cod in mapa_codigo_nos:
+                no = mapa_codigo_nos[cod]
+                print("usi: ", cod)
+                for pai in no.pais:
+                    print("pai: ", pai, " cod: ", pai.codigo)
+                for filho in no.filhos:
+                    print("filho: ", filho, " cod: ", filho.codigo)
+
             exit(1)
             print(lista_Nos)
             exit(1)
