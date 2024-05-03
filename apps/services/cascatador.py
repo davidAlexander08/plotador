@@ -76,7 +76,9 @@ class Cascatador(MetaData):
             img = Image.new(mode='RGB', size=(1000, 1200 ), color='black')
 
             draw = ImageDraw.Draw(img)
-            draw.polygon([(800, 275), (800, 450), (300, 450) ])
+            a = 10
+            x_sup = 800
+            draw.polygon([(x_sup, 275), (x_sup, 450), (300, 363) ])
 
             # save image
             img.save(diretorio_saida+"/im.png")
