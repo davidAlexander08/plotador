@@ -27,6 +27,7 @@ class Cascatador(MetaData):
             arquivo_confhd = c.caminho+"/confhd.dat"
             d_usi = Confhd.read(arquivo_confhd).usinas
             print(d_usi)
+            print(d_usi.loc[d_usi["codigo_usina"] == 2])
             mapa_codigo_nos = {}   
             for index, row in d_usi.iterrows():
                 no = Node()
