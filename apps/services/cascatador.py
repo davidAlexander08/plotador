@@ -83,7 +83,7 @@ class Cascatador(MetaData):
             no_cabeceira = mapa_codigo_nos[lista_cod_mar[0]]
             nivel = 0
             fig = go.Figure()
-            fig.add_trace(go.Scatter(x = [10], y = [nivel], mode = "markers", marker_color="rgba(0,0,0,1.0)" , marker=dict(symbol="triangle-down", size=15)))
+            fig.add_trace(go.Scatter(x = [10], y = [nivel], text =[no_cabeceira.nome], mode = "markers", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
             self.add_scatter_graph(fig, no_cabeceira, nivel)
             fig.update_layout(title="Cascata")
             self.graficos.exportar(fig, diretorio_saida, "cascata"+self.estudo+".png")
@@ -114,11 +114,37 @@ class Cascatador(MetaData):
         nivel += 1
         contador = 0
         for pai in pais:
-            n_nivel = contador if len(pais) > 0 else 0
-            contador += 1
+            self.define_n_nivel(pais)
+            ponto_x = 10 + pai.n_nivel
             print("cod: ", pai.codigo, " nivel: ", nivel)
-            fig.add_trace(go.Scatter(x = [10 + n_nivel], y = [nivel], mode = "markers", marker_color="rgba(0,0,0,1.0)" , marker=dict(symbol="square", size=15)))
+            fig.add_trace(go.Scatter(x = [ponto_x], y = [nivel], text=[pai.nome], mode = "markers", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
             self.add_scatter_graph(fig, pai, nivel)
+
+    def define_n_nivel(self, pais):
+        if(len(pais) == 0):
+            continue
+        if(len(pais) == 1):
+            for pai in pais:
+                pai.n_nivel = 0
+        if(len(pais) == 2):
+            pais[0].n_nivel = -1
+            pais[1].n_nivel = 1
+        if(len(pais) == 3):
+            pais[0].n_nivel = -1
+            pais[1].n_nivel = 0
+            pais[2].n_nivel = 1
+        if(len(pais) == 4):
+            pais[0].n_nivel = -2
+            pais[1].n_nivel = -1
+            pais[2].n_nivel = 1
+            pais[3].n_nivel = 2
+        if(len(pais) == 5):
+            pais[0].n_nivel = -2
+            pais[1].n_nivel = -1
+            pais[2].n_nivel = 0
+            pais[3].n_nivel = 1
+            pais[4].n_nivel = 2
+
 
     #def desenha_circulo(self,draw ,no, nivel):
     #    pais = no.getPais()
