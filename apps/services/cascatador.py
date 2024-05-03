@@ -116,7 +116,7 @@ class Cascatador(MetaData):
         nivel += 1
         contador = 0
         for pai in pais:
-            self.define_n_nivel(pais)
+            self.define_n_nivel(no, pais)
             pai.x = 10 + pai.n_nivel
             pai.y = nivel
             print("cod: ", pai.codigo, " nivel: ", nivel)
@@ -125,30 +125,30 @@ class Cascatador(MetaData):
 
             self.add_scatter_graph(fig, pai, nivel)
 
-    def define_n_nivel(self, pais):
+    def define_n_nivel(self, no,  pais):
         if(len(pais) == 0):
             pass
         if(len(pais) == 1):
             for pai in pais:
-                pai.n_nivel = 0
+                pai.n_nivel = no.n_nivel
         if(len(pais) == 2):
-            pais[0].n_nivel = -1
-            pais[1].n_nivel = 1
+            pais[0].n_nivel = no.n_nivel -1
+            pais[1].n_nivel = no.n_nivel + 1
         if(len(pais) == 3):
-            pais[0].n_nivel = -1
-            pais[1].n_nivel = 0
-            pais[2].n_nivel = 1
+            pais[0].n_nivel = no.n_nivel -1
+            pais[1].n_nivel = no.n_nivel
+            pais[2].n_nivel = no.n_nivel + 1
         if(len(pais) == 4):
-            pais[0].n_nivel = -2
-            pais[1].n_nivel = -1
-            pais[2].n_nivel = 1
-            pais[3].n_nivel = 2
+            pais[0].n_nivel = no.n_nivel  -2
+            pais[1].n_nivel = no.n_nivel  -1
+            pais[2].n_nivel = no.n_nivel + 1
+            pais[3].n_nivel = no.n_nivel + 2
         if(len(pais) == 5):
-            pais[0].n_nivel = -2
-            pais[1].n_nivel = -1
-            pais[2].n_nivel = 0
-            pais[3].n_nivel = 1
-            pais[4].n_nivel = 2
+            pais[0].n_nivel = no.n_nivel  -2
+            pais[1].n_nivel = no.n_nivel  -1
+            pais[2].n_nivel = no.n_nivel 
+            pais[3].n_nivel = no.n_nivel  + 1
+            pais[4].n_nivel = no.n_nivel  + 2
 
 
     #def desenha_circulo(self,draw ,no, nivel):
