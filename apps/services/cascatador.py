@@ -104,7 +104,7 @@ class Cascatador(MetaData):
         for filho in filhos:
             print("cod: ", filho.codigo, " nivel: ", nivel)
             x = 500
-            y = 2000
+            y = 100
             draw.regular_polygon((x, y + 100*nivel,50), 3, rotation=180, fill="blue", outline=None, width=1)
             draw.text((x, y + 100*nivel,50), filho.nome)
             self.desenha_circulo(draw, filho, nivel)
