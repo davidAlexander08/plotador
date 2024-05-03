@@ -115,7 +115,6 @@ class Cascatador(MetaData):
         nivel += 1
         contador = 0
         for pai in pais:
-            
             pai.y = nivel
             self.define_x(no, pais)
             print("cod: ", pai.codigo, " nivel: ", pai.y)
@@ -126,8 +125,7 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
-        dist = 15
-        square = 3
+
 
         if(len(pais) == 0):
             pass
@@ -135,23 +133,23 @@ class Cascatador(MetaData):
             for pai in pais:
                 pai.x = no.x
         if(len(pais) == 2):
-            pais[0].x = no.x -square*(dist-no.y)
-            pais[1].x = no.x +square*(dist-no.y)
+            pais[0].x = no.x + (20 - no.nivel*2)
+            pais[1].x = no.x - (20 - no.nivel*2)
         if(len(pais) == 3):
-            pais[0].x = no.x -square*(dist-no.y)
+            pais[0].x = no.x + (20 - no.nivel*2)
             pais[1].x = no.x
-            pais[2].x = no.x +square*(dist-no.y)
+            pais[2].x = no.x - (20 - no.nivel*2)
         if(len(pais) == 4):
-            pais[0].x = no.x  -square*2*(dist-no.y)
-            pais[1].x = no.x  -square*(dist-no.y)
-            pais[2].x = no.x + square*(dist-no.y)
-            pais[3].x = no.x + square*2*(dist-no.y)
+            pais[0].x = no.x  + (20 - no.nivel*2)
+            pais[1].x = no.x  + (20 - no.nivel*2)
+            pais[2].x = no.x  - (20 - no.nivel*2)
+            pais[3].x = no.x  - (20 - no.nivel*2)
         if(len(pais) == 5):
-            pais[0].x = no.x  -square*2*(dist-no.y)
-            pais[1].x = no.x  -square*(dist-no.y)
+            pais[0].x = no.x  + (20 - no.nivel*2)
+            pais[1].x = no.x  + (20 - no.nivel*2)
             pais[2].x = no.x 
-            pais[3].x = no.x  + square*(dist-no.y)
-            pais[4].x = no.x  + square*2*(dist-no.y)
+            pais[3].x = no.x  - (20 - no.nivel*2)
+            pais[4].x = no.x  - (20 - no.nivel*2)
 
 
     #def desenha_circulo(self,draw ,no, nivel):
