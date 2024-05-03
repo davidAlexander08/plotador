@@ -82,7 +82,7 @@ class Cascatador(MetaData):
                 no_cabeceira = mapa_codigo_nos[key_cab]
                 nivel = 0
                 print("cod: ", no_cabeceira.codigo, " nivel: ", nivel)
-                self.desenha_circulo(no_cabeceira, nivel)
+                self.desenha_circulo(draw, no_cabeceira, nivel)
                 
 
                 
@@ -97,7 +97,7 @@ class Cascatador(MetaData):
         exit(1)
 
 
-    def desenha_circulo(self,no, nivel):
+    def desenha_circulo(self,draw ,no, nivel):
         filhos = no.getFilhos()
         nivel += 1
         for filho in filhos:
