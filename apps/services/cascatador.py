@@ -132,7 +132,9 @@ class Cascatador(MetaData):
 
     def encontra_pai_com_mais_pais(self, no):
         pais = no.getPais()
-        print("no: ", no.nome)
+        if(len(no.pais) == 0)):
+            print("no: ", no.nome)
+
         for ino in pais:
             if(len(ino.pais) != 0):
                 self.encontra_pai_com_mais_pais(ino)
