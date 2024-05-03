@@ -120,7 +120,7 @@ class Cascatador(MetaData):
             pai.y = nivel
             print("cod: ", pai.codigo, " nivel: ", nivel)
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
-            fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [pai.y, pai.y], mode = "lines"))
+            fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines"))
             fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines"))
 
             self.add_scatter_graph(fig, pai, nivel)
