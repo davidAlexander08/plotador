@@ -126,9 +126,9 @@ class Cascatador(MetaData):
 
     def define_x(self, no,  pais):
         if(no.y <= 3):
-            dist = 1000 if no.y  == 0 else (1500/(no.y+1))
+            dist = 100 if no.y  == 0 else (150/(no.y+1))
         else: 
-            dist = (1000 - 100*no.y)
+            dist = (100 - 10*no.y)
 
         if(len(pais) == 0):
             pass
