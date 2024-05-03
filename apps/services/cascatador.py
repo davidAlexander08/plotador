@@ -81,7 +81,7 @@ class Cascatador(MetaData):
                     lista_cod_mar.append(key)
 
             no_cabeceira = mapa_codigo_nos[lista_cod_mar[0]]
-            no_cabeceira.x = 10
+            no_cabeceira.x = 0
             no_cabeceira.y = 0
             fig = go.Figure()
             fig.add_trace(go.Scatter(x = [no_cabeceira.x], y = [no_cabeceira.y], text =[no_cabeceira.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
@@ -125,7 +125,7 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
-        dist = 100 if no.y == 0 else 100/(no.y+1)
+        dist = 1000 if no.y == 0 else 1000/(no.y+1)
         if(len(pais) == 0):
             pass
         if(len(pais) == 1):
