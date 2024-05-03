@@ -125,31 +125,29 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
-
-
         if(len(pais) == 0):
             pass
         if(len(pais) == 1):
             for pai in pais:
                 pai.x = no.x
         if(len(pais) == 2):
-            pais[0].x = no.x + (20 - no.nivel*2)
-            pais[1].x = no.x - (20 - no.nivel*2)
+            pais[0].x = no.x + (20 - no.y*2)
+            pais[1].x = no.x - (20 - no.y*2)
         if(len(pais) == 3):
-            pais[0].x = no.x + (20 - no.nivel*2)
+            pais[0].x = no.x + (20 - no.y*2)
             pais[1].x = no.x
-            pais[2].x = no.x - (20 - no.nivel*2)
+            pais[2].x = no.x - (20 - no.y*2)
         if(len(pais) == 4):
-            pais[0].x = no.x  + (20 - no.nivel*2)
-            pais[1].x = no.x  + (20 - no.nivel*2)
-            pais[2].x = no.x  - (20 - no.nivel*2)
-            pais[3].x = no.x  - (20 - no.nivel*2)
+            pais[0].x = no.x  + (20 - no.y*2)
+            pais[1].x = no.x  + (20 - no.y*2)
+            pais[2].x = no.x  - (20 - no.y*2)
+            pais[3].x = no.x  - (20 - no.y*2)
         if(len(pais) == 5):
-            pais[0].x = no.x  + (20 - no.nivel*2)
-            pais[1].x = no.x  + (20 - no.nivel*2)
+            pais[0].x = no.x  + (20 - no.y*2)
+            pais[1].x = no.x  + (20 - no.y*2)
             pais[2].x = no.x 
-            pais[3].x = no.x  - (20 - no.nivel*2)
-            pais[4].x = no.x  - (20 - no.nivel*2)
+            pais[3].x = no.x  - (20 - no.y*2)
+            pais[4].x = no.x  - (20 - no.y*2)
 
 
     #def desenha_circulo(self,draw ,no, nivel):
