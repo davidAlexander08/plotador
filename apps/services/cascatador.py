@@ -67,7 +67,7 @@ class Cascatador(MetaData):
             #PEGANDO MONTANTES
             for key in mapa_codigo_nos:
                 no = mapa_codigo_nos[key]
-                if(len(self.pais) == 0):
+                if(len(no.pais) == 0):
                     print("CABECEIRA: ", key)
     
             exit(1)
