@@ -124,7 +124,7 @@ class Cascatador(MetaData):
 
             self.add_scatter_graph(fig, pai, nivel)
 
-    def define_n_nivel(self, no,  pais):
+    def define_x(self, no,  pais):
 
         if(len(pais) == 0):
             pass
