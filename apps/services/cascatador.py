@@ -81,9 +81,8 @@ class Cascatador(MetaData):
                     lista_cod_mar.append(key)
 
             no_cabeceira = mapa_codigo_nos[lista_cod_mar[0]]
-            nivel = 0
             no_cabeceira.x = 10
-            no_cabeceira.y = nivel
+            no_cabeceira.y = 0
             fig = go.Figure()
             fig.add_trace(go.Scatter(x = [no_cabeceira.x], y = [no_cabeceira.y], text =[no_cabeceira.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
             self.add_scatter_graph(fig, no_cabeceira, nivel)
@@ -116,8 +115,9 @@ class Cascatador(MetaData):
         nivel += 1
         contador = 0
         for pai in pais:
-            self.define_x(no, pais)
+            
             pai.y = nivel
+            self.define_x(no, pais)
             print("cod: ", pai.codigo, " nivel: ", nivel)
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
@@ -133,23 +133,23 @@ class Cascatador(MetaData):
             for pai in pais:
                 pai.x = no.x
         if(len(pais) == 2):
-            pais[0].x = no.x -2*(5-no.nivel)
-            pais[1].x = no.x +2*(5-no.nivel)
+            pais[0].x = no.x -2*(5-no.y)
+            pais[1].x = no.x +2*(5-no.y)
         if(len(pais) == 3):
-            pais[0].x = no.x -2*(5-no.nivel)
+            pais[0].x = no.x -2*(5-no.y)
             pais[1].x = no.x
-            pais[2].x = no.x +2*(5-no.nivel)
+            pais[2].x = no.x +2*(5-no.y)
         if(len(pais) == 4):
-            pais[0].x = no.x  -4*(5-no.nivel)
-            pais[1].x = no.x  -2*(5-no.nivel)
-            pais[2].x = no.x + 2*(5-no.nivel)
-            pais[3].x = no.x + 4*(5-no.nivel)
+            pais[0].x = no.x  -4*(5-no.y)
+            pais[1].x = no.x  -2*(5-no.y)
+            pais[2].x = no.x + 2*(5-no.y)
+            pais[3].x = no.x + 4*(5-no.y)
         if(len(pais) == 5):
-            pais[0].x = no.x  -4*(5-no.nivel)
-            pais[1].x = no.x  -2*(5-no.nivel)
+            pais[0].x = no.x  -4*(5-no.y)
+            pais[1].x = no.x  -2*(5-no.y)
             pais[2].x = no.x 
-            pais[3].x = no.x  + 2*(5-no.nivel)
-            pais[4].x = no.x  + 4*(5-no.nivel)
+            pais[3].x = no.x  + 2*(5-no.y)
+            pais[4].x = no.x  + 4*(5-no.y)
 
 
     #def desenha_circulo(self,draw ,no, nivel):
@@ -175,7 +175,6 @@ class Node():
         self.posto = None
         self.codigo_jusante = None 
         self.ree = None 
-        self.nivel = None
         self.x = None 
         self.y = None
 
