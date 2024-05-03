@@ -33,8 +33,7 @@ class Cascatador(MetaData):
             exit(1)
             first = nome_usinas[0]
             mapa_cascatas = {}
-            while True:
-                d_usi["codigo_usina_jusante"] == 
+            #while True:
                 
             
             print(nome_usinas)
