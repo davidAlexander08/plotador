@@ -64,8 +64,12 @@ class Cascatador(MetaData):
                 no.filhos = lista_nos_filhos
                 contador += 1
 
-
-
+            #PEGANDO MONTANTES
+            for key in mapa_codigo_nos:
+                no = mapa_codigo_nos[key]
+                if(len(self.pais) == 0):
+                    print("CABECEIRA: ", key)
+    
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
             print(usinas_mar)
@@ -75,7 +79,7 @@ class Cascatador(MetaData):
 class Node():
     def __init__(self):
         self.pais = []
-        self.filhos = any
+        self.filhos = []
         self.codigo = None 
         self.nome = None 
         self.posto = None
