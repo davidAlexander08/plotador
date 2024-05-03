@@ -109,7 +109,7 @@ class Cascatador(MetaData):
         for pai in pais:
             print("cod: ", pai.codigo, " nivel: ", nivel)
             x = 500
-            y = 100
+            y = 2000
             draw.regular_polygon((x, y - 100*nivel,50), 3, rotation=180, fill="blue", outline=None, width=1)
             draw.text((x, y - 100*nivel,50), pai.nome)
             self.desenha_circulo(draw, pai, nivel)
