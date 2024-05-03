@@ -78,6 +78,7 @@ class Cascatador(MetaData):
             img = Image.new(mode='RGB', size=(2500, 2500 ), color='black')
             draw = ImageDraw.Draw(img)
 
+            lista_cod_cabeceiras = [lista_cod_cabeceiras[0]]
             for key_cab in lista_cod_cabeceiras:
                 no_cabeceira = mapa_codigo_nos[key_cab]
                 nivel = 0
