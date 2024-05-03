@@ -25,9 +25,11 @@ class Cascatador(MetaData):
         os.makedirs(diretorio_saida, exist_ok=True)
 
         for c in self.casos:
-
             arquivo_confhd = c.caminho+"/confhd.dat"
             d_usi = Confhd.read(arquivo_confhd).usinas
+            nome_usinas = d_usi["nome_usina"].unique()
+            
+            print(nome_usinas)
 
         print(d_usi)
         exit(1)
