@@ -42,19 +42,19 @@ class Cascatador(MetaData):
             #usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
             lista_no_aux = list(mapa_codigo_nos.keys())
             print(lista_no_aux)
-            for no in lista_no_aux:
+            for cod_usi in lista_no_aux:
                 lista_nos_pais = []
                 lista_nos_filhos = []
-                pais = d_usi.loc[d_usi["codigo_usina_jusante"] == no]
+                pais = d_usi.loc[d_usi["codigo_usina_jusante"] == cod_usi]
                 for index, row in pais.iterrows():
                     no_pai = mapa_codigo_nos[row["codigo_usina"]]
                     lista_nos_pais.append(no_pai)
 
-                codigo_filho = d_usi.loc[d_usi["codigo_usina"] == no]["codigo_usina_jusante"].iloc[0]
+                codigo_filho = d_usi.loc[d_usi["codigo_usina"] == cod_usi]["codigo_usina_jusante"].iloc[0]
                 no_filho = mapa_codigo_nos[codigo_filho]
                 lista_nos_filhos.append(no_filho)
-                lista_no_aux.remove(no)
-                print("pais: ", no.pais, " filhos: ", no.filhos)
+                lista_no_aux.remove(cod_usi)
+                print("usi: ", cod_usi, " pais: ", lista_nos_pais, " filhos: ", lista_nos_filhos)
                 exit(1)
                 #print("codigo: ", no.codigo, " nome: ", no.nome, " pais: ", pais)
             exit(1)
