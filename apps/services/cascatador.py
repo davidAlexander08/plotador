@@ -85,7 +85,7 @@ class Cascatador(MetaData):
             no_cabeceira.y = 0
             fig = go.Figure()
             fig.add_trace(go.Scatter(x = [no_cabeceira.x], y = [no_cabeceira.y], text =[no_cabeceira.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
-            self.add_scatter_graph(fig, no_cabeceira, nivel)
+            self.add_scatter_graph(fig, no_cabeceira, no_cabeceira.y)
             fig.update_layout(title="Cascata", showlegend = False)
             self.graficos.exportar(fig, diretorio_saida, "cascata"+self.estudo+".png")
 
@@ -118,12 +118,12 @@ class Cascatador(MetaData):
             
             pai.y = nivel
             self.define_x(no, pais)
-            print("cod: ", pai.codigo, " nivel: ", nivel)
+            print("cod: ", pai.codigo, " nivel: ", pai.y)
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
             fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
 
-            self.add_scatter_graph(fig, pai, nivel)
+            self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
 
