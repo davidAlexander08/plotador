@@ -80,7 +80,7 @@ class Cascatador(MetaData):
                     print("MAR: ", key)
                     lista_cod_mar.append(key)
 
-            no_cabeceira = lista_cod_mar[0]
+            no_cabeceira = mapa_codigo_nos[lista_cod_mar[0]]
             nivel = 0
             fig = go.Figure()
             fig.add_trace(go.Scatter(x = [10], y = [nivel], mode = "markers", marker_color="rgba(0,0,0,1.0)" , marker=dict(symbol="triangle-down", size=15)))
