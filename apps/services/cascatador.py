@@ -28,7 +28,7 @@ class Cascatador(MetaData):
             d_usi = Confhd.read(arquivo_confhd).usinas
             print(d_usi)
             lista_Nos = []
-            for index, row in self.d_usi.iterrows()::
+            for index, row in self.d_usi.iterrows():
                 no = Node()
                 pais =              []
                 no.pais =           []
