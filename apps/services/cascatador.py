@@ -72,22 +72,27 @@ class Cascatador(MetaData):
                     print("CABECEIRA: ", key)
                     lista_cod_cabeceiras.append(key)
     
+            #PEGANDO MAR
+            lista_cod_mar = []
+            for key in mapa_codigo_nos:
+                no = mapa_codigo_nos[key]
+                if(len(no.filhos) == 0):
+                    print("MAR: ", key)
+                    lista_cod_mar.append(key)
+
             #Cabeceira 1
             #key_cab = lista_cod_cabeceiras[3]
 
             img = Image.new(mode='RGB', size=(2500, 2500 ), color='black')
             draw = ImageDraw.Draw(img)
 
-            lista_cod_cabeceiras = [lista_cod_cabeceiras[0]]
-            for key_cab in lista_cod_cabeceiras:
+            lista_cod_mar = [lista_cod_mar[0]]
+            for key_cab in lista_cod_mar:
                 no_cabeceira = mapa_codigo_nos[key_cab]
                 nivel = 0
                 print("cod: ", no_cabeceira.codigo, " nivel: ", nivel)
                 self.desenha_circulo(draw, no_cabeceira, nivel)
                 
-
-                
-
             # save image
             img.save(diretorio_saida+"/im.png")
 
@@ -99,15 +104,15 @@ class Cascatador(MetaData):
 
 
     def desenha_circulo(self,draw ,no, nivel):
-        filhos = no.getFilhos()
+        pais = no.getPais()
         nivel += 1
-        for filho in filhos:
-            print("cod: ", filho.codigo, " nivel: ", nivel)
+        for pai in pais:
+            print("cod: ", pai.codigo, " nivel: ", nivel)
             x = 500
             y = 100
             draw.regular_polygon((x, y + 100*nivel,50), 3, rotation=180, fill="blue", outline=None, width=1)
-            draw.text((x, y + 100*nivel,50), filho.nome)
-            self.desenha_circulo(draw, filho, nivel)
+            draw.text((x, y + 100*nivel,50), pai.nome)
+            self.desenha_circulo(draw, pai, nivel)
     
 
 
@@ -121,6 +126,9 @@ class Node():
         self.codigo_jusante = None 
         self.ree = None 
         self.nivel = None
+
+    def getPais(self):
+        return self.pais
 
     def getFilhos(self):
         return self.filhos
