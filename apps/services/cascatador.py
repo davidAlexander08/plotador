@@ -132,23 +132,23 @@ class Cascatador(MetaData):
             for pai in pais:
                 pai.x = no.x
         if(len(pais) == 2):
-            pais[0].x = no.x -1
-            pais[1].x = no.x + 1
+            pais[0].x = no.x -2
+            pais[1].x = no.x +2
         if(len(pais) == 3):
-            pais[0].x = no.x -1
+            pais[0].x = no.x -2
             pais[1].x = no.x
-            pais[2].x = no.x + 1
+            pais[2].x = no.x +2
         if(len(pais) == 4):
-            pais[0].x = no.x  -2
-            pais[1].x = no.x  -1
-            pais[2].x = no.x + 1
-            pais[3].x = no.x + 2
+            pais[0].x = no.x  -4
+            pais[1].x = no.x  -2
+            pais[2].x = no.x + 2
+            pais[3].x = no.x + 4
         if(len(pais) == 5):
-            pais[0].x = no.x  -2
-            pais[1].x = no.x  -1
+            pais[0].x = no.x  -4
+            pais[1].x = no.x  -2
             pais[2].x = no.x 
-            pais[3].x = no.x  + 1
-            pais[4].x = no.x  + 2
+            pais[3].x = no.x  + 2
+            pais[4].x = no.x  + 4
 
 
     #def desenha_circulo(self,draw ,no, nivel):
