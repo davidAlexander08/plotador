@@ -27,24 +27,27 @@ class Cascatador(MetaData):
             arquivo_confhd = c.caminho+"/confhd.dat"
             d_usi = Confhd.read(arquivo_confhd).usinas
             print(d_usi)
-            lista_Nos = []
+            mapa_codigo_nos = []
             for index, row in d_usi.iterrows():
                 no = Node()
                 no.pais =           []
-                no.filhos =         row["codigo_usina_jusante"] 
+                no.filhos =         []
                 no.codigo =         row["codigo_usina"]
                 no.nome =           row["nome_usina"]
                 no.posto =          row["posto"]
                 no.ree =            row["ree"] 
                 no.nivel =          None
-                lista_Nos.append(no)
+                mapa_codigo_nos[no.codigo] = no
 
             #usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
-            lista_no_aux = lista_Nos
+            lista_no_aux = mapa_codigo_nos.keys()
+            print(lista_no_aux)
             for no in lista_no_aux:
                 pais = d_usi.loc[d_usi["codigo_usina_jusante"] == no.codigo]
+                #for pai in pais:
+                    #no_pai = 
                 lista_no_aux.remove(no)
-                print("codigo: ", no.codigo, " pais: ", pais)
+                print("codigo: ", no.codigo, " nome: ", no.nome, " pais: ", pais)
             exit(1)
             print(lista_Nos)
             exit(1)
