@@ -54,7 +54,7 @@ class Cascatador(MetaData):
                         lista_nos_pais.append(no_pai)
                     
                 filhos = d_usi.loc[d_usi["codigo_usina"] == cod_usi]
-                if(filhos["codigo_usina_jusnate"].iloc[0] != 0):
+                if(filhos["codigo_usina_jusante"].iloc[0] != 0):
                     no_filho = mapa_codigo_nos[codigo_filho] 
                     print("usina: ", cod_usi, "filho: ", no_filho.codigo)
                     lista_nos_filhos.append(no_filho)
