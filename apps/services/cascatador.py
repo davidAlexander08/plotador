@@ -24,9 +24,10 @@ class Cascatador(MetaData):
         diretorio_saida = f"resultados/{self.estudo}/cascatador"
         os.makedirs(diretorio_saida, exist_ok=True)
 
+        for c in self.casos:
 
-        arquivo_confhd = c.caminho+"/confhd.dat"
-        d_usi = Confhd(arquivo_confhd).usinas
+            arquivo_confhd = c.caminho+"/confhd.dat"
+            d_usi = Confhd(arquivo_confhd).usinas
 
         print(d_usi)
         exit(1)
