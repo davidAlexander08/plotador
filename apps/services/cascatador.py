@@ -73,15 +73,16 @@ class Cascatador(MetaData):
                     lista_cod_cabeceiras.append(key)
     
             #Cabeceira 1
-            key_cab = lista_cod_cabeceiras[3]
+            #key_cab = lista_cod_cabeceiras[3]
 
             img = Image.new(mode='RGB', size=(1000, 1200 ), color='black')
             draw = ImageDraw.Draw(img)
 
-            no_cabeceira = mapa_codigo_nos[key_cab]
-            nivel = 0
-            print("cod: ", no_cabeceira.codigo, " nivel: ", nivel)
-            self.desenha_circulo(no_cabeceira, nivel)
+            for key_cab in lista_cod_cabeceiras:
+                no_cabeceira = mapa_codigo_nos[key_cab]
+                nivel = 0
+                print("cod: ", no_cabeceira.codigo, " nivel: ", nivel)
+                self.desenha_circulo(no_cabeceira, nivel)
                 
 
                 
