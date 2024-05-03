@@ -87,7 +87,7 @@ class Cascatador(MetaData):
             fig = go.Figure()
             fig.add_trace(go.Scatter(x = [no_cabeceira.x], y = [no_cabeceira.y], text =[no_cabeceira.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=15)))
             self.add_scatter_graph(fig, no_cabeceira, nivel)
-            fig.update_layout(title="Cascata", showlegend = False)
+            fig.update_layout(title="Cascata", showlegend = False, selections = dict(type = "rect"))
             self.graficos.exportar(fig, diretorio_saida, "cascata"+self.estudo+".png")
 
 
