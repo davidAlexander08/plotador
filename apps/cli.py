@@ -138,6 +138,20 @@ def analise_tempo(arquivo_json):
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
+
+@click.command("cascatador")
+@click.argument(
+    "arquivo_json",
+)
+def analise_cascatador(arquivo_json):
+    from apps.services.cascatador import Cascatador
+    if os.path.isfile(arquivo_json):
+        data = Dados_json_caso(arquivo_json)
+        Cascatador(data)          
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
+
 cli.add_command(analise_pareto)
 cli.add_command(eco)
 cli.add_command(analise_temporal)
@@ -148,3 +162,4 @@ cli.add_command(analise_cenarios)
 cli.add_command(analise_operacional)
 cli.add_command(analise_fcf)
 cli.add_command(analise_tempo)
+cli.add_command(analise_cascatador)
