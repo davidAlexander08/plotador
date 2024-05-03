@@ -27,7 +27,7 @@ class Cascatador(MetaData):
         for c in self.casos:
 
             arquivo_confhd = c.caminho+"/confhd.dat"
-            d_usi = Confhd(arquivo_confhd).usinas
+            d_usi = Confhd.read(arquivo_confhd).usinas
 
         print(d_usi)
         exit(1)
