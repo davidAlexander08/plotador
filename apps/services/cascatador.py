@@ -59,6 +59,7 @@ class Cascatador(MetaData):
                 no.filhos = lista_nos_filhos
 
             for cod in mapa_codigo_nos:
+                print(cod)
                 no = mapa_codigo_nos[cod]
                 print("usi: ", cod)
                 for pai in no.pais:
