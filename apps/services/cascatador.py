@@ -168,11 +168,11 @@ class Cascatador(MetaData):
                 pai.text_position = no.text_position
             
             if(no.nome == "JUPIA" and pai.nome == "TRES IRMAOS"):
-                pai.x = -150
+                pai.x = -200
                 pai.text_position = "top left"
 
             if(pai.nome == "ROSANA"):
-                pai.x = 150
+                pai.x = 200
                 pai.text_position = "top left"
 
 
