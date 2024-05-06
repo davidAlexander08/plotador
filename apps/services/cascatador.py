@@ -139,7 +139,7 @@ class Cascatador(MetaData):
                 pai.x = no.x + dist + dist + dist_max/contador 
                 contador += 1
 
-            if(len(pai.getFilhos()) == 0):
+            if(len(pai.getPais()) == 0):
                 print(pai.nome)
                 pai.x = no.x + 50
 
