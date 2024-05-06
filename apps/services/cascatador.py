@@ -99,7 +99,7 @@ class Cascatador(MetaData):
         for pai in pais:
             self.define_x(no, pais)
             #if(nivel < 5):
-            fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=13), textposition= "top right", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
+            fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=13), textposition= pai.text_position, mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
             fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
 
@@ -169,9 +169,11 @@ class Cascatador(MetaData):
             
             if(no.nome == "JUPIA" and pai.nome == "TRES IRMAOS"):
                 pai.x = -150
+                pai.text_position = "top left"
 
             if(pai.nome == "ROSANA"):
                 pai.x = 150
+                pai.text_position = "top right"
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
         lista_filho = no.getFilhos()
@@ -202,7 +204,7 @@ class Node():
         self.x = 0 
         self.y = 0
         self.n_ramos = 0
-        self.text_position = "top center"
+        self.text_position = "top right"
 
     def getPais(self):
         return self.pais
