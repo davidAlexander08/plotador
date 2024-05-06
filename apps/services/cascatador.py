@@ -13,6 +13,8 @@ from apps.interface.metaData import MetaData
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from inewave.newave import Confhd
 from inewave.newave import Hidr
+from inewave.newave import Modif
+
 from apps.indicadores.eco_indicadores import EcoIndicadores
 
 import os
@@ -48,6 +50,12 @@ class Cascatador(MetaData):
 
             vdef_min_usinas = self.eco_indicadores.retorna_df_concatenado("VDEFMIN_UHE_EST")
             vdef_min_usinas_mean = vdef_min_usinas.loc[vdef_min_usinas["cenario"] == "mean"].round(0)
+
+            arquivo_vazmin = c.caminho+"/modif.dat"
+            d_vazmin = Modif.read(arquivo_vazmin).vazmin
+            print(d_vazmin)
+            exit(1)
+
 
             arquivo_hidr = c.caminho+"/hidr.dat"
             d_hidr = Hidr.read(arquivo_hidr).cadastro
