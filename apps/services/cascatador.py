@@ -132,50 +132,27 @@ class Cascatador(MetaData):
         dist = 100 - 14*(no.y)
         contador = 0
 
-        sinal = 0
         for pai in pais:
             pai.y = no.y + 1
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
             else:
-                pass
+                print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
+                sinal = 1 if(contador%2 == 0) else -1
+                pai.x = no.x + sinal*dist
+                contador += 1
                 
+        
             if(len(pais) > 1):
                 if((len(pai.getPais()) == 0)):
                     pai.x = no.x + 10
                     pai.y = pai.y - 0.5
-
+        
                 if((len(pai.getPais()) == 1) ):
                     
                     if((len(pai.getPais()[0].getPais() )== 0)):
                         pai.x = no.x + 30
                         pai.y = pai.y - 0.5
-
-
-
-
-
-        #for pai in pais:
-        #    pai.y = no.y + 1
-        #    if(pai.nome in lista_usi_max):
-        #        pai.x = no.x
-        #    else:
-        #        print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
-        #        sinal = 1 if(contador%2 == 0) else -1
-        #        pai.x = no.x + sinal*dist
-        #        contador += 1
-        #        
-        #
-        #    if(len(pais) > 1):
-        #        if((len(pai.getPais()) == 0)):
-        #            pai.x = no.x + 10
-        #            pai.y = pai.y - 0.5
-        #
-        #        if((len(pai.getPais()) == 1) ):
-        #            
-        #            if((len(pai.getPais()[0].getPais() )== 0)):
-        #                pai.x = no.x + 30
-        #                pai.y = pai.y - 0.5
 
                     #if((len(pai.getPais()[0].getPais()) == 1)  and(len(pai.getPais()[0].getPais()[0].getPais() )== 0)):
                     #    pai.x = no.x + 30
