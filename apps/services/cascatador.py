@@ -32,19 +32,19 @@ class Cascatador(MetaData):
         for c in self.casos:
 
             defluencia_usinas = self.eco_indicadores.retorna_df_concatenado("QDEF_UHE_EST")
-            defluencia_usinas_mean = defluencia_usinas.loc[defluencia_usinas["cenario"] == "mean"].round(1)
+            defluencia_usinas_mean = defluencia_usinas.loc[defluencia_usinas["cenario"] == "mean"].round(0)
 
             qincr_usinas = self.eco_indicadores.retorna_df_concatenado("QINC_UHE_EST")
-            qincr_usinas_mean = qincr_usinas.loc[qincr_usinas["cenario"] == "mean"].round(1)
+            qincr_usinas_mean = qincr_usinas.loc[qincr_usinas["cenario"] == "mean"].round(0)
 
             qafl_usinas = self.eco_indicadores.retorna_df_concatenado("QAFL_UHE_EST")
-            qafl_usinas_mean = qafl_usinas.loc[qafl_usinas["cenario"] == "mean"].round(1)
+            qafl_usinas_mean = qafl_usinas.loc[qafl_usinas["cenario"] == "mean"].round(0)
 
             qtur_usinas = self.eco_indicadores.retorna_df_concatenado("QTUR_UHE_EST")
-            qtur_usinas_mean = qtur_usinas.loc[qtur_usinas["cenario"] == "mean"].round(1)
+            qtur_usinas_mean = qtur_usinas.loc[qtur_usinas["cenario"] == "mean"].round(0)
 
             qver_usinas = self.eco_indicadores.retorna_df_concatenado("QVER_UHE_EST")
-            qver_usinas_mean = qver_usinas.loc[qver_usinas["cenario"] == "mean"].round(1)
+            qver_usinas_mean = qver_usinas.loc[qver_usinas["cenario"] == "mean"].round(0)
 
             arquivo_hidr = c.caminho+"/hidr.dat"
             d_hidr = Hidr.read(arquivo_hidr).cadastro
