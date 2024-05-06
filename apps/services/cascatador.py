@@ -100,10 +100,10 @@ class Cascatador(MetaData):
             self.define_x(no, pais)
             #if(nivel < 5):
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=11), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
-            fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y+0.2, pai.y], mode = "lines",  line=dict(color='blue')))
-            fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y+0.2, no.y+0.2], mode = "lines", line=dict(color='blue')))
+            fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
+            fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
 
-            fig.update_xaxes(range = [-100,100])
+            #fig.update_xaxes(range = [-100,100])
 
             self.add_scatter_graph(fig, pai, pai.y)
 
@@ -134,15 +134,6 @@ class Cascatador(MetaData):
 
         for pai in pais:
             pai.y = no.y + 1
-            if(pai.nome in lista_usi_max):
-                pai.x = no.x
-            else:
-                print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
-                sinal = 1 if(contador%2 == 0) else -1
-                pai.x = no.x + sinal*dist
-                contador += 1
-                
-        
             if(len(pais) > 1):
                 if((len(pai.getPais()) == 0)):
                     pai.x = no.x + 10
@@ -158,7 +149,13 @@ class Cascatador(MetaData):
                     #    pai.x = no.x + 30
                     #    pai.y = pai.y - 0.5
 
-
+            if(pai.nome in lista_usi_max):
+                pai.x = no.x
+            else:
+                print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
+                sinal = 1 if(contador%2 == 0) else -1
+                pai.x = no.x + sinal*dist
+                contador += 1
 
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
