@@ -83,7 +83,7 @@ class Cascatador(MetaData):
             for no in lista_cod_mar:
                 fig = go.Figure()
                 fig.add_trace(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[no.nome], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
-                self.add_scatter_graph(fig, no, no.y)
+                self.add_scatter_graph(fig, no, no.y, -60, 60)
                 fig.update_layout(title="Cascata", showlegend = False)
                 self.graficos.exportar(fig, diretorio_saida, no.nome+" cascata"+self.estudo, W = 1500, H = 1200)
             exit(1)
@@ -92,7 +92,7 @@ class Cascatador(MetaData):
         print(d_usi)
         exit(1)
 
-    def add_scatter_graph(self,fig ,no, nivel):
+    def add_scatter_graph(self,fig ,no, nivel, minimo, maximo):
         pais = no.getPais()
         nivel += 1
         contador = 0
@@ -106,7 +106,7 @@ class Cascatador(MetaData):
             maximo = pai.x*1.1 if pai.x >= maximo else 50
             print("min: ", minimo, " max: ", maximo)
             fig.update_xaxes(range = [minimo,maximo])
-            self.add_scatter_graph(fig, pai, pai.y)
+            self.add_scatter_graph(fig, pai, pai.y, minimo, maximo)
 
 
 
