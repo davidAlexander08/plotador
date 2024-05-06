@@ -101,7 +101,6 @@ class Cascatador(MetaData):
         contador = 0
         for pai in pais:
             pai.y = nivel
-            print(nivel, " ", pai.y, " ", pai.nome)
             self.define_x(no, pais)
             print("cod: ", pai.codigo, " nivel: ", pai.y)
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=11), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
@@ -117,7 +116,7 @@ class Cascatador(MetaData):
             lista_usi_filhos = [ino.nome]
             self.encontra_numero_filhos(ino,lista_usi_filhos)
             mapa[ino.nome] = lista_usi_filhos
-            print("usina: ", ino.nome, " numero: ", len(lista_usi_filhos), " lista: ", lista_usi_filhos)
+            #print("usina: ", ino.nome, " numero: ", len(lista_usi_filhos), " lista: ", lista_usi_filhos)
         
         contador = 0
         maximo = 0
@@ -130,7 +129,6 @@ class Cascatador(MetaData):
         lista_usi_max =   mapa[usi_max]    
         print(lista_usi_max)  
 
-        print(no.y," ", no.nome)
         dist = 1000/(no.y+1)
         contador = 0
         for pai in pais:
@@ -138,8 +136,7 @@ class Cascatador(MetaData):
                 pai.x = no.x
             else:
                 if(no.nome == "CAPIVARA"):
-                    print(no.nome, " " ,dist)
-                    exit(1)
+                    print(contador, " ", no.nome, " " ,dist)
                 pai.x = dist if( (contador % 2) == 0 ) else -dist
                 contador += 1
 
