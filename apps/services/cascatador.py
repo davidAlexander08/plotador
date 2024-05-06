@@ -105,7 +105,7 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
-        mapa_ramos = {0:100,1:80, 2:60, 3:40, 2:20}
+        mapa_ramos = {0:100,1:80, 2:60, 3:40, 4:20}
         lista = []
         self.encontra_usinas_cabeceira(no, lista)
         mapa = {}
