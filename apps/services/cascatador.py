@@ -135,6 +135,7 @@ class Cascatador(MetaData):
             pai.y = no.y + 1
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
+                print(lista_usi_max)
                 print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
             else:
                 sinal = 1 if(contador%2 == 0) else -1
