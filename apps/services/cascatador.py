@@ -80,7 +80,7 @@ class Cascatador(MetaData):
                     lista_cod_mar.append(no)
 
             #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
-            lista_teste = lista_cod_mar[0]
+            lista_teste = [lista_cod_mar[0]]
             for no in lista_teste:#lista_cod_mar:
                 fig = go.Figure()
                 lista_traces = []
