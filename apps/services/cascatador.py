@@ -76,7 +76,7 @@ class Cascatador(MetaData):
             lista_cod_mar = []
             for key in mapa_codigo_nos:
                 no = mapa_codigo_nos[key]
-                if((len(no.filhos) == 0) and (len(no.pais) != 0)):
+                if((len(no.filhos) == 0) and (len(no.pais) > 2)):
                     lista_cod_mar.append(no)
 
             #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
