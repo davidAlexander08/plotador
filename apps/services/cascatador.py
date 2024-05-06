@@ -80,35 +80,21 @@ class Cascatador(MetaData):
                     print("MAR: ", key)
                     lista_cod_mar.append(key)
 
-            no_cabeceira = mapa_codigo_nos[lista_cod_mar[0]]
-            no_cabeceira.x = 0
-            no_cabeceira.y = 0
+            no_mar = mapa_codigo_nos[lista_cod_mar[0]]
+            usi_montante = self.descobre_maior_montante(no_mar)
+
+            no_mar.x = 0
+            no_mar.y = 0
             fig = go.Figure()
-            fig.add_trace(go.Scatter(x = [no_cabeceira.x], y = [no_cabeceira.y], textfont=dict( size=11), text =[no_cabeceira.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
-            self.add_scatter_graph(fig, no_cabeceira, no_cabeceira.y)
+            fig.add_trace(go.Scatter(x = [no_mar.x], y = [no_mar.y], textfont=dict( size=11), text =[no_mar.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
+            self.add_scatter_graph(fig, no_mar, no_mar.y)
             fig.update_layout(title="Cascata", showlegend = False)
             self.graficos.exportar(fig, diretorio_saida, "cascata"+self.estudo, W = 1500, H = 1200)
-
-
-            #img = Image.new(mode='RGB', size=(2500, 2500 ), color='black')
-            #draw = ImageDraw.Draw(img)
-            #
-            #lista_cod_mar = [lista_cod_mar[0]]
-            #for key_cab in lista_cod_mar:
-            #    no_cabeceira = mapa_codigo_nos[key_cab]
-            #    nivel = 0
-            #    print("cod: ", no_cabeceira.codigo, " nivel: ", nivel)
-            #    self.desenha_circulo(draw, no_cabeceira, nivel)
-            #    
-            ## save image
-            #img.save(diretorio_saida+"/im.png")
-
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
             print(usinas_mar)
         print(d_usi)
         exit(1)
-
 
     def add_scatter_graph(self,fig ,no, nivel):
         pais = no.getPais()
@@ -141,16 +127,10 @@ class Cascatador(MetaData):
             if(numero > maximo):
                 maximo = numero
                 usi_max = usi
+        lista_usi_max =   mapa[usi_max]    
+        print(lista_usi_max)   
 
-        print("usina maior: ", usi_max)
-            
 
-
-        
-        exit(1)
-        print("no: ", no.nome, " no_seguinte: ", no_com_mais_pais.nome)
-        for pai in pais:
-            pai.x = 10
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
         lista_filho = no.getFilhos()
