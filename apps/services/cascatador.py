@@ -128,9 +128,8 @@ class Cascatador(MetaData):
         self.encontra_usinas_cabeceira(no, lista)
         mapa = {}
         for no in lista:
-            contador = 0
             numero_filhos = self.encontra_numero_filhos(no,contador)
-            mapa[no.nome] = contador
+            mapa[no.nome] = numero_filhos
             print("usina: ", no.nome, " numero: ", contador)
         exit(1)
         print("no: ", no.nome, " no_seguinte: ", no_com_mais_pais.nome)
@@ -138,13 +137,9 @@ class Cascatador(MetaData):
             pai.x = 10
 
     def encontra_numero_filhos(self, no, contador):
-        filhos = no.getFilhos()
-        for filho in filhos:
-            if(len(filho.filhos()) == 0): 
-                return contador
-            else:
-                contador += 1
-                self.encontra_numero_filhos(filho, contador)
+        lista_filho = no.getFilhos()
+        contador += 1
+        self.encontra_numero_filhos(lista_filho[0], contador)
 
     def encontra_usinas_cabeceira(self, no, lista):
         pais = no.getPais()
