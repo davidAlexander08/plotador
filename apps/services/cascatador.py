@@ -30,7 +30,6 @@ class Cascatador(MetaData):
             arquivo_hidr = c.caminho+"/hidr.dat"
             d_hidr = Hidr.read(arquivo_hidr).cadastro
             print(d_hidr)
-            exit(1)
 
             arquivo_confhd = c.caminho+"/confhd.dat"
             d_usi = Confhd.read(arquivo_confhd).usinas
@@ -114,13 +113,16 @@ class Cascatador(MetaData):
         print(d_usi)
         exit(1)
 
-    def add_scatter_graph(self,lista_traces ,no, nivel):
+    def add_scatter_graph(self,lista_traces ,no, nivel, d_hidr):
         pais = no.getPais()
         nivel += 1
         contador = 0
         for pai in pais:
             self.define_x(no, pais)
             #if(nivel < 5):
+            row = d_hidr.loc[d_hidr["nome_usina"] == pai.nome]
+            print(pai.nome, " ", row["tipo_regulacao"])
+            #if(d_hidr.loc[d_hidr["tipo_regulacao"] == "M"])
             lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=13), textposition= pai.text_position, mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
             lista_traces.append(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             lista_traces.append(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
