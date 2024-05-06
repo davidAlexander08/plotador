@@ -93,7 +93,8 @@ class Cascatador(MetaData):
                     lista_cod_mar.append(no)
 
             estagios = defluencia_usinas_mean["estagio"].unique()
-            for est in estagios:
+            est_1 = [estagios[0]]
+            for est in est_1:#estagios:
                 defluencia_usinas_mean_est = defluencia_usinas_mean.loc[defluencia_usinas_mean["estagio"] == est]
                 #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
                 lista_teste = [lista_cod_mar[0]]
