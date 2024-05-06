@@ -82,14 +82,18 @@ class Cascatador(MetaData):
             #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
             for no in lista_cod_mar:
                 fig = go.Figure()
-                fig.add_trace(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[no.nome], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
-                self.add_scatter_graph(fig, no, no.y)
+                lista_traces = []
+                lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[no.nome], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
+                
+                self.add_scatter_graph(lista_traces, no, no.y)
+                for elemento in lista_traces:
+                    fig.add_trace(elemento)
                 fig.update_layout(title="Cascata", showlegend = False)
-                fig.update_layout(xaxis=dict(range=[xlim[0],xlim[1]]))
-                #minimo = pai.x*1.1 if pai.x <= minimo else -50
-                #maximo = pai.x*1.1 if pai.x >= maximo else 50
-                #print("min: ", minimo, " max: ", maximo)
-                #fig.update_xaxes(range = [minimo,maximo])
+
+                minimo = pai.x*1.1 if pai.x <= minimo else -50
+                maximo = pai.x*1.1 if pai.x >= maximo else 50
+                print("min: ", minimo, " max: ", maximo)
+                fig.update_xaxes(range = [minimo,maximo])
 
                 self.graficos.exportar(fig, diretorio_saida, no.nome+" cascata"+self.estudo, W = 1500, H = 1200)
             exit(1)
@@ -98,17 +102,17 @@ class Cascatador(MetaData):
         print(d_usi)
         exit(1)
 
-    def add_scatter_graph(self,fig ,no, nivel):
+    def add_scatter_graph(self,lista_traces ,no, nivel):
         pais = no.getPais()
         nivel += 1
         contador = 0
         for pai in pais:
             self.define_x(no, pais)
             #if(nivel < 5):
-            fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=13), textposition= pai.text_position, mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
-            fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
-            fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
-            self.add_scatter_graph(fig, pai, pai.y)
+            lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=13), textposition= pai.text_position, mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
+            lista_traces.append(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
+            lista_traces.append(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
+            self.add_scatter_graph(lista_traces, pai, pai.y)
 
 
 
