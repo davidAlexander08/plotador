@@ -126,7 +126,8 @@ class Cascatador(MetaData):
                 maximo = numero
                 usi_max = usi
         lista_usi_max =   mapa[usi_max]    
-        print(lista_usi_max)  
+        print(lista_usi_max) 
+        keys_max = mapa.keys() 
 
         dist = 100 - 20*(no.y)
         dist_max = 100
@@ -140,7 +141,7 @@ class Cascatador(MetaData):
                 pai.x = no.x + sinal*dist
                 contador += 1
 
-            if(len(pai.getPais()) == 0):
+            if((len(pai.getPais()) == 0) and (pai.nome not in keys_max) ):
                 print(pai.nome)
                 pai.x = no.x + 10
                 pai.y = pai.y - 0.5
