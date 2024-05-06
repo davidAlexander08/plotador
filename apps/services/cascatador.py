@@ -127,7 +127,15 @@ class Cascatador(MetaData):
                 maximo = numero
                 usi_max = usi
         lista_usi_max =   mapa[usi_max]    
-        print(lista_usi_max)   
+        print(lista_usi_max)  
+
+        dist = 100
+        for pai in pais:
+            if(pai.nome in lista_usi_max):
+                pai.x = 0
+            else:
+                pai.x = dist
+
         exit(1)
 
 
