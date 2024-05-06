@@ -105,6 +105,7 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
+        mapa_ramos = {0:100,1:80, 2:60, 3:40, 2:20}
         lista = []
         self.encontra_usinas_cabeceira(no, lista)
         mapa = {}
@@ -127,17 +128,17 @@ class Cascatador(MetaData):
         keys_max = mapa.keys() 
         dist = 100 - 14*(no.y)
         contador = 0
+
         for pai in pais:
             pai.y = no.y + 1
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
             else:
-                print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
-                sinal = 1 if(contador%2 == 0) else -1
-                pai.x = no.x + sinal*dist
-                contador += 1
+                pai.x = mapa_ramos[pai.n_ramos]
+                pai.n_ramos += 1
+                for pai_acima in pai.getPais():
+                    pai_acima.n_ramos = pai.n_ramos
                 
-
             if(len(pais) > 1):
                 if((len(pai.getPais()) == 0)):
                     pai.x = no.x + 10
@@ -148,6 +149,32 @@ class Cascatador(MetaData):
                     if((len(pai.getPais()[0].getPais() )== 0)):
                         pai.x = no.x + 30
                         pai.y = pai.y - 0.5
+
+
+
+
+
+        #for pai in pais:
+        #    pai.y = no.y + 1
+        #    if(pai.nome in lista_usi_max):
+        #        pai.x = no.x
+        #    else:
+        #        print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
+        #        sinal = 1 if(contador%2 == 0) else -1
+        #        pai.x = no.x + sinal*dist
+        #        contador += 1
+        #        
+        #
+        #    if(len(pais) > 1):
+        #        if((len(pai.getPais()) == 0)):
+        #            pai.x = no.x + 10
+        #            pai.y = pai.y - 0.5
+        #
+        #        if((len(pai.getPais()) == 1) ):
+        #            
+        #            if((len(pai.getPais()[0].getPais() )== 0)):
+        #                pai.x = no.x + 30
+        #                pai.y = pai.y - 0.5
 
                     #if((len(pai.getPais()[0].getPais()) == 1)  and(len(pai.getPais()[0].getPais()[0].getPais() )== 0)):
                     #    pai.x = no.x + 30
@@ -184,6 +211,7 @@ class Node():
         self.ree = None 
         self.x = 0 
         self.y = 0
+        self.n_ramos = 0
 
     def getPais(self):
         return self.pais
