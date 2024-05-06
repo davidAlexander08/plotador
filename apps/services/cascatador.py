@@ -129,16 +129,15 @@ class Cascatador(MetaData):
         lista_usi_max =   mapa[usi_max]    
         print(lista_usi_max)  
 
-        dist = 1000 - 40*(no.y)
+        dist = 1000 - 50*(no.y)
         contador = 0
         for pai in pais:
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
             else:
-                if(no.nome == "CAPIVARA"):
-                    print(contador, " ", no.nome, " " ,dist)
                 pai.x = no.x + dist if( (contador % 2) == 0 ) else no.x -dist
                 contador += 1
+
 
 
 
