@@ -173,7 +173,13 @@ class Cascatador(MetaData):
 
             if(pai.nome == "ROSANA"):
                 pai.x = 150
-                pai.text_position = "top right"
+                pai.text_position = "top left"
+
+
+            if(no.nome == "I. SOLTEIRA" and pai.nome == "FOZ R. CLARO"):
+                pai.x = 150
+                pai.text_position = "top left"
+
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
         lista_filho = no.getFilhos()
