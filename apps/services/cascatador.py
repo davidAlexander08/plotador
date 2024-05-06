@@ -96,6 +96,8 @@ class Cascatador(MetaData):
         pais = no.getPais()
         nivel += 1
         contador = 0
+        minimo = -50
+        maximo = 50
         for pai in pais:
             self.define_x(no, pais)
             #if(nivel < 5):
@@ -105,9 +107,8 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
             candidato = int(pai.x)
-            print(candidato)
-            minimo = candidato*1.1 if candidato <= min else -50
-            maximo = candidato*1.1 if candidato >= max else 50
+            minimo = candidato*1.1 if candidato <= minimo else -50
+            maximo = candidato*1.1 if candidato >= maximo else 50
         
             fig.update_xaxes(range = [minimo,maximo])
 
