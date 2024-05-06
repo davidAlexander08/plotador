@@ -81,7 +81,6 @@ class Cascatador(MetaData):
                     lista_cod_mar.append(key)
 
             no_mar = mapa_codigo_nos[lista_cod_mar[0]]
-            usi_montante = self.descobre_maior_montante(no_mar)
 
             no_mar.x = 0
             no_mar.y = 0
