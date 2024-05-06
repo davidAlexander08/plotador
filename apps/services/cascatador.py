@@ -96,21 +96,21 @@ class Cascatador(MetaData):
         pais = no.getPais()
         nivel += 1
         contador = 0
-        minimo = -50
-        maximo = 50
+        minimo = -60
+        maximo = 60
         for pai in pais:
             self.define_x(no, pais)
             #if(nivel < 5):
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=13), textposition= pai.text_position, mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
             fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
+            minimo = pai.x*1.1 if pai.x <= minimo else -50
+            maximo = pai.x*1.1 if pai.x >= maximo else 50
+            fig.update_xaxes(range = [minimo,maximo])
             self.add_scatter_graph(fig, pai, pai.y)
 
-            candidato = int(pai.x)
-            minimo = candidato*1.1 if candidato <= minimo else -50
-            maximo = candidato*1.1 if candidato >= maximo else 50
-        
-            fig.update_xaxes(range = [minimo,maximo])
+
+
 
     def define_x(self, no,  pais):
         mapa_ramos = {0:100,1:80, 2:60, 3:40, 4:20}
