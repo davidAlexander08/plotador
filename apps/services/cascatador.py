@@ -137,6 +137,9 @@ class Cascatador(MetaData):
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
             else:
+                if(no.nome == "CAPIVARA"):
+                    print(no.nome, " " ,dist)
+                    exit(1)
                 pai.x = dist if( (contador % 2) == 0 ) else -dist
                 contador += 1
 
