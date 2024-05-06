@@ -145,6 +145,10 @@ class Cascatador(MetaData):
                 pai.x = no.x + 10
                 pai.y = pai.y - 0.5
 
+            if((len(pai.getPais()) == 1)):
+                pai.x = no.x + 10
+                pai.y = pai.y - 0.5
+
 
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
