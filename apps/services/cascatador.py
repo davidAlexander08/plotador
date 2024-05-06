@@ -138,8 +138,10 @@ class Cascatador(MetaData):
             else:
                 pai.x = no.x + dist + dist + dist_max/contador 
                 contador += 1
+
             if(len(pai.getFilhos()) == 0):
-                pai.x = no.x + 20
+                print(pai.nome)
+                pai.x = no.x + 50
 
 
 
