@@ -104,8 +104,9 @@ class Cascatador(MetaData):
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
             self.add_scatter_graph(fig, pai, pai.y)
 
-            minimo = pai.x*1.1 if pai.x < min else -50
-            maximo = pai.x*1.1 if pai.x > max else 50
+            candidato = pai.x
+            minimo = candidato*1.1 if candidato < min else -50
+            maximo = candidato*1.1 if candidato > max else 50
         
             fig.update_xaxes(range = [minimo,maximo])
 
