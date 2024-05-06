@@ -135,7 +135,7 @@ class Cascatador(MetaData):
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
             else:
-                pai.x = no.x + dist + dist/contador if( (contador % 2) == 0 ) else no.x -dist*contador
+                pai.x = no.x + dist + dist/contador 
                 contador += 1
 
 
