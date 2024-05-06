@@ -76,13 +76,11 @@ class Cascatador(MetaData):
             lista_cod_mar = []
             for key in mapa_codigo_nos:
                 no = mapa_codigo_nos[key]
-                if((len(no.filhos) == 0) and (len(no.pais) > 2)):
+                if((len(no.filhos) == 0) and (len(no.pais) != 0)):
                     lista_cod_mar.append(no)
 
             #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
             for no in lista_cod_mar:
-                no.x = 0
-                no.y = 0
                 fig = go.Figure()
                 fig.add_trace(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=11), text =[no.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
                 self.add_scatter_graph(fig, no, no.y)
@@ -184,8 +182,8 @@ class Node():
         self.posto = None
         self.codigo_jusante = None 
         self.ree = None 
-        self.x = None 
-        self.y = None
+        self.x = 0 
+        self.y = 0
 
     def getPais(self):
         return self.pais
