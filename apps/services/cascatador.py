@@ -136,6 +136,7 @@ class Cascatador(MetaData):
             pai.y = no.y + 1
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
+                pai.text_position = "top center"
             else:
                 print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
                 sinal = 1 if(contador%2 == 0) else -1
@@ -164,6 +165,7 @@ class Cascatador(MetaData):
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
                 pai.y = no.y + 1
+                pai.text_position = "top center"
 
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
