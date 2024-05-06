@@ -138,7 +138,7 @@ class Cascatador(MetaData):
                 pai.x = no.x
             else:
                 sinal = 1 if(contador%2 == 0) else -1
-                pai.x = no.x + sinal*dist + 10*contador
+                pai.x = no.x + sinal*dist - 10*contador
                 contador += 1
 
             if((len(pai.getPais()) == 0) and (len(pais) > 1) ):
