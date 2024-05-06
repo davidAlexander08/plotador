@@ -96,8 +96,6 @@ class Cascatador(MetaData):
         pais = no.getPais()
         nivel += 1
         contador = 0
-        minimo = -60
-        maximo = 60
         for pai in pais:
             self.define_x(no, pais)
             #if(nivel < 5):
@@ -106,6 +104,7 @@ class Cascatador(MetaData):
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
             minimo = pai.x*1.1 if pai.x <= minimo else -50
             maximo = pai.x*1.1 if pai.x >= maximo else 50
+            print("min: ", minimo, " max: ", maximo)
             fig.update_xaxes(range = [minimo,maximo])
             self.add_scatter_graph(fig, pai, pai.y)
 
