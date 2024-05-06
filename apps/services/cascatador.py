@@ -197,7 +197,7 @@ class Node():
         self.x = 0 
         self.y = 0
         self.n_ramos = 0
-        self.text_position = ""
+        self.text_position = "top center"
 
     def getPais(self):
         return self.pais
