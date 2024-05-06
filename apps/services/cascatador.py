@@ -104,7 +104,7 @@ class Cascatador(MetaData):
 
                     simbolo = self.retorna_simbolo(no, d_hidr)
                     def_0 = defluencia_usinas_mean_est.loc[(defluencia_usinas_mean_est["usina"] == no.nome)]
-                    lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[no.nome + " \n def_0"], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
+                    lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[no.nome + " " + str(def_0)], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
                     
                     self.add_scatter_graph(lista_traces, no, no.y, d_hidr)
                     for elemento in lista_traces:
