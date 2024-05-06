@@ -144,7 +144,7 @@ class Cascatador(MetaData):
                 contador += 1
                 pai.text_position = "top right" if sinal == 1 else "top left"
                 
-        
+
             if(len(pais) > 1):
                 if((len(pai.getPais()) == 0)):
                     pai.x = no.x + 10
@@ -166,6 +166,10 @@ class Cascatador(MetaData):
                 pai.x = no.x
                 pai.y = no.y + 1
                 pai.text_position = no.text_position
+            
+            if(no.nome == "JUPIA" and pai.nome == "TRES IRMAOS"):
+                pai.x = -150
+
 
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
