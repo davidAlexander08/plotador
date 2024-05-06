@@ -33,7 +33,7 @@ class Cascatador(MetaData):
 
             defluencia_usinas = self.eco_indicadores.retorna_df_concatenado("QDEF_UHE_EST")
             defluencia_usinas_mean = defluencia_usinas.loc[defluencia_usinas["cenario"] == "mean"]
-            print(defluencia_usinas_mean)
+            print(defluencia_usinas_mean.round(2))
             exit(1)
 
             arquivo_hidr = c.caminho+"/hidr.dat"
