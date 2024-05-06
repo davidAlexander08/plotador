@@ -264,8 +264,8 @@ class Cascatador(MetaData):
             if(no.nome == "CAPIVARA"):
                 pai.text_position = "top left"
 
-            if(no.nome == "P. PRIMAVERA"):
-                pai.text_position = "top left"
+            if(no.nome == "ITAIPU" and pai.nome == "P. PRIMAVERA"):
+                pai.text_position = "top right"
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
         lista_filho = no.getFilhos()
