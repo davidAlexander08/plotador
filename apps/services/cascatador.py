@@ -128,7 +128,7 @@ class Cascatador(MetaData):
                 usi_max = usi
         lista_usi_max =   mapa[usi_max]    
         print(lista_usi_max)   
-
+        exit(1)
 
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
