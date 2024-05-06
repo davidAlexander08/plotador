@@ -46,6 +46,9 @@ class Cascatador(MetaData):
             qver_usinas = self.eco_indicadores.retorna_df_concatenado("QVER_UHE_EST")
             qver_usinas_mean = qver_usinas.loc[qver_usinas["cenario"] == "mean"].round(0)
 
+            vdef_min_usinas = self.eco_indicadores.retorna_df_concatenado("VDEFMIN_UHE_EST")
+            vdef_min_usinas_mean = qdef_min_usinas.loc[qdef_min_usinas["cenario"] == "mean"].round(0)
+
             arquivo_hidr = c.caminho+"/hidr.dat"
             d_hidr = Hidr.read(arquivo_hidr).cadastro
             print(d_hidr)
@@ -113,6 +116,7 @@ class Cascatador(MetaData):
 
                 qver_usinas_mean_est = qver_usinas_mean.loc[qver_usinas_mean["estagio"] == est]
                 qtur_usinas_mean_est = qtur_usinas_mean.loc[qtur_usinas_mean["estagio"] == est]
+                vdef_min_usinas_mean_est = vdef_min_usinas_mean.loc[vdef_min_usinas_mean["estagio"] == est]
 
                 
                 #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
@@ -127,10 +131,11 @@ class Cascatador(MetaData):
                     qafl = qafl_usinas_mean_est.loc[(qafl_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
                     qtur = qtur_usinas_mean_est.loc[(qtur_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
                     qver = qver_usinas_mean_est.loc[(qver_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
-                    texto = no.nome + "<br> QINC:"+str(int(qinc_0)) + "QAFL:"+str(qafl) + "<br> QTUR: " + str(qtur) + " QVER: "+ str(qver) + " QDEF:" + str(def_0) 
+                    vdef_min = vdef_min_usinas_mean_est.loc[(vdef_min_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
+                    texto = no.nome + "<br> QINC:"+str(int(qinc_0)) + "QAFL:"+str(qafl) + "<br> QTUR: " + str(qtur) + " QVER: "+ str(qver) + " QDEF:" + str(def_0) + "<br> QDEFM: " + str(int(vdef_min/2.63))
                     lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[texto], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
                     
-                    self.add_scatter_graph(lista_traces, no, no.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est)
+                    self.add_scatter_graph(lista_traces, no, no.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est, vdef_min_usinas_mean_est)
                     for elemento in lista_traces:
                         fig.add_trace(elemento)
                     fig.update_layout(title="Cascata", showlegend = False)
@@ -161,7 +166,7 @@ class Cascatador(MetaData):
             else:
                 return "circle"
 
-    def add_scatter_graph(self,lista_traces ,no, nivel, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est):
+    def add_scatter_graph(self,lista_traces ,no, nivel, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est, vdef_min_usinas_mean_est):
         pais = no.getPais()
         nivel += 1
         contador = 0
@@ -173,13 +178,15 @@ class Cascatador(MetaData):
             qafl = qafl_usinas_mean_est.loc[(qafl_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
             qtur = qtur_usinas_mean_est.loc[(qtur_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
             qver = qver_usinas_mean_est.loc[(qver_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
-            texto = pai.nome + "<br> QINC:"+str(int(qinc)) + " QAFL:"+str(int(qafl)) + "<br>QT/V/D: "+ str(int(qtur)) + " "+ str(int(qver)) + " " + str(int(deflu)) 
+            vdef_min = vdef_min_usinas_mean_est.loc[(vdef_min_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
+
+            texto = pai.nome + "<br> QINC:"+str(int(qinc)) + " QAFL:"+str(int(qafl)) + "<br>QT/V/D: "+ str(int(qtur)) + " "+ str(int(qver)) + " " + str(int(deflu)) + "<br> QDEFM: " + str(int(vdef_min/2.63))
 
             simbolo = self.retorna_simbolo(pai, d_hidr)                                                                 #pai.text_position
             lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[ texto ], textfont=dict( size=9), textposition= "top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
             lista_traces.append(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             lista_traces.append(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
-            self.add_scatter_graph(lista_traces, pai, pai.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est)
+            self.add_scatter_graph(lista_traces, pai, pai.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est, vdef_min_usinas_mean_est)
 
 
 
