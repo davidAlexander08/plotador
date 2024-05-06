@@ -128,8 +128,7 @@ class Cascatador(MetaData):
         lista_usi_max =   mapa[usi_max]    
         #print(lista_usi_max) 
         keys_max = mapa.keys() 
-        dist = 100 - 20*(no.y)
-        dist_max = 100
+        dist = 100 - 10*(no.y)
         contador = 0
         for pai in pais:
             pai.y = no.y + 1
@@ -138,7 +137,7 @@ class Cascatador(MetaData):
             else:
                 print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
                 sinal = 1 if(contador%2 == 0) else -1
-                pai.x = no.x + sinal*dist +10
+                pai.x = no.x + sinal*dist
                 contador += 1
                 
 
