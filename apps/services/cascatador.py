@@ -80,7 +80,8 @@ class Cascatador(MetaData):
                     lista_cod_mar.append(no)
 
             #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
-            for no in lista_cod_mar:
+            lista_teste = [no_mar]
+            for no in lista_teste:#lista_cod_mar:
                 fig = go.Figure()
                 lista_traces = []
                 lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[no.nome], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
@@ -95,7 +96,7 @@ class Cascatador(MetaData):
                 for elemento in lista_traces:
                     minimo = elemento.x[0]*1.1 if elemento.x[0] <= minimo else -50
                     maximo = elemento.x[0]*1.1 if elemento.x[0] >= maximo else 50
-                #print("min: ", minimo, " max: ", maximo)
+                    print("min: ", minimo, " max: ", maximo)
                 fig.update_xaxes(range = [minimo,maximo])
 
                 self.graficos.exportar(fig, diretorio_saida, no.nome+" cascata"+self.estudo, W = 1500, H = 1200)
