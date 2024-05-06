@@ -105,6 +105,7 @@ class Cascatador(MetaData):
             self.add_scatter_graph(fig, pai, pai.y)
 
             candidato = pai.x
+            print(candidato)
             minimo = candidato*1.1 if candidato < min else -50
             maximo = candidato*1.1 if candidato > max else 50
         
