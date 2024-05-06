@@ -113,7 +113,7 @@ class Cascatador(MetaData):
         self.encontra_usinas_cabeceira(no, lista)
         mapa = {}
         for no in lista:
-            lista_usi_filhos = []
+            lista_usi_filhos = [no.nome]
             self.encontra_numero_filhos(no,lista_usi_filhos)
             mapa[no.nome] = lista_usi_filhos
             print("usina: ", no.nome, " numero: ", len(lista_usi_filhos), " lista: ", lista_usi_filhos)
