@@ -159,7 +159,7 @@ class Cascatador(MetaData):
             qafl = qafl_usinas_mean_est.loc[(qafl_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
 
             simbolo = self.retorna_simbolo(pai, d_hidr)
-            lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome+ "<br> QINC:"+str(qinc) + "<br> QAFL:"+str(qafl)  +"<br>QDEF: " + str(deflu) ], textfont=dict( size=13), textposition= pai.text_position, mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
+            lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome+ "<br> QINC:"+str(qinc) + " QAFL:"+str(qafl)  +"<br>QDEF: " + str(deflu) ], textfont=dict( size=13), textposition= pai.text_position, mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
             lista_traces.append(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             lista_traces.append(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
             self.add_scatter_graph(lista_traces, pai, pai.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est)
