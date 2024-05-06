@@ -102,10 +102,10 @@ class Cascatador(MetaData):
         for pai in pais:
             pai.y = nivel
             self.define_x(no, pais)
-            #print("cod: ", pai.codigo, " nivel: ", pai.y)
-            fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=11), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
-            fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
-            fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
+            if(nivel == 0):
+                fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=11), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
+                fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
+                fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
@@ -130,12 +130,12 @@ class Cascatador(MetaData):
         print(lista_usi_max)  
 
         dist = 1000 - 190*(no.y)
-        contador = 1
+        contador = 2
         for pai in pais:
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
             else:
-                pai.x = no.x + dist*contador if( (contador % 2) == 0 ) else no.x -dist*contador
+                pai.x = no.x + dist + dist/contador if( (contador % 2) == 0 ) else no.x -dist*contador
                 contador += 1
 
 
