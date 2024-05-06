@@ -121,7 +121,7 @@ class Cascatador(MetaData):
             self.define_x(no, pais)
             #if(nivel < 5):
             row = d_hidr.loc[d_hidr["nome_usina"] == pai.nome]
-            if(not row.empty):
+            if(row.empty):
                 simbolo = "triangle-down"
             else:
                 if(row["tipo_regulacao"].iloc[0] == "M"):
