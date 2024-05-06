@@ -125,13 +125,13 @@ class Cascatador(MetaData):
 
     def define_x(self, no,  pais):
         lista = []
-        no_com_mais_pais = self.encontra_usinas_cabeceira(no, lista)
+        self.encontra_usinas_cabeceira(no, lista)
         mapa = {}
         for no in lista:
-            #contador = 0
+            contador = 0
             numero_filhos = self.encontra_numero_filhos(no,contador)
-            #mapa[no.nome] = 
-            print("usina: ", no.nome)
+            mapa[no.nome] = contador
+            print("usina: ", no.nome, " numero: ", contador)
         exit(1)
         print("no: ", no.nome, " no_seguinte: ", no_com_mais_pais.nome)
         for pai in pais:
