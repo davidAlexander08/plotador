@@ -118,12 +118,12 @@ class Cascatador(MetaData):
     def retorna_simbolo(self, no, d_hidr):
         row = d_hidr.loc[d_hidr["nome_usina"] == no.nome]
         if(row.empty):
-            simbolo = "triangle-down"
+            return "triangle-down"
         else:
             if(row["tipo_regulacao"].iloc[0] == "M"):
-                simbolo = "triangle-down"
+                return "triangle-down"
             else:
-                simbolo = "circle"
+                return "circle"
 
     def add_scatter_graph(self,lista_traces ,no, nivel, d_hidr):
         pais = no.getPais()
