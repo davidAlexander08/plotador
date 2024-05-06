@@ -177,7 +177,11 @@ class Cascatador(MetaData):
 
 
             if(no.nome == "I. SOLTEIRA" and pai.nome == "FOZ R. CLARO"):
-                pai.x = 100
+                pai.x = 130
+                pai.text_position = "top left"
+
+            if(no.nome == "I. SOLTEIRA" and pai.nome == "SAO SIMAO"):
+                pai.x = -90
                 pai.text_position = "top left"
 
 
