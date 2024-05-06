@@ -138,7 +138,7 @@ class Cascatador(MetaData):
             else:
                 print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
                 sinal = 1 if(contador%2 == 0) else -1
-                pai.x = no.x + sinal*dist
+                pai.x = no.x + sinal*dist +10
                 contador += 1
                 
 
