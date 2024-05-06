@@ -180,7 +180,7 @@ class Cascatador(MetaData):
             qver = qver_usinas_mean_est.loc[(qver_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
             vdef_min = vdef_min_usinas_mean_est.loc[(vdef_min_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
 
-            texto = pai.nome + "<br> QINC:"+str(int(qinc)) + " QAFL:"+str(int(qafl)) + "<br>QT/V/D: "+ str(int(qtur)) + " "+ str(int(qver)) + " " + str(int(deflu)) + "<br> QDEFM: " + str(int(vdef_min/2.63))
+            texto = pai.nome + "<br> QI:"+str(int(qinc)) + " QA:"+str(int(qafl)) + "<br>QT:"+ str(int(qtur)) + " QV:"+ str(int(qver)) + " <br> QD:" + str(int(deflu)) + " QDM:" + str(int(vdef_min/2.63))
 
             simbolo = self.retorna_simbolo(pai, d_hidr)                                                                 #pai.text_position
             lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[ texto ], textfont=dict( size=9), textposition= "top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
