@@ -101,6 +101,7 @@ class Cascatador(MetaData):
         contador = 0
         for pai in pais:
             pai.y = nivel
+            print(nivel, " ", pai.y, " ", pai.nome)
             self.define_x(no, pais)
             print("cod: ", pai.codigo, " nivel: ", pai.y)
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=11), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
