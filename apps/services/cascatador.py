@@ -5,6 +5,7 @@ from apps.indicadores.indicadores_cenarios import IndicadoresCenarios
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
+from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 import plotly.graph_objects as go
 import pandas as pd
 from scipy import stats
@@ -22,10 +23,15 @@ class Cascatador(MetaData):
         self.estudo = data.estudo
         self.casos = data.casos
         self.indicadores_cenarios = IndicadoresCenarios(self.casos)
+        self.eco_indicadores = EcoIndicadores(self.casos)
         self.graficos = Graficos(self.casos)
         diretorio_saida = f"resultados/{self.estudo}/cascatador"
         os.makedirs(diretorio_saida, exist_ok=True)
         for c in self.casos:
+
+            defluencia_usinas = self.eco_indicadores.retorna_df_concatenado("QDEF_UHE_EST")
+            print(defluencia_usinas)
+            exit(1)
 
             arquivo_hidr = c.caminho+"/hidr.dat"
             d_hidr = Hidr.read(arquivo_hidr).cadastro
