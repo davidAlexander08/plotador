@@ -92,7 +92,7 @@ class Cascatador(MetaData):
                 lista_traces = []
                 lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[no.nome], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
                 
-                self.add_scatter_graph(lista_traces, no, no.y)
+                self.add_scatter_graph(lista_traces, no, no.y, d_hidr)
                 for elemento in lista_traces:
                     fig.add_trace(elemento)
                 fig.update_layout(title="Cascata", showlegend = False)
