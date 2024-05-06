@@ -82,7 +82,7 @@ class Cascatador(MetaData):
             #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
             for no in lista_cod_mar:
                 fig = go.Figure()
-                fig.add_trace(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=11), text =[no.nome], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
+                fig.add_trace(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[no.nome], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
                 self.add_scatter_graph(fig, no, no.y)
                 fig.update_layout(title="Cascata", showlegend = False)
                 self.graficos.exportar(fig, diretorio_saida, no.nome+" cascata"+self.estudo, W = 1500, H = 1200)
@@ -102,10 +102,12 @@ class Cascatador(MetaData):
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=13), textposition= pai.text_position, mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
             fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
-
-            #fig.update_xaxes(range = [-100,100])
-
             self.add_scatter_graph(fig, pai, pai.y)
+
+            minimo = pai.x*1.1 if pai.x < min else -50
+            maximo = pai.x*1.1 if pai.x > max else 50
+        
+            fig.update_xaxes(range = [minimo,maximo])
 
     def define_x(self, no,  pais):
         mapa_ramos = {0:100,1:80, 2:60, 3:40, 4:20}
