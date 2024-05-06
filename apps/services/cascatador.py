@@ -100,8 +100,8 @@ class Cascatador(MetaData):
             self.define_x(no, pais)
             #if(nivel < 5):
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=11), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
-            fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
-            fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
+            fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y-0.5], mode = "lines", line=dict(color='blue')))
+            fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y-0.5, pai.y], mode = "lines",  line=dict(color='blue')))
             fig.update_xaxes(range = [-100,100])
 
             self.add_scatter_graph(fig, pai, pai.y)
@@ -131,6 +131,7 @@ class Cascatador(MetaData):
         dist = 100 - 14*(no.y)
         contador = 0
 
+        sinal = 0
         for pai in pais:
             pai.y = no.y + 1
             if(pai.nome in lista_usi_max):
