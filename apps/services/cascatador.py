@@ -69,7 +69,7 @@ class Cascatador(MetaData):
             for key in mapa_codigo_nos:
                 no = mapa_codigo_nos[key]
                 if(len(no.pais) == 0):
-                    print("CABECEIRA: ", key)
+                    #print("CABECEIRA: ", key)
                     lista_cod_cabeceiras.append(key)
     
             #PEGANDO MAR
@@ -77,7 +77,7 @@ class Cascatador(MetaData):
             for key in mapa_codigo_nos:
                 no = mapa_codigo_nos[key]
                 if(len(no.filhos) == 0):
-                    print("MAR: ", key)
+                    #print("MAR: ", key)
                     lista_cod_mar.append(key)
 
             no_mar = mapa_codigo_nos[lista_cod_mar[0]]
@@ -113,11 +113,11 @@ class Cascatador(MetaData):
         lista = []
         self.encontra_usinas_cabeceira(no, lista)
         mapa = {}
-        for no in lista:
-            lista_usi_filhos = [no.nome]
-            self.encontra_numero_filhos(no,lista_usi_filhos)
-            mapa[no.nome] = lista_usi_filhos
-            print("usina: ", no.nome, " numero: ", len(lista_usi_filhos), " lista: ", lista_usi_filhos)
+        for ino in lista:
+            lista_usi_filhos = [ino.nome]
+            self.encontra_numero_filhos(ino,lista_usi_filhos)
+            mapa[ino.nome] = lista_usi_filhos
+            print("usina: ", ino.nome, " numero: ", len(lista_usi_filhos), " lista: ", lista_usi_filhos)
         
         contador = 0
         maximo = 0
