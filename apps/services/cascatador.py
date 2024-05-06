@@ -141,7 +141,7 @@ class Cascatador(MetaData):
                 pai.x = no.x + sinal*dist
                 contador += 1
 
-            if((len(pai.getPais()) == 0) and (pai.nome not in list(keys_max)) ):
+            if((len(pai.getPais()) == 0) ):
                 print("ENTROU: ", pai.nome)
                 pai.x = no.x + 10
                 pai.y = pai.y - 0.5
