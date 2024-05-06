@@ -141,7 +141,7 @@ class Cascatador(MetaData):
                 contador += 1
                 print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
 
-            if(len(pais > 1)):
+            if(len(pais) > 1):
                 if((len(pai.getPais()) == 0)):
                     pai.x = no.x + 10
                     pai.y = pai.y - 0.5
