@@ -90,10 +90,10 @@ class Cascatador(MetaData):
                     fig.add_trace(elemento)
                 fig.update_layout(title="Cascata", showlegend = False)
 
-                minimo = pai.x*1.1 if pai.x <= minimo else -50
-                maximo = pai.x*1.1 if pai.x >= maximo else 50
-                print("min: ", minimo, " max: ", maximo)
-                fig.update_xaxes(range = [minimo,maximo])
+                #minimo = pai.x*1.1 if pai.x <= minimo else -50
+                #maximo = pai.x*1.1 if pai.x >= maximo else 50
+                #print("min: ", minimo, " max: ", maximo)
+                #fig.update_xaxes(range = [minimo,maximo])
 
                 self.graficos.exportar(fig, diretorio_saida, no.nome+" cascata"+self.estudo, W = 1500, H = 1200)
             exit(1)
