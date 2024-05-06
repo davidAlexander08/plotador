@@ -147,15 +147,15 @@ class Cascatador(MetaData):
 
             if(len(pais) > 1):
                 if((len(pai.getPais()) == 0)):
-                    pai.x = no.x + 10
+                    pai.x = no.x + 50
                     pai.y = pai.y - 0.5
                     pai.text_position = "top right"
         
                 if((len(pai.getPais()) == 1) ):
                     
                     if((len(pai.getPais()[0].getPais() )== 0)):
-                        pai.x = no.x + 30
-                        pai.y = pai.y - 0.5
+                        pai.x = no.x + 50
+                        pai.y = -pai.y + 0.5
                         pai.text_position = "top right"
 
                     #if((len(pai.getPais()[0].getPais()) == 1)  and(len(pai.getPais()[0].getPais()[0].getPais() )== 0)):
