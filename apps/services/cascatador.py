@@ -135,14 +135,11 @@ class Cascatador(MetaData):
         for pai in pais:
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
-            
-            if(len(pai.getFilhos()) == 0):
-                pai.x = no.x + 20
-
             else:
                 pai.x = no.x + dist + dist + dist_max/contador 
                 contador += 1
-
+            if(len(pai.getFilhos()) == 0):
+                pai.x = no.x + 20
 
 
 
