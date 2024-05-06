@@ -141,18 +141,21 @@ class Cascatador(MetaData):
                 sinal = 1 if(contador%2 == 0) else -1
                 pai.x = no.x + sinal*dist
                 contador += 1
+                pai.text_position = "top right" if sinal == 1 else "top left"
                 
         
             if(len(pais) > 1):
                 if((len(pai.getPais()) == 0)):
                     pai.x = no.x + 10
                     pai.y = pai.y - 0.5
+                    pai.text_position = "top right"
         
                 if((len(pai.getPais()) == 1) ):
                     
                     if((len(pai.getPais()[0].getPais() )== 0)):
                         pai.x = no.x + 30
                         pai.y = pai.y - 0.5
+                        pai.text_position = "top right"
 
                     #if((len(pai.getPais()[0].getPais()) == 1)  and(len(pai.getPais()[0].getPais()[0].getPais() )== 0)):
                     #    pai.x = no.x + 30
@@ -192,6 +195,7 @@ class Node():
         self.x = 0 
         self.y = 0
         self.n_ramos = 0
+        self.text_position = ""
 
     def getPais(self):
         return self.pais
