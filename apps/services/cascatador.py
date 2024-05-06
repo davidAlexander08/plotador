@@ -97,6 +97,7 @@ class Cascatador(MetaData):
 
     def add_scatter_graph(self,fig ,no, nivel):
         pais = no.getPais()
+        no.y = nivel
         nivel += 1
         contador = 0
         for pai in pais:
