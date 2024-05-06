@@ -11,6 +11,7 @@ from scipy import stats
 from apps.interface.metaData import MetaData
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from inewave.newave import Confhd
+from inewave.newave import Hidr
 import os
 import json
 from PIL import Image, ImageDraw
@@ -25,6 +26,12 @@ class Cascatador(MetaData):
         diretorio_saida = f"resultados/{self.estudo}/cascatador"
         os.makedirs(diretorio_saida, exist_ok=True)
         for c in self.casos:
+
+            arquivo_hidr = c.caminho+"/hidr.dat"
+            d_hidr = Hidr.read(arquivo_hidr).cadastro
+            print(d_hidr)
+            exit(1)
+
             arquivo_confhd = c.caminho+"/confhd.dat"
             d_usi = Confhd.read(arquivo_confhd).usinas
             print(d_usi)
