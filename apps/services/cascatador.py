@@ -132,6 +132,21 @@ class Cascatador(MetaData):
             self.encontra_numero_filhos(no,lista_usi_filhos)
             mapa[no.nome] = lista_usi_filhos
             print("usina: ", no.nome, " numero: ", len(lista_usi_filhos), " lista: ", lista_usi_filhos)
+        
+        contador = 0
+        maximo = 0
+        usi_max = ""
+        for usi in mapa:
+            numero = len(mapa[usi])
+            if(numero > maximo):
+                maximo = numero
+                usi_max = usi
+
+        print("usina maior: ", usi_max)
+            
+
+
+        
         exit(1)
         print("no: ", no.nome, " no_seguinte: ", no_com_mais_pais.nome)
         for pai in pais:
