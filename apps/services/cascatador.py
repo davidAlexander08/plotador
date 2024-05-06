@@ -135,7 +135,7 @@ class Cascatador(MetaData):
         contador = 0
         for pai in pais:
             if(pai.nome in lista_usi_max):
-                pai.x = 0
+                pai.x = no.x
             else:
                 pai.x = dist if( (contador % 2) == 0 ) else -dist
                 contador += 1
