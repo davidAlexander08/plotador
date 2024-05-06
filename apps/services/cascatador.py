@@ -82,7 +82,7 @@ class Cascatador(MetaData):
             #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
             for no in lista_cod_mar:
                 fig = go.Figure()
-                fig.add_trace(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=11), text =[no.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
+                fig.add_trace(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=11), text =[no.nome], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
                 self.add_scatter_graph(fig, no, no.y)
                 fig.update_layout(title="Cascata", showlegend = False)
                 self.graficos.exportar(fig, diretorio_saida, no.nome+" cascata"+self.estudo, W = 1500, H = 1200)
