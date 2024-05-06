@@ -136,7 +136,6 @@ class Cascatador(MetaData):
             else:
                 pai.x = dist
 
-        exit(1)
 
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
