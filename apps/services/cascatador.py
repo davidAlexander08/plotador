@@ -130,11 +130,13 @@ class Cascatador(MetaData):
         print(lista_usi_max)  
 
         dist = 100
+        contador = 0
         for pai in pais:
             if(pai.nome in lista_usi_max):
                 pai.x = 0
             else:
-                pai.x = dist
+                pai.x = dist if( (contador % 2) == 0 ) else -dist
+                contador += 1
 
 
 
