@@ -77,18 +77,17 @@ class Cascatador(MetaData):
             for key in mapa_codigo_nos:
                 no = mapa_codigo_nos[key]
                 if(len(no.filhos) == 0):
-                    #print("MAR: ", key)
-                    lista_cod_mar.append(key)
+                    lista_cod_mar.append(no)
 
-            no_mar = mapa_codigo_nos[lista_cod_mar[0]]
-
-            no_mar.x = 0
-            no_mar.y = 0
-            fig = go.Figure()
-            fig.add_trace(go.Scatter(x = [no_mar.x], y = [no_mar.y], textfont=dict( size=11), text =[no_mar.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
-            self.add_scatter_graph(fig, no_mar, no_mar.y)
-            fig.update_layout(title="Cascata", showlegend = False)
-            self.graficos.exportar(fig, diretorio_saida, "cascata"+self.estudo, W = 1500, H = 1200)
+            #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
+            for no in lista_cod_mar:
+                no_mar.x = 0
+                no_mar.y = 0
+                fig = go.Figure()
+                fig.add_trace(go.Scatter(x = [no_mar.x], y = [no_mar.y], textfont=dict( size=11), text =[no_mar.nome], textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
+                self.add_scatter_graph(fig, no_mar, no_mar.y)
+                fig.update_layout(title="Cascata", showlegend = False)
+                self.graficos.exportar(fig, diretorio_saida, "cascata"+self.estudo, W = 1500, H = 1200)
             exit(1)
             usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
             print(usinas_mar)
