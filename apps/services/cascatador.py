@@ -142,7 +142,7 @@ class Cascatador(MetaData):
 
             if(len(pai.getPais()) == 0):
                 print(pai.nome)
-                pai.x = no.x + 50
+                pai.x = no.x + 10
                 pai.y = pai.y - 0.5
 
 
