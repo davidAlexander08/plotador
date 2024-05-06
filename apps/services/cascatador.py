@@ -33,6 +33,11 @@ class Cascatador(MetaData):
         os.makedirs(diretorio_saida, exist_ok=True)
         for c in self.casos:
 
+            arquivo_vazmin = c.caminho+"/modif.dat"
+            d_vazmin = Modif.read(arquivo_vazmin).vazmin
+            print(d_vazmin)
+            exit(1)
+
             defluencia_usinas = self.eco_indicadores.retorna_df_concatenado("QDEF_UHE_EST")
             defluencia_usinas_mean = defluencia_usinas.loc[defluencia_usinas["cenario"] == "mean"].round(0)
 
@@ -51,10 +56,7 @@ class Cascatador(MetaData):
             vdef_min_usinas = self.eco_indicadores.retorna_df_concatenado("VDEFMIN_UHE_EST")
             vdef_min_usinas_mean = vdef_min_usinas.loc[vdef_min_usinas["cenario"] == "mean"].round(0)
 
-            arquivo_vazmin = c.caminho+"/modif.dat"
-            d_vazmin = Modif.read(arquivo_vazmin).vazmin
-            print(d_vazmin)
-            exit(1)
+
 
 
             arquivo_hidr = c.caminho+"/hidr.dat"
