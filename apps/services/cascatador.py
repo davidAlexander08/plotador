@@ -170,7 +170,8 @@ class Cascatador(MetaData):
             if(no.nome == "JUPIA" and pai.nome == "TRES IRMAOS"):
                 pai.x = -150
 
-
+            if(pai.nome == "ROSANA"):
+                pai.x = 150
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
         lista_filho = no.getFilhos()
