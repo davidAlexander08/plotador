@@ -99,7 +99,7 @@ class Cascatador(MetaData):
         for pai in pais:
             self.define_x(no, pais)
             #if(nivel < 5):
-            fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=20), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
+            fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=15), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
             fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
 
