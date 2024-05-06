@@ -97,7 +97,7 @@ class Cascatador(MetaData):
                     if(elemento.x[0]< minimo):
                         minimo = elemento.x[0]*1.4 
                     if(elemento.x[0] > maximo):
-                        maximo = elemento.x[0]*1.4 
+                        maximo = elemento.x[0]*1.7
                 fig.update_xaxes(range = [minimo,maximo])
 
                 self.graficos.exportar(fig, diretorio_saida, no.nome+" cascata"+self.estudo, W = 1500, H = 1200)
