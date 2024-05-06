@@ -134,10 +134,7 @@ class Cascatador(MetaData):
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
             else:
-                pai.x = mapa_ramos[pai.n_ramos]
-                pai.n_ramos += 1
-                for pai_acima in pai.getPais():
-                    pai_acima.n_ramos = pai.n_ramos
+                pass
                 
             if(len(pais) > 1):
                 if((len(pai.getPais()) == 0)):
