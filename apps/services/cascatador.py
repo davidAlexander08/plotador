@@ -90,7 +90,9 @@ class Cascatador(MetaData):
             for no in lista_teste:#lista_cod_mar:
                 fig = go.Figure()
                 lista_traces = []
-                lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[no.nome], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=20)))
+
+                simbolo = self.retorna_simbolo(no, d_hidr)
+                lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[no.nome], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
                 
                 self.add_scatter_graph(lista_traces, no, no.y, d_hidr)
                 for elemento in lista_traces:
@@ -113,6 +115,16 @@ class Cascatador(MetaData):
         print(d_usi)
         exit(1)
 
+    def retorna_simbolo(self, no, d_hidr):
+        row = d_hidr.loc[d_hidr["nome_usina"] == no.nome]
+        if(row.empty):
+            simbolo = "triangle-down"
+        else:
+            if(row["tipo_regulacao"].iloc[0] == "M"):
+                simbolo = "triangle-down"
+            else:
+                simbolo = "circle"
+
     def add_scatter_graph(self,lista_traces ,no, nivel, d_hidr):
         pais = no.getPais()
         nivel += 1
@@ -120,14 +132,7 @@ class Cascatador(MetaData):
         for pai in pais:
             self.define_x(no, pais)
             #if(nivel < 5):
-            row = d_hidr.loc[d_hidr["nome_usina"] == pai.nome]
-            if(row.empty):
-                simbolo = "triangle-down"
-            else:
-                if(row["tipo_regulacao"].iloc[0] == "M"):
-                    simbolo = "triangle-down"
-                else:
-                    simbolo = "circle"
+            simbolo = self.retorna_simbolo(pai, d_hidr)
             lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=13), textposition= pai.text_position, mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
             lista_traces.append(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             lista_traces.append(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
