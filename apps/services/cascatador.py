@@ -34,7 +34,7 @@ class Cascatador(MetaData):
         for c in self.casos:
 
             arquivo_vazmin = c.caminho+"/modif.dat"
-            d_vazmin = Modif.read(arquivo_vazmin).vazmin
+            d_vazmin = Modif.read(arquivo_vazmin, df = True).vazmin
             print(d_vazmin)
             exit(1)
 
