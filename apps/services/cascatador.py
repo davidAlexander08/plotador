@@ -32,19 +32,19 @@ class Cascatador(MetaData):
         for c in self.casos:
 
             defluencia_usinas = self.eco_indicadores.retorna_df_concatenado("QDEF_UHE_EST")
-            defluencia_usinas_mean = defluencia_usinas.loc[defluencia_usinas["cenario"] == "mean"].round(0).astype(int)
+            defluencia_usinas_mean = defluencia_usinas.loc[defluencia_usinas["cenario"] == "mean"].round(0)
 
             qincr_usinas = self.eco_indicadores.retorna_df_concatenado("QINC_UHE_EST")
-            qincr_usinas_mean = qincr_usinas.loc[qincr_usinas["cenario"] == "mean"].round(0).astype(int)
+            qincr_usinas_mean = qincr_usinas.loc[qincr_usinas["cenario"] == "mean"].round(0)
 
             qafl_usinas = self.eco_indicadores.retorna_df_concatenado("QAFL_UHE_EST")
-            qafl_usinas_mean = qafl_usinas.loc[qafl_usinas["cenario"] == "mean"].round(0).astype(int)
+            qafl_usinas_mean = qafl_usinas.loc[qafl_usinas["cenario"] == "mean"].round(0)
 
             qtur_usinas = self.eco_indicadores.retorna_df_concatenado("QTUR_UHE_EST")
-            qtur_usinas_mean = qtur_usinas.loc[qtur_usinas["cenario"] == "mean"].round(0).astype(int)
+            qtur_usinas_mean = qtur_usinas.loc[qtur_usinas["cenario"] == "mean"].round(0)
 
             qver_usinas = self.eco_indicadores.retorna_df_concatenado("QVER_UHE_EST")
-            qver_usinas_mean = qver_usinas.loc[qver_usinas["cenario"] == "mean"].round(0).astype(int)
+            qver_usinas_mean = qver_usinas.loc[qver_usinas["cenario"] == "mean"].round(0)
 
             arquivo_hidr = c.caminho+"/hidr.dat"
             d_hidr = Hidr.read(arquivo_hidr).cadastro
@@ -127,7 +127,7 @@ class Cascatador(MetaData):
                     qafl = qafl_usinas_mean_est.loc[(qafl_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
                     qtur = qtur_usinas_mean_est.loc[(qtur_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
                     qver = qver_usinas_mean_est.loc[(qver_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
-                    texto = no.nome + "<br> QINC:"+str(qinc_0) + "QAFL:"+str(qafl) + "<br> QTUR: " + str(qtur) + " QVER: "+ str(qver) + " QDEF:" + str(def_0) 
+                    texto = no.nome + "<br> QINC:"+str(int(qinc_0)) + "QAFL:"+str(qafl) + "<br> QTUR: " + str(qtur) + " QVER: "+ str(qver) + " QDEF:" + str(def_0) 
                     lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[texto], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
                     
                     self.add_scatter_graph(lista_traces, no, no.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est)
