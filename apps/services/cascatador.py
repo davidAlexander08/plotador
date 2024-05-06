@@ -160,6 +160,7 @@ class Cascatador(MetaData):
 
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
+                pai.y = no.y + 1
 
 
     def encontra_numero_filhos(self, no, lista_usi_filhos):
