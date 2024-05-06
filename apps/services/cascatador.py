@@ -47,7 +47,7 @@ class Cascatador(MetaData):
             qver_usinas_mean = qver_usinas.loc[qver_usinas["cenario"] == "mean"].round(0)
 
             vdef_min_usinas = self.eco_indicadores.retorna_df_concatenado("VDEFMIN_UHE_EST")
-            vdef_min_usinas_mean = qdef_min_usinas.loc[qdef_min_usinas["cenario"] == "mean"].round(0)
+            vdef_min_usinas_mean = vdef_min_usinas.loc[vdef_min_usinas["cenario"] == "mean"].round(0)
 
             arquivo_hidr = c.caminho+"/hidr.dat"
             d_hidr = Hidr.read(arquivo_hidr).cadastro
