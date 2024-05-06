@@ -169,10 +169,10 @@ class Cascatador(MetaData):
             self.define_x(no, pais)
             #if(nivel < 5):
             deflu = defluencia_usinas_mean_est.loc[(defluencia_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
-            qinc =  qincr_usinas_mean_est.loc[(qincr_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
-            qafl = qafl_usinas_mean_est.loc[(qafl_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
-            qtur = qtur_usinas_mean_est.loc[(qtur_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
-            qver = qver_usinas_mean_est.loc[(qver_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
+            qinc =  qincr_usinas_mean_est.loc[(qincr_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
+            qafl = qafl_usinas_mean_est.loc[(qafl_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
+            qtur = qtur_usinas_mean_est.loc[(qtur_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
+            qver = qver_usinas_mean_est.loc[(qver_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
             texto = pai.nome + "<br> QINC:"+str(qinc) + "QAFL:"+str(qafl) + "<br> QTUR: " + str(qtur) + " QVER: "+ str(qver) + " QDEF:" + str(deflu) 
 
             simbolo = self.retorna_simbolo(pai, d_hidr)
