@@ -139,10 +139,9 @@ class Cascatador(MetaData):
                 sinal = 1 if(contador%2 == 0) else -1
                 pai.x = no.x + sinal*dist
                 contador += 1
-                print("pai: ", pai.nome, " x: ", pai.x)
+                print("no: ", no.nome, " pai: ", pai.nome, " x: ", pai.x)
 
             if((len(pai.getPais()) == 0) and (len(pais) > 1) ):
-                print("ENTROU: ", pai.nome)
                 pai.x = no.x + 10
                 pai.y = pai.y - 0.5
 
