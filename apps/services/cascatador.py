@@ -100,7 +100,6 @@ class Cascatador(MetaData):
         nivel += 1
         contador = 0
         for pai in pais:
-            pai.y = nivel
             self.define_x(no, pais)
             if(nivel < 5):
                 fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=11), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
@@ -133,6 +132,7 @@ class Cascatador(MetaData):
         dist_max = 100
         contador = 2
         for pai in pais:
+            pai.y = no.y + 1
             if(pai.nome in lista_usi_max):
                 pai.x = no.x
             else:
