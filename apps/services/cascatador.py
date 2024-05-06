@@ -102,6 +102,8 @@ class Cascatador(MetaData):
             fig.add_trace(go.Scatter(x = [pai.x], y = [pai.y], text=[pai.nome], textfont=dict( size=11), textposition="top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol="triangle-down", size=10)))
             fig.add_trace(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
             fig.add_trace(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
+            fig.update_yaxes(range = [-100,100])
+
             self.add_scatter_graph(fig, pai, pai.y)
 
     def define_x(self, no,  pais):
@@ -138,13 +140,13 @@ class Cascatador(MetaData):
                 
             if(len(pais) > 1):
                 if((len(pai.getPais()) == 0)):
-                    pai.x = no.x + 5
+                    pai.x = no.x + 10
                     pai.y = pai.y - 0.5
 
                 if((len(pai.getPais()) == 1) ):
                     
                     if((len(pai.getPais()[0].getPais() )== 0)):
-                        pai.x = no.x + 10
+                        pai.x = no.x + 30
                         pai.y = pai.y - 0.5
 
 
