@@ -13,6 +13,8 @@ from apps.interface.metaData import MetaData
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from inewave.newave import Confhd
 from inewave.newave import Hidr
+from apps.indicadores.eco_indicadores import EcoIndicadores
+
 import os
 import json
 from PIL import Image, ImageDraw
