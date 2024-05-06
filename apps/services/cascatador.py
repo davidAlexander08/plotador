@@ -94,9 +94,9 @@ class Cascatador(MetaData):
                 minimo = -60
                 maximo = +60
                 for elemento in lista_traces:
-                    minimo = elemento.x[0]*1.1 if elemento.x[0] <= minimo else -50
-                    maximo = elemento.x[0]*1.1 if elemento.x[0] >= maximo else 50
-                    print("min: ", minimo, " max: ", maximo)
+                    minimo = elemento.x[0]*1.1 if elemento.x[0] <= minimo else -60
+                    maximo = elemento.x[0]*1.1 if elemento.x[0] >= maximo else 60
+                    print("no: ", no.nome, " min: ", minimo, " max: ", maximo)
                 fig.update_xaxes(range = [minimo,maximo])
 
                 self.graficos.exportar(fig, diretorio_saida, no.nome+" cascata"+self.estudo, W = 1500, H = 1200)
