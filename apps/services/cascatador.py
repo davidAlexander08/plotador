@@ -147,7 +147,7 @@ class Cascatador(MetaData):
 
             if((len(pai.getPais()) == 1) and (len(pais) > 1) ):
                 if(len( pai.getPais()[0].getPais() )== 0):
-                    pai.x = no.x + 10
+                    pai.x = no.x + 20
                     pai.y = pai.y - 0.5
 
 
