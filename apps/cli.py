@@ -37,6 +37,11 @@ def eco(arquivo_json):
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
 @click.command("temporal")
+@click.option(
+    "--eixox",
+    default=[0,60],
+    help="Intervalo do Eixo X",
+)
 @click.argument(
     "arquivo_json",
 )
