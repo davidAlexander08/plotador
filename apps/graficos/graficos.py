@@ -177,7 +177,7 @@ class Graficos:
         self,
         mapa, 
         coly = "valor",
-        colx = "index") :
+        colx = "estagio") :
         mapaGO = {}
         for unity in mapa:  
             df = mapa[unity]
