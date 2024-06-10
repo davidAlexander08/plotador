@@ -38,19 +38,19 @@ def eco(arquivo_json):
 
 @click.command("temporal")
 @click.option(
-    "--eixoxInf",
+    "--xinf",
     default=0,
     help="Ponto Inferior do Eixo X",
 )
 @click.option(
-    "--eixoxSup",
+    "--xsup",
     default=60,
     help="Ponto Superior do Eixo X",
 )
 @click.argument(
     "arquivo_json",
 )
-def analise_temporal(arquivo_json):
+def analise_temporal(arquivo_json, xinf, xsup):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
