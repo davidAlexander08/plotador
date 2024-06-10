@@ -38,9 +38,14 @@ def eco(arquivo_json):
 
 @click.command("temporal")
 @click.option(
-    "--eixox",
-    default=[0,60],
-    help="Intervalo do Eixo X",
+    "--eixoxInf",
+    default=0,
+    help="Ponto Inferior do Eixo X",
+)
+@click.option(
+    "--eixoxSup",
+    default=60,
+    help="Ponto Superior do Eixo X",
 )
 @click.argument(
     "arquivo_json",
