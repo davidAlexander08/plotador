@@ -15,7 +15,9 @@ import json
 class Temporal:
 
 
-    def __init__(self, data):
+    def __init__(self, data, xinf, xsup):
+        self.xinf  = xinf
+        self.xsup = xsup
         self.estudo = data.estudo
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.graficos = Graficos(data.casos)
@@ -44,7 +46,11 @@ class Temporal:
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
         for unity in conjUnity.listaUnidades:
-            mapa_temporal[unity] = self.indicadores_temporais.retorna_df_concatenado(unity)
+            df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity)
+            
+            print(df_temporal["estagio"].max())
+            exit(1)
+            mapa_temporal[unity] = df_temporal
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "temporal "+unity.titulo+"_"+conjUnity.sintese.sintese+" "+self.estudo)
                 
         mapaGO = self.graficos.gera_grafico_linha(mapa_temporal)
