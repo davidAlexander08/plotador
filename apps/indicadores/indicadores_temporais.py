@@ -26,7 +26,7 @@ class IndicadoresTemporais(EcoIndicadores):
         dict = {}
         for c in self.casos:
             df = mapa[c]
-            print(df)
+            #print(df)
             dict[c] = df.loc[df["cenario"] == cenario].reset_index(drop = True)
         return dict
 
