@@ -22,7 +22,7 @@ class IndicadoresTemporais(EcoIndicadores):
     def retorna_df_concatenado(self, unidade, cenario):
         return pd.concat(self.retorna_mapaDF_cenario_medio_temporal(unidade, cenario))
     
-    def __retorna_mapa_media_parquet(self, mapa):
+    def __retorna_mapa_media_parquet(self, mapa, cenario):
         dict = {}
         for c in self.casos:
             df = mapa[c]
