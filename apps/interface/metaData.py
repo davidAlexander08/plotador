@@ -68,7 +68,7 @@ class MetaData:
             "EVERF":    ("MWmes", "Energ. Vertida Final"),
             "EXC":    ("MWmes", "Excesso"),
             "CFU":  ("R$", "Custo Futuro"),
-            "VAGUA":  ("R$", "Valor Agua"),
-            "VAGUAI":  ("R$", "Valor Agua Incr."),
+            "VAGUA":  ("1000R$/hm3", "Valor Agua"),
+            "VAGUAI":  ("1000R$/hm3", "Valor Agua Incr."),
             "VVER":("hm3","Volume Vertido")
         }

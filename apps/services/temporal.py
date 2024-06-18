@@ -39,7 +39,6 @@ class Temporal:
                 self.executa(conj,diretorio_saida_arg )
             else:
                 for arg in data.args:
-                    print(sts.sintese)
                     if(espacial == arg.chave):
                         conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
                         diretorio_saida_arg = diretorio_saida+"/"+arg.nome
