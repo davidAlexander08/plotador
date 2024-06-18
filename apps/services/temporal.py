@@ -62,7 +62,7 @@ class Temporal:
         
         
         if(self.estagio != ""):
-            mapaEst = {self.estagio:" Estagio "+str(estagio)}
+            mapaEst = {self.estagio:" Estagio "+str(self.estagio)}
             
             for est in mapaEst:
                 mapa_estagio = {}
