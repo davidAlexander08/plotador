@@ -15,11 +15,12 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese):
         self.xinf  = xinf
         self.xsup = xsup
         self.estagio = estagio
         self.cenario = cenario
+        self.sintese = sintese
         self.estudo = data.estudo
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.graficos = Graficos(data.casos)
@@ -27,7 +28,10 @@ class Temporal:
         diretorio_saida = f"resultados/{self.estudo}/temporal"
         os.makedirs(diretorio_saida, exist_ok=True)
         
-        for sts in data.sinteses:
+        sinteses = data.sinteses if (self.sintese == "") else self.sintese
+        print(data.sinteses)
+        exit(1)
+        for sts in sinteses:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
                 arg = Argumento(None, None, "SIN")
