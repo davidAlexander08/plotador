@@ -68,8 +68,9 @@ class Temporal:
                 mapa_estagio = {}
                 print(est)
                 for unity in conjUnity.listaUnidades:
+                    print(mapa_temporal[unity])
                     mapa_estagio[unity] = mapa_temporal[unity].loc[mapa_temporal[unity]["estagio"] == est]
-                    print(mapa_estagio[unity])
+                    
                     self.indicadores_temporais.exportar(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+"_"+unity.titulo+"_"+conjUnity.sintese.sintese+" "+self.estudo)
                         
                 mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+" "+self.estudo)
