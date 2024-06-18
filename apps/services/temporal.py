@@ -28,7 +28,7 @@ class Temporal:
         diretorio_saida = f"resultados/{self.estudo}/temporal"
         os.makedirs(diretorio_saida, exist_ok=True)
         
-        sinteses = data.sinteses if (self.sintese == "") else Sintese(self.sintese)
+        sinteses = data.sinteses if (self.sintese == "") else [Sintese(self.sintese)]
         for sts in sinteses:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
