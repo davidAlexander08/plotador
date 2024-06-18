@@ -12,7 +12,7 @@ class Caso:
         self.nome = nome
         self.caminho = caminho
         self.cor = cor
-        self.marcador = marcador 
+        self.marcador = marcador
         self.modelo = modelo
 
     @classmethod

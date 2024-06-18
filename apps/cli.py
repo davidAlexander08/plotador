@@ -47,14 +47,19 @@ def eco(arquivo_json):
     default=60,
     help="Ponto Superior do Eixo X",
 )
+@click.option(
+    "--estagio",
+    default="",
+    help="Estagio Especifico para Plotar",
+)
 @click.argument(
     "arquivo_json",
 )
-def analise_temporal(arquivo_json, xinf, xsup):
+def analise_temporal(arquivo_json, xinf, xsup, estagio):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup)
+        Temporal(data, xinf, xsup, estagio)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
