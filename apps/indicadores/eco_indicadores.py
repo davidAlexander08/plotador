@@ -34,6 +34,7 @@ class EcoIndicadores:
         for c in self.casos:
             df = self.__retorna_df(c, sintese)
             df["caso"] = c.nome
+            df["modelo"] = c.modelo
             dict[c] = df
         return dict
 
