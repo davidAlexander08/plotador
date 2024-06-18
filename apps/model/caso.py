@@ -12,8 +12,9 @@ class Caso:
         self.nome = nome
         self.caminho = caminho
         self.cor = cor
-        self.marcador = marcador
+        self.marcador = marcador 
 
     @classmethod
     def from_dict(cls, d: Dict[str, str]):
-        return cls(d["nome"], d["caminho"], d["cor"], d["marcador"])
+        marcador = d["marcador"] if "marcador" in d else "diamond"
+        return cls(d["nome"], d["caminho"], d["cor"], marcador)
