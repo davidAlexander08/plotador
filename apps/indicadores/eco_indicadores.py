@@ -24,7 +24,7 @@ class EcoIndicadores:
             df = pd.read_parquet(arq_sintese)
             return df
         else:
-            print("Arquivo não existe: ", arq_sintese)
+            raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado") 
             print(check_file)
             df_vazio = pd.DataFrame()
             return df_vazio
