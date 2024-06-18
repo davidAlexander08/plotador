@@ -62,14 +62,24 @@ def eco(arquivo_json):
     default="",
     help="Sintese Especifica a ser Plotada",
 )
+@click.option(
+    "--largura",
+    default="1500",
+    help="Sintese Especifica a ser Plotada",
+)
+@click.option(
+    "--altura",
+    default="1200",
+    help="Sintese Especifica a ser Plotada",
+)
 @click.argument(
     "arquivo_json",
 )
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese):
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup, estagio, cenario, sintese)
+        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
