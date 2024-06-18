@@ -15,10 +15,11 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio):
+    def __init__(self, data, xinf, xsup,estagio, cenario):
         self.xinf  = xinf
         self.xsup = xsup
         self.estagio = estagio
+        self.cenario = cenario
         self.estudo = data.estudo
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.graficos = Graficos(data.casos)
@@ -47,19 +48,18 @@ class Temporal:
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
         for unity in conjUnity.listaUnidades:
-            df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity)
+            df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.cenario)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
             mapa_temporal[unity] = df_temporal
-            self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "temporal "+unity.titulo+"_"+conjUnity.sintese.sintese+" "+self.estudo)
+            self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+self.estudo)
                 
         mapaGO = self.graficos.gera_grafico_linha(mapa_temporal)
         figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
         
-        ultimo_estagio = max(mapa_temporal[list(mapa_temporal.keys())[0]]["estagio"])
         
         if(self.estagio != ""):
             mapaEst = {self.estagio:" Estagio "+str(estagio)}
@@ -73,17 +73,6 @@ class Temporal:
                 mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+" "+self.estudo)
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo)
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
-
-
-        #df_unity_2_mes = self.indicadores_temporais.retorna_df_concatenado_medio_2_mes(unity)
-        #self.indicadores_temporais.exportar(df_unity_2_mes, diretorio_saida_arg,  unity.titulo+"_temporal_2_mes_"+self.estudo)
-        
-        #fig = self.graficos.gera_grafico_barra(df_unity_2_mes["valor"], df_unity_2_mes["caso"],  unity.legendaEixoX, unity.legendaEixoY, 2, unity.titulo+"2_mes")
-        #self.graficos.exportar(fig, diretorio_saida_arg, unity.titulo+"_temporal_2_mes_"+self.estudo)
-
-
-
-
 
 
             #unity = UnidadeSintese("EARPF_SIN_EST", None, "%", "Energia_Armazenada_Percentual_Final_SIN_CREF "+estudo)

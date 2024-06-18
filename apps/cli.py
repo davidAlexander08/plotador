@@ -52,14 +52,19 @@ def eco(arquivo_json):
     default="",
     help="Estagio Especifico para Plotar",
 )
+@click.option(
+    "--cenario",
+    default="mean",
+    help="Cenario Especifico para Plotar",
+)
 @click.argument(
     "arquivo_json",
 )
-def analise_temporal(arquivo_json, xinf, xsup, estagio):
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup, estagio)
+        Temporal(data, xinf, xsup, estagio, cenario)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
