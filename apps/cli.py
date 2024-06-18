@@ -64,12 +64,12 @@ def eco(arquivo_json):
 )
 @click.option(
     "--largura",
-    default="1500",
+    default="1500", #VALOR INTERESSANTE PARA RELATORIOS E 1200
     help="Sintese Especifica a ser Plotada",
 )
 @click.option(
     "--altura",
-    default="1200",
+    default="1200", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
     help="Sintese Especifica a ser Plotada",
 )
 @click.argument(
