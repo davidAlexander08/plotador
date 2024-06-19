@@ -178,7 +178,7 @@ class Graficos:
         mapa, 
         coly = "valor",
         #colx = "estagio"
-        colx = "dataInicio") :
+        colx) :
         mapaGO = {}
         for unity in mapa:  
             df = mapa[unity]

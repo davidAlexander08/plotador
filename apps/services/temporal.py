@@ -15,14 +15,16 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura):
+    def __init__(self, data, xinf, xsup, eixoX,estagio, cenario, sintese, largura, altura, cronologico):
         self.xinf  = xinf
         self.xsup = xsup
+        self.eixoX = eixoX
         self.estagio = estagio
         self.cenario = cenario
         self.sintese = sintese
         self.largura = largura
         self.altura = altura
+        self.cronologico = cronologico
         self.estudo = data.estudo
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.graficos = Graficos(data.casos)
@@ -59,8 +61,12 @@ class Temporal:
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
             mapa_temporal[unity] = df_temporal
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+self.estudo)
-                
-        mapaGO = self.graficos.gera_grafico_linha(mapa_temporal)
+        
+        print(mapa_temporal)
+        print(pd.concat(mapa_temporal))
+        exit(1)
+
+        mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = eixoX)
         figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
         
