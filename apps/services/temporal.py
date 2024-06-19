@@ -63,9 +63,14 @@ class Temporal:
             mapa_temporal[unity] = df_temporal
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+self.estudo)
         
-        print(mapa_temporal)
-        print(pd.concat(mapa_temporal))
-        exit(1)
+        #print(mapa_temporal)
+        #print(pd.concat(mapa_temporal))
+        #exit(1)
+        if(self.cronologico == "True"):
+            unity = list(mapa_temporal.keys())[0]
+            mapa_temporal = {}
+            mapa_temporal[unity] = pd.concat(mapa_temporal)
+
 
         mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = eixox)
         figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
