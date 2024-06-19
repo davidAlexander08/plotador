@@ -48,11 +48,6 @@ def eco(arquivo_json):
     help="Ponto Superior do Eixo X",
 )
 @click.option(
-    "--eixoX",
-    default="estagio",
-    help="Eixo X, valores como estagio, dataInicio, dataFim",
-)
-@click.option(
     "--estagio",
     default="",
     help="Estagio Especifico para Plotar",
@@ -78,6 +73,11 @@ def eco(arquivo_json):
     help="Sintese Especifica a ser Plotada",
 )
 @click.option(
+    "--eixoX",
+    default="estagio",
+    help="Eixo X, valores como estagio, dataInicio, dataFim",
+)
+@click.option(
     "--cronologico",
     default="True", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
     help="Sintese Especifica a ser Plotada",
@@ -85,11 +85,11 @@ def eco(arquivo_json):
 @click.argument(
     "arquivo_json",
 )
-def analise_temporal(arquivo_json, xinf, xsup, eixoX, estagio, cenario, sintese, largura, altura, cronologico):
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixoX, cronologico):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup, eixoX, estagio, cenario, sintese, largura, altura, cronologico)
+        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixoX, cronologico)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 

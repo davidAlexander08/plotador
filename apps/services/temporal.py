@@ -15,7 +15,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup, eixoX,estagio, cenario, sintese, largura, altura, cronologico):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixoX, cronologico):
         self.xinf  = xinf
         self.xsup = xsup
         self.eixoX = eixoX
