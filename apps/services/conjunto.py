@@ -118,7 +118,7 @@ class Conjunto:
             #indicadores_medios.exportar(pd.concat(listaMedia), diretorio_saida_arg,  "media_"+unity.titulo+"_"+self.estudo)
             
         if(self.cronologico == "True"):
-            mapaGO = self.graficosConjunto.gera_grafico_linha(conjUnity, mapaTemporal, colx = self.eixox, cronologico = self.cronologico)
+            mapaGO = self.graficosConjunto.gera_grafico_linha(mapaTemporal, colx = self.eixox, cronologico = self.cronologico)
             figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
             self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
         #mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_1_est)

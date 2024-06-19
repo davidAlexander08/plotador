@@ -51,7 +51,6 @@ class GraficosConjunto:
 
     def gera_grafico_linha(
         self,
-        unity,
         mapa,
         cronologico, 
         coly = "valor",
@@ -62,13 +61,13 @@ class GraficosConjunto:
             df = mapa[unity]
             listaGO = []
             for conj in self.conjuntoCasos:
-                df = df.reset_index(drop = True)
+                df_conj = df.loc[(df["conjunto"] == conj.nome)]
                 listaGO.append(go.Scatter( 
-                        x = df[colx],
-                        y = df[coly],
+                        x = df_conj[colx],
+                        y = df_conj[coly],
                         name = conj.nome,
                         line = dict(color = conj.cor),
-                        showlegend=True))
+                        showlegend=unity.arg.show))
             mapaGO[unity] = listaGO
         return mapaGO
 
