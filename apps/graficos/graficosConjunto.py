@@ -34,7 +34,6 @@ class GraficosConjunto:
         colX = "caso" ):
         mapaGO = {}
         for unity in mapa:  
-            print("SHOW: ", unity.arg.show)
             df = mapa[unity]
             listaGO = []
             for conj in self.conjuntoCasos:
@@ -59,6 +58,8 @@ class GraficosConjunto:
         colx = "estagio" ) :
         mapaGO = {}
         for unity in mapa:
+            print(unity)
+            print("SHOW: ", unity.arg.show)
             df = mapa[unity]
             listaGO = []
             for conj in self.conjuntoCasos:
