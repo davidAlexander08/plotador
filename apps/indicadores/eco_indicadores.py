@@ -16,13 +16,19 @@ class EcoIndicadores:
         
     def retorna_df_concatenado(self,sintese):
         return pd.concat(self.retornaMapaDF(sintese))
-    
+
+
+    def stub(self,df, caso):  ## REGRAS ADICIONAIS QUE VARIAM POR MODELO
+        
+        return df
+
+
     def __retorna_df(self, caso, sintese) -> pd.DataFrame:
         arq_sintese = join( caso.caminho, self.DIR_SINTESE, sintese+".parquet.gzip"  )
         check_file = os.path.isfile(arq_sintese)
         if(check_file) :
             df = pd.read_parquet(arq_sintese)
-            df = stub(df)
+            df = stub(df, caso)
             return df
         else:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado") 
@@ -39,9 +45,7 @@ class EcoIndicadores:
             dict[c] = df
         return dict
 
-    def stub(self,df):  ## REGRAS ADICIONAIS QUE VARIAM POR MODELO
-        
-        return df
+
 
     def exportar(self, df, diretorio_saida, nome_arquivo, imprimeIndex = False):
         Log.log().info("Gerando tabela "+nome_arquivo)
