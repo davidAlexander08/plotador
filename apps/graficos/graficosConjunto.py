@@ -34,6 +34,7 @@ class GraficosConjunto:
         colX = "caso" ):
         mapaGO = {}
         for unity in mapa:  
+            print(unity.arg.show)
             df = mapa[unity]
             listaGO = []
             for conj in self.conjuntoCasos:
