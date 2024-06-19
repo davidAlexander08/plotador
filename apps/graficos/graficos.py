@@ -179,7 +179,7 @@ class Graficos:
         coly = "valor",
         #colx = "estagio"
         colx = "estagio",
-        cronologico) :
+        cronologico,) :
         mapaGO = {}
         if(cronologico == "True"):
             df = pd.concat(mapa)
