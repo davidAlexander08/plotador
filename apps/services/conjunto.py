@@ -97,7 +97,7 @@ class Conjunto:
 
             indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
             if(self.cronologico == "True"):
-                mapaFig = self.graficosConjunto.gera_grafico_linha(mapaTemporal, colx = self.eixox, cronologico = self.cronologico)
+                mapaFig = self.graficosConjunto.gera_grafico_linha(unity, mapaTemporal, colx = self.eixox, cronologico = self.cronologico)
             else:
                 mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+" "+unity.titulo+" "+self.estudo, legEixoX = "estagios")
             for titulo in mapaFig:
