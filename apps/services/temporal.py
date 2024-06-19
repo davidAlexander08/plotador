@@ -28,7 +28,7 @@ class Temporal:
         self.cronologico = cronologico
         self.estudo = data.estudo
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
-        self.graficos = Graficos(data.casos)
+        self.graficos = Graficos(data)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/temporal"
         os.makedirs(diretorio_saida, exist_ok=True)
@@ -63,18 +63,10 @@ class Temporal:
             mapa_temporal[unity] = df_temporal
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+self.estudo)
         
-        #print(mapa_temporal)
-        #print(pd.concat(mapa_temporal))
-        #exit(1)
-        if(self.cronologico == "True"):
-            unity = list(mapa_temporal.keys())[0]
-            conjUnity.listaUnidades = [unity]
-            df = pd.concat(mapa_temporal)
-            mapa_temporal = {}
-            mapa_temporal[unity] = df
 
 
-        mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox)
+
+        mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico)
         figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
         

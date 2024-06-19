@@ -177,22 +177,36 @@ class Graficos:
         self,
         mapa, 
         coly = "valor",
-        colx = "estagio") :
+        #colx = "estagio"
+        colx = "estagio",
+        cronologico) :
         mapaGO = {}
-        for unity in mapa:  
-            df = mapa[unity]
+        if(cronologico == "True"):
+            df = pd.concat(mapa)
             listaGO = []
-            for c in self.casos:
-                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
-                dfY = dfY.reset_index(drop = False)
-                listaGO.append(go.Scatter( 
-                        x = dfY[colx],
-                        y = dfY[coly],
-                        name = c.nome,
-                        line = dict(color = c.cor),
-                        showlegend=unity.arg.show))
+            df = df.reset_index(drop = True)
+            listaGO.append(go.Scatter( 
+                    x = df[colx],
+                    y = df[coly],
+                    name = self.estudo,
+                    showlegend=unity.arg.show))
 
             mapaGO[unity] = listaGO
+        else:
+            for unity in mapa:  
+                df = mapa[unity]
+                listaGO = []
+                for c in self.casos:
+                    dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
+                    dfY = dfY.reset_index(drop = False)
+                    listaGO.append(go.Scatter( 
+                            x = dfY[colx],
+                            y = dfY[coly],
+                            name = c.nome,
+                            line = dict(color = c.cor),
+                            showlegend=unity.arg.show))
+
+                mapaGO[unity] = listaGO
         return mapaGO
 
 
