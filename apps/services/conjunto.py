@@ -62,11 +62,13 @@ class Conjunto:
         mapaTemporal_2_mes = {}
         mapaTemporal_1_est = {}
         mapaMedio = {}
+        mapaCronologico = {}
         for unity in conjUnity.listaUnidades:
             mapaTemporal = {}
             listaTemporal_2_mes = []
             listaTemporal_1_est = []
             listaMedia = []
+            listaCronologica = []
             for conjunto in self.conjuntoCasos:
                 indicadores_temporais = IndicadoresTemporais(conjunto.casos)  
                 indicadores_medios = IndicadoresMedios(conjunto.casos, self.nome_caso_referencia)   
@@ -80,7 +82,7 @@ class Conjunto:
 
                 df_temporal["conjunto"] = conjunto.nome
                 mapaTemporal[conjunto.nome] = df_temporal
-
+                listaCronologica.append(df_temporal)
 
                 #df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
                 #df_temporal_segundo_mes["conjunto"] = conjunto.nome
@@ -96,15 +98,15 @@ class Conjunto:
                 
 
             indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
-            if(self.cronologico == "True"):
-                mapaGO = self.graficosConjunto.gera_grafico_linha(unity, mapaTemporal, colx = self.eixox, cronologico = self.cronologico)
-                figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
-                self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
 
-            else:
-                mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+" "+unity.titulo+" "+self.estudo, legEixoX = "estagios")
-                for titulo in mapaFig:
-                    self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, self.largura, self.altura)
+
+            mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+" "+unity.titulo+" "+self.estudo, legEixoX = "estagios")
+            for titulo in mapaFig:
+                self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, self.largura, self.altura)
+
+            mapaCronologico[unity] = pd.concat(listaCronologica)
+            indicadores_temporais.exportar(pd.concat(listaCronologica), diretorio_saida_arg,  "cronologico_"+unity.titulo+"_"+self.estudo)
+
 
             #mapaTemporal_2_mes[unity] = pd.concat(listaTemporal_2_mes)
             #indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_est_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
@@ -114,7 +116,11 @@ class Conjunto:
 
             #mapaMedio[unity] = pd.concat(listaMedia)
             #indicadores_medios.exportar(pd.concat(listaMedia), diretorio_saida_arg,  "media_"+unity.titulo+"_"+self.estudo)
-
+            
+        if(self.cronologico == "True"):
+            mapaGO = self.graficosConjunto.gera_grafico_linha(conjUnity, mapaTemporal, colx = self.eixox, cronologico = self.cronologico)
+            figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
+            self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
         #mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_1_est)
         #figura = Figura(conjUnity, mapaGO, "Primeiro Est "+conjUnity.titulo+self.estudo)
         #self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo)

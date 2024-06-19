@@ -58,9 +58,10 @@ class GraficosConjunto:
         #colx = "estagio"
         colx = "estagio" ) :
         mapaGO = {}
-        for conj in self.conjuntoCasos:
-            df = mapa[conj.nome]
+        for unity in mapa:
+            df = mapa[unity]
             listaGO = []
+        for conj in self.conjuntoCasos:
             df = df.reset_index(drop = True)
             listaGO.append(go.Scatter( 
                     x = df[colx],
