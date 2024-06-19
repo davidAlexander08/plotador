@@ -27,9 +27,9 @@ class IndicadoresTemporais(EcoIndicadores):
         for c in self.casos:
             df = mapa[c]
             #print(df)
-            if(c.modelo == "NEWAVE" or c.modelo == "DECOMP")
+            if(c.modelo == "NEWAVE" or c.modelo == "DECOMP"):
                 dict[c] = df.loc[df["cenario"] == cenario].reset_index(drop = True)
-            if(c.modelo == "DESSEM")   
+            if(c.modelo == "DESSEM"):   
                 dict[c] = df.reset_index(drop = True) 
         return dict
 
