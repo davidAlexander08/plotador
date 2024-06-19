@@ -183,8 +183,8 @@ class Graficos:
         colx = "estagio" ) :
         mapaGO = {}
         if(cronologico == "True"):
-            df = pd.concat(mapa)
             for unity in mapa:
+                df = pd.concat(mapa[unity])
                 print(unity.arg)
                 print(unity.filtroArgumento)
                 print(unity.sintese)
@@ -197,7 +197,6 @@ class Graficos:
                         name = self.estudo,
                         showlegend=unity.arg.show))
                 mapaGO[unity] = listaGO
-            exit(1)
         else:
             for unity in mapa:  
                 df = mapa[unity]
