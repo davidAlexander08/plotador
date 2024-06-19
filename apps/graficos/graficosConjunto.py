@@ -61,14 +61,14 @@ class GraficosConjunto:
         for unity in mapa:
             df = mapa[unity]
             listaGO = []
-        for conj in self.conjuntoCasos:
-            df = df.reset_index(drop = True)
-            listaGO.append(go.Scatter( 
-                    x = df[colx],
-                    y = df[coly],
-                    name = conj.nome,
-                    line = dict(color = conj.cor),
-                    showlegend=unity.arg.show))
+            for conj in self.conjuntoCasos:
+                df = df.reset_index(drop = True)
+                listaGO.append(go.Scatter( 
+                        x = df[colx],
+                        y = df[coly],
+                        name = conj.nome,
+                        line = dict(color = conj.cor),
+                        showlegend=unity.arg.show))
             mapaGO[unity] = listaGO
         return mapaGO
 
