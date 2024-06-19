@@ -49,6 +49,29 @@ class GraficosConjunto:
             mapaGO[unity] = listaGO
         return mapaGO
 
+    def gera_grafico_linha(
+        self,
+        mapa,
+        cronologico, 
+        coly = "valor",
+        #colx = "estagio"
+        colx = "estagio" ) :
+        mapaGO = {}
+        for conj in self.conjuntoCasos:
+            df_conj = mapa[conj.nome]
+            print(df_conj)
+        #for unity in mapa:
+        #    df = mapa[unity]
+        #    listaGO = []
+        #    df = df.reset_index(drop = True)
+        #    listaGO.append(go.Scatter( 
+        #            x = df[colx],
+        #            y = df[coly],
+        #            name = self.estudo,
+        #            showlegend=unity.arg.show))
+        #    mapaGO[unity] = listaGO
+        return mapaGO
+
 
     def subplot_gera_grafico_linha_casos(
         self,
