@@ -25,7 +25,7 @@ class EcoIndicadores:
         check_file = os.path.isfile(arq_sintese)
         if(check_file) :
             df = pd.read_parquet(arq_sintese)
-            df = stub(df, caso)
+            df = self.stub(df, caso)
             return df
         else:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado") 
