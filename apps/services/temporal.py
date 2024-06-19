@@ -15,10 +15,10 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixoX, cronologico):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico):
         self.xinf  = xinf
         self.xsup = xsup
-        self.eixoX = eixoX
+        self.eixox = eixox
         self.estagio = estagio
         self.cenario = cenario
         self.sintese = sintese
@@ -66,7 +66,7 @@ class Temporal:
         print(pd.concat(mapa_temporal))
         exit(1)
 
-        mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = eixoX)
+        mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = eixox)
         figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
         
