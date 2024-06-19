@@ -119,6 +119,51 @@ def analise_anual(arquivo_json):
 
 
 @click.command("cenarios")
+@click.option(
+    "--xinf",
+    default=0,
+    help="Ponto Inferior do Eixo X",
+)
+@click.option(
+    "--xsup",
+    default=60,
+    help="Ponto Superior do Eixo X",
+)
+@click.option(
+    "--estagio",
+    default="",
+    help="Estagio Especifico para Plotar",
+)
+@click.option(
+    "--cenario",
+    default="mean",
+    help="Cenario Especifico para Plotar",
+)
+@click.option(
+    "--sintese",
+    default="",
+    help="Sintese Especifica a ser Plotada",
+)
+@click.option(
+    "--largura",
+    default="1500", #VALOR INTERESSANTE PARA RELATORIOS E 1200
+    help="Sintese Especifica a ser Plotada",
+)
+@click.option(
+    "--altura",
+    default="1200", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+    help="Sintese Especifica a ser Plotada",
+)
+@click.option(
+    "--eixox",
+    default="estagio",
+    help="Eixo X, valores como estagio, dataInicio, dataFim",
+)
+@click.option(
+    "--cronologico",
+    default="True", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+    help="Sintese Especifica a ser Plotada",
+)
 @click.argument(
     "arquivo_json",
 )
@@ -134,11 +179,11 @@ def analise_cenarios(arquivo_json):
 @click.argument(
     "arquivo_json",
 )
-def analise_conjuntoCasos(arquivo_json):
+def analise_conjuntoCasos(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico):
     from apps.services.conjunto import Conjunto
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Conjunto(data)
+        Conjunto(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
     

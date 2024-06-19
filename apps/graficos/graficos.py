@@ -185,10 +185,6 @@ class Graficos:
         if(cronologico == "True"):
             for unity in mapa:
                 df = mapa[unity]
-                print(unity.arg)
-                print(unity.filtroArgumento)
-                print(unity.sintese)
-                print(unity.fitroColuna)
                 listaGO = []
                 df = df.reset_index(drop = True)
                 listaGO.append(go.Scatter( 

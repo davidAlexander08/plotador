@@ -18,8 +18,17 @@ import json
 class Conjunto:
 
 
-    def __init__(self, data):
+    def __init__(self, data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico):
         self.conjuntoCasos = data.conjuntoCasos
+        self.xinf  = xinf
+        self.xsup = xsup
+        self.eixox = eixox
+        self.estagio = estagio
+        self.cenario = cenario
+        self.sintese = sintese
+        self.largura = largura
+        self.altura = altura
+        self.cronologico = cronologico
         self.estudo = data.estudo
         self.nome_caso_referencia = ""
         # Gera saídas do estudo
@@ -50,8 +59,6 @@ class Conjunto:
 
 
     def executa(self, conjUnity, diretorio_saida_arg):
-
-        
         mapaTemporal_2_mes = {}
         mapaTemporal_1_est = {}
         mapaMedio = {}
@@ -61,11 +68,16 @@ class Conjunto:
             listaTemporal_1_est = []
             listaMedia = []
             for conjunto in self.conjuntoCasos:
-                indicadores_temporais = IndicadoresTemporais(conjunto.casos)  
+                indicadores_temporais = IndicadoresTemporais(conjunto.casos, cenario)  
                 indicadores_medios = IndicadoresMedios(conjunto.casos, self.nome_caso_referencia)   
                         
 
                 df_temporal = indicadores_temporais.retorna_df_concatenado(unity)
+                if(self.xsup < df_temporal["estagio"].max()):
+                    df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
+                if(self.xinf > df_temporal["estagio"].min()):
+                    df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
+
                 df_temporal["conjunto"] = conjunto.nome
                 mapaTemporal[conjunto.nome] = df_temporal
 
