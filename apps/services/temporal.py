@@ -68,8 +68,9 @@ class Temporal:
         #exit(1)
         if(self.cronologico == "True"):
             unity = list(mapa_temporal.keys())[0]
+            df = pd.concat(mapa_temporal)
             mapa_temporal = {}
-            mapa_temporal[unity] = pd.concat(mapa_temporal)
+            mapa_temporal[unity] = df
 
 
         mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = eixox)
