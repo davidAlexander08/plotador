@@ -16,12 +16,9 @@ class EcoIndicadores:
         
     def retorna_df_concatenado(self,sintese):
         return pd.concat(self.retornaMapaDF(sintese))
-
-
-    def stub(self,df, caso):  ## REGRAS ADICIONAIS QUE VARIAM POR MODELO
         
+    def stub(self,df,caso):  ## REGRAS ADICIONAIS QUE VARIAM POR MODELO
         return df
-
 
     def __retorna_df(self, caso, sintese) -> pd.DataFrame:
         arq_sintese = join( caso.caminho, self.DIR_SINTESE, sintese+".parquet.gzip"  )
