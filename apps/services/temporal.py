@@ -1,3 +1,4 @@
+import pandas as pd
 from typing import Dict
 from apps.model.unidade import UnidadeSintese
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
