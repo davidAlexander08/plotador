@@ -184,7 +184,7 @@ class Graficos:
         mapaGO = {}
         if(cronologico == "True"):
             for unity in mapa:
-                df = pd.concat(mapa[unity])
+                df = mapa[unity]
                 print(unity.arg)
                 print(unity.filtroArgumento)
                 print(unity.sintese)
