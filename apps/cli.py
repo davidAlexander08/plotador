@@ -119,6 +119,18 @@ def analise_anual(arquivo_json):
 
 
 @click.command("cenarios")
+@click.argument(
+    "arquivo_json",
+)
+def analise_cenarios(arquivo_json):
+    from apps.services.cenarios import Cenarios
+    if os.path.isfile(arquivo_json):
+        data = Dados_json_caso(arquivo_json)
+        Cenarios(data)
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
+@click.command("conjunto")
 @click.option(
     "--xinf",
     default=0,
@@ -164,18 +176,6 @@ def analise_anual(arquivo_json):
     default="True", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
     help="Sintese Especifica a ser Plotada",
 )
-@click.argument(
-    "arquivo_json",
-)
-def analise_cenarios(arquivo_json):
-    from apps.services.cenarios import Cenarios
-    if os.path.isfile(arquivo_json):
-        data = Dados_json_caso(arquivo_json)
-        Cenarios(data)
-    else:
-        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-
-@click.command("conjunto")
 @click.argument(
     "arquivo_json",
 )
