@@ -73,7 +73,7 @@ class Temporal:
             mapa_temporal[unity] = df
 
 
-        mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = eixox)
+        mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox)
         figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
         
