@@ -68,6 +68,7 @@ class Temporal:
         #exit(1)
         if(self.cronologico == "True"):
             unity = list(mapa_temporal.keys())[0]
+            conjUnity.listaUnidades = [unity]
             df = pd.concat(mapa_temporal)
             mapa_temporal = {}
             mapa_temporal[unity] = df
