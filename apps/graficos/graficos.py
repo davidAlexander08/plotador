@@ -19,8 +19,9 @@ class Graficos:
     de escolha dos pares de CVaR para recalibração.
     """
 
-    def __init__(self, casos: List[Caso]):
-        self.casos = casos
+    def __init__(self, data):
+        self.casos = data.casos
+        self.estudo = data.estudo
         self.pre_defined_colors = [
             "#BA0F30",
             "#ff4500",
