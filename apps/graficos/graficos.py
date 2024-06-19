@@ -175,23 +175,23 @@ class Graficos:
 
     def gera_grafico_linha(
         self,
-        mapa, 
+        mapa,
+        cronologico, 
         coly = "valor",
         #colx = "estagio"
-        colx = "estagio",
-        cronologico,) :
+        colx = "estagio" ) :
         mapaGO = {}
         if(cronologico == "True"):
             df = pd.concat(mapa)
-            listaGO = []
-            df = df.reset_index(drop = True)
-            listaGO.append(go.Scatter( 
-                    x = df[colx],
-                    y = df[coly],
-                    name = self.estudo,
-                    showlegend=unity.arg.show))
-
-            mapaGO[unity] = listaGO
+            for unity in mapa:
+                listaGO = []
+                df = df.reset_index(drop = True)
+                listaGO.append(go.Scatter( 
+                        x = df[colx],
+                        y = df[coly],
+                        name = self.estudo,
+                        showlegend=unity.arg.show))
+                mapaGO[unity] = listaGO
         else:
             for unity in mapa:  
                 df = mapa[unity]
