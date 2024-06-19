@@ -68,11 +68,11 @@ class Conjunto:
             listaTemporal_1_est = []
             listaMedia = []
             for conjunto in self.conjuntoCasos:
-                indicadores_temporais = IndicadoresTemporais(conjunto.casos, cenario)  
+                indicadores_temporais = IndicadoresTemporais(conjunto.casos)  
                 indicadores_medios = IndicadoresMedios(conjunto.casos, self.nome_caso_referencia)   
                         
 
-                df_temporal = indicadores_temporais.retorna_df_concatenado(unity)
+                df_temporal = indicadores_temporais.retorna_df_concatenado(unity, cenario)
                 if(self.xsup < df_temporal["estagio"].max()):
                     df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
                 if(self.xinf > df_temporal["estagio"].min()):
