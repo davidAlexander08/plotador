@@ -1,9 +1,9 @@
-# graficador-newave
+# plotador
 A filosofia deste repositório é de gerar gráficos e análises estatísticas automáticas para diferens tipos de casos de Newave, a fim de facilitar e replicar estudos feitos com o modelo. A configuração da análise é definida em um arquivo ".json" na nuvem, o qual é chamado por linha de comando, como, por exemplo:
 
-graficador-newave temporal teste.json
+plotador temporal teste.json
 
-No comando acima, o "graficador-newave" é invocado para realizar a análise "temporal" com base na configuração definida no "teste.json". Dentre as análises atualmente implementadas, encontram-se:
+No comando acima, o "plotador" é invocado para realizar a análise "temporal" com base na configuração definida no "teste.json". Dentre as análises atualmente implementadas, encontram-se:
 
 Eco
 Temporal
