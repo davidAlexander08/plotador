@@ -98,10 +98,13 @@ class Conjunto:
             indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
             if(self.cronologico == "True"):
                 mapaFig = self.graficosConjunto.gera_grafico_linha(unity, mapaTemporal, colx = self.eixox, cronologico = self.cronologico)
+                figura = Figura(conjUnity, mapaGO, "Temporal "+conjUnity.titulo+self.estudo)
+                self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
+
             else:
                 mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+" "+unity.titulo+" "+self.estudo, legEixoX = "estagios")
-            for titulo in mapaFig:
-                self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, self.largura, self.altura)
+                for titulo in mapaFig:
+                    self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, self.largura, self.altura)
 
             #mapaTemporal_2_mes[unity] = pd.concat(listaTemporal_2_mes)
             #indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_est_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
