@@ -25,21 +25,23 @@ class Tempo:
         os.makedirs(diretorio_saida, exist_ok=True)
         
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-
-        df_temp["tempo"] = df_temp["tempo"] /(60)
         lista_color = []
-        for caso in data.casos:
-            lista_color.append(caso.cor)
-        print(df_temp)
         temp = []
-        temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
-        temp.append(df_temp.loc[(df_temp["etapa"] == "Tempo Total")])
+        for caso in data.casos:
+            df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+            lista_color.append(caso.cor)
+            if(caso.modelo == "NEWAVE"):
+                df_caso["tempo"] = df_caso["tempo"] /(60)
+                #temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
+                temp.append(df_caso.loc[(df_caso["etapa"] == "Tempo Total")])
+            if(caso.modelo == "DESSEM"):
+                df = df_caso.groupby(['caso']).sum().drop(["etapa"],axis = 1).reset_index(drop=False)
+                temp.append(df)
         df = pd.concat(temp).reset_index(drop = True)
         print(df)
 
         self.eco_indicadores.exportar(df, diretorio_saida,"Tempo"+self.estudo )
-
-        fig = self.graficos.gera_grafico_barras_diferentes(df, colX = "etapa", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "minutos",
+        fig = self.graficos.gera_grafico_barras_diferentes(df, colX = "caso", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "minutos",
          aproximacao = 2, titulo = "Tempo de processamento"+"_"+self.estudo, lista_cor = lista_color)
         self.graficos.exportar(fig, diretorio_saida, "Tempo"+self.estudo)
                         
