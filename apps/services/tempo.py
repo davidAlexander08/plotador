@@ -35,7 +35,8 @@ class Tempo:
                 #temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
                 temp.append(df_caso.loc[(df_caso["etapa"] == "Tempo Total")])
             if(caso.modelo == "DESSEM"):
-                df = df_caso.groupby(['caso']).sum().drop(["etapa"],axis = 1).reset_index(drop=False)
+                print(df_caso)
+                df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
                 temp.append(df)
         df = pd.concat(temp).reset_index(drop = True)
         print(df)
