@@ -19,12 +19,13 @@ class Tempo:
     def __init__(self, data):
         self.estudo = data.estudo
         self.eco_indicadores = EcoIndicadores(data.casos)
-        self.graficos = Graficos(data.casos)
+        self.graficos = Graficos(data)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/tempo"
         os.makedirs(diretorio_saida, exist_ok=True)
         
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+
         df_temp["tempo"] = df_temp["tempo"] /(60)
         lista_color = []
         for caso in data.casos:
