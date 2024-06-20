@@ -25,6 +25,7 @@ class Tempo:
         os.makedirs(diretorio_saida, exist_ok=True)
         
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+        print(df_temp)
         lista_color = []
         temp = []
         for caso in data.casos:
