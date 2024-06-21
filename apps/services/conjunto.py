@@ -12,7 +12,7 @@ from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.graficos.figura import Figura
-from apps.Tempo.tempo import Tempo
+from apps.services.tempo import Tempo
 import pandas as pd
 import os
 import json
