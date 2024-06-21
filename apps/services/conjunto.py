@@ -38,10 +38,13 @@ class Conjunto:
         self.graficosConjunto = GraficosConjunto(data.conjuntoCasos)
         os.makedirs(diretorio_saida, exist_ok=True)
 
+        sts_temp = Sintese("TEMPO")
+        arg_temp = Argumento(None, None, "SIN")
+        conj = ConjuntoUnidadeSintese(sts_temp,arg_temp , "casos", data.limites, data.tamanho_texto)
         mapaTempo = {}
         for conjunto in self.conjuntoCasos:
             eco_indicadores = EcoIndicadores(conjunto.casos)
-            df_temp = eco_indicadores.retorna_df_concatenado("TEMPO")
+            df_temp = eco_indicadores.retorna_df_concatenado(conj.sintese.sintese)
             temp = []
             for caso in conjunto.casos:
                 df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
@@ -52,14 +55,17 @@ class Conjunto:
                     df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
                     temp.append(df)
             df_tempo_total = pd.concat(temp).reset_index(drop = True)
-
+    
             #df_tempo_total = Tempo.retorna_df_tempo_total_casos(conjunto.casos, df_temp)
             df_tempo_total["conjunto"] = conjunto.nome
             mapaTempo[conjunto] = df_tempo_total
         eco_indicadores.exportar(pd.concat(mapaTempo), diretorio_saida,  "tempo "+self.estudo)
-        mapaGO = self.graficosConjunto.gera_grafico_linhas_artesanal(mapaTempo, colY = "tempo", colX = "caso")
-        figura = Figura(conjUnity, mapaGO, "Comparacao Tempo "+self.estudo)
+        mapaGO = self.graficosConjunto.gera_grafico_linhas_artesanal(conj.listaUnidades[0],mapaTempo, colY = "tempo", colX = "caso")
+        figura = Figura(conj, mapaGO, "Comparacao Tempo "+self.estudo)
         self.graficosConjunto.exportar(figura.fig, diretorio_saida, figura.titulo)
+
+
+
 
         for sts in data.sinteses:
             espacial = sts.sintese.split("_")[1]

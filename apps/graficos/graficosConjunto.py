@@ -28,6 +28,7 @@ class GraficosConjunto:
 
     def gera_grafico_linhas_artesanal(
         self,
+        unity,
         mapa,
         colY = "valor",
         colX = "caso" ):
