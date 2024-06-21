@@ -47,10 +47,8 @@ class Conjunto:
                 df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
                 df_caso["tempo"] = df_caso["tempo"] /(60)
                 if(caso.modelo == "NEWAVE"):
-                    #temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
                     temp.append(df_caso.loc[(df_caso["etapa"] == "Tempo Total")])
                 if(caso.modelo == "DESSEM"):
-                    #print(df_caso)
                     df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
                     temp.append(df)
             df_tempo_total = pd.concat(temp).reset_index(drop = True)
@@ -59,7 +57,7 @@ class Conjunto:
             df_tempo_total["conjunto"] = conjunto.nome
             mapaTempo[conjunto] = df_tempo_total
         eco_indicadores.exportar(pd.concat(mapaTempo), diretorio_saida,  "tempo "+self.estudo)
-        mapaGO = self.graficosConjunto.gera_grafico_linhas_artesanal(mapaTempo, coly = "tempo", colx = "caso")
+        mapaGO = self.graficosConjunto.gera_grafico_linhas_artesanal(mapaTempo, colY = "tempo", colX = "caso")
         figura = Figura(conjUnity, mapaGO, "Comparacao Tempo "+self.estudo)
         self.graficosConjunto.exportar(figura.fig, diretorio_saida, figura.titulo)
 
