@@ -12,6 +12,7 @@ from idecomp.decomp.custos import Custos
 from idecomp.decomp.fcfnw import Fcfnw
 from idecomp.decomp.caso import Caso
 from idecomp.decomp.dadger import Dadger
+from idecomp.decomp.hidr import Hidr
 import os
 import json
 
@@ -69,8 +70,11 @@ class FCF:
         
         arq_fcfnwn = caso.caminho+"/fcfnwn."+extensao
         arq_dadger = caso.caminho+"/dadger."+extensao
+        arq_hidr = caso.caminho+"/hidr.dat"
         f_prodt_65 = 0
         if(not os.path.isfile(arq_fcfnwi)):
+            hid = Hidr.read(arq_hidr)
+
             dadger = Dadger.read(arq_dadger)
             dadger_uh = dadger.uh(df = True)
             print(dadger_uh)
