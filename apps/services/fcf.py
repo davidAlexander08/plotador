@@ -114,6 +114,7 @@ class FCF:
                 if(not os.path.isfile(arq_fcfnwi)):
                     coef_fcf_corte = ((fcf.loc[(fcf["corte"] == corte)]["coef_earm"].iloc[0]*f_prodt_65*10000)/36)/1000 ## PARANAUE
                 if(os.path.isfile(arq_fcfnwi)):
+                    print(fcf)
                     coef_fcf_corte = fcf.loc[(fcf["corte"] == corte)]["coef_varm"].iloc[0]
                 parcela_pi = cortes_ativos.loc[(cortes_ativos["indice_corte"]==corte)]["parcela_pi"].iloc[0]
                 valor_coef += coef_fcf_corte*parcela_pi
