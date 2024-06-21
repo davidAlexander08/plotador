@@ -13,6 +13,8 @@ from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.graficos.figura import Figura
 from apps.services.tempo import Tempo
+import plotly.graph_objects as go
+import plotly.io as pio
 import pandas as pd
 import os
 import json
@@ -42,6 +44,8 @@ class Conjunto:
         arg_temp = Argumento(None, None, ["ree", "25x35"])
         conj = ConjuntoUnidadeSintese(sts_temp,arg_temp , "casos", data.limites, data.tamanho_texto)
         mapaTempo = {}
+        fig = go.Figure()
+        listaGO = []
         for conjunto in self.conjuntoCasos:
             eco_indicadores = EcoIndicadores(conjunto.casos)
             df_temp = eco_indicadores.retorna_df_concatenado(conj.sintese.sintese)
@@ -55,14 +59,23 @@ class Conjunto:
                     df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
                     temp.append(df)
             df_tempo_total = pd.concat(temp).reset_index(drop = True)
-    
-            #df_tempo_total = Tempo.retorna_df_tempo_total_casos(conjunto.casos, df_temp)
             df_tempo_total["conjunto"] = conjunto.nome
             mapaTempo[conjunto] = df_tempo_total
-        eco_indicadores.exportar(pd.concat(mapaTempo), diretorio_saida,  "tempo "+self.estudo)
-        mapaGO = self.graficosConjunto.gera_grafico_linhas_artesanal(conj.listaUnidades[0],mapaTempo, colY = "tempo", colX = "caso")
-        figura = Figura(conj, mapaGO, "Comparacao Tempo "+self.estudo)
-        self.graficosConjunto.exportar(figura.fig, diretorio_saida, figura.titulo)
+            listaGO.append(go.Scatter(
+                                x = df_tempo_total["caso"],
+                                y = df_tempo_total["tempo"],
+                                name = conjunto.nome,
+                                line = dict(color = conjunto.cor),
+                                showlegend=True,
+                            )
+            )
+        for elemento_go in listaGO:
+            fig.add_trace(elemento_go)
+        fig.update_layout(title= "Comparacao Tempo de Execucao")
+        fig.update_yaxes(title="casos") 
+        fig.update_xaxes(title="min") 
+        self.graficosConjunto.exportar(fig,diretorio_saida, "conjunto tempo "+self.estudo+".png" )
+
 
 
 
