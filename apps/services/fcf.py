@@ -13,6 +13,7 @@ from idecomp.decomp.fcfnw import Fcfnw
 from idecomp.decomp.caso import Caso
 from idecomp.decomp.dadger import Dadger
 from idecomp.decomp.hidr import Hidr
+import pandas as pd
 import os
 import json
 
@@ -61,7 +62,9 @@ class FCF:
         ultimo_estagio = tabela["estagio"].unique()[-1]
         custo_5 = tabela.loc[(tabela["estagio"] == ultimo_estagio)].reset_index(drop = True)
         cenarios = custo_5["cenario"].unique()
+        print(custo_5)
         arq_fcfnwi = caso.caminho+"/fcfnwi."+extensao
+        fcf = pd.DataFrame()
         if(os.path.isfile(arq_fcfnwi)):
             fcf = Fcfnw.read(arq_fcfnwi)
             df = fcf.cortes
@@ -76,16 +79,12 @@ class FCF:
             hid = Hidr.read(arq_hidr)
             df_hidr = hid.cadastro.reset_index(drop = False)
             codigo = df_hidr.loc[df_hidr["nome_usina"] == unity.arg.nome]["codigo_usina"].iloc[0]
-            print(codigo)
             dadger = Dadger.read(arq_dadger)
             dadger_uh = dadger.uh(df = True)
             codigo_ree = dadger_uh.loc[dadger_uh["codigo_usina"] == codigo]["codigo_ree"].iloc[0]
-            print(codigo_ree)
-            print(dadger_uh.loc[dadger_uh["codigo_usina"] == codigo])
-            exit(1)
             fcf = Fcfnw.read(arq_fcfnwn)
             df = fcf.cortes
-            fcf = df.loc[(df["REE"] == unity.arg.nome)].reset_index(drop = True)
+            fcf = df.loc[(df["REE"] == codigo_ree)].reset_index(drop = True)
 
             arq_memcal = caso.caminho+"/memcal."+extensao
             if(os.path.isfile(arq_memcal)):
@@ -104,7 +103,26 @@ class FCF:
                 raise FileNotFoundError(f"Arquivo memcal.rvx não encontrado.") 
 
 
-
+        for cenario in cenarios:
+            cortes_ativos = custo_5.loc[(custo_5["cenario"]) == cenario]
+            lista_cortes_ativos = cortes_ativos["indice_corte"].unique()
+            #print(cortes_ativos)
+            valor_coef = 0
+            for corte in lista_cortes_ativos:
+                if(not os.path.isfile(arq_fcfnwi)):
+                    coef_fcf_corte = ((fcf.loc[(fcf["corte"] == corte)]["coef_earm"].iloc[0]*f_prodt_65*10000)/36)/1000 ## PARANAUE
+                if(os.path.isfile(arq_fcfnwi)):
+                    coef_fcf_corte = fcf.loc[(fcf["corte"] == corte)]["coef_varm"].iloc[0]
+                parcela_pi = cortes_ativos.loc[(cortes_ativos["indice_corte"]==corte)]["parcela_pi"].iloc[0]
+                valor_coef += coef_fcf_corte*parcela_pi
+            valor_coef = valor_coef/0.991
+            #df_atv = pd.DataFrame({"cenario":[cenario], "coef":[valor_coef]})
+            #lista_df_cortes_ativos_ponderados.append(df_atv)
+        
+        #df_cortes_ativos_ponderados = pd.concat(lista_df_cortes_ativos_ponderados).reset_index(drop=True)
+        #df_cortes_ativos_ponderados["caso"] = caso[0]
+        ##print(df_cortes_ativos_ponderados)
+        #lista_df_casos.append(df_cortes_ativos_ponderados)
 
 
 
