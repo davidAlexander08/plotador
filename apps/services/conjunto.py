@@ -108,6 +108,7 @@ class Conjunto:
         mapaTemporal_1_est = {}
         mapaMedio = {}
         mapaCronologico = {}
+        flag_muitos_casos = 0
         for unity in conjUnity.listaUnidades:
             mapaTemporal = {}
             listaTemporal_2_mes = []
@@ -115,6 +116,8 @@ class Conjunto:
             listaMedia = []
             listaCronologica = []
             for conjunto in self.conjuntoCasos:
+                if(conjunto.casos > 12):
+                    flag_muitos_casos = 1
                 indicadores_temporais = IndicadoresTemporais(conjunto.casos)  
                 indicadores_medios = IndicadoresMedios(conjunto.casos, self.nome_caso_referencia)   
                 df_temporal = indicadores_temporais.retorna_df_concatenado(unity, self.cenario)
@@ -137,10 +140,10 @@ class Conjunto:
 
             indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
 
-
-            mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+" "+unity.titulo+" "+self.estudo, legEixoX = "estagios")
-            for titulo in mapaFig:
-                self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, self.largura, self.altura)
+            if(flag_muitos_casos == 0):
+                mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+" "+unity.titulo+" "+self.estudo, legEixoX = "estagios")
+                for titulo in mapaFig:
+                    self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, self.largura, self.altura)
 
             mapaCronologico[unity] = pd.concat(listaCronologica)
             indicadores_temporais.exportar(pd.concat(listaCronologica), diretorio_saida_arg,  "cronologico_"+unity.titulo+"_"+self.estudo,)
