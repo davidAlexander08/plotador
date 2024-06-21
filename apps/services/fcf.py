@@ -19,7 +19,7 @@ class FCF:
         self.estudo = data.estudo
         self.casos = data.casos
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
-        self.graficos = Graficos(data.casos)
+        self.graficos = Graficos(data)
         diretorio_saida = f"resultados/{self.estudo}/fcf"
         os.makedirs(diretorio_saida, exist_ok=True)
 
