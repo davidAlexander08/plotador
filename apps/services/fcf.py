@@ -8,6 +8,9 @@ from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 from apps.model.unidadeArgumental import UnidadeArgumental
 from apps.graficos.figura import Figura
+from idecomp.decomp.custos import Custos
+from idecomp.decomp.fcfnw import Fcfnw
+from idecomp.decomp.caso import Caso
 
 import os
 import json
@@ -28,6 +31,21 @@ class FCF:
             set_modelos.add(caso.modelo)
         
         print(set_modelos)
+        if(len(set_modelos) == 1):
+            modelo = list(thisset)[0]
+            if(modelo == "DECOMP"):
+                arq_caso = Caso.read(join(str(self.__tmppath), "caso.dat"))
+                extensao = arq_caso.arquivos
+                if extensao is None:
+                    raise FileNotFoundError(f"Arquivo caso.dat não encontrado.")                
+                arq_memcal = caso.caminho+"/memcal."+extensao
+                print(caso.caminho+"/memcal."+extensao)
+                exit(1)
+
+
+        else:
+            print("ERRO: Tentativa de plotar FCF Com mais de um modelo no JSON")
+            exit(1)
 
         exit(1)
 
