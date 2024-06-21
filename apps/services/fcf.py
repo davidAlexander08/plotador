@@ -64,6 +64,11 @@ class FCF:
         cenarios = custo_5["cenario"].unique()
         coef_pi = custo_5["parcela_pi"].max()
         print(coef_pi)
+
+        arq_hidr = caso.caminho+"/hidr.dat"
+        hid = Hidr.read(arq_hidr)
+        df_hidr = hid.cadastro.reset_index(drop = False)
+        codigo = df_hidr.loc[df_hidr["nome_usina"] == unity.arg.nome]["codigo_usina"].iloc[0]
         
         arq_fcfnwi = caso.caminho+"/fcfnwi."+extensao
         print(arq_fcfnwi)
@@ -72,18 +77,15 @@ class FCF:
             fcf = Fcfnw.read(arq_fcfnwi)
             df = fcf.cortes
             print(df)
-            df_fcf = df.loc[(df["UHE"] == unity.arg.nome)].reset_index(drop = True)
+            df_fcf = df.loc[(df["UHE"] == codigo)].reset_index(drop = True)
             print(df_fcf)
         
         
         arq_fcfnwn = caso.caminho+"/fcfnwn."+extensao
         arq_dadger = caso.caminho+"/dadger."+extensao
-        arq_hidr = caso.caminho+"/hidr.dat"
         f_prodt_65 = 0
         if(not os.path.isfile(arq_fcfnwi)):
-            hid = Hidr.read(arq_hidr)
-            df_hidr = hid.cadastro.reset_index(drop = False)
-            codigo = df_hidr.loc[df_hidr["nome_usina"] == unity.arg.nome]["codigo_usina"].iloc[0]
+
             dadger = Dadger.read(arq_dadger)
             dadger_uh = dadger.uh(df = True)
             codigo_ree = dadger_uh.loc[dadger_uh["codigo_usina"] == codigo]["codigo_ree"].iloc[0]
