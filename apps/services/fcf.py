@@ -67,11 +67,13 @@ class FCF:
         
         arq_fcfnwi = caso.caminho+"/fcfnwi."+extensao
         print(arq_fcfnwi)
-        fcf = pd.DataFrame()
+        df_fcf = pd.DataFrame()
         if(os.path.isfile(arq_fcfnwi)):
             fcf = Fcfnw.read(arq_fcfnwi)
             df = fcf.cortes
+            print(df)
             df_fcf = df.loc[(df["UHE"] == unity.arg.nome)].reset_index(drop = True)
+            print(df_fcf)
         
         
         arq_fcfnwn = caso.caminho+"/fcfnwn."+extensao
