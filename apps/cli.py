@@ -172,7 +172,7 @@ def analise_cenarios(arquivo_json):
     help="Eixo X, valores como estagio, dataInicio, dataFim",
 )
 @click.option(
-    "--cronologico",
+    "--cronologico",  #plotador conjunto --cronologico True --xsup 48 conjunto.json #DESSEM
     default="False", 
     help="Sintese Especifica a ser Plotada",
 )
