@@ -27,6 +27,10 @@ class FCF:
         os.makedirs(diretorio_saida, exist_ok=True)
 
         for arg in data.args:
+            if(arg.chave == "UHE"):
+                conj = ConjuntoUnidadeSintese("", arg, "estagios", data.limites, data.tamanho_texto)
+                for unity in conjUnity.listaUnidades:
+                    print(unity.arg.chave)
             print(arg.nome, " chave: ", arg.chave, " lista: ", arg.listaNomes)
         exit(1)
 
