@@ -116,7 +116,7 @@ class Conjunto:
             listaMedia = []
             listaCronologica = []
             for conjunto in self.conjuntoCasos:
-                if(conjunto.casos > 12):
+                if(len(conjunto.casos) > 12):
                     flag_muitos_casos = 1
                 indicadores_temporais = IndicadoresTemporais(conjunto.casos)  
                 indicadores_medios = IndicadoresMedios(conjunto.casos, self.nome_caso_referencia)   
