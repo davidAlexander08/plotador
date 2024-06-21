@@ -74,7 +74,9 @@ class FCF:
         f_prodt_65 = 0
         if(not os.path.isfile(arq_fcfnwi)):
             hid = Hidr.read(arq_hidr)
-            print(hid.cadastro)
+            df_hidr = hid.cadastro.reset_index(drop = False)
+            codigo = df_hidr.loc[df_hidr["nome_usina"] == unity.arg.nome]["codigo_usina"]
+            print(codigo).
             dadger = Dadger.read(arq_dadger)
             dadger_uh = dadger.uh(df = True)
             print(dadger_uh)
