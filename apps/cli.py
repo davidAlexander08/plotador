@@ -79,7 +79,7 @@ def eco(arquivo_json):
 )
 @click.option(
     "--cronologico",
-    default="True", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+    default="False", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
     help="Sintese Especifica a ser Plotada",
 )
 @click.argument(
@@ -173,7 +173,7 @@ def analise_cenarios(arquivo_json):
 )
 @click.option(
     "--cronologico",
-    default="True", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+    default="False", 
     help="Sintese Especifica a ser Plotada",
 )
 @click.argument(
