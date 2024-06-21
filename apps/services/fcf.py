@@ -11,7 +11,7 @@ from apps.graficos.figura import Figura
 from idecomp.decomp.custos import Custos
 from idecomp.decomp.fcfnw import Fcfnw
 from idecomp.decomp.caso import Caso
-
+from idecomp.decomp.dadger import Dadger
 import os
 import json
 
@@ -53,11 +53,33 @@ class FCF:
             extensao = f.readline().strip('\n')
         if extensao == "":
             raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
-        arq_memcal = caso.caminho+"/memcal."+extensao
-        arq_fcfnwi = caso.caminho+"/fcfnwi."+extensao
 
+        arq = caso.caminho+"/custos."+extensao
+        custo = Custos.read(arq)
+        tabela = custo.relatorio_fcf
+        ultimo_estagio = tabela["estagio"].unique()[-1]
+        custo_5 = tabela.loc[(tabela["estagio"] == ultimo_estagio)].reset_index(drop = True)
+        cenarios = custo_5["cenario"].unique()
+        arq_fcfnwi = caso.caminho+"/fcfnwi."+extensao
+        if(os.path.isfile(arq_fcfnwi)):
+            fcf = Fcfnw.read(arq_fcfnwi)
+            df = fcf.cortes
+            fcf = df.loc[(df["UHE"] == unity.arg.nome)].reset_index(drop = True)
+        
         f_prodt_65 = 0
+        arq_fcfnwn = caso.caminho+"/fcfnwn."+extensao
+        arq_dadger = caso.caminho+"/dadger."+extensao
+        
         if(not os.path.isfile(arq_fcfnwi)):
+            dadger = Dadger.read(arq_dadger)
+            dadger_uh = dadger.uh
+            print(dadger_uh)
+            exit(1)
+            fcf = Fcfnw.read(arq_fcfnwn)
+            df = fcf.cortes
+            fcf = df.loc[(df["REE"] == unity.arg.nome)].reset_index(drop = True)
+
+            arq_memcal = caso.caminho+"/memcal."+extensao
             if(os.path.isfile(arq_memcal)):
                 pass
                 f = open(arq_memcal, "r")
@@ -73,12 +95,19 @@ class FCF:
             else:
                 raise FileNotFoundError(f"Arquivo memcal.rvx não encontrado.") 
 
-        arq = caso.caminho+"/custos."+extensao
-        custo = Custos.read(arq)
-        tabela = custo.relatorio_fcf
-        ultimo_estagio = tabela["estagio"].unique()[-1]
-        print(ultimo_estagio)
-        custo_5 = tabela.loc[(tabela["estagio"] == ultimo_estagio)].reset_index(drop = True)
-        cenarios = custo_5["cenario"].unique()
-        print(cenarios)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
