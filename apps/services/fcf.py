@@ -57,9 +57,9 @@ class FCF:
                         for caso in self.casos:
                             df = df_cortes_ativos_todos_casos.loc[(df_cortes_ativos_todos_casos["caso"] == caso.nome)]
                             ly = df["coef"].tolist()
-                            fig.add_trace(go.Box( y = ly, boxpoints = False, name = caso))
+                            fig.add_trace(go.Box( y = ly, boxpoints = False, name = caso.nome))
                             
-                        fig.update_layout(title="PIs Ativos "+usina[0])
+                        fig.update_layout(title="PIs Ativos "+unity.arg.nome+" "+self.estudo)
                         fig.update_xaxes(title_text="Casos")
                         fig.update_yaxes(title_text="1000R$/hm3")
                         fig.update_yaxes(range=[-1400,0])
