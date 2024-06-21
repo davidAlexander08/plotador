@@ -34,7 +34,7 @@ class FCF:
         if(len(set_modelos) == 1):
             modelo = list(set_modelos)[0]
             if(modelo == "DECOMP"):
-                arq_caso = Caso.read(join(str(self.__tmppath), "caso.dat"))
+                arq_caso = Caso.read(caso.caminho+"/caso.dat"))
                 extensao = arq_caso.arquivos
                 if extensao is None:
                     raise FileNotFoundError(f"Arquivo caso.dat não encontrado.")                
