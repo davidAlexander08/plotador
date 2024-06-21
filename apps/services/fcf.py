@@ -70,7 +70,9 @@ class FCF:
                         #print(line[25:50])
                         f_prodt_65 = float(line[25:50].strip())
                         flag = 0
-
+            else:
+                raise FileNotFoundError(f"Arquivo memcal.rvx não encontrado.") 
+                
         arq = caso.caminho+"/custos."+extensao
         custo = Custos.read(arq)
         tabela = custo.relatorio_fcf
@@ -80,5 +82,3 @@ class FCF:
         cenarios = custo_5["cenario"].unique()
         print(cenarios)
 
-        else:
-            raise FileNotFoundError(f"Arquivo memcal.rvx não encontrado.") 
