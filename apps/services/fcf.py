@@ -42,30 +42,34 @@ class FCF:
                     print(unity.arg.nome)
                     if(modelo == "DECOMP"):
                         for caso in self.casos:
-                            self.cortes_ativos_decomp(caso)
+                            self.cortes_ativos_decomp(unity, caso)
                     
 
                     #mapa_temporal[unity] = df_temporal
 
-    def cortes_ativos_decomp(self, caso):
+    def cortes_ativos_decomp(self, unity, caso):
         extensao = ""
         with open(caso.caminho+"/caso.dat") as f:
             extensao = f.readline().strip('\n')
         if extensao == "":
             raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
-
         arq_memcal = caso.caminho+"/memcal."+extensao
-        #if(os.path.isfile(arq_memcal)):
-        #    f = open(arq_memcal, "r")
-        #    Lines = f.readlines()
-        #    flag = 0
-        #    for line in Lines:
-        #        if(usina[0] in line):
-        #            flag = 1
-        #        if(flag == 1 and "SOMATORIO PRODT_65%=" in line):
-        #            #print(line[25:50])
-        #            f_prodt_65 = float(line[25:50].strip())
-        #            flag = 0
+        arq_fcfnwn = caso.caminho+"/fcfnwn."+extensao
+
+        f_prodt_65 = 0
+        if(os.path.isfile(arq_fcfnwn)):
+            if(os.path.isfile(arq_memcal)):
+                pass
+                f = open(arq_memcal, "r")
+                Lines = f.readlines()
+                flag = 0
+                for line in Lines:
+                    if(unity.arg.nome in line):
+                        flag = 1
+                    if(flag == 1 and "SOMATORIO PRODT_65%=" in line):
+                        #print(line[25:50])
+                        f_prodt_65 = float(line[25:50].strip())
+                        flag = 0
 
         arq = caso.caminho+"/custos."+extensao
         custo = Custos.read(arq)
