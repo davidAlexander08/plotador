@@ -55,16 +55,26 @@ class FCF:
             raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
 
         arq_memcal = caso.caminho+"/memcal."+extensao
-        if(os.path.isfile(arq_memcal)):
-            f = open(arq_memcal, "r")
-            Lines = f.readlines()
-            flag = 0
-            for line in Lines:
-                if(usina[0] in line):
-                    flag = 1
-                if(flag == 1 and "SOMATORIO PRODT_65%=" in line):
-                    #print(line[25:50])
-                    f_prodt_65 = float(line[25:50].strip())
-                    flag = 0
+        #if(os.path.isfile(arq_memcal)):
+        #    f = open(arq_memcal, "r")
+        #    Lines = f.readlines()
+        #    flag = 0
+        #    for line in Lines:
+        #        if(usina[0] in line):
+        #            flag = 1
+        #        if(flag == 1 and "SOMATORIO PRODT_65%=" in line):
+        #            #print(line[25:50])
+        #            f_prodt_65 = float(line[25:50].strip())
+        #            flag = 0
+
+        arq = caso.caminho+"/custos."+extensao
+        custo = Custos.read(arq)
+        tabela = custo.relatorio_fcf
+        ultimo_estagio = tabela["estagio"].unique()[-1]
+        print(ultimo_estagio)
+        custo_5 = tabela.loc[(tabela["estagio"] == ultimo_estagio)].reset_index(drop = True)
+        cenarios = custo_5["cenario"].unique()
+        print(cenarios)
+
         else:
             raise FileNotFoundError(f"Arquivo memcal.rvx não encontrado.") 
