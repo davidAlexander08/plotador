@@ -56,7 +56,7 @@ class FCF:
 
         arq_memcal = caso.caminho+"/memcal."+extensao
         if(os.path.isfile(arq_memcal)):
-            f = open(arq, "r")
+            f = open(arq_memcal, "r")
             Lines = f.readlines()
             flag = 0
             for line in Lines:
