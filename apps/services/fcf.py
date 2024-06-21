@@ -94,6 +94,8 @@ class FCF:
         arq_hidr = caso.caminho+"/hidr.dat"
         hid = Hidr.read(arq_hidr)
         df_hidr = hid.cadastro.reset_index(drop = False)
+        print(df_hidr)
+        print(unity.arg.nome)
         codigo = df_hidr.loc[df_hidr["nome_usina"] == unity.arg.nome]["codigo_usina"].iloc[0]
         
         arq_fcfnwi = caso.caminho+"/fcfnwi."+extensao
