@@ -109,7 +109,7 @@ class FCF:
             else:
                 raise FileNotFoundError(f"Arquivo memcal.rvx não encontrado.") 
 
-
+        lista_df_cortes_ativos_ponderados = []
         for cenario in cenarios:
             cortes_ativos = custo_5.loc[(custo_5["cenario"]) == cenario]
             lista_cortes_ativos = cortes_ativos["indice_corte"].unique()
