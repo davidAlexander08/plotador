@@ -31,7 +31,7 @@ class FCF:
                 sts = Sintese("VAGUA_UHE_EST") #SINTESE DUMMY
                 conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
                 for unity in conj.listaUnidades:
-                    print(unity.arg.chave)
+                    print(unity.arg.nome)
             print(arg.nome, " chave: ", arg.chave, " lista: ", arg.listaNomes)
         exit(1)
 

@@ -1,6 +1,6 @@
 from apps.model.unidadeArgumental import UnidadeArgumental 
 
-class UnidadeSintese ():  
+class UnidadeSintese ():   
     def __init__(self, sintese, uArg):
         self.arg = uArg
         self.fitroColuna = sintese.filtro
