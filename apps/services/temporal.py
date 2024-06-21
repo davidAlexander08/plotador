@@ -35,7 +35,7 @@ class Temporal:
 
         sinteses = data.sinteses if (self.sintese == "") else [Sintese(self.sintese)]
         for sts in sinteses:
-            espacial = sts.sintese.split("_")[1]
+            espacial = sts.sintese.split("_")[1] 
             if(espacial == "SIN"):
                 arg = Argumento(None, None, "SIN")
                 conj = ConjuntoUnidadeSintese(sts,arg , "estagios", data.limites, data.tamanho_texto)
