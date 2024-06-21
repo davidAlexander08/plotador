@@ -39,7 +39,7 @@ class Conjunto:
         os.makedirs(diretorio_saida, exist_ok=True)
 
         sts_temp = Sintese("TEMPO")
-        arg_temp = Argumento(None, None, "SIN")
+        arg_temp = Argumento(None, None, ["ree", "25x35"])
         conj = ConjuntoUnidadeSintese(sts_temp,arg_temp , "casos", data.limites, data.tamanho_texto)
         mapaTempo = {}
         for conjunto in self.conjuntoCasos:
