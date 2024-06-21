@@ -74,7 +74,7 @@ class FCF:
         f_prodt_65 = 0
         if(not os.path.isfile(arq_fcfnwi)):
             hid = Hidr.read(arq_hidr)
-
+            print(hid.cadastro)
             dadger = Dadger.read(arq_dadger)
             dadger_uh = dadger.uh(df = True)
             print(dadger_uh)
