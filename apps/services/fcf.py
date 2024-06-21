@@ -117,14 +117,13 @@ class FCF:
                     coef_fcf_corte = fcf.loc[(fcf["corte"] == corte)]["coef_varm"].iloc[0]
                 parcela_pi = cortes_ativos.loc[(cortes_ativos["indice_corte"]==corte)]["parcela_pi"].iloc[0]
                 valor_coef += coef_fcf_corte*parcela_pi
-            valor_coef = valor_coef/0.991
-            #df_atv = pd.DataFrame({"cenario":[cenario], "coef":[valor_coef]})
-            #lista_df_cortes_ativos_ponderados.append(df_atv)
-        
-        #df_cortes_ativos_ponderados = pd.concat(lista_df_cortes_ativos_ponderados).reset_index(drop=True)
-        #df_cortes_ativos_ponderados["caso"] = caso[0]
-        ##print(df_cortes_ativos_ponderados)
-        #lista_df_casos.append(df_cortes_ativos_ponderados)
+            valor_coef = valor_coef/coef_pi
+            df_atv = pd.DataFrame({"cenario":[cenario], "coef":[valor_coef]})
+            lista_df_cortes_ativos_ponderados.append(df_atv)
+        df_cortes_ativos_ponderados = pd.concat(lista_df_cortes_ativos_ponderados).reset_index(drop=True)
+        df_cortes_ativos_ponderados["caso"] = caso.nome
+        print(df_cortes_ativos_ponderados)
+        return df_cortes_ativos_ponderados
 
 
 
