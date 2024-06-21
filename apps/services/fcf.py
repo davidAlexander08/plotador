@@ -62,6 +62,8 @@ class FCF:
         ultimo_estagio = tabela["estagio"].unique()[-1]
         custo_5 = tabela.loc[(tabela["estagio"] == ultimo_estagio)].reset_index(drop = True)
         cenarios = custo_5["cenario"].unique()
+        coef_pi = custo_5["parcela_pi"].max()
+        print(coef_pi)
         print(custo_5)
         arq_fcfnwi = caso.caminho+"/fcfnwi."+extensao
         fcf = pd.DataFrame()
