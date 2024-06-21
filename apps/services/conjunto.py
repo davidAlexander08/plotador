@@ -41,7 +41,7 @@ class Conjunto:
         mapaTempo = {}
         for conjunto in self.conjuntoCasos:
             eco_indicadores = EcoIndicadores(conjunto.casos)
-            df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+            df_temp = eco_indicadores.retorna_df_concatenado("TEMPO")
             df_tempo_total = Tempo.retorna_df_tempo_total_casos(conjunto.casos, df_temp)
             df_tempo_total["conjunto"] = conjunto.nome
             mapaTempo[conjunto] = df_tempo_total
