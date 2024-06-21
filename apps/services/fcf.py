@@ -43,9 +43,30 @@ class FCF:
                 for unity in conj.listaUnidades:
                     print(unity.arg.nome)
                     if(modelo == "DECOMP"):
+                        lista_df_casos = []
                         for caso in self.casos:
-                            self.cortes_ativos_decomp(unity, caso)
-                    
+                            df = self.cortes_ativos_decomp(unity, caso)
+                            lista_df_casos.append(df)
+                        df_cortes_ativos_todos_casos = pd.concat(lista_df_casos)
+                        df_cortes_ativos_todos_casos.to_csv("pis_ativos"+unity.arg.nome+self.estudo+".csv")
+
+                    fig = go.Figure()
+                    casos = df_cortes_ativos_todos_casos["caso"].unique()
+                    for caso in self.casos:
+                        df = df_cortes_ativos_todos_casos.loc[(df_cortes_ativos_todos_casos["caso"] == caso.nome)]
+                        ly = df["coef"].tolist()
+                        fig.add_trace(go.Box( y = ly, boxpoints = False, name = caso))
+                        
+                    fig.update_layout(title="PIs Ativos "+usina[0])
+                    fig.update_xaxes(title_text="Casos")
+                    fig.update_yaxes(title_text="1000R$/hm3")
+                    fig.update_yaxes(range=[-1400,0])
+                    fig.update_layout(font=dict(size= 15))
+                    fig.write_image(
+                        os.path.join(diretorio_saida+"pis_ativos"+unity.arg.nome+self.estudo+".png"),
+                        width=800,
+                        height=600)
+
 
                     #mapa_temporal[unity] = df_temporal
 
