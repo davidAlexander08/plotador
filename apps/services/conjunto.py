@@ -72,8 +72,8 @@ class Conjunto:
         for elemento_go in listaGO:
             fig.add_trace(elemento_go)
         fig.update_layout(title= "Comparacao Tempo de Execucao")
-        fig.update_yaxes(title="casos") 
-        fig.update_xaxes(title="min") 
+        fig.update_yaxes(title="min") 
+        fig.update_xaxes(title="casos") 
         fig.update_layout(font=dict(size= 25))  
         self.graficosConjunto.exportar(fig,diretorio_saida, "conjunto tempo "+self.estudo)
 
