@@ -32,7 +32,7 @@ class FCF:
         
         print(set_modelos)
         if(len(set_modelos) == 1):
-            modelo = list(thisset)[0]
+            modelo = list(set_modelos)[0]
             if(modelo == "DECOMP"):
                 arq_caso = Caso.read(join(str(self.__tmppath), "caso.dat"))
                 extensao = arq_caso.arquivos
