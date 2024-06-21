@@ -74,7 +74,8 @@ class Conjunto:
         fig.update_layout(title= "Comparacao Tempo de Execucao")
         fig.update_yaxes(title="casos") 
         fig.update_xaxes(title="min") 
-        self.graficosConjunto.exportar(fig,diretorio_saida, "conjunto tempo "+self.estudo+".png" )
+        fig.update_layout(font=dict(size= 25))  
+        self.graficosConjunto.exportar(fig,diretorio_saida, "conjunto tempo "+self.estudo)
 
 
 
