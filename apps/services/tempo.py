@@ -48,3 +48,16 @@ class Tempo:
         self.graficos.exportar(fig, diretorio_saida, "Tempo"+self.estudo)
                         
 
+    def retorna_df_tempo_total_casos(self, casos, df_temp):
+        for caso in casos:
+            df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+            df_caso["tempo"] = df_caso["tempo"] /(60)
+            if(caso.modelo == "NEWAVE"):
+                #temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
+                temp.append(df_caso.loc[(df_caso["etapa"] == "Tempo Total")])
+            if(caso.modelo == "DESSEM"):
+                #print(df_caso)
+                df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
+                temp.append(df)
+        df = pd.concat(temp).reset_index(drop = True)
+        return df

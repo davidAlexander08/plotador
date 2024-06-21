@@ -26,7 +26,27 @@ class GraficosConjunto:
             height=H)
         
 
-        
+    def gera_grafico_linhas_artesanal(
+        self,
+        mapa,
+        colY = "valor",
+        colX = "caso" ):
+        mapaGO = {}
+        for conj in self.conjuntoCasos:  
+            df = mapa[conj]
+            listaGO = []
+            listaGO.append(go.Scatter(
+                                x = df[colX],
+                                y = df[colY],
+                                name = conj.nome,
+                                line = dict(color = conj.cor),
+                                showlegend=True,
+                            )
+            )
+            mapaGO[unity] = listaGO
+        return mapaGO
+
+
     def gera_grafico_linhas_diferentes_casos(
         self,
         mapa,

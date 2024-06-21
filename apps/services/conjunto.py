@@ -10,7 +10,9 @@ from apps.indicadores.indicadores_medios import IndicadoresMedios
 from apps.indicadores.indicadores_anuais import IndicadoresAnuais
 from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
+from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.graficos.figura import Figura
+from apps.Tempo.tempo import Tempo
 import pandas as pd
 import os
 import json
@@ -35,7 +37,19 @@ class Conjunto:
         diretorio_saida = f"resultados/{self.estudo}/conjunto"
         self.graficosConjunto = GraficosConjunto(data.conjuntoCasos)
         os.makedirs(diretorio_saida, exist_ok=True)
-      
+
+        mapaTempo = {}
+        for conjunto in self.conjuntoCasos:
+            indicadores_eco = EcoIndicadores(conjunto.casos)
+            df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+            df_tempo_total = Tempo.retorna_df_tempo_total_casos(conjunto.casos, df_temp)
+            df_tempo_total["conjunto"] = conjunto.nome
+            mapaTempo[conjunto] = df_tempo_total
+        indicadores_eco.exportar(pd.concat(mapaTempo), diretorio_saida,  "tempo "+self.estudo)
+        mapaGO = self.graficosConjunto.gera_grafico_linhas_artesanal(mapaTempo, coly = "tempo", colx = "caso")
+        figura = Figura(conjUnity, mapaGO, "Comparacao Tempo "+self.estudo)
+        self.graficosConjunto.exportar(figura.fig, diretorio_saida, figura.titulo)
+
         for sts in data.sinteses:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
@@ -48,7 +62,7 @@ class Conjunto:
             else:
                 for arg in data.args:
                     if(espacial == arg.chave):
-                        conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, data.tamanho_texto)
+                        conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, data.tamanho_texto) 
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
                         #unity = UnidadeSintese(sts, args, "caso", data.limites, data.tamanho_texto)
@@ -72,8 +86,6 @@ class Conjunto:
             for conjunto in self.conjuntoCasos:
                 indicadores_temporais = IndicadoresTemporais(conjunto.casos)  
                 indicadores_medios = IndicadoresMedios(conjunto.casos, self.nome_caso_referencia)   
-                        
-
                 df_temporal = indicadores_temporais.retorna_df_concatenado(unity, self.cenario)
                 if(self.xsup < df_temporal["estagio"].max()):
                     df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
@@ -84,10 +96,6 @@ class Conjunto:
                 mapaTemporal[conjunto.nome] = df_temporal
                 listaCronologica.append(df_temporal)
 
-                #df_temporal_segundo_mes = df_temporal.loc[df_temporal["estagio"] == 2 ].reset_index(drop = True)
-                #df_temporal_segundo_mes["conjunto"] = conjunto.nome
-                #listaTemporal_2_mes.append(df_temporal_segundo_mes)
-
                 #df_temporal_primeiro_est = df_temporal.loc[df_temporal["estagio"] == 1 ].reset_index(drop = True)
                 #df_temporal_primeiro_est["conjunto"] = conjunto.nome
                 #listaTemporal_1_est.append(df_temporal_primeiro_est)
@@ -95,7 +103,6 @@ class Conjunto:
                 #df_medio = indicadores_medios.retorna_df_concatenado(unity)
                 #df_medio["conjunto"] = conjunto.nome
                 #listaMedia.append(df_medio)
-                
 
             indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
 
@@ -106,10 +113,6 @@ class Conjunto:
 
             mapaCronologico[unity] = pd.concat(listaCronologica)
             indicadores_temporais.exportar(pd.concat(listaCronologica), diretorio_saida_arg,  "cronologico_"+unity.titulo+"_"+self.estudo)
-
-
-            #mapaTemporal_2_mes[unity] = pd.concat(listaTemporal_2_mes)
-            #indicadores_temporais.exportar(pd.concat(listaTemporal_2_mes), diretorio_saida_arg,  "segundo_est_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
 
             #mapaTemporal_1_est[unity] = pd.concat(listaTemporal_1_est)
             #indicadores_temporais.exportar(pd.concat(listaTemporal_1_est), diretorio_saida_arg,  "primeiro_est_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
@@ -123,10 +126,6 @@ class Conjunto:
             self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
         #mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_1_est)
         #figura = Figura(conjUnity, mapaGO, "Primeiro Est "+conjUnity.titulo+self.estudo)
-        #self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
-
-        #mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_2_mes)
-        #figura = Figura(conjUnity, mapaGO, "Segundo Est "+conjUnity.titulo+self.estudo)
         #self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo)
 
         #mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaMedio)
