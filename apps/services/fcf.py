@@ -75,11 +75,13 @@ class FCF:
         if(not os.path.isfile(arq_fcfnwi)):
             hid = Hidr.read(arq_hidr)
             df_hidr = hid.cadastro.reset_index(drop = False)
-            codigo = df_hidr.loc[df_hidr["nome_usina"] == unity.arg.nome]["codigo_usina"]
+            codigo = df_hidr.loc[df_hidr["nome_usina"] == unity.arg.nome]["codigo_usina"].iloc[0]
             print(codigo)
             dadger = Dadger.read(arq_dadger)
             dadger_uh = dadger.uh(df = True)
-            print(dadger_uh)
+            codigo_ree = dadger_uh.loc[dadger_uh["codigo_usina"] == codigo]["codigo_ree"].iloc[0]
+            print(codigo_ree)
+            print(dadger_uh.loc[dadger_uh["codigo_usina"] == codigo])
             exit(1)
             fcf = Fcfnw.read(arq_fcfnwn)
             df = fcf.cortes
