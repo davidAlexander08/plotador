@@ -40,12 +40,12 @@ class Conjunto:
 
         mapaTempo = {}
         for conjunto in self.conjuntoCasos:
-            indicadores_eco = EcoIndicadores(conjunto.casos)
+            eco_indicadores = EcoIndicadores(conjunto.casos)
             df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
             df_tempo_total = Tempo.retorna_df_tempo_total_casos(conjunto.casos, df_temp)
             df_tempo_total["conjunto"] = conjunto.nome
             mapaTempo[conjunto] = df_tempo_total
-        indicadores_eco.exportar(pd.concat(mapaTempo), diretorio_saida,  "tempo "+self.estudo)
+        eco_indicadores.exportar(pd.concat(mapaTempo), diretorio_saida,  "tempo "+self.estudo)
         mapaGO = self.graficosConjunto.gera_grafico_linhas_artesanal(mapaTempo, coly = "tempo", colx = "caso")
         figura = Figura(conjUnity, mapaGO, "Comparacao Tempo "+self.estudo)
         self.graficosConjunto.exportar(figura.fig, diretorio_saida, figura.titulo)
