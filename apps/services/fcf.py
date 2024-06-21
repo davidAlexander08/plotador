@@ -17,10 +17,19 @@ class FCF:
 
     def __init__(self, data):
         self.estudo = data.estudo
+        self.casos = data.casos
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.graficos = Graficos(data.casos)
         diretorio_saida = f"resultados/{self.estudo}/fcf"
         os.makedirs(diretorio_saida, exist_ok=True)
+
+        lista_modelos = []
+        for caso in self.casos:
+            lista_modelos.append(caso.modelo)
+        
+        print(lista_modelos)
+
+        exit(1)
 
         sinteses = [Sintese("VAGUA_UHE_EST"), Sintese("VAGUA_REE_EST"), Sintese("VAGUAI_UHE_EST")]
         
