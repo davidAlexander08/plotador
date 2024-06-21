@@ -54,10 +54,10 @@ class FCF:
         if extensao == "":
             raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
         arq_memcal = caso.caminho+"/memcal."+extensao
-        arq_fcfnwn = caso.caminho+"/fcfnwn."+extensao
+        arq_fcfnwi = caso.caminho+"/fcfnwi."+extensao
 
         f_prodt_65 = 0
-        if(os.path.isfile(arq_fcfnwn)):
+        if(not os.path.isfile(arq_fcfnwi)):
             if(os.path.isfile(arq_memcal)):
                 pass
                 f = open(arq_memcal, "r")
@@ -72,7 +72,7 @@ class FCF:
                         flag = 0
             else:
                 raise FileNotFoundError(f"Arquivo memcal.rvx não encontrado.") 
-                
+
         arq = caso.caminho+"/custos."+extensao
         custo = Custos.read(arq)
         tabela = custo.relatorio_fcf
