@@ -23,7 +23,7 @@ class FCF:
         diretorio_saida = f"resultados/{self.estudo}/fcf"
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        set_modelos = {}
+        set_modelos =set({})
         for caso in self.casos:
             set_modelos.add(caso.modelo)
         
