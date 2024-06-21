@@ -16,6 +16,8 @@ from idecomp.decomp.hidr import Hidr
 import pandas as pd
 import os
 import json
+import plotly.graph_objects as go
+import plotly.io as pio
 
 class FCF:
 
@@ -50,25 +52,29 @@ class FCF:
                         df_cortes_ativos_todos_casos = pd.concat(lista_df_casos)
                         df_cortes_ativos_todos_casos.to_csv("pis_ativos"+unity.arg.nome+self.estudo+".csv")
 
-                    fig = go.Figure()
-                    casos = df_cortes_ativos_todos_casos["caso"].unique()
-                    for caso in self.casos:
-                        df = df_cortes_ativos_todos_casos.loc[(df_cortes_ativos_todos_casos["caso"] == caso.nome)]
-                        ly = df["coef"].tolist()
-                        fig.add_trace(go.Box( y = ly, boxpoints = False, name = caso))
-                        
-                    fig.update_layout(title="PIs Ativos "+usina[0])
-                    fig.update_xaxes(title_text="Casos")
-                    fig.update_yaxes(title_text="1000R$/hm3")
-                    fig.update_yaxes(range=[-1400,0])
-                    fig.update_layout(font=dict(size= 15))
-                    fig.write_image(
-                        os.path.join(diretorio_saida+"pis_ativos"+unity.arg.nome+self.estudo+".png"),
-                        width=800,
-                        height=600)
+                        fig = go.Figure()
+                        casos = df_cortes_ativos_todos_casos["caso"].unique()
+                        for caso in self.casos:
+                            df = df_cortes_ativos_todos_casos.loc[(df_cortes_ativos_todos_casos["caso"] == caso.nome)]
+                            ly = df["coef"].tolist()
+                            fig.add_trace(go.Box( y = ly, boxpoints = False, name = caso))
+                            
+                        fig.update_layout(title="PIs Ativos "+usina[0])
+                        fig.update_xaxes(title_text="Casos")
+                        fig.update_yaxes(title_text="1000R$/hm3")
+                        fig.update_yaxes(range=[-1400,0])
+                        fig.update_layout(font=dict(size= 15))
+                        fig.write_image(
+                            os.path.join(diretorio_saida+"pis_ativos"+unity.arg.nome+self.estudo+".png"),
+                            width=800,
+                            height=600)
+                    if(modelo == "DESSEM"):
+                        for caso in self.casos:
+                            self.cortes_ativos_dessem(unity, caso)
 
 
-                    #mapa_temporal[unity] = df_temporal
+    def cortes_ativos_decomp(self, unity, caso):
+        pass
 
     def cortes_ativos_decomp(self, unity, caso):
         extensao = ""
@@ -84,7 +90,6 @@ class FCF:
         custo_5 = tabela.loc[(tabela["estagio"] == ultimo_estagio)].reset_index(drop = True)
         cenarios = custo_5["cenario"].unique()
         coef_pi = custo_5["parcela_pi"].max()
-        print(coef_pi)
 
         arq_hidr = caso.caminho+"/hidr.dat"
         hid = Hidr.read(arq_hidr)
@@ -92,14 +97,11 @@ class FCF:
         codigo = df_hidr.loc[df_hidr["nome_usina"] == unity.arg.nome]["codigo_usina"].iloc[0]
         
         arq_fcfnwi = caso.caminho+"/fcfnwi."+extensao
-        print(arq_fcfnwi)
         df_fcf = pd.DataFrame()
         if(os.path.isfile(arq_fcfnwi)):
             fcf = Fcfnw.read(arq_fcfnwi)
             df = fcf.cortes
-            print(df)
             df_fcf = df.loc[(df["UHE"] == codigo)].reset_index(drop = True)
-            print(df_fcf)
         
         
         arq_fcfnwn = caso.caminho+"/fcfnwn."+extensao
@@ -140,7 +142,6 @@ class FCF:
                 if(not os.path.isfile(arq_fcfnwi)):
                     coef_fcf_corte = ((df_fcf.loc[(df_fcf["corte"] == corte)]["coef_earm"].iloc[0]*f_prodt_65*10000)/36)/1000 ## PARANAUE
                 if(os.path.isfile(arq_fcfnwi)):
-                    print(df_fcf)
                     coef_fcf_corte = df_fcf.loc[(df_fcf["corte"] == corte)]["coef_varm"].iloc[0]
                 parcela_pi = cortes_ativos.loc[(cortes_ativos["indice_corte"]==corte)]["parcela_pi"].iloc[0]
                 valor_coef += coef_fcf_corte*parcela_pi
@@ -149,7 +150,6 @@ class FCF:
             lista_df_cortes_ativos_ponderados.append(df_atv)
         df_cortes_ativos_ponderados = pd.concat(lista_df_cortes_ativos_ponderados).reset_index(drop=True)
         df_cortes_ativos_ponderados["caso"] = caso.nome
-        print(df_cortes_ativos_ponderados)
         return df_cortes_ativos_ponderados
 
 
