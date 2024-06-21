@@ -76,7 +76,7 @@ class FCF:
             hid = Hidr.read(arq_hidr)
             df_hidr = hid.cadastro.reset_index(drop = False)
             codigo = df_hidr.loc[df_hidr["nome_usina"] == unity.arg.nome]["codigo_usina"]
-            print(codigo).
+            print(codigo)
             dadger = Dadger.read(arq_dadger)
             dadger_uh = dadger.uh(df = True)
             print(dadger_uh)
