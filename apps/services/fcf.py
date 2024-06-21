@@ -64,13 +64,14 @@ class FCF:
         cenarios = custo_5["cenario"].unique()
         coef_pi = custo_5["parcela_pi"].max()
         print(coef_pi)
-        print(custo_5)
+        
         arq_fcfnwi = caso.caminho+"/fcfnwi."+extensao
+        print(arq_fcfnwi)
         fcf = pd.DataFrame()
         if(os.path.isfile(arq_fcfnwi)):
             fcf = Fcfnw.read(arq_fcfnwi)
             df = fcf.cortes
-            fcf = df.loc[(df["UHE"] == unity.arg.nome)].reset_index(drop = True)
+            df_fcf = df.loc[(df["UHE"] == unity.arg.nome)].reset_index(drop = True)
         
         
         arq_fcfnwn = caso.caminho+"/fcfnwn."+extensao
@@ -86,7 +87,7 @@ class FCF:
             codigo_ree = dadger_uh.loc[dadger_uh["codigo_usina"] == codigo]["codigo_ree"].iloc[0]
             fcf = Fcfnw.read(arq_fcfnwn)
             df = fcf.cortes
-            fcf = df.loc[(df["REE"] == codigo_ree)].reset_index(drop = True)
+            df_fcf = df.loc[(df["REE"] == codigo_ree)].reset_index(drop = True)
 
             arq_memcal = caso.caminho+"/memcal."+extensao
             if(os.path.isfile(arq_memcal)):
@@ -112,10 +113,10 @@ class FCF:
             valor_coef = 0
             for corte in lista_cortes_ativos:
                 if(not os.path.isfile(arq_fcfnwi)):
-                    coef_fcf_corte = ((fcf.loc[(fcf["corte"] == corte)]["coef_earm"].iloc[0]*f_prodt_65*10000)/36)/1000 ## PARANAUE
+                    coef_fcf_corte = ((df_fcf.loc[(df_fcf["corte"] == corte)]["coef_earm"].iloc[0]*f_prodt_65*10000)/36)/1000 ## PARANAUE
                 if(os.path.isfile(arq_fcfnwi)):
-                    print(fcf)
-                    coef_fcf_corte = fcf.loc[(fcf["corte"] == corte)]["coef_varm"].iloc[0]
+                    print(df_fcf)
+                    coef_fcf_corte = df_fcf.loc[(df_fcf["corte"] == corte)]["coef_varm"].iloc[0]
                 parcela_pi = cortes_ativos.loc[(cortes_ativos["indice_corte"]==corte)]["parcela_pi"].iloc[0]
                 valor_coef += coef_fcf_corte*parcela_pi
             valor_coef = valor_coef/coef_pi
