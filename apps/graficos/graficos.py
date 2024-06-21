@@ -174,7 +174,7 @@ class Graficos:
         ))
         return fig
 
-    def gera_grafico_linha(
+    def gera_grafico_linha( 
         self,
         mapa,
         cronologico, 

@@ -58,20 +58,35 @@ class GraficosConjunto:
         #colx = "estagio"
         colx = "estagio" ) :
         mapaGO = {}
-        for unity in mapa:
-            print(unity)
-            print("SHOW: ", unity.arg.show)
-            df = mapa[unity]
-            listaGO = []
-            for conj in self.conjuntoCasos:
-                df_conj = df.loc[(df["conjunto"] == conj.nome)]
-                listaGO.append(go.Scatter( 
-                        x = df_conj[colx],
-                        y = df_conj[coly],
-                        name = conj.nome,
-                        line = dict(color = conj.cor),
-                        showlegend=unity.arg.show))
-            mapaGO[unity] = listaGO
+        if(cronologico == "True"):
+            for unity in mapa:
+                df = mapa[unity]
+                listaGO = []
+                for conj in self.conjuntoCasos:
+                    df_conj = df.loc[(df["conjunto"] == conj.nome)]
+                    df = df.reset_index(drop = True)
+                    listaGO.append(go.Scatter( 
+                            x = df_conj[colx],
+                            y = df_conj[coly],
+                            name = conj.nome,
+                            line = dict(color = conj.cor),
+                            showlegend=unity.arg.show))
+                mapaGO[unity] = listaGO
+        else:
+            for unity in mapa:
+                print(unity)
+                print("SHOW: ", unity.arg.show)
+                df = mapa[unity]
+                listaGO = []
+                for conj in self.conjuntoCasos:
+                    df_conj = df.loc[(df["conjunto"] == conj.nome)]
+                    listaGO.append(go.Scatter( 
+                            x = df_conj[colx],
+                            y = df_conj[coly],
+                            name = conj.nome,
+                            line = dict(color = conj.cor),
+                            showlegend=unity.arg.show))
+                mapaGO[unity] = listaGO
         return mapaGO
 
 
