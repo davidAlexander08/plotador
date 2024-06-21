@@ -59,6 +59,7 @@ class GraficosConjunto:
         colx = "estagio" ) :
         mapaGO = {}
         if(cronologico == "True"):
+            colx = "dataInicio"
             for unity in mapa:
                 df = mapa[unity]
                 listaGO = []

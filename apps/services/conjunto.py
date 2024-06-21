@@ -143,7 +143,7 @@ class Conjunto:
                 self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, self.largura, self.altura)
 
             mapaCronologico[unity] = pd.concat(listaCronologica)
-            indicadores_temporais.exportar(pd.concat(listaCronologica), diretorio_saida_arg,  "cronologico_"+unity.titulo+"_"+self.estudo)
+            indicadores_temporais.exportar(pd.concat(listaCronologica), diretorio_saida_arg,  "cronologico_"+unity.titulo+"_"+self.estudo,)
 
             #mapaTemporal_1_est[unity] = pd.concat(listaTemporal_1_est)
             #indicadores_temporais.exportar(pd.concat(listaTemporal_1_est), diretorio_saida_arg,  "primeiro_est_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
