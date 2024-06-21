@@ -27,7 +27,7 @@ class FCF:
         os.makedirs(diretorio_saida, exist_ok=True)
 
         for arg in data.args:
-            print(arg.nome)
+            print(arg.nome, " chave: ", arg.chave, " lista: ", listaNomes)
         exit(1)
 
 
