@@ -66,13 +66,13 @@ class FCF:
             df = fcf.cortes
             fcf = df.loc[(df["UHE"] == unity.arg.nome)].reset_index(drop = True)
         
-        f_prodt_65 = 0
+        
         arq_fcfnwn = caso.caminho+"/fcfnwn."+extensao
         arq_dadger = caso.caminho+"/dadger."+extensao
-        
+        f_prodt_65 = 0
         if(not os.path.isfile(arq_fcfnwi)):
             dadger = Dadger.read(arq_dadger)
-            dadger_uh = dadger.uh
+            dadger_uh = dadger.uh(df = True)
             print(dadger_uh)
             exit(1)
             fcf = Fcfnw.read(arq_fcfnwn)
