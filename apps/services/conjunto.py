@@ -45,6 +45,7 @@ class Conjunto:
         conj = ConjuntoUnidadeSintese(sts_temp,arg_temp , "casos", data.limites, data.tamanho_texto)
         mapaTempo = {}
         fig = go.Figure()
+        concat_df = []
         listaGO = []
         for conjunto in self.conjuntoCasos:
             eco_indicadores = EcoIndicadores(conjunto.casos)
@@ -61,6 +62,7 @@ class Conjunto:
             df_tempo_total = pd.concat(temp).reset_index(drop = True)
             df_tempo_total["conjunto"] = conjunto.nome
             mapaTempo[conjunto] = df_tempo_total
+            concat_df.append(df_tempo_total)
             listaGO.append(go.Scatter(
                                 x = df_tempo_total["caso"],
                                 y = df_tempo_total["tempo"],
@@ -77,6 +79,8 @@ class Conjunto:
         fig.update_layout(font=dict(size= 25))  
         self.graficosConjunto.exportar(fig,diretorio_saida, "conjunto tempo "+self.estudo)
 
+        df_tempo = pd.concat(concat_df)
+        df_tempo.to_csv(diretorio_saida+"conjunto_tempo "+self.estudo)
 
 
 
