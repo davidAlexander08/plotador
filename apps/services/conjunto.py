@@ -80,8 +80,7 @@ class Conjunto:
         self.graficosConjunto.exportar(fig,diretorio_saida, "conjunto tempo "+self.estudo)
 
         df_tempo = pd.concat(concat_df)
-        df_tempo.to_csv(diretorio_saida+"conjunto_tempo "+self.estudo)
-
+        eco_indicadores.exportar(df_tempo,diretorio_saida,  "conjunto_tempo "+self.estudo)
 
 
 
