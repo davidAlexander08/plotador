@@ -102,7 +102,6 @@ class FCF:
                             os.path.join("_pivs_ativos_"+unity.arg.nome+self.estudo+".png"),
                             width=800,
                             height=600)
-                        exit(1)
 
 
     def cortes_ativos_dessem(self, unity, caso):
