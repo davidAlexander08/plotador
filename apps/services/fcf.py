@@ -75,7 +75,7 @@ class FCF:
                     if(modelo == "DESSEM"):
                         lista_df_usi = []
                         for caso in self.casos:
-                            df = self.cortes_ativos_dessem(unity)
+                            df = self.cortes_ativos_dessem(unity, caso)
                         df_resultado = pd.concat(lista_df_usi)
                         lista_df_usi.append(df_result)
                         print(df_resultado)
@@ -104,7 +104,7 @@ class FCF:
                         exit(1)
 
 
-    def cortes_ativos_dessem(self, unity):
+    def cortes_ativos_dessem(self, unity, caso):
         arq = caso.caminho+"/PDO_ECO_FCFCORTES.DAT"
         df = PdoEcoFcfCortes.read(arq).tabela
         #df_rhs = df.loc[(df["tipo_coeficiente"] == "RHS")].reset_index(drop=True)
