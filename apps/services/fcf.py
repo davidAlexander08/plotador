@@ -81,7 +81,7 @@ class FCF:
     def cortes_ativos_dessem(self, unity):
         lista_df_varm = []
         lista_df_ativos = []
-        for caso in casos:
+        for caso in self.casos:
             arq = caso.caminho+"/PDO_ECO_FCFCORTES.DAT"
             #print(arq)
             df = PdoEcoFcfCortes.read(arq).tabela
@@ -105,7 +105,7 @@ class FCF:
 
         df_varm_usi = pd_concat_varm.loc[(pd_concat_varm["nome_entidade"] == unity.arg.nome)]
         lista_df_usi = []
-        for caso in casos:
+        for caso in self.casos:
             df_ativo = pd_concat_ativos.loc[(pd_concat_ativos["caso"] == caso.nome) & (pd_concat_ativos["multiplicador"] > 0)]
             df_varm = df_varm_usi.loc[(df_varm_usi["caso"] == caso.nome)]
             print(df_ativo)
