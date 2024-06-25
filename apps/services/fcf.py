@@ -78,7 +78,7 @@ class FCF:
                             df = self.cortes_ativos_dessem(unity, caso)
                             lista_df_usi.append(df)
                         df_resultado = pd.concat(lista_df_usi)
-                        lista_df_usi.append(df_result)
+                        lista_df_usi.append(df_resultado)
                         print(df_resultado)
 
                         fig = go.Figure()
