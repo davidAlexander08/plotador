@@ -90,14 +90,14 @@ class FCF:
                                 text = df_resultado["valor"].round(1).tolist(),
                                 textposition = "inside",
                                 name = "PIvs",
-                                textfont=dict(size=25),
+                                textfont=dict(size=20),
                                 marker_color= "blue",
                                 showlegend=True
                             )
                         )
                         fig.update_xaxes(title_text="Casos")
                         fig.update_yaxes(title_text="1000$/hm3")
-                        fig.update_layout(font=dict(size= 25))
+                        fig.update_layout(font=dict(size= 20))
                         fig.update_layout(title=" PIvs Ativos "+unity.arg.nome)
                         fig.write_image(
                             os.path.join(diretorio_saida+"/pivs_ativos_"+unity.arg.nome+self.estudo+".png"),
