@@ -78,7 +78,7 @@ exclude_patterns: List[str] = []
 
 add_module_names = False
 pygments_style = "sphinx"
-modindex_common_prefix = ["idessem."]
+#modindex_common_prefix = ["idessem."]
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -114,10 +114,10 @@ intersphinx_mapping = {
 }
 
 # https://github.com/sphinx-gallery/sphinx-gallery
-sphinx_gallery_conf = {
-    # path to your examples scripts
-    "examples_dirs": "../../examples",
-    # path where to save gallery generated examples
-    "gallery_dirs": "examples",
-    "backreferences_dir": "gen_modules/generated",
-}
+#sphinx_gallery_conf = {
+#    # path to your examples scripts
+#    "examples_dirs": "../../examples",
+#    # path where to save gallery generated examples
+#    "gallery_dirs": "examples",
+#    "backreferences_dir": "gen_modules/generated",
+#}
