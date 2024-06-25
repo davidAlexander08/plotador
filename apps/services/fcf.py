@@ -180,12 +180,11 @@ class FCF:
                         #print(line[25:50])
                         f_prodt_65 = float(line[25:50].strip())
                         flag = 0
+            else:
+                raise FileNotFoundError(f"Arquivo memcal.rvx não encontrado.") 
             df_fcf["coef_earm"] = ((df_fcf["coef_earm"]*f_prodt_65*10000)/36)/1000 # PARANAUE
             df_fcf["coef"] = df_fcf["coef_earm"]
             df_fcf = df_fcf.drop(["coef_earm"], axis = 1)
-
-            else:
-                raise FileNotFoundError(f"Arquivo memcal.rvx não encontrado.") 
 
         lista_df_cortes_ativos_ponderados = []
         for cenario in cenarios:
