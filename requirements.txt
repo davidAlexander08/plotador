@@ -7,3 +7,6 @@ openpyxl
 click
 boto3
 boto3-stubs[s3]
+sphinx
+sphinx-gallery
+sphinx-rtd-theme
