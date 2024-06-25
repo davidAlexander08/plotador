@@ -70,7 +70,7 @@ class FCF:
                         fig.update_yaxes(range=[-1400,0])
                         fig.update_layout(font=dict(size= 25))
                         fig.write_image(
-                            os.path.join(diretorio_saida+"pis_ativos"+unity.arg.nome+self.estudo+".png"),
+                            os.path.join(diretorio_saida+"/pis_ativos"+unity.arg.nome+self.estudo+".png"),
                             width=800,
                             height=600)
                     if(modelo == "DESSEM"):
@@ -107,12 +107,21 @@ class FCF:
 
     def cortes_ativos_dessem(self, unity, caso):
         arq = caso.caminho+"/PDO_ECO_FCFCORTES.DAT"
+        with open(arq) as f:
+            extensao = f.readline().strip('\n')
+        if extensao == "":
+            raise FileNotFoundError(f"Arquivo PDO_ECO_FCFCORTES.dat não encontrado.") 
+
         df = PdoEcoFcfCortes.read(arq).tabela
         #df_rhs = df.loc[(df["tipo_coeficiente"] == "RHS")].reset_index(drop=True)
         df_varm = df.loc[(df["tipo_coeficiente"] == "VARM") & (df["tipo_entidade"] == "USIH")].reset_index(drop=True)
         df_varm_usi = df_varm.loc[(df_varm["nome_entidade"] == unity.arg.nome)]
 
         arq_oper = caso.caminho+"/PDO_OPERACAO.DAT"
+        with open(arq_oper) as f:
+            extensao = f.readline().strip('\n')
+        if extensao == "":
+            raise FileNotFoundError(f"Arquivo PDO_OPERACAO .dat não encontrado.") 
         df_ativos = PdoOperacao.read(arq_oper).cortes_ativos 
         df_ativo = df_ativos.loc[(df_ativos["multiplicador"] > 0)]
         
