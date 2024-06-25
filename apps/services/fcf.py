@@ -73,35 +73,57 @@ class FCF:
                             width=800,
                             height=600)
                     if(modelo == "DESSEM"):
-                        df = self.cortes_ativos_dessem(unity)
-                        print(df)
+                        lista_df_usi = []
+                        for caso in self.casos:
+                            df = self.cortes_ativos_dessem(unity)
+                        df_resultado = pd.concat(lista_df_usi)
+                        lista_df_usi.append(df_result)
+                        print(df_resultado)
+
+                        fig = go.Figure()
+                        fig.add_trace(
+                            go.Bar(
+                                x = df_resultado["caso"].tolist(),
+                                y = df_resultado["valor"].tolist(),
+                                text = df_resultado["valor"].round(1).tolist(),
+                                textposition = "inside",
+                                name = "PIvs",
+                                textfont=dict(size=25),
+                                marker_color= "blue",
+                                showlegend=True
+                            )
+                        )
+                        fig.update_xaxes(title_text="Casos")
+                        fig.update_yaxes(title_text="1000$/hm3")
+                        fig.update_layout(font=dict(size= 13))
+                        fig.update_layout(title=" PIvs Ativos "+unity.arg.nome)
+                        fig.write_image(
+                            os.path.join("_pivs_ativos_"+unity.arg.nome+self.estudo+".png"),
+                            width=800,
+                            height=600)
                         exit(1)
 
 
     def cortes_ativos_dessem(self, unity):
-        lista_df_usi = []
-        for caso in self.casos:
-            arq = caso.caminho+"/PDO_ECO_FCFCORTES.DAT"
-            df = PdoEcoFcfCortes.read(arq).tabela
-            df_rhs = df.loc[(df["tipo_coeficiente"] == "RHS")].reset_index(drop=True)
-            df_varm = df.loc[(df["tipo_coeficiente"] == "VARM") & (df["tipo_entidade"] == "USIH")].reset_index(drop=True)
-            
-            arq_oper = caso.caminho+"/PDO_OPERACAO.DAT"
-            df_ativos = PdoOperacao.read(arq_oper).cortes_ativos 
+        arq = caso.caminho+"/PDO_ECO_FCFCORTES.DAT"
+        df = PdoEcoFcfCortes.read(arq).tabela
+        #df_rhs = df.loc[(df["tipo_coeficiente"] == "RHS")].reset_index(drop=True)
+        df_varm = df.loc[(df["tipo_coeficiente"] == "VARM") & (df["tipo_entidade"] == "USIH")].reset_index(drop=True)
+        df_varm_usi = df_varm.loc[(df_varm["nome_entidade"] == unity.arg.nome)]
 
-            df_varm_usi = df_varm.loc[(df_varm["nome_entidade"] == unity.arg.nome)]
-            df_ativo = df_ativos.loc[(df_ativos["multiplicador"] > 0)]
-            lista_coefs = []
-            indices = df_ativo["indice_corte"].unique()
-            coef_medio = 0
-            for indice in indices:
-                mult =  df_ativo.loc[( df_ativo["indice_corte"] == indice)]["multiplicador"].iloc[0]
-                coef =  df_varm_usi.loc[(df_varm_usi["indice_corte"] == indice)]["valor_coeficiente"].iloc[0]
-                coef_medio += mult*coef
-            df_result = pd.DataFrame({"usina":[unity.arg.nome], "caso":[caso.nome], "valor":[coef_medio]})
-            lista_df_usi.append(df_result)
-        df_resultado = pd.concat(lista_df_usi)
-        return df_resultado
+        arq_oper = caso.caminho+"/PDO_OPERACAO.DAT"
+        df_ativos = PdoOperacao.read(arq_oper).cortes_ativos 
+        df_ativo = df_ativos.loc[(df_ativos["multiplicador"] > 0)]
+        
+        lista_coefs = []
+        indices = df_ativo["indice_corte"].unique()
+        coef_medio = 0
+        for indice in indices:
+            mult =  df_ativo.loc[( df_ativo["indice_corte"] == indice)]["multiplicador"].iloc[0]
+            coef =  df_varm_usi.loc[(df_varm_usi["indice_corte"] == indice)]["valor_coeficiente"].iloc[0]
+            coef_medio += mult*coef
+        df_result = pd.DataFrame({"usina":[unity.arg.nome], "caso":[caso.nome], "valor":[coef_medio]})
+        return df_result
 
     def cortes_ativos_decomp(self, unity, caso):
         extensao = ""
