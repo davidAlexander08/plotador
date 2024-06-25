@@ -1,4 +1,4 @@
-Sintetizador do NEWAVE
+Plotador
 =================================
 
 **Versão:** |release|

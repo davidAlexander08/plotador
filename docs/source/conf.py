@@ -24,9 +24,9 @@ from sintetizador import __version__  # noqa: E402
 
 # -- Project information -----------------------------------------------------
 
-project = "sintetizador-newave"
-copyright = f"{date.today().year}, Rogerio Alves"
-author = "Rogerio Alves"
+project = "plotador"
+copyright = f"{date.today().year}, David Alexander"
+author = "David Alexander"
 
 # The full version, including alpha/beta/rc tags
 release = __version__
