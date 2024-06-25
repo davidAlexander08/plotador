@@ -13,6 +13,10 @@ from idecomp.decomp.fcfnw import Fcfnw
 from idecomp.decomp.caso import Caso
 from idecomp.decomp.dadger import Dadger
 from idecomp.decomp.hidr import Hidr
+from idessem.dessem.entdados import Entdados
+from idessem.dessem.pdo_eco_fcfcortes import PdoEcoFcfCortes
+from idessem.dessem.pdo_operacao import PdoOperacao
+
 import pandas as pd
 import os
 import json
@@ -69,12 +73,56 @@ class FCF:
                             width=800,
                             height=600)
                     if(modelo == "DESSEM"):
-                        for caso in self.casos:
-                            self.cortes_ativos_dessem(unity, caso)
+                        df = self.cortes_ativos_dessem(unity)
+                        print(df)
+                        exit(1)
 
 
-    def cortes_ativos_decomp(self, unity, caso):
-        pass
+    def cortes_ativos_decomp(self, unity):
+        lista_df_varm = []
+        lista_df_ativos = []
+        for caso in casos:
+            arq = caso.caminho+"/PDO_ECO_FCFCORTES.DAT"
+            #print(arq)
+            df = PdoEcoFcfCortes.read(arq).tabela
+            df_rhs = df.loc[(df["tipo_coeficiente"] == "RHS")].reset_index(drop=True)
+            df_varm = df.loc[(df["tipo_coeficiente"] == "VARM") & (df["tipo_entidade"] == "USIH")].reset_index(drop=True)
+            df_varm["caso"] = caso.nome
+            lista_df_varm.append(df_varm)
+            #print(df_varm)
+            
+            arq_oper = caso.caminho+"/PDO_OPERACAO.DAT"
+            #print(arq_oper)
+            df_ativos = PdoOperacao.read(arq_oper).cortes_ativos 
+            df_ativos["caso"] = caso.nome
+            lista_df_ativos.append(df_ativos)
+            #print(df_ativos)
+        pd_concat_varm = pd.concat(lista_df_varm)
+        print(pd_concat_varm)
+
+        pd_concat_ativos = pd.concat(lista_df_ativos)
+        print(pd_concat_ativos)
+
+        df_varm_usi = pd_concat_varm.loc[(pd_concat_varm["nome_entidade"] == unity.arg.nome)]
+        lista_df_usi = []
+        for caso in casos:
+            df_ativo = pd_concat_ativos.loc[(pd_concat_ativos["caso"] == caso.nome) & (pd_concat_ativos["multiplicador"] > 0)]
+            df_varm = df_varm_usi.loc[(df_varm_usi["caso"] == caso.nome)]
+            print(df_ativo)
+            print(df_varm)
+            lista_coefs = []
+            indices = df_ativo["indice_corte"].unique()
+            coef_medio = 0
+            for indice in indices:
+                mult =  df_ativo.loc[( df_ativo["indice_corte"] == indice)]["multiplicador"].iloc[0]
+                coef =  df_varm.loc[(df_varm["indice_corte"] == indice)]["valor_coeficiente"].iloc[0]
+                coef_medio += mult*coef
+                print(mult, " coef: ", coef )
+            print(coef_medio)
+            df_result = pd.DataFrame({"usina":[unity.arg.nome], "caso":[caso.nome], "valor":[coef_medio]})
+            lista_df_usi.append(df_result)
+        df_resultado = pd.concat(lista_df_usi)
+        return df_resultado
 
     def cortes_ativos_decomp(self, unity, caso):
         extensao = ""
