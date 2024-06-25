@@ -76,6 +76,7 @@ class FCF:
                         lista_df_usi = []
                         for caso in self.casos:
                             df = self.cortes_ativos_dessem(unity, caso)
+                            lista_df_usi.append(df)
                         df_resultado = pd.concat(lista_df_usi)
                         lista_df_usi.append(df_result)
                         print(df_resultado)
