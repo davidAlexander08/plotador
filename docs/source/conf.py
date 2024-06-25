@@ -113,7 +113,7 @@ intersphinx_mapping = {
     "inewave": ("https://rjmalves.github.io/inewave/", None),
 }
 
- https://github.com/sphinx-gallery/sphinx-gallery
+#https://github.com/sphinx-gallery/sphinx-gallery
 sphinx_gallery_conf = {
     # path to your examples scripts
     "examples_dirs": "../../examples",
