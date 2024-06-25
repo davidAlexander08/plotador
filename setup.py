@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-long_description = "graficador-newave"
+long_description = "plotador"
 
 requirements = []
 with open("requirements.txt", "r") as fh:
@@ -8,11 +8,11 @@ with open("requirements.txt", "r") as fh:
 
 
 setup(
-    name="graficador-newave",
+    name="plotador",
     version="0.0.0",
     author="David Alexander",
     author_email="david.tbsilva@gmail.com",
-    description="graficador-newave",
+    description="plotador",
     long_description=long_description,
     install_requires=requirements,
     packages=find_packages(),
@@ -24,6 +24,6 @@ setup(
     ],
     entry_points="""
         [console_scripts]
-        graficador-newave=main:main
+        plotador=main:main
     """,
 )
