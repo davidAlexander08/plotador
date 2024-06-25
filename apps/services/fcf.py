@@ -90,7 +90,7 @@ class FCF:
             df_ativos = PdoOperacao.read(arq_oper).cortes_ativos 
 
             df_varm_usi = df_varm.loc[(df_varm["nome_entidade"] == unity.arg.nome)]
-            df_ativo = pd_concat_ativos.loc[(pd_concat_ativos["multiplicador"] > 0)]
+            df_ativo = df_ativos.loc[(df_ativos["multiplicador"] > 0)]
             lista_coefs = []
             indices = df_ativo["indice_corte"].unique()
             coef_medio = 0
