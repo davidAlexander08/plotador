@@ -15,7 +15,7 @@ jobs:
           python-version: '3.10'
       - name: Install dependencies
         run: |
-          pip install -r dev-requirements.txt
+          pip install -r requirements.txt
       - name: Sphinx build
         run: |
           sphinx-build -M html docs/source docs/build
