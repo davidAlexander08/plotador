@@ -21,10 +21,3 @@ desenvolvido pelo `CEPEL <http://www.cepel.br/>`_ e utilizado para a planejament
    :hidden:
 
    ./reference.rst
-
-.. toctree::
-   :caption: Exemplos 
-   :maxdepth: 3
-   :hidden:
-
-   examples/index.rst
