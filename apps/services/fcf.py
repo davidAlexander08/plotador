@@ -193,7 +193,7 @@ class FCF:
             #print(cortes_ativos)
             valor_coef = 0
             for corte in lista_cortes_ativos:
-                    coef_fcf_corte = df_fcf.loc[(df_fcf["corte"] == corte)]["coef"].iloc[0]
+                coef_fcf_corte = df_fcf.loc[(df_fcf["corte"] == corte)]["coef"].iloc[0]
                 parcela_pi = cortes_ativos.loc[(cortes_ativos["indice_corte"]==corte)]["parcela_pi"].iloc[0]
                 valor_coef += coef_fcf_corte*parcela_pi
             valor_coef = valor_coef/coef_pi
