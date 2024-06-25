@@ -78,7 +78,7 @@ class FCF:
                         exit(1)
 
 
-    def cortes_ativos_decomp(self, unity):
+    def cortes_ativos_dessem(self, unity):
         lista_df_varm = []
         lista_df_ativos = []
         for caso in casos:
