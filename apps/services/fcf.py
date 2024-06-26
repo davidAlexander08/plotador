@@ -26,7 +26,15 @@ import plotly.io as pio
 class FCF:
 
 
-    def __init__(self, data):
+    def __init__(self, data, xinf, xsup, largura, altura, eco, yinf, ysup):
+        self.xinf = xinf
+        self.xsup = xsup
+        self.largura = largura
+        self.altura = altura
+        self.eco = eco
+        self.yinf = yinf
+        self.ysup = ysup
+
         self.estudo = data.estudo
         self.casos = data.casos
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
@@ -70,19 +78,21 @@ class FCF:
                             ly = df["coef"].tolist()
                             fig.add_trace(go.Box( y = ly, boxpoints = False, name = caso.nome))
 
-                            df_fcfs = df_fcf_todos_casos.loc[(df_fcf_todos_casos["caso"] == caso.nome)]
-                            ly = df_fcfs["coef"].tolist()
-                            fig.add_trace(go.Box( y = ly, boxpoints = False, name = "cortes "+caso.nome))
+                            if(self.eco == "True"):
+                                df_fcfs = df_fcf_todos_casos.loc[(df_fcf_todos_casos["caso"] == caso.nome)]
+                                ly = df_fcfs["coef"].tolist()
+                                fig.add_trace(go.Box( y = ly, boxpoints = False, name = "cortes "+caso.nome))
 
                         fig.update_layout(title="PIs Ativos "+unity.arg.nome+" "+self.estudo)
                         fig.update_xaxes(title_text="Casos")
                         fig.update_yaxes(title_text="1000R$/hm3")
-                        #fig.update_yaxes(range=[-1400,0])
-                        fig.update_layout(font=dict(size= 20))
+                        fig.update_yaxes(range=[self.yinf,self.ysup])
+                        fig.update_xaxes(range=[self.xinf,self.xsup])
+                        fig.update_layout(font=dict(size= data.tamanho_texto))
                         fig.write_image(
                             os.path.join(diretorio_saida+"/pis_ativos"+unity.arg.nome+self.estudo+".png"),
-                            width=1200,
-                            height=600)
+                            width=self.largura,
+                            height=self.altura)
                     if(modelo == "DESSEM"):
                         lista_df_usi = []
                         for caso in self.casos:
@@ -100,7 +110,7 @@ class FCF:
                                 text = df_resultado["valor"].round(1).tolist(),
                                 textposition = "inside",
                                 name = "PIvs",
-                                textfont=dict(size=20),
+                                textfont=dict(size=data.tamanho_texto),
                                 marker_color= "blue",
                                 showlegend=True
                             )
@@ -108,11 +118,13 @@ class FCF:
                         fig.update_xaxes(title_text="Casos")
                         fig.update_yaxes(title_text="1000$/hm3")
                         fig.update_layout(font=dict(size= 20))
+                        fig.update_yaxes(range=[self.yinf,self.ysup])
+                        fig.update_xaxes(range=[self.xinf,self.xsup])
                         fig.update_layout(title=" PIvs Ativos "+unity.arg.nome)
                         fig.write_image(
                             os.path.join(diretorio_saida+"/pivs_ativos_"+unity.arg.nome+self.estudo+".png"),
-                            width=1200,
-                            height=600)
+                            width=self.largura,
+                            height=self.altura)
 
 
     def cortes_ativos_dessem(self, unity, caso):

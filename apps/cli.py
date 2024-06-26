@@ -208,11 +208,47 @@ def analise_operacional(arquivo_json):
 @click.argument(
     "arquivo_json",
 )
-def analise_fcf(arquivo_json):
+@click.option(
+    "--xinf",
+    default=None,
+    help="Ponto Inferior do Eixo X",
+)
+@click.option(
+    "--xsup",
+    default=None,
+    help="Ponto Superior do Eixo X",
+)
+@click.option(
+    "--largura",
+    default="1500", #VALOR INTERESSANTE PARA RELATORIOS E 1200
+    help="Largura Figura",
+)
+@click.option(
+    "--altura",
+    default="1200", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+    help="Altura Figura",
+)
+@click.option(
+    "--eco",
+    default="False", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+    help="Plota tambem o eco dos cortes",
+)
+@click.option(
+    "--yinf",
+    default=None,
+    help="Ponto Inferior do Eixo Y",
+)
+@click.option(
+    "--ysup",
+    default=None,
+    help="Ponto Superior do Eixo Y",
+)
+
+def analise_fcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup):
     from apps.services.fcf import FCF
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        FCF(data)          
+        FCF(data, xinf, xsup, largura, altura, eco, yinf, ysup)          
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
