@@ -50,12 +50,18 @@ class FCF:
                     print(unity.arg.nome)
                     if(modelo == "DECOMP"):
                         lista_df_casos = []
+                        lista_fcf = []
                         for caso in self.casos:
                             df = self.cortes_ativos_decomp(unity, caso)
                             lista_df_casos.append(df[0])
+                            lista_fcf.append(df[1])
 
+                        
                         df_cortes_ativos_todos_casos = pd.concat(lista_df_casos)
                         df_cortes_ativos_todos_casos.to_csv("pis_ativos"+unity.arg.nome+self.estudo+".csv")
+
+                        df_fcf_todos_casos = pd.concat(lista_fcf)
+                        df_fcf_todos_casos.to_csv("fcf_ativos"+unity.arg.nome+self.estudo+".csv")
 
                         fig = go.Figure()
                         casos = df_cortes_ativos_todos_casos["caso"].unique()
@@ -63,7 +69,11 @@ class FCF:
                             df = df_cortes_ativos_todos_casos.loc[(df_cortes_ativos_todos_casos["caso"] == caso.nome)]
                             ly = df["coef"].tolist()
                             fig.add_trace(go.Box( y = ly, boxpoints = False, name = caso.nome))
-                            
+
+                            df_fcfs = df_fcf_todos_casos.loc[(df_fcf_todos_casos["caso"] == caso.nome)]
+                            ly = df_fcfs["coef"].tolist()
+                            fig.add_trace(go.Box( y = ly, boxpoints = False, name = "cortes "+caso.nome))
+
                         fig.update_layout(title="PIs Ativos "+unity.arg.nome+" "+self.estudo)
                         fig.update_xaxes(title_text="Casos")
                         fig.update_yaxes(title_text="1000R$/hm3")
@@ -162,6 +172,7 @@ class FCF:
             df = fcf.cortes.copy()
             df_fcf = df.loc[(df["UHE"] == codigo)].reset_index(drop = True)
             df_fcf["coef"] = df_fcf["coef_varm"]
+            df_fcf["caso"] = caso.nome
             df_fcf = df_fcf.drop(["coef_varm"], axis = 1)
 
         arq_fcfnwn = caso.caminho+"/fcfnwn."+extensao
