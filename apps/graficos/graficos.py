@@ -312,7 +312,7 @@ class Graficos:
                     textposition = "outside",
                     name = cat,
                     textfont=dict(
-                        size=30,
+                        size=20,
                     ),
                     marker_color=colors[indiceCor],
                     showlegend=True
