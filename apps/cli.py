@@ -256,11 +256,21 @@ def analise_fcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup):
 @click.argument(
     "arquivo_json",
 )
-def analise_tempo(arquivo_json):
+@click.option(
+    "--largura",
+    default="1500", #VALOR INTERESSANTE PARA RELATORIOS E 1200
+    help="Largura Figura",
+)
+@click.option(
+    "--altura",
+    default="1200", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+    help="Altura Figura",
+)
+def analise_tempo(arquivo_json, largura, altura):
     from apps.services.tempo import Tempo
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Tempo(data)          
+        Tempo(data, largura, altura)          
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
