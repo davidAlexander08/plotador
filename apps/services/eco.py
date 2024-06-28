@@ -5,6 +5,7 @@ from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
+from apps.indicadores.eco_indicadores import EcoIndicadores
 import os
 import json
 
