@@ -17,14 +17,14 @@ class Eco:
         eco_indicadores = EcoIndicadores(self.casos)
         graficos = Graficos(data)
         # Gera saídas do estudo
-        diretorio_saida = f"resultados/{estudo}/eco"
+        diretorio_saida = f"resultados/{self.estudo}/eco"
         os.makedirs(diretorio_saida, exist_ok=True)
 
         for sts in data.sinteses:
-            Log.log().info("Gerando eco "+ sts.sintese +" para o estudo: "+ estudo)
+            Log.log().info("Gerando eco "+ sts.sintese +" para o estudo: "+ self.estudo)
             eco = eco_indicadores.retorna_df_concatenado(sts.sintese)
             eco.to_csv(
-                os.path.join(diretorio_saida, "eco_"+sts.sintese+"_"+estudo+".csv"),
+                os.path.join(diretorio_saida, "eco_"+sts.sintese+"_"+self.estudo+".csv"),
                 index=False,
             )
 
@@ -35,7 +35,7 @@ class Eco:
         df_custos = df_custos.round(0)
         fig = graficos.gera_grafico_barras_diferentes(df_custos, "parcela", "mean", "caso",  "parcelas", "R$", 0, "Custos Totais Casos")
         fig.write_image(
-            os.path.join(diretorio_saida, "Newave_"+"Custos Totais Casos"+"_"+estudo+".png"),
+            os.path.join(diretorio_saida, "Newave_"+"Custos Totais Casos"+"_"+self.estudo+".png"),
             width=800,
             height=600,
         )
@@ -43,7 +43,7 @@ class Eco:
             df_plot = df_custos.loc[(df_custos["caso"] == c.nome)]
             fig = graficos.gera_grafico_barras_diferentes(df_plot, "parcela", "mean", "caso",  "parcelas", "R$", 0, "Custos Totais "+c.nome)
             fig.write_image(
-                os.path.join(diretorio_saida, "Newave_"+"Custos Totais "+"_"+c.nome+"_"+estudo+".png"),
+                os.path.join(diretorio_saida, "Newave_"+"Custos Totais "+"_"+c.nome+"_"+self.estudo+".png"),
                 width=800,
                 height=600,
             )
@@ -55,7 +55,7 @@ class Eco:
         mapFormatLine = {"zinf": "dot"}
         fig = graficos.gera_grafico_linhas_diferentes(df_convergencia,lista, mapFormatLine, "R$ (10 6)", "iteracoes", "Convergencia")
         fig.write_image(
-            os.path.join(diretorio_saida, "Newave_"+"Convergencias"+"_"+estudo+".png"),
+            os.path.join(diretorio_saida, "Newave_"+"Convergencias"+"_"+self.estudo+".png"),
             width=800,
             height=600,
         )
