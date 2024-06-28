@@ -20,13 +20,7 @@ class Eco:
         diretorio_saida = f"resultados/{self.estudo}/eco"
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        for sts in data.sinteses:
-            Log.log().info("Gerando eco "+ sts.sintese +" para o estudo: "+ self.estudo)
-            eco = eco_indicadores.retorna_df_concatenado(sts.sintese)
-            eco.to_csv(
-                os.path.join(diretorio_saida, "eco_"+sts.sintese+"_"+self.estudo+".csv"),
-                index=False,
-            )
+
 
         df_custos = eco_indicadores.retorna_df_concatenado("CUSTOS")
         #df_custos = df_custos.loc[(df_custos["mean"] != 0)] #Remove colunas com 0
@@ -46,6 +40,15 @@ class Eco:
                 os.path.join(diretorio_saida, "Newave_"+"Custos Totais "+"_"+c.nome+"_"+self.estudo+".png"),
                 width=800,
                 height=600,
+            )
+
+
+        for sts in data.sinteses:
+            Log.log().info("Gerando eco "+ sts.sintese +" para o estudo: "+ self.estudo)
+            eco = eco_indicadores.retorna_df_concatenado(sts.sintese)
+            eco.to_csv(
+                os.path.join(diretorio_saida, "eco_"+sts.sintese+"_"+self.estudo+".csv"),
+                index=False,
             )
 
         df_convergencia = eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
