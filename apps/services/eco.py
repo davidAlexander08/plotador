@@ -39,7 +39,7 @@ class Eco:
             width=800,
             height=600,
         )
-        for c in casos:
+        for c in self.casos:
             df_plot = df_custos.loc[(df_custos["caso"] == c.nome)]
             fig = graficos.gera_grafico_barras_diferentes(df_plot, "parcela", "mean", "caso",  "parcelas", "R$", 0, "Custos Totais "+c.nome)
             fig.write_image(
