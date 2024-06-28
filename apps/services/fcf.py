@@ -81,7 +81,7 @@ class FCF:
                             if(self.eco == "True"):
                                 df_fcfs = df_fcf_todos_casos.loc[(df_fcf_todos_casos["caso"] == caso.nome)]
                                 ly = df_fcfs["coef"].tolist()
-                                fig.add_trace(go.Box( y = ly, boxpoints = False, name = "cortes "+caso.nome))
+                                fig.add_trace(go.Box( y = ly, boxpoints = False, name = "fcfnw "+caso.nome))
 
                         fig.update_layout(title="PIs Ativos "+unity.arg.nome+" "+self.estudo)
                         fig.update_xaxes(title_text="Casos")
