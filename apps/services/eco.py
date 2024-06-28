@@ -8,7 +8,7 @@ from apps.model.argumento import Argumento
 from apps.indicadores.eco_indicadores import EcoIndicadores
 import os
 import json
-
+from apps.utils.log import Log
 class Eco:
     def __init__(self, data):
         self.estudo = data.estudo
