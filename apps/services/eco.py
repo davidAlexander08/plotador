@@ -14,8 +14,8 @@ class Eco:
         self.estudo = data.estudo
         self.casos = data.casos
         
-        eco_indicadores = EcoIndicadores(casos)
-        graficos = Graficos(casos)
+        eco_indicadores = EcoIndicadores(self.casos)
+        graficos = Graficos(data)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{estudo}/eco"
         os.makedirs(diretorio_saida, exist_ok=True)
