@@ -47,7 +47,7 @@ class NWLISTCF:
             print("ERRO: Tentativa de plotar NWLISTCF Com mais de um caso no JSON")
             exit(1)
         modelo = list(set_modelos)[0]
-
+        print("ENTROU AQUI")
         for arg in data.args:
             if(arg.chave == "UHE"):
                 sts = Sintese("VAGUA_UHE_EST") #SINTESE DUMMY
