@@ -37,10 +37,10 @@ class NWLISTCF:
 
         print(self.series, " ", self.iters)
         for serie in self.series:
-            print(serie)
+            print(int(serie))
 
         for it in self.iters:
-            print(it)
+            print(int(it))
 
         self.estudo = data.estudo
         self.casos = data.casos
