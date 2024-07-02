@@ -90,7 +90,7 @@ class NWLISTCF:
                                 for elem in self.series:
                                     df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == int(elem))]
                                     lista_aux.append(df_aux)
-                                    df_aux_2 = df_estados_rees.loc[(df_estados_rees["SIMc"] == int(elem))]
+                                    df_aux_2 = df_estados_ree.loc[(df_estados_ree["SIMc"] == int(elem))]
                                     lista_aux2.append(df_aux_2)
                                 df_nwlistcf_ree = pd.concat(lista_aux)
                                 df_estados_ree = pd.concat(lista_aux2)
@@ -100,7 +100,7 @@ class NWLISTCF:
                                 for elem in self.iters:
                                     df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["iter"] == int(elem))]
                                     lista_aux.append(df_aux)
-                                    df_aux_2 = df_estados_rees.loc[(df_estados_rees["ITEc"] == int(elem))]
+                                    df_aux_2 = df_estados_ree.loc[(df_estados_ree["ITEc"] == int(elem))]
                                     lista_aux2.append(df_aux_2)
                                 df_nwlistcf_ree = pd.concat(lista_aux)
                                 df_estados_ree = pd.concat(lista_aux2)
@@ -110,7 +110,7 @@ class NWLISTCF:
                                 for elem in self.periodos:
                                     df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == int(elem))]
                                     lista_aux.append(df_aux)
-                                    df_aux_2 = df_estados_rees.loc[(df_estados_rees["SIMc"] == int(elem))]
+                                    df_aux_2 = df_estados_ree.loc[(df_estados_ree["SIMc"] == int(elem))]
                                     lista_aux2.append(df_aux_2)
                                 df_nwlistcf_ree = pd.concat(lista_aux)
                                 df_estados_ree = pd.concat(lista_aux2)
