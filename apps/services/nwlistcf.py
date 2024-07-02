@@ -228,33 +228,34 @@ class NWLISTCF:
                                     height=self.altura)
 
 
-                            #print("IMPRIMINDO CSV")
-                            #df_ree.to_csv("ESTADOS_REE_"+str(REE)+".csv")
-                            Variavel  = "EARM"
-                            lista_series = df_nwlistcf_ree["serie"].unique()
-                            for ser in lista_series:
-                                print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
-                                df_serie = df_estados_ree.loc[(df_estados_ree["SIMc"] == ser) & (df_estados_ree["ITEc"] != 1) ].copy()
-                                fig = go.Figure()
-                                lista_per = df_serie["PERIODO"].unique()
-                                lista_iter = df_serie["ITEc"].unique()
-                                degradee = 1.0/(len(lista_iter) + 1)
-                                tonalidade = 0.95
-                                for it in lista_iter:
-                                    df_iter = df_serie.loc[(df_serie["ITEc"] == it)].copy()
-                                    ly = df_iter[Variavel].tolist()
-                                    fig.add_trace(go.Scatter( y = ly, x = lista_per, name = str(it), marker_color = "rgba(0,0,155,"+str(tonalidade)+")"))
-                                    tonalidade -= degradee
-                                fig.update_layout(title="EARM Por Iteracao Temporal "+str(u_ree) + " Serie "+str(ser))
-                                fig.update_xaxes(title_text="Periodos")
-                                fig.update_yaxes(title_text="MW")
-                                fig.update_yaxes(range=[self.yinf,self.ysup])
-                                fig.update_xaxes(range=[self.xinf,self.xsup])
-                                fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=True)
-                                fig.write_image(
-                                    os.path.join(diretorio_saida+"/36_earm_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
-                                    width=self.largura,
-                                    height=self.altura)
+                            if(self.linhas == "True"):
+                                #print("IMPRIMINDO CSV")
+                                #df_ree.to_csv("ESTADOS_REE_"+str(REE)+".csv")
+                                Variavel  = "EARM"
+                                lista_series = df_nwlistcf_ree["serie"].unique()
+                                for ser in lista_series:
+                                    print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
+                                    df_serie = df_estados_ree.loc[(df_estados_ree["SIMc"] == ser) & (df_estados_ree["ITEc"] != 1) ].copy()
+                                    fig = go.Figure()
+                                    lista_per = df_serie["PERIODO"].unique()
+                                    lista_iter = df_serie["ITEc"].unique()
+                                    degradee = 1.0/(len(lista_iter) + 1)
+                                    tonalidade = 0.95
+                                    for it in lista_iter:
+                                        df_iter = df_serie.loc[(df_serie["ITEc"] == it)].copy()
+                                        ly = df_iter[Variavel].tolist()
+                                        fig.add_trace(go.Scatter( y = ly, x = lista_per, name = str(it), marker_color = "rgba(0,0,155,"+str(tonalidade)+")"))
+                                        tonalidade -= degradee
+                                    fig.update_layout(title="EARM Por Iteracao Temporal "+str(u_ree) + " Serie "+str(ser))
+                                    fig.update_xaxes(title_text="Periodos")
+                                    fig.update_yaxes(title_text="MW")
+                                    fig.update_yaxes(range=[self.yinf,self.ysup])
+                                    fig.update_xaxes(range=[self.xinf,self.xsup])
+                                    fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=True)
+                                    fig.write_image(
+                                        os.path.join(diretorio_saida+"/36_earm_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
+                                        width=self.largura,
+                                        height=self.altura)
 
 
                             print("GRAFICO PIVs por EARMs  SCATTER")
