@@ -294,11 +294,41 @@ def analise_fcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup):
     help="Ponto Superior do Eixo Y",
 )
 
-def analise_nwlistcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup):
+@click.option(
+    "--ree",
+    default=None,
+    help="REE para impressao",
+)
+
+@click.option(
+    "--box",
+    default="True",
+    help="Ativa ou desativa Boxplots",
+)
+
+@click.option(
+    "--linhas",
+    default="True",
+    help="Ativa ou desativa Graficos de Linha",
+)
+
+@click.option(
+    "--series",
+    default=None,
+    help="Series a serem investigadas",
+)
+
+@click.option(
+    "--iters",
+    default=None,
+    help="Iteracoes a serem investigadas",
+)
+
+def analise_nwlistcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup, ree, box, linhas, series, iters):
     from apps.services.nwlistcf import NWLISTCF
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        NWLISTCF(data, xinf, xsup, largura, altura, eco, yinf, ysup)          
+        NWLISTCF(data, xinf, xsup, largura, altura, eco, yinf, ysup, ree, box, linhas, series, iters)          
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 

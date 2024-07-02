@@ -21,7 +21,7 @@ import plotly.io as pio
 class NWLISTCF:
 
 
-    def __init__(self, data, xinf, xsup, largura, altura, eco, yinf, ysup):
+    def __init__(self, data, xinf, xsup, largura, altura, eco, yinf, ysup, ree, box, linhas, series, iters):
         self.xinf = xinf
         self.xsup = xsup
         self.largura = largura
@@ -29,6 +29,13 @@ class NWLISTCF:
         self.eco = eco
         self.yinf = yinf
         self.ysup = ysup
+        self.ree = ree
+        self.box = box
+        self.linhas = linhas
+        self.series = series
+        self.iters = iters
+
+        print(self.series, " ", self.iters)
 
         self.estudo = data.estudo
         self.casos = data.casos
@@ -73,114 +80,119 @@ class NWLISTCF:
                         df_estados_rees = pd.concat(lista_df_casos_estados)
                         df_estados_rees.to_csv(diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
 
+                        if(self.ree != None):
+                            lista_rees = [self.ree]
+
 
 
                         for u_ree in lista_rees:
                             df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["iter"] != 1)]
                             df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
-                            #EVOLUCAO TEMPORAL DO PIV POR SERIE UMA LINHA PARA CADA ITERACAO
-                            lista_series = list(range(1,201))
-                            Variavel  = "PIEARM"
-                            for ser in lista_series:
-                                print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
-                                df_serie = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == ser) & (df_nwlistcf_ree["iter"] != 1) ].copy()
+
+                            if(self.linhas == "True"):
+                                #EVOLUCAO TEMPORAL DO PIV POR SERIE UMA LINHA PARA CADA ITERACAO
+                                lista_series = list(range(1,201))
+                                Variavel  = "PIEARM"
+                                for ser in lista_series:
+                                    print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
+                                    df_serie = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == ser) & (df_nwlistcf_ree["iter"] != 1) ].copy()
+                                    fig = go.Figure()
+                                    lista_per = df_serie["PERIODO"].unique()
+                                    lista_iter = df_serie["iter"].unique()
+                                    degradee = 1.0/(len(lista_iter) + 1)
+                                    tonalidade = 0.95
+                                    for it in lista_iter:
+                                        df_iter = df_serie.loc[(df_serie["iter"] == it)].copy()
+                                        ly = df_iter[Variavel].tolist()
+                                        fig.add_trace(go.Scatter( y = ly, x = lista_per, name = str(it), marker_color = "rgba(0,0,155,"+str(tonalidade)+")"))
+                                        tonalidade -= degradee
+                                    fig.update_layout(title="PIs Por Iteracao Temporal "+str(u_ree) + " Serie "+str(ser))
+                                    fig.update_xaxes(title_text="Periodos")
+                                    fig.update_yaxes(title_text="R$/MWh")
+                                    #fig.update_yaxes(range=[-4000,0])
+                                    fig.update_yaxes(range=[self.yinf,self.ysup])
+                                    fig.update_xaxes(range=[self.xinf,self.xsup])
+                                    fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=True)
+                                    fig.write_image(
+                                        os.path.join(diretorio_saida+"/36_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
+                                        width=self.largura,
+                                        height=self.altura)
+                                #FIM EVOLUCAO TEMPORAL DO PIV POR SERIE
+
+
+
+
+                            if(self.box == "True"):
+
+                                #BOXPLOT PARA CADA SERIE
+                                lista_series = list(range(1,201))
+                                Variavel  = "PIEARM"
+                                for ser in lista_series:
+                                    print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
+                                    df_serie = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == ser) & (df_nwlistcf_ree["iter"] != 1)].copy()
+                                    fig = go.Figure()
+                                    for per in periodos:
+                                        df_per = df_serie.loc[(df_serie["PERIODO"] == per) & (df_serie["iter"] != 1)].copy()
+                                        ly = df_per[Variavel].tolist()
+                                        fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
+                                        fig.update_layout(title="PIs Temporal "+str(u_ree) + " Serie "+str(ser))
+                                        fig.update_xaxes(title_text="Periodos")
+                                        fig.update_yaxes(title_text="R$/MWh")
+                                        fig.update_yaxes(range=[self.yinf,self.ysup])
+                                        fig.update_xaxes(range=[self.xinf,self.xsup])
+                                        fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
+                                        fig.write_image(
+                                            os.path.join(diretorio_saida+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
+                                            width=self.largura,
+                                            height=self.altura)
+                                #FIM BOXPLOT POR PERIODOS E SERIE
+
+
+                            if(self.box == "True"):
+                                #BOXPLOT PARA CADA PERIODO
+                                print("IMPRIMINDO GRAFICO BOXPLOT")
+
+                                Variavel  = "PIEARM"
                                 fig = go.Figure()
-                                lista_per = df_serie["PERIODO"].unique()
-                                lista_iter = df_serie["iter"].unique()
-                                degradee = 1.0/(len(lista_iter) + 1)
-                                tonalidade = 0.95
-                                for it in lista_iter:
-                                    df_iter = df_serie.loc[(df_serie["iter"] == it)].copy()
-                                    ly = df_iter[Variavel].tolist()
-                                    fig.add_trace(go.Scatter( y = ly, x = lista_per, name = str(it), marker_color = "rgba(0,0,155,"+str(tonalidade)+")"))
-                                    tonalidade -= degradee
-                                fig.update_layout(title="PIs Por Iteracao Temporal "+str(u_ree) + " Serie "+str(ser))
+                                periodos_artificial = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+                                for per in periodos_artificial:
+                                    df_per = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["iter"] != 1)].copy()
+                                    ly = df_per[Variavel].tolist()
+                                    fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
+                                fig.update_layout(title="PIs Temporal"+str(u_ree))
                                 fig.update_xaxes(title_text="Periodos")
                                 fig.update_yaxes(title_text="R$/MWh")
                                 #fig.update_yaxes(range=[-4000,0])
                                 fig.update_yaxes(range=[self.yinf,self.ysup])
                                 fig.update_xaxes(range=[self.xinf,self.xsup])
-                                fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=True)
+                                fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
+
                                 fig.write_image(
-                                    os.path.join(diretorio_saida+"/36_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
+                                    os.path.join(diretorio_saida+"/"+str(u_ree)+"_temporal.png"),
                                     width=self.largura,
                                     height=self.altura)
-                            #FIM EVOLUCAO TEMPORAL DO PIV POR SERIE
+                                #FIM BOXPLOT POR PERIODO
 
-
-
-                            #BOXPLOT PARA CADA PERIODO
-                            print("IMPRIMINDO GRAFICO BOXPLOT")
-
-                            Variavel  = "PIEARM"
-                            fig = go.Figure()
-                            periodos_artificial = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
-                            for per in periodos_artificial:
-                                df_per = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["iter"] != 1)].copy()
-                                ly = df_per[Variavel].tolist()
-                                fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
-                            fig.update_layout(title="PIs Temporal"+str(u_ree))
-                            fig.update_xaxes(title_text="Periodos")
-                            fig.update_yaxes(title_text="R$/MWh")
-                            #fig.update_yaxes(range=[-4000,0])
-                            fig.update_yaxes(range=[self.yinf,self.ysup])
-                            fig.update_xaxes(range=[self.xinf,self.xsup])
-                            fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
-
-                            fig.write_image(
-                                os.path.join(diretorio_saida+"/"+str(u_ree)+"_temporal.png"),
-                                width=self.largura,
-                                height=self.altura)
-                            #FIM BOXPLOT POR PERIODO
-
-
-
-                            #BOXPLOT PARA CADA SERIE
-                            lista_series = list(range(1,201))
-                            Variavel  = "PIEARM"
-                            for ser in lista_series:
-                                print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
-                                df_serie = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == ser) & (df_nwlistcf_ree["iter"] != 1)].copy()
+                            if(self.box == "True"):
+                                #BOXPLOT POR PERIODO
+                                print("IMPRIMINDO GRAFICO TEMPORAL")
+                                Variavel  = "EARM"
                                 fig = go.Figure()
                                 for per in periodos:
-                                    df_per = df_serie.loc[(df_serie["PERIODO"] == per) & (df_serie["iter"] != 1)].copy()
+                                    df_per = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] != 1)].copy()
                                     ly = df_per[Variavel].tolist()
                                     fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
-                                    fig.update_layout(title="PIs Temporal "+str(u_ree) + " Serie "+str(ser))
-                                    fig.update_xaxes(title_text="Periodos")
-                                    fig.update_yaxes(title_text="R$/MWh")
-                                    fig.update_yaxes(range=[self.yinf,self.ysup])
-                                    fig.update_xaxes(range=[self.xinf,self.xsup])
-                                    fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
-                                    fig.write_image(
-                                        os.path.join(diretorio_saida+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
-                                        width=self.largura,
-                                        height=self.altura)
-                            #FIM BOXPLOT POR PERIODOS E SERIE
+                                fig.update_layout(title="EARM Temporal"+str(u_ree))
+                                fig.update_xaxes(title_text="Periodos")
+                                fig.update_yaxes(title_text="MW")
+                                fig.update_yaxes(range=[self.yinf,self.ysup])
+                                fig.update_xaxes(range=[self.xinf,self.xsup])
+                                fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
 
-
-
-
-
-                            #BOXPLOT POR PERIODO
-                            print("IMPRIMINDO GRAFICO TEMPORAL")
-                            Variavel  = "EARM"
-                            fig = go.Figure()
-                            for per in periodos:
-                                df_per = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] != 1)].copy()
-                                ly = df_per[Variavel].tolist()
-                                fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
-                            fig.update_layout(title="EARM Temporal"+str(u_ree))
-                            fig.update_xaxes(title_text="Periodos")
-                            fig.update_yaxes(title_text="MW")
-                            fig.update_yaxes(range=[self.yinf,self.ysup])
-                            fig.update_xaxes(range=[self.xinf,self.xsup])
-                            fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
-
-                            fig.write_image(
-                                os.path.join(diretorio_saida+"/estados_"+str(u_ree)+"_temporal.png"),
-                                width=self.largura,
-                                height=self.altura)
+                                fig.write_image(
+                                    os.path.join(diretorio_saida+"/estados_"+str(u_ree)+"_temporal.png"),
+                                    width=self.largura,
+                                    height=self.altura)
 
 
                             #print("IMPRIMINDO CSV")
@@ -211,7 +223,6 @@ class NWLISTCF:
                                     height=self.altura)
 
 
-                            #BOXPLOT POR PERIODO
                             print("GRAFICO PIVs por EARMs  SCATTER")
                             Variavel_ESTADO  = "EARM"
                             Variavel_PIV = "PIEARM"
