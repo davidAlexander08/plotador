@@ -99,7 +99,7 @@ class NWLISTCF:
                             if(self.iters != None):
                                 lista_aux = []
                                 lista_aux2 = []
-                                for elem in self.iter:
+                                for elem in self.iters:
                                     df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["iter"] == int(elem))]
                                     lista_aux.append(df_aux)
                                     df_aux_2 = df_estados_rees.loc[(df_estados_rees["ITEc"] == int(elem))]
