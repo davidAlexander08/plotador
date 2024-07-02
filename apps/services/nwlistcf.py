@@ -94,7 +94,7 @@ class NWLISTCF:
                                     ly = df_iter[Variavel].tolist()
                                     fig.add_trace(go.Scatter( y = ly, x = lista_per, name = str(it), marker_color = "rgba(0,0,155,"+str(tonalidade)+")"))
                                     tonalidade -= degradee
-                                fig.update_layout(title="PIs Por Iteracao Temporal "+str(REE) + " Serie "+str(ser))
+                                fig.update_layout(title="PIs Por Iteracao Temporal "+str(u_ree) + " Serie "+str(ser))
                                 fig.update_xaxes(title_text="Periodos")
                                 fig.update_yaxes(title_text="R$/MWh")
                                 #fig.update_yaxes(range=[-4000,0])
@@ -102,7 +102,7 @@ class NWLISTCF:
                                 fig.update_xaxes(range=[self.xinf,self.xsup])
                                 fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=True)
                                 fig.write_image(
-                                    os.path.join(diretorio_saida+"/36_iteracao_linhas_"+str(REE)+"_serie_"+str(ser)+"_temporal.png"),
+                                    os.path.join(diretorio_saida+"/36_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
                                     width=self.largura,
                                     height=self.altura)
                             #FIM EVOLUCAO TEMPORAL DO PIV POR SERIE
@@ -119,7 +119,7 @@ class NWLISTCF:
                                 df_per = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["iter"] != 1)].copy()
                                 ly = df_per[Variavel].tolist()
                                 fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
-                            fig.update_layout(title="PIs Temporal"+str(REE))
+                            fig.update_layout(title="PIs Temporal"+str(u_ree))
                             fig.update_xaxes(title_text="Periodos")
                             fig.update_yaxes(title_text="R$/MWh")
                             #fig.update_yaxes(range=[-4000,0])
@@ -128,7 +128,7 @@ class NWLISTCF:
                             fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
 
                             fig.write_image(
-                                os.path.join(diretorio_saida+"/"+str(REE)+"_temporal.png"),
+                                os.path.join(diretorio_saida+"/"+str(u_ree)+"_temporal.png"),
                                 width=self.largura,
                                 height=self.altura)
                             #FIM BOXPLOT POR PERIODO
@@ -146,14 +146,14 @@ class NWLISTCF:
                                     df_per = df_serie.loc[(df_serie["PERIODO"] == per) & (df_serie["iter"] != 1)].copy()
                                     ly = df_per[Variavel].tolist()
                                     fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
-                                    fig.update_layout(title="PIs Temporal "+str(REE) + " Serie "+str(ser))
+                                    fig.update_layout(title="PIs Temporal "+str(u_ree) + " Serie "+str(ser))
                                     fig.update_xaxes(title_text="Periodos")
                                     fig.update_yaxes(title_text="R$/MWh")
                                     fig.update_yaxes(range=[self.yinf,self.ysup])
                                     fig.update_xaxes(range=[self.xinf,self.xsup])
                                     fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
                                     fig.write_image(
-                                        os.path.join(diretorio_saida+str(REE)+"_serie_"+str(ser)+"_temporal.png"),
+                                        os.path.join(diretorio_saida+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
                                         width=self.largura,
                                         height=self.altura)
                             #FIM BOXPLOT POR PERIODOS E SERIE
@@ -170,7 +170,7 @@ class NWLISTCF:
                                 df_per = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] != 1)].copy()
                                 ly = df_per[Variavel].tolist()
                                 fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
-                            fig.update_layout(title="EARM Temporal"+str(REE))
+                            fig.update_layout(title="EARM Temporal"+str(u_ree))
                             fig.update_xaxes(title_text="Periodos")
                             fig.update_yaxes(title_text="MW")
                             fig.update_yaxes(range=[self.yinf,self.ysup])
@@ -178,7 +178,7 @@ class NWLISTCF:
                             fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
 
                             fig.write_image(
-                                os.path.join(diretorio_saida+"/estados_"+str(REE)+"_temporal.png"),
+                                os.path.join(diretorio_saida+"/estados_"+str(u_ree)+"_temporal.png"),
                                 width=self.largura,
                                 height=self.altura)
 
@@ -199,14 +199,14 @@ class NWLISTCF:
                                     ly = df_iter[Variavel].tolist()
                                     fig.add_trace(go.Scatter( y = ly, x = lista_per, name = str(it), marker_color = "rgba(0,0,155,"+str(tonalidade)+")"))
                                     tonalidade -= degradee
-                                fig.update_layout(title="EARM Por Iteracao Temporal "+str(REE) + " Serie "+str(ser))
+                                fig.update_layout(title="EARM Por Iteracao Temporal "+str(u_ree) + " Serie "+str(ser))
                                 fig.update_xaxes(title_text="Periodos")
                                 fig.update_yaxes(title_text="MW")
                                 fig.update_yaxes(range=[self.yinf,self.ysup])
                                 fig.update_xaxes(range=[self.xinf,self.xsup])
                                 fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=True)
                                 fig.write_image(
-                                    os.path.join(diretorio_saida+"/36_earm_iteracao_linhas_"+str(REE)+"_serie_"+str(ser)+"_temporal.png"),
+                                    os.path.join(diretorio_saida+"/36_earm_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
                                     width=self.largura,
                                     height=self.altura)
 
@@ -237,14 +237,14 @@ class NWLISTCF:
                                             fig.add_trace(go.Scatter( y = [valor_piv], x = [valor_earm], name = str(it), showlegend = aparece, marker_color = "rgba("+cor+","+str(tonalidade)+")"))
                                             aparece = False
                                         tonalidade -= degradee
-                                fig.update_layout(title="PIVs x EARM REE "+str(REE)+" PERIODO "+str(per))
+                                fig.update_layout(title="PIVs x EARM REE "+str(u_ree)+" PERIODO "+str(per))
                                 fig.update_xaxes(title_text="EARM")
                                 fig.update_yaxes(title_text="PIVs")
                                 fig.update_yaxes(range=[self.yinf,self.ysup])
                                 fig.update_xaxes(range=[self.xinf,self.xsup])
                                 fig.update_layout(font=dict(size= data.tamanho_texto))
                                 fig.write_image(
-                                    os.path.join(diretorio_saida+"/scatter_REE_"+str(REE)+"_PERIODO_"+str(per)+"_temporal.png"),
+                                    os.path.join(diretorio_saida+"/scatter_REE_"+str(u_ree)+"_PERIODO_"+str(per)+"_temporal.png"),
                                     width=self.largura,
                                     height=self.altura)
 
