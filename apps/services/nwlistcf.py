@@ -53,10 +53,10 @@ class NWLISTCF:
                 sts = Sintese("VAGUA_UHE_EST") #SINTESE DUMMY
                 conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
                 for unity in conj.listaUnidades:
-                    print(unity.arg.nome)
                     if(modelo == "NEWAVE"):
                         lista_df_casos_nwlistcf = []
                         for caso in self.casos:
+                            print("ENTROU AQUI")
                             df = self.processa_NWLISTCF(unity, caso)
                             lista_df_casos_nwlistcf.append(df)
                         df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
