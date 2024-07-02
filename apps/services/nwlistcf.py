@@ -32,16 +32,9 @@ class NWLISTCF:
         self.ree = ree
         self.box = box
         self.linhas = linhas
-        self.series = series.split(",")
-        self.iters = iters.split(",")
-        self.periodos = periodos.split(",")
-
-        print(self.series, " ", self.iters)
-        for serie in self.series:
-            print(int(serie))
-
-        for it in self.iters:
-            print(int(it))
+        self.series = series.split(",") if series is not None else None
+        self.iters = iters.split(",") if iters is not None else None
+        self.periodos = periodos.split(",") if periodos is not None else None
 
         self.estudo = data.estudo
         self.casos = data.casos
