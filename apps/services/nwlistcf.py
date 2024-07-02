@@ -82,6 +82,7 @@ class NWLISTCF:
                             lista_rees = [self.ree]
 
                         for u_ree in lista_rees:
+                            print(u_ree)
                             df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["iter"] != 1)]
                             df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
                             print(df_nwlistcf_ree)
