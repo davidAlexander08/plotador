@@ -115,6 +115,9 @@ class NWLISTCF:
                                 df_nwlistcf_ree = pd.concat(lista_aux)
                                 df_estados_ree = pd.concat(lista_aux2)
 
+                            print(df_nwlistcf_ree)
+                            print(df_estados_ree)
+
                             series = df_nwlistcf_ree["serie"].unique()
                             iteracoes = df_nwlistcf_ree["iter"].unique()
                             periodos = df_nwlistcf_ree["PERIODO"].unique()
@@ -272,7 +275,7 @@ class NWLISTCF:
                                 for it in iteracoes:
                                     if(it%10 == 0.0):
                                         contador_cores += 1
-                                        print(it, " contador: ", contador_cores)
+                                        #print(it, " contador: ", contador_cores)
                                         cor = cores[contador_cores]
                                         tonalidade = 0.95
                                     if(it != 1):
@@ -353,7 +356,7 @@ class NWLISTCF:
 
         REEs = Ree.read(caso.caminho+"/ree.dat")
         df_rees = REEs.rees
-        print(df_rees)
+        #print(df_rees)
         numero_rees = df_rees["codigo"].unique()
 
         lista_data_frame_rees = []
@@ -381,7 +384,7 @@ class NWLISTCF:
             df_concat = pd.concat(lista_df).reset_index(drop = True)
             lista_data_frame_rees.append(df_concat)
         df_concat_rees =    pd.concat(lista_data_frame_rees).reset_index(drop = True)
-        print(df_concat_rees)
+        #print(df_concat_rees)
         return df_concat_rees
 
 
