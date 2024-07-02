@@ -252,6 +252,56 @@ def analise_fcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup):
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
+
+
+@click.command("nwlistcf")
+@click.argument(
+    "arquivo_json",
+)
+@click.option(
+    "--xinf",
+    default=None,
+    help="Ponto Inferior do Eixo X",
+)
+@click.option(
+    "--xsup",
+    default=None,
+    help="Ponto Superior do Eixo X",
+)
+@click.option(
+    "--largura",
+    default="1500", #VALOR INTERESSANTE PARA RELATORIOS E 1200
+    help="Largura Figura",
+)
+@click.option(
+    "--altura",
+    default="1200", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+    help="Altura Figura",
+)
+@click.option(
+    "--eco",
+    default="False", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+    help="Plota tambem o eco dos cortes",
+)
+@click.option(
+    "--yinf",
+    default=None,
+    help="Ponto Inferior do Eixo Y",
+)
+@click.option(
+    "--ysup",
+    default=None,
+    help="Ponto Superior do Eixo Y",
+)
+
+def analise_nwlistcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup):
+    from apps.services.nwlistcf import NWLISTCF
+    if os.path.isfile(arquivo_json):
+        data = Dados_json_caso(arquivo_json)
+        NWLISTCF(data, xinf, xsup, largura, altura, eco, yinf, ysup)          
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
 @click.command("tempo")
 @click.argument(
     "arquivo_json",
@@ -297,5 +347,6 @@ cli.add_command(analise_conjuntoCasos)
 cli.add_command(analise_cenarios)
 cli.add_command(analise_operacional)
 cli.add_command(analise_fcf)
+cli.add_command(analise_nwlistcf)
 cli.add_command(analise_tempo)
 cli.add_command(analise_cascatador)
