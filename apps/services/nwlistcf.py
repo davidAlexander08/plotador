@@ -293,7 +293,7 @@ class NWLISTCF:
                                 diretorio_saida_nuvem = diretorio_saida+"/nuvem"
                                 os.makedirs(diretorio_saida_nuvem, exist_ok=True)
                                 fig.write_image(
-                                    os.path.join(diretorio_saida+"/scatter_REE_"+str(u_ree)+"_PERIODO_"+str(per)+"_temporal.png"),
+                                    os.path.join(diretorio_saida_nuvem+"/scatter_REE_"+str(u_ree)+"_PERIODO_"+str(per)+"_temporal.png"),
                                     width=self.largura,
                                     height=self.altura)
 
