@@ -68,9 +68,7 @@ class NWLISTCF:
                         df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
                         df_nwlistcf_rees.to_csv(diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
 
-                        series = df_nwlistcf_rees["serie"].unique()
-                        iteracoes = df_nwlistcf_rees["iter"].unique()
-                        periodos = df_nwlistcf_rees["PERIODO"].unique()
+
                         lista_rees = df_nwlistcf_rees["REE"].unique()
 
                         lista_df_casos_estados = []
@@ -117,6 +115,9 @@ class NWLISTCF:
                                 df_nwlistcf_ree = pd.concat(lista_aux)
                                 df_estados_ree = pd.concat(lista_aux2)
 
+                            series = df_nwlistcf_ree["serie"].unique()
+                            iteracoes = df_nwlistcf_ree["iter"].unique()
+                            periodos = df_nwlistcf_ree["PERIODO"].unique()
 
 
                             if(self.linhas == "True"):
@@ -161,7 +162,8 @@ class NWLISTCF:
                                     print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
                                     df_serie = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == ser) & (df_nwlistcf_ree["iter"] != 1)].copy()
                                     fig = go.Figure()
-                                    for per in periodos:
+                                    lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
+                                    for per in lista_periodos:
                                         df_per = df_serie.loc[(df_serie["PERIODO"] == per) & (df_serie["iter"] != 1)].copy()
                                         ly = df_per[Variavel].tolist()
                                         fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
@@ -184,8 +186,8 @@ class NWLISTCF:
 
                                 Variavel  = "PIEARM"
                                 fig = go.Figure()
-                                periodos_artificial = df_nwlistcf_ree["PERIODO"].unique()
-                                for per in periodos_artificial:
+                                lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
+                                for per in lista_periodos:
                                     df_per = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["iter"] != 1)].copy()
                                     ly = df_per[Variavel].tolist()
                                     fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
@@ -208,7 +210,8 @@ class NWLISTCF:
                                 print("IMPRIMINDO GRAFICO TEMPORAL")
                                 Variavel  = "EARM"
                                 fig = go.Figure()
-                                for per in periodos:
+                                lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
+                                for per in lista_periodos:
                                     df_per = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] != 1)].copy()
                                     ly = df_per[Variavel].tolist()
                                     fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
@@ -228,7 +231,8 @@ class NWLISTCF:
                             #print("IMPRIMINDO CSV")
                             #df_ree.to_csv("ESTADOS_REE_"+str(REE)+".csv")
                             Variavel  = "EARM"
-                            for ser in series:
+                            lista_series = df_nwlistcf_ree["serie"].unique()
+                            for ser in lista_series:
                                 print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
                                 df_serie = df_estados_ree.loc[(df_estados_ree["SIMc"] == ser) & (df_estados_ree["ITEc"] != 1) ].copy()
                                 fig = go.Figure()
@@ -257,7 +261,8 @@ class NWLISTCF:
                             Variavel_ESTADO  = "EARM"
                             Variavel_PIV = "PIEARM"
                             cores = ["255,0,0", "0,255,0","0,0,255", "0,0,0"]
-                            for per in periodos:
+                            lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
+                            for per in lista_periodos:
                                 fig = go.Figure()
                                 degradee = 1.0/11
                                 tonalidade = 0.95
