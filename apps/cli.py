@@ -324,11 +324,17 @@ def analise_fcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup):
     help="Iteracoes a serem investigadas",
 )
 
-def analise_nwlistcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup, ree, box, linhas, series, iters):
+@click.option(
+    "--periodos",
+    default=None,
+    help="Periodos a serem investigados",
+)
+
+def analise_nwlistcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup, ree, box, linhas, series, iters, periodos):
     from apps.services.nwlistcf import NWLISTCF
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        NWLISTCF(data, xinf, xsup, largura, altura, eco, yinf, ysup, ree, box, linhas, series, iters)          
+        NWLISTCF(data, xinf, xsup, largura, altura, eco, yinf, ysup, ree, box, linhas, series, iters, periodos)          
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 

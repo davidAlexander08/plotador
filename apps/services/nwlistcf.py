@@ -21,7 +21,7 @@ import plotly.io as pio
 class NWLISTCF:
 
 
-    def __init__(self, data, xinf, xsup, largura, altura, eco, yinf, ysup, ree, box, linhas, series, iters):
+    def __init__(self, data, xinf, xsup, largura, altura, eco, yinf, ysup, ree, box, linhas, series, iters, periodos):
         self.xinf = xinf
         self.xsup = xsup
         self.largura = largura
@@ -34,6 +34,7 @@ class NWLISTCF:
         self.linhas = linhas
         self.series = series.split(",")
         self.iters = iters.split(",")
+        self.periodos = periodos.split(",")
 
         print(self.series, " ", self.iters)
         for serie in self.series:
@@ -58,6 +59,7 @@ class NWLISTCF:
         if(len(self.casos) != 1):
             print("ERRO: Tentativa de plotar NWLISTCF Com mais de um caso no JSON")
             exit(1)
+
         modelo = list(set_modelos)[0]
         for arg in data.args:
             if(arg.chave == "REE"):
@@ -88,15 +90,45 @@ class NWLISTCF:
                         if(self.ree != None):
                             lista_rees = [self.ree]
 
-
-
                         for u_ree in lista_rees:
                             df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["iter"] != 1)]
                             df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
+                            if(self.series != None):
+                                lista_aux = []
+                                lista_aux2 = []
+                                for elem in self.series:
+                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == int(elem))]
+                                    lista_aux.append(df_aux)
+                                    df_aux_2 = df_estados_rees.loc[(df_estados_rees["SIMc"] == int(elem))]
+                                    lista_aux2.append(df_aux_2)
+                                df_nwlistcf_ree = pd.concat(lista_aux)
+                                df_estados_ree = pd.concat(lista_aux2)
+                            if(self.iters != None):
+                                lista_aux = []
+                                lista_aux2 = []
+                                for elem in self.iter:
+                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["iter"] == int(elem))]
+                                    lista_aux.append(df_aux)
+                                    df_aux_2 = df_estados_rees.loc[(df_estados_rees["ITEc"] == int(elem))]
+                                    lista_aux2.append(df_aux_2)
+                                df_nwlistcf_ree = pd.concat(lista_aux)
+                                df_estados_ree = pd.concat(lista_aux2)
+                            if(self.periodos != None):
+                                lista_aux = []
+                                lista_aux2 = []
+                                for elem in self.periodos:
+                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == int(elem))]
+                                    lista_aux.append(df_aux)
+                                    df_aux_2 = df_estados_rees.loc[(df_estados_rees["SIMc"] == int(elem))]
+                                    lista_aux2.append(df_aux_2)
+                                df_nwlistcf_ree = pd.concat(lista_aux)
+                                df_estados_ree = pd.concat(lista_aux2)
+
+
 
                             if(self.linhas == "True"):
                                 #EVOLUCAO TEMPORAL DO PIV POR SERIE UMA LINHA PARA CADA ITERACAO
-                                lista_series = list(range(1,201))
+                                lista_series = df_nwlistcf_ree["serie"].unique()
                                 Variavel  = "PIEARM"
                                 for ser in lista_series:
                                     print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
@@ -130,7 +162,7 @@ class NWLISTCF:
                             if(self.box == "True"):
 
                                 #BOXPLOT PARA CADA SERIE
-                                lista_series = list(range(1,201))
+                                lista_series = df_nwlistcf_ree["serie"].unique()
                                 Variavel  = "PIEARM"
                                 for ser in lista_series:
                                     print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
@@ -159,7 +191,7 @@ class NWLISTCF:
 
                                 Variavel  = "PIEARM"
                                 fig = go.Figure()
-                                periodos_artificial = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+                                periodos_artificial = df_nwlistcf_ree["PERIODO"].unique()
                                 for per in periodos_artificial:
                                     df_per = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["iter"] != 1)].copy()
                                     ly = df_per[Variavel].tolist()
