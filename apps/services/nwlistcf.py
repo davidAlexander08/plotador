@@ -84,6 +84,7 @@ class NWLISTCF:
                         for u_ree in lista_rees:
                             df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["iter"] != 1)]
                             df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
+                            print(df_nwlistcf_ree)
                             if(self.series != None):
                                 lista_aux = []
                                 lista_aux2 = []
@@ -116,6 +117,7 @@ class NWLISTCF:
                                 df_estados_ree = pd.concat(lista_aux2)
 
                             print(df_nwlistcf_ree)
+                            exit(1)
                             print(df_estados_ree)
 
                             series = df_nwlistcf_ree["serie"].unique()
