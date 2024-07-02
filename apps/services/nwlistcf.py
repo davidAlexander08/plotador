@@ -79,7 +79,7 @@ class NWLISTCF:
                         df_estados_rees.to_csv(diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
 
                         if(self.ree != None):
-                            lista_rees = [self.ree]
+                            lista_rees = [int(self.ree)]
 
                         for u_ree in lista_rees:
                             print(u_ree)
