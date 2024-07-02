@@ -32,8 +32,8 @@ class NWLISTCF:
         self.ree = ree
         self.box = box
         self.linhas = linhas
-        self.series = series
-        self.iters = iters
+        self.series = series.split(",")
+        self.iters = iters.split(",")
 
         print(self.series, " ", self.iters)
         for serie in self.series:
