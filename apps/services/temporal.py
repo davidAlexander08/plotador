@@ -72,7 +72,7 @@ class Temporal:
 
         mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico)
 
-        tituloFigura = "Temporal "+conjUnity.titulo+self.estudo if self.titulo == "True" else ""
+        tituloFigura = "Temporal "+conjUnity.titulo+self.estudo if self.titulo == "True" else " "
         figura = Figura(conjUnity, mapaGO, tituloFigura)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
         
