@@ -16,7 +16,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, titulo):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo):
         self.xinf  = xinf
         self.xsup = xsup
         self.eixox = eixox
@@ -27,6 +27,7 @@ class Temporal:
         self.altura = altura
         self.cronologico = cronologico
         self.labely = labely
+        self.booltitulo = booltitulo
         self.titulo = titulo
         self.estudo = data.estudo
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
@@ -73,8 +74,8 @@ class Temporal:
         mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico)
 
         titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
-        tituloFigura = titulo_padrao if self.titulo == "True" else " "
-        print(tituloFigura)
+        tituloFigura = titulo_padrao if self.booltitulo == "True" else " "
+        tituloFigura = titulo_padrao if self.titulo == " " else self.titulo
         figura = Figura(conjUnity, mapaGO, tituloFigura)
         
         self.graficos.exportar(figura.fig, diretorio_saida_arg, titulo_padrao, self.largura, self.altura)
