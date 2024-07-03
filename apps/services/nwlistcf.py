@@ -139,7 +139,7 @@ class NWLISTCF:
 
     def gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(self, Variavel, df_nwlistcf_ree):
         #BOXPLOT PARA CADA SERIE
-        lista_series = df_nwlistcf_ree["serie"].unique()
+        lista_series = df_nwlistcf_ree["SIMc"].unique()
         Variavel  = "PIEARM"
         for ser in lista_series:
             print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
