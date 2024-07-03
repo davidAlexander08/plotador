@@ -151,7 +151,7 @@ class NWLISTCF:
 
                             gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree)
 
-    def gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(self, Variavel, df_nwlistcf_ree)
+    def gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(self, Variavel, df_nwlistcf_ree):
         #BOXPLOT PARA CADA SERIE
         lista_series = df_nwlistcf_ree["serie"].unique()
         Variavel  = "PIEARM"
@@ -175,7 +175,7 @@ class NWLISTCF:
                     width=self.largura,
                     height=self.altura)
 
-    def gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(self,Variavel, df_estados_ree)
+    def gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(self,Variavel, df_estados_ree):
         #BOXPLOT POR PERIODO
         print("IMPRIMINDO GRAFICO TEMPORAL")
         fig = go.Figure()
@@ -196,7 +196,7 @@ class NWLISTCF:
             width=self.largura,
             height=self.altura)
 
-    def gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(self,Variavel, df_estados_ree)
+    def gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(self,Variavel, df_estados_ree):
         lista_series = df_nwlistcf_ree["serie"].unique()
         for ser in lista_series:
             print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
@@ -222,7 +222,7 @@ class NWLISTCF:
                 width=self.largura,
                 height=self.altura)
 
-    def gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(self, Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree)
+    def gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(self, Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree):
         print("GRAFICO PIVs por EARMs  SCATTER")
         cores = ["255,0,0", "0,255,0","0,0,255", "0,0,0"]
         lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
