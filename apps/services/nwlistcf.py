@@ -41,8 +41,8 @@ class NWLISTCF:
         self.casos = data.casos
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.graficos = Graficos(data)
-        diretorio_saida = f"resultados/{self.estudo}/nwlistcf"
-        os.makedirs(diretorio_saida, exist_ok=True)
+        self.diretorio_saida = f"resultados/{self.estudo}/nwlistcf"
+        os.makedirs(self.diretorio_saida, exist_ok=True)
 
         set_modelos =set({})
         for caso in self.casos:
@@ -69,7 +69,7 @@ class NWLISTCF:
                             df = self.processa_NWLISTCF(unity, caso, self.ree)
                             lista_df_casos_nwlistcf.append(df)
                         df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
-                        df_nwlistcf_rees.to_csv(diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
+                        df_nwlistcf_rees.to_csv(self.diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
 
 
                         lista_rees = df_nwlistcf_rees["REE"].unique()
@@ -79,7 +79,7 @@ class NWLISTCF:
                             df_est = self.processa_ESTADOS(unity, caso)
                             lista_df_casos_estados.append(df_est)
                         df_estados_rees = pd.concat(lista_df_casos_estados)
-                        df_estados_rees.to_csv(diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
+                        df_estados_rees.to_csv(self.diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
 
                         if(self.ree != None):
                             lista_rees = [int(self.ree)]
@@ -158,7 +158,7 @@ class NWLISTCF:
                 fig.update_xaxes(range=[self.xinf,self.xsup])
                 fig.update_layout(font=dict(size= self.tamanho_texto), showlegend=False)
                 fig.write_image(
-                    os.path.join(diretorio_saida+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
+                    os.path.join(self.diretorio_saida+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
                     width=self.largura,
                     height=self.altura)
 
@@ -179,7 +179,7 @@ class NWLISTCF:
         fig.update_layout(font=dict(size= self.tamanho_texto), showlegend=False)
 
         fig.write_image(
-            os.path.join(diretorio_saida+"/estados_"+str(u_ree)+"_temporal.png"),
+            os.path.join(self.diretorio_saida+"/estados_"+str(u_ree)+"_temporal.png"),
             width=self.largura,
             height=self.altura)
 
@@ -205,7 +205,7 @@ class NWLISTCF:
             fig.update_xaxes(range=[self.xinf,self.xsup])
             fig.update_layout(font=dict(size= self.tamanho_texto), showlegend=True)
             fig.write_image(
-                os.path.join(diretorio_saida+"/36_earm_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
+                os.path.join(self.diretorio_saida+"/36_earm_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
                 width=self.largura,
                 height=self.altura)
 
@@ -240,7 +240,7 @@ class NWLISTCF:
             fig.update_yaxes(range=[self.yinf,self.ysup])
             fig.update_xaxes(range=[self.xinf,self.xsup])
             fig.update_layout(font=dict(size= self.tamanho_texto))
-            diretorio_saida_nuvem = diretorio_saida+"/nuvem"
+            diretorio_saida_nuvem = self.diretorio_saida+"/nuvem"
             os.makedirs(diretorio_saida_nuvem, exist_ok=True)
             fig.write_image(
                 os.path.join(diretorio_saida_nuvem+"/scatter_REE_"+str(u_ree)+"_PERIODO_"+str(per)+"_temporal.png"),
