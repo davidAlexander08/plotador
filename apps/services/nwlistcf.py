@@ -126,16 +126,16 @@ class NWLISTCF:
                             Variavel_ESTADO  = "EARM"
                             Variavel_PIV = "PIEARM"
                             if(self.box == "True"):
-                                gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree)
-                                gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree)
-                                gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree)
+                                self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree)
+                                self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree)
+                                self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree)
 
                             if(self.linhas == "True"):
-                                gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_PIV, df_nwlistcf_ree)
-                                gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree)
+                                self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_PIV, df_nwlistcf_ree)
+                                self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree)
 
 
-                            gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree)
+                            self.gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree)
 
     def gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(self, Variavel, df_nwlistcf_ree):
         #BOXPLOT PARA CADA SERIE
