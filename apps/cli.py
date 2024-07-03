@@ -97,14 +97,19 @@ def eco(arquivo_json):
     default=" ", 
     help="Nome do Titulo de Todas as Imagens",
 )
+@click.option(
+    "--boolLegenda",
+    default=" ", 
+    help="True default. False desativa legendas",
+)
 @click.argument(
     "arquivo_json",
 )
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo):
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, boolLegenda):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo)
+        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, boolLegenda)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
