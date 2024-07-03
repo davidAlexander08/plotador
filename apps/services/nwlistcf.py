@@ -55,14 +55,30 @@ class NWLISTCF:
 
         modelo = list(set_modelos)[0]
         for arg in data.args:
-            if(arg.chave == "REE"):
-                sts = Sintese("VAGUA_UHE_EST") #SINTESE DUMMY
-                conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
+            sts = Sintese("VAGUA_UHE_EST") #SINTESE DUMMY
+            conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
+            if(arg.chave == "UHE"):
                 for unity in conj.listaUnidades:
                     if(modelo == "NEWAVE"):
                         lista_df_casos_nwlistcf = []
                         for caso in self.casos:
-                            print("ENTROU AQUI")
+                            df = self.processa_NWLISTCF(unity, caso)
+                            lista_df_casos_nwlistcf.append(df)
+                        df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
+                        df_nwlistcf_rees.to_csv(diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
+                        lista_rees = df_nwlistcf_rees["REE"].unique()
+                        lista_df_casos_estados = []
+                        for caso in self.casos:
+                            df_est = self.processa_ESTADOS(unity, caso)
+                            lista_df_casos_estados.append(df_est)
+                        df_estados_rees = pd.concat(lista_df_casos_estados)
+                        df_estados_rees.to_csv(diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
+
+            if(arg.chave == "REE"):
+                for unity in conj.listaUnidades:
+                    if(modelo == "NEWAVE"):
+                        lista_df_casos_nwlistcf = []
+                        for caso in self.casos:
                             df = self.processa_NWLISTCF(unity, caso)
                             lista_df_casos_nwlistcf.append(df)
                         df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
@@ -82,13 +98,13 @@ class NWLISTCF:
                             lista_rees = [int(self.ree)]
 
                         for u_ree in lista_rees:
-                            df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["iter"] != 1)]
+                            df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["ITEc"] != 1)]
                             df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
                             if(self.series != None):
                                 lista_aux = []
                                 lista_aux2 = []
                                 for elem in self.series:
-                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == int(elem))]
+                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["SIMc"] == int(elem))]
                                     lista_aux.append(df_aux)
                                     df_aux_2 = df_estados_ree.loc[(df_estados_ree["SIMc"] == int(elem))]
                                     lista_aux2.append(df_aux_2)
@@ -98,7 +114,7 @@ class NWLISTCF:
                                 lista_aux = []
                                 lista_aux2 = []
                                 for elem in self.iters:
-                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["iter"] == int(elem))]
+                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["ITEc"] == int(elem))]
                                     lista_aux.append(df_aux)
                                     df_aux_2 = df_estados_ree.loc[(df_estados_ree["ITEc"] == int(elem))]
                                     lista_aux2.append(df_aux_2)
@@ -108,237 +124,141 @@ class NWLISTCF:
                                 lista_aux = []
                                 lista_aux2 = []
                                 for elem in self.periodos:
-                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == int(elem))]
+                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["SIMc"] == int(elem))]
                                     lista_aux.append(df_aux)
                                     df_aux_2 = df_estados_ree.loc[(df_estados_ree["SIMc"] == int(elem))]
                                     lista_aux2.append(df_aux_2)
                                 df_nwlistcf_ree = pd.concat(lista_aux)
                                 df_estados_ree = pd.concat(lista_aux2)
 
-                            series = df_nwlistcf_ree["serie"].unique()
-                            iteracoes = df_nwlistcf_ree["iter"].unique()
+                            series = df_nwlistcf_ree["SIMc"].unique()
+                            iteracoes = df_nwlistcf_ree["ITEc"].unique()
                             periodos = df_nwlistcf_ree["PERIODO"].unique()
 
 
-                            if(self.linhas == "True"):
-                                #EVOLUCAO TEMPORAL DO PIV POR SERIE UMA LINHA PARA CADA ITERACAO
-                                lista_series = df_nwlistcf_ree["serie"].unique()
-                                Variavel  = "PIEARM"
-                                for ser in lista_series:
-                                    print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
-                                    df_serie = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == ser) & (df_nwlistcf_ree["iter"] != 1) ].copy()
-                                    fig = go.Figure()
-                                    lista_per = df_serie["PERIODO"].unique()
-                                    lista_iter = df_serie["iter"].unique()
-                                    degradee = 1.0/(len(lista_iter) + 1)
-                                    tonalidade = 0.95
-                                    for it in lista_iter:
-                                        df_iter = df_serie.loc[(df_serie["iter"] == it)].copy()
-                                        ly = df_iter[Variavel].tolist()
-                                        fig.add_trace(go.Scatter( y = ly, x = lista_per, name = str(it), marker_color = "rgba(0,0,155,"+str(tonalidade)+")"))
-                                        tonalidade -= degradee
-                                    fig.update_layout(title="PIs Por Iteracao Temporal "+str(u_ree) + " Serie "+str(ser))
-                                    fig.update_xaxes(title_text="Periodos")
-                                    fig.update_yaxes(title_text="R$/MWh")
-                                    #fig.update_yaxes(range=[-4000,0])
-                                    fig.update_yaxes(range=[self.yinf,self.ysup])
-                                    fig.update_xaxes(range=[self.xinf,self.xsup])
-                                    fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=True)
-                                    fig.write_image(
-                                        os.path.join(diretorio_saida+"/36_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
-                                        width=self.largura,
-                                        height=self.altura)
-                                #FIM EVOLUCAO TEMPORAL DO PIV POR SERIE
 
-
-
-
-                            if(self.box == "True"):
-
-                                #BOXPLOT PARA CADA SERIE
-                                lista_series = df_nwlistcf_ree["serie"].unique()
-                                Variavel  = "PIEARM"
-                                for ser in lista_series:
-                                    print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
-                                    df_serie = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == ser) & (df_nwlistcf_ree["iter"] != 1)].copy()
-                                    fig = go.Figure()
-                                    lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
-                                    for per in lista_periodos:
-                                        df_per = df_serie.loc[(df_serie["PERIODO"] == per) & (df_serie["iter"] != 1)].copy()
-                                        ly = df_per[Variavel].tolist()
-                                        fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
-                                        fig.update_layout(title="PIs Temporal "+str(u_ree) + " Serie "+str(ser))
-                                        fig.update_xaxes(title_text="Periodos")
-                                        fig.update_yaxes(title_text="R$/MWh")
-                                        fig.update_yaxes(range=[self.yinf,self.ysup])
-                                        fig.update_xaxes(range=[self.xinf,self.xsup])
-                                        fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
-                                        fig.write_image(
-                                            os.path.join(diretorio_saida+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
-                                            width=self.largura,
-                                            height=self.altura)
-                                #FIM BOXPLOT POR PERIODOS E SERIE
-
-
-                            if(self.box == "True"):
-                                #BOXPLOT PARA CADA PERIODO
-                                print("IMPRIMINDO GRAFICO BOXPLOT")
-
-                                Variavel  = "PIEARM"
-                                fig = go.Figure()
-                                lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
-                                for per in lista_periodos:
-                                    df_per = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["iter"] != 1)].copy()
-                                    ly = df_per[Variavel].tolist()
-                                    fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
-                                fig.update_layout(title="PIs Temporal"+str(u_ree))
-                                fig.update_xaxes(title_text="Periodos")
-                                fig.update_yaxes(title_text="R$/MWh")
-                                #fig.update_yaxes(range=[-4000,0])
-                                fig.update_yaxes(range=[self.yinf,self.ysup])
-                                fig.update_xaxes(range=[self.xinf,self.xsup])
-                                fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
-
-                                fig.write_image(
-                                    os.path.join(diretorio_saida+"/"+str(u_ree)+"_temporal.png"),
-                                    width=self.largura,
-                                    height=self.altura)
-                                #FIM BOXPLOT POR PERIODO
-
-                            if(self.box == "True"):
-                                #BOXPLOT POR PERIODO
-                                print("IMPRIMINDO GRAFICO TEMPORAL")
-                                Variavel  = "EARM"
-                                fig = go.Figure()
-                                lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
-                                for per in lista_periodos:
-                                    df_per = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] != 1)].copy()
-                                    ly = df_per[Variavel].tolist()
-                                    fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
-                                fig.update_layout(title="EARM Temporal"+str(u_ree))
-                                fig.update_xaxes(title_text="Periodos")
-                                fig.update_yaxes(title_text="MW")
-                                fig.update_yaxes(range=[self.yinf,self.ysup])
-                                fig.update_xaxes(range=[self.xinf,self.xsup])
-                                fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
-
-                                fig.write_image(
-                                    os.path.join(diretorio_saida+"/estados_"+str(u_ree)+"_temporal.png"),
-                                    width=self.largura,
-                                    height=self.altura)
-
-
-                            if(self.linhas == "True"):
-                                #print("IMPRIMINDO CSV")
-                                #df_ree.to_csv("ESTADOS_REE_"+str(REE)+".csv")
-                                Variavel  = "EARM"
-                                lista_series = df_nwlistcf_ree["serie"].unique()
-                                for ser in lista_series:
-                                    print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
-                                    df_serie = df_estados_ree.loc[(df_estados_ree["SIMc"] == ser) & (df_estados_ree["ITEc"] != 1) ].copy()
-                                    fig = go.Figure()
-                                    lista_per = df_serie["PERIODO"].unique()
-                                    lista_iter = df_serie["ITEc"].unique()
-                                    degradee = 1.0/(len(lista_iter) + 1)
-                                    tonalidade = 0.95
-                                    for it in lista_iter:
-                                        df_iter = df_serie.loc[(df_serie["ITEc"] == it)].copy()
-                                        ly = df_iter[Variavel].tolist()
-                                        fig.add_trace(go.Scatter( y = ly, x = lista_per, name = str(it), marker_color = "rgba(0,0,155,"+str(tonalidade)+")"))
-                                        tonalidade -= degradee
-                                    fig.update_layout(title="EARM Por Iteracao Temporal "+str(u_ree) + " Serie "+str(ser))
-                                    fig.update_xaxes(title_text="Periodos")
-                                    fig.update_yaxes(title_text="MW")
-                                    fig.update_yaxes(range=[self.yinf,self.ysup])
-                                    fig.update_xaxes(range=[self.xinf,self.xsup])
-                                    fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=True)
-                                    fig.write_image(
-                                        os.path.join(diretorio_saida+"/36_earm_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
-                                        width=self.largura,
-                                        height=self.altura)
-
-
-                            print("GRAFICO PIVs por EARMs  SCATTER")
                             Variavel_ESTADO  = "EARM"
                             Variavel_PIV = "PIEARM"
-                            cores = ["255,0,0", "0,255,0","0,0,255", "0,0,0"]
-                            lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
-                            for per in lista_periodos:
-                                fig = go.Figure()
-                                degradee = 1.0/11
-                                tonalidade = 0.95
-                                cor = cores[0]
-                                contador_cores = -1
-                                for it in iteracoes:
-                                    if(it%10 == 0.0):
-                                        contador_cores += 1
-                                        #print(it, " contador: ", contador_cores)
-                                        cor = cores[contador_cores]
-                                        tonalidade = 0.95
-                                    if(it != 1):
-                                        aparece = True
-                                        for ser in series:
-                                            valor_piv = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["iter"] == it) & (df_nwlistcf_ree["serie"] == ser)][Variavel_PIV].iloc[0]
-                                            valor_earm = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] == it) & (df_estados_ree["SIMc"] == ser)][Variavel_ESTADO].iloc[0]
+                            if(self.box == "True"):
+                                gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree)
+                                gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree)
+                                gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree)
 
-                                            fig.add_trace(go.Scatter( y = [valor_piv], x = [valor_earm], name = str(it), showlegend = aparece, marker_color = "rgba("+cor+","+str(tonalidade)+")"))
-                                            aparece = False
-                                        tonalidade -= degradee
-                                fig.update_layout(title="PIVs x EARM REE "+str(u_ree)+" PERIODO "+str(per))
-                                fig.update_xaxes(title_text="EARM")
-                                fig.update_yaxes(title_text="PIVs")
-                                fig.update_yaxes(range=[self.yinf,self.ysup])
-                                fig.update_xaxes(range=[self.xinf,self.xsup])
-                                fig.update_layout(font=dict(size= data.tamanho_texto))
-                                diretorio_saida_nuvem = diretorio_saida+"/nuvem"
-                                os.makedirs(diretorio_saida_nuvem, exist_ok=True)
-                                fig.write_image(
-                                    os.path.join(diretorio_saida_nuvem+"/scatter_REE_"+str(u_ree)+"_PERIODO_"+str(per)+"_temporal.png"),
-                                    width=self.largura,
-                                    height=self.altura)
+                            if(self.linhas == "True"):
+                                gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_PIV, df_nwlistcf_ree)
+                                gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree)
 
 
+                            gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree)
 
+    def gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(self, Variavel, df_nwlistcf_ree)
+        #BOXPLOT PARA CADA SERIE
+        lista_series = df_nwlistcf_ree["serie"].unique()
+        Variavel  = "PIEARM"
+        for ser in lista_series:
+            print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
+            df_serie = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == ser) & (df_nwlistcf_ree["iter"] != 1)].copy()
+            fig = go.Figure()
+            lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
+            for per in lista_periodos:
+                df_per = df_serie.loc[(df_serie["PERIODO"] == per) & (df_serie["iter"] != 1)].copy()
+                ly = df_per[Variavel].tolist()
+                fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
+                fig.update_layout(title="PIs Temporal "+str(u_ree) + " Serie "+str(ser))
+                fig.update_xaxes(title_text="Periodos")
+                fig.update_yaxes(title_text="R$/MWh")
+                fig.update_yaxes(range=[self.yinf,self.ysup])
+                fig.update_xaxes(range=[self.xinf,self.xsup])
+                fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
+                fig.write_image(
+                    os.path.join(diretorio_saida+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
+                    width=self.largura,
+                    height=self.altura)
 
+    def gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(self,Variavel, df_estados_ree)
+        #BOXPLOT POR PERIODO
+        print("IMPRIMINDO GRAFICO TEMPORAL")
+        fig = go.Figure()
+        lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
+        for per in lista_periodos:
+            df_per = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] != 1)].copy()
+            ly = df_per[Variavel].tolist()
+            fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
+        fig.update_layout(title=Variavel+" Temporal"+str(u_ree))
+        fig.update_xaxes(title_text="Periodos")
+        fig.update_yaxes(title_text="MW")
+        fig.update_yaxes(range=[self.yinf,self.ysup])
+        fig.update_xaxes(range=[self.xinf,self.xsup])
+        fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
 
+        fig.write_image(
+            os.path.join(diretorio_saida+"/estados_"+str(u_ree)+"_temporal.png"),
+            width=self.largura,
+            height=self.altura)
 
+    def gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(self,Variavel, df_estados_ree)
+        lista_series = df_nwlistcf_ree["serie"].unique()
+        for ser in lista_series:
+            print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
+            df_serie = df_estados_ree.loc[(df_estados_ree["SIMc"] == ser) & (df_estados_ree["ITEc"] != 1) ].copy()
+            fig = go.Figure()
+            lista_per = df_serie["PERIODO"].unique()
+            lista_iter = df_serie["ITEc"].unique()
+            degradee = 1.0/(len(lista_iter) + 1)
+            tonalidade = 0.95
+            for it in lista_iter:
+                df_iter = df_serie.loc[(df_serie["ITEc"] == it)].copy()
+                ly = df_iter[Variavel].tolist()
+                fig.add_trace(go.Scatter( y = ly, x = lista_per, name = str(it), marker_color = "rgba(0,0,155,"+str(tonalidade)+")"))
+                tonalidade -= degradee
+            fig.update_layout(title=Variavel+" Por Iteracao Temporal "+str(u_ree) + " Serie "+str(ser))
+            fig.update_xaxes(title_text="Periodos")
+            fig.update_yaxes(title_text="MW")
+            fig.update_yaxes(range=[self.yinf,self.ysup])
+            fig.update_xaxes(range=[self.xinf,self.xsup])
+            fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=True)
+            fig.write_image(
+                os.path.join(diretorio_saida+"/36_earm_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
+                width=self.largura,
+                height=self.altura)
 
+    def gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(self, Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree)
+        print("GRAFICO PIVs por EARMs  SCATTER")
+        cores = ["255,0,0", "0,255,0","0,0,255", "0,0,0"]
+        lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
+        for per in lista_periodos:
+            fig = go.Figure()
+            degradee = 1.0/11
+            tonalidade = 0.95
+            cor = cores[0]
+            contador_cores = -1
+            for it in iteracoes:
+                if(it%10 == 0.0):
+                    contador_cores += 1
+                    #print(it, " contador: ", contador_cores)
+                    cor = cores[contador_cores]
+                    tonalidade = 0.95
+                if(it != 1):
+                    aparece = True
+                    for ser in series:
+                        valor_piv = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["iter"] == it) & (df_nwlistcf_ree["serie"] == ser)][Variavel_PIV].iloc[0]
+                        valor_earm = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] == it) & (df_estados_ree["SIMc"] == ser)][Variavel_ESTADO].iloc[0]
 
-
-
-
-
-
-
-
-
-                        #fig = go.Figure()
-                        #casos = df_cortes_ativos_todos_casos["caso"].unique()
-                        #for caso in self.casos:
-                        #    df = df_cortes_ativos_todos_casos.loc[(df_cortes_ativos_todos_casos["caso"] == caso.nome)]
-                        #    ly = df["coef"].tolist()
-                        #    fig.add_trace(go.Box( y = ly, boxpoints = False, name = caso.nome))
-                        #
-                        #    if(self.eco == "True"):
-                        #        df_fcfs = df_fcf_todos_casos.loc[(df_fcf_todos_casos["caso"] == caso.nome)]
-                        #        ly = df_fcfs["coef"].tolist()
-                        #        fig.add_trace(go.Box( y = ly, boxpoints = False, name = "fcfnw "+caso.nome))
-                        #
-                        #fig.update_layout(title="PIs Ativos "+unity.arg.nome+" "+self.estudo)
-                        #fig.update_xaxes(title_text="Casos")
-                        #fig.update_yaxes(title_text="1000R$/hm3")
-                        #fig.update_yaxes(range=[self.yinf,self.ysup])
-                        #fig.update_xaxes(range=[self.xinf,self.xsup])
-                        #fig.update_layout(font=dict(size= data.tamanho_texto))
-                        #fig.write_image(
-                        #    os.path.join(diretorio_saida+"/pis_ativos"+unity.arg.nome+self.estudo+".png"),
-                        #    width=self.largura,
-                        #    height=self.altura)
-            
-
-
-
-
+                        fig.add_trace(go.Scatter( y = [valor_piv], x = [valor_earm], name = str(it), showlegend = aparece, marker_color = "rgba("+cor+","+str(tonalidade)+")"))
+                        aparece = False
+                    tonalidade -= degradee
+            fig.update_layout(title=Variavel_PIV+" x "+Variavel_ESTADO+" REE "+str(u_ree)+" PERIODO "+str(per))
+            fig.update_xaxes(title_text=Variavel_ESTADO)
+            fig.update_yaxes(title_text=Variavel_PIV)
+            fig.update_yaxes(range=[self.yinf,self.ysup])
+            fig.update_xaxes(range=[self.xinf,self.xsup])
+            fig.update_layout(font=dict(size= data.tamanho_texto))
+            diretorio_saida_nuvem = diretorio_saida+"/nuvem"
+            os.makedirs(diretorio_saida_nuvem, exist_ok=True)
+            fig.write_image(
+                os.path.join(diretorio_saida_nuvem+"/scatter_REE_"+str(u_ree)+"_PERIODO_"+str(per)+"_temporal.png"),
+                width=self.largura,
+                height=self.altura)
             
     def processa_ESTADOS(self, unity, caso):
         dado = Estados.read(caso.caminho+"/nwlistcf/estados.rel")
@@ -349,7 +269,7 @@ class NWLISTCF:
 
 
 
-    def processa_NWLISTCF(self, unity, caso):
+    def processa_NWLISTCF(self, unity, caso, ree):
         dado = Nwlistcfrel.read(caso.caminho+"/nwlistcf/nwlistcf.rel")
         df = dado.cortes
 
@@ -358,6 +278,7 @@ class NWLISTCF:
         #print(df_rees)
         numero_rees = df_rees["codigo"].unique()
 
+        numero_rees = df_rees["codigo"].unique() if (self.ree is None) else [self.ree]
         lista_data_frame_rees = []
         for n_ree in numero_rees:
             df_teste = df.copy()
@@ -367,7 +288,7 @@ class NWLISTCF:
             contador = 0
             for per in periodos:
                 df_temporal = df_teste.loc[(df_teste["PERIODO"] == per)].copy()
-                df_temporal["iter"] = (((df_temporal["IREG"]-22400 + 200*contador)/22800)+1).astype("int")
+                df_temporal["ITEc"] = (((df_temporal["IREG"]-22400 + 200*contador)/22800)+1).astype("int")
                 #print(df_temporal)
                 iteracoes = df_temporal["iter"].unique()
                 contador += 1
@@ -377,7 +298,7 @@ class NWLISTCF:
                     #print(df_temp)
                     registro_0 = df_temp["IREG"].iloc[-1] -1
                     #print("MENOR REGISTRO: ", registro_0)
-                    df_temp["serie"] = df_temp["IREG"] - registro_0
+                    df_temp["SIMc"] = df_temp["IREG"] - registro_0
                     #print(df_temp)
                     lista_df.append(df_temp)
             df_concat = pd.concat(lista_df).reset_index(drop = True)
