@@ -87,14 +87,19 @@ def eco(arquivo_json):
     default=None, 
     help="Label Y para todos os graficos Plotados",
 )
+@click.option(
+    "--titulo",
+    default="True", 
+    help="Ativa ou desativa o titulo de figuras",
+)
 @click.argument(
     "arquivo_json",
 )
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely):
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, titulo):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely)
+        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, titulo)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
