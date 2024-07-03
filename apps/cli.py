@@ -79,17 +79,22 @@ def eco(arquivo_json):
 )
 @click.option(
     "--cronologico",
-    default="False", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+    default="False", 
     help="Sintese Especifica a ser Plotada",
+)
+@click.option(
+    "--labely",
+    default=None, 
+    help="Label Y para todos os graficos Plotados",
 )
 @click.argument(
     "arquivo_json",
 )
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico):
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico)
+        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
@@ -297,37 +302,37 @@ def analise_fcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup):
 @click.option(
     "--ree",
     default=None,
-    help="REE para impressao",
+    help="REE para impressao. Um REE unico.",
 )
 
 @click.option(
     "--box",
     default="True",
-    help="Ativa ou desativa Boxplots",
+    help="True default. False desativa Boxplots",
 )
 
 @click.option(
     "--linhas",
     default="True",
-    help="Ativa ou desativa Graficos de Linha",
+    help="True default. False desativa graficos de Linha",
 )
 
 @click.option(
     "--series",
     default=None,
-    help="Series a serem investigadas",
+    help="Lista de series separadas por virgula a serem investigadas. Ex: 192,194",
 )
 
 @click.option(
     "--iters",
     default=None,
-    help="Iteracoes a serem investigadas",
+    help="Lista de iteracoes separados por virgula a serem investigadas. Ex: 3,4",
 )
 
 @click.option(
     "--periodos",
     default=None,
-    help="Periodos a serem investigados",
+    help="Lista de periodos separados por virgula a serem investigados. Ex: 20,21",
 )
 
 def analise_nwlistcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup, ree, box, linhas, series, iters, periodos):

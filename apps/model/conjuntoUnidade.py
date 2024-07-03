@@ -1,5 +1,5 @@
 from apps.model.sintese import Sintese
-from apps.model.argumento import Argumento
+from apps.model.argumento import Argumento 
 from apps.interface.metaData import MetaData
 from apps.model.unidade import UnidadeSintese
 from apps.model.unidadeArgumental import UnidadeArgumental
