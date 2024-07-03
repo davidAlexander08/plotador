@@ -32,6 +32,7 @@ class NWLISTCF:
         self.ree = ree
         self.box = box
         self.linhas = linhas
+        self.tamanho_texto = data.tamanho_texto
         self.series = series.split(",") if series is not None else None
         self.iters = iters.split(",") if iters is not None else None
         self.periodos = periodos.split(",") if periodos is not None else None
@@ -155,7 +156,7 @@ class NWLISTCF:
                 fig.update_yaxes(title_text="R$/MWh")
                 fig.update_yaxes(range=[self.yinf,self.ysup])
                 fig.update_xaxes(range=[self.xinf,self.xsup])
-                fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
+                fig.update_layout(font=dict(size= self.tamanho_texto), showlegend=False)
                 fig.write_image(
                     os.path.join(diretorio_saida+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
                     width=self.largura,
@@ -175,7 +176,7 @@ class NWLISTCF:
         fig.update_yaxes(title_text="MW")
         fig.update_yaxes(range=[self.yinf,self.ysup])
         fig.update_xaxes(range=[self.xinf,self.xsup])
-        fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=False)
+        fig.update_layout(font=dict(size= self.tamanho_texto), showlegend=False)
 
         fig.write_image(
             os.path.join(diretorio_saida+"/estados_"+str(u_ree)+"_temporal.png"),
@@ -202,7 +203,7 @@ class NWLISTCF:
             fig.update_yaxes(title_text="MW")
             fig.update_yaxes(range=[self.yinf,self.ysup])
             fig.update_xaxes(range=[self.xinf,self.xsup])
-            fig.update_layout(font=dict(size= data.tamanho_texto), showlegend=True)
+            fig.update_layout(font=dict(size= self.tamanho_texto), showlegend=True)
             fig.write_image(
                 os.path.join(diretorio_saida+"/36_earm_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
                 width=self.largura,
@@ -238,7 +239,7 @@ class NWLISTCF:
             fig.update_yaxes(title_text=Variavel_PIV)
             fig.update_yaxes(range=[self.yinf,self.ysup])
             fig.update_xaxes(range=[self.xinf,self.xsup])
-            fig.update_layout(font=dict(size= data.tamanho_texto))
+            fig.update_layout(font=dict(size= self.tamanho_texto))
             diretorio_saida_nuvem = diretorio_saida+"/nuvem"
             os.makedirs(diretorio_saida_nuvem, exist_ok=True)
             fig.write_image(
