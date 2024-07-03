@@ -57,7 +57,7 @@ class NWLISTCF:
         for arg in data.args:
             sts = Sintese("VAGUA_UHE_EST") #SINTESE DUMMY
             conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
-            if(arg.chave == "UHE"):
+            #if(arg.chave == "UHE"):
 
 
             if(arg.chave == "REE"):
