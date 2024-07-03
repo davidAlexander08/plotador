@@ -75,7 +75,8 @@ class Temporal:
 
         titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
         tituloFigura = titulo_padrao if self.booltitulo == "True" else " "
-        tituloFigura = titulo_padrao if self.titulo == " " else self.titulo
+        tituloFigura = titulo_padrao if self.titulo == " " else self.titulo.replace("_", " ")
+
         figura = Figura(conjUnity, mapaGO, tituloFigura)
         
         self.graficos.exportar(figura.fig, diretorio_saida_arg, titulo_padrao, self.largura, self.altura)
