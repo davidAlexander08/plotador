@@ -143,11 +143,11 @@ class NWLISTCF:
         Variavel  = "PIEARM"
         for ser in lista_series:
             print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
-            df_serie = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == ser) & (df_nwlistcf_ree["iter"] != 1)].copy()
+            df_serie = df_nwlistcf_ree.loc[(df_nwlistcf_ree["serie"] == ser) & (df_nwlistcf_ree["ITEc"] != 1)].copy()
             fig = go.Figure()
             lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
             for per in lista_periodos:
-                df_per = df_serie.loc[(df_serie["PERIODO"] == per) & (df_serie["iter"] != 1)].copy()
+                df_per = df_serie.loc[(df_serie["PERIODO"] == per) & (df_serie["ITEc"] != 1)].copy()
                 ly = df_per[Variavel].tolist()
                 fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
                 fig.update_layout(title="PIs Temporal "+str(u_ree) + " Serie "+str(ser))
@@ -227,7 +227,7 @@ class NWLISTCF:
                 if(it != 1):
                     aparece = True
                     for ser in series:
-                        valor_piv = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["iter"] == it) & (df_nwlistcf_ree["serie"] == ser)][Variavel_PIV].iloc[0]
+                        valor_piv = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["ITEc"] == it) & (df_nwlistcf_ree["serie"] == ser)][Variavel_PIV].iloc[0]
                         valor_earm = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] == it) & (df_estados_ree["SIMc"] == ser)][Variavel_ESTADO].iloc[0]
 
                         fig.add_trace(go.Scatter( y = [valor_piv], x = [valor_earm], name = str(it), showlegend = aparece, marker_color = "rgba("+cor+","+str(tonalidade)+")"))
@@ -276,11 +276,11 @@ class NWLISTCF:
                 df_temporal = df_teste.loc[(df_teste["PERIODO"] == per)].copy()
                 df_temporal["ITEc"] = (((df_temporal["IREG"]-22400 + 200*contador)/22800)+1).astype("int")
                 #print(df_temporal)
-                iteracoes = df_temporal["iter"].unique()
+                iteracoes = df_temporal["ITEc"].unique()
                 contador += 1
                 #print(iteracoes)
                 for it in iteracoes:
-                    df_temp = df_temporal.loc[(df_temporal["iter"] == it)].reset_index(drop = True)
+                    df_temp = df_temporal.loc[(df_temporal["ITEc"] == it)].reset_index(drop = True)
                     #print(df_temp)
                     registro_0 = df_temp["IREG"].iloc[-1] -1
                     #print("MENOR REGISTRO: ", registro_0)
