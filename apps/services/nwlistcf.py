@@ -58,28 +58,14 @@ class NWLISTCF:
             sts = Sintese("VAGUA_UHE_EST") #SINTESE DUMMY
             conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
             if(arg.chave == "UHE"):
-                for unity in conj.listaUnidades:
-                    if(modelo == "NEWAVE"):
-                        lista_df_casos_nwlistcf = []
-                        for caso in self.casos:
-                            df = self.processa_NWLISTCF(unity, caso)
-                            lista_df_casos_nwlistcf.append(df)
-                        df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
-                        df_nwlistcf_rees.to_csv(diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
-                        lista_rees = df_nwlistcf_rees["REE"].unique()
-                        lista_df_casos_estados = []
-                        for caso in self.casos:
-                            df_est = self.processa_ESTADOS(unity, caso)
-                            lista_df_casos_estados.append(df_est)
-                        df_estados_rees = pd.concat(lista_df_casos_estados)
-                        df_estados_rees.to_csv(diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
+
 
             if(arg.chave == "REE"):
                 for unity in conj.listaUnidades:
                     if(modelo == "NEWAVE"):
                         lista_df_casos_nwlistcf = []
                         for caso in self.casos:
-                            df = self.processa_NWLISTCF(unity, caso)
+                            df = self.processa_NWLISTCF(unity, caso, self.ree)
                             lista_df_casos_nwlistcf.append(df)
                         df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
                         df_nwlistcf_rees.to_csv(diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
