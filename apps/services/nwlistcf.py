@@ -166,7 +166,7 @@ class NWLISTCF:
         #BOXPLOT POR PERIODO
         print("IMPRIMINDO GRAFICO TEMPORAL")
         fig = go.Figure()
-        lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
+        lista_periodos = df_estados_ree["PERIODO"].unique()
         for per in lista_periodos:
             df_per = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] != 1)].copy()
             ly = df_per[Variavel].tolist()
@@ -184,7 +184,7 @@ class NWLISTCF:
             height=self.altura)
 
     def gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(self,Variavel, df_estados_ree, u_ree):
-        lista_series = df_nwlistcf_ree["SIMc"].unique()
+        lista_series = df_estados_ree["SIMc"].unique()
         for ser in lista_series:
             print("IMPRIMINDO GRAFICO DA SERIE: ", ser)
             df_serie = df_estados_ree.loc[(df_estados_ree["SIMc"] == ser) & (df_estados_ree["ITEc"] != 1) ].copy()
