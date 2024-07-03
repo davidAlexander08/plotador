@@ -18,7 +18,7 @@ class EcoIndicadores:
         return pd.concat(self.retornaMapaDF(sintese))
         
     def stub(self,df,caso, sintese):  ## REGRAS ADICIONAIS QUE VARIAM POR MODELO
-        (if caso.modelo == "NEWAVE" and sintese == "VAGUA_UHE_EST")
+        if (caso.modelo == "NEWAVE" and sintese == "VAGUA_UHE_EST"):
             df["valor"] = df["valor"]/1000
         return df
 
