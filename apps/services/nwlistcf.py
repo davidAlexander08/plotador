@@ -239,6 +239,7 @@ class NWLISTCF:
         cores = ["255,0,0", "0,255,0","0,0,255", "0,0,0"]
         lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
         lista_iteracoes = df_nwlistcf_ree["ITEc"].unique()
+        lista_series = df_nwlistcf_ree["SIMc"].unique()
         for per in lista_periodos:
             fig = go.Figure()
             degradee = 1.0/11
@@ -253,7 +254,7 @@ class NWLISTCF:
                     tonalidade = 0.95
                 if(it != 1):
                     aparece = True
-                    for ser in series:
+                    for ser in lista_series:
                         valor_piv = df_nwlistcf_ree.loc[(df_nwlistcf_ree["PERIODO"] == per) & (df_nwlistcf_ree["ITEc"] == it) & (df_nwlistcf_ree["SIMc"] == ser)][Variavel_PIV].iloc[0]
                         valor_earm = df_estados_ree.loc[(df_estados_ree["PERIODO"] == per) & (df_estados_ree["ITEc"] == it) & (df_estados_ree["SIMc"] == ser)][Variavel_ESTADO].iloc[0]
 
