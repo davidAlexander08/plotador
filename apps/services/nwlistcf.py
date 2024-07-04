@@ -240,7 +240,9 @@ class NWLISTCF:
         lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
         lista_iteracoes = df_nwlistcf_ree["ITEc"].unique()
         lista_series = df_nwlistcf_ree["SIMc"].unique()
-        print()
+        print(lista_periodos)
+        print(lista_iteracoes)
+        print(lista_series)
         for per in lista_periodos:
             fig = go.Figure()
             degradee = 1.0/11
