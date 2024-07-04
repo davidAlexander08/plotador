@@ -114,12 +114,18 @@ class NWLISTCF:
 
                     lista_rees = df_nwlistcf_rees["REE"].unique()
 
+                    
+                    flag_existe_estados = 0
                     lista_df_casos_estados = []
                     for caso in self.casos:
-                        df_est = self.processa_ESTADOS(unity, caso)
-                        lista_df_casos_estados.append(df_est)
-                    df_estados_rees = pd.concat(lista_df_casos_estados)
-                    df_estados_rees.to_csv(self.diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
+                        if(os.path.isfile(caso.caminho+"/nwlistcf/estados.rel")):
+                            flag_existe_estados = 1
+                            df_est = self.processa_ESTADOS(unity, caso)
+                            lista_df_casos_estados.append(df_est)
+
+                    if(flag_existe_estados == 1):
+                        df_estados_rees = pd.concat(lista_df_casos_estados)
+                        df_estados_rees.to_csv(self.diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
 
                     if(self.ree != None):
                         lista_rees = [int(self.ree)]
@@ -128,21 +134,25 @@ class NWLISTCF:
                         df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["ITEc"] != 1)]
                         df_nwlistcf_ree = self.filtra_data_frame(df_nwlistcf_ree)
 
-                        df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
-                        df_estados_ree = self.filtra_data_frame(df_estados_ree)
+                        if(flag_existe_estados == 1):
+                            df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
+                            df_estados_ree = self.filtra_data_frame(df_estados_ree)
 
                         Variavel_ESTADO  = "EARM"
                         Variavel_PIV = "PIEARM"
                         if(self.box == "True"):
                             self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
                             self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                            self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree, u_ree)
+                            if(flag_existe_estados == 1): 
+                                self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree, u_ree)
 
                         if(self.linhas == "True"):
                             self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                            self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree, u_ree)
+                            if(flag_existe_estados == 1): 
+                                self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree, u_ree)
 
-                        self.gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree, u_ree)
+                        if(flag_existe_estados == 1): 
+                            self.gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree, u_ree)
 
 
     def filtra_data_frame(self, df):
