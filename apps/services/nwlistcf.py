@@ -214,7 +214,7 @@ class NWLISTCF:
         fig.update_layout(font=dict(size= self.tamanho_texto), showlegend=False)
 
         fig.write_image(
-            os.path.join(self.diretorio_saida+"/estados_"+str(u_ree)+"_temporal.png"),
+            os.path.join(self.diretorio_saida+"/"+Variavel"_"+str(u_ree)+"_temporal.png"),
             width=self.largura,
             height=self.altura)
 
@@ -240,7 +240,7 @@ class NWLISTCF:
             fig.update_xaxes(range=[self.xinf,self.xsup])
             fig.update_layout(font=dict(size= self.tamanho_texto), showlegend=True)
             fig.write_image(
-                os.path.join(self.diretorio_saida+"/36_earm_iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
+                os.path.join(self.diretorio_saida+"/36_"+Variavel+"iteracao_linhas_"+str(u_ree)+"_serie_"+str(ser)+"_temporal.png"),
                 width=self.largura,
                 height=self.altura)
 
