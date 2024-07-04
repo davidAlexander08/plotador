@@ -291,8 +291,7 @@ class NWLISTCF:
         #print(df_rees)
         numero_rees = df_rees["codigo"].unique()
 
-        numero_rees = df_rees["codigo"].unique() if (self.ree is None) else [self.ree]
-        print("nuermo_rees: ", numero_rees)
+        numero_rees = df_rees["codigo"].unique() if (self.ree is None) else [int(self.ree)]
         lista_data_frame_rees = []
         for n_ree in numero_rees:
             df_teste = df.copy()
