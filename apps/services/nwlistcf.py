@@ -314,8 +314,9 @@ class NWLISTCF:
                 print(menor_registro)
                 valor_maior_proximo_registro = df_temporal["IREG"].min() + num_fw
                 print(valor_maior_proximo_registro)
-                menor_registro_proximo = df_temporal.loc[(df_temporal["IREG"] > valor_maior_proximo_registro)].min()
+                menor_registro_proximo = df_temporal.loc[(df_temporal["IREG"] > valor_maior_proximo_registro)]["IREG"].min() - 1
                 print(menor_registro_proximo)
+                print(menor_registro_proximo - menor_registro)
                 exit(1)
                 #df_temporal["ITEc"] = (((df_temporal["IREG"]-22400 + 200*contador)/22800)+1).astype("int")
                 df_temporal["ITEc"] = (((df_temporal["IREG"]-menor_registro + num_fw*contador)/22800)+1).astype("int")
