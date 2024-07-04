@@ -141,8 +141,8 @@ class NWLISTCF:
                         Variavel_ESTADO  = "EARM" 
                         Variavel_PIV = "PIV" #PIV para versao 28.0.3 e PIVARM para versao 29.4
                         if(self.box == "True"):
-                            self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
                             self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
+                            self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
                             if(flag_existe_estados == 1): 
                                 self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree, u_ree)
 
