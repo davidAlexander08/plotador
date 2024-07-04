@@ -9,6 +9,7 @@ from apps.model.argumento import Argumento
 from apps.model.unidadeArgumental import UnidadeArgumental
 from apps.graficos.figura import Figura
 from inewave.newave import Ree
+from inewave.newave import Dger
 from inewave.nwlistcf import Nwlistcfrel
 from inewave.nwlistcf import Estados
 import plotly.express as px
@@ -290,6 +291,10 @@ class NWLISTCF:
         dado = Nwlistcfrel.read(caso.caminho+"/nwlistcf/nwlistcf.rel")
         df = dado.cortes
 
+        Dger = Ree.read(caso.caminho+"/dger.dat")
+        num_fw = Dger.num_forwards
+        print("num_fw: ", num_fw)
+
         REEs = Ree.read(caso.caminho+"/ree.dat")
         df_rees = REEs.rees
         #print(df_rees)
@@ -308,7 +313,8 @@ class NWLISTCF:
                 menor_registro = df_temporal["IREG"].min() -1 
                 print(menor_registro)
                 exit(1)
-                df_temporal["ITEc"] = (((df_temporal["IREG"]-22400 + 200*contador)/22800)+1).astype("int")
+                #df_temporal["ITEc"] = (((df_temporal["IREG"]-22400 + 200*contador)/22800)+1).astype("int")
+                df_temporal["ITEc"] = (((df_temporal["IREG"]-menor_registro + 200*contador)/22800)+1).astype("int")
                 #print(df_temporal)
                 iteracoes = df_temporal["ITEc"].unique()
                 contador += 1
