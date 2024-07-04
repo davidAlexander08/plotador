@@ -53,90 +53,115 @@ class NWLISTCF:
         if(len(self.casos) != 1):
             print("ERRO: Tentativa de plotar NWLISTCF Com mais de um caso no JSON")
             exit(1)
-
+        if(list(set_modelos)[0] != "NEWAVE"):
+            print("ERRO: NWLISTCF e valido apenas para o modelo NEWAVE")
+            exit(1)
         modelo = list(set_modelos)[0]
+
         for arg in data.args:
             sts = Sintese("VAGUA_UHE_EST") #SINTESE DUMMY
             conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
-            #if(arg.chave == "UHE"):
+            if(arg.chave == "UHE"):
+                for unity in conj.listaUnidades:
+                    lista_df_casos_nwlistcf = []
+                    for caso in self.casos:
+                        df = self.processa_NWLISTCF(unity, caso, self.ree)
+                        lista_df_casos_nwlistcf.append(df)
+                    df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
+                    df_nwlistcf_rees.to_csv(self.diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
 
+                    lista_rees = df_nwlistcf_rees["REE"].unique()
+
+                    lista_df_casos_estados = []
+                    for caso in self.casos:
+                        df_est = self.processa_ESTADOS(unity, caso)
+                        lista_df_casos_estados.append(df_est)
+                    df_estados_rees = pd.concat(lista_df_casos_estados)
+                    df_estados_rees.to_csv(self.diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
+
+                    if(self.ree != None):
+                        lista_rees = [int(self.ree)]
+
+                    for u_ree in lista_rees:
+                        df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["ITEc"] != 1)]
+                        df_nwlistcf_ree = self.filtra_data_frame(df_nwlistcf_ree)
+
+                        df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
+                        df_estados_ree = self.filtra_data_frame(df_estados_ree)
+
+                        Variavel_ESTADO  = "EARM"
+                        Variavel_PIV = "PIEARM"
+                        if(self.box == "True"):
+                            self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
+                            self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
+                            self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree, u_ree)
+
+                        if(self.linhas == "True"):
+                            self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_PIV, df_nwlistcf_ree, u_ree)
+                            self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree, u_ree)
+
+                        self.gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree, u_ree)
 
             if(arg.chave == "REE"):
                 for unity in conj.listaUnidades:
-                    if(modelo == "NEWAVE"):
-                        lista_df_casos_nwlistcf = []
-                        for caso in self.casos:
-                            df = self.processa_NWLISTCF(unity, caso, self.ree)
-                            lista_df_casos_nwlistcf.append(df)
-                        df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
-                        df_nwlistcf_rees.to_csv(self.diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
+                    lista_df_casos_nwlistcf = []
+                    for caso in self.casos:
+                        df = self.processa_NWLISTCF(unity, caso, self.ree)
+                        lista_df_casos_nwlistcf.append(df)
+                    df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
+                    df_nwlistcf_rees.to_csv(self.diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
+
+                    lista_rees = df_nwlistcf_rees["REE"].unique()
+
+                    lista_df_casos_estados = []
+                    for caso in self.casos:
+                        df_est = self.processa_ESTADOS(unity, caso)
+                        lista_df_casos_estados.append(df_est)
+                    df_estados_rees = pd.concat(lista_df_casos_estados)
+                    df_estados_rees.to_csv(self.diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
+
+                    if(self.ree != None):
+                        lista_rees = [int(self.ree)]
+
+                    for u_ree in lista_rees:
+                        df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["ITEc"] != 1)]
+                        df_nwlistcf_ree = self.filtra_data_frame(df_nwlistcf_ree)
+
+                        df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
+                        df_estados_ree = self.filtra_data_frame(df_estados_ree)
+
+                        Variavel_ESTADO  = "EARM"
+                        Variavel_PIV = "PIEARM"
+                        if(self.box == "True"):
+                            self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
+                            self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
+                            self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree, u_ree)
+
+                        if(self.linhas == "True"):
+                            self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_PIV, df_nwlistcf_ree, u_ree)
+                            self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree, u_ree)
+
+                        self.gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree, u_ree)
 
 
-                        lista_rees = df_nwlistcf_rees["REE"].unique()
-
-                        lista_df_casos_estados = []
-                        for caso in self.casos:
-                            df_est = self.processa_ESTADOS(unity, caso)
-                            lista_df_casos_estados.append(df_est)
-                        df_estados_rees = pd.concat(lista_df_casos_estados)
-                        df_estados_rees.to_csv(self.diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
-
-                        if(self.ree != None):
-                            lista_rees = [int(self.ree)]
-
-                        for u_ree in lista_rees:
-                            df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["ITEc"] != 1)]
-                            df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
-                            if(self.series != None):
-                                lista_aux = []
-                                lista_aux2 = []
-                                for elem in self.series:
-                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["SIMc"] == int(elem))]
-                                    lista_aux.append(df_aux)
-                                    df_aux_2 = df_estados_ree.loc[(df_estados_ree["SIMc"] == int(elem))]
-                                    lista_aux2.append(df_aux_2)
-                                df_nwlistcf_ree = pd.concat(lista_aux)
-                                df_estados_ree = pd.concat(lista_aux2)
-                            if(self.iters != None):
-                                lista_aux = []
-                                lista_aux2 = []
-                                for elem in self.iters:
-                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["ITEc"] == int(elem))]
-                                    lista_aux.append(df_aux)
-                                    df_aux_2 = df_estados_ree.loc[(df_estados_ree["ITEc"] == int(elem))]
-                                    lista_aux2.append(df_aux_2)
-                                df_nwlistcf_ree = pd.concat(lista_aux)
-                                df_estados_ree = pd.concat(lista_aux2)
-                            if(self.periodos != None):
-                                lista_aux = []
-                                lista_aux2 = []
-                                for elem in self.periodos:
-                                    df_aux = df_nwlistcf_ree.loc[(df_nwlistcf_ree["SIMc"] == int(elem))]
-                                    lista_aux.append(df_aux)
-                                    df_aux_2 = df_estados_ree.loc[(df_estados_ree["SIMc"] == int(elem))]
-                                    lista_aux2.append(df_aux_2)
-                                df_nwlistcf_ree = pd.concat(lista_aux)
-                                df_estados_ree = pd.concat(lista_aux2)
-
-                            series = df_nwlistcf_ree["SIMc"].unique()
-                            iteracoes = df_nwlistcf_ree["ITEc"].unique()
-                            periodos = df_nwlistcf_ree["PERIODO"].unique()
-
-
-
-                            Variavel_ESTADO  = "EARM"
-                            Variavel_PIV = "PIEARM"
-                            if(self.box == "True"):
-                                self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                                self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                                self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree, u_ree)
-
-                            if(self.linhas == "True"):
-                                self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                                self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree, u_ree)
-
-
-                            self.gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree, u_ree)
+    def filtra_data_frame(self, df):
+        df_entrada = df.copy()
+        if(self.series != None):
+            lista_aux = []
+            for elem in self.series:
+                lista_aux.append(df_entrada.loc[(df_entrada["SIMc"] == int(elem))])
+            df_entrada = pd.concat(lista_aux)
+        if(self.iters != None):
+            lista_aux = []
+            for elem in self.iters:
+                lista_aux.append(df_entrada.loc[(df_entrada["ITEc"] == int(elem))])
+            df_entrada = pd.concat(lista_aux)
+        if(self.periodos != None):
+            lista_aux = []
+            for elem in self.periodos:
+                lista_aux.append( df_entrada.loc[(df_entrada["SIMc"] == int(elem))])
+            df_entrada = pd.concat(lista_aux)
+        return df_entrada
 
     def gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(self, Variavel, df_nwlistcf_ree, u_ree):
         #BOXPLOT PARA CADA SERIE
@@ -213,13 +238,14 @@ class NWLISTCF:
         print("GRAFICO PIVs por EARMs  SCATTER")
         cores = ["255,0,0", "0,255,0","0,0,255", "0,0,0"]
         lista_periodos = df_nwlistcf_ree["PERIODO"].unique()
+        lista_iteracoes = df_nwlistcf_ree["ITEc"].unique()
         for per in lista_periodos:
             fig = go.Figure()
             degradee = 1.0/11
             tonalidade = 0.95
             cor = cores[0]
             contador_cores = -1
-            for it in iteracoes:
+            for it in lista_iteracoes:
                 if(it%10 == 0.0):
                     contador_cores += 1
                     #print(it, " contador: ", contador_cores)
