@@ -305,6 +305,9 @@ class NWLISTCF:
             contador = 0
             for per in periodos:
                 df_temporal = df_teste.loc[(df_teste["PERIODO"] == per)].copy()
+                menor_registro = df_temporal["IREG"].min() -1 
+                print(menor_registro)
+                exit(1)
                 df_temporal["ITEc"] = (((df_temporal["IREG"]-22400 + 200*contador)/22800)+1).astype("int")
                 #print(df_temporal)
                 iteracoes = df_temporal["ITEc"].unique()
