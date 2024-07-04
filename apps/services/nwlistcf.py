@@ -291,8 +291,8 @@ class NWLISTCF:
         dado = Nwlistcfrel.read(caso.caminho+"/nwlistcf/nwlistcf.rel")
         df = dado.cortes
 
-        Dger = Ree.read(caso.caminho+"/dger.dat")
-        num_fw = Dger.num_forwards
+        dado_dger = Dger.read(caso.caminho+"/dger.dat")
+        num_fw = dado_dger.num_forwards
         print("num_fw: ", num_fw)
 
         REEs = Ree.read(caso.caminho+"/ree.dat")
