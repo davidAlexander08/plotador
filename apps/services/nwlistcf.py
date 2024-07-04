@@ -311,32 +311,21 @@ class NWLISTCF:
             for per in periodos:
                 df_temporal = df_teste.loc[(df_teste["PERIODO"] == per)].copy()
                 menor_registro = df_temporal["IREG"].min() -1 
-                print(menor_registro)
                 valor_maior_proximo_registro = df_temporal["IREG"].min() + num_fw
-                print(valor_maior_proximo_registro)
                 menor_registro_proximo = df_temporal.loc[(df_temporal["IREG"] > valor_maior_proximo_registro)]["IREG"].min() - 1
-                print(menor_registro_proximo)
-                print(menor_registro_proximo - menor_registro)
                 delta_registro = menor_registro_proximo - menor_registro
-                print(delta_registro)
                 #df_temporal["ITEc"] = (((df_temporal["IREG"]-22400 + 200*contador)/22800)+1).astype("int")
                 df_temporal["ITEc"] = (((df_temporal["IREG"]-menor_registro + num_fw*contador)/delta_registro)+1).astype("int")
-                #print(df_temporal)
                 iteracoes = df_temporal["ITEc"].unique()
                 contador += 1
-                #print(iteracoes)
                 for it in iteracoes:
                     df_temp = df_temporal.loc[(df_temporal["ITEc"] == it)].reset_index(drop = True)
-                    #print(df_temp)
                     registro_0 = df_temp["IREG"].iloc[-1] -1
-                    #print("MENOR REGISTRO: ", registro_0)
                     df_temp["SIMc"] = df_temp["IREG"] - registro_0
-                    #print(df_temp)
                     lista_df.append(df_temp)
             df_concat = pd.concat(lista_df).reset_index(drop = True)
             lista_data_frame_rees.append(df_concat)
         df_concat_rees =    pd.concat(lista_data_frame_rees).reset_index(drop = True)
-        #print(df_concat_rees)
         return df_concat_rees
 
 
