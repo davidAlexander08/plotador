@@ -214,7 +214,7 @@ class NWLISTCF:
         fig.update_layout(font=dict(size= self.tamanho_texto), showlegend=False)
 
         fig.write_image(
-            os.path.join(self.diretorio_saida+"/"+Variavel"_"+str(u_ree)+"_temporal.png"),
+            os.path.join(self.diretorio_saida+"/"+Variavel+"_"+str(u_ree)+"_temporal.png"),
             width=self.largura,
             height=self.altura)
 
