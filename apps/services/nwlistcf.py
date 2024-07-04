@@ -317,9 +317,10 @@ class NWLISTCF:
                 menor_registro_proximo = df_temporal.loc[(df_temporal["IREG"] > valor_maior_proximo_registro)]["IREG"].min() - 1
                 print(menor_registro_proximo)
                 print(menor_registro_proximo - menor_registro)
-                exit(1)
+                delta_registro = menor_registro_proximo - menor_registro
+                print(delta_registro)
                 #df_temporal["ITEc"] = (((df_temporal["IREG"]-22400 + 200*contador)/22800)+1).astype("int")
-                df_temporal["ITEc"] = (((df_temporal["IREG"]-menor_registro + num_fw*contador)/22800)+1).astype("int")
+                df_temporal["ITEc"] = (((df_temporal["IREG"]-menor_registro + num_fw*contador)/delta_registro)+1).astype("int")
                 #print(df_temporal)
                 iteracoes = df_temporal["ITEc"].unique()
                 contador += 1
