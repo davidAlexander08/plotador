@@ -63,6 +63,11 @@ def eco(arquivo_json):
     help="Sintese Especifica a ser Plotada",
 )
 @click.option(
+    "--argumento",
+    nargs = 2,
+    help="Argumento Especifico a ser plotado e chave. Chaves: None, SBM, REE, UHE",
+)
+@click.option(
     "--largura",
     default="1500", #VALOR INTERESSANTE PARA RELATORIOS E 1200
     help="Sintese Especifica a ser Plotada",
@@ -110,11 +115,12 @@ def eco(arquivo_json):
 @click.argument(
     "arquivo_json",
 )
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumento, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
+    argumento_, chave = argumento
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx)
+        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumento_, chave)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
@@ -397,7 +403,6 @@ def analise_cascatador(arquivo_json):
         Cascatador(data)          
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-
 
 cli.add_command(analise_pareto)
 cli.add_command(eco)
