@@ -40,9 +40,17 @@ class Temporal:
         diretorio_saida = f"resultados/{self.estudo}/temporal"
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        print(self.argumento)
-        print(self.chave)
-        exit(1)
+        if(self.argumento is not None and self.chave is None):
+            print("FALTA DECLARAR A CHAVE DO ARGUMENTO")
+            exit(1)
+        if(self.chave is not None and self.argumento is None):
+            print("FALTA DECLARAR O ARGUMENTO DO ARGUMENTO")
+            exit(1)
+        if(self.chave is not None and self.argumento is not None):
+            lista_argumentos = self.argumentos.split(",")
+            print(lista_argumentos)
+            data.args = Argumento([self.argumento], self.chave, " ")
+
 
         sinteses = data.sinteses if (self.sintese == "") else [Sintese(self.sintese)]
         for sts in sinteses:
