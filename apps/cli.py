@@ -63,9 +63,9 @@ def eco(arquivo_json):
     help="Sintese Especifica a ser Plotada",
 )
 @click.option(
-    "--argumento",
+    "--argumentos",
     default = None,
-    help="Argumento Especifico a ser plotado como SUDESTE, TRES MARIAS, etc... ",
+    help="Argumentos Especifico a ser plotado como SUDESTE, TRES MARIAS, etc...  Separados por virgula",
 )
 @click.option(
     "--chave",
@@ -120,11 +120,11 @@ def eco(arquivo_json):
 @click.argument(
     "arquivo_json",
 )
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumento, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumento, chave)
+        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 

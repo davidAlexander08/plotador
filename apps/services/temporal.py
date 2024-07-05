@@ -16,14 +16,14 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumento, chave):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave):
         self.xinf  = xinf
         self.xsup = xsup
         self.eixox = eixox
         self.estagio = estagio
         self.cenario = cenario
         self.sintese = sintese
-        self.argumento  = argumento
+        self.argumentos  = argumentos
         self.chave = chave
         self.largura = largura
         self.altura = altura
