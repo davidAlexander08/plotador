@@ -48,11 +48,9 @@ class Temporal:
             exit(1)
         if(self.chave is not None and self.argumentos is not None):
             lista_argumentos = self.argumentos.split(",")
-            print(lista_argumentos)
             data.args = [Argumento(lista_argumentos, self.chave, "out")] 
-            #if(len(lista_argumentos) == 1 and self.titulo == " "): 
-            #    self.titulo = lista_argumentos[0]
-            print(len(lista_argumentos))
+            if(len(lista_argumentos) == 1 and self.titulo == " "): 
+                self.titulo = lista_argumentos[0]
 
 
         sinteses = data.sinteses if (self.sintese == "") else [Sintese(self.sintese)]
@@ -109,7 +107,6 @@ class Temporal:
             
             for est in mapaEst:
                 mapa_estagio = {}
-                print(est)
                 for unity in conjUnity.listaUnidades:
                     mapa_estagio[unity] = mapa_temporal[unity].loc[mapa_temporal[unity]["estagio"] == int(est)]
                     self.indicadores_temporais.exportar(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+"_"+unity.titulo+"_"+conjUnity.sintese.sintese+" "+self.estudo)
