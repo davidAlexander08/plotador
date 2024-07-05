@@ -49,7 +49,7 @@ class Temporal:
         if(self.chave is not None and self.argumentos is not None):
             lista_argumentos = self.argumentos.split(",")
             print(lista_argumentos)
-            data.args = [Argumento(lista_argumentos, self.chave, self.chave)]
+            data.args = [Argumento(lista_argumentos, self.chave, " ")] if len(lista_argumentos) > 1 else [Argumento(lista_argumentos, self.chave, lista_argumentos[0])]
 
 
         sinteses = data.sinteses if (self.sintese == "") else [Sintese(self.sintese)]
