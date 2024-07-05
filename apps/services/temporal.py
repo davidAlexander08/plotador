@@ -16,7 +16,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
         self.xinf  = xinf
         self.xsup = xsup
         self.eixox = eixox
@@ -27,6 +27,7 @@ class Temporal:
         self.altura = altura
         self.cronologico = cronologico
         self.labely = labely
+        self.labelx = labelx
         self.booltitulo = booltitulo
         self.titulo = titulo
         self.showlegend = showlegend
@@ -52,6 +53,8 @@ class Temporal:
                         conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
                         if(self.labely is not None):
                             conj.legendaEixoY = self.labely
+                        if(self.labelx is not None):
+                            conj.legendaEixoX = self.labelx
                         diretorio_saida_arg = diretorio_saida+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
                         self.executa(conj,diretorio_saida_arg )
