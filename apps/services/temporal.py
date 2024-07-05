@@ -50,7 +50,9 @@ class Temporal:
             lista_argumentos = self.argumentos.split(",")
             print(lista_argumentos)
             data.args = [Argumento(lista_argumentos, self.chave, "out")] 
-            if(len(lista_argumentos) == 1 and self.titulo == " "): self.titulo = lista_argumentos[0]
+            #if(len(lista_argumentos) == 1 and self.titulo == " "): 
+            #    self.titulo = lista_argumentos[0]
+            print(len(lista_argumentos))
 
 
         sinteses = data.sinteses if (self.sintese == "") else [Sintese(self.sintese)]
