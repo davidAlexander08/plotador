@@ -52,7 +52,7 @@ def cli():
 #)
 def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
     from apps.services.temporal import Temporal
-    if(arquivo_json is not None):
+    if(arquivo_json is None):
         arquivo_json = "exemplo.json"
     print(arquivo_json)
     if os.path.isfile(arquivo_json):
