@@ -53,13 +53,11 @@ def cli():
 def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
     from apps.services.temporal import Temporal
     if(arquivo_json is None):
-        path = __file__.split("/")
-        path.pop()
+        path = __file__.split("/").pop()
         arquivo_json = "/".join(path)+"/exemplo.json"
-        print(arquivo_json)
-
     data = Dados_json_caso(arquivo_json)
-    #print(arquivo_json)
+    print(arquivo_json)
+    
     #print(os.getcwd())
     print(data)
     print(data.estudo)
