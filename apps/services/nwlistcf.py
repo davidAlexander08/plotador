@@ -59,100 +59,58 @@ class NWLISTCF:
             exit(1)
         modelo = list(set_modelos)[0]
 
-        for arg in data.args:
-            sts = Sintese("VAGUA_UHE_EST") #SINTESE DUMMY
-            conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
-            if(arg.chave == "UHE"):
-                for unity in conj.listaUnidades:
-                    lista_df_casos_nwlistcf = []
-                    for caso in self.casos:
-                        df = self.processa_NWLISTCF(unity, caso, self.ree)
-                        lista_df_casos_nwlistcf.append(df)
-                    df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
-                    df_nwlistcf_rees.to_csv(self.diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
+        print( self.yinf, " ",  self.ysup)        
 
-                    lista_rees = df_nwlistcf_rees["REE"].unique()
 
-                    lista_df_casos_estados = []
-                    for caso in self.casos:
-                        df_est = self.processa_ESTADOS(unity, caso)
-                        lista_df_casos_estados.append(df_est)
-                    df_estados_rees = pd.concat(lista_df_casos_estados)
-                    df_estados_rees.to_csv(self.diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
+        df_nwlistcf_rees = self.processa_NWLISTCF(self.casos[0], self.ree)
+        df_nwlistcf_rees.to_csv(self.diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
 
-                    if(self.ree != None):
-                        lista_rees = [int(self.ree)]
+        lista_rees = df_nwlistcf_rees["REE"].unique()
 
-                    for u_ree in lista_rees:
-                        df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["ITEc"] != 1)]
-                        df_nwlistcf_ree = self.filtra_data_frame(df_nwlistcf_ree)
+        
+        flag_existe_estados = 0
+        lista_df_casos_estados = []
+        if(os.path.isfile(caso.caminho+"/nwlistcf/estados.rel")):
+            flag_existe_estados = 1
+            df_est = self.processa_ESTADOS(self.casos[0])
+            lista_df_casos_estados.append(df_est)
 
-                        df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
-                        df_estados_ree = self.filtra_data_frame(df_estados_ree)
+        if(flag_existe_estados == 1):
+            df_estados_rees = pd.concat(lista_df_casos_estados)
+            df_estados_rees.to_csv(self.diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
 
-                        Variavel_ESTADO  = "EARM"
-                        Variavel_PIV = "PIEARM"
-                        if(self.box == "True"):
-                            self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                            self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                            self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree, u_ree)
+        if(self.ree != None):
+            lista_rees = [int(self.ree)]
 
-                        if(self.linhas == "True"):
-                            self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                            self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree, u_ree)
+        for u_ree in lista_rees:
+            df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["ITEc"] != 1)]
+            df_nwlistcf_ree = self.filtra_data_frame(df_nwlistcf_ree)
 
-                        self.gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree, u_ree)
+            if(flag_existe_estados == 1):
+                df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
+                df_estados_ree = self.filtra_data_frame(df_estados_ree)
 
-            if(arg.chave == "REE"):
-                for unity in conj.listaUnidades:
-                    lista_df_casos_nwlistcf = []
-                    for caso in self.casos:
-                        df = self.processa_NWLISTCF(unity, caso, self.ree)
-                        lista_df_casos_nwlistcf.append(df)
-                    df_nwlistcf_rees = pd.concat(lista_df_casos_nwlistcf)
-                    df_nwlistcf_rees.to_csv(self.diretorio_saida+"/df_nwlistcf_rees"+self.estudo+".csv")
+            Variavel_ESTADO  = "EARM" 
+            Variavel_PIV = "PIEARM" #PIV para versao 28.0.3 e PIEARM para versao 29.4
+            if(self.box == "True"):
+                self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
+                self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
+                if(flag_existe_estados == 1): 
+                    self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree, u_ree)
 
-                    lista_rees = df_nwlistcf_rees["REE"].unique()
+            if(self.linhas == "True"):
+                self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_PIV, df_nwlistcf_ree, u_ree)
+                if(flag_existe_estados == 1): 
+                    self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree, u_ree)
 
-                    
-                    flag_existe_estados = 0
-                    lista_df_casos_estados = []
-                    for caso in self.casos:
-                        if(os.path.isfile(caso.caminho+"/nwlistcf/estados.rel")):
-                            flag_existe_estados = 1
-                            df_est = self.processa_ESTADOS(unity, caso)
-                            lista_df_casos_estados.append(df_est)
+            if(flag_existe_estados == 1): 
+                self.gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree, u_ree)
 
-                    if(flag_existe_estados == 1):
-                        df_estados_rees = pd.concat(lista_df_casos_estados)
-                        df_estados_rees.to_csv(self.diretorio_saida+"/df_estados_rees"+self.estudo+".csv")
-
-                    if(self.ree != None):
-                        lista_rees = [int(self.ree)]
-
-                    for u_ree in lista_rees:
-                        df_nwlistcf_ree = df_nwlistcf_rees.loc[(df_nwlistcf_rees["REE"] == u_ree) & (df_nwlistcf_rees["ITEc"] != 1)]
-                        df_nwlistcf_ree = self.filtra_data_frame(df_nwlistcf_ree)
-
-                        if(flag_existe_estados == 1):
-                            df_estados_ree = df_estados_rees.loc[(df_estados_rees["REE"] == u_ree) & (df_estados_rees["ITEc"] != 1)]
-                            df_estados_ree = self.filtra_data_frame(df_estados_ree)
-
-                        Variavel_ESTADO  = "EARM" 
-                        Variavel_PIV = "PIEARM" #PIV para versao 28.0.3 e PIEARM para versao 29.4
-                        if(self.box == "True"):
-                            self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                            self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                            if(flag_existe_estados == 1): 
-                                self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_ESTADO, df_estados_ree, u_ree)
-
-                        if(self.linhas == "True"):
-                            self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_PIV, df_nwlistcf_ree, u_ree)
-                            if(flag_existe_estados == 1): 
-                                self.gera_grafico_evolucao_temporal_por_serie_para_cada_iteracao(Variavel_ESTADO, df_estados_ree, u_ree)
-
-                        if(flag_existe_estados == 1): 
-                            self.gera_grafico_nuvem_PIVs_por_Armazanamento_Scatter(Variavel_ESTADO, Variavel_PIV, df_nwlistcf_ree, df_estados_ree, u_ree)
+        #for arg in data.args:
+        #    sts = Sintese("VAGUA_UHE_EST") #SINTESE DUMMY
+        #    conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
+        #    if(arg.chave == "REE"):
+        #        for unity in conj.listaUnidades:
 
 
     def filtra_data_frame(self, df):
@@ -208,7 +166,7 @@ class NWLISTCF:
             fig.add_trace(go.Box( y = ly, boxpoints = False, name = str(per), marker_color = 'blue'))
         fig.update_layout(title=Variavel+" Temporal"+str(u_ree))
         fig.update_xaxes(title_text="Periodos")
-        fig.update_yaxes(title_text="MW")
+        fig.update_yaxes(title_text="R$/MWh")
         fig.update_yaxes(range=[self.yinf,self.ysup])
         fig.update_xaxes(range=[self.xinf,self.xsup])
         fig.update_layout(font=dict(size= self.tamanho_texto), showlegend=False)
@@ -287,7 +245,7 @@ class NWLISTCF:
                 width=self.largura,
                 height=self.altura)
             
-    def processa_ESTADOS(self, unity, caso):
+    def processa_ESTADOS(self, caso):
         dado = Estados.read(caso.caminho+"/nwlistcf/estados.rel")
         df = dado.estados
         return df
@@ -296,7 +254,7 @@ class NWLISTCF:
 
 
 
-    def processa_NWLISTCF(self, unity, caso, ree):
+    def processa_NWLISTCF(self, caso, ree):
         dado = Nwlistcfrel.read(caso.caminho+"/nwlistcf/nwlistcf.rel")
         df = dado.cortes
 
