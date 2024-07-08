@@ -60,10 +60,17 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
         flag_diretorio  = 1
     data = Dados_json_caso(arquivo_json)
     if (flag_diretorio == 1):
-        data.estudo = "default"
+        data.estudo = "_default"
         data.casos[0].nome = " "
         data.casos[0].caminho = os.getcwd()
-        data.casos[0].modelo = "NEWAVE"
+        if os.path.isfile("dger.dat"):
+            data.casos[0].modelo = "NEWAVE"
+        else if os.path.isfile("dadger.dat"):
+            data.casos[0].modelo = "DECOMP"
+        else if os.path.isfile("entdados.dat"):
+            data.casos[0].modelo = "DESSEM"
+        else: 
+            raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
     Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
 
 
