@@ -35,7 +35,7 @@ class IndicadoresTemporais(EcoIndicadores):
 
     def retorna_mapaDF_cenario_medio_temporal(self, unidade, cenario):
         eco_mapa = self.retornaMapaDF(unidade.sintese)
-        print(eco_mapa)
+        
         #print(unidade.sintese)
         mapa_temporal = {}
         if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
@@ -43,6 +43,7 @@ class IndicadoresTemporais(EcoIndicadores):
         else:
             for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.fitroColuna] == unidade.filtroArgumento]
             mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa, cenario) 
+            print(mapa_temporal)
         return mapa_temporal
 
 
