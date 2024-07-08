@@ -3,45 +3,24 @@ import os
 import json
 from apps.interface.dados_json_caso import Dados_json_caso
 from apps.utils.log import Log
-@click.group()
-def cli():
-    """
-    Aplicação para reproduzir estudos de metodologias
-    de planejamento energético feitos no âmbito
-    da CPAMP pelo ONS.
-    """
-    pass
 
-@click.command("pareto")
-@click.argument(
-    "arquivo_json",
-)
-def analise_pareto(arquivo_json):
-    from apps.services.pareto import Pareto
-    if os.path.isfile(arquivo_json):
-
-        Pareto(arquivo_json)
-    else:
-        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-
-@click.command("eco")
-@click.argument(
-    "arquivo_json",
-)
-def eco(arquivo_json):
-    from apps.services.eco import Eco
-    if os.path.isfile(arquivo_json):
-        data = Dados_json_caso(arquivo_json)
-        Eco(data)
-    else:
-        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-
-@click.command("temporal")
-@click.option(
+option_xinf = click.option(
     "--xinf",
     default=0,
     help="Ponto Inferior do Eixo X",
 )
+
+@click.group()
+def cli():
+    pass
+
+@click.command("temporal")
+@option_xinf
+#@click.option(
+#    "--xinf",
+#    default=0,
+#    help="Ponto Inferior do Eixo X",
+#)
 @click.option(
     "--xsup",
     default=60,
@@ -407,6 +386,33 @@ def analise_cascatador(arquivo_json):
         Cascatador(data)          
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
+
+@click.command("pareto")
+@click.argument(
+    "arquivo_json",
+)
+def analise_pareto(arquivo_json):
+    from apps.services.pareto import Pareto
+    if os.path.isfile(arquivo_json):
+
+        Pareto(arquivo_json)
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
+@click.command("eco")
+@click.argument(
+    "arquivo_json",
+)
+def eco(arquivo_json):
+    from apps.services.eco import Eco
+    if os.path.isfile(arquivo_json):
+        data = Dados_json_caso(arquivo_json)
+        Eco(data)
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
+
 
 cli.add_command(analise_pareto)
 cli.add_command(eco)
