@@ -1,0 +1,19 @@
+{
+    "estudo": " ",
+    "nome_caso_referencia": "",
+    "casos": [
+        {
+            "nome": "",
+            "caminho": "",
+            "cor": "rgba(0, 0, 0, 1)",
+            "modelo": ""
+        }
+    ],
+    "tamanho_texto":"20",
+    "grupo_parquet":"SBM",
+    "parquets":["GTER_SIN_EST", "GTER_SBM_EST"],
+    "argumentos":[
+		{"nome":"SBMs","chave":"SBM","args":["SUDESTE","NORDESTE","NORTE","SUL"]}
+    ]
+}
+

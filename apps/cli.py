@@ -51,12 +51,13 @@ def cli():
 #    "arquivo_json",
 #)
 def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
-    if(arquivo_json is None):
-        print(Path.home())
     from apps.services.temporal import Temporal
-    if os.path.isfile(arquivo_json):
-        data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
+    if(arquivo_json is None):
+        arquivo_json = "exemplo.json"
+    else:
+        if os.path.isfile(arquivo_json):
+            data = Dados_json_caso(arquivo_json)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
