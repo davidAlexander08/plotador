@@ -57,15 +57,13 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
         path.pop()
         arquivo_json = "/".join(path)+"/exemplo.json"
         print(arquivo_json)
-    else:
-        if os.path.isfile(arquivo_json):
-            pass
-        else:
-            raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
-    print(arquivo_json)
-    print(os.getcwd())
-    print(__file__)
+
     data = Dados_json_caso(arquivo_json)
+    #print(arquivo_json)
+    #print(os.getcwd())
+    print(data)
+    print(data.estudo)
+    exit(1)
     Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
 
 
