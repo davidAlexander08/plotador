@@ -61,6 +61,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
             raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
     print(arquivo_json)
     print(os.getcwd())
+    print(__file__)
     data = Dados_json_caso(arquivo_json)
     Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
 
