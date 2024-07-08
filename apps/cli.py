@@ -3,6 +3,7 @@ import os
 import json
 from apps.interface.dados_json_caso import Dados_json_caso
 from apps.utils.log import Log
+from pathlib import Path
 
 option_xinf = click.option("--xinf", default=0,  help="Ponto Inferior do Eixo X")
 option_xsup = click.option("--xsup", default=60, help="Ponto Superior do Eixo X")
@@ -50,7 +51,8 @@ def cli():
 #    "arquivo_json",
 #)
 def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
-    print("JSON: ", arquivo_json)
+    if(arquivo_json is None):
+        print(Path.home())
     from apps.services.temporal import Temporal
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
