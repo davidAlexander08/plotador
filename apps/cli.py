@@ -59,7 +59,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
         arquivo_json = "/".join(path)+"/exemplo.json"
         flag_diretorio  = 1
     data = Dados_json_caso(arquivo_json)
-    (flag_diretorio == 1):
+    if (flag_diretorio == 1):
         data.estudo = "default"
         data.casos[0].nome = " "
         data.casos[0].caminho = os.getcwd()
