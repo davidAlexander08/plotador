@@ -4,98 +4,44 @@ import json
 from apps.interface.dados_json_caso import Dados_json_caso
 from apps.utils.log import Log
 
-option_xinf = click.option(
-    "--xinf",
-    default=0,
-    help="Ponto Inferior do Eixo X",
-)
-
+option_xinf = click.option("--xinf", default=0,  help="Ponto Inferior do Eixo X")
+option_xsup = click.option("--xsup", default=60, help="Ponto Superior do Eixo X")
+option_estagio = click.option( "--estagio",  default="",  help="Estagio Especifico para Plotar")
+option_cenario = click.option("--cenario",   default="mean",  help="Cenario Especifico para Plotar")
+option_sintese = click.option("--sintese",  default="",  help="Sintese Especifica a ser Plotada")
+option_argumentos = click.option("--argumentos",  default = None, help="Argumentos Especifico a ser plotado como SUDESTE, TRES MARIAS, etc...  Separados por virgula")
+option_chave = click.option("--chave",  default = None,  help="Chaves para o argumento: None, SBM, REE, UHE")
+option_largura = click.option("--largura",  default="1500",   help="Sintese Especifica a ser Plotada") #VALOR INTERESSANTE PARA RELATORIOS E 1200
+option_altura = click.option( "--altura",   default="1200",   help="Sintese Especifica a ser Plotada") #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
+option_eixox = click.option( "--eixox",   default="estagio",   help="Eixo X, valores como estagio, dataInicio, dataFim")
+option_cronologico = click.option("--cronologico",   default="False",    help="Sintese Especifica a ser Plotada")
+option_labely = click.option("--labely",   default=None, help="Label Y para todos os graficos Plotados")
+option_labelx = click.option( "--labelx",   default=None,  help="Label X para todos os graficos Plotados")
+option_booltitulo = click.option("--booltitulo",   default="True", help="Ativa ou desativa o titulo de figuras")
+option_titulo = click.option("--titulo",    default=" ", help="Nome do Titulo de Todas as Imagens")
+option_showlegend = click.option("--showlegend",    default=" ", help="True default. False desativa legendas")
 @click.group()
 def cli():
     pass
 
 @click.command("temporal")
 @option_xinf
-#@click.option(
-#    "--xinf",
-#    default=0,
-#    help="Ponto Inferior do Eixo X",
-#)
-@click.option(
-    "--xsup",
-    default=60,
-    help="Ponto Superior do Eixo X",
-)
-@click.option(
-    "--estagio",
-    default="",
-    help="Estagio Especifico para Plotar",
-)
-@click.option(
-    "--cenario",
-    default="mean",
-    help="Cenario Especifico para Plotar",
-)
-@click.option(
-    "--sintese",
-    default="",
-    help="Sintese Especifica a ser Plotada",
-)
-@click.option(
-    "--argumentos",
-    default = None,
-    help="Argumentos Especifico a ser plotado como SUDESTE, TRES MARIAS, etc...  Separados por virgula",
-)
-@click.option(
-    "--chave",
-    default = None,
-    help="Chaves para o argumento: None, SBM, REE, UHE",
-)
-@click.option(
-    "--largura",
-    default="1500", #VALOR INTERESSANTE PARA RELATORIOS E 1200
-    help="Sintese Especifica a ser Plotada",
-)
-@click.option(
-    "--altura",
-    default="1200", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
-    help="Sintese Especifica a ser Plotada",
-)
-@click.option(
-    "--eixox",
-    default="estagio",
-    help="Eixo X, valores como estagio, dataInicio, dataFim",
-)
-@click.option(
-    "--cronologico",
-    default="False", 
-    help="Sintese Especifica a ser Plotada",
-)
-@click.option(
-    "--labely",
-    default=None, 
-    help="Label Y para todos os graficos Plotados",
-)
-@click.option(
-    "--labelx",
-    default=None, 
-    help="Label X para todos os graficos Plotados",
-)
-@click.option(
-    "--booltitulo",
-    default="True", 
-    help="Ativa ou desativa o titulo de figuras",
-)
-@click.option(
-    "--titulo",
-    default=" ", 
-    help="Nome do Titulo de Todas as Imagens",
-)
-@click.option(
-    "--showlegend",
-    default=" ", 
-    help="True default. False desativa legendas",
-)
+@option_xsup
+@option_estagio
+@option_cenario
+@option_sintese
+@option_argumentos
+@option_chave
+@option_largura
+@option_altura
+@option_eixox
+@option_cronologico
+@option_labely
+@option_labelx
+@option_booltitulo
+@option_titulo
+@option_showlegend
+
 @click.argument(
     "arquivo_json",
 )
