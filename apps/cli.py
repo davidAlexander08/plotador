@@ -55,6 +55,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
     if(arquivo_json is None):
         arquivo_json = "exemplo.json"
     print(arquivo_json)
+    print(Path.home())
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
         Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
