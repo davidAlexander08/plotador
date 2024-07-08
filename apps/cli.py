@@ -23,6 +23,7 @@ option_showlegend = click.option("--showlegend",    default=" ", help="True defa
 option_yinf  = click.option("--yinf", default=None, help="Ponto Inferior do Eixo Y")
 option_ysup = click.option("--ysup", default=None, help="Ponto Superior do Eixo Y")
 
+option_json = click.option("--json", default = None, help ="definicao do arquivo json. Caso nenhum, ele considera estar dentro da pasta do caso")
 @click.group()
 def cli():
     pass
@@ -44,10 +45,10 @@ def cli():
 @option_booltitulo
 @option_titulo
 @option_showlegend
-
-@click.argument(
-    "arquivo_json",
-)
+@option_json
+#@click.argument(
+#    "arquivo_json",
+#)
 def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
     print("JSON: ", arquivo_json)
     from apps.services.temporal import Temporal
