@@ -16,6 +16,7 @@ class Dados_json_caso(MetaData):
 
     def __init__(self, arquivo_json):
         MetaData.__init__(self)
+        print(arquivo_json)
 
         with open(arquivo_json, "r") as f:
             dados = json.load(f)
