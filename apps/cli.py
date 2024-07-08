@@ -117,7 +117,6 @@ def analise_fcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup):
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
 
-
 @click.command("nwlistcf")
 @click.argument(
     "arquivo_json",
@@ -131,6 +130,7 @@ def analise_fcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup):
     default="False", #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
     help="Plota tambem o eco dos cortes",
 )
+
 @option_yinf
 @option_ysup
 
