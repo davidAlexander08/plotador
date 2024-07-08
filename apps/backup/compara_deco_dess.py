@@ -21,7 +21,7 @@ dic_Dess_48 = {}
 casos = [("AGO_Deco","ago21/dessem_d16/","16 DE AGOSTO"),("NOV_Deco","nov21/dessem_d10/", "10 DE NOVEMBRO")]
 for caso in casos:
 	for elemento in tipos:
-		arq = "/home/ESTUDO/PEM/Atividades/Ciclo23_24/Analise_CVAR/"+caso[0]+"/"+parquet+"_"+elemento+".parquet.gzip"
+		arq = caso[0]+"/"+parquet+"_"+elemento+".parquet.gzip"
 		df_GT_Deco = pd.read_parquet(arq, engine='pyarrow')
 		if(filtro != ""):
 			df_GT_Deco = df_GT_Deco.loc[(df_GT_Deco["submercado"] == filtro)]
@@ -31,11 +31,11 @@ for caso in casos:
 		#print("Deco: ", valor_gt_Deco)
 		dic_Decomp[elemento] = [valor_gt_Deco]
 
-		ent = Entdados.read("/home/ESTUDO/PEM/Atividades/Ciclo23_24/Analise_CVAR/"+caso[1]+elemento+"/entdados.dat")
+		ent = Entdados.read(caso[1]+elemento+"/entdados.dat")
 		df = ent.tm(df=True)
 		df_linha = df.reset_index(drop = False)["duracao"]
 
-		arq = "/home/ESTUDO/PEM/Atividades/Ciclo23_24/Analise_CVAR/"+caso[1]+elemento+"/sintese/"+parquet+".parquet.gzip"
+		arq = +caso[1]+elemento+"/sintese/"+parquet+".parquet.gzip"
 		df_GT_Dess = pd.read_parquet(arq, engine='pyarrow')
 		if(filtro != ""):
 			df_GT_Dess = df_GT_Dess.loc[(df_GT_Dess["submercado"] == filtro)]
