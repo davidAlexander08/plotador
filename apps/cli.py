@@ -54,13 +54,16 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
     from apps.services.temporal import Temporal
     if(arquivo_json is None):
         arquivo_json = "exemplo.json"
+    else:
+        if os.path.isfile(arquivo_json):
+            pass
+        else:
+            raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
     print(arquivo_json)
     print(os.getcwd())
-    if os.path.isfile(arquivo_json):
-        data = Dados_json_caso(arquivo_json)
-        Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
-    else:
-        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+    data = Dados_json_caso(arquivo_json)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
+
 
 @click.command("conjunto")
 @option_xinf
