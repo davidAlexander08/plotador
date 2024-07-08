@@ -139,7 +139,7 @@ class NWLISTCF:
                             df_estados_ree = self.filtra_data_frame(df_estados_ree)
 
                         Variavel_ESTADO  = "EARM" 
-                        Variavel_PIV = "PIV" #PIV para versao 28.0.3 e PIEARM para versao 29.4
+                        Variavel_PIV = "PIEARM" #PIV para versao 28.0.3 e PIEARM para versao 29.4
                         if(self.box == "True"):
                             self.gera_grafico_boxplot_por_periodo_todas_series_e_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
                             self.gera_grafico_boxplot_por_serie_para_cada_periodo_todas_iteracoes(Variavel_PIV, df_nwlistcf_ree, u_ree)
