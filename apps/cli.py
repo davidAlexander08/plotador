@@ -55,9 +55,8 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
     if(arquivo_json is None):
         path = __file__.split("/")
         path.pop()
-        print(path)
-        print("/".join(path))
-        arquivo_json = "exemplo.json"
+        arquivo_json = "/".join(path)+"/exemplo.json"
+        print(arquivo_json)
     else:
         if os.path.isfile(arquivo_json):
             pass
