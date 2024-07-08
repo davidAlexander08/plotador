@@ -23,7 +23,7 @@ option_showlegend = click.option("--showlegend",    default=" ", help="True defa
 option_yinf  = click.option("--yinf", default=None, help="Ponto Inferior do Eixo Y")
 option_ysup = click.option("--ysup", default=None, help="Ponto Superior do Eixo Y")
 
-option_json = click.option("--json", default = None, help ="definicao do arquivo json. Caso nenhum, ele considera estar dentro da pasta do caso")
+option_json = click.option("--arquivo_json", "--json", default = None, help ="definicao do arquivo json. Caso nenhum, ele considera estar dentro da pasta do caso")
 @click.group()
 def cli():
     pass
