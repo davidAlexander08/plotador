@@ -84,6 +84,7 @@ class Temporal:
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
+            print(df_temporal)
             mapa_temporal[unity] = df_temporal
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+self.estudo)
         
