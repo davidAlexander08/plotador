@@ -41,13 +41,8 @@ class IndicadoresTemporais(EcoIndicadores):
         if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
             return self.__retorna_mapa_media_parquet(eco_mapa, cenario)
         else:
-            print("ECO: ", eco_mapa)
-            print(unidade.fitroColuna)
-            print(unidade.filtroArgumento)
             for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.fitroColuna] == unidade.filtroArgumento]
-            print(eco_mapa)
             mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa, cenario) 
-            print(mapa_temporal)
         return mapa_temporal
 
 
