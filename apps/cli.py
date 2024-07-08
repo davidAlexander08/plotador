@@ -52,17 +52,18 @@ def cli():
 #)
 def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
     from apps.services.temporal import Temporal
+    flag_diretorio = 0
     if(arquivo_json is None):
         path = __file__.split("/")
         path.pop()
         arquivo_json = "/".join(path)+"/exemplo.json"
+        flag_diretorio  = 1
     data = Dados_json_caso(arquivo_json)
-
-    print(arquivo_json)
-    #print(os.getcwd())
-    print(data)
-    print(data.estudo)
-    exit(1)
+    (flag_diretorio == 1):
+        data.estudo = "default"
+        data.casos[0].nome = " "
+        data.casos[0].caminho = os.getcwd()
+        data.casos[0].modelo = "NEWAVE"
     Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
 
 
