@@ -65,9 +65,9 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
         data.casos[0].caminho = os.getcwd()
         if os.path.isfile("dger.dat"):
             data.casos[0].modelo = "NEWAVE"
-        else if os.path.isfile("dadger.dat"):
+        elif os.path.isfile("dadger.dat"):
             data.casos[0].modelo = "DECOMP"
-        else if os.path.isfile("entdados.dat"):
+        elif os.path.isfile("entdados.dat"):
             data.casos[0].modelo = "DESSEM"
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
