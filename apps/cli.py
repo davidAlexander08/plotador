@@ -65,7 +65,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
         if os.path.isfile("dger.dat"):
             data.casos[0].modelo = "NEWAVE"
             data.args = [Argumento(["SUDESTE","NORDESTE","NORTE","SUL"], "SBM", "SBMs")]
-        elif os.path.isfile("dadger.dat"):
+        elif os.path.isfile("decomp.tim"):
             data.casos[0].modelo = "DECOMP"
             data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
         elif os.path.isfile("entdados.dat"):
