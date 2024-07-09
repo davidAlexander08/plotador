@@ -16,7 +16,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho):
         self.xinf  = xinf
         self.xsup = xsup
         self.eixox = eixox
@@ -34,6 +34,7 @@ class Temporal:
         self.titulo = titulo
         self.showlegend = showlegend
         self.estudo = data.estudo
+        self.tamanho_texto = data.tamanho_texto if tamanho is None else tamanho
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
@@ -58,14 +59,14 @@ class Temporal:
             espacial = sts.sintese.split("_")[1] 
             if(espacial == "SIN"):
                 arg = Argumento(None, None, "SIN")
-                conj = ConjuntoUnidadeSintese(sts,arg , "estagios", data.limites, data.tamanho_texto)
+                conj = ConjuntoUnidadeSintese(sts,arg , "estagios", data.limites, self.tamanho_texto)
                 diretorio_saida_arg = diretorio_saida+"/"+arg.nome
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 self.executa(conj,diretorio_saida_arg )
             else:
                 for arg in data.args:
                     if(espacial == arg.chave):
-                        conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, data.tamanho_texto)
+                        conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, self.tamanho_texto)
                         if(self.labely is not None):
                             conj.legendaEixoY = self.labely
                         if(self.labelx is not None):

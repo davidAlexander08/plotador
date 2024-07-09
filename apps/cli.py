@@ -23,7 +23,7 @@ option_titulo = click.option("--titulo",    default=" ", help="Nome do Titulo de
 option_showlegend = click.option("--showlegend",    default=" ", help="True default. False desativa legendas")
 option_yinf  = click.option("--yinf", default=None, help="Ponto Inferior do Eixo Y")
 option_ysup = click.option("--ysup", default=None, help="Ponto Superior do Eixo Y")
-
+option_tamanho = click.option("--tamanho", default=None, help="Tamanho da letra")
 option_json = click.option("--arquivo_json", "--json", default = None, help ="definicao do arquivo json. Caso nenhum, ele considera estar dentro da pasta do caso")
 @click.group()
 def cli():
@@ -47,7 +47,8 @@ def cli():
 @option_titulo
 @option_showlegend
 @option_json
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx):
+@option_tamanho
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho):
     from apps.services.temporal import Temporal
     flag_diretorio = 0
     if(arquivo_json is None):
@@ -68,7 +69,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
             data.casos[0].modelo = "DESSEM"
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
-    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho)
 
 
 @click.command("conjunto")
