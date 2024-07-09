@@ -4,6 +4,7 @@ import json
 from apps.interface.dados_json_caso import Dados_json_caso
 from apps.utils.log import Log
 from pathlib import Path
+from apps.model.argumento import Argumento
 
 option_xinf = click.option("--xinf", default=0,  help="Ponto Inferior do Eixo X")
 option_xsup = click.option("--xsup", default=60, help="Ponto Superior do Eixo X")
