@@ -50,7 +50,6 @@ class Conjunto:
         for conjunto in self.conjuntoCasos:
             eco_indicadores = EcoIndicadores(conjunto.casos)
             df_temp = eco_indicadores.retorna_df_concatenado(conj.sintese.sintese)
-            print(df_temp)
             temp = []
             for caso in conjunto.casos:
                 df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
@@ -60,7 +59,6 @@ class Conjunto:
                 if(caso.modelo == "DESSEM"):
                     df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
                     temp.append(df)
-            print(temp)
             df_tempo_total = pd.concat(temp).reset_index(drop = True)
             df_tempo_total["conjunto"] = conjunto.nome
             mapaTempo[conjunto] = df_tempo_total
