@@ -55,11 +55,12 @@ class Conjunto:
             for caso in conjunto.casos:
                 df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
                 df_caso["tempo"] = df_caso["tempo"] /(60)
-                if(caso.modelo == "NEWAVE"):
+                if(caso.modelo == "NEWAVE" or caso.modelo == "DECOMP"):
                     temp.append(df_caso.loc[(df_caso["etapa"] == "Tempo Total")])
                 if(caso.modelo == "DESSEM"):
                     df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
                     temp.append(df)
+            print(temp)
             df_tempo_total = pd.concat(temp).reset_index(drop = True)
             df_tempo_total["conjunto"] = conjunto.nome
             mapaTempo[conjunto] = df_tempo_total
