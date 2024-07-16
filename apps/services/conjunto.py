@@ -30,7 +30,7 @@ class Conjunto:
         self.ysup = ysup
         self.eixox = eixox
         self.labelx = labelx
-        self.tamanho_texto = data.tamanho_texto if tamanho is None else tamanho
+        self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         self.estagio = estagio
         self.cenario = cenario
         self.sintese = sintese
