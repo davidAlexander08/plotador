@@ -150,6 +150,12 @@ class Conjunto:
                     df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
                 if(self.xinf > df_temporal["estagio"].min()):
                     df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
+                
+                if(self.yinf is not None and self.ysup is None):
+                    self.ysup = df_temporal["valor"].max()
+
+                if(self.ysup is not None and self.yinf is None):
+                    self.yinf = df_temporal["valor"].min() 
 
                 df_temporal["conjunto"] = conjunto.nome
                 mapaTemporal[conjunto.nome] = df_temporal
