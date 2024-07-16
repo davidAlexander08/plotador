@@ -22,7 +22,7 @@ import json
 class Conjunto:
 
 
-    def __init__(self, data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx):
+    def __init__(self, data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho):
         self.conjuntoCasos = data.conjuntoCasos
         self.xinf  = xinf
         self.xsup = xsup
@@ -30,6 +30,7 @@ class Conjunto:
         self.ysup = ysup
         self.eixox = eixox
         self.labelx = labelx
+        self.tamanho_texto = data.tamanho_texto if tamanho is None else tamanho
         self.estagio = estagio
         self.cenario = cenario
         self.sintese = sintese
@@ -64,7 +65,7 @@ class Conjunto:
 
         sts_temp = Sintese("TEMPO")
         arg_temp = Argumento(None, None, ["ree", "25x35"])
-        conj = ConjuntoUnidadeSintese(sts_temp,arg_temp , "casos", data.limites, data.tamanho_texto)
+        conj = ConjuntoUnidadeSintese(sts_temp,arg_temp , "casos", data.limites, self.tamanho_texto)
         mapaTempo = {}
         fig = go.Figure()
         concat_df = []
@@ -110,7 +111,7 @@ class Conjunto:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
                 arg = Argumento(None, None, "SIN")
-                conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, data.tamanho_texto)
+                conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, self.tamanho_texto)
                 if(self.labelx is not None):
                     conj.legendaEixoX = self.labelx
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
@@ -120,7 +121,7 @@ class Conjunto:
             else:
                 for arg in data.args:
                     if(espacial == arg.chave):
-                        conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, data.tamanho_texto) 
+                        conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, self.tamanho_texto) 
                         if(self.labelx is not None):
                             conj.legendaEixoX = self.labelx
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
