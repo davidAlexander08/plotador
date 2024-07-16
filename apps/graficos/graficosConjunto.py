@@ -129,9 +129,10 @@ class GraficosConjunto:
                         line = dict(color = conj.cor),
                         showlegend=show,
                     ), row = contador_lin, col = contador_col    )
-                fig_subplot.update_xaxes(title= legendaEixoX, row = contador_lin, col = contador_col )
+                
                 if(contador_lin == 1 and contador_col == 1):
                     fig_subplot.update_yaxes(title=conjUnity.legendaEixoY, row = contador_lin, col = contador_col )
+                    fig_subplot.update_xaxes(title= legendaEixoX, row = contador_lin, col = contador_col )
                 contador_col += 1
                 if(contador_col == subplot_col+1):
                     contador_col = 1
