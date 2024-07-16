@@ -41,8 +41,8 @@ class Conjunto:
         self.graficosConjunto = GraficosConjunto(data.conjuntoCasos)
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        self.subp_col = int(self.subplot.split(",")[0]) if self.subplot is not None else 4
-        self.subp_lin = int(self.subplot.split(",")[1]) if self.subplot is not None else 3
+        self.subp_col = int(subplot.split(",")[0]) if subplot is not None else 4
+        self.subp_lin = int(subplot.split(",")[1]) if subplot is not None else 3
 
         sts_temp = Sintese("TEMPO")
         arg_temp = Argumento(None, None, ["ree", "25x35"])
