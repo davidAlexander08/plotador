@@ -22,13 +22,14 @@ import json
 class Conjunto:
 
 
-    def __init__(self, data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot):
+    def __init__(self, data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx):
         self.conjuntoCasos = data.conjuntoCasos
         self.xinf  = xinf
         self.xsup = xsup
         self.yinf = yinf
         self.ysup = ysup
         self.eixox = eixox
+        self.labelx = labelx
         self.estagio = estagio
         self.cenario = cenario
         self.sintese = sintese
@@ -110,6 +111,8 @@ class Conjunto:
             if(espacial == "SIN"):
                 arg = Argumento(None, None, "SIN")
                 conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, data.tamanho_texto)
+                if(self.labelx is not None):
+                    conj.legendaEixoX = self.labelx
                 diretorio_saida_arg = diretorio_saida+"/"+espacial
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 #unity = UnidadeSintese(sts, args, "caso", data.limites, data.tamanho_texto)
@@ -118,6 +121,8 @@ class Conjunto:
                 for arg in data.args:
                     if(espacial == arg.chave):
                         conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, data.tamanho_texto) 
+                        if(self.labelx is not None):
+                            conj.legendaEixoX = self.labelx
                         diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
                         #unity = UnidadeSintese(sts, args, "caso", data.limites, data.tamanho_texto)
