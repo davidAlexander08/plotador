@@ -150,7 +150,7 @@ class Conjunto:
             titulo_padrao = conjUnity.titulo+" "+unity.titulo+" "+self.estudo
             tituloFigura = titulo_padrao if self.titulo == " " else self.titulo.replace("_", " ")
             if(flag_muitos_casos == 0):
-                mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, tituloFigura, legEixoX = "estagios", self.subp_col, self.subp_lin)
+                mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, tituloFigura, self.subp_col, self.subp_lin, legEixoX = "estagios" )
                 for titulo in mapaFig:
                     self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, self.largura, self.altura)
 
