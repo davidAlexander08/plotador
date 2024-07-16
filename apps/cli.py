@@ -26,7 +26,7 @@ option_yinf  = click.option("--yinf", default=None, help="Ponto Inferior do Eixo
 option_ysup = click.option("--ysup", default=None, help="Ponto Superior do Eixo Y")
 option_tamanho = click.option("--tamanho", default=None, help="Tamanho da letra")
 option_json = click.option("--arquivo_json", "--json", default = None, help ="definicao do arquivo json. Caso nenhum, ele considera estar dentro da pasta do caso")
-option_json = click.option("--subplot", default = None, help ="definicao do numero de colunas e linhas do subplot separados por virgula")
+option_subplot = click.option("--subplot", default = None, help ="definicao do numero de colunas e linhas do subplot separados por virgula")
 @click.group()
 def cli():
     pass
