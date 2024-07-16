@@ -22,7 +22,7 @@ import json
 class Conjunto:
 
 
-    def __init__(self, data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, titulo, subplot):
+    def __init__(self, data, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot):
         self.conjuntoCasos = data.conjuntoCasos
         self.xinf  = xinf
         self.xsup = xsup
@@ -33,6 +33,8 @@ class Conjunto:
         self.largura = largura
         self.altura = altura
         self.titulo = titulo
+        self.argumentos  = argumentos
+        self.chave = chave
         self.cronologico = cronologico
         self.estudo = data.estudo
         self.nome_caso_referencia = ""
@@ -44,6 +46,18 @@ class Conjunto:
         self.subp_col = int(subplot.split(",")[0]) if subplot is not None else 4
         self.subp_lin = int(subplot.split(",")[1]) if subplot is not None else 3
         print(self.subp_col, " ", self.subp_lin)
+
+        if(self.argumentos is not None and self.chave is None):
+            print("FALTA DECLARAR A CHAVE DO ARGUMENTO")
+            exit(1)
+        if(self.chave is not None and self.argumentos is None):
+            print("FALTA DECLARAR O ARGUMENTO DO ARGUMENTO")
+            exit(1)
+        if(self.chave is not None and self.argumentos is not None):
+            lista_argumentos = self.argumentos.split(",")
+            data.args = [Argumento(lista_argumentos, self.chave, "out")] 
+            if(len(lista_argumentos) == 1 and self.titulo == " "): 
+                self.titulo = lista_argumentos[0]
 
         sts_temp = Sintese("TEMPO")
         arg_temp = Argumento(None, None, ["ree", "25x35"])
