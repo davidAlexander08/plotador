@@ -22,7 +22,7 @@ import json
 class Conjunto:
 
 
-    def __init__(self, data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico):
+    def __init__(self, data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, titulo):
         self.conjuntoCasos = data.conjuntoCasos
         self.xinf  = xinf
         self.xsup = xsup
@@ -32,6 +32,7 @@ class Conjunto:
         self.sintese = sintese
         self.largura = largura
         self.altura = altura
+        self.titulo = titulo
         self.cronologico = cronologico
         self.estudo = data.estudo
         self.nome_caso_referencia = ""
@@ -81,10 +82,10 @@ class Conjunto:
 
         df_tempo = pd.concat(concat_df)
         eco_indicadores.exportar(df_tempo,diretorio_saida,  "conjunto_tempo "+self.estudo)
+        sinteses = data.sinteses if (self.sintese == "") else [Sintese(self.sintese)]
 
 
-
-        for sts in data.sinteses:
+        for sts in sinteses:
             espacial = sts.sintese.split("_")[1]
             if(espacial == "SIN"):
                 arg = Argumento(None, None, "SIN")
@@ -107,6 +108,7 @@ class Conjunto:
 
 
     def executa(self, conjUnity, diretorio_saida_arg):
+        
         mapaTemporal_2_mes = {}
         mapaTemporal_1_est = {}
         mapaMedio = {}
@@ -142,9 +144,10 @@ class Conjunto:
                 #listaMedia.append(df_medio)
 
             indicadores_temporais.exportar(pd.concat(mapaTemporal), diretorio_saida_arg,  "temporal_"+conjUnity.titulo+"_"+unity.titulo+"_"+self.estudo)
-
+            titulo_padrao = unity, conjUnity.titulo+" "+unity.titulo+" "+self.estudo
+            tituloFigura = titulo_padrao if self.titulo == " " else self.titulo.replace("_", " ")
             if(flag_muitos_casos == 0):
-                mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, conjUnity.titulo+" "+unity.titulo+" "+self.estudo, legEixoX = "estagios")
+                mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, tituloFigura, legEixoX = "estagios")
                 for titulo in mapaFig:
                     self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, self.largura, self.altura)
 
