@@ -194,7 +194,7 @@ class Conjunto:
             
         if(self.cronologico == "True"):
             mapaGO = self.graficosConjunto.gera_grafico_linha(mapaCronologico, colx = self.eixox, cronologico = self.cronologico)
-            figura = Figura(conjUnity, mapaGO, tituloFigura)
+            figura = Figura(conjUnity, mapaGO, tituloFigura, self.yinf, self.ysup)
             self.graficosConjunto.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
         #mapaGO = self.graficosConjunto.gera_grafico_linhas_diferentes_casos(mapaTemporal_1_est)
         #figura = Figura(conjUnity, mapaGO, "Primeiro Est "+conjUnity.titulo+self.estudo)

@@ -53,7 +53,7 @@ class GraficosConjunto:
     def gera_grafico_linha(
         self,
         mapa,
-        cronologico, 
+        cronologico,
         coly = "valor",
         #colx = "estagio"
         colx = "estagio" ) :

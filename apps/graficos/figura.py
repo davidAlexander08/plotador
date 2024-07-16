@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 class Figura():
 
-    def __init__(self, conjUnity , mapaGO, titulo):
+    def __init__(self, conjUnity , mapaGO, titulo, yinf = None,  ysup = None):
         self.titulo = titulo
         self.fig = make_subplots(rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
         for unity in conjUnity.listaUnidades:
@@ -15,6 +15,7 @@ class Figura():
                 lim_sup = max(trace.y) if len(trace.y) is not 0 else 0
                 lim_inf = min(trace.y) if len(trace.y) is not 0 else 0
                 self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col)
+                self.fig.update_yaxes(range=[yinf,ysup])
             if(unity.arg.lin == 1 and unity.arg.col == 1):
                 self.fig.update_yaxes(title=conjUnity.legendaEixoY, row = unity.arg.lin , col = unity.arg.col) 
                 self.fig.update_xaxes(title=conjUnity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
