@@ -107,8 +107,11 @@ class GraficosConjunto:
 
         legendaEixoX = conjUnity.legendaEixoX if legEixoX == "" else legEixoX
         
+        subplot_col = subp_col
+        subplot_lin = subp_lin
+
         mapaFiguras = {}
-        fig_subplot = make_subplots(rows=subp_lin, cols=subp_col,subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
+        fig_subplot = make_subplots(rows=subplot_lin, cols=subplot_col,subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
         for conj in self.conjuntoCasos:
             df_conj = mapaConjuntoCasos[conj.nome]
             contador_col = 1
