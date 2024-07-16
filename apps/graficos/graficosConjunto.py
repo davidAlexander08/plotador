@@ -96,12 +96,13 @@ class GraficosConjunto:
         mapaConjuntoCasos,
         conjUnity, 
         unidade,
+        subp_col,
+        subp_lin,
         titulo: str,
         legEixoX = "",
         colY = "valor",
         colX = "index",
-        subp_col,
-        subp_lin,
+
     ) -> go.Figure:
 
         legendaEixoX = conjUnity.legendaEixoX if legEixoX == "" else legEixoX
