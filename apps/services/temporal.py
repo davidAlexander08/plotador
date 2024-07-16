@@ -60,6 +60,10 @@ class Temporal:
             if(espacial == "SIN"):
                 arg = Argumento(None, None, "SIN")
                 conj = ConjuntoUnidadeSintese(sts,arg , "estagios", data.limites, self.tamanho_texto)
+                if(self.labely is not None):
+                    conj.legendaEixoY = self.labely
+                if(self.labelx is not None):
+                    conj.legendaEixoX = self.labelx
                 diretorio_saida_arg = diretorio_saida+"/"+arg.nome
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 self.executa(conj,diretorio_saida_arg )
