@@ -100,8 +100,8 @@ class GraficosConjunto:
         legEixoX = "",
         colY = "valor",
         colX = "index",
-        subp_col = 4,
-        subp_lin = 3
+        subp_col,
+        subp_lin,
     ) -> go.Figure:
 
         legendaEixoX = conjUnity.legendaEixoX if legEixoX == "" else legEixoX
