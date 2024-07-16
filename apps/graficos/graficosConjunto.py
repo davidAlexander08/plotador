@@ -145,6 +145,6 @@ class GraficosConjunto:
         fig_subplot.update_layout(title = titulo, 
                                   font=dict(size= conjUnity.tamanho_texto)
                                   )
-        fig.update_yaxes(range=[self.yinf,self.ysup])
+        fig_subplot.update_yaxes(range=[self.yinf,self.ysup])
         mapaFiguras["subplot"+titulo] = fig_subplot
         return mapaFiguras
