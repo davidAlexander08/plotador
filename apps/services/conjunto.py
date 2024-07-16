@@ -22,7 +22,7 @@ import json
 class Conjunto:
 
 
-    def __init__(self, data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, titulo):
+    def __init__(self, data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, titulo, sbp_col_lin):
         self.conjuntoCasos = data.conjuntoCasos
         self.xinf  = xinf
         self.xsup = xsup
@@ -33,6 +33,7 @@ class Conjunto:
         self.largura = largura
         self.altura = altura
         self.titulo = titulo
+        self.sbp_col_lin = sbp_col_lin
         self.cronologico = cronologico
         self.estudo = data.estudo
         self.nome_caso_referencia = ""
@@ -40,6 +41,9 @@ class Conjunto:
         diretorio_saida = f"resultados/{self.estudo}/conjunto"
         self.graficosConjunto = GraficosConjunto(data.conjuntoCasos)
         os.makedirs(diretorio_saida, exist_ok=True)
+
+        self.subp_col = int(self.sbp_col_lin.split(",")[0]) if self.sbp_col_lin is not None else 4
+        self.subp_lin = int(self.sbp_col_lin.split(",")[1]) if self.sbp_col_lin is not None else 3
 
         sts_temp = Sintese("TEMPO")
         arg_temp = Argumento(None, None, ["ree", "25x35"])
@@ -147,7 +151,7 @@ class Conjunto:
             titulo_padrao = conjUnity.titulo+" "+unity.titulo+" "+self.estudo
             tituloFigura = titulo_padrao if self.titulo == " " else self.titulo.replace("_", " ")
             if(flag_muitos_casos == 0):
-                mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, tituloFigura, legEixoX = "estagios")
+                mapaFig = self.graficosConjunto.subplot_gera_grafico_linha_casos(mapaTemporal, conjUnity, unity, tituloFigura, legEixoX = "estagios", self.subp_col, self.subp_lin)
                 for titulo in mapaFig:
                     self.graficosConjunto.exportar(mapaFig[titulo], diretorio_saida_arg, titulo+self.estudo, self.largura, self.altura)
 

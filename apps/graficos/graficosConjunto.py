@@ -99,15 +99,15 @@ class GraficosConjunto:
         titulo: str,
         legEixoX = "",
         colY = "valor",
-        colX = "index"
+        colX = "index",
+        subp_col = 4,
+        subp_lin = 3
     ) -> go.Figure:
 
         legendaEixoX = conjUnity.legendaEixoX if legEixoX == "" else legEixoX
         
         mapaFiguras = {}
-        subplot_col = 4
-        subplot_lin = 3
-        fig_subplot = make_subplots(rows=subplot_lin, cols=subplot_col,subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
+        fig_subplot = make_subplots(rows=subp_lin, cols=subp_col,subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
         for conj in self.conjuntoCasos:
             df_conj = mapaConjuntoCasos[conj.nome]
             contador_col = 1
