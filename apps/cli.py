@@ -26,7 +26,7 @@ option_yinf  = click.option("--yinf", default=None, help="Ponto Inferior do Eixo
 option_ysup = click.option("--ysup", default=None, help="Ponto Superior do Eixo Y")
 option_tamanho = click.option("--tamanho", default=None, help="Tamanho da letra")
 option_json = click.option("--arquivo_json", "--json", default = None, help ="definicao do arquivo json. Caso nenhum, ele considera estar dentro da pasta do caso")
-option_json = click.option("--sbp_col_lin", default = None, help ="definicao do numero de linhas e colunas do subplot separados por virgula")
+option_json = click.option("--subplot", default = None, help ="definicao do numero de colunas e linhas do subplot separados por virgula")
 @click.group()
 def cli():
     pass
@@ -88,15 +88,15 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
 @option_eixox
 @option_cronologico
 @option_titulo
-@option_sbp_col_lin
+@option_subplot
 @click.argument(
     "arquivo_json",
 )
-def analise_conjuntoCasos(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, titulo,sbp_col_lin):
+def analise_conjuntoCasos(arquivo_json, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, titulo, subplot):
     from apps.services.conjunto import Conjunto
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Conjunto(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, titulo, sbp_col_lin)
+        Conjunto(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, titulo, subplot)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 

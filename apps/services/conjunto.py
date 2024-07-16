@@ -22,7 +22,7 @@ import json
 class Conjunto:
 
 
-    def __init__(self, data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, titulo, sbp_col_lin):
+    def __init__(self, data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, titulo, subplot):
         self.conjuntoCasos = data.conjuntoCasos
         self.xinf  = xinf
         self.xsup = xsup
@@ -33,7 +33,6 @@ class Conjunto:
         self.largura = largura
         self.altura = altura
         self.titulo = titulo
-        self.sbp_col_lin = sbp_col_lin
         self.cronologico = cronologico
         self.estudo = data.estudo
         self.nome_caso_referencia = ""
@@ -42,8 +41,8 @@ class Conjunto:
         self.graficosConjunto = GraficosConjunto(data.conjuntoCasos)
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        self.subp_col = int(self.sbp_col_lin.split(",")[0]) if self.sbp_col_lin is not None else 4
-        self.subp_lin = int(self.sbp_col_lin.split(",")[1]) if self.sbp_col_lin is not None else 3
+        self.subp_col = int(self.subplot.split(",")[0]) if self.subplot is not None else 4
+        self.subp_lin = int(self.subplot.split(",")[1]) if self.subplot is not None else 3
 
         sts_temp = Sintese("TEMPO")
         arg_temp = Argumento(None, None, ["ree", "25x35"])
