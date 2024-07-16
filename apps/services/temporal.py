@@ -34,7 +34,7 @@ class Temporal:
         self.titulo = titulo
         self.showlegend = showlegend
         self.estudo = data.estudo
-        self.tamanho_texto = data.tamanho_texto if tamanho is None else tamanho
+        self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
