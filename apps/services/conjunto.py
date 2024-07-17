@@ -99,8 +99,8 @@ class Conjunto:
         fig.update_layout(title= "Comparacao Tempo de Execucao")
         fig.update_yaxes(title="min") 
         fig.update_xaxes(title="casos") 
-        fig.update_layout(font=dict(size= 25))  
-        self.graficosConjunto.exportar(fig,diretorio_saida, "conjunto tempo "+self.estudo)
+        fig.update_layout(font=dict(size= self.tamanho_texto))  
+        self.graficosConjunto.exportar(fig,diretorio_saida, "conjunto tempo "+self.estudo, self.largura, self.altura)
 
         df_tempo = pd.concat(concat_df)
         eco_indicadores.exportar(df_tempo,diretorio_saida,  "conjunto_tempo "+self.estudo)
