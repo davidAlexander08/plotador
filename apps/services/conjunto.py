@@ -43,7 +43,7 @@ class Conjunto:
         self.estudo = data.estudo
         self.nome_caso_referencia = ""
         # Gera saídas do estudo
-        diretorio_saida = f"resultados/{self.estudo}/conjunto"
+        diretorio_saida = f"resultados/{self.estudo}/conjunto" 
         self.graficosConjunto = GraficosConjunto(data.conjuntoCasos)
         os.makedirs(diretorio_saida, exist_ok=True)
 
