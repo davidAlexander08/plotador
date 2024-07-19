@@ -88,6 +88,7 @@ class Temporal:
         mapa_temporal = {}
         for unity in conjUnity.listaUnidades:
             df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.cenario, self.boxplot)
+            print(df_temporal)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
