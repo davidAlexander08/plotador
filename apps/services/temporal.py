@@ -52,6 +52,11 @@ class Temporal:
             exit(1)
         if(self.chave is not None and self.argumentos is not None):
             lista_argumentos = self.argumentos.split(",")
+            list_arg = []
+            for arg in lista_argumentos:
+                list_arg.append(arg.replace("_"," "))
+            lista_argumentos = list_arg
+            print(lista_argumentos)
             data.args = [Argumento(lista_argumentos, self.chave, "out")] 
             if(len(lista_argumentos) == 1 and self.titulo == " "): 
                 self.titulo = lista_argumentos[0]
