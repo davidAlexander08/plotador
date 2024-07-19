@@ -98,13 +98,15 @@ class Temporal:
         
         if(self.boxplot == "True"):
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
+            titulo_padrao = "Boxplot Temporal "+conjUnity.titulo+self.estudo
         else:
             mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico)
+            titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
 
 
 
+        
 
-        titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
         tituloFigura = titulo_padrao if self.booltitulo == "True" else " "
         tituloFigura = titulo_padrao if self.titulo == " " else self.titulo.replace("_", " ")
 
