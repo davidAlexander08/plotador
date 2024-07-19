@@ -17,7 +17,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, option_outpath):
         self.xinf  = xinf
         self.xsup = xsup
         self.eixox = eixox
@@ -43,7 +43,8 @@ class Temporal:
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
-        diretorio_saida = f"resultados/{self.estudo}/temporal"
+
+        diretorio_saida = f"resultados/{self.estudo}/temporal" if option_outpath is None else option_outpath
         os.makedirs(diretorio_saida, exist_ok=True)
 
         if(self.argumentos is not None and self.chave is None):
@@ -74,7 +75,7 @@ class Temporal:
                     conj.legendaEixoY = self.labely
                 if(self.labelx is not None):
                     conj.legendaEixoX = self.labelx
-                diretorio_saida_arg = diretorio_saida+"/"+arg.nome
+                diretorio_saida_arg = diretorio_saida+"/"+arg.nome if option_outpath is None else option_outpath
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 self.executa(conj,diretorio_saida_arg )
             else:
@@ -85,7 +86,7 @@ class Temporal:
                             conj.legendaEixoY = self.labely
                         if(self.labelx is not None):
                             conj.legendaEixoX = self.labelx
-                        diretorio_saida_arg = diretorio_saida+"/"+arg.nome
+                        diretorio_saida_arg = diretorio_saida+"/"+arg.nome if option_outpath is None else option_outpath
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
                         self.executa(conj,diretorio_saida_arg )
                         
