@@ -220,10 +220,10 @@ class Graficos:
         for unity in mapa:  
             df = mapa[unity]
             listaGO = []
-            print(df)
             for c in self.casos:
                 dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
                 dfY = dfY.reset_index(drop = False)
+                print(dfY)
                 listaGO.append(go.Box( 
                         x = dfY[colx].tolist(),
                         y = list(map(str,dfY[coly].tolist())) ,
