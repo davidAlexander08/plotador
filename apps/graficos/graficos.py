@@ -225,8 +225,8 @@ class Graficos:
                 dfY = dfY.reset_index(drop = False)
                 print(dfY)
                 listaGO.append(go.Box( 
-                        x = dfY[colx].tolist(),
-                        y = list(map(str,dfY[coly].tolist())) ,
+                        x = list(map(str,dfY[colx].tolist())) ,
+                        y =  dfY[coly].tolist(),
                         name = c.nome,
                         line = dict(color = c.cor),
                         showlegend=unity.arg.show))
