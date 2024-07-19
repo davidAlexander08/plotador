@@ -25,10 +25,13 @@ class Report:
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>HTML Report with Plotly</title>
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         </head>
         <body>
             <h1>My HTML Report</h1>
             <p>This is a sample report that includes text and a Plotly plot.</p>
+            <p>Here is some LaTeX: \( E = mc^2 \)</p>
             <div id="plotly-div">{plot_html}</div>
         </body>
         </html>
