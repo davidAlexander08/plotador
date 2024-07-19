@@ -88,14 +88,13 @@ class Temporal:
         mapa_temporal = {}
         for unity in conjUnity.listaUnidades:
             df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.cenario, self.boxplot)
-            print(df_temporal)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
             
             mapa_temporal[unity] = df_temporal
-            self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+self.estudo)
+            self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
         
         if(self.boxplot == "True"):
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
