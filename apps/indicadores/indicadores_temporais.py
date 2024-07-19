@@ -56,10 +56,10 @@ class IndicadoresTemporais(EcoIndicadores):
                 return self.__retorna_mapa_cenarios_parquet(eco_mapa)
         else:
             for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.fitroColuna] == unidade.filtroArgumento]
-                if(boxplot =="True"):
-                    mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa, cenario)
-                else:
-                    mapa_temporal = self.__retorna_mapa_cenarios_parquet(eco_mapa)
+            if(boxplot =="True"):
+                mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa, cenario)
+            else:
+                mapa_temporal = self.__retorna_mapa_cenarios_parquet(eco_mapa)
         return mapa_temporal
 
 
