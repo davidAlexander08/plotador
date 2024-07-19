@@ -33,11 +33,12 @@ class Report:
             flag = 0
             caminho_saida = "sem_caminho"
             for comando in lista_commands_cli:
-                if(comando == "--outpath"):
-                    flag = 1
                 if(flag == 1):
                     caminho_saida = comando
                     break
+                if(comando == "--outpath"):
+                    flag = 1
+
             print(cli_command.split())
             print(caminho_saida)
             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
