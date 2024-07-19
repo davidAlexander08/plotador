@@ -17,7 +17,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv):
         self.xinf  = xinf
         self.xsup = xsup
         self.eixox = eixox
@@ -36,6 +36,7 @@ class Temporal:
         self.showlegend = showlegend
         self.estudo = data.estudo
         self.boxplot = boxplot
+        self.csv = csv
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.eco_indicadores = EcoIndicadores(data.casos)
@@ -99,7 +100,7 @@ class Temporal:
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
             
             mapa_temporal[unity] = df_temporal
-            self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
+            if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
         
         if(self.boxplot == "True"):
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
@@ -128,7 +129,7 @@ class Temporal:
                 mapa_estagio = {}
                 for unity in conjUnity.listaUnidades:
                     mapa_estagio[unity] = mapa_temporal[unity].loc[mapa_temporal[unity]["estagio"] == int(est)]
-                    self.indicadores_temporais.exportar(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+"_"+unity.titulo+"_"+conjUnity.sintese.sintese+" "+self.estudo)
+                    if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+"_"+unity.titulo+"_"+conjUnity.sintese.sintese+" "+self.estudo)
                         
                 mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+" "+self.estudo)
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo)

@@ -28,6 +28,8 @@ option_tamanho = click.option("--tamanho", default=None, help="Tamanho da letra"
 option_json = click.option("--arquivo_json", "--json", default = None, help ="definicao do arquivo json. Caso nenhum, ele considera estar dentro da pasta do caso")
 option_subplot = click.option("--subplot", default = None, help ="definicao do numero de colunas e linhas do subplot separados por virgula")
 option_boxplot = click.option("--boxplot", default = None, help = "Se True ativa a opcao boxplots, habilitando graficos boxplot")
+option_csv = click.option("--csv", default = "True", help = "Default True, se False nao imprime mais os csvs")
+
 @click.group()
 def cli():
     pass
@@ -52,7 +54,8 @@ def cli():
 @option_json
 @option_tamanho
 @option_boxplot
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot):
+@option_csv
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv):
     from apps.services.temporal import Temporal
     flag_diretorio = 0
     if(arquivo_json is None):
@@ -76,7 +79,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
             data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
-    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv)
 
 
 @click.command("conjunto")
