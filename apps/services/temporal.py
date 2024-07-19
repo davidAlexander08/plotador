@@ -17,7 +17,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html):
         self.xinf  = xinf
         self.xsup = xsup
         self.eixox = eixox
@@ -37,6 +37,7 @@ class Temporal:
         self.estudo = data.estudo
         self.boxplot = boxplot
         self.csv = csv
+        self.html = html
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.eco_indicadores = EcoIndicadores(data.casos)
@@ -119,7 +120,7 @@ class Temporal:
         figura = Figura(conjUnity, mapaGO, tituloFigura)
         if(self.showlegend == "False"):
             figura.fig.update_layout(showlegend= False)
-        self.graficos.exportar(figura.fig, diretorio_saida_arg, tituloFigura, self.largura, self.altura)
+        self.graficos.exportar(figura.fig, diretorio_saida_arg, tituloFigura, , self.html, self.largura, self.altura)
         
         
         if(self.estagio != ""):
@@ -133,7 +134,7 @@ class Temporal:
                         
                 mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+" "+self.estudo)
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo)
-                self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.largura, self.altura)
+                self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, , self.html, self.largura, self.altura)
 
 
             #unity = UnidadeSintese("EARPF_SIN_EST", None, "%", "Energia_Armazenada_Percentual_Final_SIN_CREF "+estudo)
