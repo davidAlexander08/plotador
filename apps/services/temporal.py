@@ -118,7 +118,7 @@ class Temporal:
         figura = Figura(conjUnity, mapaGO, tituloFigura)
         if(self.showlegend == "False"):
             figura.fig.update_layout(showlegend= False)
-        self.graficos.exportar(figura.fig, diretorio_saida_arg, titulo_padrao, self.largura, self.altura)
+        self.graficos.exportar(figura.fig, diretorio_saida_arg, tituloFigura, self.largura, self.altura)
         
         
         if(self.estagio != ""):
