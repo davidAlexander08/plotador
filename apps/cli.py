@@ -27,6 +27,7 @@ option_ysup = click.option("--ysup", default=None, help="Ponto Superior do Eixo 
 option_tamanho = click.option("--tamanho", default=None, help="Tamanho da letra")
 option_json = click.option("--arquivo_json", "--json", default = None, help ="definicao do arquivo json. Caso nenhum, ele considera estar dentro da pasta do caso")
 option_subplot = click.option("--subplot", default = None, help ="definicao do numero de colunas e linhas do subplot separados por virgula")
+option_boxplot = click.option("--boxplot", default = None, help = "Se True ativa a opcao boxplots, habilitando graficos boxplot")
 @click.group()
 def cli():
     pass
@@ -50,7 +51,8 @@ def cli():
 @option_showlegend
 @option_json
 @option_tamanho
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho):
+@option_boxplot
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot):
     from apps.services.temporal import Temporal
     flag_diretorio = 0
     if(arquivo_json is None):
@@ -74,7 +76,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
             data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
-    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot)
 
 
 @click.command("conjunto")

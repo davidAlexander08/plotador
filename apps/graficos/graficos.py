@@ -211,6 +211,28 @@ class Graficos:
         return mapaGO
 
 
+    def gera_grafico_boxplot( 
+        self,
+        mapa,
+        coly = "valor",
+        colx = "estagio" ) :
+        mapaGO = {}
+        for unity in mapa:  
+            df = mapa[unity]
+            listaGO = []
+            for c in self.casos:
+                dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
+                dfY = dfY.reset_index(drop = False)
+                listaGO.append(go.Box( 
+                        x = dfY[colx].tolist(),
+                        y = list(map(str,dfY[coly].tolist())) ,
+                        name = c.nome,
+                        line = dict(color = c.cor),
+                        showlegend=unity.arg.show))
+            mapaGO[unity] = listaGO
+        return mapaGO
+
+
 
     def gera_grafico_barra(
         self,

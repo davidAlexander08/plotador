@@ -4,6 +4,7 @@ from apps.model.unidade import UnidadeSintese
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from apps.graficos.graficos import Graficos
 from apps.indicadores.indicadores_temporais import IndicadoresTemporais
+from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
@@ -16,7 +17,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot):
         self.xinf  = xinf
         self.xsup = xsup
         self.eixox = eixox
@@ -34,8 +35,10 @@ class Temporal:
         self.titulo = titulo
         self.showlegend = showlegend
         self.estudo = data.estudo
+        self.boxplot = boxplot
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
+        self.eco_indicadores = EcoIndicadores(data.casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/temporal"
@@ -84,8 +87,7 @@ class Temporal:
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
         for unity in conjUnity.listaUnidades:
-            df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.cenario)
-            
+            df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.cenario, self.boxplot)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
@@ -94,10 +96,13 @@ class Temporal:
             mapa_temporal[unity] = df_temporal
             self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+self.estudo)
         
+        if(self.boxplot == "True"):
+            mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
+        else:
+            mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico)
 
 
 
-        mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico)
 
         titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
         tituloFigura = titulo_padrao if self.booltitulo == "True" else " "
