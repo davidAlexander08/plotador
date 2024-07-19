@@ -44,7 +44,7 @@ class Temporal:
         self.graficos = Graficos(data)
         # Gera saídas do estudo
 
-        diretorio_saida = f"resultados/{self.estudo}/temporal" if option_outpath is None else option_outpath
+        diretorio_saida = f"resultados/{self.estudo}/temporal" if option_outpath is None else f"option_outpath"
         os.makedirs(diretorio_saida, exist_ok=True)
 
         if(self.argumentos is not None and self.chave is None):
