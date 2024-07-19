@@ -29,7 +29,15 @@ class Report:
         if cli_command_match:
             cli_command = cli_command_match.group(1).strip()
             print(f"Executing CLI command: {cli_command}")
+            lista_commands_cli = cli_command.split()
+            flag = 0
+            for comando in lista_commands_cli:
+                if(commando == "--outpath"):
+                    flag = 1
+                if(flag == 1):
+                    caminho_saida = comando
             print(cli_command.split())
+            print(caminho_saida)
             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
         else:
             cli_output = "No CLI command found."
