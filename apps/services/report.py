@@ -29,6 +29,7 @@ class Report:
         if cli_command_match:
             cli_command = cli_command_match.group(1).strip()
             print(f"Executing CLI command: {cli_command}")
+            print(cli_command.split())
             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
         else:
             cli_output = "No CLI command found."
