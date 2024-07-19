@@ -32,7 +32,7 @@ class Report:
             lista_commands_cli = cli_command.split()
             flag = 0
             for comando in lista_commands_cli:
-                if(commando == "--outpath"):
+                if(comando == "--outpath"):
                     flag = 1
                 if(flag == 1):
                     caminho_saida = comando
