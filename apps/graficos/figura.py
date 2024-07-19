@@ -29,7 +29,7 @@ class Figura():
         else:
             limInf = None
         
-        self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto))  
+        self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group")  
         #self.fig.update_yaxes(range=[limInf,limSup])
     def getFig(self):
         return self.fig
