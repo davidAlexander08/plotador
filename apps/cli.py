@@ -34,6 +34,11 @@ option_csv = click.option("--csv", default = "True", help = "Default True, se Fa
 def cli():
     pass
 
+@click.command("report")
+def realiza_report():
+    from apps.services.report import Report
+    Report()
+
 @click.command("temporal")
 @option_xinf
 @option_xsup
@@ -290,6 +295,7 @@ def analise_cenarios(arquivo_json):
 
 cli.add_command(analise_pareto)
 cli.add_command(eco)
+cli.add_command(realiza_report)
 cli.add_command(analise_temporal)
 cli.add_command(analise_media)
 cli.add_command(analise_anual)
