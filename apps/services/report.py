@@ -6,9 +6,11 @@ import pandas as pd
 import os
 import json
 import subprocess
+import re
 
 class Report:
     def __init__(self):
+
         # Create a simple line plot
         x = [1, 2, 3, 4, 5]
         y = [10, 15, 13, 17, 20]
@@ -20,9 +22,16 @@ class Report:
         with open("template.html", "r") as file:
             html_template = file.read()
 
-        # Execute the CLI command and capture its output
-        cli_command = ["echo", "This is the output of my CLI command."]
-        cli_output = subprocess.check_output(cli_command).decode("utf-8")
+        # Find the CLI command in the HTML template
+        cli_command_pattern = re.compile(r'CLI_COMMAND_PLACEHOLDER: (.*?)<', re.DOTALL)
+        cli_command_match = cli_command_pattern.search(html_template)
+
+        if cli_command_match:
+            cli_command = cli_command_match.group(1).strip()
+            print(f"Executing CLI command: {cli_command}")
+            cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
+        else:
+            cli_output = "No CLI command found."
 
         # Replace the placeholders with the Plotly plot and CLI output
         html_report = html_template.replace("PLOT_PLACEHOLDER", plot_html)
