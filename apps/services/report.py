@@ -76,6 +76,6 @@ class Report:
             html_file.write('</html>\n')
         # Save the final HTML report
         #with open("report.html", "w") as file:
-            file.write(html_file)
+            #file.write(html_file)
 
         print("Report saved as report.html")
