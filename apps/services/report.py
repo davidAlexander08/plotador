@@ -92,7 +92,8 @@ class Report:
     def create_sphinx_project(self, project_name, author, version, release, language='en'):
         # Define the project directory
         project_dir = os.path.join(os.getcwd(), project_name)
-
+        if not os.path.exists(project_dir):
+            os.makedirs(project_dir)
         # Run sphinx-quickstart to initialize the Sphinx project
         subprocess.run([
             'sphinx-quickstart',
