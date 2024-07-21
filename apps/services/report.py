@@ -8,9 +8,20 @@ import json
 import subprocess
 import re
 
+import os
+import subprocess
+import shutil
+
 class Report:
     def __init__(self):
-
+        # Example usage
+        create_sphinx_project(
+            project_name='MyProject',
+            author='Your Name',
+            version='0.1',
+            release='0.1.0'
+        )
+        
         # Create a simple line plot
         x = [1, 2, 3, 4, 5]
         y = [10, 15, 13, 17, 20]
@@ -74,3 +85,80 @@ class Report:
 
 
         print("Report saved as report.html")
+
+
+
+
+    def create_sphinx_project(self, project_name, author, version, release, language='en'):
+        # Define the project directory
+        project_dir = os.path.join(os.getcwd(), project_name)
+
+        # Run sphinx-quickstart to initialize the Sphinx project
+        subprocess.run([
+            'sphinx-quickstart',
+            '--no-batchfile',   # Don't create make.bat file for Windows
+            '--no-makefile',    # Don't create Makefile for Unix
+            '--quiet',
+            '--project', project_name,
+            '--author', author,
+            '--version', version,
+            '--release', release,
+            '--language', language,
+            '--sep', ' ',
+            '--no-interactive'
+        ], cwd=project_dir)
+
+        # Copy additional files or modify configuration if needed
+        modify_conf_file(project_dir)
+        add_documentation_content(project_dir)
+
+        # Build the documentation
+        build_sphinx_docs(project_dir)
+
+    def modify_conf_file(self, project_dir):
+        # Path to the conf.py file
+        conf_path = os.path.join(project_dir, 'source', 'conf.py')
+
+        # Read the conf.py file
+        with open(conf_path, 'r') as file:
+            conf_lines = file.readlines()
+
+        # Modify conf.py settings (example: setting the theme)
+        with open(conf_path, 'w') as file:
+            for line in conf_lines:
+                if line.startswith('html_theme ='):
+                    file.write('html_theme = \'alabaster\'\n')
+                else:
+                    file.write(line)
+
+    def add_documentation_content(self, project_dir):
+        # Add content to index.rst
+        index_path = os.path.join(project_dir, 'source', 'index.rst')
+        with open(index_path, 'w') as file:
+            file.write("""\
+        Welcome to Your Project’s Documentation!
+        =========================================
+
+        Introduction
+        ------------
+
+        This is the beginning of your documentation. Replace this text with your actual content.
+
+        Getting Started
+        ---------------
+
+        Provide information on getting started with your project.
+
+        Usage
+        -----
+
+        Provide usage instructions for your project.
+        """)
+
+    def build_sphinx_docs(self, project_dir):
+        # Change directory to the Sphinx project directory
+        os.chdir(project_dir)
+
+        # Build the documentation
+        subprocess.run(['make', 'html'], cwd=os.path.join(project_dir, 'docs'))
+
