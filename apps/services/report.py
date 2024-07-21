@@ -41,6 +41,8 @@ class Report:
                 if line.strip():
                     if("</h" in line):
                         html_file.write(line+"\n")
+                    if("plotador" in line):
+                        print("PLOTADOR")
                     else:
                         html_file.write("<p>"+line+"<\p>\n")
                     print(line)
