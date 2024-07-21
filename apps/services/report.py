@@ -40,9 +40,7 @@ class Report:
             html_file.write('</head>\n')
             html_file.write('<body>\n')
             #html_file.write('<iframe src="docs/_build/html/index.html"></iframe>\n')
-
             for line in lines:
-                line = line.strip()
                 if line.strip():
                     if("</h" in line):
                         html_file.write(line.strip()+"\n")
