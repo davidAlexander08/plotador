@@ -47,8 +47,20 @@ class Report:
                         cli_command = line.strip()
                         print(f"Executing CLI command: {cli_command}")
                         cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
-                        print("PLOTADOR")   
-                        exit(1)
+                        lista_commands_cli = cli_command.split()
+                        print(lista_commands_cli)
+                        caminho_saida = "sem_caminho"
+                        nome_arquivo  = "sem_nome"
+                        contador = 0 
+                        for comando in lista_commands_cli:
+                            if(comando == "--outpath"):
+                                caminho_saida = lista_commands_cli[contador+1]
+                            if(comando == "--titulo"):
+                                nome_arquivo = lista_commands_cli[contador+1].replace("_"," ")+".html"
+                            contador += 1
+                            with open(caminho_saida+"/"+nome_arquivo, "r") as file:
+                                html_plotly = file.read()
+                                html_file.write(html_plotly+"\n")
                     else:
                         html_file.write("<p>"+line+"<\p>\n")
                     print(line)
