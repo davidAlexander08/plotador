@@ -50,7 +50,7 @@ class Report:
 
         # Replace the placeholders with the Plotly plot and CLI output
         html_report = html_template.replace("PLOT_PLACEHOLDER", plot_html)
-        html_report = html_report.replace("CLI_OUTPUT_PLACEHOLDER", htmt_plotly)
+        html_report = html_report.replace("PLOTLY_PLACEHOLDER", htmt_plotly)
 
         # Save the final HTML report
         with open("report.html", "w") as file:
