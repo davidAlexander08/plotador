@@ -138,9 +138,11 @@ class Report:
 
     def add_documentation_content(self, project_dir):
         # Add content to index.rst
+        # Add content to index.rst
         index_path = os.path.join(project_dir, 'source', 'index.rst')
-        with open(index_path, 'w') as file:
-            file.write("""\
+        if os.path.exists(index_path):
+            with open(index_path, 'w') as file:
+                file.write("""\
         Welcome to Your Project’s Documentation!
         =========================================
 
@@ -159,11 +161,15 @@ class Report:
 
         Provide usage instructions for your project.
         """)
+        else:
+            print(f"Index file {index_path} not found.")
 
     def build_sphinx_docs(self, project_dir):
         # Change directory to the Sphinx project directory
-        os.chdir(project_dir)
-
-        # Build the documentation
-        subprocess.run(['make', 'html'], cwd=os.path.join(project_dir, 'docs'))
+        docs_dir = os.path.join(project_dir, 'docs')
+        if os.path.exists(docs_dir):
+            # Build the documentation
+            subprocess.run(['make', 'html'], cwd=docs_dir, check=True)
+        else:
+            print(f"Docs directory {docs_dir} not found.")
 
