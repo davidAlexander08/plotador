@@ -41,10 +41,8 @@ class Report:
                 contador += 1
 
             print(cli_command.split())
-            print(caminho_saida)
-            print(nome_arquivo)
             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
-            print()
+            print(caminho_saida+"/"+nome_arquivo)
             with open(caminho_saida+"/"+nome_arquivo, "r") as file:
                 htmt_plotly = file.read()
         else:
