@@ -115,6 +115,3 @@ class Report:
 
         # Build the documentation
         subprocess.run(['make', 'html'], cwd=os.path.join(project_name, 'docs'), check=True)
-
-    # Example usage
-    create_and_build_sphinx_project('MyProject')
