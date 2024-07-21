@@ -120,17 +120,21 @@ class Report:
         # Path to the conf.py file
         conf_path = os.path.join(project_dir, 'source', 'conf.py')
 
-        # Read the conf.py file
-        with open(conf_path, 'r') as file:
-            conf_lines = file.readlines()
 
-        # Modify conf.py settings (example: setting the theme)
-        with open(conf_path, 'w') as file:
-            for line in conf_lines:
-                if line.startswith('html_theme ='):
-                    file.write('html_theme = \'alabaster\'\n')
-                else:
-                    file.write(line)
+        # Check if conf.py exists before modifying it
+        if os.path.exists(conf_path):
+            with open(conf_path, 'r') as file:
+                conf_lines = file.readlines()
+
+            # Modify conf.py settings (example: setting the theme)
+            with open(conf_path, 'w') as file:
+                for line in conf_lines:
+                    if line.startswith('html_theme ='):
+                        file.write('html_theme = \'alabaster\'\n')
+                    else:
+                        file.write(line)
+        else:
+            print(f"Configuration file {conf_path} not found.")
 
     def add_documentation_content(self, project_dir):
         # Add content to index.rst
