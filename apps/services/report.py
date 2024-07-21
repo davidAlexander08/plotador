@@ -55,7 +55,7 @@ class Report:
                             if(comando == "--outpath"):
                                 caminho_saida = lista_commands_cli[contador+1]
                             if(comando == "--titulo"):
-                                nome_arquivo = lista_commands_cli[contador+1].replace("_"," ")+".html"
+                                nome_arquivo = lista_commands_cli[contador+1].replace("_"," ")
                             if(comando == "--html"):
                                 extensao = ".html"
                             contador += 1
