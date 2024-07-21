@@ -67,7 +67,7 @@ class Report:
                             #html_file.write(html_plotly+"\n")
                             html_file.write(nome_arquivo+"\n")
                     else:
-                        html_file.write("<p>"+line.strip()+"<\p>\n")
+                        html_file.write("<p>"+line.strip()+"</p>\n")
                     print(line)
             html_file.write('</body>\n')
             html_file.write('</html>\n')
