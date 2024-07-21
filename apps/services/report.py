@@ -43,13 +43,16 @@ class Report:
             print(cli_command.split())
             print(caminho_saida)
             print(nome_arquivo)
+            with open(caminho_saida+"/"+nome_arquivo, "r") as file:
+                htmt_plotly = file.read()
+
             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
         else:
             cli_output = "No CLI command found."
 
         # Replace the placeholders with the Plotly plot and CLI output
         html_report = html_template.replace("PLOT_PLACEHOLDER", plot_html)
-        html_report = html_report.replace("CLI_OUTPUT_PLACEHOLDER", cli_output)
+        html_report = html_report.replace("CLI_OUTPUT_PLACEHOLDER", htmt_plotly)
 
         # Save the final HTML report
         with open("report.html", "w") as file:
