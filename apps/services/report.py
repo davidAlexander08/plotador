@@ -23,7 +23,6 @@ class Report:
             lines = file.readlines()
         print("ANTES DO FOR")
         for line in lines:
-            print("ENTROU")
             print(line)
         exit(1)
         # Find the CLI command in the HTML template
