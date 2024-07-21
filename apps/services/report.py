@@ -110,11 +110,11 @@ class Report:
         ], cwd=project_dir)
 
         # Copy additional files or modify configuration if needed
-        modify_conf_file(project_dir)
-        add_documentation_content(project_dir)
+        self.modify_conf_file(project_dir)
+        self.add_documentation_content(project_dir)
 
         # Build the documentation
-        build_sphinx_docs(project_dir)
+        self.build_sphinx_docs(project_dir)
 
     def modify_conf_file(self, project_dir):
         # Path to the conf.py file
