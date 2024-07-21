@@ -84,15 +84,11 @@ class Report:
 
 
 
-    def create_sphinx_project(self, project_name):
-        # Define the project directory
-        project_dir = os.path.join(os.getcwd(), project_name)
-        
-        # Create the project directory if it doesn't exist
-        os.makedirs(project_dir, exist_ok=True)
-
-        # Initialize the Sphinx project
-        result = subprocess.run([
+    def create_and_build_sphinx_project(self, project_name):
+        # Create the project directory
+        os.makedirs(project_name, exist_ok=True)
+        # Initialize Sphinx
+        subprocess.run([
             'sphinx-quickstart',
             '--quiet',  # Suppress output
             '--project', project_name,
@@ -102,67 +98,23 @@ class Report:
             '--language', 'en',
             '--makefile',  # Create Makefile
             '--batchfile'  # Create make.bat for Windows
-        ], cwd=project_dir, text=True, capture_output=True)
+        ], cwd=project_name, check=True)
 
-        if result.returncode != 0:
-            print(f"Error running sphinx-quickstart: {result.stderr}")
-            return
-
-        # Path to the conf.py and index.rst files
-        source_dir = os.path.join(project_dir, 'source')
-        conf_path = os.path.join(source_dir, 'conf.py')
-        index_path = os.path.join(source_dir, 'index.rst')
-
-        # Modify conf.py
-        if os.path.isfile(conf_path):
-            with open(conf_path, 'r') as file:
-                conf_lines = file.readlines()
-            with open(conf_path, 'w') as file:
-                for line in conf_lines:
-                    if line.startswith('html_theme ='):
-                        file.write('html_theme = \'alabaster\'\n')
-                    else:
-                        file.write(line)
-        else:
-            print(f"Configuration file '{conf_path}' not found.")
-
-        # Add content to index.rst
-        if os.path.isfile(index_path):
-            with open(index_path, 'w') as file:
-                file.write("""\
+        # Create a basic index.rst file
+        index_path = os.path.join(project_name, 'source', 'index.rst')
+        with open(index_path, 'w') as f:
+            f.write("""\
     Welcome to Your Project’s Documentation!
     =========================================
 
     Introduction
     ------------
 
-    This is the beginning of your documentation. Replace this text with your actual content.
-
-    Getting Started
-    ---------------
-
-    Provide information on getting started with your project.
-
-    Usage
-    -----
-
-    Provide usage instructions for your project.
+    This is a basic Sphinx documentation setup.
     """)
-        else:
-            print(f"Index file '{index_path}' not found.")
 
         # Build the documentation
-        self.build_sphinx_docs(project_dir)
+        subprocess.run(['make', 'html'], cwd=os.path.join(project_name, 'docs'), check=True)
 
-    def build_sphinx_docs(self, project_dir):
-        # Build the documentation
-        docs_dir = os.path.join(project_dir, 'docs')
-        if os.path.isdir(docs_dir):
-            result = subprocess.run(['make', 'html'], cwd=docs_dir, text=True, capture_output=True)
-            if result.returncode != 0:
-                print(f"Error building documentation: {result.stderr}")
-            else:
-                print("Documentation built successfully.")
-        else:
-            print(f"Docs directory '{docs_dir}' not found.")
-
+    # Example usage
+    create_and_build_sphinx_project('MyProject')
