@@ -20,9 +20,14 @@ class Report:
         # Read the HTML template
         with open("template.html", "r") as file:
             html_template = file.read()
+            lines = file.readlines()
+
+        for line in lines:
+            print(line)
 
         # Find the CLI command in the HTML template
         cli_command_pattern = re.compile(r'CLI_COMMAND_PLACEHOLDER: (.*?)<', re.DOTALL)
+
         cli_command_match = cli_command_pattern.search(html_template)
 
         if cli_command_match:
