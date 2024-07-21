@@ -44,7 +44,7 @@ class Report:
                 if line.strip():
                     if("</h" in line):
                         html_file.write(line.strip()+"\n")
-                    if("plotador" in line):
+                    else if("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
                         cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
