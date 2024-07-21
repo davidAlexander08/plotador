@@ -51,6 +51,7 @@ class Graficos:
             height=H)
 
         if(html =="True"):
+            figura.update_layout(width = W, height = H)
             figura.write_html(os.path.join(diretorio_saida, nome_arquivo+".html"))
     
     
