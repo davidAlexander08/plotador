@@ -39,7 +39,7 @@ class Report:
             #html_file.write("<\style>")
             html_file.write('</head>\n')
             html_file.write('<body>\n')
-            html_file.write('<iframe src="docs/_build/html/index.html"></iframe>\n')
+            #html_file.write('<iframe src="docs/_build/html/index.html"></iframe>\n')
 
             for line in lines:
                 line = line.strip()
