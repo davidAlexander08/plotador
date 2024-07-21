@@ -53,7 +53,7 @@ class Graficos:
         if(html =="True"):
             figura.write_html(os.path.join(diretorio_saida, nome_arquivo+".html"))
     
-
+    
 
     def gera_pareto_fast(
         self,

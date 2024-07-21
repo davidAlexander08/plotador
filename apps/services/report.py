@@ -17,7 +17,6 @@ class Report:
 
         fig = go.Figure(data=go.Scatter(x=x, y=y, mode='lines', name='Line Plot'))
         plot_html = pio.to_html(fig, full_html=False)
-
         # Read the HTML template
         with open("template.html", "r") as file:
             html_template = file.read()
@@ -32,15 +31,18 @@ class Report:
             lista_commands_cli = cli_command.split()
             flag = 0
             caminho_saida = "sem_caminho"
+            nome_arquivo  = "sem_nome"
+            contador = 0 
             for comando in lista_commands_cli:
-                if(flag == 1):
-                    caminho_saida = comando
-                    break
                 if(comando == "--outpath"):
-                    flag = 1
+                    caminho_saida = lista_commands_cli[contador+1]
+                if(comando == "--titulo"):
+                    nome_arquivo = lista_commands_cli[contador+1]+".html"
+                contador += 1
 
             print(cli_command.split())
             print(caminho_saida)
+            print(nome_arquivo)
             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
         else:
             cli_output = "No CLI command found."
