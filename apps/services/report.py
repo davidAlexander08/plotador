@@ -15,12 +15,7 @@ import shutil
 class Report:
     def __init__(self):
         # Example usage
-        self.create_sphinx_project(
-            project_name='MyProject',
-            author='Your Name',
-            version='0.1',
-            release='0.1.0'
-        )
+        self.create_sphinx_project('MyProject')
 
         # Create a simple line plot
         x = [1, 2, 3, 4, 5]
@@ -89,73 +84,49 @@ class Report:
 
 
 
-    def create_sphinx_project(self, project_name, author, version, release, language='en'):
+    def create_sphinx_project(self, project_name):
         # Define the project directory
         project_dir = os.path.join(os.getcwd(), project_name)
         
-        if os.path.exists(project_dir):
-            print(f"Directory '{project_dir}' already exists. Please remove or choose a different name.")
-            return
-
-        os.makedirs(project_dir)
+        # Create the project directory if it doesn't exist
+        os.makedirs(project_dir, exist_ok=True)
 
         # Initialize the Sphinx project
         result = subprocess.run([
             'sphinx-quickstart',
             '--quiet',  # Suppress output
             '--project', project_name,
-            '--author', author,
-            '--version', version,
-            '--release', release,
-            '--language', language,
+            '--author', 'Your Name',
+            '--version', '0.1',
+            '--release', '0.1.0',
+            '--language', 'en',
             '--makefile',  # Create Makefile
             '--batchfile'  # Create make.bat for Windows
         ], cwd=project_dir, text=True, capture_output=True)
 
-        # Check if sphinx-quickstart was successful
         if result.returncode != 0:
             print(f"Error running sphinx-quickstart: {result.stderr}")
             return
 
-        # Check if the necessary files have been created
+        # Path to the conf.py and index.rst files
         source_dir = os.path.join(project_dir, 'source')
-        build_dir = os.path.join(project_dir, 'build')
-        
-        if not os.path.isdir(source_dir):
-            print(f"Source directory '{source_dir}' not found. Sphinx project setup may have failed.")
-            return
+        conf_path = os.path.join(source_dir, 'conf.py')
+        index_path = os.path.join(source_dir, 'index.rst')
 
-        if not os.path.isfile(os.path.join(source_dir, 'conf.py')):
-            print(f"Configuration file 'conf.py' not found in '{source_dir}'.")
-            return
+        # Modify conf.py
+        if os.path.isfile(conf_path):
+            with open(conf_path, 'r') as file:
+                conf_lines = file.readlines()
+            with open(conf_path, 'w') as file:
+                for line in conf_lines:
+                    if line.startswith('html_theme ='):
+                        file.write('html_theme = \'alabaster\'\n')
+                    else:
+                        file.write(line)
+        else:
+            print(f"Configuration file '{conf_path}' not found.")
 
-        # Modify conf.py settings
-        modify_conf_file(project_dir)
-
-        # Add documentation content
-        add_documentation_content(project_dir)
-
-        # Build the documentation
-        build_sphinx_docs(project_dir)
-
-    def modify_conf_file(self, project_dir):
-        # Path to the conf.py file
-        conf_path = os.path.join(project_dir, 'source', 'conf.py')
-
-        # Modify conf.py settings
-        with open(conf_path, 'r') as file:
-            conf_lines = file.readlines()
-
-        with open(conf_path, 'w') as file:
-            for line in conf_lines:
-                if line.startswith('html_theme ='):
-                    file.write('html_theme = \'alabaster\'\n')
-                else:
-                    file.write(line)
-
-    def add_documentation_content(self, project_dir):
         # Add content to index.rst
-        index_path = os.path.join(project_dir, 'source', 'index.rst')
         if os.path.isfile(index_path):
             with open(index_path, 'w') as file:
                 file.write("""\
@@ -180,17 +151,18 @@ class Report:
         else:
             print(f"Index file '{index_path}' not found.")
 
-    def build_sphinx_docs(self, project_dir):
-        # Check if the build directory exists
-        docs_dir = os.path.join(project_dir, 'docs')
-        if not os.path.isdir(docs_dir):
-            print(f"Docs directory '{docs_dir}' not found.")
-            return
-
         # Build the documentation
-        result = subprocess.run(['make', 'html'], cwd=docs_dir, text=True, capture_output=True)
-        if result.returncode != 0:
-            print(f"Error building documentation: {result.stderr}")
+        self.build_sphinx_docs(project_dir)
+
+    def build_sphinx_docs(self, project_dir):
+        # Build the documentation
+        docs_dir = os.path.join(project_dir, 'docs')
+        if os.path.isdir(docs_dir):
+            result = subprocess.run(['make', 'html'], cwd=docs_dir, text=True, capture_output=True)
+            if result.returncode != 0:
+                print(f"Error building documentation: {result.stderr}")
+            else:
+                print("Documentation built successfully.")
         else:
-            print("Documentation built successfully.")
+            print(f"Docs directory '{docs_dir}' not found.")
 
