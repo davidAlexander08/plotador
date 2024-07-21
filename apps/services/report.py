@@ -30,6 +30,7 @@ class Report:
 
         cli_command_match = cli_command_pattern.search(html_template)
 
+        html_plotly = " "
         if cli_command_match:
             cli_command = cli_command_match.group(1).strip()
             print(f"Executing CLI command: {cli_command}")
@@ -49,13 +50,13 @@ class Report:
             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
             print(caminho_saida+"/"+nome_arquivo)
             with open(caminho_saida+"/"+nome_arquivo, "r") as file:
-                htmt_plotly = file.read()
+                html_plotly = file.read()
         else:
             cli_output = "No CLI command found."
 
         # Replace the placeholders with the Plotly plot and CLI output
         #html_report = html_template.replace("PLOT_PLACEHOLDER", plot_html)
-        html_report = html_template.replace("PLOTLY_PLACEHOLDER", htmt_plotly)
+        html_report = html_template.replace("PLOTLY_PLACEHOLDER", html_plotly)
 
         # Save the final HTML report
         with open("report.html", "w") as file:
