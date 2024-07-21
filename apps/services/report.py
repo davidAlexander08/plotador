@@ -19,7 +19,7 @@ class Report:
         plot_html = pio.to_html(fig, full_html=False)
         # Read the HTML template
         with open("template.html", "r") as file:
-            html_template = file.read()
+            #html_template = file.read()
             lines = file.readlines()
         print("ANTES DO FOR")
         for line in lines:
