@@ -23,8 +23,9 @@ class Report:
             lines = file.readlines()
 
         for line in lines:
+            "ENTROU"
             print(line)
-
+        exit(1)
         # Find the CLI command in the HTML template
         cli_command_pattern = re.compile(r'CLI_COMMAND_PLACEHOLDER: (.*?)<', re.DOTALL)
 
