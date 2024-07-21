@@ -42,8 +42,6 @@ class Report:
                     if("</h" in line):
                         html_file.write(line+"\n")
                     if("plotador" in line):
-                        #cli_command_pattern = re.compile(r'CLI_COMMAND_PLACEHOLDER: (.*?)<', re.DOTALL)
-                        #cli_command_match = cli_command_pattern.search(html_template)
                         cli_command = line.strip()
                         print(f"Executing CLI command: {cli_command}")
                         cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
@@ -58,50 +56,15 @@ class Report:
                             if(comando == "--titulo"):
                                 nome_arquivo = lista_commands_cli[contador+1].replace("_"," ")+".html"
                             contador += 1
-                        print(caminho_saida+"/"+nome_arquivo)
+                        #print(caminho_saida+"/"+nome_arquivo)
                         with open(caminho_saida+"/"+nome_arquivo, "r") as file:
                             html_plotly = file.read()
                             html_file.write(html_plotly+"\n")
                     else:
                         html_file.write("<p>"+line+"<\p>\n")
                     print(line)
-            # Find the CLI command in the HTML template
-            #
-
-            #
-
-            #html_plotly = " "
-            #if cli_command_match:
-            #    
-            #    print(f"Executing CLI command: {cli_command}")
-            #    lista_commands_cli = cli_command.split()
-            #    flag = 0
-            #    caminho_saida = "sem_caminho"
-            #    nome_arquivo  = "sem_nome"
-            #    contador = 0 
-            #    for comando in lista_commands_cli:
-            #        if(comando == "--outpath"):
-            #            caminho_saida = lista_commands_cli[contador+1]
-            #        if(comando == "--titulo"):
-            #            nome_arquivo = lista_commands_cli[contador+1].replace("_"," ")+".html"
-            #        contador += 1
-#
-            #    print(cli_command.split())
-            #    cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
-            #    print(caminho_saida+"/"+nome_arquivo)
-            #    with open(caminho_saida+"/"+nome_arquivo, "r") as file:
-            #        html_plotly = file.read()
-            #else:
-            #    cli_output = "No CLI command found."
-#
-            ## Replace the placeholders with the Plotly plot and CLI output
-            ##html_report = html_template.replace("PLOT_PLACEHOLDER", plot_html)
-            #html_report = html_template.replace("PLOTLY_PLACEHOLDER", html_plotly)
-            # Close the HTML tags
             html_file.write('</body>\n')
             html_file.write('</html>\n')
-        # Save the final HTML report
-        #with open("report.html", "w") as file:
-            #file.write(html_file)
+
 
         print("Report saved as report.html")
