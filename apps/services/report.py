@@ -58,9 +58,10 @@ class Report:
                             if(comando == "--titulo"):
                                 nome_arquivo = lista_commands_cli[contador+1].replace("_"," ")+".html"
                             contador += 1
-                            with open(caminho_saida+"/"+nome_arquivo, "r") as file:
-                                html_plotly = file.read()
-                                html_file.write(html_plotly+"\n")
+                        print(caminho_saida+"/"+nome_arquivo)
+                        with open(caminho_saida+"/"+nome_arquivo, "r") as file:
+                            html_plotly = file.read()
+                            html_file.write(html_plotly+"\n")
                     else:
                         html_file.write("<p>"+line+"<\p>\n")
                     print(line)
