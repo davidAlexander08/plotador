@@ -21,7 +21,7 @@ class Report:
         with open("template.html", "r") as file:
             html_template = file.read()
             lines = file.readlines()
-
+        print("ANTES DO FOR")
         for line in lines:
             print("ENTROU")
             print(line)
