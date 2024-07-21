@@ -15,13 +15,13 @@ import shutil
 class Report:
     def __init__(self):
         # Example usage
-        create_sphinx_project(
+        self.create_sphinx_project(
             project_name='MyProject',
             author='Your Name',
             version='0.1',
             release='0.1.0'
         )
-        
+
         # Create a simple line plot
         x = [1, 2, 3, 4, 5]
         y = [10, 15, 13, 17, 20]
