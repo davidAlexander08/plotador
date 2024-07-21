@@ -37,11 +37,12 @@ class Report:
             html_file.write('<body>\n')
 
             for line in lines:
-                if("</h" in line):
-                    html_file.write(line.strip()+"\n")
-                else:
-                    html_file.write("<p>"+line.strip()+"<\p>\n")
-                print(line)
+                if line.strip():
+                    if("</h" in line):
+                        html_file.write(line+"\n")
+                    else:
+                        html_file.write("<p>"+line+"<\p>\n")
+                    print(line)
             # Find the CLI command in the HTML template
             #cli_command_pattern = re.compile(r'CLI_COMMAND_PLACEHOLDER: (.*?)<', re.DOTALL)
 
