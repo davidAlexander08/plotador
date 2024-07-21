@@ -42,18 +42,24 @@ class Report:
                     if("</h" in line):
                         html_file.write(line+"\n")
                     if("plotador" in line):
-                        print("PLOTADOR")
+                        #cli_command_pattern = re.compile(r'CLI_COMMAND_PLACEHOLDER: (.*?)<', re.DOTALL)
+                        #cli_command_match = cli_command_pattern.search(html_template)
+                        cli_command = line.strip()
+                        print(f"Executing CLI command: {cli_command}")
+
+                        print("PLOTADOR")   
+                        exit(1)
                     else:
                         html_file.write("<p>"+line+"<\p>\n")
                     print(line)
             # Find the CLI command in the HTML template
-            #cli_command_pattern = re.compile(r'CLI_COMMAND_PLACEHOLDER: (.*?)<', re.DOTALL)
+            #
 
-            #cli_command_match = cli_command_pattern.search(html_template)
+            #
 
             #html_plotly = " "
             #if cli_command_match:
-            #    cli_command = cli_command_match.group(1).strip()
+            #    
             #    print(f"Executing CLI command: {cli_command}")
             #    lista_commands_cli = cli_command.split()
             #    flag = 0
