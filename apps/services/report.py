@@ -23,7 +23,7 @@ class Report:
             lines = file.readlines()
 
         for line in lines:
-            "ENTROU"
+            print("ENTROU")
             print(line)
         exit(1)
         # Find the CLI command in the HTML template
