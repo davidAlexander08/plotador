@@ -45,7 +45,7 @@ class Report:
                 line = line.strip()
                 if line.strip():
                     if("</h" in line):
-                        html_file.write(line+"\n")
+                        html_file.write(line.strip()+"\n")
                     if("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
@@ -69,7 +69,7 @@ class Report:
                             html_file.write(html_plotly+"\n")
                             #html_file.write(nome_arquivo+"\n")
                     else:
-                        html_file.write("<p>"+line+"<\p>\n")
+                        html_file.write("<p>"+line.strip()+"<\p>\n")
                     print(line)
             html_file.write('</body>\n')
             html_file.write('</html>\n')
