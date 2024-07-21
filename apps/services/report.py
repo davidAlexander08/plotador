@@ -15,7 +15,7 @@ import shutil
 class Report:
     def __init__(self):
         # Example usage
-        self.create_sphinx_project('MyProject')
+        self.create_and_build_sphinx_project('MyProject')
 
         # Create a simple line plot
         x = [1, 2, 3, 4, 5]
