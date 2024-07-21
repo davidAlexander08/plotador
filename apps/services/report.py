@@ -46,7 +46,7 @@ class Report:
                         #cli_command_match = cli_command_pattern.search(html_template)
                         cli_command = line.strip()
                         print(f"Executing CLI command: {cli_command}")
-
+                        cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                         print("PLOTADOR")   
                         exit(1)
                     else:
