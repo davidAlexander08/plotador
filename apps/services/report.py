@@ -37,6 +37,7 @@ class Report:
             html_file.write('<body>\n')
 
             for line in lines:
+                line = line.strip()
                 if line.strip():
                     if("</h" in line):
                         html_file.write(line+"\n")
