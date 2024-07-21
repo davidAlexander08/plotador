@@ -24,7 +24,7 @@ class Report:
             #html_template = file.read()
             lines = file.readlines()
 
-        with open("output.html", "w") as arquivo_html:
+        with open("output.html", "w") as html_file:
             html_file.write('<!DOCTYPE html>\n')
             html_file.write('<html lang="en">\n')
             html_file.write('<head>\n')
