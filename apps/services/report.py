@@ -58,7 +58,7 @@ class Report:
         #html_report = html_report.replace("PLOTLY_PLACEHOLDER", htmt_plotly)
 
         # Save the final HTML report
-        #with open("report.html", "w") as file:
-        #    file.write(html_report)
+        with open("report.html", "w") as file:
+            file.write(html_report)
 
         print("Report saved as report.html")
