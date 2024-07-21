@@ -33,8 +33,13 @@ class Report:
             html_file.write('<title>Generated HTML</title>\n')
             html_file.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>\n')
             html_file.write('<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>\n')
+            html_file.write("<style>")
+            html_file.write("iframe {width: 100%; height: 600px; border: none;")
+            html_file.write("}")
+            html_file.write("<\style>")
             html_file.write('</head>\n')
             html_file.write('<body>\n')
+            html_file.write('<iframe src="docs/_build/html/index.html"></iframe>\n')
 
             for line in lines:
                 line = line.strip()
