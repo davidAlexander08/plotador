@@ -25,7 +25,7 @@ class Report:
         path.pop()
         arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
         if(self.json is not None):
-            data = Dados_json_caso(arquivo_json)
+            data = Dados_json_caso(self.json)
 
         # Example usage
         with open(arquivo_template, "r") as file:
