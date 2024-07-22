@@ -25,7 +25,7 @@ class Report:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generated HTML</title>
+<title>Relatorio ONS</title>
 <style>
 
         body {
@@ -99,8 +99,18 @@ class Report:
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
+    <div class="sidebar">
+        <div class="company-name">ONS</div>
+        <ul>
             """
             html_file.write(head_html)
+            for line in lines:
+                if("\page{") in line:
+                    nome_pagina = line.split("{")
+                    print(nome_pagina)
+                    
+
+
             for line in lines:
                 if line.strip():
                     if("</h" in line):
