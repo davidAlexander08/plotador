@@ -30,28 +30,11 @@ class Convergencia:
         print(diretorio_saida)
         os.makedirs(diretorio_saida, exist_ok=True)
         
-        df_temp = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
-        print(df_temp)
-        lista_color = []
-        temp = []
-        for caso in data.casos:
-            df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-            print(df_caso)
-            exit(1)
-            lista_color.append(caso.cor)
-            if(caso.modelo == "NEWAVE"):
-                #temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
-                temp.append(df_caso.loc[(df_caso["etapa"] == "Tempo Total")])
-            if(caso.modelo == "DESSEM"):
-                #print(df_caso)
-                df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
-                temp.append(df)
-        df = pd.concat(temp).reset_index(drop = True)
-        print(df)
-
-        self.eco_indicadores.exportar(df, diretorio_saida,"Tempo"+self.estudo )
-        titulo_tempo = "Tempo de processamento"+" "+self.estudo if self.titulo == " " else self.titulo.replace("_"," ")
-        fig = self.graficos.gera_grafico_barras_diferentes(df, colX = "caso", colY = "tempo", categorias = "caso",tamanho = self.tamanho, eixoX = "", eixoY = "minutos",
-         aproximacao = 2, titulo = titulo_tempo, lista_cor = lista_color)
-        self.graficos.exportar(fig, diretorio_saida, titulo_tempo, self.html, self.largura, self.altura)
+        df_convergencia = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
+        self.eco_indicadores.exportar(df, diretorio_saida,"Convergencia"+self.estudo )
+        titulo_grafico = "Convergencia "+self.estudo if self.titulo == " " else self.titulo.replace("_"," ")
+        lista = ["zinf"]
+        mapFormatLine = {"zinf": "dot"}
+        fig = graficos.gera_grafico_linhas_diferentes(df_convergencia,lista, mapFormatLine, "R$ (10 6)", "iteracoes", titulo_grafico)
+        self.graficos.exportar(fig, diretorio_saida, titulo_grafico, self.html, self.largura, self.altura)
                         
