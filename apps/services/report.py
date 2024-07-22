@@ -1,5 +1,6 @@
 
 
+from apps.interface.dados_json_caso import Dados_json_caso
 import plotly.graph_objects as go
 import plotly.io as pio
 import pandas as pd
@@ -14,6 +15,7 @@ import shutil
 
 class Report:
     def __init__(self,outpath, json, txt, titulo):
+        
         #self.outpath = outpath
         self.json = json
         self.txt = txt
@@ -22,7 +24,8 @@ class Report:
         path.pop()
         path.pop()
         arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
-        
+        if(self.json is not None):
+            data = Dados_json_caso(arquivo_json)
 
         # Example usage
         with open(arquivo_template, "r") as file:
@@ -138,6 +141,36 @@ class Report:
                         pagina_ativa = "page active" if flag == 0 else "page"
                         html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                         print(nome_pagina)
+                        if(nome_pagina == "Infos" or nome_pagina == "Info"):
+                            Inicio_tabela = """
+<table>
+  <tr>
+    <th>Nome do Caso</th>
+    <th>Caminho</th>
+    <th>Modelo</th>
+    <th>Cor</th>
+  </tr>
+"""                         
+                            Template_tabela_caso = """
+  <tr>
+    <td>nome</td>
+    <td>caminho</td>
+    <td>modelo</td>
+    <td>cor</td>
+  </tr>
+"""
+                            html_file.write(Inicio_tabela)
+                            for caso in data.casos:
+                                temp = Template_tabela_caso
+                                temp = temp.replace("nome", caso.nome)
+                                temp = temp.replace("caminho", caso.caminho)
+                                temp = temp.replace("modelo", caso.modelo)
+                                temp = temp.replace("cor", caso.cor)
+                                html_file.write(temp)
+                            html_file.write("</table>"+"\n")
+                            html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
+
+
                     elif("</h" in line):
                         html_file.write(line.strip()+"\n")
                     elif("plotador" in line):

@@ -1,9 +1,13 @@
+\page{Infos}
+
+<h1>Informações Gerais do Estudo</h1>
+
+
+
 \page{SIN}
 
 <h1>Relatório SIN</h1>
 Relatório com grandezas relacionadas ao estudo
-
-<h2>Informações Gerais</h2>
 
 <h2>Geração Térmica</h2>
 ###Formula:
