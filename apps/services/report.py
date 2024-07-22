@@ -107,7 +107,7 @@ class Report:
             for line in lines:
                 if("\page{") in line:
                     nome_pagina = line.split("{")
-                    print(nome_pagina[1].spit("}"))
+                    print(nome_pagina[1].split("}"))
 
 
 
