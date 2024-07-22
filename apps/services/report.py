@@ -13,9 +13,17 @@ import subprocess
 import shutil
 
 class Report:
-    def __init__(self):
+    def __init__(self,outpath, json, txt):
+        #self.outpath = outpath
+        self.json = json
+        self.txt = txt
+        path = __file__.split("/")
+        path.pop()
+        arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
+        
+
         # Example usage
-        with open("template.txt", "r") as file:
+        with open(arquivo_template, "r") as file:
             #html_template = file.read()
             lines = file.readlines()
 
@@ -116,6 +124,7 @@ class Report:
             flag = 0
             for line in lines:
                 if line.strip():
+
                     if("###" in line):
                         pass
                     elif("\page{") in line:
@@ -131,6 +140,8 @@ class Report:
                     elif("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
+                        if("arquivo_json" in cli_command):
+                            cli_command.replace("arquivo_json", self.json)
                         cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                         lista_commands_cli = cli_command.split()
                         print(lista_commands_cli)

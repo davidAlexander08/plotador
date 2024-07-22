@@ -31,15 +31,19 @@ option_boxplot = click.option("--boxplot", default = None, help = "Se True ativa
 option_csv = click.option("--csv", default = "True", help = "Default True, se False nao imprime mais os csvs")
 option_html = click.option("--html", default = None, help = "Default False, se True gera o html da figura")
 option_outpath = click.option("--outpath", default = None, help = "Muda o caminho de saida da figura e csv a serem gerados")
+option_txt = click.option("--txt", default = None, help ="definicao do arquivo txt. Caso nenhum, ele considera estar dentro da pasta do caso")
 
 @click.group()
 def cli():
     pass
 
 @click.command("report")
-def realiza_report():
+@option_outpath
+@option_json
+@option_txt
+def realiza_report(outpath, json, txt):
     from apps.services.report import Report
-    Report()
+    Report(outpath, json, txt)
 
 @click.command("temporal")
 @option_xinf
