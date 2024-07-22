@@ -41,9 +41,10 @@ def cli():
 @option_outpath
 @option_json
 @option_txt
-def realiza_report(outpath, arquivo_json, txt):
+@option_titulo
+def realiza_report(outpath, arquivo_json, txt, titulo):
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt)
+    Report(outpath, arquivo_json, txt, titulo)
 
 @click.command("temporal")
 @option_xinf
@@ -216,11 +217,13 @@ def analise_nwlistcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup,
 )
 @option_largura
 @option_altura
-def analise_tempo(arquivo_json, largura, altura):
+@option_html
+@option_outpath
+def analise_tempo(arquivo_json, largura, altura, html, outpath):
     from apps.services.tempo import Tempo
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Tempo(data, largura, altura)          
+        Tempo(data, largura, altura, html, outpath)          
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 

@@ -36,4 +36,4 @@ plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_
 
 
 \page{execucao}
-###plotador tempo
+plotador tempo --html True

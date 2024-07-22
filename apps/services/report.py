@@ -13,10 +13,11 @@ import subprocess
 import shutil
 
 class Report:
-    def __init__(self,outpath, json, txt):
+    def __init__(self,outpath, json, txt, titulo):
         #self.outpath = outpath
         self.json = json
         self.txt = txt
+        self.titulo = titulo
         path = __file__.split("/")
         path.pop()
         path.pop()
@@ -28,7 +29,8 @@ class Report:
             #html_template = file.read()
             lines = file.readlines()
 
-        with open("output.html", "w") as html_file:
+        titulo_html = "output.html" if self.titulo == " " else self.titulo
+        with open(titulo_html, "w") as html_file:
             head_html = """
 <!DOCTYPE html>
 <head>

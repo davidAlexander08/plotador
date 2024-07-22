@@ -16,14 +16,15 @@ import json
 class Tempo:
 
     #Faz gráficos de tempo de execução apenas
-    def __init__(self, data, largura, altura):
+    def __init__(self, data, largura, altura, html, outpath):
         self.largura = largura
         self.altura = altura
         self.estudo = data.estudo
+        self.html = html
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
-        diretorio_saida = f"resultados/{self.estudo}/tempo"
+        diretorio_saida = f"resultados/{self.estudo}/tempo" if outpath is None else outpath
         os.makedirs(diretorio_saida, exist_ok=True)
         
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
@@ -47,5 +48,5 @@ class Tempo:
         self.eco_indicadores.exportar(df, diretorio_saida,"Tempo"+self.estudo )
         fig = self.graficos.gera_grafico_barras_diferentes(df, colX = "caso", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "minutos",
          aproximacao = 2, titulo = "Tempo de processamento"+" "+self.estudo, lista_cor = lista_color)
-        self.graficos.exportar(fig, diretorio_saida, "Tempo"+self.estudo, self.largura, self.altura)
+        self.graficos.exportar(fig, diretorio_saida, "Tempo"+self.estudo, self.html, self.largura, self.altura)
                         
