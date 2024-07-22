@@ -251,6 +251,9 @@ class Report:
                         print(f"Executing CLI command: {cli_command}")
                         if("arquivo_json" in cli_command):
                             cli_command = cli_command.replace("arquivo_json", self.json)
+                        if("ADD_SBMS" in cli_command):
+                            submercados = "SE,S,NE,N" if data.casos[0].modelo != "NEWAVE" else "SUDESTE,SUL,NORDESTE,NORTE"
+                            cli_command = cli_command.replace("ADD_SBMS", submercados)
                         cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                         lista_commands_cli = cli_command.split()
                         print(lista_commands_cli)
@@ -279,7 +282,7 @@ class Report:
 
                     else:
                         html_file.write("<p>"+line.strip()+"</p>\n")
-                    print(line)
+                    #print(line)
 
             html_file.write('</div>'+"\n")
 
