@@ -21,84 +21,84 @@ class Report:
 
         with open("output.html", "w") as html_file:
             head_html = """
-                <!DOCTYPE html>
-                <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Generated HTML</title>
-                <style>
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generated HTML</title>
+<style>
 
-                        body {
-                            margin: 0;
-                            font-family: Arial, sans-serif;
-                        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
 
-                        .sidebar {
-                            height: 100%;
-                            width: 250px;
-                            position: fixed;
-                            top: 0;
-                            left: 0;
-                            background-color: #333;
-                            padding-top: 20px;
-                            color: white;
-                            box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-                        }
-                        
-                        .company-name {
-                            text-align: center;
-                            font-size: 20px;
-                            font-weight: bold;
-                            padding: 20px 0;
-                            border-bottom: 1px solid #575757;
-                        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding-top: 20px;
+            color: white;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+        }
+        
+        .company-name {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 20px 0;
+            border-bottom: 1px solid #575757;
+        }
 
-                        .sidebar ul {
-                            list-style-type: none; /* Removes default bullets */
-                            padding: 0;
-                            margin: 20px 0 0; /* Adjusts menu position */
-                        }
+        .sidebar ul {
+            list-style-type: none; /* Removes default bullets */
+            padding: 0;
+            margin: 20px 0 0; /* Adjusts menu position */
+        }
 
-                        .sidebar li {
-                            margin: 0;
-                        }
+        .sidebar li {
+            margin: 0;
+        }
 
-                        .sidebar a {
-                            padding: 15px 20px;
-                            text-decoration: none;
-                            font-size: 18px;
-                            color: white;
-                            display: block;
-                            border-left: 4px solid transparent; /* Space for hover effect */
-                        }
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            border-left: 4px solid transparent; /* Space for hover effect */
+        }
 
-                        .sidebar a:hover {
-                            background-color: #575757;
-                            border-left: 4px solid #ffcc00; /* Highlight color on hover */
-                        }
+        .sidebar a:hover {
+            background-color: #575757;
+            border-left: 4px solid #ffcc00; /* Highlight color on hover */
+        }
 
-                        .content {
-                            margin-left: 260px;
-                            padding: 20px;
-                        }
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+        }
 
 
-                        .page {
-                            display: none;
-                        }
+        .page {
+            display: none;
+        }
 
-                        .page.active {
-                            display: block;
-                        }
+        .page.active {
+            display: block;
+        }
 
-                        h1 {
-                            color: #333;
-                        }
+        h1 {
+            color: #333;
+        }
 
-                </style>
-                <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-                </head>
-                <body>
+</style>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
             """
             html_file.write(head_html)
             for line in lines:
