@@ -3,6 +3,8 @@
 <h1>Relatório SIN</h1>
 Relatório com grandezas relacionadas ao estudo
 
+<h2>Informações Gerais</h2>
+
 <h2>Geração Térmica</h2>
 ###Formula:
 ###Here is some LaTeX: \( E = mc^2 \)
@@ -36,4 +38,7 @@ plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_
 
 
 \page{execucao}
-plotador tempo arquivo_json --html True --titulo Tempo_de_Execucao
+
+<h1> Relatório de Execução </h1>
+
+plotador tempo arquivo_json --html True --titulo Tempo_de_Execucao --largura 1200 --altura 550
