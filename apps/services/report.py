@@ -127,6 +127,46 @@ class Report:
         tr:nth-child(even) {
         background-color: #dddddd;
         }
+
+
+        .centered-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh; /* 50% of the viewport height */
+            margin-top: 20px;
+        }
+
+        .centered-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .content {
+                margin-left: 210px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .centered-image {
+                height: auto;
+            }
+        }
 </style>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -228,7 +268,7 @@ class Report:
                                 if(caso.modelo == "NEWAVE"):
                                     data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]
+                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
                                     iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
                                     zinf = data_pmo.convergencia["zinf"].iloc[-1]
                                     custo_total = data_pmo.custo_operacao_total
