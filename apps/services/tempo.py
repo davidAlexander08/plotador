@@ -50,5 +50,5 @@ class Tempo:
         titulo_tempo = "Tempo de processamento"+" "+self.estudo if self.titulo == " " else self.titulo.replace("_"," ")
         fig = self.graficos.gera_grafico_barras_diferentes(df, colX = "caso", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "minutos",
          aproximacao = 2, titulo = titulo_tempo, lista_cor = lista_color)
-        self.graficos.exportar(fig, diretorio_saida, "Tempo"+self.estudo, self.html, self.largura, self.altura)
+        self.graficos.exportar(fig, diretorio_saida, titulo_tempo, self.html, self.largura, self.altura)
                         
