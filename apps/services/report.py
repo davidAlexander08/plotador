@@ -123,7 +123,7 @@ class Report:
                         nome_pagina = line.split("{")[1].split("}")[0]
                         html_file.write('<div id="'+nome_pagina+'" class="page active">'+"\n")
                         print(nome_pagina)
-                    if("</h" in line):
+                    elif("</h" in line):
                         html_file.write(line.strip()+"\n")
                     elif("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
