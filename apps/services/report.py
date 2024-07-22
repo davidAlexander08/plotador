@@ -19,6 +19,7 @@ class Report:
         self.txt = txt
         path = __file__.split("/")
         path.pop()
+        path.pop()
         arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
         
 
