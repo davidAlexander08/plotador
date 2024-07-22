@@ -116,7 +116,9 @@ class Report:
             flag = 0
             for line in lines:
                 if line.strip():
-                    if("\page{") in line:
+                    if("###" in line):
+                        pass
+                    elif("\page{") in line:
                         if(flag == 1):
                             html_file.write('</div>'+"\n")
                         flag = 1
