@@ -41,9 +41,9 @@ def cli():
 @option_outpath
 @option_json
 @option_txt
-def realiza_report(outpath, json, txt):
+def realiza_report(outpath, arquivo_json, txt):
     from apps.services.report import Report
-    Report(outpath, json, txt)
+    Report(outpath, arquivo_json, txt)
 
 @click.command("temporal")
 @option_xinf
