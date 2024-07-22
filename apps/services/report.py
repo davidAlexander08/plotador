@@ -143,8 +143,6 @@ class Report:
                         print(f"Executing CLI command: {cli_command}")
                         if("arquivo_json" in cli_command):
                             cli_command = cli_command.replace("arquivo_json", self.json)
-                        print(cli_command)
-                        exit(1)
                         cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                         lista_commands_cli = cli_command.split()
                         print(lista_commands_cli)
