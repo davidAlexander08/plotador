@@ -35,6 +35,6 @@ class Convergencia:
         titulo_grafico = "Convergencia "+self.estudo if self.titulo == " " else self.titulo.replace("_"," ")
         lista = ["zinf"]
         mapFormatLine = {"zinf": "dot"}
-        fig = self.graficos.gera_grafico_linhas_diferentes(df_convergencia,lista, mapFormatLine, "R$ (10 6)", "iteracoes", titulo_grafico)
+        fig = self.graficos.gera_grafico_linhas_diferentes(df_convergencia,lista, mapFormatLine, "R$ (10 6)", "iteracoes", titulo_grafico, tamanho = self.tamanho)
         self.graficos.exportar(fig, diretorio_saida, titulo_grafico, self.html, self.largura, self.altura)
                         

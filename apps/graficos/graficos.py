@@ -155,6 +155,7 @@ class Graficos:
         legendaEixoY:str,
         legendaEixoX:str,
         titulo: str,
+        tamanho = 25
     ) -> go.Figure:
         fig = go.Figure()
         for c in self.casos:
@@ -173,7 +174,7 @@ class Graficos:
         fig.update_xaxes(title=legendaEixoX)
         fig.update_yaxes(title=legendaEixoY)
         fig.update_layout(legend=dict(title_font_family="Times New Roman",
-                              font=dict(size= 11)
+                              font=dict(size= tamanho)
         ))
         return fig
 
