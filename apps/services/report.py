@@ -231,15 +231,15 @@ class Report:
                                     print(data_pmo.convergencia["zinf"])
                                     print(data_pmo.custo_operacao_total)
                                     
-                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["etapa"].iloc[0]
+                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]
                                     iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
                                     zinf = data_pmo.convergencia["zinf"].iloc[-1]
                                     custo_total = data_pmo.custo_operacao_total
 
-                                temp = temp.replace("tempo_total", tempo_total)
-                                temp = temp.replace("iteracoes", iteracoes)
-                                temp = temp.replace("zinf", zinf)
-                                temp = temp.replace("custo_total", custo_total)
+                                temp = temp.replace("tempo_total", str(tempo_total))
+                                temp = temp.replace("iteracoes", str(iteracoes))
+                                temp = temp.replace("zinf", str(zinf))
+                                temp = temp.replace("custo_total", str(custo_total))
                                 html_file.write(temp)
                             html_file.write("</table>"+"\n")
 
