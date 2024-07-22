@@ -1,6 +1,7 @@
 
 
 from apps.interface.dados_json_caso import Dados_json_caso
+from inewave.newave import Pmo
 import plotly.graph_objects as go
 import plotly.io as pio
 import pandas as pd
@@ -26,6 +27,7 @@ class Report:
         arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
         if(self.json is not None):
             data = Dados_json_caso(self.json)
+            self.eco_indicadores = EcoIndicadores(data.casos)
 
         # Example usage
         with open(arquivo_template, "r") as file:
@@ -147,6 +149,8 @@ class Report:
 
                     if("###" in line):
                         pass
+                    elif("</h" in line):
+                        html_file.write(line.strip()+"\n")
                     elif("\page{") in line:
                         nome_pagina = line.split("{")[1].split("}")[0]
                         if(flag == 1):
@@ -173,6 +177,7 @@ class Report:
     </tr>
 """
                             html_file.write(Inicio_tabela)
+                            html_file.write("<h1>Informações Gerais do Estudo</h1>"+"\n")
                             for caso in data.casos:
                                 temp = Template_tabela_caso
                                 temp = temp.replace("nome", caso.nome)
@@ -181,12 +186,60 @@ class Report:
                                 temp = temp.replace("cor", caso.cor)
                                 html_file.write(temp)
                             html_file.write("</table>"+"\n")
+
+### TABELA DE INFORMACOES OPERACIONAIS
+
+                            Inicio_tabela = """
+    <table>
+    <tr>
+        <th>Caso</th>
+        <th>Modelo</th>
+        <th>Tempo Total (min)</th>
+        <th>Iter</th>
+        <th>Zinf</th>
+        <th>Custo Total</th>
+    </tr>
+"""                         
+                            Template_tabela_caso = """
+  <tr>
+    <td>nome</td>
+	<td>modelo</td>
+	<td>tempo_total</td>
+    <td>iteracoes</td>
+    <td>zinf</td>
+    <td>custo_total</td>
+  </tr>
+"""
+                            html_file.write(Inicio_tabela)
+                            html_file.write("<h2>Informações Operacionais</h2>"+"\n")
+                            df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+                            for caso in data.casos:
+                                temp = Template_tabela_caso
+                                temp = temp.replace("nome", caso.nome)
+                                temp = temp.replace("modelo", caso.modelo)
+                                tempo_total = 0
+                                iteracoes= 0 
+                                zinf = 0
+                                custo_total=0
+                                if(caso.modelo == "NEWAVE"):
+                                    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]
+                                    iteracoes = Pmo.read(caso.caminho+"/pmo.dat").convergencia["iteracao"].iloc[-1]
+                                    zinf = Pmo.read(caso.caminho+"/pmo.dat").convergencia["zinf"].iloc[-1]
+                                    custo_total = Pmo.read(caso.caminho+"/pmo.dat").custo_operacao_total
+
+                                temp = temp.replace("tempo_total", caso.cor)
+                                temp = temp.replace("iteracoes", caso.cor)
+                                temp = temp.replace("zinf", caso.cor)
+                                temp = temp.replace("custo_total", caso.cor)
+                                html_file.write(temp)
+                            html_file.write("</table>"+"\n")
+
+
                         else:
                             flag = 1
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                             print(nome_pagina)
-                    elif("</h" in line):
-                        html_file.write(line.strip()+"\n")
                     elif("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")

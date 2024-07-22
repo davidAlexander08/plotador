@@ -1,6 +1,4 @@
 \page{Infos}
-<h1>Informações Gerais do Estudo</h1>
-
 
 
 \page{SIN}
