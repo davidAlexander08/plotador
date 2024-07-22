@@ -121,7 +121,7 @@ class Report:
                             html_file.write('</div>'+"\n")
                         flag = 1
                         nome_pagina = line.split("{")[1].split("}")[0]
-                        html_file.write('<div id="SIN" class="page active">'+"\n")
+                        html_file.write('<div id="'+nome_pagina+'" class="page active">'+"\n")
                     if("</h" in line):
                         html_file.write(line.strip()+"\n")
                     elif("plotador" in line):
