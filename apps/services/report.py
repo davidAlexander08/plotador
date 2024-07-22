@@ -106,8 +106,8 @@ class Report:
             html_file.write(head_html)
             for line in lines:
                 if("\page{") in line:
-                    nome_pagina = line.split("{")
-                    print(nome_pagina[1].split("}"))
+                    nome_pagina = line.split("{")[1].split("}")[0]
+                    print(nome_pagina)
 
 
 
