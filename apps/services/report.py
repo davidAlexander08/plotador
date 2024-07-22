@@ -110,10 +110,18 @@ class Report:
                     print(nome_pagina)
                     html_file.write('<li><a href="#" onclick="showPage(\''+nome_pagina+'\')">'+nome_pagina+'</a></li>'+"\n")
 
-
-
+            html_file.write("</ul>"+"\n")
+            html_file.write("</div>"+"\n")
+            html_file.write('<div class="content">'+"\n")
+            flag = 0
             for line in lines:
                 if line.strip():
+                    if("\page{") in line:
+                        if(flag == 1):
+                            html_file.write('</div>'+"\n")
+                        flag = 1
+                        nome_pagina = line.split("{")[1].split("}")[0]
+                        html_file.write('<div id="SIN" class="page active">'+"\n")
                     if("</h" in line):
                         html_file.write(line.strip()+"\n")
                     elif("plotador" in line):
@@ -141,6 +149,25 @@ class Report:
                     else:
                         html_file.write("<p>"+line.strip()+"</p>\n")
                     print(line)
+
+
+
+            script_html = """
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            var pages = document.querySelectorAll('.page');
+            pages.forEach(function(page) {
+                page.classList.remove('active');
+            });
+
+            // Show the selected page
+            var selectedPage = document.getElementById(pageId);
+            selectedPage.classList.add('active');
+        }
+    </script>
+            """
+            html_file.write(script_html)
             html_file.write('</body>\n')
             html_file.write('</html>\n')
 
