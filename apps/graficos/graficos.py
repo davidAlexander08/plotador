@@ -320,12 +320,12 @@ class Graficos:
         colX,
         colY,
         categorias,
-        tamanho = 25,
         eixoX:str,
         eixoY:str,
         aproximacao:int,
         titulo:str,
-        lista_cor = []
+        lista_cor = [],
+        tamanho = 25,
     ) -> go.Figure:
         colors = self.pre_defined_colors if (len(lista_cor) == 0 ) else lista_cor
         Log.log().info("Gerando grafico "+titulo)
