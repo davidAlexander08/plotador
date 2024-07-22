@@ -230,6 +230,25 @@ def analise_tempo(arquivo_json, largura, altura, html, outpath, titulo, tamanho)
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
 
+
+@click.command("convergencia")
+@click.argument(
+    "arquivo_json",
+)
+@option_largura
+@option_altura
+@option_html
+@option_outpath
+@option_titulo
+@option_tamanho
+def analise_convergencia(arquivo_json, largura, altura, html, outpath, titulo, tamanho):
+    from apps.services.convergencia import Convergencia
+    if os.path.isfile(arquivo_json):
+        data = Dados_json_caso(arquivo_json)
+        Convergencia(data, largura, altura, html, outpath, titulo, tamanho)          
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
 @click.command("cascatador")
 @click.argument(
     "arquivo_json",
@@ -318,3 +337,4 @@ cli.add_command(analise_fcf)
 cli.add_command(analise_nwlistcf)
 cli.add_command(analise_tempo)
 cli.add_command(analise_cascatador)
+cli.add_command(analise_convergencia)
