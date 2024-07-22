@@ -6,16 +6,16 @@ Relatório com grandezas relacionadas ao estudo
 <h2>Geração Térmica</h2>
 ###Formula:
 ###Here is some LaTeX: \( E = mc^2 \)
-plotador temporal --titulo Geracao_Termica_SIN --json arquivo_json.json --sintese GTER_SIN_EST --html True --largura 1200 --altura 350
+plotador temporal --titulo Geracao_Termica_SIN --json arquivo_json --sintese GTER_SIN_EST --html True --largura 1200 --altura 350
 
 <h2>Geração Hidrelétrica</h2>
-plotador temporal --titulo Geracao_Hidreletrica_SIN --json arquivo_json.json --sintese GHID_SIN_EST --html True --largura 1200 --altura 350
+plotador temporal --titulo Geracao_Hidreletrica_SIN --json arquivo_json --sintese GHID_SIN_EST --html True --largura 1200 --altura 350
 
 <h2>Energia Armazenada</h2>
-plotador temporal --titulo Energia_Armazenada_SIN --json arquivo_json.json --sintese EARMF_SIN_EST --html True --largura 1200 --altura 350
+plotador temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN_EST --html True --largura 1200 --altura 350
 
 <h2>Custo Operacional</h2>
-plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json.json --sintese COP_SIN_EST --html True --largura 1200 --altura 350
+plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json --sintese COP_SIN_EST --html True --largura 1200 --altura 350
 
 
 \page{Submercado}
@@ -23,16 +23,16 @@ plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json.json --sint
 <h1> Relatório de Submercados </h1>
 
 <h2>Geração Térmica</h2>
-plotador temporal --titulo Geracao_Termica_SBM --json arquivo_json.json --sintese GTER_SBM_EST --argumentos SE,NE,N,S --chave SBM --html True --largura 1200 --altura 550
+plotador temporal --titulo Geracao_Termica_SBM --json arquivo_json --sintese GTER_SBM_EST --argumentos SE,NE,N,S --chave SBM --html True --largura 1200 --altura 550
 
 <h2>Geração Hidrelétrica</h2>
-plotador temporal --titulo Geracao_Hidreletrica_SBM --json arquivo_json.json --sintese GHID_SBM_EST --argumentos SE,NE,N,S --chave SBM --html True --largura 1200 --altura 550
+plotador temporal --titulo Geracao_Hidreletrica_SBM --json arquivo_json --sintese GHID_SBM_EST --argumentos SE,NE,N,S --chave SBM --html True --largura 1200 --altura 550
 
 <h2>Energia Armazenada</h2>
-plotador temporal --titulo Energia_Armazenada_SBM --json arquivo_json.json --sintese EARMF_SBM_EST --argumentos SE,NE,N,S --chave SBM --html True --largura 1200 --altura 550
+plotador temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM_EST --argumentos SE,NE,N,S --chave SBM --html True --largura 1200 --altura 550
 
 <h2>CMO</h2>
-plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json.json --sintese CMO_SBM_EST --argumentos SE,NE,N,S --chave SBM --html True --largura 1200 --altura 550
+plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM_EST --argumentos SE,NE,N,S --chave SBM --html True --largura 1200 --altura 550
 
 
 \page{execucao}
