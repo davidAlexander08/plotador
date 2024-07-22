@@ -123,7 +123,8 @@ class Report:
                             html_file.write('</div>'+"\n")
                         flag = 1
                         nome_pagina = line.split("{")[1].split("}")[0]
-                        html_file.write('<div id="'+nome_pagina+'" class="page active">'+"\n")
+                        pagina_ativa = "page active" if flag == 0 else "page"
+                        html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                         print(nome_pagina)
                     elif("</h" in line):
                         html_file.write(line.strip()+"\n")
