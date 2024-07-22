@@ -148,6 +148,7 @@ class Report:
                     if("###" in line):
                         pass
                     elif("\page{") in line:
+                        nome_pagina = line.split("{")[1].split("}")[0]
                         if(flag == 1):
                             html_file.write('</div>'+"\n")
                         pagina_ativa = "page active" if flag == 0 else "page"
@@ -155,21 +156,21 @@ class Report:
                             flag = 1
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                             Inicio_tabela = """
-<table>
-  <tr>
-    <th>Nome do Caso</th>
-    <th>Caminho</th>
-    <th>Modelo</th>
-    <th>Cor</th>
-  </tr>
+    <table>
+    <tr>
+        <th>Nome do Caso</th>
+        <th>Caminho</th>
+        <th>Modelo</th>
+        <th>Cor</th>
+    </tr>
 """                         
                             Template_tabela_caso = """
-  <tr>
-    <td>nome</td>
-    <td>caminho</td>
-    <td>modelo</td>
-    <td>cor</td>
-  </tr>
+    <tr>
+        <td>nome</td>
+        <td>caminho</td>
+        <td>modelo</td>
+        <td>cor</td>
+    </tr>
 """
                             html_file.write(Inicio_tabela)
                             for caso in data.casos:
@@ -182,7 +183,6 @@ class Report:
                             html_file.write("</table>"+"\n")
                         else:
                             flag = 1
-                            nome_pagina = line.split("{")[1].split("}")[0]
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                             print(nome_pagina)
                     elif("</h" in line):
