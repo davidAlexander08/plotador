@@ -1,6 +1,8 @@
 
 
 from apps.interface.dados_json_caso import Dados_json_caso
+from apps.indicadores.eco_indicadores import EcoIndicadores
+
 from inewave.newave import Pmo
 import plotly.graph_objects as go
 import plotly.io as pio
