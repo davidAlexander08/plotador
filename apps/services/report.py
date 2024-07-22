@@ -108,7 +108,7 @@ class Report:
                 if("\page{") in line:
                     nome_pagina = line.split("{")[1].split("}")[0]
                     print(nome_pagina)
-                    html_file.write("<li><a href='#' onclick='showPage('"+nome_pagina+"')'>"+nome_pagina+"</a></li>"+"\n")
+                    html_file.write('<li><a href="#" onclick="showPage("'+nome_pagina+'")">'+nome_pagina+'</a></li>'+"\n")
 
 
 
