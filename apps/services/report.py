@@ -108,7 +108,21 @@ class Report:
         h1 {
             color: #333;
         }
+        table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
 
+        td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        }
+
+        tr:nth-child(even) {
+        background-color: #dddddd;
+        }
 </style>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -136,12 +150,10 @@ class Report:
                     elif("\page{") in line:
                         if(flag == 1):
                             html_file.write('</div>'+"\n")
-                        flag = 1
-                        nome_pagina = line.split("{")[1].split("}")[0]
                         pagina_ativa = "page active" if flag == 0 else "page"
-                        html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
-                        print(nome_pagina)
                         if(nome_pagina == "Infos" or nome_pagina == "Info"):
+                            flag = 1
+                            html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                             Inicio_tabela = """
 <table>
   <tr>
@@ -168,9 +180,11 @@ class Report:
                                 temp = temp.replace("cor", caso.cor)
                                 html_file.write(temp)
                             html_file.write("</table>"+"\n")
+                        else:
+                            flag = 1
+                            nome_pagina = line.split("{")[1].split("}")[0]
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
-
-
+                            print(nome_pagina)
                     elif("</h" in line):
                         html_file.write(line.strip()+"\n")
                     elif("plotador" in line):
@@ -196,12 +210,12 @@ class Report:
                         if(extensao == ".html"):
                             with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
                                 html_plotly = file.read()
-                                html_file.write(html_plotly+"\n")
-                                #html_file.write(nome_arquivo+"\n")
+                                #html_file.write(html_plotly+"\n")
+                                html_file.write(nome_arquivo+"\n")
                         else:
                             with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
                                 base64_string = base64.b64encode(image_file.read()).decode('utf-8')
-                                html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
+                                #html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
                                             #<img src="data:image/png;base64,INSERT_BASE64_ENCODED_STRING_HERE" alt="Centered Image" style="max-width: 100%; height: auto;">
 
                     else:
