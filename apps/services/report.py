@@ -226,12 +226,12 @@ class Report:
                                 if(caso.modelo == "NEWAVE"):
                                     data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-                                    print(df_caso.loc[(df_caso["etapa"] == "Tempo Total")])
+                                    print(df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["etapa"].iloc[0])
                                     print(data_pmo.convergencia["iteracao"].iloc[-1])
                                     print(data_pmo.convergencia["zinf"].iloc[-1])
                                     print(data_pmo.custo_operacao_total)
                                     
-                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]
+                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["etapa"].iloc[0]
                                     iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
                                     zinf = data_pmo.convergencia["zinf"].iloc[-1]
                                     custo_total = data_pmo.custo_operacao_total
