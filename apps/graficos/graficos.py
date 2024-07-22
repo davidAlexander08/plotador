@@ -320,6 +320,7 @@ class Graficos:
         colX,
         colY,
         categorias,
+        tamanho = 25,
         eixoX:str,
         eixoY:str,
         aproximacao:int,
@@ -339,7 +340,7 @@ class Graficos:
                     textposition = "outside",
                     name = cat,
                     textfont=dict(
-                        size=25,
+                        size=tamanho,
                     ),
                     marker_color=colors[indiceCor],
                     showlegend=True
@@ -351,7 +352,7 @@ class Graficos:
 
         fig.update_xaxes(title_text=eixoX)
         fig.update_yaxes(title_text=eixoY)
-        fig.update_layout(font=dict(size= 25))
+        fig.update_layout(font=dict(size= tamanho))
         fig.update_layout(title=titulo)
         return fig
 
