@@ -142,7 +142,7 @@ class Report:
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
                         if("arquivo_json" in cli_command):
-                            cli_command.replace("arquivo_json", self.json)
+                            cli_command = cli_command.replace("arquivo_json", self.json)
                         print(cli_command)
                         exit(1)
                         cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
