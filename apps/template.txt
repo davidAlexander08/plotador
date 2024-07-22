@@ -45,3 +45,7 @@ plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_
 
 <h2>Tempo de Execução</h2>
 plotador tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20 --html True
+
+<h2>Convergencia</h2>
+plotador convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20 --html True
+
