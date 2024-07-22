@@ -224,16 +224,22 @@ class Report:
                                 zinf = 0
                                 custo_total=0
                                 if(caso.modelo == "NEWAVE"):
+                                    data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+                                    print(df_temp.loc[(df_temp["caso"] == caso.nome)])
+                                    print(df_caso.loc[(df_caso["etapa"] == "Tempo Total")])
+                                    print(data_pmo.convergencia["iteracao"].iloc[-1])
+                                    print(data_pmo.convergencia["zinf"].iloc[-1])
+                                    print(data_pmo.custo_operacao_total)
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
                                     tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]
-                                    iteracoes = Pmo.read(caso.caminho+"/pmo.dat").convergencia["iteracao"].iloc[-1]
-                                    zinf = Pmo.read(caso.caminho+"/pmo.dat").convergencia["zinf"].iloc[-1]
-                                    custo_total = Pmo.read(caso.caminho+"/pmo.dat").custo_operacao_total
+                                    iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
+                                    zinf = data_pmo.convergencia["zinf"].iloc[-1]
+                                    custo_total = data_pmo.custo_operacao_total
 
-                                temp = temp.replace("tempo_total", caso.cor)
-                                temp = temp.replace("iteracoes", caso.cor)
-                                temp = temp.replace("zinf", caso.cor)
-                                temp = temp.replace("custo_total", caso.cor)
+                                temp = temp.replace("tempo_total", tempo_total)
+                                temp = temp.replace("iteracoes", iteracoes)
+                                temp = temp.replace("zinf", zinf)
+                                temp = temp.replace("custo_total", custo_total)
                                 html_file.write(temp)
                             html_file.write("</table>"+"\n")
 
