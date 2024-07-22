@@ -22,7 +22,7 @@ class Tempo:
         self.estudo = data.estudo
         self.html = html
         self.titulo = titulo
-        self.tamanho = tamanho
+        self.tamanho = int(tamanho)
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
