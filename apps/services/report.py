@@ -7,7 +7,7 @@ import os
 import json
 import subprocess
 import re
-
+import base64
 import os
 import subprocess
 import shutil
@@ -160,10 +160,17 @@ class Report:
                             if(comando == "--html"):
                                 extensao = ".html"
                             contador += 1
-                        with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
-                            html_plotly = file.read()
-                            html_file.write(html_plotly+"\n")
-                            #html_file.write(nome_arquivo+"\n")
+                        if(extensao == ".html"):
+                            with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
+                                html_plotly = file.read()
+                                html_file.write(html_plotly+"\n")
+                                #html_file.write(nome_arquivo+"\n")
+                        else:
+                            with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
+                                base64_string = base64.b64encode(image_file.read()).decode('utf-8')
+                                html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
+                                            #<img src="data:image/png;base64,INSERT_BASE64_ENCODED_STRING_HERE" alt="Centered Image" style="max-width: 100%; height: auto;">
+
                     else:
                         html_file.write("<p>"+line.strip()+"</p>\n")
                     print(line)
