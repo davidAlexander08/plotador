@@ -15,37 +15,92 @@ import shutil
 class Report:
     def __init__(self):
         # Example usage
-        #self.create_and_build_sphinx_project('MyProject')
-
-        # Create a simple line plot
-        x = [1, 2, 3, 4, 5]
-        y = [10, 15, 13, 17, 20]
-
-        fig = go.Figure(data=go.Scatter(x=x, y=y, mode='lines', name='Line Plot'))
-        plot_html = pio.to_html(fig, full_html=False)
-        # Read the HTML template
-
-
         with open("template.txt", "r") as file:
             #html_template = file.read()
             lines = file.readlines()
 
         with open("output.html", "w") as html_file:
-            html_file.write('<!DOCTYPE html>\n')
-            html_file.write('<html lang="en">\n')
-            html_file.write('<head>\n')
-            html_file.write('<meta charset="UTF-8">\n')
-            html_file.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">\n')
-            html_file.write('<title>Generated HTML</title>\n')
-            html_file.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>\n')
-            html_file.write('<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>\n')
-            #html_file.write("<style>")
-            #html_file.write("iframe {width: 100%; height: 600px; border: none;")
-            #html_file.write("}")
-            #html_file.write("<\style>")
-            html_file.write('</head>\n')
-            html_file.write('<body>\n')
-            #html_file.write('<iframe src="docs/_build/html/index.html"></iframe>\n')
+            head_html = """
+                <!DOCTYPE html>
+                <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Generated HTML</title>
+                <style>
+
+                        body {
+                            margin: 0;
+                            font-family: Arial, sans-serif;
+                        }
+
+                        .sidebar {
+                            height: 100%;
+                            width: 250px;
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            background-color: #333;
+                            padding-top: 20px;
+                            color: white;
+                            box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+                        }
+                        
+                        .company-name {
+                            text-align: center;
+                            font-size: 20px;
+                            font-weight: bold;
+                            padding: 20px 0;
+                            border-bottom: 1px solid #575757;
+                        }
+
+                        .sidebar ul {
+                            list-style-type: none; /* Removes default bullets */
+                            padding: 0;
+                            margin: 20px 0 0; /* Adjusts menu position */
+                        }
+
+                        .sidebar li {
+                            margin: 0;
+                        }
+
+                        .sidebar a {
+                            padding: 15px 20px;
+                            text-decoration: none;
+                            font-size: 18px;
+                            color: white;
+                            display: block;
+                            border-left: 4px solid transparent; /* Space for hover effect */
+                        }
+
+                        .sidebar a:hover {
+                            background-color: #575757;
+                            border-left: 4px solid #ffcc00; /* Highlight color on hover */
+                        }
+
+                        .content {
+                            margin-left: 260px;
+                            padding: 20px;
+                        }
+
+
+                        .page {
+                            display: none;
+                        }
+
+                        .page.active {
+                            display: block;
+                        }
+
+                        h1 {
+                            color: #333;
+                        }
+
+                </style>
+                <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                </head>
+                <body>
+            """
+            html_file.write(head_html)
             for line in lines:
                 if line.strip():
                     if("</h" in line):
@@ -83,35 +138,3 @@ class Report:
 
 
 
-
-    def create_and_build_sphinx_project(self, project_name):
-        # Create the project directory
-        os.makedirs(project_name, exist_ok=True)
-        # Initialize Sphinx
-        subprocess.run([
-            'sphinx-quickstart',
-            '--quiet',  # Suppress output
-            '--project', project_name,
-            '--author', 'Your Name',
-            '--version', '0.1',
-            '--release', '0.1.0',
-            '--language', 'en',
-            '--makefile',  # Create Makefile
-            '--batchfile'  # Create make.bat for Windows
-        ], cwd=project_name, check=True)
-
-        # Create a basic index.rst file
-        index_path = os.path.join(project_name, 'source', 'index.rst')
-        with open(index_path, 'w') as f:
-            f.write("""\
-    Welcome to Your Project’s Documentation!
-    =========================================
-
-    Introduction
-    ------------
-
-    This is a basic Sphinx documentation setup.
-    """)
-
-        # Build the documentation
-        subprocess.run(['make', 'html'], cwd=os.path.join(project_name, 'docs'), check=True)
