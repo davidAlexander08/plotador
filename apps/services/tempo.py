@@ -26,6 +26,7 @@ class Tempo:
         self.graficos = Graficos(data)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/tempo" if outpath is None else outpath
+        print(diretorio_saida)
         os.makedirs(diretorio_saida, exist_ok=True)
         
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
