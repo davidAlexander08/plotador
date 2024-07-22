@@ -16,11 +16,12 @@ import json
 class Tempo:
 
     #Faz gráficos de tempo de execução apenas
-    def __init__(self, data, largura, altura, html, outpath):
+    def __init__(self, data, largura, altura, html, outpath, titulo):
         self.largura = largura
         self.altura = altura
         self.estudo = data.estudo
         self.html = html
+        self.titulo = titulo
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
@@ -46,7 +47,8 @@ class Tempo:
         print(df)
 
         self.eco_indicadores.exportar(df, diretorio_saida,"Tempo"+self.estudo )
+        titulo_tempo = "Tempo de processamento"+" "+self.estudo if self.titulo == " " else self.titulo.replace("_"," ")
         fig = self.graficos.gera_grafico_barras_diferentes(df, colX = "caso", colY = "tempo", categorias = "caso", eixoX = "", eixoY = "minutos",
-         aproximacao = 2, titulo = "Tempo de processamento"+" "+self.estudo, lista_cor = lista_color)
+         aproximacao = 2, titulo = titulo_tempo, lista_cor = lista_color)
         self.graficos.exportar(fig, diretorio_saida, "Tempo"+self.estudo, self.html, self.largura, self.altura)
                         

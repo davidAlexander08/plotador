@@ -219,11 +219,12 @@ def analise_nwlistcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup,
 @option_altura
 @option_html
 @option_outpath
-def analise_tempo(arquivo_json, largura, altura, html, outpath):
+@option_titulo
+def analise_tempo(arquivo_json, largura, altura, html, outpath, titulo):
     from apps.services.tempo import Tempo
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Tempo(data, largura, altura, html, outpath)          
+        Tempo(data, largura, altura, html, outpath, titulo)          
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
