@@ -147,13 +147,13 @@ class Report:
                             contador += 1
                         with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
                             html_plotly = file.read()
-                            #tml_file.write(html_plotly+"\n")
-                            html_file.write(nome_arquivo+"\n")
+                            html_file.write(html_plotly+"\n")
+                            #html_file.write(nome_arquivo+"\n")
                     else:
                         html_file.write("<p>"+line.strip()+"</p>\n")
                     print(line)
 
-
+            html_file.write('</div>'+"\n")
 
             script_html = """
     <script>
