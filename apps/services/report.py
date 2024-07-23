@@ -242,6 +242,7 @@ class Report:
         <th>Iter</th>
         <th>Zinf</th>
         <th>Custo Total</th>
+        <th>Desvio Custo</th>
     </tr>
 """                         
                             Template_tabela_caso = """
@@ -253,6 +254,7 @@ class Report:
     <td>iteracoes</td>
     <td>zinf</td>
     <td>custo_total</td>
+    <td>desvio_custo</td>
   </tr>
 """
                             html_file.write(Inicio_tabela)
@@ -273,6 +275,7 @@ class Report:
                                     iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
                                     zinf = data_pmo.convergencia["zinf"].iloc[-1]
                                     custo_total = data_pmo.custo_operacao_total
+                                    desvio_custo = data_pmo.desvio_custo
                                     versao = data_pmo.versao_modelo
                                 if(caso.modelo == "DECOMP"):
                                     extensao = ""
@@ -287,13 +290,15 @@ class Report:
                                     tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
                                     iteracoes = data_relato["iteracao"].iloc[-1]
                                     zinf = data_relato["zinf"].iloc[-1]
-                                    custo_total = "X"
-                                    versao = "X"
+                                    custo_total = " "
+                                    desvio_custo = " "
+                                    versao = " "
                                 temp = temp.replace("versao", versao)
                                 temp = temp.replace("tempo_total", str(tempo_total))
                                 temp = temp.replace("iteracoes", str(iteracoes))
                                 temp = temp.replace("zinf", str(zinf))
                                 temp = temp.replace("custo_total", str(custo_total))
+                                temp = temp.replace("desvio_custo", str(desvio_custo))
                                 html_file.write(temp)
                             html_file.write("</table>"+"\n")
 
