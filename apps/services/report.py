@@ -305,38 +305,39 @@ class Report:
                     elif("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
-                        if("arquivo_json" in cli_command):
-                            cli_command = cli_command.replace("arquivo_json", self.json)
-                        if("ADD_SBMS" in cli_command):
-                            submercados = "SE,S,NE,N" if data.casos[0].modelo != "NEWAVE" else "SUDESTE,SUL,NORDESTE,NORTE"
-                            cli_command = cli_command.replace("ADD_SBMS", submercados)
                         if(data.casos[0].modelo == "DECOMP" and "convergencia" in cli_command):
-                            cli_command = " "
-                        cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
-                        lista_commands_cli = cli_command.split()
-                        print(lista_commands_cli)
-                        caminho_saida = "report"
-                        nome_arquivo  = "sem_nome"
-                        extensao = ".png"
-                        contador = 0 
-                        for comando in lista_commands_cli:
-                            if(comando == "--outpath"):
-                                caminho_saida = lista_commands_cli[contador+1]
-                            if(comando == "--titulo"):
-                                nome_arquivo = lista_commands_cli[contador+1].replace("_"," ")
-                            if(comando == "--html"):
-                                extensao = ".html"
-                            contador += 1
-                        if(extensao == ".html"):
-                            with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
-                                html_plotly = file.read()
-                                html_file.write(html_plotly+"\n")
-                                #html_file.write(nome_arquivo+"\n")
+                            pass
                         else:
-                            with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
-                                base64_string = base64.b64encode(image_file.read()).decode('utf-8')
-                                html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
-                                            #<img src="data:image/png;base64,INSERT_BASE64_ENCODED_STRING_HERE" alt="Centered Image" style="max-width: 100%; height: auto;">
+                            if("arquivo_json" in cli_command):
+                                cli_command = cli_command.replace("arquivo_json", self.json)
+                            if("ADD_SBMS" in cli_command):
+                                submercados = "SE,S,NE,N" if data.casos[0].modelo != "NEWAVE" else "SUDESTE,SUL,NORDESTE,NORTE"
+                                cli_command = cli_command.replace("ADD_SBMS", submercados)
+                            cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
+                            lista_commands_cli = cli_command.split()
+                            print(lista_commands_cli)
+                            caminho_saida = "report"
+                            nome_arquivo  = "sem_nome"
+                            extensao = ".png"
+                            contador = 0 
+                            for comando in lista_commands_cli:
+                                if(comando == "--outpath"):
+                                    caminho_saida = lista_commands_cli[contador+1]
+                                if(comando == "--titulo"):
+                                    nome_arquivo = lista_commands_cli[contador+1].replace("_"," ")
+                                if(comando == "--html"):
+                                    extensao = ".html"
+                                contador += 1
+                            if(extensao == ".html"):
+                                with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
+                                    html_plotly = file.read()
+                                    html_file.write(html_plotly+"\n")
+                                    #html_file.write(nome_arquivo+"\n")
+                            else:
+                                with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
+                                    base64_string = base64.b64encode(image_file.read()).decode('utf-8')
+                                    html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
+                                                #<img src="data:image/png;base64,INSERT_BASE64_ENCODED_STRING_HERE" alt="Centered Image" style="max-width: 100%; height: auto;">
 
                     else:
                         html_file.write("<p>"+line.strip()+"</p>\n")
