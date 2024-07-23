@@ -294,7 +294,6 @@ class Report:
                                     desvio_custo = " "
                                     versao = " "
                                 if(caso.modelo == "DESSEM"):
-                                    data_relato = Relato.read(caso.caminho+"/relato."+extensao).convergencia
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
                                     #print(data_relato)
                                     #print(df_caso)
