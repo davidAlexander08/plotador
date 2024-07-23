@@ -38,7 +38,7 @@ class Tempo:
             df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
             df_caso["tempo"] = df_caso["tempo"] /(60)
             lista_color.append(caso.cor)
-            if(caso.modelo == "NEWAVE"):
+            if(caso.modelo == "NEWAVE" or caso.modelo == "DECOMP"):
                 #temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
                 temp.append(df_caso.loc[(df_caso["etapa"] == "Tempo Total")])
             if(caso.modelo == "DESSEM"):
