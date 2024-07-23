@@ -5,7 +5,7 @@ from apps.indicadores.eco_indicadores import EcoIndicadores
 
 from inewave.newave import Pmo
 from idecomp.decomp import Relato
-from idessem.dessem import DesLogRelato
+from idessem import DesLogRelato
 import plotly.graph_objects as go
 import plotly.io as pio
 import pandas as pd
