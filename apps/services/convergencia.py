@@ -23,6 +23,7 @@ class Convergencia:
         self.html = html
         self.titulo = titulo
         self.tamanho = int(tamanho) if tamanho is not None else 25
+        print(data.casos)
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
