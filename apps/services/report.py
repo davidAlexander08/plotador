@@ -320,7 +320,7 @@ class Report:
                     elif("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
-                        if(data.casos[0].modelo == "DECOMP" and "convergencia" in cli_command):
+                        if( (data.casos[0].modelo == "DECOMP" or data.casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
                             pass
                         else:
                             if("arquivo_json" in cli_command):
