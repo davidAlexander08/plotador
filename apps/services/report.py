@@ -275,10 +275,15 @@ class Report:
                                     custo_total = data_pmo.custo_operacao_total
                                     versao = data_pmo.versao_modelo
                                 if(caso.modelo == "DECOMP"):
-                                    data_relato = Relato.read(caso.caminho+"/relato.rv0").convergencia
+                                    extensao = ""
+                                    with open(caso.caminho+"/caso.dat") as f:
+                                        extensao = f.readline().strip('\n')
+                                    if extensao == "":
+                                        raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
+                                    data_relato = Relato.read(caso.caminho+"/relato."+extensao).convergencia
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-                                    print(data_relato)
-                                    print(df_caso)
+                                    #print(data_relato)
+                                    #print(df_caso)
                                     tempo_total = df_caso["tempo"].iloc[-1]
                                     iteracoes = data_relato["iteracao"].iloc[-1]
                                     zinf = data_relato["zinf"].iloc[-1]
