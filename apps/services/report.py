@@ -296,8 +296,8 @@ class Report:
                                 if(caso.modelo == "DESSEM"):
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
                                     print(df_caso)
-                                    print(df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False))
-                                    tempo_total = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)/60
+                                    print(df_caso["tempo"])
+                                    tempo_total = df_caso["tempo"].sum()/60
                                     iteracoes = " "
                                     zinf = " "
                                     custo_total = " "
