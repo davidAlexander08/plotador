@@ -5,6 +5,7 @@ from apps.indicadores.eco_indicadores import EcoIndicadores
 
 from inewave.newave import Pmo
 from idecomp.decomp import Relato
+from idessem.dessem import DesLogRelato
 import plotly.graph_objects as go
 import plotly.io as pio
 import pandas as pd
@@ -294,15 +295,14 @@ class Report:
                                     desvio_custo = " "
                                     versao = " "
                                 if(caso.modelo == "DESSEM"):
+                                    data_relato = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-                                    print(df_caso)
-                                    print(df_caso["tempo"])
                                     tempo_total = df_caso["tempo"].sum()/60
                                     iteracoes = " "
                                     zinf = " "
                                     custo_total = " "
                                     desvio_custo = " "
-                                    versao = " "
+                                    versao = data_relato.versao
                                 temp = temp.replace("versao", versao)
                                 temp = temp.replace("tempo_total", str(tempo_total))
                                 temp = temp.replace("iteracoes", str(iteracoes))
