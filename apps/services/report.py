@@ -275,7 +275,7 @@ class Report:
                                     custo_total = data_pmo.custo_operacao_total
                                     versao = data_pmo.versao_modelo
                                 if(caso.modelo == "DECOMP"):
-                                    data_relato = Relato.read(caso.caminho+"/relato.dat").convergencia
+                                    data_relato = Relato.read(caso.caminho+"/relato.rv0").convergencia
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
                                     print(data_relato)
                                     print(df_caso)
