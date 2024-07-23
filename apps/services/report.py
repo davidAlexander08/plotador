@@ -279,7 +279,7 @@ class Report:
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
                                     print(data_relato)
                                     print(df_caso)
-                                    tempo_total = data_relato["tempo"].iloc[-1]
+                                    tempo_total = df_caso["tempo"].iloc[-1]
                                     iteracoes = data_relato["iteracao"].iloc[-1]
                                     zinf = data_relato["zinf"].iloc[-1]
                                     custo_total = "X"
