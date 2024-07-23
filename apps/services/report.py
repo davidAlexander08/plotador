@@ -275,7 +275,7 @@ class Report:
                                     iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
                                     zinf = data_pmo.convergencia["zinf"].iloc[-1]
                                     custo_total = data_pmo.custo_operacao_total
-                                    desvio_custo = data_pmo.desvio_custo_operacao_total
+                                    desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
                                     versao = data_pmo.versao_modelo
                                 if(caso.modelo == "DECOMP"):
                                     extensao = ""
@@ -290,6 +290,18 @@ class Report:
                                     tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
                                     iteracoes = data_relato["iteracao"].iloc[-1]
                                     zinf = data_relato["zinf"].iloc[-1]
+                                    custo_total = " "
+                                    desvio_custo = " "
+                                    versao = " "
+                                if(caso.modelo == "DESSEM"):
+                                    data_relato = Relato.read(caso.caminho+"/relato."+extensao).convergencia
+                                    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+                                    #print(data_relato)
+                                    #print(df_caso)
+                                    print(df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False))
+                                    tempo_total = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)/60
+                                    iteracoes = " "
+                                    zinf = " "
                                     custo_total = " "
                                     desvio_custo = " "
                                     versao = " "
