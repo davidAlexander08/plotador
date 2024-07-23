@@ -4,6 +4,7 @@ from apps.interface.dados_json_caso import Dados_json_caso
 from apps.indicadores.eco_indicadores import EcoIndicadores
 
 from inewave.newave import Pmo
+from idecomp.decomp import Relato
 import plotly.graph_objects as go
 import plotly.io as pio
 import pandas as pd
@@ -273,6 +274,16 @@ class Report:
                                     zinf = data_pmo.convergencia["zinf"].iloc[-1]
                                     custo_total = data_pmo.custo_operacao_total
                                     versao = data_pmo.versao_modelo
+                                if(caso.modelo == "DECOMP"):
+                                    data_relato = Relato.read(caso.caminho+"/relato.dat").convergencia
+                                    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+                                    print(data_relato)
+                                    print(df_caso)
+                                    tempo_total = data_relato["tempo"].iloc[-1]
+                                    iteracoes = data_relato["iteracao"].iloc[-1]
+                                    zinf = data_relato["zinf"].iloc[-1]
+                                    custo_total = "X"
+                                    versao = "X"
                                 temp = temp.replace("versao", versao)
                                 temp = temp.replace("tempo_total", str(tempo_total))
                                 temp = temp.replace("iteracoes", str(iteracoes))
