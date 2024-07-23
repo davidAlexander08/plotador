@@ -275,7 +275,7 @@ class Report:
                                     iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
                                     zinf = data_pmo.convergencia["zinf"].iloc[-1]
                                     custo_total = data_pmo.custo_operacao_total
-                                    desvio_custo = data_pmo.desvio_custo
+                                    desvio_custo = data_pmo.desvio_custo_operacao_total
                                     versao = data_pmo.versao_modelo
                                 if(caso.modelo == "DECOMP"):
                                     extensao = ""
