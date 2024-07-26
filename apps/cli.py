@@ -69,7 +69,9 @@ def realiza_report(outpath, arquivo_json, txt, titulo):
 @option_csv
 @option_html
 @option_outpath
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath):
+@option_yinf
+@option_ysup
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf):
     from apps.services.temporal import Temporal
     flag_diretorio = 0
     if(arquivo_json is None):
@@ -93,7 +95,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
             data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
-    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf)
 
 
 @click.command("conjunto")

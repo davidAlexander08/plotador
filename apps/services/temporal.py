@@ -17,9 +17,11 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf):
         self.xinf  = xinf
         self.xsup = xsup
+        self.ysup = ysup
+        self.yinf = yinf
         self.eixox = eixox
         self.estagio = estagio
         self.cenario = cenario
@@ -118,7 +120,7 @@ class Temporal:
         tituloFigura = titulo_padrao if self.booltitulo == "True" else " "
         tituloFigura = titulo_padrao if self.titulo == " " else self.titulo.replace("_", " ")
 
-        figura = Figura(conjUnity, mapaGO, tituloFigura)
+        figura = Figura(conjUnity, mapaGO, tituloFigura, self.yinf, self.ysup)
         if(self.showlegend == "False"):
             figura.fig.update_layout(showlegend= False)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, tituloFigura, self.html, self.largura, self.altura)
@@ -134,7 +136,7 @@ class Temporal:
                     if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+"_"+unity.titulo+"_"+conjUnity.sintese.sintese+" "+self.estudo)
                         
                 mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+" "+self.estudo)
-                figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo)
+                figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup)
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
 
 
