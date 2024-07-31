@@ -58,6 +58,8 @@ class Report:
                     dados["argumentos"][0]["args"] = ["SE","NE","N","S"]
                 else: 
                     raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
+            with open("exemplo.json", 'w') as file:
+                json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
 
             self.json = "exemplo.json"
             data = Dados_json_caso(self.json)
