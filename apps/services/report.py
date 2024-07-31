@@ -50,13 +50,13 @@ class Report:
                 print(dados["argumentos"]["args"])
                 if os.path.isfile("dger.dat"):
                     dados["modelo"] = "NEWAVE"
-                    dados["argumentos"]["args"] = ["SUDESTE","NORDESTE","NORTE","SUL"]
+                    dados["argumentos"][0]["args"] = ["SUDESTE","NORDESTE","NORTE","SUL"]
                 elif os.path.isfile("decomp.tim"):
                     dados["modelo"] = "DECOMP"
-                    dados["argumentos"]["args"] = ["SE","NE","N","S"]
+                    dados["argumentos"][0]["args"] = ["SE","NE","N","S"]
                 elif os.path.isfile("entdados.dat"):
                     dados["modelo"] = "DESSEM"
-                    dados["argumentos"]["args"] = ["SE","NE","N","S"]
+                    dados["argumentos"][0]["args"] = ["SE","NE","N","S"]
                 else: 
                     raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
 
