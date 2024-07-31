@@ -37,9 +37,9 @@ class Report:
             path = __file__.split("/")
             path.pop()
             path.pop()
-            arquivo_json = "/".join(path)+"/exemplo.json"
+            self.json = "/".join(path)+"/exemplo.json"
             flag_diretorio  = 1
-            data = Dados_json_caso(arquivo_json)
+            data = Dados_json_caso(self.json)
             if (flag_diretorio == 1):
                 data.estudo = "_default"
                 data.casos[0].nome = " "
