@@ -40,9 +40,9 @@ class Report:
             path.pop()
             arq_json_exemplo = "/".join(path)+"/exemplo.json"
             current_directory = os.getcwd()
-            print(current_directory)
-            shutil.copy(arq_json_exemplo, current_directory+"/exemplo.json")
-            with open("exemplo.json", "r") as file:
+            #print(current_directory)
+            #shutil.copy(arq_json_exemplo, current_directory+"/exemplo.json")
+            with open(arq_json_exemplo, "r") as file:
                 dados = json.load(file)
                 dados["estudo"] = "_default"
                 dados["nome"] = " "
