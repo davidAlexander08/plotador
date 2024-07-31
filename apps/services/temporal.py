@@ -10,7 +10,7 @@ from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
 from apps.model.unidadeArgumental import UnidadeArgumental
 from apps.graficos.figura import Figura
-
+from apps.model.caso import Caso
 import os
 import json
 
@@ -27,7 +27,19 @@ class Temporal:
         self.cenario = [cenario] if cenario == "mean" else cenario.split(",")
         print(self.cenario) 
         if(len(self.cenario) > 1):
-            print(data.casos)
+            marcadores= ["circle","square", "diamond","x","cross"]
+            dashes = ["dash", "dot"]
+            contador = 0
+            contador_marcadores = 0
+            for caso in data.casos:
+                for cen in self.cenario:
+                    if(cen != "mean"):
+                        marcador = marcadores[contador_marcadores]
+                        data.casos.append(Caso(caso.nome+"_"+cen, caso.caminho, caso.cor, marcador, caso.modelo, dashes[contador]))
+                        contador += 1
+                    if(contador > len(dashes)):
+                        contador = 0
+                        contador_marcadores += 1
         exit(1)
         self.sintese = sintese
         self.argumentos  = argumentos
@@ -112,7 +124,7 @@ class Temporal:
 
                 if(cen != "mean" and len(self.cenario) > 1):
                     df_temporal["caso"] = df_temporal["caso"] if cen == "mean" else df_temporal["caso"]+ cen
-                    print(data.casos[0])
+                    #print(data.casos[0])
                     #data.casos.append({})
 
                 lista_data_frame.append(df_temporal)
