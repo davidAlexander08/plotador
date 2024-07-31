@@ -20,10 +20,10 @@ import shutil
 import json
 
 class Report:
-    def __init__(self,outpath, json, txt, titulo):
+    def __init__(self,outpath, arq_json, txt, titulo):
         
         #self.outpath = outpath
-        self.json = json
+        self.json = arq_json
         self.txt = txt
         self.titulo = titulo
         path = __file__.split("/")
@@ -42,7 +42,6 @@ class Report:
             current_directory = os.getcwd()
             print(current_directory)
             shutil.copy(arq_json_exemplo, current_directory+"/exemplo.json")
-
             with open("exemplo.json", "r") as file:
                 dados = json.load("exemplo.json")
                 dados["estudo"] = "_default"
