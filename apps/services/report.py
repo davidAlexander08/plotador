@@ -34,11 +34,10 @@ class Report:
             self.eco_indicadores = EcoIndicadores(data.casos)
         if(self.txt is None and self.json is None):
             flag_diretorio = 0
-            if(arquivo_json is None):
-                path = __file__.split("/")
-                path.pop()
-                arquivo_json = "../".join(path)+"/exemplo.json"
-                flag_diretorio  = 1
+            path = __file__.split("/")
+            path.pop()
+            arquivo_json = "../".join(path)+"/exemplo.json"
+            flag_diretorio  = 1
             data = Dados_json_caso(arquivo_json)
             if (flag_diretorio == 1):
                 data.estudo = "_default"
