@@ -45,7 +45,7 @@ class Temporal:
             data.casos = data.casos+novos_casos
         else:
             for caso in data.casos:
-                caso.tipo = self.cenario
+                caso.tipo = self.cenario[0]
                 caso.dash = None
                 caso.marcador = None
         
