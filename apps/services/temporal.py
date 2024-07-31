@@ -26,6 +26,9 @@ class Temporal:
         self.estagio = estagio
         self.cenario = [cenario] if cenario == "mean" else cenario.split(",")
         print(self.cenario) 
+        if(cen != "mean" and len(self.cenario) > 1):
+            print(data.casos[0])
+        exit(1)
         self.sintese = sintese
         self.argumentos  = argumentos
         self.chave = chave
@@ -46,6 +49,7 @@ class Temporal:
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
+
 
         diretorio_saida = f"resultados/{self.estudo}/temporal" if outpath is None else outpath
         os.makedirs(diretorio_saida, exist_ok=True)
