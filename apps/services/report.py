@@ -17,6 +17,7 @@ import base64
 import os
 import subprocess
 import shutil
+import json
 
 class Report:
     def __init__(self,outpath, json, txt, titulo):
@@ -41,24 +42,28 @@ class Report:
             current_directory = os.getcwd()
             print(current_directory)
             shutil.copy(arq_json_exemplo, current_directory+"/exemplo.json")
-            self.json = "exemplo.json"
-            flag_diretorio  = 1
-            data = Dados_json_caso(self.json)
-            if (flag_diretorio == 1):
-                data.estudo = "_default"
-                data.casos[0].nome = " "
-                data.casos[0].caminho = os.getcwd()
+
+            with open("exemplo.json", "r") as file:
+                dados = json.load("exemplo.json")
+                dados["estudo"] = "_default"
+                dados["nome"] = " "
+                dados["caminho"] = os.getcwd()
                 if os.path.isfile("dger.dat"):
-                    data.casos[0].modelo = "NEWAVE"
-                    data.args = [Argumento(["SUDESTE","NORDESTE","NORTE","SUL"], "SBM", "SBMs")]
+                    dados["modelo"] = "NEWAVE"
+                    dados["argumentos"]["args"] = ["SUDESTE","NORDESTE","NORTE","SUL"]
                 elif os.path.isfile("decomp.tim"):
-                    data.casos[0].modelo = "DECOMP"
-                    data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
+                    dados["modelo"] = "DECOMP"
+                    dados["argumentos"]["args"] = ["SE","NE","N","S"]
                 elif os.path.isfile("entdados.dat"):
-                    data.casos[0].modelo = "DESSEM"
-                    data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
+                    dados["modelo"] = "DESSEM"
+                    dados["argumentos"]["args"] = ["SE","NE","N","S"]
                 else: 
                     raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
+
+            self.json = "exemplo.json"
+            data = Dados_json_caso(self.json)
+
+
             self.eco_indicadores = EcoIndicadores(data.casos)
 
         # Example usage
