@@ -37,7 +37,7 @@ class Temporal:
                     if(cen != "mean"):
                         marcador = marcadores[contador_marcadores]
                         dash = dashes[contador]
-                        novos_casos.append(Caso(caso.nome, caso.caminho, caso.cor, marcador, caso.modelo, dash, cen))
+                        novos_casos.append(Caso(caso.nome+"_"+cen, caso.caminho, caso.cor, marcador, caso.modelo, dash, cen))
                         contador += 1
                     if(contador >= len(dashes)):
                         contador = 0
