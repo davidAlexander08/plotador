@@ -202,8 +202,7 @@ class Graficos:
                 df = mapa[unity]
                 listaGO = []
                 lista_casos = df["caso"].unique()
-                #for c in self.casos:
-                for c in lista_casos:
+                for c in self.casos:
                     dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
                     dfY = dfY.reset_index(drop = False)
                     listaGO.append(go.Scatter( 

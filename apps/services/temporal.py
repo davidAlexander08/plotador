@@ -106,7 +106,11 @@ class Temporal:
                 if(self.xinf > df_temporal["estagio"].min()):
                     df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
 
-                df_temporal["caso"] = df_temporal["caso"] if cen == "mean" else df_temporal["caso"]+ cen
+                if(cen != "mean" and len(self.cenario) > 1):
+                    df_temporal["caso"] = df_temporal["caso"] if cen == "mean" else df_temporal["caso"]+ cen
+                    print(data.casos[0])
+                    #data.casos.append({})
+
                 lista_data_frame.append(df_temporal)
             #mapa_temporal[unity] = df_temporal
             mapa_temporal[unity] = pd.concat(lista_data_frame)
