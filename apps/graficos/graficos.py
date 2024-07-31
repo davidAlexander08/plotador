@@ -209,7 +209,7 @@ class Graficos:
                             x = dfY[colx],
                             y = dfY[coly],
                             mode="lines+markers",
-                            marker=dict( symbol=caso.marcador ),
+                            marker=dict( symbol=c.marcador ),
                             name = c.nome,
                             line = dict(color = c.cor, dash=c.dash),
                             showlegend=unity.arg.show))
