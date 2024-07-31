@@ -44,6 +44,28 @@ def cli():
 @option_titulo
 def realiza_report(outpath, arquivo_json, txt, titulo):
     from apps.services.report import Report
+    flag_diretorio = 0
+    if(arquivo_json is None):
+        path = __file__.split("/")
+        path.pop()
+        arquivo_json = "/".join(path)+"/exemplo.json"
+        flag_diretorio  = 1
+    data = Dados_json_caso(arquivo_json)
+    if (flag_diretorio == 1):
+        data.estudo = "_default"
+        data.casos[0].nome = " "
+        data.casos[0].caminho = os.getcwd()
+        if os.path.isfile("dger.dat"):
+            data.casos[0].modelo = "NEWAVE"
+            data.args = [Argumento(["SUDESTE","NORDESTE","NORTE","SUL"], "SBM", "SBMs")]
+        elif os.path.isfile("decomp.tim"):
+            data.casos[0].modelo = "DECOMP"
+            data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
+        elif os.path.isfile("entdados.dat"):
+            data.casos[0].modelo = "DESSEM"
+            data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
+        else: 
+            raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
     Report(outpath, arquivo_json, txt, titulo)
 
 @click.command("temporal")
