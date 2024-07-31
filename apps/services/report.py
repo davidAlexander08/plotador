@@ -37,7 +37,11 @@ class Report:
             path = __file__.split("/")
             path.pop()
             path.pop()
-            self.json = "/".join(path)+"/exemplo.json"
+            arq_json_exemplo = "/".join(path)+"/exemplo.json"
+            current_directory = os.getcwd()
+            print(current_directory)
+            shutil.copy(arq_json_exemplo, current_directory+"/exemplo.json")
+            self.json = "exemplo.json"
             flag_diretorio  = 1
             data = Dados_json_caso(self.json)
             if (flag_diretorio == 1):
