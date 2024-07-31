@@ -37,6 +37,14 @@ class Temporal:
                     if(cen != "mean"):
                         marcador = marcadores[contador_marcadores]
                         dash = dashes[contador]
+
+                        #rgba = rgba_str.lstrip('rgba(').rstrip(')').split(',')
+                        #r, g, b, a = [float(x) for x in rgba]
+                        #r = min(255, r * factor)
+                        #g = min(255, g * factor)
+                        #b = min(255, b * factor)
+                        #brightened_rgba = f'rgba({int(r)}, {int(g)}, {int(b)}, {a})'
+
                         novos_casos.append(Caso(caso.nome+"_"+cen, caso.caminho, caso.cor, marcador, caso.modelo, dash, cen))
                         contador += 1
                     if(contador >= len(dashes)):
