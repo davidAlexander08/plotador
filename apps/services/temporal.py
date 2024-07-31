@@ -26,7 +26,7 @@ class Temporal:
         self.estagio = estagio
         self.cenario = [cenario] if cenario == "mean" else cenario.split(",")
         print(self.cenario) 
-        if(cen != "mean" and len(self.cenario) > 1):
+        if(len(self.cenario) > 1):
             print(data.casos[0])
         exit(1)
         self.sintese = sintese
