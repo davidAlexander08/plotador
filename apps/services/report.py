@@ -36,7 +36,7 @@ class Report:
             flag_diretorio = 0
             path = __file__.split("/")
             path.pop()
-            arquivo_json = "../".join(path)+"/exemplo.json"
+            arquivo_json = ".."+"/".join(path)+"/exemplo.json"
             flag_diretorio  = 1
             data = Dados_json_caso(arquivo_json)
             if (flag_diretorio == 1):
