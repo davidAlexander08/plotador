@@ -41,7 +41,7 @@ class Temporal:
                     if(contador >= len(dashes)):
                         contador = 0
                         contador_marcadores += 1
-        exit(1)
+        print("PASSOU AQUI")
         self.sintese = sintese
         self.argumentos  = argumentos
         self.chave = chave
