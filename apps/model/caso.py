@@ -19,6 +19,6 @@ class Caso:
 
     @classmethod
     def from_dict(cls, d: Dict[str, str]):
-        marcador = d["marcador"] if "marcador" in d else "diamond"
+        marcador = d["marcador"] if "marcador" in d else None
         modelo = d["modelo"] if "modelo" in d else "NEWAVE"
         return cls(d["nome"], d["caminho"], d["cor"], marcador, modelo, None, "mean")
