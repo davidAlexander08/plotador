@@ -205,10 +205,11 @@ class Graficos:
                 for c in self.casos:
                     dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
                     dfY = dfY.reset_index(drop = False)
+                    modo = "line+markers" if c.marcador != None else "lines"
                     listaGO.append(go.Scatter( 
                             x = dfY[colx],
                             y = dfY[coly],
-                            mode="lines+markers",
+                            mode=modo,
                             marker=dict( symbol=c.marcador ),
                             name = c.nome,
                             line = dict(color = c.cor, dash=c.dash),
