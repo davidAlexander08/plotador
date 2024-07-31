@@ -17,7 +17,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, p10, p90):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf):
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
@@ -41,8 +41,6 @@ class Temporal:
         self.boxplot = boxplot
         self.csv = csv
         self.html = html
-        self.p10 = p10
-        self.p90 = p90
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.eco_indicadores = EcoIndicadores(data.casos)
