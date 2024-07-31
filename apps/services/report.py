@@ -2,7 +2,7 @@
 
 from apps.interface.dados_json_caso import Dados_json_caso
 from apps.indicadores.eco_indicadores import EcoIndicadores
-
+from apps.model.argumento import Argumento
 from inewave.newave import Pmo
 from idecomp.decomp import Relato
 from idessem.dessem.des_log_relato import DesLogRelato
