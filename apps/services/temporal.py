@@ -17,14 +17,15 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, p10, p90):
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
         self.yinf = yinf
         self.eixox = eixox
         self.estagio = estagio
-        self.cenario = cenario
+        self.cenario = [cenario] if cenario == "mean" else cenario.split(",")
+        print(self.cenario) 
         self.sintese = sintese
         self.argumentos  = argumentos
         self.chave = chave
@@ -40,6 +41,8 @@ class Temporal:
         self.boxplot = boxplot
         self.csv = csv
         self.html = html
+        self.p10 = p10
+        self.p90 = p90
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         self.indicadores_temporais = IndicadoresTemporais(data.casos)
         self.eco_indicadores = EcoIndicadores(data.casos)
@@ -102,7 +105,9 @@ class Temporal:
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
-            
+
+
+
             mapa_temporal[unity] = df_temporal
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
         

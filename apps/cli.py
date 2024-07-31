@@ -32,6 +32,8 @@ option_csv = click.option("--csv", default = "True", help = "Default True, se Fa
 option_html = click.option("--html", default = None, help = "Default False, se True gera o html da figura")
 option_outpath = click.option("--outpath", default = None, help = "Muda o caminho de saida da figura e csv a serem gerados")
 option_txt = click.option("--txt", default = None, help ="definicao do arquivo txt. Caso nenhum, ele considera estar dentro da pasta do caso")
+option_p = click.option("--p", default = None, help ="ativa p5 p10 p15 p20 p25 p30 p35 p40 p55 median p60 p65 p70 p75 p80 p85 p90 p95 max separados por virgula")
+
 
 @click.group()
 def cli():
@@ -71,7 +73,9 @@ def realiza_report(outpath, arquivo_json, txt, titulo):
 @option_outpath
 @option_yinf
 @option_ysup
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf):
+@option_p10
+@option_p90
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, p10, p90):
     from apps.services.temporal import Temporal
     flag_diretorio = 0
     if(arquivo_json is None):
@@ -95,7 +99,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
             data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
-    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf, p10, p90)
 
 
 @click.command("conjunto")
