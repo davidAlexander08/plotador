@@ -47,7 +47,6 @@ class Report:
                 dados["estudo"] = "_default"
                 dados["nome"] = " "
                 dados["caminho"] = os.getcwd()
-                print(dados["argumentos"]["args"])
                 if os.path.isfile("dger.dat"):
                     dados["modelo"] = "NEWAVE"
                     dados["argumentos"][0]["args"] = ["SUDESTE","NORDESTE","NORTE","SUL"]
