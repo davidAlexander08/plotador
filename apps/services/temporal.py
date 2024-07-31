@@ -29,7 +29,8 @@ class Temporal:
         if(len(self.cenario) > 1):
             marcadores= ["circle","square", "diamond","x","cross"]
             dashes = ["dash", "dot"]
-            for caso in data.casos:
+            casos_a_alterar = data.casos
+            for caso in casos_a_alterar:
                 contador = 0
                 contador_marcadores = 0
                 print("ENTORU AQUI")
