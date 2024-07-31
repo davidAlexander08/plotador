@@ -32,8 +32,10 @@ class Temporal:
             for caso in data.casos:
                 contador = 0
                 contador_marcadores = 0
+                print("ENTORU AQUI")
                 for cen in self.cenario:
                     if(cen != "mean"):
+                        print("ENTORU AQUI 2")
                         marcador = marcadores[contador_marcadores]
                         dash = dashes[contador]
                         data.casos.append(Caso(caso.nome+"_"+cen, caso.caminho, caso.cor, marcador, caso.modelo, dash))
