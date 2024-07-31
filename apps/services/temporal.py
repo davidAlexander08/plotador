@@ -42,13 +42,13 @@ class Temporal:
                     if(contador >= len(dashes)):
                         contador = 0
                         contador_marcadores += 1
+            data.casos = data.casos+novos_casos
         else:
             for caso in data.casos:
                 caso.tipo = self.cenario
                 caso.dash = None
                 caso.marcador = None
-        data.casos = data.casos+novos_casos
-        print(data.casos)
+        
         self.sintese = sintese
         self.argumentos  = argumentos
         self.chave = chave
