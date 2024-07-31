@@ -37,11 +37,16 @@ class Temporal:
                     if(cen != "mean"):
                         marcador = marcadores[contador_marcadores]
                         dash = dashes[contador]
-                        novos_casos.append(Caso(caso.nome+"_"+cen, caso.caminho, caso.cor, marcador, caso.modelo, dash))
+                        novos_casos.append(Caso(caso.nome, caso.caminho, caso.cor, marcador, caso.modelo, dash, cen))
                         contador += 1
                     if(contador >= len(dashes)):
                         contador = 0
                         contador_marcadores += 1
+        else:
+            for caso in data.casos:
+                caso.tipo = self.cenario
+                caso.dash = None
+                caso.marcador = None
         data.casos = data.casos+novos_casos
         print(data.casos)
         self.sintese = sintese
@@ -117,22 +122,14 @@ class Temporal:
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
         for unity in conjUnity.listaUnidades:
-            lista_data_frame = []
-            #for cen in self.cenario:
-            df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, cen, self.boxplot)
+            #lista_data_frame = []
+            df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] < self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
-
-                #if(cen != "mean" and len(self.cenario) > 1):
-                #    df_temporal["caso"] = df_temporal["caso"] if cen == "mean" else df_temporal["caso"]+ cen
-                    #print(data.casos[0])
-                    #data.casos.append({})
-
-                #lista_data_frame.append(df_temporal)
             mapa_temporal[unity] = df_temporal
-            mapa_temporal[unity] = pd.concat(lista_data_frame)
+            #mapa_temporal[unity] = pd.concat(lista_data_frame)
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
         
         if(self.boxplot == "True"):

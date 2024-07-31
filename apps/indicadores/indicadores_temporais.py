@@ -19,16 +19,16 @@ class IndicadoresTemporais(EcoIndicadores):
         EcoIndicadores.__init__(self, casos)
 
     
-    def retorna_df_concatenado(self, unidade, cenario, boxplot):
-        return pd.concat(self.retorna_mapaDF_cenario_medio_temporal(unidade, cenario, boxplot))
+    def retorna_df_concatenado(self, unidade, boxplot):
+        return pd.concat(self.retorna_mapaDF_cenario_medio_temporal(unidade, boxplot))
     
-    def __retorna_mapa_media_parquet(self, mapa, cenario):
+    def __retorna_mapa_media_parquet(self, mapa):
         dict = {}
         for c in self.casos:
             df = mapa[c]
             #print(df)
             if(c.modelo == "NEWAVE" or c.modelo == "DECOMP"):
-                dict[c] = df.loc[df["cenario"] == cenario].reset_index(drop = True)
+                dict[c] = df.loc[df["cenario"] == c.tipo].reset_index(drop = True)
             if(c.modelo == "DESSEM"):   
                 dict[c] = df.reset_index(drop = True) 
         return dict
@@ -45,7 +45,7 @@ class IndicadoresTemporais(EcoIndicadores):
         return dict
 
 
-    def retorna_mapaDF_cenario_medio_temporal(self, unidade, cenario, boxplot):
+    def retorna_mapaDF_cenario_medio_temporal(self, unidade, boxplot):
         eco_mapa = self.retornaMapaDF(unidade.sintese)
         #print(unidade.sintese)
         mapa_temporal = {}
@@ -53,13 +53,13 @@ class IndicadoresTemporais(EcoIndicadores):
             if(boxplot =="True"):
                 return self.__retorna_mapa_cenarios_parquet(eco_mapa)
             else:
-                return self.__retorna_mapa_media_parquet(eco_mapa, cenario)
+                return self.__retorna_mapa_media_parquet(eco_mapa)
         else:
             for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.fitroColuna] == unidade.filtroArgumento]
             if(boxplot =="True"):
                 mapa_temporal = self.__retorna_mapa_cenarios_parquet(eco_mapa)
             else:
-                mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa, cenario)
+                mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
         return mapa_temporal
 
 
