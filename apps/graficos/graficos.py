@@ -208,8 +208,10 @@ class Graficos:
                     listaGO.append(go.Scatter( 
                             x = dfY[colx],
                             y = dfY[coly],
+                            mode="lines+markers",
+                            marker=dict( symbol=caso.marcador ),
                             name = c.nome,
-                            line = dict(color = c.cor),
+                            line = dict(color = c.cor, dash=c.dash),
                             showlegend=unity.arg.show))
 
                 mapaGO[unity] = listaGO
