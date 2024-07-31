@@ -29,8 +29,8 @@ class Temporal:
         if(len(self.cenario) > 1):
             marcadores= ["circle","square", "diamond","x","cross"]
             dashes = ["dash", "dot"]
-            casos_a_alterar = data.casos
-            for caso in casos_a_alterar:
+            novos_casos = [] 
+            for caso in data.casos:
                 contador = 0
                 contador_marcadores = 0
                 print("ENTORU AQUI")
@@ -39,11 +39,12 @@ class Temporal:
                         print("ENTORU AQUI 2")
                         marcador = marcadores[contador_marcadores]
                         dash = dashes[contador]
-                        data.casos.append(Caso(caso.nome+"_"+cen, caso.caminho, caso.cor, marcador, caso.modelo, dash))
+                        novos_casos.append(Caso(caso.nome+"_"+cen, caso.caminho, caso.cor, marcador, caso.modelo, dash))
                         contador += 1
                     if(contador >= len(dashes)):
                         contador = 0
                         contador_marcadores += 1
+        
         print("PASSOU AQUI")
         self.sintese = sintese
         self.argumentos  = argumentos
