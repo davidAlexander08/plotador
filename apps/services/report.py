@@ -44,17 +44,17 @@ class Report:
             #shutil.copy(arq_json_exemplo, current_directory+"/exemplo.json")
             with open(arq_json_exemplo, "r") as file:
                 dados = json.load(file)
-                dados["estudo"] = "_default"
-                dados["nome"] = " "
-                dados["caminho"] = os.getcwd()
+                dados["casos"][0]["estudo"] = "_default"
+                dados["casos"][0]["nome"] = " "
+                dados["casos"][0]["caminho"] = os.getcwd()
                 if os.path.isfile("dger.dat"):
-                    dados["modelo"] = "NEWAVE"
+                    dados["casos"][0]["modelo"] = "NEWAVE"
                     dados["argumentos"][0]["args"] = ["SUDESTE","NORDESTE","NORTE","SUL"]
                 elif os.path.isfile("decomp.tim"):
-                    dados["modelo"] = "DECOMP"
+                    dados["casos"][0]["modelo"] = "DECOMP"
                     dados["argumentos"][0]["args"] = ["SE","NE","N","S"]
                 elif os.path.isfile("entdados.dat"):
-                    dados["modelo"] = "DESSEM"
+                    dados["casos"][0]["modelo"] = "DESSEM"
                     dados["argumentos"][0]["args"] = ["SE","NE","N","S"]
                 else: 
                     raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
