@@ -301,6 +301,7 @@ class Report:
                                 iteracoes= 0 
                                 zinf = 0
                                 custo_total=0
+                                versao = 0
                                 if(caso.modelo == "NEWAVE"):
                                     data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
