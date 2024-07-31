@@ -27,7 +27,7 @@ class Temporal:
         self.cenario = [cenario] if cenario == "mean" else cenario.split(",")
         print(self.cenario) 
         if(len(self.cenario) > 1):
-            marcadores= ["circle","square", "diamond","x","cross"]
+            marcadores= [None,"circle","square", "diamond","x","cross"]
             dashes = ["dash", "dot"]
             novos_casos = [] 
             for caso in data.casos:
