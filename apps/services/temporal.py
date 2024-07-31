@@ -29,9 +29,9 @@ class Temporal:
         if(len(self.cenario) > 1):
             marcadores= ["circle","square", "diamond","x","cross"]
             dashes = ["dash", "dot"]
-            contador = 0
-            contador_marcadores = 0
             for caso in data.casos:
+                contador = 0
+                contador_marcadores = 0
                 for cen in self.cenario:
                     if(cen != "mean"):
                         marcador = marcadores[contador_marcadores]
