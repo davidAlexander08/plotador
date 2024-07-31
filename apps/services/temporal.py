@@ -106,9 +106,10 @@ class Temporal:
                 if(self.xinf > df_temporal["estagio"].min()):
                     df_temporal = df_temporal.loc[(df_temporal["estagio"] > self.xinf)]
 
-
-
-            mapa_temporal[unity] = df_temporal
+                df_temporal["caso"] = df_temporal["caso"] if cen == "mean" else df_temporal["caso"]+ cen
+                lista_data_frame.append(df_temporal)
+            #mapa_temporal[unity] = df_temporal
+            mapa_temporal[unity] = pd.concat(lista_data_frame)
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
         
         if(self.boxplot == "True"):
