@@ -230,7 +230,7 @@ class Graficos:
                                 text = df_valor.round(1).tolist(),
                                 textposition ="outside",
                                 marker_color="black",
-                                name = lista_casos[0]+"-"lista_casos[1]+,
+                                name = lista_casos[0]+"-"+lista_casos[1],
                                 showlegend=True))
                 mapaGO[unity] = listaGO
         return mapaGO
