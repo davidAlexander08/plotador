@@ -9,7 +9,7 @@ class Figura():
 
     def __init__(self, conjUnity , mapaGO, titulo, yinf = None,  ysup = None, y2 = "False"):
         self.titulo = titulo
-        self.fig = make_subplots(rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
+        self.fig = make_subplots(specs=[[{"secondary_y": True}]], rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
         for unity in conjUnity.listaUnidades:
             for trace in mapaGO[unity]:
                 lim_sup = max(trace.y) if len(trace.y) is not 0 else 0
