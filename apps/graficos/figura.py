@@ -28,8 +28,8 @@ class Figura():
             limInf = 0 if lim_inf > 0 else lim_inf
         else:
             limInf = None
-        print(y2)
         if(y2 == "True"):
+            print("ENTROU AQUI")
             self.fig.update_layout(yaxis2 = dict(title ="Diff", side = "right", overlaying = "y"))
         
         self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group")  
