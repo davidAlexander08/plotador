@@ -226,7 +226,7 @@ class Graficos:
                         listaGO.append(go.Bar( 
                                 x = df_caso_0[colx],
                                 y = df_valor,
-                                yaxis = "y2"
+                                yaxis = "y2",
                                 text = df_valor.round(1).tolist(),
                                 textposition ="outside"
                                 marker_color="black",
