@@ -228,7 +228,7 @@ class Graficos:
                                 y = df_valor,
                                 yaxis = "y2",
                                 text = df_valor.round(1).tolist(),
-                                textposition ="outside"
+                                textposition ="outside",
                                 marker_color="black",
                                 name = lista_casos[0]+"-"lista_casos[1]+,
                                 showlegend=True))
