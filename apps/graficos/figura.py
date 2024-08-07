@@ -29,10 +29,9 @@ class Figura():
         else:
             limInf = None
         if(y2 == "True"):
-            print("ENTROU AQUI")
-            self.fig.update_layout(yaxis2 = dict(title ="Diff", side = "right", overlaying = "y"))
-        
-        self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group")  
+            self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group", yaxis2 = dict(title ="Diff", side = "right", overlaying = "y"))
+        else:
+            self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group")  
         #self.fig.update_yaxes(range=[limInf,limSup])
     def getFig(self):
         return self.fig
