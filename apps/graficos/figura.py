@@ -18,6 +18,8 @@ class Figura():
                 if(y2 == "True"):
                     if(contador == len(mapaGO[unity])):
                         self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col, secondary_y = True)
+                        print("ENTROU AQUI")
+                        print(trace.y)
                     else:
                         self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col)
                 else:
