@@ -19,7 +19,7 @@ class Figura():
                     print("contador: ", contador)
                     print("tamanho: ",len(mapaGO[unity]) )
                     if(contador == len(mapaGO[unity])):
-                        self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col, secondary_y = True)
+                        self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col, secondary_y = True, range = [None,lim_inf])
                         print("ENTROU AQUI")
                         print(trace.y)
                     else:
