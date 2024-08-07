@@ -231,7 +231,7 @@ class Graficos:
                                 textposition ="outside",
                                 marker_color="black",
                                 name = lista_casos[0]+"-"+lista_casos[1],
-                                showlegend=True), secondary_y=True)
+                                showlegend=True))
                 mapaGO[unity] = listaGO
         return mapaGO
 
