@@ -19,7 +19,8 @@ class Figura():
             if(unity.arg.lin == 1 and unity.arg.col == 1):
                 self.fig.update_yaxes(title=conjUnity.legendaEixoY, row = unity.arg.lin , col = unity.arg.col) 
                 self.fig.update_xaxes(title=conjUnity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
-                self.fig.update_layout(yaxis2 = dict(title ="Diff", side = "right", overlaying = "y"), row = unity.arg.lin , col = unity.arg.col)
+                self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying "y", side = "right", row = unity.arg.lin , col = unity.arg.col) 
+#                self.fig.update_layout(yaxis2 = dict(title ="Diff", side = "right", overlaying = "y"), row = unity.arg.lin , col = unity.arg.col)
             if(len(conjUnity.listaUnidades) > 1):
                 self.fig.layout.annotations[unity.arg.t].update(text=unity.arg.nome) 
             self.fig.update_layout(title= titulo)
@@ -29,11 +30,7 @@ class Figura():
             limInf = 0 if lim_inf > 0 else lim_inf
         else:
             limInf = None
-        if(y2 == "True"):
-            print("ENTROU AQUI")
-
-        else:
-            self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group")  
+        self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group")  
         #self.fig.update_yaxes(range=[limInf,limSup])
     def getFig(self):
         return self.fig
