@@ -182,6 +182,7 @@ class Graficos:
         self,
         mapa,
         cronologico, 
+        eixo_y2,
         coly = "valor",
         #colx = "estagio"
         colx = "estagio" ) :
@@ -215,7 +216,23 @@ class Graficos:
                             name = c.nome,
                             line = dict(color = c.cor, dash=c.dash),
                             showlegend=unity.arg.show))
-
+                if(eixo_y2 == "True"):
+                    for unity in mapa:  
+                        df = mapa[unity]
+                        lista_casos = df["caso"].unique()
+                        df_caso_0 = df.loc[df["caso"] == lista_casos[0]].reset_index(drop=True)
+                        df_caso_1 = df.loc[df["caso"] == lista_casos[1]].reset_index(drop=True)
+                        df_valor = df_caso_0[coly] - df_caso_1[coly].reset_index(drop=True)
+                        print(df_valor)
+                        listaGO.append(go.Bar( 
+                                x = df_caso_0[colx],
+                                y = df_valor,
+                                yaxis = "y2"
+                                text = df_valor.round(1).tolist(),
+                                textposition ="outside"
+                                marker_color="black",
+                                name = lista_casos[0]+"-"lista_casos[1]+,
+                                showlegend=True))
                 mapaGO[unity] = listaGO
         return mapaGO
 

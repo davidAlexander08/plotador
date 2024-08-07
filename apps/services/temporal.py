@@ -17,13 +17,17 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2):
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
         self.yinf = yinf
         self.eixox = eixox
         self.estagio = estagio
+        self.y2 = y2
+        if(self.y2 == "True" and len(data.casos) > 2):
+            print("ERRO: Opcao y2 valida apenas para comparacao de duplas de casos")
+            exit(1)
         self.cenario = [cenario] if cenario == "mean" else cenario.split(",")
         print(self.cenario) 
         if(len(self.cenario) > 1):
@@ -144,7 +148,7 @@ class Temporal:
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
             titulo_padrao = "Boxplot Temporal "+conjUnity.titulo+self.estudo
         else:
-            mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico)
+            mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico, eixo_y2 = self.y2)
             titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
 
 
