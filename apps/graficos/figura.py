@@ -30,7 +30,7 @@ class Figura():
             limInf = None
         if(y2 == "True"):
             print("ENTROU AQUI")
-            self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group", yaxis2 = dict(title ="Diff", side = "right", overlaying = "y"))
+            self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group", yaxis2 = dict(title ="Diff", side = "right", overlaying = "y", achor = "free"))
         else:
             self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group")  
         #self.fig.update_yaxes(range=[limInf,limSup])
