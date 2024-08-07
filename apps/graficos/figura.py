@@ -19,7 +19,7 @@ class Figura():
             if(unity.arg.lin == 1 and unity.arg.col == 1):
                 self.fig.update_yaxes(title=conjUnity.legendaEixoY, row = unity.arg.lin , col = unity.arg.col) 
                 self.fig.update_xaxes(title=conjUnity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
-                self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying "y", side = "right", row = unity.arg.lin , col = unity.arg.col) 
+                self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying ="y", side = "right", row = unity.arg.lin , col = unity.arg.col) 
 #                self.fig.update_layout(yaxis2 = dict(title ="Diff", side = "right", overlaying = "y"), row = unity.arg.lin , col = unity.arg.col)
             if(len(conjUnity.listaUnidades) > 1):
                 self.fig.layout.annotations[unity.arg.t].update(text=unity.arg.nome) 
