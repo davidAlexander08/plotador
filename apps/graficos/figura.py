@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 class Figura():
 
-    def __init__(self, conjUnity , mapaGO, titulo, yinf = None,  ysup = None):
+    def __init__(self, conjUnity , mapaGO, titulo, yinf = None,  ysup = None, y2 = "False"):
         self.titulo = titulo
         self.fig = make_subplots(rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
         for unity in conjUnity.listaUnidades:
@@ -28,6 +28,9 @@ class Figura():
             limInf = 0 if lim_inf > 0 else lim_inf
         else:
             limInf = None
+        
+        if(y2 == "True"):
+            fig.update_layout(yaxis2 = dict(title=dict(text="Diff"), side = "right", overlaying = "y", tickmode = "sync"))
         
         self.fig.update_layout(font=dict(size= conjUnity.tamanho_texto), boxmode="group")  
         #self.fig.update_yaxes(range=[limInf,limSup])
