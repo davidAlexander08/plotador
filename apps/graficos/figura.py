@@ -5,7 +5,7 @@
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
-class Figura():
+class Figura(): 
 
     def __init__(self, conjUnity , mapaGO, titulo, yinf = None,  ysup = None, y2 = "False"):
         self.titulo = titulo
@@ -28,7 +28,7 @@ class Figura():
             limInf = 0 if lim_inf > 0 else lim_inf
         else:
             limInf = None
-        
+        print(y2)
         if(y2 == "True"):
             self.fig.update_layout(yaxis2 = dict(title ="Diff", side = "right", overlaying = "y"))
         
