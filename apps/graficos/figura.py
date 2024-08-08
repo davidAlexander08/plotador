@@ -20,7 +20,7 @@ class Figura():
                     print("tamanho: ",len(mapaGO[unity]) )
                     if(contador == len(mapaGO[unity])):
                         self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col, secondary_y = True)
-                        self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying ="y", side = "right", range = [y2inf,y2sup], row = unity.arg.lin , col = unity.arg.col) 
+                        #self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying ="y", side = "right", range = [y2inf,y2sup], row = unity.arg.lin , col = unity.arg.col) 
 
                         print("ENTROU AQUI")
                         print(trace.y)
@@ -33,7 +33,7 @@ class Figura():
             if(unity.arg.lin == 1 and unity.arg.col == 1):
                 self.fig.update_yaxes(title=conjUnity.legendaEixoY, row = unity.arg.lin , col = unity.arg.col) 
                 self.fig.update_xaxes(title=conjUnity.legendaEixoX, row = unity.arg.lin , col = unity.arg.col) 
-                self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying ="y", side = "right") 
+                self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying ="y", side = "right", range=[y2inf,y2sup]) 
             if(len(conjUnity.listaUnidades) > 1):
                 self.fig.layout.annotations[unity.arg.t].update(text=unity.arg.nome) 
             self.fig.update_layout(title= titulo)
