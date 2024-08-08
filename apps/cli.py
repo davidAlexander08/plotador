@@ -33,7 +33,8 @@ option_html = click.option("--html", default = None, help = "Default False, se T
 option_outpath = click.option("--outpath", default = None, help = "Muda o caminho de saida da figura e csv a serem gerados")
 option_txt = click.option("--txt", default = None, help ="definicao do arquivo txt. Caso nenhum, ele considera estar dentro da pasta do caso")
 option_y2 = click.option("--y2", default = None, help = "adicao de um segundo eixo para comparacao de uma dupla de casos com barras de diferença entre eles.")
-
+option_y2sup = click.option("--y2sup", default = None, help = "limite superior y2.")
+option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y2.")
 
 @click.group()
 def cli():
@@ -74,7 +75,9 @@ def realiza_report(outpath, arquivo_json, txt, titulo):
 @option_yinf
 @option_ysup
 @option_y2
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2):
+@option_y2sup
+@option_y2inf
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf):
     from apps.services.temporal import Temporal
     flag_diretorio = 0
     if(arquivo_json is None):
@@ -98,7 +101,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
             data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
-    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf)
 
 
 @click.command("conjunto")

@@ -17,11 +17,13 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf):
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
         self.yinf = yinf
+        self.y2sup = y2sup
+        self.y2inf = y2inf
         self.eixox = eixox
         self.estagio = estagio
         self.y2 = y2
@@ -158,7 +160,7 @@ class Temporal:
         tituloFigura = titulo_padrao if self.booltitulo == "True" else " "
         tituloFigura = titulo_padrao if self.titulo == " " else self.titulo.replace("_", " ")
 
-        figura = Figura(conjUnity, mapaGO, tituloFigura, self.yinf, self.ysup, self.y2)
+        figura = Figura(conjUnity, mapaGO, tituloFigura, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
         if(self.showlegend == "False"):
             figura.fig.update_layout(showlegend= False)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, tituloFigura, self.html, self.largura, self.altura)
@@ -174,7 +176,7 @@ class Temporal:
                     if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+"_"+unity.titulo+"_"+conjUnity.sintese.sintese+" "+self.estudo)
                         
                 mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+" "+self.estudo)
-                figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup, self.y2)
+                figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
 
 

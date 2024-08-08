@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 class Figura(): 
 
-    def __init__(self, conjUnity , mapaGO, titulo, yinf = None,  ysup = None, y2 = "False"):
+    def __init__(self, conjUnity , mapaGO, titulo, yinf = None,  ysup = None, y2 = "False", y2sup = None, y2inf = None):
         self.titulo = titulo
         self.fig = make_subplots(specs=[[{"secondary_y": True}]], rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
         for unity in conjUnity.listaUnidades:
@@ -20,7 +20,7 @@ class Figura():
                     print("tamanho: ",len(mapaGO[unity]) )
                     if(contador == len(mapaGO[unity])):
                         self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col, secondary_y = True)
-                        self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying ="y", side = "right", range = [min(trace.y)*2, max(trace.y)*2],row = unity.arg.lin , col = unity.arg.col) 
+                        self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying ="y", side = "right", range = [y2inf,y2sup],row = unity.arg.lin , col = unity.arg.col) 
                         #self.fig.update_layout(yaxis2 = dict(title ="Diff", side = "right", overlaying = "y", range=[min(trace.y)*2, max(trace.y)*2]), row = unity.arg.lin , col = unity.arg.col)
 
                         print("ENTROU AQUI")
