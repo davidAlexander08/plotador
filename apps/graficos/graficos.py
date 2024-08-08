@@ -227,9 +227,9 @@ class Graficos:
                                 x = df_caso_0[colx],
                                 y = df_valor,
                                 yaxis = "y2",
-                                text = df_valor.round(1).tolist(),
-                                textposition ="outside",
-                                marker_color="black",
+                                #text = df_valor.round(1).tolist(),
+                                #textposition ="outside",
+                                marker_color="gray",
                                 name = lista_casos[0]+"-"+lista_casos[1],
                                 showlegend=True))
                 mapaGO[unity] = listaGO
