@@ -9,7 +9,11 @@ class Figura():
 
     def __init__(self, conjUnity , mapaGO, titulo, yinf = None,  ysup = None, y2 = "False", y2sup = None, y2inf = None):
         self.titulo = titulo
-        self.fig = make_subplots(specs=[[{"secondary_y": True}]], rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
+        if(y2 == "True"):
+                self.fig = make_subplots(specs=[[{"secondary_y": True}]], rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
+        else:
+                self.fig = make_subplots(rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
+
         for unity in conjUnity.listaUnidades:
             contador = 1
             for trace in mapaGO[unity]:
