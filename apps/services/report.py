@@ -305,14 +305,14 @@ class Report:
                                 custo_total=0
                                 versao = "0"
                                 if(caso.modelo == "NEWAVE"):
-                                    data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+                                    #data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
                                     #df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
                                     #tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
-                                    iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
-                                    zinf = data_pmo.convergencia["zinf"].iloc[-1]
-                                    custo_total = data_pmo.custo_operacao_total
-                                    desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
-                                    versao = data_pmo.versao_modelo
+                                    #iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
+                                    #zinf = data_pmo.convergencia["zinf"].iloc[-1]
+                                    #custo_total = data_pmo.custo_operacao_total
+                                    #desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
+                                    #versao = data_pmo.versao_modelo
                                 if(caso.modelo == "DECOMP"):
                                     extensao = ""
                                     with open(caso.caminho+"/caso.dat") as f:
@@ -320,8 +320,8 @@ class Report:
                                     if extensao == "":
                                         raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
                                     data_relato = Relato.read(caso.caminho+"/relato."+extensao).convergencia
-                                    #df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-                                    #tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
+                                    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
                                     iteracoes = data_relato["iteracao"].iloc[-1]
                                     zinf = data_relato["zinf"].iloc[-1]
                                     custo_total = " "
@@ -329,8 +329,8 @@ class Report:
                                     versao = " "
                                 if(caso.modelo == "DESSEM"):
                                     data_relato = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
-                                    #df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-                                    #tempo_total = df_caso["tempo"].sum()/60
+                                    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+                                    tempo_total = df_caso["tempo"].sum()/60
                                     iteracoes = " "
                                     zinf = " "
                                     custo_total = " "
