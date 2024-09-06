@@ -305,6 +305,7 @@ class Report:
                                 custo_total=0
                                 versao = "0"
                                 if(caso.modelo == "NEWAVE"):
+                                    pass
                                     #data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
                                     #df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
                                     #tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
