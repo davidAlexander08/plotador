@@ -303,6 +303,7 @@ class Report:
                                 iteracoes= 0 
                                 zinf = 0
                                 custo_total=0
+                                desvio_custo =0
                                 versao = "0"
                                 if(caso.modelo == "NEWAVE"):
                                     pass
