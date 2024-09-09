@@ -294,7 +294,7 @@ class Report:
 """
                             html_file.write(Inicio_tabela)
                             html_file.write("<h2>Informações Operacionais</h2>"+"\n")
-                            #df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+                            df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
                             for caso in data.casos:
                                 temp = Template_tabela_caso
                                 temp = temp.replace("nome", caso.nome)
