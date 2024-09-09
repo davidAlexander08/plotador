@@ -307,14 +307,14 @@ class Report:
                                 versao = "0"
                                 if(caso.modelo == "NEWAVE"):
                                     pass
-                                    #data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-                                    #df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-                                    #tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
-                                    #iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
-                                    #zinf = data_pmo.convergencia["zinf"].iloc[-1]
-                                    #custo_total = data_pmo.custo_operacao_total
-                                    #desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
-                                    #versao = data_pmo.versao_modelo
+                                    data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+                                    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
+                                    iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
+                                    zinf = data_pmo.convergencia["zinf"].iloc[-1]
+                                    custo_total = data_pmo.custo_operacao_total
+                                    desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
+                                    versao = data_pmo.versao_modelo
                                 if(caso.modelo == "DECOMP"):
                                     extensao = ""
                                     with open(caso.caminho+"/caso.dat") as f:
