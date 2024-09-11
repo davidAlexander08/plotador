@@ -106,7 +106,7 @@
         /* Style for the first row if you want to make it stand out (optional) */
         tr:first-child {
             background-color: #007bff; /* Background color for the first row */
-            color: #ffffff; /* Text color for the first row */
+            color: #000000; /* Text color for the first row */
         }
 
 

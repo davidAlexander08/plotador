@@ -132,7 +132,7 @@ class Report(Estruturas):
     </tr>
 """
                             html_file.write(Inicio_tabela)
-                            html_file.write("<h1>Informações Gerais do Estudo</h1>"+"\n")
+                            html_file.write("<h2>Informações Gerais do Estudo</h2>"+"\n")
                             for caso in data.casos:
                                 temp = Template_tabela_caso
                                 temp = temp.replace("nome", caso.nome)
