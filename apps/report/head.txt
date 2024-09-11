@@ -20,6 +20,7 @@
             padding-top: 20px;
             color: white;
             box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+            z-index: 1;
         }
         
         .company-name {
@@ -192,6 +193,32 @@
             font-family: Arial, sans-serif; /* Fonte para o texto */
             font-size: 24px; /* Tamanho da fonte do texto */
             color: #333; /* Cor do texto */
+        }
+
+        .top-bar {
+            width: calc(100% - 200px);
+            height: 50px;
+            background-color: #333;
+            color: white;
+            line-height: 50px;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 150px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .top-bar select {
+            background: #555;
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 4px;
+            position: fixed;
+            left: 300px;
         }
 </style>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

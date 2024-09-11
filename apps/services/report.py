@@ -84,6 +84,13 @@ class Report(Estruturas):
         <span>ONS a energia que potencializa a vida - Carregando Visualização - Gerência PEM</span>
     </div>
 
+    <div class="top-bar" id="top-bar">
+        <div id="top-bar-title">Menu</div>
+        <select id="top-bar-menu" onchange="showTopBarPage(this.value)">
+            <!-- Options will be updated dynamically -->
+        </select>
+    </div>
+
     <div class="sidebar">
         <div class="company-name">ONS</div>
         <ul>
@@ -93,7 +100,7 @@ class Report(Estruturas):
                 if("\page{") in line:
                     nome_pagina = line.split("{")[1].split("}")[0]
                     print(nome_pagina)
-                    html_file.write('<li><a href="#" onclick="showPage(\''+nome_pagina+'\')">'+nome_pagina+'</a></li>'+"\n")
+                    html_file.write('<li><a href="#" onclick="showSidebarPage(\''+nome_pagina+'\')">'+nome_pagina+'</a></li>'+"\n")
 
             html_file.write("</ul>"+"\n")
             html_file.write("</div>"+"\n")
@@ -210,9 +217,8 @@ class Report(Estruturas):
                             
                     elif("plotador" in line):
                         if(len(lista_html) == 0):
-                            html_file.write('<select id="'+nome_pagina+"graphs"+'" onchange="showGraph('+pagina_ativa+')">'+"\n")
+                            html_file.write('<div id="'+nome_pagina+'-subpages'+'" class="top-bar-menu">'+"\n")
                         
-
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
                         if( (data.casos[0].modelo == "DECOMP" or data.casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
@@ -240,21 +246,24 @@ class Report(Estruturas):
                                 if(comando == "--html"):
                                     extensao = ".html"
                                 contador += 1
+
+                            html_file.write('<div id="'+nome_arquivo+'" class="page">'+"\n")
+
                             if(extensao == ".html"):
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
                                     html_plotly = file.read()
                                     mapa_imagens_html[nome_arquivo] = html_plotly
                                     lista_html.append(html_plotly)
-                                    html_file.write('<option value="'+nome_arquivo+'">'+nome_arquivo+'</option>'+"\n")
+                                    #html_file.write('<option value="'+nome_arquivo+'">'+nome_arquivo+'</option>'+"\n")
 
-                                    #html_file.write(html_plotly+"\n")
+                                    html_file.write(html_plotly+"\n")
                                     #html_file.write(nome_arquivo+"\n")
                             else:
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
                                     base64_string = base64.b64encode(image_file.read()).decode('utf-8')
                                     html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
                                                 #<img src="data:image/png;base64,INSERT_BASE64_ENCODED_STRING_HERE" alt="Centered Image" style="max-width: 100%; height: auto;">
-
+                            html_file.write('</div>'+"\n")
                     else:
                         html_file.write("<p>"+line.strip()+"</p>\n")
                     #print(line)
@@ -276,7 +285,57 @@ class Report(Estruturas):
         }
     </script>
 
-    
+    <script>
+        function showSidebarPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.content .page').forEach(el => el.classList.remove('active'));
+
+            // Show the selected sidebar page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update sidebar buttons
+            document.querySelectorAll('.sidebar button').forEach(button => button.classList.remove('active'));
+            document.getElementById('btn-' + pageId).classList.add('active');
+
+            // Update top bar
+            const topBar = document.getElementById('top-bar');
+            const dropdown = topBar.querySelector('select');
+            const subpagesContainer = document.getElementById(pageId + '-subpages');
+            
+            // Clear previous options
+            dropdown.innerHTML = '';
+            dropdown.style.display = 'none';
+
+            // Add new options based on the selected sidebar page
+            if (subpagesContainer) {
+                subpagesContainer.querySelectorAll('.page').forEach(page => {
+                    const option = document.createElement('option');
+                    option.value = page.id;
+                    option.textContent = page.id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    dropdown.appendChild(option);
+                });
+                dropdown.style.display = 'block';
+
+                // Show the first top bar page
+                const firstTopBarPage = subpagesContainer.querySelector('.page');
+                if (firstTopBarPage) {
+                    showTopBarPage(firstTopBarPage.id);
+                }
+            }
+        }
+
+        function showTopBarPage(pageId) {
+            // Hide all top bar pages
+            document.querySelectorAll('.top-bar-menu .page').forEach(el => el.classList.remove('active'));
+
+            // Show the selected top bar page
+            const page = document.getElementById(pageId);
+            if (page) page.classList.add('active');
+        }
+
+        // Default view
+        showSidebarPage('page1');
+    </script>
 
     <script>
     document.getElementById('downloadAll').addEventListener('click', function() {
