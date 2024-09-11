@@ -72,19 +72,41 @@
             color: #333;
         }
         table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
+            font-family: Arial, sans-serif;
+            border-collapse: separate; /* Allows for rounded corners */
+            border-spacing: 0; /* Removes default spacing between cells */
+            width: 100%;
+            border-radius: 8px; /* Rounds the corners of the table */
+            overflow: hidden; /* Ensures rounded corners are visible */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
         }
 
+        /* Style for table cells and headers */
         td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 12px; /* Increased padding for better spacing */
         }
 
+        /* Style for table headers */
+        th {
+            background-color: #f4f4f4; /* Lighter background for headers */
+            font-weight: bold;
+        }
+
+        /* Style for table rows */
         tr:nth-child(even) {
-        background-color: #dddddd;
+            background-color: #f9f9f9; /* Slightly lighter background for even rows */
+        }
+
+        tr:hover {
+            background-color: #e2e2e2; /* Highlight row on hover */
+        }
+
+        /* Style for the first row if you want to make it stand out (optional) */
+        tr:first-child {
+            background-color: #007bff; /* Background color for the first row */
+            color: #ffffff; /* Text color for the first row */
         }
 
 
