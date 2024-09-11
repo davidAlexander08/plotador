@@ -190,11 +190,20 @@ class Report(Estruturas):
                             #html_file.write("</table>"+"\n")
 
                         else:
+                            if(len(lista_html) != 0):
+                                html_file.write('</select>'+"\n")
+                                html_file.write('<div id="'+nome_pagina+'container'+'"></div>'+"\n")
+                                
+
                             flag = 1
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                             print(nome_pagina)
                             mapa_imagens_html = {}
+                            lista_html = []
                     elif("plotador" in line):
+                        
+                        html_file.write('<select id="'+nome_pagina+"graphs"+'" onchange="showGraph('+pagina_ativa+')">'+"\n")
+
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
                         if( (data.casos[0].modelo == "DECOMP" or data.casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
@@ -226,6 +235,9 @@ class Report(Estruturas):
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
                                     html_plotly = file.read()
                                     mapa_imagens_html[nome_arquivo] = html_plotly
+                                    lista_html.append(html_plotly)
+                                    html_file.write('<option value="'+nome_arquivo+'">'nome_arquivo'</option>'+"\n")
+
                                     #html_file.write(html_plotly+"\n")
                                     #html_file.write(nome_arquivo+"\n")
                             else:
