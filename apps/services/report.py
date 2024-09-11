@@ -79,6 +79,7 @@ class Report(Estruturas):
                 html_file.write(conteudo)
             head_html = """
 <body>
+    <button id="downloadAll">Baixar Gráficos</button>
     <div class="sidebar">
         <div class="company-name">ONS</div>
         <ul>
@@ -224,7 +225,7 @@ class Report(Estruturas):
         }
     </script>
 
-    <button id="downloadAll">Baixar Gráficos</button>
+    
 
     <script>
     document.getElementById('downloadAll').addEventListener('click', function() {
