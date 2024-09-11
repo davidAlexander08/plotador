@@ -67,16 +67,13 @@ class Report:
 
             self.eco_indicadores = EcoIndicadores(data.casos)
 
-        # Example usage
         with open(arquivo_template, "r") as file:
-            #html_template = file.read()
             lines = file.readlines()
 
         titulo_html = "output.html" if self.titulo == " " else self.titulo
         with open(titulo_html, "w") as html_file:
             with open("/".join(path)+"/report/head.txt", 'r', encoding='utf-8') as arquivo:
                 conteudo = arquivo.read()
-                print(conteudo)
                 html_file.write(conteudo)
             head_html = """
 <body>
@@ -138,21 +135,7 @@ class Report:
                                 html_file.write(temp)
                             html_file.write("</table>"+"\n")
 
-### TABELA DE INFORMACOES OPERACIONAIS
-
-                            Inicio_tabela = """
-    <table>
-    <tr>
-        <th>Caso</th>
-        <th>Modelo</th>
-        <th>Versao</th>
-        <th>Tempo Total (min)</th>
-        <th>Iter</th>
-        <th>Zinf</th>
-        <th>Custo Total</th>
-        <th>Desvio Custo</th>
-    </tr>
-"""                         
+### TABELA DE INFORMACOES NEWAVE                     
                             Template_tabela_caso = """
   <tr>
     <td>nome</td>
@@ -165,7 +148,10 @@ class Report:
     <td>desvio_custo</td>
   </tr>
 """
-                            html_file.write(Inicio_tabela)
+                            with open("/".join(path)+"/report/tabela_newave.txt", 'r', encoding='utf-8') as arquivo:
+                                conteudo = arquivo.read()
+                                print(conteudo)
+                                html_file.write(conteudo)
                             html_file.write("<h2>Informações Operacionais</h2>"+"\n")
                             df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
                             for caso in data.casos:
