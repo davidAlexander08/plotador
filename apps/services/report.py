@@ -111,7 +111,7 @@ class Report(Estruturas):
                         mapa_imagens_html = {}
                         nome_pagina = line.split("{")[1].split("}")[0]
                         if(flag == 1):
-                            html_file.write('</div>'+"\n")
+                            pass
                         pagina_ativa = "page active" if flag == 0 else "page"
                         if(nome_pagina == "Infos" or nome_pagina == "Info"):
                             flag = 1
@@ -195,18 +195,20 @@ class Report(Estruturas):
                             if(len(lista_html) != 0):
                                 html_file.write('</select>'+"\n")
                                 html_file.write('<div id="'+nome_pagina+'container'+'"></div>'+"\n")
+                                html_file.write('</div>'+"\n")
                                 lista_html = []
                                 print("NETROU AQUI")
                                 
 
                             flag = 1
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
-                            html_file.write('<select id="'+nome_pagina+"graphs"+'" onchange="showGraph('+pagina_ativa+')">'+"\n")
+                            
                             print(nome_pagina)
                             mapa_imagens_html = {}
                             
                     elif("plotador" in line):
-                        
+                        if(len(lista_html) == 0):
+                            html_file.write('<select id="'+nome_pagina+"graphs"+'" onchange="showGraph('+pagina_ativa+')">'+"\n")
                         
 
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
