@@ -286,14 +286,15 @@ class Report(Estruturas):
         versao = "0"
 
         temp = self.mapa_template_tabela_modelo[caso.modelo]
-        temp = temp.replace("nome", caso.nome)
-        temp = temp.replace("modelo", caso.modelo)
+        temp = temp.replace("Caso", caso.nome)
+        temp = temp.replace("Modelo", caso.modelo)
 
         data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
         data_dger = Dger.read(caso.caminho+"/dger.dat")
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
 
-        temp = temp.replace("versao", data_pmo.versao_modelo)
+        print(data_dger.num_series_sinteticas)
+        temp = temp.replace("Versao", data_pmo.versao_modelo)
         temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
         temp = temp.replace("Ano_I", str(data_dger.ano_inicio_estudo))
         temp = temp.replace("Anos_Pos", str(data_dger.num_anos_pos_estudo))
@@ -302,7 +303,8 @@ class Report(Estruturas):
         temp = temp.replace("FW", str(data_dger.num_forwards))
         temp = temp.replace("BK", str(data_dger.num_aberturas))
         temp = temp.replace("FW_SF", str(data_dger.num_series_sinteticas))
-        temp = temp.replace("SF_Ind", str(data_dger.agregacao_simulacao_final))
+        tipo_sim_fin = "Ind" if data_dger.agregacao_simulacao_final == 1 else "Agr"
+        temp = temp.replace("SF_Ind", tipo_sim_fin)
         temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
         #df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
         #tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
