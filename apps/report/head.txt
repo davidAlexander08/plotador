@@ -155,7 +155,25 @@
             background-color: #004494;
             transform: translateY(0);
         }
+
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff; /* Cor de fundo enquanto carrega */
+            z-index: 9999; /* Garante que o loader fique sobre todos os outros elementos */
+            font-family: Arial, sans-serif; /* Fonte para o texto */
+            font-size: 24px; /* Tamanho da fonte do texto */
+            color: #333; /* Cor do texto */
+        }
 </style>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
 </head>

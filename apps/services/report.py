@@ -79,7 +79,10 @@ class Report(Estruturas):
                 html_file.write(conteudo)
             head_html = """
 <body>
-    
+    <div id="loader">
+        <span>Carregando...</span>
+    </div>
+
     <div class="sidebar">
         <div class="company-name">ONS</div>
         <ul>
@@ -245,7 +248,15 @@ class Report(Estruturas):
     });
     </script>
 
-    
+    <script>
+    window.addEventListener('load', function() {
+        // Remove o loader após o carregamento da página
+        const loader = document.getElementById('loader');
+        if (loader) {
+            loader.style.display = 'none';
+        }
+    });
+    </script>
 
             """
             html_file.write(script_html)
