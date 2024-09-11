@@ -126,6 +126,35 @@
                 height: auto;
             }
         }
+
+        button {
+            all: unset;
+        }
+
+        #downloadAll {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #downloadAll:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        #downloadAll:active {
+            background-color: #004494;
+            transform: translateY(0);
+        }
 </style>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>

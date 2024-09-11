@@ -224,7 +224,7 @@ class Report(Estruturas):
         }
     </script>
 
-    <button id="downloadAll">Download All Graphs</button>
+    <button id="downloadAll">Baixar Gráficos</button>
 
     <script>
     document.getElementById('downloadAll').addEventListener('click', function() {
