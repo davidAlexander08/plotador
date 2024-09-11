@@ -295,16 +295,16 @@ class Report(Estruturas):
         print(data_cvar.valores_constantes)
 
         temp = temp.replace("versao", data_pmo.versao_modelo)
-        temp = temp.replace("Mes_I", data_dger.mes_inicio_estudo)
-        temp = temp.replace("Ano_I", data_dger.ano_inicio_estudo)
-        temp = temp.replace("Anos_Pos", data_dger.num_anos_pos_estudo)
-        temp = temp.replace("It_Max", data_dger.num_max_iteracoes)
-        temp = temp.replace("It_Min", data_dger.num_minimo_iteracoes)
-        temp = temp.replace("FW", data_dger.num_forwards)
-        temp = temp.replace("BK", data_dger.num_aberturas)
-        temp = temp.replace("FW_SF", data_dger.num_series_sinteticas)
-        temp = temp.replace("SF_Ind", data_dger.agregacao_simulacao_final)
-        temp = temp.replace("CVAR", data_cvar.valores_constantes)
+        temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
+        temp = temp.replace("Ano_I", str(data_dger.ano_inicio_estudo))
+        temp = temp.replace("Anos_Pos", str(data_dger.num_anos_pos_estudo))
+        temp = temp.replace("It_Max", str(data_dger.num_max_iteracoes))
+        temp = temp.replace("It_Min", str(data_dger.num_minimo_iteracoes))
+        temp = temp.replace("FW", str(data_dger.num_forwards))
+        temp = temp.replace("BK", str(data_dger.num_aberturas))
+        temp = temp.replace("FW_SF", str(data_dger.num_series_sinteticas))
+        temp = temp.replace("SF_Ind", str(data_dger.agregacao_simulacao_final))
+        temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
         #df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
         #tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
         #iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
