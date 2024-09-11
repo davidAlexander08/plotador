@@ -266,7 +266,7 @@ class Report(Estruturas):
 
 
 
-    def preenche_modelo_tabela_modelo_NEWAVE(caso):
+    def preenche_modelo_tabela_modelo_NEWAVE(self,caso):
 
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
 
