@@ -191,6 +191,7 @@ class Report(Estruturas):
                             #html_file.write("</table>"+"\n")
 
                         else:
+                            print(len(lista_html))
                             if(len(lista_html) != 0):
                                 html_file.write('</select>'+"\n")
                                 html_file.write('<div id="'+nome_pagina+'container'+'"></div>'+"\n")
