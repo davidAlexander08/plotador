@@ -59,7 +59,7 @@ class Estruturas:
             <th>It_Min</th>
             <th>FW</th>
             <th>BK</th>
-            <th>FW_SF</th>
+            <th>N_series_sim_final</th>
             <th>SF_Ind</th>
             <th>CVAR</th>
         </tr>

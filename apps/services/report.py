@@ -301,7 +301,7 @@ class Report(Estruturas):
         temp = temp.replace("It_Min", str(data_dger.num_minimo_iteracoes))
         temp = temp.replace("FW", str(data_dger.num_forwards))
         temp = temp.replace("BK", str(data_dger.num_aberturas))
-        temp = temp.replace("FW_SF", str(data_dger.num_series_sinteticas))
+        temp = temp.replace("N_series_sim_final", str(data_dger.num_series_sinteticas))
         tipo_sim_fin = "Ind" if data_dger.agregacao_simulacao_final == 1 else "Agr"
         temp = temp.replace("SF_Ind", tipo_sim_fin)
         temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
