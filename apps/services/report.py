@@ -74,6 +74,7 @@ class Report:
         with open(titulo_html, "w") as html_file:
             with open("/".join(path)+"/report/head.txt", 'r', encoding='utf-8') as arquivo:
                 conteudo = arquivo.read()
+                print(conteudo)
                 html_file.write(conteudo)
             head_html = """
 <body>
@@ -135,8 +136,22 @@ class Report:
                                 html_file.write(temp)
                             html_file.write("</table>"+"\n")
 
-### TABELA DE INFORMACOES NEWAVE                     
-                            Template_tabela_caso = """
+### TABELA DE INFORMACOES NEWAVE
+
+                            Inicio_tabela_Newave = """
+    <table>
+    <tr>
+        <th>Caso</th>
+        <th>Modelo</th>
+        <th>Versao</th>
+        <th>Tempo Total (min)</th>
+        <th>Iter</th>
+        <th>Zinf</th>
+        <th>Custo Total</th>
+        <th>Desvio Custo</th>
+    </tr>
+"""                         
+                            Template_tabela_caso_Newave = """
   <tr>
     <td>nome</td>
 	<td>modelo</td>
@@ -148,21 +163,52 @@ class Report:
     <td>desvio_custo</td>
   </tr>
 """
-                            html_file.write("<h2>Informações Operacionais</h2>"+"\n")
-                            with open("/".join(path)+"/report/tabela_newave.txt", 'r', encoding='utf-8') as arquivo:
-                                conteudo = arquivo.read()
-                                print(conteudo)
-                                html_file.write(conteudo)
+
+### TABELA DE INFORMACOES NEWAVE
+
+                            Inicio_tabela_Decomp = """
+    <table>
+    <tr>
+        <th>Caso</th>
+        <th>Modelo</th>
+        <th>Versao</th>
+        <th>Tempo Total (min)</th>
+        <th>Iter</th>
+        <th>Zinf</th>
+        <th>Custo Total</th>
+    </tr>
+"""                         
+                            Template_tabela_caso_Decomp = """
+  <tr>
+    <td>nome</td>
+	<td>modelo</td>
+    <td>versao</td>
+	<td>tempo_total</td>
+    <td>iteracoes</td>
+    <td>zinf</td>
+    <td>custo_total</td>
+  </tr>
+"""
                             
+                            html_file.write("<h2>Informações Operacionais</h2>"+"\n")
                             df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+                            flag_nw = 0
+                            flag_deco = 0
                             for caso in data.casos:
-                                temp = Template_tabela_caso
-                                temp = temp.replace("nome", caso.nome)
-                                temp = temp.replace("modelo", caso.modelo)
-                                tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
+                                tempo_total = 0
+                                iteracoes= 0 
+                                zinf = 0
+                                custo_total=0
+                                desvio_custo =0
                                 versao = "0"
                                 if(caso.modelo == "NEWAVE"):
-                                    pass
+                                    if(flag_nw == 0):
+                                        html_file.write(Inicio_tabela_Newave)
+                                        flag_nw = 1
+                                    temp = Template_tabela_caso_Newave
+                                    temp = temp.replace("nome", caso.nome)
+                                    temp = temp.replace("modelo", caso.modelo)
+
                                     data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
                                     tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
@@ -171,7 +217,22 @@ class Report:
                                     custo_total = data_pmo.custo_operacao_total
                                     desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
                                     versao = data_pmo.versao_modelo
+
+                                    temp = temp.replace("versao", versao)
+                                    temp = temp.replace("tempo_total", str(tempo_total))
+                                    temp = temp.replace("iteracoes", str(iteracoes))
+                                    temp = temp.replace("zinf", str(zinf))
+                                    temp = temp.replace("custo_total", str(custo_total))
+                                    temp = temp.replace("desvio_custo", str(desvio_custo))
+
                                 if(caso.modelo == "DECOMP"):
+                                    if(flag_deco == 0):
+                                        html_file.write(Inicio_tabela_Decomp)
+                                        flag_deco = 1
+
+                                    temp = Template_tabela_caso_Decomp
+                                    temp = temp.replace("nome", caso.nome)
+                                    temp = temp.replace("modelo", caso.modelo)
                                     extensao = ""
                                     with open(caso.caminho+"/caso.dat") as f:
                                         extensao = f.readline().strip('\n')
@@ -183,8 +244,13 @@ class Report:
                                     iteracoes = data_relato["iteracao"].iloc[-1]
                                     zinf = data_relato["zinf"].iloc[-1]
                                     custo_total = " "
-                                    desvio_custo = " "
                                     versao = " "
+                                    temp = temp.replace("versao", versao)
+                                    temp = temp.replace("tempo_total", str(tempo_total))
+                                    temp = temp.replace("iteracoes", str(iteracoes))
+                                    temp = temp.replace("zinf", str(zinf))
+                                    temp = temp.replace("custo_total", str(custo_total))
+
                                 if(caso.modelo == "DESSEM"):
                                     data_relato = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
                                     df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
@@ -194,12 +260,7 @@ class Report:
                                     custo_total = " "
                                     desvio_custo = " "
                                     versao = data_relato.versao
-                                temp = temp.replace("versao", versao)
-                                temp = temp.replace("tempo_total", str(tempo_total))
-                                temp = temp.replace("iteracoes", str(iteracoes))
-                                temp = temp.replace("zinf", str(zinf))
-                                temp = temp.replace("custo_total", str(custo_total))
-                                temp = temp.replace("desvio_custo", str(desvio_custo))
+
                                 html_file.write(temp)
                             html_file.write("</table>"+"\n")
 
