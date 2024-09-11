@@ -198,12 +198,13 @@ class Report(Estruturas):
 
                             flag = 1
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
+                            html_file.write('<select id="'+nome_pagina+"graphs"+'" onchange="showGraph('+pagina_ativa+')">'+"\n")
                             print(nome_pagina)
                             mapa_imagens_html = {}
                             lista_html = []
                     elif("plotador" in line):
                         
-                        html_file.write('<select id="'+nome_pagina+"graphs"+'" onchange="showGraph('+pagina_ativa+')">'+"\n")
+                        
 
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
