@@ -157,27 +157,7 @@ class Report(Estruturas):
                                     if(flag_deco == 0):
                                         html_file.write(self.mapa_tabela_modelo[caso.modelo])
                                         flag_deco = 1
-
-                                    temp = self.mapa_template_tabela_modelo[caso.modelo]
-                                    temp = temp.replace("nome", caso.nome)
-                                    temp = temp.replace("modelo", caso.modelo)
-                                    extensao = ""
-                                    with open(caso.caminho+"/caso.dat") as f:
-                                        extensao = f.readline().strip('\n')
-                                    if extensao == "":
-                                        raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
-                                    data_relato = Relato.read(caso.caminho+"/relato."+extensao).convergencia
-                                    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
-                                    iteracoes = data_relato["iteracao"].iloc[-1]
-                                    zinf = data_relato["zinf"].iloc[-1]
-                                    custo_total = " "
-                                    versao = " "
-                                    temp = temp.replace("versao", versao)
-                                    temp = temp.replace("tempo_total", str(tempo_total))
-                                    temp = temp.replace("iteracoes", str(iteracoes))
-                                    temp = temp.replace("zinf", str(zinf))
-                                    temp = temp.replace("custo_total", str(custo_total))
+                                    temp = self.preenche_modelo_tabela_modelo_DECOMP(caso)
 
                                 if(caso.modelo == "DESSEM"):
                                     data_relato = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
@@ -290,4 +270,28 @@ class Report(Estruturas):
         temp = temp.replace("custo_total", str(custo_total))
         temp = temp.replace("desvio_custo", str(desvio_custo))
 
+        return temp
+
+
+    def preenche_modelo_tabela_modelo_DECOMP(self, caso):
+        temp = self.mapa_template_tabela_modelo[caso.modelo]
+        temp = temp.replace("nome", caso.nome)
+        temp = temp.replace("modelo", caso.modelo)
+        extensao = ""
+        with open(caso.caminho+"/caso.dat") as f:
+            extensao = f.readline().strip('\n')
+        if extensao == "":
+            raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
+        data_relato = Relato.read(caso.caminho+"/relato."+extensao).convergencia
+        df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+        tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
+        iteracoes = data_relato["iteracao"].iloc[-1]
+        zinf = data_relato["zinf"].iloc[-1]
+        custo_total = " "
+        versao = " "
+        temp = temp.replace("versao", versao)
+        temp = temp.replace("tempo_total", str(tempo_total))
+        temp = temp.replace("iteracoes", str(iteracoes))
+        temp = temp.replace("zinf", str(zinf))
+        temp = temp.replace("custo_total", str(custo_total))
         return temp
