@@ -1,6 +1,7 @@
 
 
 from apps.interface.dados_json_caso import Dados_json_caso
+from apps.report.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.model.argumento import Argumento
 from inewave.newave import Pmo
@@ -19,9 +20,9 @@ import subprocess
 import shutil
 import json
 
-class Report:
+class Report(Estruturas):
     def __init__(self,outpath, arq_json, txt, titulo):
-        
+        Estruturas.__init__(self)
         #self.outpath = outpath
         self.json = arq_json
         self.txt = txt
@@ -135,60 +136,6 @@ class Report:
                                 temp = temp.replace("cor", caso.cor)
                                 html_file.write(temp)
                             html_file.write("</table>"+"\n")
-
-### TABELA DE INFORMACOES NEWAVE
-
-                            Inicio_tabela_Newave = """
-    <table>
-    <tr>
-        <th>Caso</th>
-        <th>Modelo</th>
-        <th>Versao</th>
-        <th>Tempo Total (min)</th>
-        <th>Iter</th>
-        <th>Zinf</th>
-        <th>Custo Total</th>
-        <th>Desvio Custo</th>
-    </tr>
-"""                         
-                            Template_tabela_caso_Newave = """
-  <tr>
-    <td>nome</td>
-	<td>modelo</td>
-    <td>versao</td>
-	<td>tempo_total</td>
-    <td>iteracoes</td>
-    <td>zinf</td>
-    <td>custo_total</td>
-    <td>desvio_custo</td>
-  </tr>
-"""
-
-### TABELA DE INFORMACOES NEWAVE
-
-                            Inicio_tabela_Decomp = """
-    <table>
-    <tr>
-        <th>Caso</th>
-        <th>Modelo</th>
-        <th>Versao</th>
-        <th>Tempo Total (min)</th>
-        <th>Iter</th>
-        <th>Zinf</th>
-        <th>Custo Total</th>
-    </tr>
-"""                         
-                            Template_tabela_caso_Decomp = """
-  <tr>
-    <td>nome</td>
-	<td>modelo</td>
-    <td>versao</td>
-	<td>tempo_total</td>
-    <td>iteracoes</td>
-    <td>zinf</td>
-    <td>custo_total</td>
-  </tr>
-"""
                             
                             html_file.write("<h2>Informações Operacionais</h2>"+"\n")
                             df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
@@ -203,9 +150,9 @@ class Report:
                                 versao = "0"
                                 if(caso.modelo == "NEWAVE"):
                                     if(flag_nw == 0):
-                                        html_file.write(Inicio_tabela_Newave)
+                                        html_file.write(self.mapa_tabela_modelo[caso.modelo])
                                         flag_nw = 1
-                                    temp = Template_tabela_caso_Newave
+                                    temp = self.mapa_template_tabela_modelo[caso.modelo]
                                     temp = temp.replace("nome", caso.nome)
                                     temp = temp.replace("modelo", caso.modelo)
 
@@ -227,10 +174,10 @@ class Report:
 
                                 if(caso.modelo == "DECOMP"):
                                     if(flag_deco == 0):
-                                        html_file.write(Inicio_tabela_Decomp)
+                                        html_file.write(self.mapa_tabela_modelo[caso.modelo])
                                         flag_deco = 1
 
-                                    temp = Template_tabela_caso_Decomp
+                                    temp = self.mapa_template_tabela_modelo[caso.modelo]
                                     temp = temp.replace("nome", caso.nome)
                                     temp = temp.replace("modelo", caso.modelo)
                                     extensao = ""
