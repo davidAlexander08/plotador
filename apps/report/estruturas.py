@@ -18,6 +18,7 @@ class Estruturas:
             <th>FW SF</th>
             <th>SF Ind</th>
             <th>CVAR</th>
+        </tr>
 """
 
 
@@ -62,6 +63,7 @@ class Estruturas:
             <th>FW_SF</th>
             <th>SF_Ind</th>
             <th>CVAR</th>
+        </tr>
 """
 
                       

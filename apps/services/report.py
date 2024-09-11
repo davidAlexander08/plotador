@@ -77,7 +77,6 @@ class Report(Estruturas):
         with open(titulo_html, "w") as html_file:
             with open("/".join(path)+"/report/head.txt", 'r', encoding='utf-8') as arquivo:
                 conteudo = arquivo.read()
-                print(conteudo)
                 html_file.write(conteudo)
             head_html = """
 <body>
