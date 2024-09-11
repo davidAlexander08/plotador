@@ -99,15 +99,15 @@ class Report(Estruturas):
             html_file.write("</div>"+"\n")
             html_file.write('<div class="content">'+"\n")
             flag = 0
+            lista_html = []
             for line in lines:
                 if line.strip():
-
                     if("###" in line):
                         pass
                     elif("</h" in line):
                         html_file.write(line.strip()+"\n")
                     elif("\page{") in line:
-                        lista_html = []
+                        
                         mapa_imagens_html = {}
                         nome_pagina = line.split("{")[1].split("}")[0]
                         if(flag == 1):
