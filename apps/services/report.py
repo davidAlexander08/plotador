@@ -148,21 +148,18 @@ class Report:
     <td>desvio_custo</td>
   </tr>
 """
+                            html_file.write("<h2>Informações Operacionais</h2>"+"\n")
                             with open("/".join(path)+"/report/tabela_newave.txt", 'r', encoding='utf-8') as arquivo:
                                 conteudo = arquivo.read()
                                 print(conteudo)
                                 html_file.write(conteudo)
-                            html_file.write("<h2>Informações Operacionais</h2>"+"\n")
+                            
                             df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
                             for caso in data.casos:
                                 temp = Template_tabela_caso
                                 temp = temp.replace("nome", caso.nome)
                                 temp = temp.replace("modelo", caso.modelo)
-                                tempo_total = 0
-                                iteracoes= 0 
-                                zinf = 0
-                                custo_total=0
-                                desvio_custo =0
+                                tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
                                 versao = "0"
                                 if(caso.modelo == "NEWAVE"):
                                     pass
