@@ -167,27 +167,27 @@ class Report(Estruturas):
                             html_file.write("</table>"+"\n")
 
 
-                            html_file.write("<h2>Operacao</h2>"+"\n")
-                            
-                            flag_nw = flag_deco = flag_dss = True
-                            for caso in data.casos:
-                                if(caso.modelo == "NEWAVE"):
-                                    if(flag_nw == True):
-                                        html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                        flag_nw = False
-                                    temp = self.preenche_operacao_NEWAVE(caso)
-                                if(caso.modelo == "DECOMP"):
-                                    if(flag_deco == True):
-                                        html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                        flag_deco = False
-                                    temp = self.preenche_operacao_DECOMP(caso)
-                                if(caso.modelo == "DESSEM"):
-                                    if(flag_dss == True):
-                                        html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                        flag_dss = False
-                                    temp = self.preenche_operacao_DESSEM(caso)
-                                html_file.write(temp)
-                            html_file.write("</table>"+"\n")
+                            #html_file.write("<h2>Operacao</h2>"+"\n")
+                            #
+                            #flag_nw = flag_deco = flag_dss = True
+                            #for caso in data.casos:
+                            #    if(caso.modelo == "NEWAVE"):
+                            #        if(flag_nw == True):
+                            #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
+                            #            flag_nw = False
+                            #        temp = self.preenche_operacao_NEWAVE(caso)
+                            #    if(caso.modelo == "DECOMP"):
+                            #        if(flag_deco == True):
+                            #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
+                            #            flag_deco = False
+                            #        temp = self.preenche_operacao_DECOMP(caso)
+                            #    if(caso.modelo == "DESSEM"):
+                            #        if(flag_dss == True):
+                            #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
+                            #            flag_dss = False
+                            #        temp = self.preenche_operacao_DESSEM(caso)
+                            #    html_file.write(temp)
+                            #html_file.write("</table>"+"\n")
 
                         else:
                             flag = 1
