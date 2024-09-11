@@ -1,13 +1,29 @@
 class Estruturas:
     def __init__(self):
 
-        Inicio_tabela_Newave = """
+        #TABELA DE INFORMACOES BASICAS
+        Tabela_Eco_Entrada = """
         <table>
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
             <th>Versao</th>
-            <th>Tempo Total (min)</th>
+            <th>Mes_I</th>
+            <th>Ano_I</th>
+            <th>Anos_Pos</th>
+            <th>It_Max</th>
+            <th>It_Min</th>
+            <th>FW</th>
+            <th>BK</th>
+            <th>FW_SF</th>
+            <th>SF_Ind</th>
+            <th>CVAR</th>
+
+"""
+
+
+        Tabela_Operacao_NEWAVE = """
+            <th>Temp. Tot (min)</th>
             <th>Iter</th>
             <th>Zinf</th>
             <th>Custo Total</th>
@@ -28,7 +44,7 @@ class Estruturas:
     </tr>
 """   
         self.mapa_tabela_modelo = {}
-        self.mapa_tabela_modelo["NEWAVE"] = Inicio_tabela_Newave
+        self.mapa_tabela_modelo["NEWAVE"] = Tabela_Eco_Entrada
         self.mapa_tabela_modelo["DECOMP"] = Inicio_tabela_Decomp
 
         Template_tabela_caso_Newave = """

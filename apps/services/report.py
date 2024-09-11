@@ -5,6 +5,8 @@ from apps.report.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.model.argumento import Argumento
 from inewave.newave import Pmo
+from inewave.newave import Dger
+from inewave.newave import Cvar
 from idecomp.decomp import Relato
 from idessem.dessem.des_log_relato import DesLogRelato
 import plotly.graph_objects as go
@@ -288,23 +290,34 @@ class Report(Estruturas):
         temp = temp.replace("modelo", caso.modelo)
 
         data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-        df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-        tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
-        iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
-        zinf = data_pmo.convergencia["zinf"].iloc[-1]
-        custo_total = data_pmo.custo_operacao_total
-        desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
-        versao = data_pmo.versao_modelo
+        data_dger = Dger.read(caso.caminho+"/dger.dat")
+        data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
+        print(data_cvar.valores_constantes)
 
-        temp = temp.replace("versao", versao)
-        temp = temp.replace("tempo_total", str(tempo_total))
-        temp = temp.replace("iteracoes", str(iteracoes))
-        temp = temp.replace("zinf", str(zinf))
-        temp = temp.replace("custo_total", str(custo_total))
-        temp = temp.replace("desvio_custo", str(desvio_custo))
+        temp = temp.replace("versao", data_pmo.versao_modelo)
+        temp = temp.replace("Mes_I", data_dger.mes_inicio_estudo)
+        temp = temp.replace("Ano_I", data_dger.ano_inicio_estudo)
+        temp = temp.replace("Anos_Pos", data_dger.num_anos_pos_estudo)
+        temp = temp.replace("It_Max", data_dger.num_max_iteracoes)
+        temp = temp.replace("It_Min", data_dger.num_minimo_iteracoes)
+        temp = temp.replace("FW", data_dger.num_forwards)
+        temp = temp.replace("BK", data_dger.num_aberturas)
+        temp = temp.replace("FW_SF", data_dger.num_series_sinteticas)
+        temp = temp.replace("SF_Ind", data_dger.agregacao_simulacao_final)
+        temp = temp.replace("CVAR", data_cvar.valores_constantes)
+        #df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+        #tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
+        #iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
+        #zinf = data_pmo.convergencia["zinf"].iloc[-1]
+        #custo_total = data_pmo.custo_operacao_total
+        #desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
+        #temp = temp.replace("tempo_total", str(tempo_total))
+        #temp = temp.replace("iteracoes", str(iteracoes))
+        #temp = temp.replace("zinf", str(zinf))
+        #temp = temp.replace("custo_total", str(custo_total))
+        #temp = temp.replace("desvio_custo", str(desvio_custo))
 
         return temp
-
 
     def preenche_modelo_tabela_modelo_DECOMP(self, caso):
 
