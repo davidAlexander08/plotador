@@ -79,7 +79,7 @@ class Report(Estruturas):
                 html_file.write(conteudo)
             head_html = """
 <body>
-    <button id="downloadAll">Baixar Gráficos</button>
+    
     <div class="sidebar">
         <div class="company-name">ONS</div>
         <ul>
@@ -110,6 +110,7 @@ class Report(Estruturas):
                         if(nome_pagina == "Infos" or nome_pagina == "Info"):
                             flag = 1
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
+                            <button id="downloadAll">Baixar Gráficos</button>
                             Inicio_tabela = """
     <table>
     <tr>
