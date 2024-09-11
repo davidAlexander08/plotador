@@ -57,5 +57,5 @@ class Estruturas:
   </tr>
 """
         self.mapa_template_tabela_modelo = {}
-        self.mapa_tabela_modelo["NEWAVE"] = Template_tabela_caso_Newave
-        self.mapa_tabela_modelo["DECOMP"] = Template_tabela_caso_Decomp
+        self.mapa_template_tabela_modelo["NEWAVE"] = Template_tabela_caso_Newave
+        self.mapa_template_tabela_modelo["DECOMP"] = Template_tabela_caso_Decomp

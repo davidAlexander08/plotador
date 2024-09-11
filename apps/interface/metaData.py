@@ -1,5 +1,5 @@
 from apps.model.sintese import Sintese
-from apps.model.argumento import Argumento
+from apps.model.argumento import Argumento 
 
 class MetaData:
     def __init__(self):
