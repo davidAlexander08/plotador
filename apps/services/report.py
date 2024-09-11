@@ -138,7 +138,7 @@ class Report(Estruturas):
                             html_file.write("</table>"+"\n")
                             
                             html_file.write("<h2>Informações Operacionais</h2>"+"\n")
-                            df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+                            
                             flag_nw = 0
                             flag_deco = 0
                             for caso in data.casos:
@@ -152,26 +152,7 @@ class Report(Estruturas):
                                     if(flag_nw == 0):
                                         html_file.write(self.mapa_tabela_modelo[caso.modelo])
                                         flag_nw = 1
-                                    temp = self.mapa_template_tabela_modelo[caso.modelo]
-                                    temp = temp.replace("nome", caso.nome)
-                                    temp = temp.replace("modelo", caso.modelo)
-
-                                    data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-                                    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-                                    tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
-                                    iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
-                                    zinf = data_pmo.convergencia["zinf"].iloc[-1]
-                                    custo_total = data_pmo.custo_operacao_total
-                                    desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
-                                    versao = data_pmo.versao_modelo
-
-                                    temp = temp.replace("versao", versao)
-                                    temp = temp.replace("tempo_total", str(tempo_total))
-                                    temp = temp.replace("iteracoes", str(iteracoes))
-                                    temp = temp.replace("zinf", str(zinf))
-                                    temp = temp.replace("custo_total", str(custo_total))
-                                    temp = temp.replace("desvio_custo", str(desvio_custo))
-
+                                    temp = preenche_modelo_tabela_modelo_NEWAVE(caso)
                                 if(caso.modelo == "DECOMP"):
                                     if(flag_deco == 0):
                                         html_file.write(self.mapa_tabela_modelo[caso.modelo])
@@ -285,3 +266,28 @@ class Report(Estruturas):
 
 
 
+    def preenche_modelo_tabela_modelo_NEWAVE(caso):
+
+        df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+
+        temp = self.mapa_template_tabela_modelo[caso.modelo]
+        temp = temp.replace("nome", caso.nome)
+        temp = temp.replace("modelo", caso.modelo)
+
+        data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+        df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+        tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
+        iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
+        zinf = data_pmo.convergencia["zinf"].iloc[-1]
+        custo_total = data_pmo.custo_operacao_total
+        desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
+        versao = data_pmo.versao_modelo
+
+        temp = temp.replace("versao", versao)
+        temp = temp.replace("tempo_total", str(tempo_total))
+        temp = temp.replace("iteracoes", str(iteracoes))
+        temp = temp.replace("zinf", str(zinf))
+        temp = temp.replace("custo_total", str(custo_total))
+        temp = temp.replace("desvio_custo", str(desvio_custo))
+
+        return temp
