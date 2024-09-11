@@ -23,7 +23,10 @@ class Estruturas:
 
 
         Tabela_Operacao_NEWAVE = """
-            <th>Temp. Tot (min)</th>
+        <tr>
+            <th>Caso</th>
+            <th>Modelo</th>
+            <th>Temp. Tot(min)</th>
             <th>Iter</th>
             <th>Zinf</th>
             <th>Custo Total</th>

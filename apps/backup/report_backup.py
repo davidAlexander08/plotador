@@ -107,7 +107,6 @@ class Report(Estruturas):
                     elif("</h" in line):
                         html_file.write(line.strip()+"\n")
                     elif("\page{") in line:
-                        mapa_imagens_html = {}
                         nome_pagina = line.split("{")[1].split("}")[0]
                         if(flag == 1):
                             html_file.write('</div>'+"\n")
@@ -193,7 +192,6 @@ class Report(Estruturas):
                             flag = 1
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                             print(nome_pagina)
-                            mapa_imagens_html = {}
                     elif("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
@@ -225,8 +223,7 @@ class Report(Estruturas):
                             if(extensao == ".html"):
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
                                     html_plotly = file.read()
-                                    mapa_imagens_html[nome_arquivo] = html_plotly
-                                    #html_file.write(html_plotly+"\n")
+                                    html_file.write(html_plotly+"\n")
                                     #html_file.write(nome_arquivo+"\n")
                             else:
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
@@ -296,40 +293,39 @@ class Report(Estruturas):
 
     def preenche_operacao_NEWAVE(self,caso):
 
-        #df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-        #temp = self.mapa_template_tabela_modelo[caso.modelo]
-        #temp = temp.replace("Caso", caso.nome)
-        #temp = temp.replace("Modelo", caso.modelo)
-        #data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-        #data_dger = Dger.read(caso.caminho+"/dger.dat")
-        #data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
-        #print(data_dger.num_series_sinteticas)
-        #temp = temp.replace("Versao", data_pmo.versao_modelo)
-        #temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
-        #temp = temp.replace("Ano_I", str(data_dger.ano_inicio_estudo))
-        #temp = temp.replace("Anos_Pos", str(data_dger.num_anos_pos_estudo))
-        #temp = temp.replace("It_Max", str(data_dger.num_max_iteracoes))
-        #temp = temp.replace("It_Min", str(data_dger.num_minimo_iteracoes))
-        #temp = temp.replace("FW", str(data_dger.num_forwards))
-        #temp = temp.replace("BK", str(data_dger.num_aberturas))
-        #temp = temp.replace("N_series_sim_final", str(data_dger.num_series_sinteticas))
-        #tipo_sim_fin = "Ind" if data_dger.agregacao_simulacao_final == 1 else "Agr"
-        #temp = temp.replace("SF_Ind", tipo_sim_fin)
-        #temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
-        ##df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-        ##tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
-        ##iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
-        ##zinf = data_pmo.convergencia["zinf"].iloc[-1]
-        ##custo_total = data_pmo.custo_operacao_total
-        ##desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
-        ##temp = temp.replace("tempo_total", str(tempo_total))
-        ##temp = temp.replace("iteracoes", str(iteracoes))
-        ##temp = temp.replace("zinf", str(zinf))
-        ##temp = temp.replace("custo_total", str(custo_total))
-        ##temp = temp.replace("desvio_custo", str(desvio_custo))
-#
-        #return temp
-        pass
+        df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+        temp = self.mapa_template_tabela_modelo[caso.modelo]
+        temp = temp.replace("Caso", caso.nome)
+        temp = temp.replace("Modelo", caso.modelo)
+        data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+        data_dger = Dger.read(caso.caminho+"/dger.dat")
+        data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
+        print(data_dger.num_series_sinteticas)
+        temp = temp.replace("Versao", data_pmo.versao_modelo)
+        temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
+        temp = temp.replace("Ano_I", str(data_dger.ano_inicio_estudo))
+        temp = temp.replace("Anos_Pos", str(data_dger.num_anos_pos_estudo))
+        temp = temp.replace("It_Max", str(data_dger.num_max_iteracoes))
+        temp = temp.replace("It_Min", str(data_dger.num_minimo_iteracoes))
+        temp = temp.replace("FW", str(data_dger.num_forwards))
+        temp = temp.replace("BK", str(data_dger.num_aberturas))
+        temp = temp.replace("N_series_sim_final", str(data_dger.num_series_sinteticas))
+        tipo_sim_fin = "Ind" if data_dger.agregacao_simulacao_final == 1 else "Agr"
+        temp = temp.replace("SF_Ind", tipo_sim_fin)
+        temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
+        #df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+        #tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
+        #iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
+        #zinf = data_pmo.convergencia["zinf"].iloc[-1]
+        #custo_total = data_pmo.custo_operacao_total
+        #desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
+        #temp = temp.replace("tempo_total", str(tempo_total))
+        #temp = temp.replace("iteracoes", str(iteracoes))
+        #temp = temp.replace("zinf", str(zinf))
+        #temp = temp.replace("custo_total", str(custo_total))
+        #temp = temp.replace("desvio_custo", str(desvio_custo))
+
+        return temp
 
 
     def preenche_operacao_DECOMP(self,caso):
