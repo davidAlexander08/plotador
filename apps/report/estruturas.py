@@ -48,7 +48,6 @@ class Estruturas:
         self.mapa_tabela_modelo["DECOMP"] = Inicio_tabela_Decomp
 
         template_Tabela_Eco_Entrada = """
-        <table>
         <tr>
             <th>Caso</th>
             <th>Modelo</th>

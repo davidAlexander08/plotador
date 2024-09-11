@@ -81,7 +81,7 @@ class Report(Estruturas):
             head_html = """
 <body>
     <div id="loader">
-        <span>Carregando Visualização - ONS a energia que potencializa a vida - Gerência PEM</span>
+        <span>ONS a energia que potencializa a vida - Carregando Visualização - Gerência PEM</span>
     </div>
 
     <div class="sidebar">
