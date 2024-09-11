@@ -8,17 +8,16 @@ class Estruturas:
             <th>Caso</th>
             <th>Modelo</th>
             <th>Versao</th>
-            <th>Mes_I</th>
-            <th>Ano_I</th>
-            <th>Anos_Pos</th>
-            <th>It_Max</th>
-            <th>It_Min</th>
+            <th>Mes I</th>
+            <th>Ano I</th>
+            <th>Anos Pos</th>
+            <th>It Max</th>
+            <th>It Min</th>
             <th>FW</th>
             <th>BK</th>
-            <th>FW_SF</th>
-            <th>SF_Ind</th>
+            <th>FW SF</th>
+            <th>SF Ind</th>
             <th>CVAR</th>
-
 """
 
 
@@ -47,17 +46,22 @@ class Estruturas:
         self.mapa_tabela_modelo["NEWAVE"] = Tabela_Eco_Entrada
         self.mapa_tabela_modelo["DECOMP"] = Inicio_tabela_Decomp
 
-        Template_tabela_caso_Newave = """
-  <tr>
-    <td>nome</td>
-	<td>modelo</td>
-    <td>versao</td>
-	<td>tempo_total</td>
-    <td>iteracoes</td>
-    <td>zinf</td>
-    <td>custo_total</td>
-    <td>desvio_custo</td>
-  </tr>
+        template_Tabela_Eco_Entrada = """
+        <table>
+        <tr>
+            <th>Caso</th>
+            <th>Modelo</th>
+            <th>Versao</th>
+            <th>Mes_I</th>
+            <th>Ano_I</th>
+            <th>Anos_Pos</th>
+            <th>It_Max</th>
+            <th>It_Min</th>
+            <th>FW</th>
+            <th>BK</th>
+            <th>FW_SF</th>
+            <th>SF_Ind</th>
+            <th>CVAR</th>
 """
 
                       
@@ -73,5 +77,5 @@ class Estruturas:
   </tr>
 """
         self.mapa_template_tabela_modelo = {}
-        self.mapa_template_tabela_modelo["NEWAVE"] = Template_tabela_caso_Newave
+        self.mapa_template_tabela_modelo["NEWAVE"] = template_Tabela_Eco_Entrada
         self.mapa_template_tabela_modelo["DECOMP"] = Template_tabela_caso_Decomp

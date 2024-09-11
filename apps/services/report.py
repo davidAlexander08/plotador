@@ -292,7 +292,6 @@ class Report(Estruturas):
         data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
         data_dger = Dger.read(caso.caminho+"/dger.dat")
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
-        print(data_cvar.valores_constantes)
 
         temp = temp.replace("versao", data_pmo.versao_modelo)
         temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
