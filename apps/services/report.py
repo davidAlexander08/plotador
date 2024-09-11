@@ -139,36 +139,23 @@ class Report(Estruturas):
                             
                             html_file.write("<h2>Informações Operacionais</h2>"+"\n")
                             
-                            flag_nw = 0
-                            flag_deco = 0
+                            flag_nw = flag_deco = flag_dss = True
                             for caso in data.casos:
-                                tempo_total = 0
-                                iteracoes= 0 
-                                zinf = 0
-                                custo_total=0
-                                desvio_custo =0
-                                versao = "0"
                                 if(caso.modelo == "NEWAVE"):
-                                    if(flag_nw == 0):
+                                    if(flag_nw == True):
                                         html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                        flag_nw = 1
+                                        flag_nw = False
                                     temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso)
                                 if(caso.modelo == "DECOMP"):
-                                    if(flag_deco == 0):
+                                    if(flag_deco == True):
                                         html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                        flag_deco = 1
+                                        flag_deco = False
                                     temp = self.preenche_modelo_tabela_modelo_DECOMP(caso)
-
                                 if(caso.modelo == "DESSEM"):
-                                    data_relato = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
-                                    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-                                    tempo_total = df_caso["tempo"].sum()/60
-                                    iteracoes = " "
-                                    zinf = " "
-                                    custo_total = " "
-                                    desvio_custo = " "
-                                    versao = data_relato.versao
-
+                                    if(flag_dss == True):
+                                        html_file.write(self.mapa_tabela_modelo[caso.modelo])
+                                        flag_dss = False
+                                    temp = self.preenche_modelo_tabela_modelo_DESSEM(caso)
                                 html_file.write(temp)
                             html_file.write("</table>"+"\n")
 
@@ -236,6 +223,28 @@ class Report(Estruturas):
             selectedPage.classList.add('active');
         }
     </script>
+
+    <button id="downloadAll">Download All Graphs</button>
+
+    <script>
+    document.getElementById('downloadAll').addEventListener('click', function() {
+        // Get all Plotly graph divs (assuming each graph is in a div with class "plotly-graph-div")
+        const graphs = document.querySelectorAll('.js-plotly-plot');
+
+        // Iterate through each graph and download it as a PNG
+        graphs.forEach((graph, index) => {
+            Plotly.downloadImage(graph, {
+                format: 'png', // Choose the format: 'png', 'jpeg', 'webp', etc.
+                filename: `graph_${index + 1}`, // Filename for each graph
+                width: 1200, // Width of the image
+                height: 600 // Height of the image
+            });
+        });
+    });
+    </script>
+
+    
+
             """
             html_file.write(script_html)
             html_file.write('</body>\n')
@@ -246,9 +255,20 @@ class Report(Estruturas):
 
 
 
+
+
+
+
+
+
+
+
     def preenche_modelo_tabela_modelo_NEWAVE(self,caso):
 
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+
+        tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
+        versao = "0"
 
         temp = self.mapa_template_tabela_modelo[caso.modelo]
         temp = temp.replace("nome", caso.nome)
@@ -274,6 +294,12 @@ class Report(Estruturas):
 
 
     def preenche_modelo_tabela_modelo_DECOMP(self, caso):
+
+        df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+
+        tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
+        versao = "0"
+
         temp = self.mapa_template_tabela_modelo[caso.modelo]
         temp = temp.replace("nome", caso.nome)
         temp = temp.replace("modelo", caso.modelo)
@@ -294,4 +320,17 @@ class Report(Estruturas):
         temp = temp.replace("iteracoes", str(iteracoes))
         temp = temp.replace("zinf", str(zinf))
         temp = temp.replace("custo_total", str(custo_total))
+        return temp
+
+    def preenche_modelo_tabela_modelo_DESSEM(self, caso):
+        df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+        ## FALTA COMPLEMENTAR, ESTA INCOMPLETO
+        data_relato = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
+        df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+        tempo_total = df_caso["tempo"].sum()/60
+        iteracoes = " "
+        zinf = " "
+        custo_total = " "
+        desvio_custo = " "
+        versao = data_relato.versao
         return temp
