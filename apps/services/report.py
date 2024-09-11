@@ -152,7 +152,7 @@ class Report(Estruturas):
                                     if(flag_nw == 0):
                                         html_file.write(self.mapa_tabela_modelo[caso.modelo])
                                         flag_nw = 1
-                                    temp = preenche_modelo_tabela_modelo_NEWAVE(caso)
+                                    temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso)
                                 if(caso.modelo == "DECOMP"):
                                     if(flag_deco == 0):
                                         html_file.write(self.mapa_tabela_modelo[caso.modelo])
