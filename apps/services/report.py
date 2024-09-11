@@ -194,6 +194,8 @@ class Report(Estruturas):
                             if(len(lista_html) != 0):
                                 html_file.write('</select>'+"\n")
                                 html_file.write('<div id="'+nome_pagina+'container'+'"></div>'+"\n")
+                                lista_html = []
+                                print("NETROU AQUI")
                                 
 
                             flag = 1
@@ -201,7 +203,7 @@ class Report(Estruturas):
                             html_file.write('<select id="'+nome_pagina+"graphs"+'" onchange="showGraph('+pagina_ativa+')">'+"\n")
                             print(nome_pagina)
                             mapa_imagens_html = {}
-                            lista_html = []
+                            
                     elif("plotador" in line):
                         
                         
