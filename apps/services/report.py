@@ -112,6 +112,7 @@ class Report(Estruturas):
                         if(nome_pagina == "Infos" or nome_pagina == "Info"):
                             flag_primeira_pagina = False
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
+                            flag_primeira_subpagina = True
                             html_file.write('<button id="downloadAll">Baixar Gráficos</button>'+"\n")
                             Inicio_tabela = """
     <table>
@@ -194,6 +195,7 @@ class Report(Estruturas):
                                 html_file.write('</div>'+"\n")
                             
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
+                            flag_primeira_subpagina = True
                             
                     elif("\subpage{") in line:
                         if(flag_primeira_subpagina == False):
