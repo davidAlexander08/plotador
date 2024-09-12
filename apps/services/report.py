@@ -111,7 +111,7 @@ class Report(Estruturas):
                         if(nome_pagina == "Infos" or nome_pagina == "Info"):
                             flag = 1
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
-                            html_file.write('<button id="downloadAll">Baixar Gráficos</button>')
+                            html_file.write('<button id="downloadAll">Baixar Gráficos</button>'+"\n")
                             Inicio_tabela = """
     <table>
     <tr>
@@ -191,7 +191,7 @@ class Report(Estruturas):
                         else:
                             print(len(lista_html))
                             if(len(lista_html) != 0):
-                                #html_file.write('</div>'+"\n")
+                                html_file.write('</div>'+"\n")
                                 lista_html = []
                                 print("NETROU AQUI")
                                 
