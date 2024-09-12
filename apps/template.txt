@@ -21,16 +21,12 @@ plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json --sintese C
 
 <h1> Relatório de Submercados </h1>
 
-<h2>Geração Térmica</h2>
 plotador temporal --titulo Geracao_Termica_SBM --json arquivo_json --sintese GTER_SBM_EST --argumentos ADD_SBMS --chave SBM --html True --largura 1000 --altura 650 --tamanho 20
 
-<h2>Geração Hidrelétrica</h2>
 plotador temporal --titulo Geracao_Hidreletrica_SBM --json arquivo_json --sintese GHID_SBM_EST --argumentos ADD_SBMS --chave SBM --html True --largura 1000 --altura 650 --tamanho 20
 
-<h2>Energia Armazenada</h2>
 plotador temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM_EST --argumentos ADD_SBMS --chave SBM --html True --largura 1000 --altura 650 --tamanho 20
 
-<h2>CMO</h2>
 plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM_EST --argumentos ADD_SBMS --chave SBM --html True --largura 1000 --altura 650 --tamanho 20
 
 
@@ -39,9 +35,7 @@ plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_
 <h1> Relatório de Execução </h1>
 
 
-<h2>Tempo de Execução</h2>
 plotador tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20 --html True
 
-<h2>Convergencia</h2>
 plotador convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20 --html True
 

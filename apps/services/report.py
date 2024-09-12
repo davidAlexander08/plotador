@@ -128,9 +128,10 @@ class Report(Estruturas):
         <td>modelo</td>
         <td style="background-color: cor;"></td>
     </tr>
-"""
-                            html_file.write(Inicio_tabela)
+"""                         
                             html_file.write("<h3>Informações Gerais do Estudo</h3>"+"\n")
+                            html_file.write(Inicio_tabela)
+                            
                             for caso in data.casos:
                                 temp = Template_tabela_caso
                                 temp = temp.replace("nome", caso.nome)
@@ -190,7 +191,7 @@ class Report(Estruturas):
                         else:
                             print(len(lista_html))
                             if(len(lista_html) != 0):
-                                html_file.write('</div>'+"\n")
+                                #html_file.write('</div>'+"\n")
                                 lista_html = []
                                 print("NETROU AQUI")
                                 
