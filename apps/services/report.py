@@ -95,7 +95,6 @@ class Report(Estruturas):
             html_file.write('<div class="content">'+"\n")
             flag_primeira_pagina = True
             flag_primeira_subpagina = True
-            lista_html = []
             for line in lines:
                 if line.strip():
                     if("###" in line):
@@ -106,7 +105,6 @@ class Report(Estruturas):
 
                     elif("\page{") in line:
                         
-                        mapa_imagens_html = {}
                         nome_pagina = line.split("{")[1].split("}")[0]
                         pagina_ativa = "page active" if flag_primeira_pagina == True else "page"
                         if(nome_pagina == "Infos" or nome_pagina == "Info"):
@@ -241,8 +239,6 @@ class Report(Estruturas):
                             if(extensao == ".html"):
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
                                     html_plotly = file.read()
-                                    mapa_imagens_html[nome_arquivo] = html_plotly
-                                    lista_html.append(html_plotly)
                                     html_file.write(nome_arquivo+"\n")
                                     #html_file.write(html_plotly+"\n")
                                     #html_file.write(nome_arquivo+"\n")
