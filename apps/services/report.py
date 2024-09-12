@@ -255,8 +255,8 @@ class Report(Estruturas):
                                     mapa_imagens_html[nome_arquivo] = html_plotly
                                     lista_html.append(html_plotly)
                                     #html_file.write('<option value="'+nome_arquivo+'">'+nome_arquivo+'</option>'+"\n")
-
-                                    html_file.write(html_plotly+"\n")
+                                    html_file.write(nome_arquivo+"\n")
+                                    #html_file.write(html_plotly+"\n")
                                     #html_file.write(nome_arquivo+"\n")
                             else:
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
