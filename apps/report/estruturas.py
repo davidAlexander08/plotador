@@ -52,19 +52,19 @@ class Estruturas:
 
         template_Tabela_Eco_Entrada = """
         <tr>
-            <th>Caso</th>
-            <th>Modelo</th>
-            <th>Versao</th>
-            <th>Mes_I</th>
-            <th>Ano_I</th>
-            <th>Anos_Pos</th>
-            <th>It_Max</th>
-            <th>It_Min</th>
-            <th>FW</th>
-            <th>BK</th>
-            <th>N_series_sim_final</th>
-            <th>SF_Ind</th>
-            <th>CVAR</th>
+            <td>Caso</td>
+            <td>Modelo</td>
+            <td>Versao</td>
+            <td>Mes_I</td>
+            <td>Ano_I</td>
+            <td>Anos_Pos</td>
+            <td>It_Max</td>
+            <td>It_Min</td>
+            <td>FW</td>
+            <td>BK</td>
+            <td>N_series_sim_final</td>
+            <td>SF_Ind</td>
+            <td>CVAR</td>
         </tr>
 """
 

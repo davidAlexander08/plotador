@@ -7,16 +7,16 @@
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: Verdana , sans-serif;
         }
 
         .sidebar {
             height: 100%;
-            width: 250px;
+            width: 200px;
             position: fixed;
             top: 0;
             left: 0;
-            background-color: #333;
+            background-color: #2F4F4F;
             padding-top: 20px;
             color: white;
             box-shadow: 2px 0 5px rgba(0,0,0,0.3);
@@ -51,7 +51,7 @@
         }
 
         .sidebar a:hover {
-            background-color: #575757;
+            background-color: #86897E;
             border-left: 4px solid #ffcc00; /* Highlight color on hover */
         }
 
@@ -73,7 +73,7 @@
             color: #333;
         }
         table {
-            font-family: Arial, sans-serif;
+            font-family: Verdana, sans-serif;
             border-collapse: separate; /* Allows for rounded corners */
             border-spacing: 0; /* Removes default spacing between cells */
             width: 100%;
@@ -159,23 +159,23 @@
             padding: 10px 20px;
             font-size: 16px;
             color: #ffffff;
-            background-color: #007bff;
+            background-color: #9A572D;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s, transform 0.2s;
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: Verdana, sans-serif;
         }
 
         #downloadAll:hover {
-            background-color: #0056b3;
+            background-color: #DAA520;
             transform: translateY(-2px);
         }
 
         #downloadAll:active {
-            background-color: #004494;
+            background-color: #DAA520;
             transform: translateY(0);
         }
 
@@ -188,9 +188,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #ffffff; /* Cor de fundo enquanto carrega */
+            background-color: #2F4F4F; /* Cor de fundo enquanto carrega */
             z-index: 9999; /* Garante que o loader fique sobre todos os outros elementos */
-            font-family: Arial, sans-serif; /* Fonte para o texto */
+            font-family: Verdana, sans-serif; /* Fonte para o texto */
             font-size: 24px; /* Tamanho da fonte do texto */
             color: #333; /* Cor do texto */
         }
@@ -198,13 +198,13 @@
         .top-bar {
             width: calc(100% - 200px);
             height: 50px;
-            background-color: #333;
+            background-color: #2F4F4F;
             color: white;
             line-height: 50px;
             padding: 0 20px;
             position: fixed;
             top: 0;
-            left: 150px;
+            left: 200px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 0;
             display: flex;
@@ -212,17 +212,37 @@
             justify-content: space-between;
         }
         .top-bar select {
-            background: #555;
+            background: #86897E;
             color: white;
             border: none;
             padding: 5px;
-            border-radius: 4px;
+            border-radius: 7px;
             position: fixed;
-            left: 300px;
+            left: 350px;
         }
+        .content {
+            margin-left: 210px;
+            margin-top: 50px;
+            padding: 20px;
+        }
+		.hidden {
+			display: none;
+		}
 </style>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 
 </head>
+
+<body>
+    <div id="loader">
+        <span>ONS - A energia que potencializa a vida - Carregando Visualização - Gerência PEM</span>
+    </div>
+
+    <div class="top-bar" id="top-bar">
+        <div id="top-bar-title">Menu</div>
+        <select id="top-bar-menu" onchange="showTopBarPage(this.value)">
+            <!-- Options will be updated dynamically -->
+        </select>
+    </div>

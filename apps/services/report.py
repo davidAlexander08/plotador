@@ -79,18 +79,6 @@ class Report(Estruturas):
                 conteudo = arquivo.read()
                 html_file.write(conteudo)
             head_html = """
-<body>
-    <div id="loader">
-        <span>ONS a energia que potencializa a vida - Carregando Visualização - Gerência PEM</span>
-    </div>
-
-    <div class="top-bar" id="top-bar">
-        <div id="top-bar-title">Menu</div>
-        <select id="top-bar-menu" onchange="showTopBarPage(this.value)">
-            <!-- Options will be updated dynamically -->
-        </select>
-    </div>
-
     <div class="sidebar">
         <div class="company-name">ONS</div>
         <ul>
@@ -138,11 +126,11 @@ class Report(Estruturas):
         <td>nome</td>
         <td>caminho</td>
         <td>modelo</td>
-        <td>cor</td>
+        <td style="background-color: cor;"></td>
     </tr>
 """
                             html_file.write(Inicio_tabela)
-                            html_file.write("<h2>Informações Gerais do Estudo</h2>"+"\n")
+                            html_file.write("<h3>Informações Gerais do Estudo</h3>"+"\n")
                             for caso in data.casos:
                                 temp = Template_tabela_caso
                                 temp = temp.replace("nome", caso.nome)
@@ -202,14 +190,13 @@ class Report(Estruturas):
                         else:
                             print(len(lista_html))
                             if(len(lista_html) != 0):
-                                html_file.write('</select>'+"\n")
-                                html_file.write('<div id="'+nome_pagina+'container'+'"></div>'+"\n")
                                 html_file.write('</div>'+"\n")
                                 lista_html = []
                                 print("NETROU AQUI")
                                 
 
                             flag = 1
+                            
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                             
                             print(nome_pagina)
@@ -217,6 +204,7 @@ class Report(Estruturas):
                             
                     elif("plotador" in line):
                         if(len(lista_html) == 0):
+                            html_file.write('</div>'+"\n")
                             html_file.write('<div id="'+nome_pagina+'-subpages'+'" class="top-bar-menu">'+"\n")
                         
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
@@ -254,7 +242,6 @@ class Report(Estruturas):
                                     html_plotly = file.read()
                                     mapa_imagens_html[nome_arquivo] = html_plotly
                                     lista_html.append(html_plotly)
-                                    #html_file.write('<option value="'+nome_arquivo+'">'+nome_arquivo+'</option>'+"\n")
                                     html_file.write(nome_arquivo+"\n")
                                     #html_file.write(html_plotly+"\n")
                                     #html_file.write(nome_arquivo+"\n")
@@ -271,31 +258,13 @@ class Report(Estruturas):
             html_file.write('</div>'+"\n")
 
             script_html = """
-    <script>
-        function showPage(pageId) {
-            // Hide all pages
-            var pages = document.querySelectorAll('.page');
-            pages.forEach(function(page) {
-                page.classList.remove('active');
-            });
-
-            // Show the selected page
-            var selectedPage = document.getElementById(pageId);
-            selectedPage.classList.add('active');
-        }
-    </script>
-
+ 
     <script>
         function showSidebarPage(pageId) {
             // Hide all pages
             document.querySelectorAll('.content .page').forEach(el => el.classList.remove('active'));
-
             // Show the selected sidebar page
             document.getElementById(pageId).classList.add('active');
-
-            // Update sidebar buttons
-            document.querySelectorAll('.sidebar button').forEach(button => button.classList.remove('active'));
-            document.getElementById('btn-' + pageId).classList.add('active');
 
             // Update top bar
             const topBar = document.getElementById('top-bar');
@@ -304,40 +273,42 @@ class Report(Estruturas):
             
             // Clear previous options
             dropdown.innerHTML = '';
-            dropdown.style.display = 'none';
+			// Add the default "Selecionar gráfico" option
+			const defaultOption = document.createElement('option');
+			defaultOption.value = '';
+			defaultOption.textContent = 'Selecionar gráfico';
+			defaultOption.selected = true;
+			defaultOption.disabled = true;
+			dropdown.appendChild(defaultOption);
+            //dropdown.style.display = 'none';
 
             // Add new options based on the selected sidebar page
-            if (subpagesContainer) {
-                subpagesContainer.querySelectorAll('.page').forEach(page => {
-                    const option = document.createElement('option');
-                    option.value = page.id;
-                    option.textContent = page.id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                    dropdown.appendChild(option);
-                });
-                dropdown.style.display = 'block';
+			if (subpagesContainer) {
+				subpagesContainer.querySelectorAll('.page').forEach(page => {
+					const option = document.createElement('option');
+					option.value = page.id;
+					option.textContent = page.id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()); // Fix the replace pattern
+					dropdown.appendChild(option);
+				});
 
-                // Show the first top bar page
-                const firstTopBarPage = subpagesContainer.querySelector('.page');
-                if (firstTopBarPage) {
-                    showTopBarPage(firstTopBarPage.id);
-                }
-            }
+				dropdown.style.display = 'block'; // Display the dropdown when subpages are present
+			} else {
+				dropdown.style.display = 'none'; // Hide the dropdown if no subpages are found
+			}
         }
 
         function showTopBarPage(pageId) {
-            // Hide all top bar pages
-            document.querySelectorAll('.top-bar-menu .page').forEach(el => el.classList.remove('active'));
-
+			document.querySelectorAll('.content .page').forEach(el => el.classList.remove('active'));
+			
+            // Hide all top bar pages            
+            //document.querySelectorAll('.top-bar-menu .page').forEach(el => el.classList.remove('active'));
             // Show the selected top bar page
             const page = document.getElementById(pageId);
             if (page) page.classList.add('active');
-        }
+            }
+        
 
-        // Default view
-        showSidebarPage('page1');
-    </script>
 
-    <script>
     document.getElementById('downloadAll').addEventListener('click', function() {
         // Get all Plotly graph divs (assuming each graph is in a div with class "plotly-graph-div")
         const graphs = document.querySelectorAll('.js-plotly-plot');
@@ -352,9 +323,7 @@ class Report(Estruturas):
             });
         });
     });
-    </script>
 
-    <script>
     window.addEventListener('load', function() {
         // Remove o loader após o carregamento da página
         const loader = document.getElementById('loader');
@@ -363,6 +332,7 @@ class Report(Estruturas):
         }
     });
     </script>
+
 
             """
             html_file.write(script_html)
