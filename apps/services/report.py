@@ -188,8 +188,6 @@ class Report(Estruturas):
                             #    html_file.write(temp)
                             #html_file.write("</table>"+"\n")
 
-                            html_file.write('</div>'+"\n")
-
                         else:
                             if(flag_primeira_pagina == False):
                                 html_file.write('</div>'+"\n")
