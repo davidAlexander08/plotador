@@ -239,9 +239,8 @@ class Report(Estruturas):
                             if(extensao == ".html"):
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
                                     html_plotly = file.read()
-                                    html_file.write(nome_arquivo+"\n")
-                                    #html_file.write(html_plotly+"\n")
                                     #html_file.write(nome_arquivo+"\n")
+                                    html_file.write(html_plotly+"\n")
                             else:
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
                                     base64_string = base64.b64encode(image_file.read()).decode('utf-8')
