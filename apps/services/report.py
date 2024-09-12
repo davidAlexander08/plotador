@@ -93,7 +93,7 @@ class Report(Estruturas):
             html_file.write("</ul>"+"\n")
             html_file.write("</div>"+"\n")
             html_file.write('<div class="content">'+"\n")
-            flag = 0
+            flag_primeira_pagina = True
             lista_html = []
             for line in lines:
                 if line.strip():
@@ -101,15 +101,15 @@ class Report(Estruturas):
                         pass
                     elif("</h" in line):
                         html_file.write(line.strip()+"\n")
+
+
                     elif("\page{") in line:
                         
                         mapa_imagens_html = {}
                         nome_pagina = line.split("{")[1].split("}")[0]
-                        if(flag == 1):
-                            pass
-                        pagina_ativa = "page active" if flag == 0 else "page"
+                        pagina_ativa = "page active" if flag_primeira_pagina == True else "page"
                         if(nome_pagina == "Infos" or nome_pagina == "Info"):
-                            flag = 1
+                            flag_primeira_pagina = False
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                             html_file.write('<button id="downloadAll">Baixar Gráficos</button>'+"\n")
                             Inicio_tabela = """
@@ -189,24 +189,24 @@ class Report(Estruturas):
                             html_file.write('</div>'+"\n")
 
                         else:
-                            print(len(lista_html))
-                            if(len(lista_html) != 0):
+                            if(flag_primeira_pagina == False):
                                 html_file.write('</div>'+"\n")
-                                lista_html = []
-                                
-
-                            flag = 1
                             
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                             
-                            print(nome_pagina)
-                            mapa_imagens_html = {}
-                            
-                    elif("plotador" in line):
-                        if(len(lista_html) == 0):
+                    elif("\subpage{") in line:
+                        if(flag_primeira_subpagina == False):
+                            html_file.write('</div>'+"\n")
+
+                        if(flag_primeira_subpagina == True):
                             html_file.write('</div>'+"\n")
                             html_file.write('<div id="'+nome_pagina+'-subpages'+'" class="top-bar-menu">'+"\n")
                         
+                        flag_primeira_subpagina = False
+                        nome_sub_pagina = line.split("{")[1].split("}")[0]
+                        html_file.write('<div id="'+nome_sub_pagina+'" class="page">'+"\n")
+                            
+                    elif("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
                         if( (data.casos[0].modelo == "DECOMP" or data.casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
@@ -235,8 +235,6 @@ class Report(Estruturas):
                                     extensao = ".html"
                                 contador += 1
 
-                            html_file.write('<div id="'+nome_arquivo+'" class="page">'+"\n")
-
                             if(extensao == ".html"):
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
                                     html_plotly = file.read()
@@ -250,7 +248,6 @@ class Report(Estruturas):
                                     base64_string = base64.b64encode(image_file.read()).decode('utf-8')
                                     html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
                                                 #<img src="data:image/png;base64,INSERT_BASE64_ENCODED_STRING_HERE" alt="Centered Image" style="max-width: 100%; height: auto;">
-                            html_file.write('</div>'+"\n")
                     else:
                         html_file.write("<p>"+line.strip()+"</p>\n")
 

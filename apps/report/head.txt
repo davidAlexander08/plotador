@@ -191,8 +191,8 @@
             background-color: #2F4F4F; /* Cor de fundo enquanto carrega */
             z-index: 9999; /* Garante que o loader fique sobre todos os outros elementos */
             font-family: Verdana, sans-serif; /* Fonte para o texto */
-            font-size: 24px; /* Tamanho da fonte do texto */
-            color: #333; /* Cor do texto */
+            font-size: 30px; /* Tamanho da fonte do texto */
+            color: 	#FFFFFF; /* Cor do texto */
         }
 
         .top-bar {
