@@ -191,6 +191,8 @@ class Report(Estruturas):
                         else:
                             if(flag_primeira_pagina == False):
                                 html_file.write('</div>'+"\n")
+                            if(flag_primeira_subpagina == False):
+                                html_file.write('</div>'+"\n")
                             
                             html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                             flag_primeira_subpagina = True
