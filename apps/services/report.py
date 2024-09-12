@@ -94,6 +94,7 @@ class Report(Estruturas):
             html_file.write("</div>"+"\n")
             html_file.write('<div class="content">'+"\n")
             flag_primeira_pagina = True
+            flag_primeira_subpagina = True
             lista_html = []
             for line in lines:
                 if line.strip():
