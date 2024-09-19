@@ -3,7 +3,7 @@ from apps.report.info.geral.estruturas import Estruturas
 from apps.report.info.geral.NEWAVE.eco.infoGeralEcoNewave import InfoGeralEcoNewave
 from apps.report.info.geral.NEWAVE.operacao.infoGeralOperNewave import InfoGeralOperNewave
 class InfoGeral(Estruturas):
-    def __init__(self, data):
+    def __init__(self, data, par_dados):
         Estruturas.__init__(self)
         self.lista_text = []
 
@@ -19,28 +19,29 @@ class InfoGeral(Estruturas):
             self.lista_text.append(temp)
         self.lista_text.append("</table>"+"\n")
         
-        ## TABELA ECO
-        self.lista_text.append("<h3>Eco Dados Entrada</h3>"+"\n")
-        if(caso.modelo == "NEWAVE"):
-            self.lista_text.append(InfoGeralEcoNewave(data).text_html)
-        if(caso.modelo == "DECOMP"):
-            #self.lista_text.append(InfoGeralEcoDecomp(data).text_html)
-            pass
-        if(caso.modelo == "DESSEM"):
-            #self.lista_text.append(InfoGeralEcoDessem(data).text_html)
-            pass
+        if(par_dados[1] == "ECO" or par_dados[1] == None):
+            ## TABELA ECO
+            self.lista_text.append("<h3>Eco Dados Entrada</h3>"+"\n")
+            if(caso.modelo == "NEWAVE"):
+                self.lista_text.append(InfoGeralEcoNewave(data).text_html)
+            if(caso.modelo == "DECOMP"):
+                #self.lista_text.append(InfoGeralEcoDecomp(data).text_html)
+                pass
+            if(caso.modelo == "DESSEM"):
+                #self.lista_text.append(InfoGeralEcoDessem(data).text_html)
+                pass
 
-
-        ##TABELA OPER
-        self.lista_text.append("<h3>Oper Dados</h3>"+"\n")
-        if(caso.modelo == "NEWAVE"):
-            self.lista_text.append(InfoGeralOperNewave(data).text_html)
-        if(caso.modelo == "DECOMP"):
-            #self.lista_text.append(InfoGeralOperDecomp(data).text_html)
-            pass
-        if(caso.modelo == "DESSEM"):
-            #self.lista_text.append(InfoGeralOperDessem(data).text_html)
-            pass
+        if(par_dados[1] == "OPER" or par_dados[1] == None):
+            ##TABELA OPER
+            self.lista_text.append("<h3>Oper Dados</h3>"+"\n")
+            if(caso.modelo == "NEWAVE"):
+                self.lista_text.append(InfoGeralOperNewave(data).text_html)
+            if(caso.modelo == "DECOMP"):
+                #self.lista_text.append(InfoGeralOperDecomp(data).text_html)
+                pass
+            if(caso.modelo == "DESSEM"):
+                #self.lista_text.append(InfoGeralOperDessem(data).text_html)
+                pass
 
         self.text_html = "\n".join(self.lista_text)
 

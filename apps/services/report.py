@@ -102,7 +102,7 @@ class Report():
                         chave = args[0]
                         argumentos = nome_argumento_info.split("/")[1].split(",") if(len(args) > 1) else None
                         par_dados = (chave, argumentos)
-                        info = Info(html_file, data, par_dados)
+                        info = Info(data, par_dados)
                         html_file.write(info.text_html+"\n")
 
                     elif("\page{") in line:
