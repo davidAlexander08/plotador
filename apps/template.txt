@@ -12,18 +12,18 @@ Relatório com grandezas relacionadas ao estudo
 \subpage{Geracao Termica}
 
 descrevendo a geracao termica xcafdiajfdiaj
-plotador temporal --titulo Geracao_Termica_SIN --json arquivo_json --sintese GTER_SIN_EST --html True --largura 1000 --altura 350 --tamanho 20
+plotador temporal --titulo Geracao_Termica_SIN --json arquivo_json --sintese GTER_SIN_EST --html False --largura 1000 --altura 350 --tamanho 20
 
 continua descrevendo fadhfidahfad
 
 \subpage{Geracao Hidreletrica}
-plotador temporal --titulo Geracao_Hidreletrica_SIN --json arquivo_json --sintese GHID_SIN_EST --html True --largura 1000 --altura 350 --tamanho 20
+plotador temporal --titulo Geracao_Hidreletrica_SIN --json arquivo_json --sintese GHID_SIN_EST --html False --largura 1000 --altura 350 --tamanho 20
 
 \subpage{Energia Armazenada}
-plotador temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN_EST --html True --largura 1000 --altura 350 --tamanho 20
+plotador temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN_EST --html False --largura 1000 --altura 350 --tamanho 20
 
 \subpage{Custo Operacional}
-plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json --sintese COP_SIN_EST --html True --largura 1000 --altura 350 --tamanho 20
+plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json --sintese COP_SIN_EST --html False --largura 1000 --altura 350 --tamanho 20
 
 
 \page{Submercado}
@@ -33,16 +33,16 @@ plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json --sintese C
 \subpage{Geracoes}
 
 Geracao Trmica
-plotador temporal --titulo Geracao_Termica_SBM --json arquivo_json --sintese GTER_SBM_EST --argumentos ADD_SBMS --chave SBM --html True --largura 1000 --altura 650 --tamanho 20
+plotador temporal --titulo Geracao_Termica_SBM --json arquivo_json --sintese GTER_SBM_EST --argumentos ADD_SBMS --chave SBM --html False --largura 1000 --altura 650 --tamanho 20
 
 Geracao Hidreletrica
-plotador temporal --titulo Geracao_Hidreletrica_SBM --json arquivo_json --sintese GHID_SBM_EST --argumentos ADD_SBMS --chave SBM --html True --largura 1000 --altura 650 --tamanho 20
+plotador temporal --titulo Geracao_Hidreletrica_SBM --json arquivo_json --sintese GHID_SBM_EST --argumentos ADD_SBMS --chave SBM --html False --largura 1000 --altura 650 --tamanho 20
 
 \subpage{Energia Armazenada SBM}
-plotador temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM_EST --argumentos ADD_SBMS --chave SBM --html True --largura 1000 --altura 650 --tamanho 20
+plotador temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM_EST --argumentos ADD_SBMS --chave SBM --html False --largura 1000 --altura 650 --tamanho 20
 
 \subpage{Custo Operacional SBM}
-plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM_EST --argumentos ADD_SBMS --chave SBM --html True --largura 1000 --altura 650 --tamanho 20
+plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM_EST --argumentos ADD_SBMS --chave SBM --html False --largura 1000 --altura 650 --tamanho 20
 
 
 \page{Execucao}
@@ -50,7 +50,7 @@ plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_
 <h1> Relatório de Execução </h1>
 
 \subpage{Tempo Execucao}
-plotador tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20 --html True
+plotador tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20 --html False
 
-plotador convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20 --html True
+plotador convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20 --html False
 
