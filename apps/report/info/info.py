@@ -1,4 +1,4 @@
-from apps.report.infoGeral import InfoGeral
+from apps.report.info.geral.infoGeral import InfoGeral
 
 class Info():
     def __init__(self, html_file, data, nome_argumento_info):
