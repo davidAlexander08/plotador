@@ -242,6 +242,7 @@
 
     <div class="top-bar" id="top-bar">
         <div id="top-bar-title">Menu</div>
+        <button id="downloadAll">Baixar Gráficos</button>
         <select id="top-bar-menu" onchange="showTopBarPage(this.value)">
             <!-- Options will be updated dynamically -->
         </select>
