@@ -3,6 +3,7 @@ class Estruturas:
 
 
         self.Tabela_Operacao_NEWAVE = """
+        <table>
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
