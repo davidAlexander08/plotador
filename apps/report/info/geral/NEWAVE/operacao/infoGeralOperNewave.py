@@ -22,7 +22,6 @@ class InfoGeralOperNewave(Estruturas):
     def preenche_operacao_NEWAVE(self,caso):
 
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-        print(df_temp)
         temp = self.template_Tabela_Operacao_NEWAVE
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
@@ -41,12 +40,13 @@ class InfoGeralOperNewave(Estruturas):
         zinf = data_pmo.convergencia["zinf"].iloc[-1]
         custo_total = data_pmo.custo_operacao_total
         desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
-        temp = temp.replace("tempo_politica", str(tempo_politica))
-        temp = temp.replace("tempo_sf", str(tempo_sf))
-        temp = temp.replace("tempo_total", str(tempo_total))
+
+        temp = temp.replace("tempo_politica", str(round(tempo_politica, 2)))
+        temp = temp.replace("tempo_sf", str(round(tempo_sf, 2)))
+        temp = temp.replace("tempo_total", str(round(tempo_total, 2)))
         temp = temp.replace("iteracoes", str(iteracoes))
         temp = temp.replace("zinf", str(zinf))
         temp = temp.replace("custo_total", str(custo_total))
-        temp = temp.replace("desvio_custo", str(desvio_custo))
+        temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
         return temp
 
