@@ -48,29 +48,41 @@
             }
         
 
+        document.getElementById('downloadAll').addEventListener('click', function() {
+            // Get all Plotly graph divs
+            const graphs = document.querySelectorAll('.js-plotly-plot');
 
-    document.getElementById('downloadAll').addEventListener('click', function() {
-        // Get all Plotly graph divs (assuming each graph is in a div with class "plotly-graph-div")
-        const graphs = document.querySelectorAll('.js-plotly-plot');
+            // Download Plotly graphs as PNGs
+            graphs.forEach((graph, index) => {
+                Plotly.downloadImage(graph, {
+                    format: 'png',
+                    filename: `graph_${index + 1}`,
+                    width: 1200,
+                    height: 600
+                });
+            });
 
-        // Iterate through each graph and download it as a PNG
-        graphs.forEach((graph, index) => {
-            Plotly.downloadImage(graph, {
-                format: 'png', // Choose the format: 'png', 'jpeg', 'webp', etc.
-                filename: `graph_${index + 1}`, // Filename for each graph
-                width: 1200, // Width of the image
-                height: 600 // Height of the image
+            // Get all PNG images in the HTML
+            const images = document.querySelectorAll('img[src$=".png"], img[src^="data:image/png"]');
+
+            // Iterate through each image and download it
+            images.forEach((img, index) => {
+                const link = document.createElement('a');
+                link.href = img.src; // Get the source of the image
+                link.download = `image_${index + 1}.png`; // Set a filename for the image
+                document.body.appendChild(link); // Append the link to the document
+                link.click(); // Simulate a click to download the image
+                document.body.removeChild(link); // Remove the link from the document
             });
         });
-    });
 
-    window.addEventListener('load', function() {
-        // Remove o loader após o carregamento da página
-        const loader = document.getElementById('loader');
-        if (loader) {
-            loader.style.display = 'none';
-        }
-    });
+        window.addEventListener('load', function() {
+            // Remove o loader após o carregamento da página
+            const loader = document.getElementById('loader');
+            if (loader) {
+                loader.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>

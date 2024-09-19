@@ -43,7 +43,6 @@ class Report(Estruturas):
             path.pop()
             arq_json_exemplo = "/".join(path)+"/exemplo.json"
             current_directory = os.getcwd()
-            #print(current_directory)
             #shutil.copy(arq_json_exemplo, current_directory+"/exemplo.json")
             with open(arq_json_exemplo, "r") as file:
                 dados = json.load(file)
@@ -95,6 +94,7 @@ class Report(Estruturas):
             html_file.write('<div class="content">'+"\n")
             flag_primeira_pagina = True
             flag_primeira_subpagina = True
+
             for line in lines:
                 if line.strip():
                     if("###" in line):
@@ -103,79 +103,7 @@ class Report(Estruturas):
                         html_file.write(line.strip()+"\n")
 
                     elif("\info") in line:
-                        Inicio_tabela = """
-    <table>
-    <tr>
-        <th>Nome do Caso</th>
-        <th>Caminho</th>
-        <th>Modelo</th>
-        <th>Cor</th>
-    </tr>
-"""                         
-                        Template_tabela_caso = """
-    <tr>
-        <td>nome</td>
-        <td>caminho</td>
-        <td>modelo</td>
-        <td style="background-color: cor;"></td>
-    </tr>
-"""                         
-                        html_file.write("<h3>Informações Gerais do Estudo</h3>"+"\n")
-                        html_file.write(Inicio_tabela)
-                        
-                        for caso in data.casos:
-                            temp = Template_tabela_caso
-                            temp = temp.replace("nome", caso.nome)
-                            temp = temp.replace("caminho", caso.caminho)
-                            temp = temp.replace("modelo", caso.modelo)
-                            temp = temp.replace("cor", caso.cor)
-                            html_file.write(temp)
-                        html_file.write("</table>"+"\n")
-                        
-                        html_file.write("<h2>Eco Dados Entrada</h2>"+"\n")
-                        
-                        flag_nw = flag_deco = flag_dss = True
-                        for caso in data.casos:
-                            if(caso.modelo == "NEWAVE"):
-                                if(flag_nw == True):
-                                    html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                    flag_nw = False
-                                temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso)
-                            if(caso.modelo == "DECOMP"):
-                                if(flag_deco == True):
-                                    html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                    flag_deco = False
-                                temp = self.preenche_modelo_tabela_modelo_DECOMP(caso)
-                            if(caso.modelo == "DESSEM"):
-                                if(flag_dss == True):
-                                    html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                    flag_dss = False
-                                temp = self.preenche_modelo_tabela_modelo_DESSEM(caso)
-                            html_file.write(temp)
-                        html_file.write("</table>"+"\n")
-
-
-                        #html_file.write("<h2>Operacao</h2>"+"\n")
-                        #
-                        #flag_nw = flag_deco = flag_dss = True
-                        #for caso in data.casos:
-                        #    if(caso.modelo == "NEWAVE"):
-                        #        if(flag_nw == True):
-                        #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                        #            flag_nw = False
-                        #        temp = self.preenche_operacao_NEWAVE(caso)
-                        #    if(caso.modelo == "DECOMP"):
-                        #        if(flag_deco == True):
-                        #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                        #            flag_deco = False
-                        #        temp = self.preenche_operacao_DECOMP(caso)
-                        #    if(caso.modelo == "DESSEM"):
-                        #        if(flag_dss == True):
-                        #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                        #            flag_dss = False
-                        #        temp = self.preenche_operacao_DESSEM(caso)
-                        #    html_file.write(temp)
-                        #html_file.write("</table>"+"\n")
+                        self.preencheInfo(html_file, data)
 
                     elif("\page{") in line:
                         if(flag_primeira_pagina == False):
@@ -248,16 +176,82 @@ class Report(Estruturas):
                 conteudo = arquivo.read()
                 html_file.write(conteudo)
 
-            #script_html = """
- #
-#
-            #"""
-            #html_file.write(script_html)
-            #html_file.write('</body>\n')
-            #html_file.write('</html>\n')
-
-
         print("Report saved as report.html")
+
+    def preenche_info(self, html_file, data):
+        Inicio_tabela = """
+<table>
+<tr>
+<th>Nome do Caso</th>
+<th>Caminho</th>
+<th>Modelo</th>
+<th>Cor</th>
+</tr>
+"""                         
+        Template_tabela_caso = """
+<tr>
+<td>nome</td>
+<td>caminho</td>
+<td>modelo</td>
+<td style="background-color: cor;"></td>
+</tr>
+"""                         
+        html_file.write("<h3>Informações Gerais do Estudo</h3>"+"\n")
+        html_file.write(Inicio_tabela)
+        
+        for caso in data.casos:
+            temp = Template_tabela_caso
+            temp = temp.replace("nome", caso.nome)
+            temp = temp.replace("caminho", caso.caminho)
+            temp = temp.replace("modelo", caso.modelo)
+            temp = temp.replace("cor", caso.cor)
+            html_file.write(temp)
+        html_file.write("</table>"+"\n")
+        
+        html_file.write("<h2>Eco Dados Entrada</h2>"+"\n")
+        
+        flag_nw = flag_deco = flag_dss = True
+        for caso in data.casos:
+            if(caso.modelo == "NEWAVE"):
+                if(flag_nw == True):
+                    html_file.write(self.mapa_tabela_modelo[caso.modelo])
+                    flag_nw = False
+                temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso)
+            if(caso.modelo == "DECOMP"):
+                if(flag_deco == True):
+                    html_file.write(self.mapa_tabela_modelo[caso.modelo])
+                    flag_deco = False
+                temp = self.preenche_modelo_tabela_modelo_DECOMP(caso)
+            if(caso.modelo == "DESSEM"):
+                if(flag_dss == True):
+                    html_file.write(self.mapa_tabela_modelo[caso.modelo])
+                    flag_dss = False
+                temp = self.preenche_modelo_tabela_modelo_DESSEM(caso)
+            html_file.write(temp)
+        html_file.write("</table>"+"\n")
+
+
+        #html_file.write("<h2>Operacao</h2>"+"\n")
+        #
+        #flag_nw = flag_deco = flag_dss = True
+        #for caso in data.casos:
+        #    if(caso.modelo == "NEWAVE"):
+        #        if(flag_nw == True):
+        #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
+        #            flag_nw = False
+        #        temp = self.preenche_operacao_NEWAVE(caso)
+        #    if(caso.modelo == "DECOMP"):
+        #        if(flag_deco == True):
+        #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
+        #            flag_deco = False
+        #        temp = self.preenche_operacao_DECOMP(caso)
+        #    if(caso.modelo == "DESSEM"):
+        #        if(flag_dss == True):
+        #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
+        #            flag_dss = False
+        #        temp = self.preenche_operacao_DESSEM(caso)
+        #    html_file.write(temp)
+        #html_file.write("</table>"+"\n")
 
 
 
