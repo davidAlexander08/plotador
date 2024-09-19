@@ -20,7 +20,6 @@ class InfoGeral(Estruturas):
         self.lista_text.append("</table>"+"\n")
         
         self.lista_text.append("<h2>Eco Dados Entrada</h2>"+"\n")
-        
         if(caso.modelo == "NEWAVE"):
             self.lista_text.append(InfoGeralNewave(data).text_html)
             #if(caso.modelo == "DECOMP"):
