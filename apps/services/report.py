@@ -100,7 +100,7 @@ class Report():
                         nome_argumento_info = line.split("{")[1].split("}")[0]
                         print(nome_argumento_info)
                         chave = nome_argumento_info.split("/")[0]
-                        argumentos = nome_argumento_info.split("/")[1]
+                        argumentos = nome_argumento_info.split("/")[1].split(",")
                         print(chave)
                         print(argumentos)
                         exit(1)
