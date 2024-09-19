@@ -12,7 +12,6 @@ class InfoGeralEcoNewave(Estruturas):
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.lista_text = []
         self.lista_text.append(self.Tabela_Eco_Entrada)
-        flag_nw = flag_deco = flag_dss = True
         for caso in data.casos:
             if(caso.modelo == "NEWAVE"):
                 temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso)

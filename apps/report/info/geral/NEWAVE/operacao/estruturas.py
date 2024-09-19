@@ -2,7 +2,6 @@ class Estruturas:
     def __init__(self):
 
 
-
         self.Tabela_Operacao_NEWAVE = """
         <tr>
             <th>Caso</th>

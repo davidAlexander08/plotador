@@ -1,12 +1,10 @@
 
 from apps.report.info.geral.estruturas import Estruturas
-from apps.report.info.geral.NEWAVE.infoGeralNewave import InfoGeralNewave
-from apps.indicadores.eco_indicadores import EcoIndicadores
-
+from apps.report.info.geral.NEWAVE.eco.infoGeralEcoNewave import InfoGeralEcoNewave
+from apps.report.info.geral.NEWAVE.operacao.infoGeralEcoNewave import InfoGeralOperNewave
 class InfoGeral(Estruturas):
     def __init__(self, html_file, data):
         Estruturas.__init__(self)
-        self.eco_indicadores = EcoIndicadores(data.casos)
         self.lista_text = []
         self.lista_text.append("<h3>Informações Gerais do Estudo</h3>"+"\n")
         self.lista_text.append(self.Inicio_tabela)    
@@ -21,7 +19,7 @@ class InfoGeral(Estruturas):
         
         self.lista_text.append("<h2>Eco Dados Entrada</h2>"+"\n")
         if(caso.modelo == "NEWAVE"):
-            self.lista_text.append(InfoGeralNewave(data).text_html)
+            self.lista_text.append(InfoGeralEcoNewave(data).text_html)
             #if(caso.modelo == "DECOMP"):
             #    if(flag_deco == True):
             #        self.lista_text.append(self.mapa_tabela_modelo[caso.modelo])
@@ -33,7 +31,9 @@ class InfoGeral(Estruturas):
             #        flag_dss = False
             #    temp = self.preenche_modelo_tabela_modelo_DESSEM(caso)
 
-        
-
+        self.lista_text.append("<h2>Oper Dados</h2>"+"\n")
+        if(caso.modelo == "NEWAVE"):
+            #self.lista_text.append(InfoGeralOperNewave(data).text_html)
+            pass
 
         self.text_html = "\n".join(self.lista_text)

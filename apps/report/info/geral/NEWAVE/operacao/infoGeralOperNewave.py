@@ -1,42 +1,23 @@
 
-from apps.report.info.geral.NEWAVE.estruturas import Estruturas
-from apps.report.info.geral.NEWAVE.eco.infoGeralEcoNewave import InfoGeralEcoNewave
+from apps.report.info.geral.NEWAVE.operacao.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from inewave.newave import Pmo
 from inewave.newave import Dger
 from inewave.newave import Cvar
 
 
-class InfoGeralNewave():
+class InfoGeralOperNewave(Estruturas):
     def __init__(self, data):
+        Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.lista_text = []
+        self.lista_text.append(self.Tabela_Eco_Entrada)
 
-        self.lista_text.append(InfoGeralEcoNewave(data).text_html)
-
-        Tabela_Operacao_NEWAVE = """
-        <tr>
-            <th>Caso</th>
-            <th>Modelo</th>
-            <th>Temp. Tot(min)</th>
-            <th>Iter</th>
-            <th>Zinf</th>
-            <th>Custo Total</th>
-            <th>Desvio Custo</th>
-        </tr>
-    """      
-
-        #self.lista_text.append("<h2>Operacao</h2>"+"\n")
-        #
-        #flag_nw = flag_deco = flag_dss = True
-        #for caso in data.casos:
-        #    if(caso.modelo == "NEWAVE"):
-        #        if(flag_nw == True):
-        #            self.lista_text.append(self.mapa_tabela_modelo[caso.modelo])
-        #            flag_nw = False
-        #        temp = self.preenche_operacao_NEWAVE(caso)
-        #    self.lista_text.append(temp)
-        #self.lista_text.append("</table>"+"\n")
+        for caso in data.casos:
+            if(caso.modelo == "NEWAVE"):
+                temp = self.preenche_operacao_NEWAVE(caso)
+                self.lista_text.append(temp)
+        self.lista_text.append("</table>"+"\n")
 
         self.text_html = "\n".join(self.lista_text)
 
