@@ -25,7 +25,8 @@ class Info(Estruturas):
         self.lista_text.append("<h3>Informações Gerais do Estudo</h3>"+"\n")
         self.lista_text.append(Inicio_tabela)
         print(self.lista_text)
-        print("\n".join(lines))
+        texto = "\n".join(lines)
+        print(texto)
         exit(1)
         for caso in data.casos:
             temp = Template_tabela_caso
