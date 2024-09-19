@@ -178,20 +178,15 @@ class Report(Estruturas):
                         #html_file.write("</table>"+"\n")
 
                     elif("\page{") in line:
-                        
-                        nome_pagina = line.split("{")[1].split("}")[0]
-                        pagina_ativa = "page active" if flag_primeira_pagina == True else "page"
-                        html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
-
                         if(flag_primeira_pagina == False):
                             html_file.write('</div>'+"\n")
                         if(flag_primeira_subpagina == False):
                             html_file.write('</div>'+"\n")
+                        nome_pagina = line.split("{")[1].split("}")[0]
+                        pagina_ativa = "page active" if flag_primeira_pagina == True else "page"
+                        html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                         flag_primeira_pagina = False
                         flag_primeira_subpagina = True
-
-                        
-                        #html_file.write('<button id="downloadAll">Baixar Gráficos</button>'+"\n")
                             
                     elif("\subpage{") in line:
                         if(flag_primeira_subpagina == False):
