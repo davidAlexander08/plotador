@@ -178,7 +178,7 @@ class Report(Estruturas):
 
         print("Report saved as report.html")
 
-    def preenche_info(self, html_file, data):
+    def preencheInfo(self, html_file, data):
         Inicio_tabela = """
 <table>
 <tr>
