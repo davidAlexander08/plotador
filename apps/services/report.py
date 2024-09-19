@@ -98,6 +98,12 @@ class Report():
 
                     elif("\info{") in line:
                         nome_argumento_info = line.split("{")[1].split("}")[0]
+                        print(nome_argumento_info)
+                        chave = nome_argumento_info.split("/")[0]
+                        argumentos = nome_argumento_info.split("/")[1]
+                        print(chave)
+                        print(argumentos)
+                        exit(1)
 
                         info = Info(html_file, data, nome_argumento_info)
                         html_file.write(info.text_html+"\n")

@@ -3,7 +3,7 @@ from apps.report.info.geral.estruturas import Estruturas
 from apps.report.info.geral.NEWAVE.eco.infoGeralEcoNewave import InfoGeralEcoNewave
 from apps.report.info.geral.NEWAVE.operacao.infoGeralOperNewave import InfoGeralOperNewave
 class InfoGeral(Estruturas):
-    def __init__(self, html_file, data):
+    def __init__(self, data):
         Estruturas.__init__(self)
         self.lista_text = []
 
