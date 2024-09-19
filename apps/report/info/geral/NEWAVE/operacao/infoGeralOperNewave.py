@@ -12,13 +12,11 @@ class InfoGeralOperNewave(Estruturas):
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.lista_text = []
         self.lista_text.append(self.Tabela_Operacao_NEWAVE)
-
         for caso in data.casos:
             if(caso.modelo == "NEWAVE"):
                 temp = self.preenche_operacao_NEWAVE(caso)
                 self.lista_text.append(temp)
         self.lista_text.append("</table>"+"\n")
-
         self.text_html = "\n".join(self.lista_text)
 
     def preenche_operacao_NEWAVE(self,caso):
