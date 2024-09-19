@@ -96,8 +96,10 @@ class Report():
                     elif("</h" in line):
                         html_file.write(line.strip()+"\n")
 
-                    elif("\info") in line:
-                        info = Info(html_file, data)
+                    elif("\info{") in line:
+                        nome_argumento_info = line.split("{")[1].split("}")[0]
+
+                        info = Info(html_file, data, nome_argumento_info)
                         html_file.write(info.text_html+"\n")
 
                     elif("\page{") in line:
