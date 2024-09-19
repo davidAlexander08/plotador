@@ -17,12 +17,12 @@ class Estruturas:
 
         self.template_Tabela_Operacao_NEWAVE = """
         <tr>
-            <th>Caso</th>
-            <th>Modelo</th>
-            <th>tempo_total</th>
-            <th>iteracoes</th>
-            <th>zinf</th>
-            <th>custo_total</th>
-            <th>desvio_custo</th>
+            <tr>Caso</tr>
+            <tr>Modelo</tr>
+            <tr>tempo_total</tr>
+            <tr>iteracoes</tr>
+            <tr>zinf</tr>
+            <tr>custo_total</tr>
+            <tr>desvio_custo</tr>
         </tr>
     """     
