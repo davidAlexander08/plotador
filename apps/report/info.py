@@ -23,11 +23,7 @@ class Info(Estruturas):
 </tr>
 """                         
         self.lista_text.append("<h3>Informações Gerais do Estudo</h3>"+"\n")
-        self.lista_text.append(Inicio_tabela)
-        print(self.lista_text)
-        texto = "\n".join(self.lista_text)
-        print(texto)
-        exit(1)
+        self.lista_text.append(Inicio_tabela)    
         for caso in data.casos:
             temp = Template_tabela_caso
             temp = temp.replace("nome", caso.nome)
@@ -82,7 +78,7 @@ class Info(Estruturas):
         #    html_file.write(temp)
         #html_file.write("</table>"+"\n")
 
-
+        self.text_html = "\n".join(self.lista_text)
 
     def preenche_operacao_NEWAVE(self,caso):
 
