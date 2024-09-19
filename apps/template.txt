@@ -1,6 +1,6 @@
 \page{Infos}
 
-\info{Estudo}
+\info{Estudo/OPER}
 
 \page{SIN}
 
