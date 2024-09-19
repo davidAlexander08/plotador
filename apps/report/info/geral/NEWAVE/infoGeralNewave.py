@@ -1,6 +1,6 @@
 
 from apps.report.info.geral.NEWAVE.estruturas import Estruturas
-from apps.report.info.geral.NEWAVE.eco.InfoGeralEcoNewave import InfoGeralEcoNewave
+from apps.report.info.geral.NEWAVE.eco.infoGeralEcoNewave import InfoGeralEcoNewave
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from inewave.newave import Pmo
 from inewave.newave import Dger
