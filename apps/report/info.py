@@ -1,8 +1,9 @@
 
 from apps.report.estruturas import Estruturas
-
+from apps.indicadores.eco_indicadores import EcoIndicadores
 class Info(Estruturas):
     def __init__(self,html_file, data):
+        self.eco_indicadores = EcoIndicadores(data.casos)
         self.lista_text = []
         Estruturas.__init__(self)
         Inicio_tabela = """
