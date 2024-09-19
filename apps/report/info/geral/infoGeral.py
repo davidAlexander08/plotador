@@ -1,7 +1,7 @@
 
 from apps.report.info.geral.estruturas import Estruturas
 from apps.report.info.geral.NEWAVE.eco.infoGeralEcoNewave import InfoGeralEcoNewave
-from apps.report.info.geral.NEWAVE.operacao.infoGeralEcoNewave import InfoGeralOperNewave
+from apps.report.info.geral.NEWAVE.operacao.infoGeralOperNewave import InfoGeralOperNewave
 class InfoGeral(Estruturas):
     def __init__(self, html_file, data):
         Estruturas.__init__(self)
