@@ -14,3 +14,14 @@ class Estruturas:
         </tr>
     """      
 
+        self.template_Tabela_Operacao_NEWAVE = """
+        <tr>
+            <th>Caso</th>
+            <th>Modelo</th>
+            <th>tempo_total</th>
+            <th>iteracoes</th>
+            <th>zinf</th>
+            <th>custo_total</th>
+            <th>desvio_custo</th>
+        </tr>
+    """     
