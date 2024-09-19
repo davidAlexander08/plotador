@@ -32,11 +32,17 @@ class InfoGeralOperNewave(Estruturas):
 
 
         df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+        
+        tempo_politica = df_caso.loc[(df_caso["etapa"] == "Calculo da Politica")]["tempo"].iloc[0]/60
+        tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
         tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
+
         iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
         zinf = data_pmo.convergencia["zinf"].iloc[-1]
         custo_total = data_pmo.custo_operacao_total
         desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
+        temp = temp.replace("tempo_politica", str(tempo_politica))
+        temp = temp.replace("tempo_sf", str(tempo_sf))
         temp = temp.replace("tempo_total", str(tempo_total))
         temp = temp.replace("iteracoes", str(iteracoes))
         temp = temp.replace("zinf", str(zinf))

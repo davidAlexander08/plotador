@@ -7,7 +7,9 @@ class Estruturas:
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
-            <th>Temp. Tot(min)</th>
+            <th>Politica (min)</th>
+            <th>SF (min)</th>
+            <th>Total (min)</th>
             <th>Iter</th>
             <th>Zinf</th>
             <th>Custo Total</th>
@@ -19,6 +21,8 @@ class Estruturas:
         <tr>
             <td>Caso</td>
             <td>Modelo</td>
+            <td>tempo_politica</td>
+            <td>tempo_sf</td>
             <td>tempo_total</td>
             <td>iteracoes</td>
             <td>zinf</td>
