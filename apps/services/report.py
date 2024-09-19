@@ -98,7 +98,6 @@ class Report():
 
                     elif("\info{") in line:
                         nome_argumento_info = line.split("{")[1].split("}")[0]
-                        print(nome_argumento_info)
                         args = nome_argumento_info.split("/")
                         chave = args[0]
                         argumentos = nome_argumento_info.split("/")[1].split(",") if(len(args) > 1) else None
