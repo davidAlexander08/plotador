@@ -22,6 +22,7 @@ class InfoGeralOperNewave(Estruturas):
     def preenche_operacao_NEWAVE(self,caso):
 
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+        print(df_temp)
         temp = self.template_Tabela_Operacao_NEWAVE
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
