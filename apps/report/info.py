@@ -22,9 +22,9 @@ class Info(Estruturas):
 <td style="background-color: cor;"></td>
 </tr>
 """                         
-        self.text_html.write("<h3>Informações Gerais do Estudo</h3>"+"\n")
-        self.text_html.write(Inicio_tabela)
-        
+        self.text_html.append("<h3>Informações Gerais do Estudo</h3>"+"\n")
+        self.text_html.append(Inicio_tabela)
+        print(self.text_html)
         for caso in data.casos:
             temp = Template_tabela_caso
             temp = temp.replace("nome", caso.nome)
