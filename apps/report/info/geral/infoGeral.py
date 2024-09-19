@@ -2,12 +2,6 @@
 from apps.report.info.geral.estruturas import Estruturas
 from apps.report.info.geral.NEWAVE.infoGeralNewave import InfoGeralNewave
 from apps.indicadores.eco_indicadores import EcoIndicadores
-from inewave.newave import Pmo
-from inewave.newave import Dger
-from inewave.newave import Cvar
-from idecomp.decomp import Relato
-from idessem.dessem.des_log_relato import DesLogRelato
-
 
 class InfoGeral(Estruturas):
     def __init__(self, html_file, data):
@@ -27,10 +21,8 @@ class InfoGeral(Estruturas):
         
         self.lista_text.append("<h2>Eco Dados Entrada</h2>"+"\n")
         
-        for caso in data.casos:
-            if(caso.modelo == "NEWAVE"):
-                info = InfoGeralNewave(data)
-                temp = info.text_html
+        if(caso.modelo == "NEWAVE"):
+            self.lista_text.append(InfoGeralNewave(data).text_html)
             #if(caso.modelo == "DECOMP"):
             #    if(flag_deco == True):
             #        self.lista_text.append(self.mapa_tabela_modelo[caso.modelo])
@@ -41,7 +33,7 @@ class InfoGeral(Estruturas):
             #        self.lista_text.append(self.mapa_tabela_modelo[caso.modelo])
             #        flag_dss = False
             #    temp = self.preenche_modelo_tabela_modelo_DESSEM(caso)
-            self.lista_text.append(temp)
+
         
 
 
