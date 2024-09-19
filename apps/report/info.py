@@ -3,7 +3,7 @@ from apps.report.estruturas import Estruturas
 
 class Info(Estruturas):
     def __init__(self,html_file, data):
-        self.text_html = ""
+        self.lista_text = []
         Estruturas.__init__(self)
         Inicio_tabela = """
 <table>
@@ -22,39 +22,41 @@ class Info(Estruturas):
 <td style="background-color: cor;"></td>
 </tr>
 """                         
-        self.text_html.append("<h3>Informações Gerais do Estudo</h3>"+"\n")
-        self.text_html.append(Inicio_tabela)
-        print(self.text_html)
+        self.lista_text.append("<h3>Informações Gerais do Estudo</h3>"+"\n")
+        self.lista_text.append(Inicio_tabela)
+        print(self.lista_text)
+        print("\n".join(lines))
+        exit(1)
         for caso in data.casos:
             temp = Template_tabela_caso
             temp = temp.replace("nome", caso.nome)
             temp = temp.replace("caminho", caso.caminho)
             temp = temp.replace("modelo", caso.modelo)
             temp = temp.replace("cor", caso.cor)
-            self.text_html.write(temp)
-        self.text_html.write("</table>"+"\n")
+            self.lista_text.write(temp)
+        self.lista_text.write("</table>"+"\n")
         
-        self.text_html.write("<h2>Eco Dados Entrada</h2>"+"\n")
+        self.lista_text.write("<h2>Eco Dados Entrada</h2>"+"\n")
         
         flag_nw = flag_deco = flag_dss = True
         for caso in data.casos:
             if(caso.modelo == "NEWAVE"):
                 if(flag_nw == True):
-                    self.text_html.write(self.mapa_tabela_modelo[caso.modelo])
+                    self.lista_text.write(self.mapa_tabela_modelo[caso.modelo])
                     flag_nw = False
                 temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso)
             if(caso.modelo == "DECOMP"):
                 if(flag_deco == True):
-                    self.text_html.write(self.mapa_tabela_modelo[caso.modelo])
+                    self.lista_text.write(self.mapa_tabela_modelo[caso.modelo])
                     flag_deco = False
                 temp = self.preenche_modelo_tabela_modelo_DECOMP(caso)
             if(caso.modelo == "DESSEM"):
                 if(flag_dss == True):
-                    self.text_html.write(self.mapa_tabela_modelo[caso.modelo])
+                    self.lista_text.write(self.mapa_tabela_modelo[caso.modelo])
                     flag_dss = False
                 temp = self.preenche_modelo_tabela_modelo_DESSEM(caso)
-            self.text_html.write(temp)
-        self.text_html.write("</table>"+"\n")
+            self.lista_text.write(temp)
+        self.lista_text.write("</table>"+"\n")
 
 
         #html_file.write("<h2>Operacao</h2>"+"\n")
