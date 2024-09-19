@@ -11,7 +11,7 @@ class InfoGeralOperNewave(Estruturas):
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.lista_text = []
-        self.lista_text.append(self.Tabela_Eco_Entrada)
+        self.lista_text.append(self.Tabela_Operacao_NEWAVE)
 
         for caso in data.casos:
             if(caso.modelo == "NEWAVE"):
