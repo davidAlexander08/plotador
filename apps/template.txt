@@ -1,6 +1,6 @@
 \page{Infos}
 
-\info{SBM/SUDESTE,NORDESTE,NORTE,SUL}
+\info{SBM}
 
 \page{SIN}
 
