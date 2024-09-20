@@ -1,4 +1,4 @@
-from apps.report.info.SBM.NEWAVE.infoSINNewave import InfoSBMNewave
+from apps.report.info.SBM.NEWAVE.infoSBMNewave import InfoSBMNewave
 
 
 class InfoSBM():
