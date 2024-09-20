@@ -1,9 +1,8 @@
 from apps.report.info.SIN.NEWAVE.infoSINNewave import InfoSINNewave
 
 
-class InfoSIN(Estruturas):
+class InfoSIN():
     def __init__(self, data, par_dados):
-        Estruturas.__init__(self)
         self.lista_text = []
         self.lista_text.append("<h3>Dados SIN</h3>"+"\n")
         if(caso.modelo == "NEWAVE"):

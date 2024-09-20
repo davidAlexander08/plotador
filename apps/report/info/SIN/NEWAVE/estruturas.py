@@ -1,8 +1,6 @@
 class Estruturas:
     def __init__(self):
 
-
-
         #TABELA DE INFORMACOES BASICAS
         self.Tabela_Eco_Entrada = """
         <table>
