@@ -70,23 +70,10 @@ plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese ENAA
 Geracao Hidreletrica
 plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese GHID_UHE_EST --argumentos ITAIPU --chave UHE --largura 1000 --altura 650 --tamanho 20
 
-Vazao Incremental
-plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese QINC_UHE_EST --argumentos ITAIPU --chave UHE --largura 1000 --altura 650 --tamanho 20
-
-Volume Armazenado Final
-plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese VARMF_UHE_EST --argumentos ITAIPU --chave UHE --largura 1000 --altura 650 --tamanho 20
-
 \subpage{FURNAS}
 
 Geracao Hidreletrica
-plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese GHID_UHE_EST --argumentos FURNAS --chave UHE --largura 1000 --altura 650 --tamanho 20
-
-Vazao Incremental
-plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese QINC_UHE_EST --argumentos FURNAS --chave UHE --largura 1000 --altura 650 --tamanho 20
-
-Volume Armazenado Final
-plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese VARMF_UHE_EST --argumentos FURNAS --chave UHE --largura 1000 --altura 650 --tamanho 20
-
+plotador temporal --titulo Geracao_Hidreletrica_FURNAS --json arquivo_json --sintese GHID_UHE_EST --argumentos FURNAS --chave UHE --largura 1000 --altura 650 --tamanho 20
 
 
 \page{Execucao}
