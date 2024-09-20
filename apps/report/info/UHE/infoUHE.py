@@ -1,4 +1,4 @@
-from apps.report.info.UHE.NEWAVE.infoUSIHNewave import InfoUHENewave
+from apps.report.info.UHE.NEWAVE.infoUHENewave import InfoUHENewave
 
 
 class InfoUHE():
