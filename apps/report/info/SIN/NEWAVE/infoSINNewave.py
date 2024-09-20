@@ -41,29 +41,36 @@ class InfoSINNewave(Estruturas):
         earm_max_first_per = earm_max.loc[(earm_max["configuracao"] == 1)]["valor_MWmes"].sum()
         earmi_first_per = earmi["valor_MWmes"].sum()
         varmi_first_per = varmi["valor_hm3"].sum()
-        print(earm_max)
-        print(earmi)
-        print(varmi)
-
-
-        print(earm_max_first_per)
-        print(earmi_first_per)
-
-        print(varmi_first_per)
 
         earpf_i = round(earmi_first_per/earm_max_first_per,2)
         varm_i = round(varmi_first_per,2)
 
-        print(earpf_i)
-        print(varm_i)
-        exit(1)
-        
+        temp = temp.replace("EarmI", str(round(earmi_first_per,2)))
+        temp = temp.replace("EarpI", str(earpf_i))
+        temp = temp.replace("VarmI", str(varm_i))
+
+        df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SIN_EST.parquet.gzip")
+        df_gh = self.eco_indicadores.retorna_df_concatenado("GHID_SIN_EST.parquet.gzip")
+        df_earpf = self.eco_indicadores.retorna_df_concatenado("EARPF_SIN_EST.parquet.gzip")
+
+        print(df_gt)
+        print(df_gh)
+        print(df_earpf)
+
+        gt_2_mes = df_gt.loc[(df_gt["estagio"] == 2) & (df_gt["cenario"] == "mean")].iloc[0]
+        gh_2_mes = df_gh.loc[(df_gh["estagio"] == 2) & (df_gh["cenario"] == "mean")].iloc[0]
+        earpf_2_mes = df_earpf.loc[(df_earpf["estagio"] == 2) & (df_earpf["cenario"] == "mean")].iloc[0]
+
+        print(gt_2_mes)
+        print(gh_2_mes)
+        print(earpf_2_mes)
+
+        temp = temp.replace("2_Mes_GT", str(gt_2_mes))
+        temp = temp.replace("2_Mes_GH", str(gh_2_mes))
+        temp = temp.replace("2_Mes_EARPF", str(earpf_2_mes))
 
 
 
-        #temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
-        #temp = temp.replace("Ano_I", str(data_dger.ano_inicio_estudo))
-        #temp = temp.replace("Anos_Pos", str(data_dger.num_anos_pos_estudo))
         #temp = temp.replace("It_Max", str(data_dger.num_max_iteracoes))
         #temp = temp.replace("It_Min", str(data_dger.num_minimo_iteracoes))
         #temp = temp.replace("FW", str(data_dger.num_forwards))
@@ -73,10 +80,7 @@ class InfoSINNewave(Estruturas):
         #temp = temp.replace("SF_Ind", tipo_sim_fin)
         #temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
 #
-        #    <td>Caso</td>
-        #    <td>Modelo</td>
-        #    <td>Versao</td>
-        #    <td>EARPI</td>
+
         #    <td>2_Mes_GT</td>
         #    <td>2_Mes_GH</td>
         #    <td>2_Mes_EARPF</td>

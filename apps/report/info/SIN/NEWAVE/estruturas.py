@@ -8,7 +8,9 @@ class Estruturas:
             <th>Caso</th>
             <th>Modelo</th>
             <th>Versao</th>
-            <th>EARPI</th>
+            <th>EarmI</th>
+            <th>EarpI</th>
+            <th>VarmI</th>
             <th>2 Mes GT</th>
             <th>2 Mes GH</th>
             <th>2 Mes EARPF</th>
@@ -24,7 +26,9 @@ class Estruturas:
             <td>Caso</td>
             <td>Modelo</td>
             <td>Versao</td>
-            <td>EARPI</td>
+            <th>EarmI</th>
+            <td>EarpI</td>
+            <td>VarmI</td>
             <td>2_Mes_GT</td>
             <td>2_Mes_GH</td>
             <td>2_Mes_EARPF</td>
