@@ -50,6 +50,12 @@ class InfoSINNewave(Estruturas):
         print(earmi_first_per)
 
         print(varmi_first_per)
+
+        earpf_i = round(earmi_first_per/earm_max_first_per,2)
+        varm_i = round(varmi_first_per,2)
+
+        print(earpf_i)
+        print(varm_i)
         exit(1)
         
 
