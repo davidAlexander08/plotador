@@ -62,25 +62,26 @@ class InfoSINNewave(Estruturas):
         gh_2_mes = df_gh_caso.loc[(df_gh_caso["estagio"] == 2) & (df_gh_caso["cenario"] == "mean")]["valor"].iloc[0]
         earpf_2_mes = df_earpf_caso.loc[(df_earpf_caso["estagio"] == 2) & (df_earpf_caso["cenario"] == "mean")]["valor"].iloc[0]
 
-        print(gt_2_mes)
-        print(gh_2_mes)
-        print(earpf_2_mes)
+        print(round(gt_2_mes,2))
+        print(round(gh_2_mes,2))
+        print(round(earpf_2_mes,2))
 
-        temp = temp.replace("2_Mes_GT", str(gt_2_mes))
-        temp = temp.replace("2_Mes_GH", str(gh_2_mes))
-        temp = temp.replace("2_Mes_EARPF", str(earpf_2_mes))
+        temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
+        temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
+        temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
 
+        gt_avg = df_gt_caso.loc[(df_gt_caso["cenario"] == "mean")]["valor"].mean()
+        gh_avg = df_gh_caso.loc[(df_gh_caso["cenario"] == "mean")]["valor"].mean()
+        earpf_avg = df_earpf_caso.loc[(df_earpf_caso["cenario"] == "mean")]["valor"].mean()
 
+        print(round(gt_avg,2))
+        print(round(gh_avg,2))
+        print(round(earpf_avg,2))
 
-        #temp = temp.replace("It_Max", str(data_dger.num_max_iteracoes))
-        #temp = temp.replace("It_Min", str(data_dger.num_minimo_iteracoes))
-        #temp = temp.replace("FW", str(data_dger.num_forwards))
-        #temp = temp.replace("BK", str(data_dger.num_aberturas))
-        #temp = temp.replace("N_series_sim_final", str(data_dger.num_series_sinteticas))
-        #tipo_sim_fin = "Ind" if data_dger.agregacao_simulacao_final == 1 else "Agr"
-        #temp = temp.replace("SF_Ind", tipo_sim_fin)
-        #temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
-#
+        temp = temp.replace("Media_GT", str(round(gt_avg,2)))
+        temp = temp.replace("Media_GH", str(round(gh_avg,2)))
+        temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
+
 
         #    <td>2_Mes_GT</td>
         #    <td>2_Mes_GH</td>
