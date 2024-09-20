@@ -1,5 +1,5 @@
 
-from apps.report.info.geral.NEWAVE.eco.estruturas import Estruturas
+from apps.report.info.SIN.NEWAVE.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from inewave.newave import Pmo
 from inewave.newave import Dger
