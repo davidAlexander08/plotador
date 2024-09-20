@@ -22,8 +22,6 @@ class InfoSINNewave(Estruturas):
 
     def preenche_modelo_tabela_modelo_NEWAVE(self,caso):
 
-        df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-
         tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
         versao = "0"
         temp = self.template_Tabela_Eco_Entrada
@@ -50,16 +48,19 @@ class InfoSINNewave(Estruturas):
         temp = temp.replace("VarmI", str(varm_i))
 
         df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SIN_EST")
+        df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)]
         df_gh = self.eco_indicadores.retorna_df_concatenado("GHID_SIN_EST")
+        df_gh_caso = df_gh.loc[(df_gh["caso"] == caso.nome)]
         df_earpf = self.eco_indicadores.retorna_df_concatenado("EARPF_SIN_EST")
+        df_earpf_caso = df_earpf.loc[(df_earpf["caso"] == caso.nome)]
 
-        print(df_gt)
-        print(df_gh)
-        print(df_earpf)
+        print(df_gt_caso)
+        print(df_gh_caso)
+        print(df_earpf_caso)
 
-        gt_2_mes = df_gt.loc[(df_gt["estagio"] == 2) & (df_gt["cenario"] == "mean")].iloc[0]
-        gh_2_mes = df_gh.loc[(df_gh["estagio"] == 2) & (df_gh["cenario"] == "mean")].iloc[0]
-        earpf_2_mes = df_earpf.loc[(df_earpf["estagio"] == 2) & (df_earpf["cenario"] == "mean")].iloc[0]
+        gt_2_mes = df_gt_caso.loc[(df_gt_caso["estagio"] == 2) & (df_gt_caso["cenario"] == "mean")]["valor"].iloc[0]
+        gh_2_mes = df_gh_caso.loc[(df_gh_caso["estagio"] == 2) & (df_gh_caso["cenario"] == "mean")]["valor"].iloc[0]
+        earpf_2_mes = df_earpf_caso.loc[(df_earpf_caso["estagio"] == 2) & (df_earpf_caso["cenario"] == "mean")]["valor"].iloc[0]
 
         print(gt_2_mes)
         print(gh_2_mes)
