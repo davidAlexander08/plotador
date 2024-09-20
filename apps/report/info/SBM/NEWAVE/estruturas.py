@@ -28,6 +28,7 @@ class Estruturas:
             <td>Caso</td>
             <td>Modelo</td>
             <td>Versao</td>
+            <td>Subm</td>
             <td>EarmI</td>
             <td>EarpI</td>
             <td>2_Mes_GT</td>
