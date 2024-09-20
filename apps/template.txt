@@ -66,9 +66,9 @@ plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese ENAA
 \info{UHE}
 
 \subpage{ITAIPU}
-
+dafda
 \subpage{FURNAS}
-
+fdafda
 
 \page{Execucao}
 
