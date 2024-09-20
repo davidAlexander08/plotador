@@ -41,11 +41,11 @@ class InfoSINNewave(Estruturas):
         varmi_first_per = varmi["valor_hm3"].sum()
 
         earpf_i = round(earmi_first_per/earm_max_first_per,2)
-        varm_i = round(varmi_first_per,2)
+        #varm_i = round(varmi_first_per,2)
 
         temp = temp.replace("EarmI", str(round(earmi_first_per,2)))
         temp = temp.replace("EarpI", str(earpf_i))
-        temp = temp.replace("VarmI", str(varm_i))
+        #temp = temp.replace("VarmI", str(varm_i))
 
         df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SIN_EST")
         df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)]

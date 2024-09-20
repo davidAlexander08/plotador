@@ -4,10 +4,12 @@
 
 \page{SIN}
 
-\info{SIN}
+
 
 <h1>Relatório SIN</h1>
 Relatório com grandezas relacionadas ao estudo
+
+\info{SIN}
 
 ###Formula:
 ###Here is some LaTeX: \( E = mc^2 \)
@@ -32,6 +34,8 @@ plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json --sintese C
 \page{Submercado}
 
 <h1> Relatório de Submercados </h1>
+
+\info{SBM}
 
 \subpage{Geracoes}
 
