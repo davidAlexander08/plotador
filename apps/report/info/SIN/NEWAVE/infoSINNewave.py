@@ -6,7 +6,7 @@ from inewave.newave import Dger
 from inewave.newave import Cvar
 
 
-class InfoGeralEcoNewave(Estruturas):
+class InfoSINNewave(Estruturas):
     def __init__(self, data):
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.casos)
@@ -33,6 +33,21 @@ class InfoGeralEcoNewave(Estruturas):
         data_dger = Dger.read(caso.caminho+"/dger.dat")
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
         temp = temp.replace("Versao", data_pmo.versao_modelo)
+
+        earm_max = data_pmo.energia_armazenada_maxima
+        earmi = data_pmo.energia_armazenada_inicial
+        varmi = data_pmo.volume_armazenado_inicial
+        
+        print(earm_max)
+
+        print(earmi)
+
+        print(varmi)
+        exit(1)
+        
+
+
+
         temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
         temp = temp.replace("Ano_I", str(data_dger.ano_inicio_estudo))
         temp = temp.replace("Anos_Pos", str(data_dger.num_anos_pos_estudo))
@@ -44,4 +59,17 @@ class InfoGeralEcoNewave(Estruturas):
         tipo_sim_fin = "Ind" if data_dger.agregacao_simulacao_final == 1 else "Agr"
         temp = temp.replace("SF_Ind", tipo_sim_fin)
         temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
+
+            <td>Caso</td>
+            <td>Modelo</td>
+            <td>Versao</td>
+            <td>EARPI</td>
+            <td>2_Mes_GT</td>
+            <td>2_Mes_GH</td>
+            <td>2_Mes_EARPF</td>
+            <td>Media_GT</td>
+            <td>Media_GH</td>
+            <td>Media_EARPF</td>
+
+
         return temp

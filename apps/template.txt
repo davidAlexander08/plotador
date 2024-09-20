@@ -1,8 +1,10 @@
 \page{Infos}
 
-\info{Estudo/OPER}
+\info{Estudo}
 
 \page{SIN}
+
+\info{SIN}
 
 <h1>Relatório SIN</h1>
 Relatório com grandezas relacionadas ao estudo

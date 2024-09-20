@@ -29,9 +29,7 @@ class InfoGeralOperNewave(Estruturas):
         data_dger = Dger.read(caso.caminho+"/dger.dat")
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
 
-
         df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-        
         tempo_politica = df_caso.loc[(df_caso["etapa"] == "Calculo da Politica")]["tempo"].iloc[0]/60
         tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
         tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
