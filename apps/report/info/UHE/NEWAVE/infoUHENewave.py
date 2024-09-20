@@ -39,12 +39,12 @@ class InfoUHENewave(Estruturas):
         temp = temp.replace("UHE", arg)
         print(arg)
         
-        df_varmi = self.eco_indicadores.retorna_df_concatenado("VARMI_UHE_EST")
-        print(df_varmi)
-        df_varmi_caso = df_varmi.loc[(df_varmi["caso"] == caso.nome) & (df_varmi["usina"] == arg) ]
-        print(df_varmi_caso)
-        varmi = df_varmi_caso.loc[(df_varmi_caso["estagio"] == 1) & (df_varmi_caso["cenario"] == "mean")]["valor"].iloc[0]
-
+        #df_varmi = self.eco_indicadores.retorna_df_concatenado("VARMI_UHE_EST")
+        #print(df_varmi)
+        #df_varmi_caso = df_varmi.loc[(df_varmi["caso"] == caso.nome) & (df_varmi["usina"] == arg) ]
+        #print(df_varmi_caso)
+        #varmi = df_varmi_caso.loc[(df_varmi_caso["estagio"] == 1) & (df_varmi_caso["cenario"] == "mean")]["valor"].iloc[0]
+        varmi = 0 
         temp = temp.replace("VarmI", str(round(varmi,2)))
 
         return temp
