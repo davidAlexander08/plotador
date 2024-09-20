@@ -49,9 +49,9 @@ class InfoSINNewave(Estruturas):
         temp = temp.replace("EarpI", str(earpf_i))
         temp = temp.replace("VarmI", str(varm_i))
 
-        df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SIN_EST.parquet.gzip")
-        df_gh = self.eco_indicadores.retorna_df_concatenado("GHID_SIN_EST.parquet.gzip")
-        df_earpf = self.eco_indicadores.retorna_df_concatenado("EARPF_SIN_EST.parquet.gzip")
+        df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SIN_EST")
+        df_gh = self.eco_indicadores.retorna_df_concatenado("GHID_SIN_EST")
+        df_earpf = self.eco_indicadores.retorna_df_concatenado("EARPF_SIN_EST")
 
         print(df_gt)
         print(df_gh)
