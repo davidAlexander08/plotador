@@ -31,6 +31,10 @@ plotador temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese 
 plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json --sintese COP_SIN_EST --largura 1000 --altura 350 --tamanho 20
 
 
+\subpage{ENA}
+plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json --sintese ENAA_SIN_EST --largura 1000 --altura 350 --tamanho 20
+
+
 \page{Submercado}
 
 <h1> Relatório de Submercados </h1>
@@ -50,6 +54,39 @@ plotador temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese 
 
 \subpage{Custo Operacional SBM}
 plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1000 --altura 650 --tamanho 20
+
+\subpage{ENA}
+plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese ENAA_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1000 --altura 650 --tamanho 20
+
+
+\page{Usinas Hidro}
+
+<h1> Relatório de Usina Hidrelétricas </h1>
+
+\info{UHE}
+
+\subpage{ITAIPU}
+
+Geracao Hidreletrica
+plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese GHID_UHE_EST --argumentos ITAIPU --chave UHE --largura 1000 --altura 650 --tamanho 20
+
+Vazao Incremental
+plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese QINC_UHE_EST --argumentos ITAIPU --chave UHE --largura 1000 --altura 650 --tamanho 20
+
+Volume Armazenado Final
+plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese VARMF_UHE_EST --argumentos ITAIPU --chave UHE --largura 1000 --altura 650 --tamanho 20
+
+\subpage{FURNAS}
+
+Geracao Hidreletrica
+plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese GHID_UHE_EST --argumentos FURNAS --chave UHE --largura 1000 --altura 650 --tamanho 20
+
+Vazao Incremental
+plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese QINC_UHE_EST --argumentos FURNAS --chave UHE --largura 1000 --altura 650 --tamanho 20
+
+Volume Armazenado Final
+plotador temporal --titulo Geracao_Hidreletrica_ITAIPU --json arquivo_json --sintese VARMF_UHE_EST --argumentos FURNAS --chave UHE --largura 1000 --altura 650 --tamanho 20
+
 
 
 \page{Execucao}

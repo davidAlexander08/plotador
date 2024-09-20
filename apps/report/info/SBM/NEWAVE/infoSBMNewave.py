@@ -61,7 +61,7 @@ class InfoSBMNewave(Estruturas):
         earmi = df_earmi_caso.loc[(df_earmi_caso["estagio"] == 1) & (df_earmi_caso["cenario"] == "mean")]["valor"].iloc[0]
 
         temp = temp.replace("EarmI", str(round(earmi,2)))
-        temp = temp.replace("EarpI", str(earpi))
+        temp = temp.replace("EarpI", str(round(earpi,2)))
 
         df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SBM_EST")
         df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]

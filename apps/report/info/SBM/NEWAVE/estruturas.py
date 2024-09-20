@@ -12,7 +12,7 @@ class Estruturas:
             <th>EarmI</th>
             <th>EarpI</th>
             <th>2 Mes GT</th>
-            <td>2_Mes_GH</td>
+            <th>2_Mes_GH</th>
             <th>2 Mes EARPF</th>
             <th>2 Mes CMO</th>
             <th>Média GT</th>
@@ -35,10 +35,10 @@ class Estruturas:
             <td>2_Mes_GH</td>
             <td>2_Mes_EARPF</td>
             <td>2_Mes_CMO</td>
-            <th>Media_GT</th>
-            <th>Media_GH</th>
+            <td>Media_GT</td>
+            <td>Media_GH</td>
             <td>Media_EARPF</td>
-            <th>Media_CMO</th>
+            <td>Media_CMO</td>
         </tr>
 """
 
