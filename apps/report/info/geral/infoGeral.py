@@ -6,7 +6,7 @@ class InfoGeral(Estruturas):
     def __init__(self, data, par_dados):
         Estruturas.__init__(self)
         self.lista_text = []
-        set_modelos = {}
+        set_modelos = set()
 
         ## TABELA JSON
         self.lista_text.append("<h3>Informações Gerais do Estudo</h3>"+"\n")

@@ -3,7 +3,7 @@ from apps.report.info.SIN.NEWAVE.infoSINNewave import InfoSINNewave
 
 class InfoSIN():
     def __init__(self, data, par_dados):
-        set_modelos = {}
+        set_modelos = set()
         for caso in data.casos:
             set_modelos.add(caso.modelo)
 
