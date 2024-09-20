@@ -38,11 +38,18 @@ class InfoSINNewave(Estruturas):
         earmi = data_pmo.energia_armazenada_inicial
         varmi = data_pmo.volume_armazenado_inicial
         
+        earm_max_first_per = earm_max.loc[(earm_max["configuracao"] == 1)]["valor_MWmes"].sum()
+        earmi_first_per = earmi["valor_MWmes"].sum()
+        varmi_first_per = varmi["valor_hm3"].sum()
         print(earm_max)
-
         print(earmi)
-
         print(varmi)
+
+
+        print(earm_max_first_per)
+        print(earmi_first_per)
+
+        print(varmi_first_per)
         exit(1)
         
 
