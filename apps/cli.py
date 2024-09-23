@@ -5,6 +5,7 @@ from apps.interface.dados_json_caso import Dados_json_caso
 from apps.utils.log import Log
 from pathlib import Path
 from apps.model.argumento import Argumento
+import pandas as pd
 
 option_xinf = click.option("--xinf", default=0,  help="Ponto Inferior do Eixo X")
 option_xsup = click.option("--xsup", default=60, help="Ponto Superior do Eixo X")
@@ -49,17 +50,26 @@ def cli():
 @option_modelo_report
 @option_automatico
 def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
+    cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
+    contador = 0
     if(automatico == "True"):
         current_directory = os.getcwd()
         for item in os.listdir(current_directory):
             if(item != "resultados" and item != "report"):
                 item_path = os.path.join(current_directory, item)
                 if os.path.isdir(item_path):
-                    print(item_path)
+                    if(os.path.exists(item_path+"/sintese")):
+                        caminho = item_path
+                        nome = item
+                        cor = cores[contador]
+                        modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')
+                        print(modelo)
+                        contador += 1
+                        print(item_path)
 
-        print(current_directory)
-        print("AUTOMATICO TRUE")
-        exit(1)
+    print(current_directory)
+    print("AUTOMATICO TRUE")
+    exit(1)
     from apps.services.report import Report
     Report(outpath, arquivo_json, txt, titulo, tipo)
 
