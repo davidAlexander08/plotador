@@ -1,14 +1,9 @@
 
 
 from apps.interface.dados_json_caso import Dados_json_caso
-from apps.report.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.model.argumento import Argumento
-from inewave.newave import Pmo
-from inewave.newave import Dger
-from inewave.newave import Cvar
-from idecomp.decomp import Relato
-from idessem.dessem.des_log_relato import DesLogRelato
+from apps.report.info.info import Info
 import plotly.graph_objects as go
 import plotly.io as pio
 import pandas as pd
@@ -22,17 +17,26 @@ import subprocess
 import shutil
 import json
 
-class Report(Estruturas):
-    def __init__(self,outpath, arq_json, txt, titulo):
-        Estruturas.__init__(self)
+class Report():
+    def __init__(self,outpath, arq_json, txt, titulo, tipo):
         #self.outpath = outpath
         self.json = arq_json
+        print(self.json)
         self.txt = txt
         self.titulo = titulo
         path = __file__.split("/")
         path.pop()
         path.pop()
-        arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
+        arquivo_template = ""
+        if(tipo == "Simples"):
+            arquivo_template = "/".join(path)+"/template_simples.txt" if self.txt is None else self.txt
+        elif(tipo == "Completo"):
+            arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
+        else:
+            print("Tipo definido errado: Simples ou Completo")
+            exit(1)
+        
+
         if(self.json is not None):
             data = Dados_json_caso(self.json)
             self.eco_indicadores = EcoIndicadores(data.casos)
@@ -43,7 +47,6 @@ class Report(Estruturas):
             path.pop()
             arq_json_exemplo = "/".join(path)+"/exemplo.json"
             current_directory = os.getcwd()
-            #print(current_directory)
             #shutil.copy(arq_json_exemplo, current_directory+"/exemplo.json")
             with open(arq_json_exemplo, "r") as file:
                 dados = json.load(file)
@@ -79,11 +82,6 @@ class Report(Estruturas):
                 conteudo = arquivo.read()
                 html_file.write(conteudo)
             head_html = """
-<body>
-    <div id="loader">
-        <span>ONS a energia que potencializa a vida - Carregando Visualização - Gerência PEM</span>
-    </div>
-
     <div class="sidebar">
         <div class="company-name">ONS</div>
         <ul>
@@ -93,126 +91,54 @@ class Report(Estruturas):
                 if("\page{") in line:
                     nome_pagina = line.split("{")[1].split("}")[0]
                     print(nome_pagina)
-                    html_file.write('<li><a href="#" onclick="showPage(\''+nome_pagina+'\')">'+nome_pagina+'</a></li>'+"\n")
+                    html_file.write('<li><a href="#" onclick="showSidebarPage(\''+nome_pagina+'\')">'+nome_pagina+'</a></li>'+"\n")
 
             html_file.write("</ul>"+"\n")
             html_file.write("</div>"+"\n")
             html_file.write('<div class="content">'+"\n")
-            flag = 0
-            lista_html = []
+            flag_primeira_pagina = True
+            flag_primeira_subpagina = True
+
             for line in lines:
                 if line.strip():
                     if("###" in line):
                         pass
                     elif("</h" in line):
                         html_file.write(line.strip()+"\n")
+
+                    elif("\info{") in line:
+                        nome_argumento_info = line.split("{")[1].split("}")[0]
+                        args = nome_argumento_info.split("/")
+                        chave = args[0]
+                        argumentos = nome_argumento_info.split("/")[1].split(",") if(len(args) > 1) else None
+                        par_dados = (chave, argumentos)
+                        info = Info(data, par_dados)
+                        html_file.write(info.text_html+"\n")
+
                     elif("\page{") in line:
-                        
-                        mapa_imagens_html = {}
+                        if(flag_primeira_pagina == False):
+                            html_file.write('</div>'+"\n")
+                        if(flag_primeira_subpagina == False):
+                            html_file.write('</div>'+"\n")
                         nome_pagina = line.split("{")[1].split("}")[0]
-                        if(flag == 1):
-                            pass
-                        pagina_ativa = "page active" if flag == 0 else "page"
-                        if(nome_pagina == "Infos" or nome_pagina == "Info"):
-                            flag = 1
-                            html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
-                            html_file.write('<button id="downloadAll">Baixar Gráficos</button>')
-                            Inicio_tabela = """
-    <table>
-    <tr>
-        <th>Nome do Caso</th>
-        <th>Caminho</th>
-        <th>Modelo</th>
-        <th>Cor</th>
-    </tr>
-"""                         
-                            Template_tabela_caso = """
-    <tr>
-        <td>nome</td>
-        <td>caminho</td>
-        <td>modelo</td>
-        <td>cor</td>
-    </tr>
-"""
-                            html_file.write(Inicio_tabela)
-                            html_file.write("<h2>Informações Gerais do Estudo</h2>"+"\n")
-                            for caso in data.casos:
-                                temp = Template_tabela_caso
-                                temp = temp.replace("nome", caso.nome)
-                                temp = temp.replace("caminho", caso.caminho)
-                                temp = temp.replace("modelo", caso.modelo)
-                                temp = temp.replace("cor", caso.cor)
-                                html_file.write(temp)
-                            html_file.write("</table>"+"\n")
+                        pagina_ativa = "page active" if flag_primeira_pagina == True else "page"
+                        html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
+                        flag_primeira_pagina = False
+                        flag_primeira_subpagina = True
                             
-                            html_file.write("<h2>Eco Dados Entrada</h2>"+"\n")
-                            
-                            flag_nw = flag_deco = flag_dss = True
-                            for caso in data.casos:
-                                if(caso.modelo == "NEWAVE"):
-                                    if(flag_nw == True):
-                                        html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                        flag_nw = False
-                                    temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso)
-                                if(caso.modelo == "DECOMP"):
-                                    if(flag_deco == True):
-                                        html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                        flag_deco = False
-                                    temp = self.preenche_modelo_tabela_modelo_DECOMP(caso)
-                                if(caso.modelo == "DESSEM"):
-                                    if(flag_dss == True):
-                                        html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                                        flag_dss = False
-                                    temp = self.preenche_modelo_tabela_modelo_DESSEM(caso)
-                                html_file.write(temp)
-                            html_file.write("</table>"+"\n")
-
-
-                            #html_file.write("<h2>Operacao</h2>"+"\n")
-                            #
-                            #flag_nw = flag_deco = flag_dss = True
-                            #for caso in data.casos:
-                            #    if(caso.modelo == "NEWAVE"):
-                            #        if(flag_nw == True):
-                            #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                            #            flag_nw = False
-                            #        temp = self.preenche_operacao_NEWAVE(caso)
-                            #    if(caso.modelo == "DECOMP"):
-                            #        if(flag_deco == True):
-                            #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                            #            flag_deco = False
-                            #        temp = self.preenche_operacao_DECOMP(caso)
-                            #    if(caso.modelo == "DESSEM"):
-                            #        if(flag_dss == True):
-                            #            html_file.write(self.mapa_tabela_modelo[caso.modelo])
-                            #            flag_dss = False
-                            #        temp = self.preenche_operacao_DESSEM(caso)
-                            #    html_file.write(temp)
-                            #html_file.write("</table>"+"\n")
-
+                    elif("\subpage{") in line:
+                        if(flag_primeira_subpagina == False):
                             html_file.write('</div>'+"\n")
 
-                        else:
-                            print(len(lista_html))
-                            if(len(lista_html) != 0):
-                                html_file.write('</select>'+"\n")
-                                html_file.write('<div id="'+nome_pagina+'container'+'"></div>'+"\n")
-                                html_file.write('</div>'+"\n")
-                                lista_html = []
-                                print("NETROU AQUI")
-                                
-
-                            flag = 1
-                            html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
-                            
-                            print(nome_pagina)
-                            mapa_imagens_html = {}
+                        if(flag_primeira_subpagina == True):
+                            html_file.write('</div>'+"\n")
+                            html_file.write('<div id="'+nome_pagina+'-subpages'+'" class="top-bar-menu">'+"\n")
+                        
+                        flag_primeira_subpagina = False
+                        nome_sub_pagina = line.split("{")[1].split("}")[0]
+                        html_file.write('<div id="'+nome_sub_pagina+'" class="page">'+"\n")
                             
                     elif("plotador" in line):
-                        if(len(lista_html) == 0):
-                            html_file.write('<select id="'+nome_pagina+"graphs"+'" onchange="showGraph('+pagina_ativa+')">'+"\n")
-                        
-
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
                         if( (data.casos[0].modelo == "DECOMP" or data.casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
@@ -240,194 +166,25 @@ class Report(Estruturas):
                                 if(comando == "--html"):
                                     extensao = ".html"
                                 contador += 1
+
                             if(extensao == ".html"):
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
                                     html_plotly = file.read()
-                                    mapa_imagens_html[nome_arquivo] = html_plotly
-                                    lista_html.append(html_plotly)
-                                    html_file.write('<option value="'+nome_arquivo+'">'+nome_arquivo+'</option>'+"\n")
-
-                                    #html_file.write(html_plotly+"\n")
                                     #html_file.write(nome_arquivo+"\n")
+                                    html_file.write(html_plotly+"\n")
                             else:
                                 with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
                                     base64_string = base64.b64encode(image_file.read()).decode('utf-8')
                                     html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
                                                 #<img src="data:image/png;base64,INSERT_BASE64_ENCODED_STRING_HERE" alt="Centered Image" style="max-width: 100%; height: auto;">
-
                     else:
                         html_file.write("<p>"+line.strip()+"</p>\n")
-                    #print(line)
 
             html_file.write('</div>'+"\n")
 
-            script_html = """
-    <script>
-        function showPage(pageId) {
-            // Hide all pages
-            var pages = document.querySelectorAll('.page');
-            pages.forEach(function(page) {
-                page.classList.remove('active');
-            });
-
-            // Show the selected page
-            var selectedPage = document.getElementById(pageId);
-            selectedPage.classList.add('active');
-        }
-    </script>
-
-    
-
-    <script>
-    document.getElementById('downloadAll').addEventListener('click', function() {
-        // Get all Plotly graph divs (assuming each graph is in a div with class "plotly-graph-div")
-        const graphs = document.querySelectorAll('.js-plotly-plot');
-
-        // Iterate through each graph and download it as a PNG
-        graphs.forEach((graph, index) => {
-            Plotly.downloadImage(graph, {
-                format: 'png', // Choose the format: 'png', 'jpeg', 'webp', etc.
-                filename: `graph_${index + 1}`, // Filename for each graph
-                width: 1200, // Width of the image
-                height: 600 // Height of the image
-            });
-        });
-    });
-    </script>
-
-    <script>
-    window.addEventListener('load', function() {
-        // Remove o loader após o carregamento da página
-        const loader = document.getElementById('loader');
-        if (loader) {
-            loader.style.display = 'none';
-        }
-    });
-    </script>
-
-            """
-            html_file.write(script_html)
-            html_file.write('</body>\n')
-            html_file.write('</html>\n')
-
+            with open("/".join(path)+"/report/script.txt", 'r', encoding='utf-8') as arquivo:
+                conteudo = arquivo.read()
+                html_file.write(conteudo)
 
         print("Report saved as report.html")
-
-
-
-    def preenche_operacao_NEWAVE(self,caso):
-
-        #df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-        #temp = self.mapa_template_tabela_modelo[caso.modelo]
-        #temp = temp.replace("Caso", caso.nome)
-        #temp = temp.replace("Modelo", caso.modelo)
-        #data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-        #data_dger = Dger.read(caso.caminho+"/dger.dat")
-        #data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
-        #print(data_dger.num_series_sinteticas)
-        #temp = temp.replace("Versao", data_pmo.versao_modelo)
-        #temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
-        #temp = temp.replace("Ano_I", str(data_dger.ano_inicio_estudo))
-        #temp = temp.replace("Anos_Pos", str(data_dger.num_anos_pos_estudo))
-        #temp = temp.replace("It_Max", str(data_dger.num_max_iteracoes))
-        #temp = temp.replace("It_Min", str(data_dger.num_minimo_iteracoes))
-        #temp = temp.replace("FW", str(data_dger.num_forwards))
-        #temp = temp.replace("BK", str(data_dger.num_aberturas))
-        #temp = temp.replace("N_series_sim_final", str(data_dger.num_series_sinteticas))
-        #tipo_sim_fin = "Ind" if data_dger.agregacao_simulacao_final == 1 else "Agr"
-        #temp = temp.replace("SF_Ind", tipo_sim_fin)
-        #temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
-        ##df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-        ##tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
-        ##iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
-        ##zinf = data_pmo.convergencia["zinf"].iloc[-1]
-        ##custo_total = data_pmo.custo_operacao_total
-        ##desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
-        ##temp = temp.replace("tempo_total", str(tempo_total))
-        ##temp = temp.replace("iteracoes", str(iteracoes))
-        ##temp = temp.replace("zinf", str(zinf))
-        ##temp = temp.replace("custo_total", str(custo_total))
-        ##temp = temp.replace("desvio_custo", str(desvio_custo))
-#
-        #return temp
-        pass
-
-
-    def preenche_operacao_DECOMP(self,caso):
-        pass
-
-    def preenche_operacao_DESSEM(self,caso):
-        pass
-
-
-    def preenche_modelo_tabela_modelo_NEWAVE(self,caso):
-
-        df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-
-        tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
-        versao = "0"
-
-        temp = self.mapa_template_tabela_modelo[caso.modelo]
-        temp = temp.replace("Caso", caso.nome)
-        temp = temp.replace("Modelo", caso.modelo)
-
-        data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-        data_dger = Dger.read(caso.caminho+"/dger.dat")
-        data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
-
-        temp = temp.replace("Versao", data_pmo.versao_modelo)
-        temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
-        temp = temp.replace("Ano_I", str(data_dger.ano_inicio_estudo))
-        temp = temp.replace("Anos_Pos", str(data_dger.num_anos_pos_estudo))
-        temp = temp.replace("It_Max", str(data_dger.num_max_iteracoes))
-        temp = temp.replace("It_Min", str(data_dger.num_minimo_iteracoes))
-        temp = temp.replace("FW", str(data_dger.num_forwards))
-        temp = temp.replace("BK", str(data_dger.num_aberturas))
-        temp = temp.replace("N_series_sim_final", str(data_dger.num_series_sinteticas))
-        tipo_sim_fin = "Ind" if data_dger.agregacao_simulacao_final == 1 else "Agr"
-        temp = temp.replace("SF_Ind", tipo_sim_fin)
-        temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
-        return temp
-
-    def preenche_modelo_tabela_modelo_DECOMP(self, caso):
-
-        df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-
-        tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
-        versao = "0"
-
-        temp = self.mapa_template_tabela_modelo[caso.modelo]
-        temp = temp.replace("nome", caso.nome)
-        temp = temp.replace("modelo", caso.modelo)
-        extensao = ""
-        with open(caso.caminho+"/caso.dat") as f:
-            extensao = f.readline().strip('\n')
-        if extensao == "":
-            raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
-        data_relato = Relato.read(caso.caminho+"/relato."+extensao).convergencia
-        df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-        tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
-        iteracoes = data_relato["iteracao"].iloc[-1]
-        zinf = data_relato["zinf"].iloc[-1]
-        custo_total = " "
-        versao = " "
-        temp = temp.replace("versao", versao)
-        temp = temp.replace("tempo_total", str(tempo_total))
-        temp = temp.replace("iteracoes", str(iteracoes))
-        temp = temp.replace("zinf", str(zinf))
-        temp = temp.replace("custo_total", str(custo_total))
-        return temp
-
-    def preenche_modelo_tabela_modelo_DESSEM(self, caso):
-        df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-        ## FALTA COMPLEMENTAR, ESTA INCOMPLETO
-        data_relato = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
-        df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-        tempo_total = df_caso["tempo"].sum()/60
-        iteracoes = " "
-        zinf = " "
-        custo_total = " "
-        desvio_custo = " "
-        versao = data_relato.versao
-        return temp
 

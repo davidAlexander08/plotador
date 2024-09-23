@@ -56,17 +56,6 @@ plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_
 plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese ENAA_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20
 
 
-\page{Usinas Hidro}
-
-<h1> Relatório de Usina Hidrelétricas </h1>
-
-\info{UHE}
-
-\subpage{ITAIPU}
-dafda
-\subpage{FURNAS}
-fdafda
-
 \page{Execucao}
 
 <h1> Relatório de Execução </h1>

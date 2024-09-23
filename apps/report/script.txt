@@ -1,0 +1,88 @@
+
+    <script>
+        function showSidebarPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.content .page').forEach(el => el.classList.remove('active'));
+            // Show the selected sidebar page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update top bar
+            const topBar = document.getElementById('top-bar');
+            const dropdown = topBar.querySelector('select');
+            const subpagesContainer = document.getElementById(pageId + '-subpages');
+            
+            // Clear previous options
+            dropdown.innerHTML = '';
+			// Add the default "Selecionar gráfico" option
+			const defaultOption = document.createElement('option');
+			defaultOption.value = '';
+			defaultOption.textContent = 'Selecionar gráfico';
+			defaultOption.selected = true;
+			defaultOption.disabled = true;
+			dropdown.appendChild(defaultOption);
+            //dropdown.style.display = 'none';
+
+            // Add new options based on the selected sidebar page
+			if (subpagesContainer) {
+				subpagesContainer.querySelectorAll('.page').forEach(page => {
+					const option = document.createElement('option');
+					option.value = page.id;
+					option.textContent = page.id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()); // Fix the replace pattern
+					dropdown.appendChild(option);
+				});
+
+				dropdown.style.display = 'block'; // Display the dropdown when subpages are present
+			} else {
+				dropdown.style.display = 'none'; // Hide the dropdown if no subpages are found
+			}
+        }
+
+        function showTopBarPage(pageId) {
+			document.querySelectorAll('.content .page').forEach(el => el.classList.remove('active'));
+			
+            // Hide all top bar pages            
+            //document.querySelectorAll('.top-bar-menu .page').forEach(el => el.classList.remove('active'));
+            // Show the selected top bar page
+            const page = document.getElementById(pageId);
+            if (page) page.classList.add('active');
+            }
+        
+
+        document.getElementById('downloadAll').addEventListener('click', function() {
+            // Get all Plotly graph divs
+            const graphs = document.querySelectorAll('.js-plotly-plot');
+
+            // Download Plotly graphs as PNGs
+            graphs.forEach((graph, index) => {
+                Plotly.downloadImage(graph, {
+                    format: 'png',
+                    filename: `graph_${index + 1}`,
+                    width: 1200,
+                    height: 600
+                });
+            });
+
+            // Get all PNG images in the HTML
+            const images = document.querySelectorAll('img[src$=".png"], img[src^="data:image/png"]');
+
+            // Iterate through each image and download it
+            images.forEach((img, index) => {
+                const link = document.createElement('a');
+                link.href = img.src; // Get the source of the image
+                link.download = `image_${index + 1}.png`; // Set a filename for the image
+                document.body.appendChild(link); // Append the link to the document
+                link.click(); // Simulate a click to download the image
+                document.body.removeChild(link); // Remove the link from the document
+            });
+        });
+
+        window.addEventListener('load', function() {
+            // Remove o loader após o carregamento da página
+            const loader = document.getElementById('loader');
+            if (loader) {
+                loader.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

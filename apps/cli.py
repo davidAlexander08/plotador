@@ -5,6 +5,7 @@ from apps.interface.dados_json_caso import Dados_json_caso
 from apps.utils.log import Log
 from pathlib import Path
 from apps.model.argumento import Argumento
+import pandas as pd
 
 option_xinf = click.option("--xinf", default=0,  help="Ponto Inferior do Eixo X")
 option_xsup = click.option("--xsup", default=60, help="Ponto Superior do Eixo X")
@@ -35,7 +36,8 @@ option_txt = click.option("--txt", default = None, help ="definicao do arquivo t
 option_y2 = click.option("--y2", default = None, help = "adicao de um segundo eixo para comparacao de uma dupla de casos com barras de diferença entre eles.")
 option_y2sup = click.option("--y2sup", default = None, help = "limite superior y2.")
 option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y2.")
-
+option_modelo_report = click.option("--tipo", default = "Simples", help = "Report Simples (Sem UHE) ou Completo")
+option_automatico = click.option("--automatico", default = "False", help = "Report Simples (Sem UHE) ou Completo")
 @click.group()
 def cli():
     pass
@@ -45,9 +47,47 @@ def cli():
 @option_json
 @option_txt
 @option_titulo
-def realiza_report(outpath, arquivo_json, txt, titulo):
+@option_modelo_report
+@option_automatico
+def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
+    cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
+    contador = 0
+    if(automatico == "True"):
+        flag_diretorio = 0
+        path = __file__.split("/")
+        path.pop()
+        path.pop()
+        arq_json_exemplo = "/".join(path)+"/apps/exemplo.json"
+        current_directory = os.getcwd()
+        novos_casos =[]
+        with open(arq_json_exemplo, "r") as file:
+            dados = json.load(file)
+            for item in os.listdir(current_directory):
+                if(item != "resultados" and item != "report"):
+                    item_path = os.path.join(current_directory, item)
+                    if os.path.isdir(item_path):
+                        if(os.path.exists(item_path+"/sintese")):
+                            caminho = item_path
+                            nome = item
+                            cor = cores[contador]
+                            modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
+                            contador += 1
+                            novo_caso = {"nome":nome,
+                                         "caminho":caminho,
+                                         "cor":cor,
+                                         "modelo":modelo}
+                            novos_casos.append(novo_caso)
+
+            dados["casos"] = novos_casos
+
+        with open("exemplo.json", 'w') as file:
+            json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
+
+        arquivo_json = "exemplo.json"
+
+
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt, titulo)
+    Report(outpath, arquivo_json, txt, titulo, tipo)
 
 @click.command("temporal")
 @option_xinf
