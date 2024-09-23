@@ -25,14 +25,9 @@ class InfoExecucaoNewave(Estruturas):
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
         print(df_temp)
 
-        df = self.eco_indicadores.retorna_df_concatenado("PROGRAMA")
+        df = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
         print(df)
 
-        df = self.eco_indicadores.retorna_df_concatenado("RECURSOS_CLUSTER")
-        print(df)
-
-        df = self.eco_indicadores.retorna_df_concatenado("RECURSOS_JOB")
-        print(df)
         exit(1)
 
         tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
