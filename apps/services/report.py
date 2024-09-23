@@ -21,6 +21,7 @@ class Report():
     def __init__(self,outpath, arq_json, txt, titulo, tipo):
         #self.outpath = outpath
         self.json = arq_json
+        print(self.json)
         self.txt = txt
         self.titulo = titulo
         path = __file__.split("/")
@@ -38,6 +39,7 @@ class Report():
 
         if(self.json is not None):
             data = Dados_json_caso(self.json)
+            print("DATA", data)
             self.eco_indicadores = EcoIndicadores(data.casos)
         if(self.txt is None and self.json is None):
             flag_diretorio = 0
