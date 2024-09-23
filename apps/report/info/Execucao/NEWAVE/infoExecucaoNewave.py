@@ -23,6 +23,7 @@ class InfoExecucaoNewave(Estruturas):
     def preenche_modelo_tabela_modelo_NEWAVE(self,caso):
 
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+        temp = self.template_Tabela_Operacao_NEWAVE
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
