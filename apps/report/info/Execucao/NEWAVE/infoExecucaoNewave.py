@@ -37,10 +37,10 @@ class InfoExecucaoNewave(Estruturas):
 
         df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
         df_caso_conv = df_conv.loc[(df_conv["caso"] == caso.nome)]
-        iteracao =      df_caso_conv.loc["iter"].iloc[-1]
-        zinf =          df_caso_conv.loc["zinf"].iloc[-1]
-        zsup =          df_caso_conv.loc["zsup"].iloc[-1]
-        t_ultimo_pl =   df_caso_conv.loc["tempo"].iloc[-1]/60
+        iteracao =      df_caso_conv["iter"].iloc[-1]
+        zinf =          df_caso_conv["zinf"].iloc[-1]
+        zsup =          df_caso_conv["zsup"].iloc[-1]
+        t_ultimo_pl =   df_caso_conv["tempo"].iloc[-1]/60
 
         temp = temp.replace("Calc Inicio (min)", str(round(tempo_inicial,2)))
         temp = temp.replace("Politica (min)", str(round(tempo_politica,2)))
