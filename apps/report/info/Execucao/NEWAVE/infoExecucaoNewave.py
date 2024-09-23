@@ -4,7 +4,7 @@ from apps.indicadores.eco_indicadores import EcoIndicadores
 from inewave.newave import Pmo
 from inewave.newave import Dger
 from inewave.newave import Cvar
-
+   
 
 class InfoExecucaoNewave(Estruturas):
     def __init__(self, data):
