@@ -49,7 +49,7 @@ def cli():
 @option_modelo_report
 @option_automatico
 def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
-    if(automatico == True):
+    if(automatico == "True"):
         print("AUTOMATICO TRUE")
         exit(1)
     from apps.services.report import Report
