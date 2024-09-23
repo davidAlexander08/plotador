@@ -62,7 +62,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
                         caminho = item_path
                         nome = item
                         cor = cores[contador]
-                        modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet", engine='pyarrow')["programa"]
+                        modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet", engine='pyarrow')["programa"].iloc[0]
                         print(modelo)
                         contador += 1
                         print(item_path)
