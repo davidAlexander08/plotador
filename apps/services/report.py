@@ -73,7 +73,7 @@ class Report():
                 html_file.write(conteudo)
             head_html = """
     <div class="sidebar">
-        <div class="company-name">Company_Report</div>
+        <div class="company-name">ONS</div>
         <ul>
             """
             html_file.write(head_html)
