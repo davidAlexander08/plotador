@@ -26,6 +26,7 @@ class InfoGeralOperNewave(Estruturas):
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+        print(caso.caminho)
         data_dger = Dger.read(caso.caminho+"/dger.dat")
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
 
