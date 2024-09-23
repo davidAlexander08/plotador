@@ -53,19 +53,38 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
     contador = 0
     if(automatico == "True"):
+        flag_diretorio = 0
+        path = __file__.split("/")
+        path.pop()
+        path.pop()
+        arq_json_exemplo = "/".join(path)+"/exemplo.json"
         current_directory = os.getcwd()
-        for item in os.listdir(current_directory):
-            if(item != "resultados" and item != "report"):
-                item_path = os.path.join(current_directory, item)
-                if os.path.isdir(item_path):
-                    if(os.path.exists(item_path+"/sintese")):
-                        caminho = item_path
-                        nome = item
-                        cor = cores[contador]
-                        modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
-                        contador += 1
-                        print(modelo)
-                        print(item_path)
+        novos_casos =[]
+        with open(arq_json_exemplo, "r") as file:
+            dados = json.load(file)
+            for item in os.listdir(current_directory):
+                if(item != "resultados" and item != "report"):
+                    item_path = os.path.join(current_directory, item)
+                    if os.path.isdir(item_path):
+                        if(os.path.exists(item_path+"/sintese")):
+                            caminho = item_path
+                            nome = item
+                            cor = cores[contador]
+                            modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
+                            contador += 1
+                            novo_caso = {"nome":nome,
+                                         "caminho":caminho,
+                                         "cor":cor,
+                                         "modelo":modelo}
+                            novos_casos.append(novo_caso)
+
+            dados["casos"] = novos_casos
+
+        with open("exemplo.json", 'w') as file:
+            json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
+
+            self.json = "exemplo.json"
+            data = Dados_json_caso(self.json)
 
     print(current_directory)
     print("AUTOMATICO TRUE")
