@@ -23,80 +23,41 @@ class InfoExecucaoNewave(Estruturas):
     def preenche_modelo_tabela_modelo_NEWAVE(self,caso):
 
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-        print(df_temp)
-
-        df = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
-        print(df)
-
-        exit(1)
-
-        tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
-        versao = "0"
-        temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-        data_dger = Dger.read(caso.caminho+"/dger.dat")
-        data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
         temp = temp.replace("Versao", data_pmo.versao_modelo)
 
-        earm_max = data_pmo.energia_armazenada_maxima
-        earmi = data_pmo.energia_armazenada_inicial
-        varmi = data_pmo.volume_armazenado_inicial
-        
-        earm_max_first_per = earm_max.loc[(earm_max["configuracao"] == 1)]["valor_MWmes"].sum()
-        earmi_first_per = earmi["valor_MWmes"].sum()
-        varmi_first_per = varmi["valor_hm3"].sum()
+        df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+        tempo_inicial = df_caso.loc[(df_caso["etapa"] == "Calculos Iniciais")]["tempo"].iloc[0]/60
+        tempo_politica = df_caso.loc[(df_caso["etapa"] == "Calculo da Politica")]["tempo"].iloc[0]/60
+        tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
+        tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
 
-        earpf_i = round(earmi_first_per/earm_max_first_per,2)
-        #varm_i = round(varmi_first_per,2)
+        df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
+        df_caso_conv = df_conv.loc[(df_conv["caso"] == caso.nome)]
+        iteracao =      df_caso_conv.loc["iter"].iloc[-1]
+        zinf =          df_caso_conv.loc["zinf"].iloc[-1]
+        zsup =          df_caso_conv.loc["zsup"].iloc[-1]
+        t_ultimo_pl =   df_caso_conv.loc["tempo"].iloc[-1]/60
 
-        temp = temp.replace("EarmI", str(round(earmi_first_per,2)))
-        temp = temp.replace("EarpI", str(earpf_i))
-        #temp = temp.replace("VarmI", str(varm_i))
+        temp = temp.replace("Calc Inicio (min)", str(round(tempo_inicial,2)))
+        temp = temp.replace("Politica (min)", str(round(tempo_politica,2)))
+        temp = temp.replace("Sim. Final (Min)", str(round(tempo_sf,2)))
+        temp = temp.replace("Total (min)", str(round(tempo_total,2)))
+        temp = temp.replace("Iter", str(round(iteracao,2)))
+        temp = temp.replace("Zinf", str(round(zinf,2)))
+        temp = temp.replace("Zsup", str(round(zsup,2)))
+        temp = temp.replace("Ultimo PL (min)", str(round(t_ultimo_pl,2)))
 
-        df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SIN_EST")
-        df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)]
-        df_gh = self.eco_indicadores.retorna_df_concatenado("GHID_SIN_EST")
-        df_gh_caso = df_gh.loc[(df_gh["caso"] == caso.nome)]
-        df_earpf = self.eco_indicadores.retorna_df_concatenado("EARPF_SIN_EST")
-        df_earpf_caso = df_earpf.loc[(df_earpf["caso"] == caso.nome)]
-
-        print(df_gt_caso)
-        print(df_gh_caso)
-        print(df_earpf_caso)
-
-        gt_2_mes = df_gt_caso.loc[(df_gt_caso["estagio"] == 2) & (df_gt_caso["cenario"] == "mean")]["valor"].iloc[0]
-        gh_2_mes = df_gh_caso.loc[(df_gh_caso["estagio"] == 2) & (df_gh_caso["cenario"] == "mean")]["valor"].iloc[0]
-        earpf_2_mes = df_earpf_caso.loc[(df_earpf_caso["estagio"] == 2) & (df_earpf_caso["cenario"] == "mean")]["valor"].iloc[0]
-
-        print(round(gt_2_mes,2))
-        print(round(gh_2_mes,2))
-        print(round(earpf_2_mes,2))
-
-        temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
-        temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
-        temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
-
-        gt_avg = df_gt_caso.loc[(df_gt_caso["cenario"] == "mean")]["valor"].mean()
-        gh_avg = df_gh_caso.loc[(df_gh_caso["cenario"] == "mean")]["valor"].mean()
-        earpf_avg = df_earpf_caso.loc[(df_earpf_caso["cenario"] == "mean")]["valor"].mean()
-
-        print(round(gt_avg,2))
-        print(round(gh_avg,2))
-        print(round(earpf_avg,2))
-
-        temp = temp.replace("Media_GT", str(round(gt_avg,2)))
-        temp = temp.replace("Media_GH", str(round(gh_avg,2)))
-        temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
-
-
-        #    <td>2_Mes_GT</td>
-        #    <td>2_Mes_GH</td>
-        #    <td>2_Mes_EARPF</td>
-        #    <td>Media_GT</td>
-        #    <td>Media_GH</td>
-        #    <td>Media_EARPF</td>
-
+        #    <td>Caso</td>
+        #    <td>Modelo</td>
+        #    <td>Versao</td>
+        #    <td>Dados Entrada (min)</td>
+        #    <td>Politica (min)</td>
+        #    <td>Sim. Final (Min)</td>
+        #    <td>Total (min)</td>
+        #    <td>Zinf</td>
+        #    <td>Zsup</td>
 
         return temp

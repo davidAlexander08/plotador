@@ -8,14 +8,14 @@ class Estruturas:
             <th>Caso</th>
             <th>Modelo</th>
             <th>Versao</th>
-            <th>Tempo</th>
-            <th>EarpI</th>
-            <th>2 Mes GT</th>
-            <th>2 Mes GH</th>
-            <th>2 Mes EARPF</th>
-            <th>Média GT</th>
-            <th>Média GH</th>
-            <th>Média EARPF</th>
+            <th>Calc Inicio (min)</th>
+            <th>Politica (min)</th>
+            <th>Sim. Final (Min)</th>
+            <th>Total (min)</th>
+            <th>Iter</th>
+            <th>Zinf</th>
+            <th>Zsup</th>
+            <th>Ultimo PL (min)</th>
         </tr>
 """
 
@@ -25,14 +25,14 @@ class Estruturas:
             <td>Caso</td>
             <td>Modelo</td>
             <td>Versao</td>
-            <td>EarmI</td>
-            <td>EarpI</td>
-            <td>2_Mes_GT</td>
-            <td>2_Mes_GH</td>
-            <td>2_Mes_EARPF</td>
-            <td>Media_GT</td>
-            <td>Media_GH</td>
-            <td>Media_EARPF</td>
+            <td>Calc Inicio (min)</td>
+            <td>Politica (min)</td>
+            <td>Sim. Final (Min)</td>
+            <td>Total (min)</td>
+            <td>Iter</td>
+            <td>Zinf</td>
+            <td>Zsup</td>
+            <td>Ultimo PL (min)</td>
         </tr>
 """
 
