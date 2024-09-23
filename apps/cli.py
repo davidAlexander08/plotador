@@ -83,8 +83,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
         with open("exemplo.json", 'w') as file:
             json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
 
-            self.json = "exemplo.json"
-            data = Dados_json_caso(self.json)
+        arquivo_json = "exemplo.json"
 
     print(current_directory)
     print("AUTOMATICO TRUE")
