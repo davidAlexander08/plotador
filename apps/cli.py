@@ -36,6 +36,7 @@ option_y2 = click.option("--y2", default = None, help = "adicao de um segundo ei
 option_y2sup = click.option("--y2sup", default = None, help = "limite superior y2.")
 option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y2.")
 
+option_modelo_report = click.option("--tipo", default = "Simples", help = "Report Simples (Sem UHE) ou Completo")
 @click.group()
 def cli():
     pass
@@ -45,9 +46,10 @@ def cli():
 @option_json
 @option_txt
 @option_titulo
-def realiza_report(outpath, arquivo_json, txt, titulo):
+@option_modelo_report
+def realiza_report(outpath, arquivo_json, txt, titulo, tipo):
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt, titulo)
+    Report(outpath, arquivo_json, txt, titulo, tipo)
 
 @click.command("temporal")
 @option_xinf

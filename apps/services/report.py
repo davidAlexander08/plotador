@@ -18,7 +18,7 @@ import shutil
 import json
 
 class Report():
-    def __init__(self,outpath, arq_json, txt, titulo):
+    def __init__(self,outpath, arq_json, txt, titulo, tipo):
         #self.outpath = outpath
         self.json = arq_json
         self.txt = txt
@@ -26,7 +26,16 @@ class Report():
         path = __file__.split("/")
         path.pop()
         path.pop()
-        arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
+        arquivo_template = ""
+        if(tipo == "Simples"):
+            arquivo_template = "/".join(path)+"/template_simples.txt" if self.txt is None else self.txt
+        elif(tipo == "Completo"):
+            arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
+        else:
+            print("Tipo definido errado: Simples ou Completo")
+            exit(1)
+        
+
         if(self.json is not None):
             data = Dados_json_caso(self.json)
             self.eco_indicadores = EcoIndicadores(data.casos)
