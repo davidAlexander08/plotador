@@ -85,9 +85,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
 
         arquivo_json = "exemplo.json"
 
-    print(current_directory)
-    print("AUTOMATICO TRUE")
-    exit(1)
+
     from apps.services.report import Report
     Report(outpath, arquivo_json, txt, titulo, tipo)
 
