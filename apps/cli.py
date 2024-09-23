@@ -52,10 +52,11 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
     if(automatico == "True"):
         current_directory = os.getcwd()
         for item in os.listdir(current_directory):
-            item_path = os.path.join(current_directory, item)
-            if os.path.isdir(item_path):
-                print(item_path)
-                
+            if(item != "resultados" and item != "report"):
+                item_path = os.path.join(current_directory, item)
+                if os.path.isdir(item_path):
+                    print(item_path)
+
         print(current_directory)
         print("AUTOMATICO TRUE")
         exit(1)
