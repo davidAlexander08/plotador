@@ -50,6 +50,8 @@ def cli():
 @option_automatico
 def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
     if(automatico == "True"):
+        current_directory = os.getcwd()
+        print(current_directory)
         print("AUTOMATICO TRUE")
         exit(1)
     from apps.services.report import Report
