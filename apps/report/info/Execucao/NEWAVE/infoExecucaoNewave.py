@@ -22,6 +22,19 @@ class InfoExecucaoNewave(Estruturas):
 
     def preenche_modelo_tabela_modelo_NEWAVE(self,caso):
 
+        df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+        print(df_temp)
+
+        df = self.eco_indicadores.retorna_df_concatenado("PROGRAMA")
+        print(df)
+
+        df = self.eco_indicadores.retorna_df_concatenado("RECURSOS_CLUSTER")
+        print(df)
+
+        df = self.eco_indicadores.retorna_df_concatenado("RECURSOS_JOB")
+        print(df)
+        exit(1)
+
         tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
         versao = "0"
         temp = self.template_Tabela_Eco_Entrada

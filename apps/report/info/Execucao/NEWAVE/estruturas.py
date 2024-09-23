@@ -8,7 +8,7 @@ class Estruturas:
             <th>Caso</th>
             <th>Modelo</th>
             <th>Versao</th>
-            <th>EarmI</th>
+            <th>Tempo</th>
             <th>EarpI</th>
             <th>2 Mes GT</th>
             <th>2 Mes GH</th>
