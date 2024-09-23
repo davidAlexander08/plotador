@@ -57,7 +57,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
         path = __file__.split("/")
         path.pop()
         path.pop()
-        arq_json_exemplo = "/".join(path)+"/exemplo.json"
+        arq_json_exemplo = "/".join(path)+"/apps/exemplo.json"
         current_directory = os.getcwd()
         novos_casos =[]
         with open(arq_json_exemplo, "r") as file:
