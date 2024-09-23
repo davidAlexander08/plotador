@@ -35,8 +35,8 @@ option_txt = click.option("--txt", default = None, help ="definicao do arquivo t
 option_y2 = click.option("--y2", default = None, help = "adicao de um segundo eixo para comparacao de uma dupla de casos com barras de diferença entre eles.")
 option_y2sup = click.option("--y2sup", default = None, help = "limite superior y2.")
 option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y2.")
-
 option_modelo_report = click.option("--tipo", default = "Simples", help = "Report Simples (Sem UHE) ou Completo")
+option_automatico = click.option("--automatico", default = "False", help = "Report Simples (Sem UHE) ou Completo")
 @click.group()
 def cli():
     pass
@@ -47,7 +47,11 @@ def cli():
 @option_txt
 @option_titulo
 @option_modelo_report
-def realiza_report(outpath, arquivo_json, txt, titulo, tipo):
+@option_automatico
+def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
+    if(automatico == True):
+        print("AUTOMATICO TRUE")
+        exit(1)
     from apps.services.report import Report
     Report(outpath, arquivo_json, txt, titulo, tipo)
 
