@@ -13,7 +13,7 @@ class InfoGeralEcoDessem(Estruturas):
         self.lista_text = []
         self.lista_text.append(self.Tabela_Eco_Entrada)
         for caso in data.casos:
-            if(caso.modelo == "NEWAVE"):
+            if(caso.modelo == "DESSEM"):
                 temp = self.preenche_modelo_tabela_modelo(caso)
                 self.lista_text.append(temp)
         self.lista_text.append("</table>"+"\n")
