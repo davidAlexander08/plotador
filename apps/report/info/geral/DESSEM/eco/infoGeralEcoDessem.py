@@ -40,6 +40,7 @@ class InfoGeralEcoDessem(Estruturas):
         engolimento = data_dessopc.engolimento #CONSIDERA ENGOLIMENTO MAXIMO
         tratainviabilha = data_dessopc.tratainviabilha #TRATA INVIAB ILHA
 
+        print(caso.caminho)
         print(ucterm)
         print(crossover)
         print(engolimento)
