@@ -17,7 +17,7 @@ class InfoSIN():
                 #self.lista_text.append(InfoGeralEcoDecomp(data).text_html)
                 pass
             if(modelo == "DESSEM"):
-                #self.lista_text.append(InfoGeralEcoDessem(data).text_html)
+                self.lista_text.append(InfoSINDessem(data).text_html)
                 pass
 
         self.text_html = "\n".join(self.lista_text)

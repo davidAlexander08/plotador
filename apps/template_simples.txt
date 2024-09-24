@@ -36,7 +36,7 @@ plotador temporal --titulo Custo_Operacional_SIN --json arquivo_json --sintese E
 
 <h1> Relatório de Submercados </h1>
 
-\info{SBM}
+
 
 \subpage{Geracoes}
 
