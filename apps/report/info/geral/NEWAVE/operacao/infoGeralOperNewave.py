@@ -11,18 +11,18 @@ class InfoGeralOperNewave(Estruturas):
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.lista_text = []
-        self.lista_text.append(self.Tabela_Operacao_NEWAVE)
+        self.lista_text.append(self.Tabela_Operacao)
         for caso in data.casos:
             if(caso.modelo == "NEWAVE"):
-                temp = self.preenche_operacao_NEWAVE(caso)
+                temp = self.preenche_operacao(caso)
                 self.lista_text.append(temp)
         self.lista_text.append("</table>"+"\n")
         self.text_html = "\n".join(self.lista_text)
 
-    def preenche_operacao_NEWAVE(self,caso):
+    def preenche_operacao(self,caso):
 
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-        temp = self.template_Tabela_Operacao_NEWAVE
+        temp = self.template_Tabela_Operacao
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         data_pmo = Pmo.read(caso.caminho+"/pmo.dat")

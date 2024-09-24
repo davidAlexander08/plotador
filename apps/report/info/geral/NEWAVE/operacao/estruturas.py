@@ -2,7 +2,7 @@ class Estruturas:
     def __init__(self):
 
 
-        self.Tabela_Operacao_NEWAVE = """
+        self.Tabela_Operacao = """
         <table>
         <tr>
             <th>Caso</th>
@@ -17,7 +17,7 @@ class Estruturas:
         </tr>
     """      
 
-        self.template_Tabela_Operacao_NEWAVE = """
+        self.template_Tabela_Operacao = """
         <tr>
             <td>Caso</td>
             <td>Modelo</td>
