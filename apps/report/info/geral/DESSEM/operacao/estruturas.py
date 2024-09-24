@@ -12,8 +12,6 @@ class Estruturas:
             <th>Custo Presente</th>
             <th>Custo Futuro</th>
             <th>Custo Viol</th>
-            <th>Custo Peq. Penalid</th>
-            <th>Max Gap Otim</th>
         </tr>
     """      
 
@@ -26,7 +24,5 @@ class Estruturas:
             <td>Custo Presente</td>
             <td>Custo Futuro</td>
             <td>Custo Viol</td>
-            <td>Custo Peq. Penalid</td>
-            <td>Max Gap Otim</td>
         </tr>
     """     
