@@ -2,6 +2,7 @@
 from apps.report.info.geral.DESSEM.eco.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from idessem.dessem.des_log_relato import DesLogRelato
+from idessem.dessem.dessopc import Dessopc
 from inewave.newave import Dger
 from inewave.newave import Cvar
 
@@ -33,6 +34,18 @@ class InfoGeralEcoDessem(Estruturas):
         temp = temp.replace("Data", str(data_des_log.data_estudo))
 
 
+        data_dessopc = Dessopc.read(caso.caminho+"/dessopc.dat")
+        ucterm = data_dessopc.ucterm #INCLUSAO OU NAO UCTERM
+        crossover = data_dessopc.crossover #ALTERACOES DO CROSSOVER
+        engolimento = data_dessopc.engolimento #CONSIDERA ENGOLIMENTO MAXIMO
+        tratainviabilha = data_dessopc.tratainviabilha #TRATA INVIAB ILHA
+
+        print(ucterm)
+        print(crossover)
+        print(engolimento)
+        print(tratainviabilha)
+        
+        exit(1)
         temp = temp.replace("Tempo", str(data_des_log.tempo_processamento))
         print(data_des_log.versao)
         print(data_des_log.data_estudo)
