@@ -34,12 +34,12 @@ class InfoGeralOperDessem(Estruturas):
         colunas = otim.loc[(otim["variavel"] == "Funcao objetivo do Problema Linear (FOBJ)")]
         print(colunas)
 
-        custo_real                  = otim.loc[(otim["variavel"] == "Funcao objetivo do Problema Linear (FOBJ)")]["valor"]
-        parcela_custo_presente      = otim.loc[(otim["variavel"] == "Parcela de custo presente")]["valor"]            
-        parcela_Custo_Futuro        = otim.loc[(otim["variavel"] == "Parcela de custo Futuro")]["valor"]            
-        custo_viol_restr            = otim.loc[(otim["variavel"] == "Custo de violacao de restricoes")]["valor"]            
-        custo_pequenas_penalidades  = otim.loc[(otim["variavel"] == "Custo de pequenas penalidades")]["valor"]            
-        gap_max_otim                = otim.loc[(otim["variavel"] == "Gap Maximo de Otimalidade")]["valor"]            
+        custo_real                  = otim.loc[(otim["variavel"] == "Funcao objetivo do Problema Linear (FOBJ)")]["valor"].iloc[0]
+        parcela_custo_presente      = otim.loc[(otim["variavel"] == "Parcela de custo presente")]["valor"].iloc[0]            
+        parcela_Custo_Futuro        = otim.loc[(otim["variavel"] == "Parcela de custo Futuro")]["valor"].iloc[0]            
+        custo_viol_restr            = otim.loc[(otim["variavel"] == "Custo de violacao de restricoes")]["valor"].iloc[0]            
+        custo_pequenas_penalidades  = otim.loc[(otim["variavel"] == "Custo de pequenas penalidades")]["valor"].iloc[0]            
+        gap_max_otim                = otim.loc[(otim["variavel"] == "Gap Maximo de Otimalidade")]["valor"].iloc[0]            
 
         temp = temp.replace("Custo Total",          str(custo_real))
         temp = temp.replace("Custo Presente",       str(parcela_custo_presente))
