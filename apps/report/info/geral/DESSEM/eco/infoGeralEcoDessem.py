@@ -39,22 +39,11 @@ class InfoGeralEcoDessem(Estruturas):
         crossover = data_dessopc.crossover #ALTERACOES DO CROSSOVER
         #engolimento = data_dessopc.engolimento #CONSIDERA ENGOLIMENTO MAXIMO
         #tratainviabilha = data_dessopc.tratainviabilha #TRATA INVIAB ILHA
-
-        temp = temp.replace("Ucterm", str(ucterm))
+        string_ucterm = "None" if ucterm is None else str(ucterm)
         string_crossover = "None" if crossover is None else ' '.join(map(str, crossover[:-1]))
+
+        temp = temp.replace("Ucterm", string_ucterm)
         temp = temp.replace("Crossover", string_crossover)
-        print(caso.caminho)
-        print(ucterm)
-        print(string_crossover)
-        #print(engolimento)
-        #print(tratainviabilha)
-        
-        exit(1)
-        temp = temp.replace("Tempo", str(data_des_log.tempo_processamento))
-        print(data_des_log.versao)
-        print(data_des_log.data_estudo)
-        print(data_des_log.tempo_processamento)
-        print(data_des_log.variaveis_otimizacao)
         
 
         return temp
