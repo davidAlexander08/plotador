@@ -1,7 +1,7 @@
 
 from apps.report.info.geral.DESSEM.eco.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
-from idessem.dessem import DesLogRelato
+from idessem.dessem.des_log_relato import DesLogRelato
 from inewave.newave import Dger
 from inewave.newave import Cvar
 
