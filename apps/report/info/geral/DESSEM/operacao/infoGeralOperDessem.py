@@ -31,7 +31,7 @@ class InfoGeralOperDessem(Estruturas):
         otim = data_des_log.variaveis_otimizacao
         print(data_des_log.variaveis_otimizacao)
 
-        custo_real                  = otim["Funcao objetivo do Problema Linear (FOBJ)"]
+        custo_real                  = otim["        Funcao objetivo do Problema Linear (FOBJ)"] 
         parcela_custo_presente      = otim["Parcela de custo presente"]
         parcela_Custo_Futuro        = otim["Parcela de custo Futuro"]
         custo_viol_restr            = otim["Custo de violacao de restricoes"]
