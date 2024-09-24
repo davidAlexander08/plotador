@@ -10,8 +10,7 @@ class Estruturas:
             <th>Caso</th>
             <th>Modelo</th>
             <th>Versao</th>
-            <th>Mes I</th>
-            <th>Ano I</th>
+            <th>Data</th>
             <th>Anos Pos</th>
             <th>It Max</th>
             <th>It Min</th>
@@ -29,8 +28,7 @@ class Estruturas:
             <td>Caso</td>
             <td>Modelo</td>
             <td>Versao</td>
-            <td>Mes_I</td>
-            <td>Ano_I</td>
+            <td>Data</td>
             <td>Anos_Pos</td>
             <td>It_Max</td>
             <td>It_Min</td>
