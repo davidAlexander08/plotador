@@ -37,14 +37,17 @@ class InfoGeralEcoDessem(Estruturas):
         data_dessopc = Dessopc.read(caso.caminho+"/dessopc.dat")
         ucterm = data_dessopc.ucterm #INCLUSAO OU NAO UCTERM
         crossover = data_dessopc.crossover #ALTERACOES DO CROSSOVER
-        engolimento = data_dessopc.engolimento #CONSIDERA ENGOLIMENTO MAXIMO
-        tratainviabilha = data_dessopc.tratainviabilha #TRATA INVIAB ILHA
+        #engolimento = data_dessopc.engolimento #CONSIDERA ENGOLIMENTO MAXIMO
+        #tratainviabilha = data_dessopc.tratainviabilha #TRATA INVIAB ILHA
 
+        temp = temp.replace("Ucterm", str(ucterm))
+        string_crossover = "None" if crossover is None else ' '.join(map(str, crossover[:-1]))
+        temp = temp.replace("Crossover", string_crossover)
         print(caso.caminho)
         print(ucterm)
-        print(crossover)
-        print(engolimento)
-        print(tratainviabilha)
+        print(string_crossover)
+        #print(engolimento)
+        #print(tratainviabilha)
         
         exit(1)
         temp = temp.replace("Tempo", str(data_des_log.tempo_processamento))

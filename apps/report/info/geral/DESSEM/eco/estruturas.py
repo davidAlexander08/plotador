@@ -13,8 +13,6 @@ class Estruturas:
             <th>Data</th>
             <th>Ucterm</th>
             <th>Crossover</th>
-            <th>Engolimento</th>
-            <th>Tratainviabilha</th>
         </tr>
 """
 
@@ -27,8 +25,6 @@ class Estruturas:
             <td>Data</td>
             <td>Ucterm</td>
             <td>Crossover</td>
-            <td>Engolimento</td>
-            <td>Tratainviabilha</td>
         </tr>
 """
 
