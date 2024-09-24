@@ -14,13 +14,13 @@ class InfoGeralEcoNewave(Estruturas):
         self.lista_text.append(self.Tabela_Eco_Entrada)
         for caso in data.casos:
             if(caso.modelo == "NEWAVE"):
-                temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso)
+                temp = self.preenche_modelo_tabela_modelo(caso)
                 self.lista_text.append(temp)
         self.lista_text.append("</table>"+"\n")
 
         self.text_html = "\n".join(self.lista_text)
 
-    def preenche_modelo_tabela_modelo_NEWAVE(self,caso):
+    def preenche_modelo_tabela_modelo(self,caso):
 
 
         tempo_total = iteracoes = zinf = custo_total = desvio_custo = 0
