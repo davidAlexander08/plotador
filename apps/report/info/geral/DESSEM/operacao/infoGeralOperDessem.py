@@ -38,15 +38,15 @@ class InfoGeralOperDessem(Estruturas):
         parcela_custo_presente      = otim.loc[(otim["variavel"] == "Parcela de custo presente")]["valor"].iloc[0]            
         parcela_Custo_Futuro        = otim.loc[(otim["variavel"] == "Parcela de custo Futuro")]["valor"].iloc[0]            
         custo_viol_restr            = otim.loc[(otim["variavel"] == "Custo de violacao de restricoes")]["valor"].iloc[0]            
-        custo_pequenas_penalidades  = otim.loc[(otim["variavel"] == "Custo de pequenas penalidades")]["valor"].iloc[0]            
-        gap_max_otim                = otim.loc[(otim["variavel"] == "Gap Maximo de Otimalidade")]["valor"].iloc[0]            
+        #custo_pequenas_penalidades  = otim.loc[(otim["variavel"] == "Custo de pequenas penalidades")]["valor"].iloc[0]            
+        #gap_max_otim                = otim.loc[(otim["variavel"] == "Gap Maximo de Otimalidade")]["valor"].iloc[0]            
 
         temp = temp.replace("Custo Total",          str(custo_real))
         temp = temp.replace("Custo Presente",       str(parcela_custo_presente))
         temp = temp.replace("Custo Futuro",         str(parcela_Custo_Futuro))
         temp = temp.replace("Custo Viol",           str(custo_viol_restr))
-        temp = temp.replace("Custo Peq. Penalid",   str(custo_pequenas_penalidades))
-        temp = temp.replace("Max Gap Otim",         str(gap_max_otim))
+        #temp = temp.replace("Custo Peq. Penalid",   str(custo_pequenas_penalidades))
+        #temp = temp.replace("Max Gap Otim",         str(gap_max_otim))
 
         
         #    <td>Caso</td>
