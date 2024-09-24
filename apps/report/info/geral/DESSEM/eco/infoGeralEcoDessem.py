@@ -40,6 +40,4 @@ class InfoGeralEcoDessem(Estruturas):
         print(data_des_log.variaveis_otimizacao)
         
 
-        exit(1)
-
         return temp
