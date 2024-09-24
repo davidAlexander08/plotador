@@ -27,7 +27,7 @@ class InfoGeralOperDessem(Estruturas):
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         data_des_log = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
-        temp = temp.replace("Tempo", data_des_log.tempo_processamento)
+        temp = temp.replace("Tempo", str(data_des_log.tempo_processamento))
         otim = data_des_log.variaveis_otimizacao
         print(data_des_log.variaveis_otimizacao)
 
