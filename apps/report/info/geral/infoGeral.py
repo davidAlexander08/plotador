@@ -2,6 +2,10 @@
 from apps.report.info.geral.estruturas import Estruturas
 from apps.report.info.geral.NEWAVE.eco.infoGeralEcoNewave import InfoGeralEcoNewave
 from apps.report.info.geral.NEWAVE.operacao.infoGeralOperNewave import InfoGeralOperNewave
+
+from apps.report.info.geral.DESSEM.eco.infoGeralEcoDessem import InfoGeralEcoDessem
+from apps.report.info.geral.DESSEM.operacao.infoGeralOperDessem import InfoGeralOperDessem
+
 class InfoGeral(Estruturas):
     def __init__(self, data, par_dados):
         Estruturas.__init__(self)
@@ -31,7 +35,7 @@ class InfoGeral(Estruturas):
                     #self.lista_text.append(InfoGeralEcoDecomp(data).text_html)
                     pass
                 if(modelo == "DESSEM"):
-                    #self.lista_text.append(InfoGeralEcoDessem(data).text_html)
+                    self.lista_text.append(InfoGeralEcoDessem(data).text_html)
                     pass
 
             if(par_dados[1] == "OPER" or par_dados[1] == None):
