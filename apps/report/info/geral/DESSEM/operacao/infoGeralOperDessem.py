@@ -6,7 +6,7 @@ from inewave.newave import Dger
 from inewave.newave import Cvar
 
 
-class InfoGeralOperNewave(Estruturas):
+class InfoGeralOperDessem(Estruturas):
     def __init__(self, data):
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.casos)
