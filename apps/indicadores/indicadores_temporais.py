@@ -60,10 +60,12 @@ class IndicadoresTemporais(EcoIndicadores):
             mapa_argumentos = self.retornaMapaDF(unidade.sintese.espacial)
             print(mapa_argumentos)
             
+            coluna_filtro = unidade.filtro.split("_")[1]
+            print(coluna_filtro)
             for c in self.casos:
                 
-                print(mapa_argumentos[c])
-                
+                cod_arg = mapa_argumentos[c].loc[(mapa_argumentos[c][coluna_filtro] == unidade.filtroArgumento)]
+                print(cod_arg)                
                 eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == unidade.filtroArgumento]
             exit(1)
             if(boxplot =="True"):
