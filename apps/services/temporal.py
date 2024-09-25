@@ -52,7 +52,7 @@ class Temporal:
                         #b = min(255, b * factor)
                         #brightened_rgba = f'rgba({int(r)}, {int(g)}, {int(b)}, {a})'
 
-                        novos_casos.append(Caso(caso.nome+"_"+cen, caso.caminho, caso.cor, marcador, caso.modelo, dash, cen))
+                        novos_casos.append(Caso(caso.nome+"_"+cen, caso.caminho, caso.cor, marcador, caso.modelo, dash, cen, self.patamar ))
                         contador += 1
                     if(contador >= len(dashes)):
                         contador = 0
@@ -63,6 +63,9 @@ class Temporal:
                 caso.tipo = self.cenario[0]
                 caso.dash = None
                 caso.marcador = None
+                caso.patamar = self.patamar 
+
+        
         
         self.sintese = sintese
         self.argumentos  = argumentos

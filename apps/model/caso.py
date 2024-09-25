@@ -8,7 +8,7 @@ class Caso:
     calibração do CVaR e para geração de gráficos.
     """
 
-    def __init__(self, nome: str, caminho: str, cor: str, marcador: str, modelo:str, dash:str, tipo:str):
+    def __init__(self, nome: str, caminho: str, cor: str, marcador: str, modelo:str, dash:str, tipo:str, patamar):
         self.nome = nome
         self.caminho = caminho
         self.cor = cor
@@ -16,6 +16,7 @@ class Caso:
         self.modelo = modelo
         self.dash = dash
         self.tipo = tipo
+        self.patamar = patamar
 
     @classmethod
     def from_dict(cls, d: Dict[str, str]):
