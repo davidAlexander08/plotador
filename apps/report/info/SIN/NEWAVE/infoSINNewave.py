@@ -35,7 +35,8 @@ class InfoSINNewave(Estruturas):
 
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet")):
             oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SIN")
-            oper_sin = oper.loc[(oper["caso"] == caso.nome) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0) ]
+            oper_sin = oper.loc[(oper["caso"] == caso.nome) & (oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
+
             earmi_first_per = oper_sin.loc[(oper_sin["variavel"] == "EARMI") & (oper_sin["estagio"] == 1) ]["valor"].iloc[0]
             earpf_i = oper_sin.loc[(oper_sin["variavel"] == "EARPI") & (oper_sin["estagio"] == 1)]["valor"].iloc[0]
             temp = temp.replace("EarmI", str(round(earmi_first_per,2)))
