@@ -92,6 +92,13 @@ class Temporal:
         diretorio_saida = f"resultados/{self.estudo}/temporal" if outpath is None else outpath
         os.makedirs(diretorio_saida, exist_ok=True)
 
+        meta_dados = self.eco_indicadores.retorna_df(data.casos[0], "METADADOS_OPERACAO")
+        df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)]
+        titulo_meta = df_chave["nome_longo_variavel"].iloc[0]
+        if(self.labely is None):
+            self.labely = df_chave["unidade"].iloc[0]
+            
+
         if(self.argumentos is not None and self.chave is None):
             print("FALTA DECLARAR A CHAVE DO ARGUMENTO")
             exit(1)
@@ -115,10 +122,7 @@ class Temporal:
             exit(1)
         sts = Sintese(self.sintese)
 
-        meta_dados = self.eco_indicadores.retorna_df(data.casos[0], "METADADOS_OPERACAO")
-        df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)]
-        print(df_chave)
-        exit(1)
+
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")
