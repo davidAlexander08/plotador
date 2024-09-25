@@ -20,6 +20,7 @@ class Sintese:
             "SIN": None
         }
         self.sintese = sts  
+        self.grandeza = sts.split("_")[0]
         self.filtro = self.retornaFiltro(sts) if len(sts.split("_")) > 1 else ""
 
 
