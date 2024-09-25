@@ -57,5 +57,5 @@ plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_
 \info{Execucao}
 
 \subpage{Tempo Execucao}
-plotador tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20  
+plotador tempo arquivo_json --titulo Tempo_de_Execucao --largura 1400 --altura 650 --tamanho 15  
 

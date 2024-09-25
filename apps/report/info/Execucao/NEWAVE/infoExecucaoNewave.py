@@ -51,14 +51,4 @@ class InfoExecucaoNewave(Estruturas):
         temp = temp.replace("Zsup", str(round(zsup,2)))
         temp = temp.replace("Ultimo PL (min)", str(round(t_ultimo_pl,2)))
 
-        #    <td>Caso</td>
-        #    <td>Modelo</td>
-        #    <td>Versao</td>
-        #    <td>Dados Entrada (min)</td>
-        #    <td>Politica (min)</td>
-        #    <td>Sim. Final (Min)</td>
-        #    <td>Total (min)</td>
-        #    <td>Zinf</td>
-        #    <td>Zsup</td>
-
         return temp

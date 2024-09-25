@@ -1,4 +1,5 @@
 from apps.report.info.Execucao.NEWAVE.infoExecucaoNewave import InfoExecucaoNewave
+from apps.report.info.Execucao.DESSEM.infoExecucaoDessem import InfoExecucaoDessem
 
 
 class InfoExecucao():
@@ -17,7 +18,7 @@ class InfoExecucao():
                 #self.lista_text.append(InfoGeralEcoDecomp(data).text_html)
                 pass
             if(modelo == "DESSEM"):
-                #self.lista_text.append(InfoGeralEcoDessem(data).text_html)
+                self.lista_text.append(InfoExecucaoDessem(data).text_html)
                 pass
 
         self.text_html = "\n".join(self.lista_text)
