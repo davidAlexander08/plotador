@@ -32,7 +32,7 @@ class InfoSINDessem(Estruturas):
         df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)]
 
         gt_1_dia = df_gt_caso.loc[(df_gt_caso["estagio"] <= 48)]["valor"].mean()
-        temp = temp.replace("1_Dia_GT", str(round(gt_2_mes,2)))
+        temp = temp.replace("1_Dia_GT", str(round(gt_1_dia,2)))
 
         gt_avg = df_gt_caso["valor"].mean()
         temp = temp.replace("Media_GT", str(round(gt_avg,2)))
@@ -41,7 +41,7 @@ class InfoSINDessem(Estruturas):
         df_gh_caso = df_gh.loc[(df_gh["caso"] == caso.nome)]
 
         gh_1_dia = df_gh_caso["valor"].mean()
-        temp = temp.replace("1_Dia_GH", str(round(gh_2_mes,2)))
+        temp = temp.replace("1_Dia_GH", str(round(gh_1_dia,2)))
 
         gh_avg = df_gh_caso.loc[(df_gh_caso["cenario"] == "mean")]["valor"].mean()
         temp = temp.replace("Media_GH", str(round(gh_avg,2)))
@@ -50,7 +50,7 @@ class InfoSINDessem(Estruturas):
         df_earmf_caso = df_earmf.loc[(df_earmf["caso"] == caso.nome)]
 
         earmf_1_dia = df_earmf_caso.loc[(df_earmf_caso["estagio"] <= 48)]["valor"].mean()
-        temp = temp.replace("1_Dia_EARMF", str(round(earmf_2_mes,2)))
+        temp = temp.replace("1_Dia_EARMF", str(round(earmf_1_dia,2)))
         
         earmf_avg = df_earpf_caso["valor"].mean()
         temp = temp.replace("Media_EARMF", str(round(earmf_avg,2)))
