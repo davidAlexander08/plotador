@@ -110,11 +110,20 @@ class Temporal:
         if(self.sintese is None):
             print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
             exit(1)
+        
+        self.grandeza = self.sintese.split("_")[0]
+        self.espacial = self.sintese.split("_")[1]
 
-        sts = Sintese(self.sintese)
-        print(sts.sintese)
-        print(sts.grandeza)
-        print(sts.espacial)
+        print(self.sintese)
+        print(self.grandeza)
+        print(self.espacial)
+
+
+        if(not self.cenario.isdigit()):
+            self.sintese = "ESTATISTICA_OPERACAO_"+sts.espacial
+
+        print(self.sintese)
+        exit(1)
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")
