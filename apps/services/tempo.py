@@ -40,7 +40,7 @@ class Tempo:
             lista_color.append(caso.cor)
             if(caso.modelo == "NEWAVE" or caso.modelo == "DECOMP"):
                 #temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
-                temp.append(df_caso.loc[(df_caso["etapa"] == "Tempo Total")])
+                temp.append(df_caso.loc["tempo"].sum())
             if(caso.modelo == "DESSEM"):
                 #print(df_caso)
                 df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
