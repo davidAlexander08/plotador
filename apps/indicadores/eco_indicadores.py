@@ -38,17 +38,17 @@ class EcoIndicadores:
     def retornaMapaDF(self, sintese):
         dict = {}
         for c in self.casos:
-            if(self.checkIfNumberOnly(c.tipo)):
-                print("APENAS NUMEROS: ", c.tipo)
-            else:
-                print("APENAS LETRAS: ", c.tipo)
+            if(len(sintese.split("_")) > 1):
+                if(self.checkIfNumberOnly(c.tipo)):
+                    pass
+                else:
+                    sintese = "ESTATISTICA_OPERACAO"+sintese.split("_")[1]
             
-        exit(1)
 
-        df = self.__retorna_df(c, sintese)
-        df["caso"] = c.nome
-        df["modelo"] = c.modelo
-        dict[c] = df
+            df = self.__retorna_df(c, sintese)
+            df["caso"] = c.nome
+            df["modelo"] = c.modelo
+            dict[c] = df
         return dict
 
     def checkIfNumberOnly(self,s):
