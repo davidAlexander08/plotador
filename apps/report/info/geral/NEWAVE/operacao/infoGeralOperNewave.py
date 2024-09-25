@@ -33,7 +33,8 @@ class InfoGeralOperNewave(Estruturas):
         df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
         tempo_politica = df_caso.loc[(df_caso["etapa"] == "Calculo da Politica")]["tempo"].iloc[0]/60
         tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
-        tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
+        tempo_total = df_caso["tempo"].sum()/60
+        print(tempo_total)
 
         iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
         zinf = data_pmo.convergencia["zinf"].iloc[-1]
