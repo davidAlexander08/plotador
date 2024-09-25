@@ -46,11 +46,10 @@ class IndicadoresTemporais(EcoIndicadores):
 
 
     def retorna_mapaDF_cenario_medio_temporal(self, unidade, boxplot):
-        eco_mapa = self.retornaMapaDF(unidade.sintese)
+        eco_mapa = self.retornaMapaDF(unidade.sintese.sintese)
         print(eco_mapa)
-        
         mapa_temporal = {}
-        if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
+        if( (unidade.sintese.filtro is None) & (unidade.filtroArgumento is None) ):
             if(boxplot =="True"):
                 print("BOX SIN: ", eco_mapa)
                 return eco_mapa
@@ -58,10 +57,10 @@ class IndicadoresTemporais(EcoIndicadores):
                 print("CEN SIN: ", self.__retorna_mapa_media_parquet(eco_mapa))
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else:
-            for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.fitroColuna] == unidade.filtroArgumento]
+            for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == unidade.filtroArgumento]
             if(boxplot =="True"):
-                print("BOX ARG: ", self.__retorna_mapa_cenarios_parquet(eco_mapa))
-                mapa_temporal = self.__retorna_mapa_cenarios_parquet(eco_mapa)
+                print("BOX ARG: ", eco_mapa)
+                mapa_temporal = eco_mapa
             else:
                 print("CEN ARG: ", self.__retorna_mapa_media_parquet(eco_mapa))
                 mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
