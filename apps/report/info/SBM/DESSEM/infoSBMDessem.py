@@ -50,11 +50,8 @@ class InfoSBMDessem(Estruturas):
 
         df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SBM_EST")
         df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome) & (df_gt["submercado"] == arg)]
-        print(arg)
-        print(df_gt_caso)
 
         gt_1_dia = df_gt_caso.loc[(df_gt_caso["estagio"] <= 48)]["valor"].mean()
-        print(gt_1_dia)
         temp = temp.replace("1_Dia_GT", str(round(gt_1_dia,2)))
 
         gt_avg = df_gt_caso["valor"].mean()
