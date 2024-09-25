@@ -51,10 +51,8 @@ class IndicadoresTemporais(EcoIndicadores):
         mapa_temporal = {}
         if( (unidade.sintese.filtro is None) & (unidade.filtroArgumento is None) ):
             if(boxplot =="True"):
-                print("BOX SIN: ", eco_mapa)
                 return eco_mapa
             else:
-                print("CEN SIN: ", self.__retorna_mapa_media_parquet(eco_mapa))
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else:
             mapa_argumentos = self.retornaMapaDF(unidade.sintese.espacial)
@@ -66,15 +64,9 @@ class IndicadoresTemporais(EcoIndicadores):
                 eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
                 
             if(boxplot =="True"):
-                print("BOX ARG: ", eco_mapa)
                 mapa_temporal = eco_mapa
             else:
-                print("CEN ARG: ", self.__retorna_mapa_media_parquet(eco_mapa))
                 mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
-                for c in self.casos:
-                    print(mapa_temporal[c].iloc[0])
-        
-        exit(1)
         return mapa_temporal
 
 
