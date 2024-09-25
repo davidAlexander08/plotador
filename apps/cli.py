@@ -11,6 +11,8 @@ option_xinf = click.option("--xinf", default=0,  help="Ponto Inferior do Eixo X"
 option_xsup = click.option("--xsup", default=60, help="Ponto Superior do Eixo X")
 option_estagio = click.option( "--estagio",  default="",  help="Estagio Especifico para Plotar")
 option_cenario = click.option("--cenario",   default="mean",  help="Cenario Especifico para Plotar")
+option_patamar = click.option("--patamar",   default="0",  help="Patamar Especifico para Plotar")
+
 option_sintese = click.option("--sintese",  default="",  help="Sintese Especifica a ser Plotada")
 option_argumentos = click.option("--argumentos",  default = None, help="Argumentos Especifico a ser plotado como SUDESTE, TRES MARIAS, etc...  Separados por virgula")
 option_chave = click.option("--chave",  default = None,  help="Chaves para o argumento: None, SBM, REE, UHE")
@@ -117,7 +119,8 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
 @option_y2
 @option_y2sup
 @option_y2inf
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf):
+@option_patamar
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar):
     from apps.services.temporal import Temporal
     flag_diretorio = 0
     if(arquivo_json is None):
@@ -141,7 +144,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
             data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
-    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar)
 
 
 @click.command("conjunto")

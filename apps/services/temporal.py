@@ -17,7 +17,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar):
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
@@ -25,6 +25,7 @@ class Temporal:
         self.y2sup = y2sup
         self.y2inf = y2inf
         self.eixox = eixox
+        self.patamar = int(patamar)
         self.estagio = estagio
         self.y2 = y2
         if(self.y2 == "True" and len(data.casos) > 2):
