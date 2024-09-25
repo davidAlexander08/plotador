@@ -16,20 +16,20 @@ Relatório com grandezas relacionadas ao estudo
 
 \subpage{Geracao Termica}
 
-plotador temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
 \subpage{Geracao Hidreletrica}
-plotador temporal --titulo Geração_Hidrelétrica_SIN --json arquivo_json --sintese GHID_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Geração_Hidrelétrica_SIN --json arquivo_json --sintese GHID_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
 \subpage{Energia Armazenada}
-plotador temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
 \subpage{Custo Operacional}
-plotador temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MMR$
+plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MMR$
 
 
 \subpage{ENA}
-plotador temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json --sintese ENAA_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json --sintese ENAA_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
 
 \page{Submercado}
@@ -41,19 +41,19 @@ plotador temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json --si
 \subpage{Geracoes}
 
 Geracao Térmica
-plotador temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
 Geracao Hidreletrica
-plotador temporal --titulo Geração_Hidrelétrica_SBM --json arquivo_json --sintese GHID_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Geração_Hidrelétrica_SBM --json arquivo_json --sintese GHID_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
 \subpage{Energia Armazenada SBM}
-plotador temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
 \subpage{Custo Operacional SBM}
-plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20
+plotador_dev temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20
 
 \subpage{ENA}
-plotador temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
 
 \page{Execucao}
@@ -63,7 +63,7 @@ plotador temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --si
 \info{Execucao}
 
 \subpage{Tempo Execucao}
-plotador tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20
+plotador_dev tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20
 
-plotador convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20
+plotador_dev convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20
 
