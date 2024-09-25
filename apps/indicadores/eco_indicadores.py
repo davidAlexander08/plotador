@@ -43,12 +43,12 @@ class EcoIndicadores:
             else:
                 print("APENAS LETRAS: ", c.tipo)
             
-            exit(1)
+        exit(1)
 
-            df = self.__retorna_df(c, sintese)
-            df["caso"] = c.nome
-            df["modelo"] = c.modelo
-            dict[c] = df
+        df = self.__retorna_df(c, sintese)
+        df["caso"] = c.nome
+        df["modelo"] = c.modelo
+        dict[c] = df
         return dict
 
     def checkIfNumberOnly(self,s):
