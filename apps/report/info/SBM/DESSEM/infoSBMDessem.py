@@ -1,7 +1,7 @@
 
 from apps.report.info.SBM.DESSEM.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
-
+from idessem.dessem.des_log_relato import DesLogRelato
 
 class InfoSBMDessem(Estruturas):
     def __init__(self, data, par_dados):
