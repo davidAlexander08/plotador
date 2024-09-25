@@ -45,7 +45,7 @@ class EcoIndicadores:
                     sintese = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
 
             df = self.__retorna_df(c, sintese)
-            
+            print(df)
             if(len(sintese.split("_")) > 1):
                 if(self.checkIfNumberOnly(c.tipo)):
                     pass
@@ -55,6 +55,7 @@ class EcoIndicadores:
             df["caso"] = c.nome
             df["modelo"] = c.modelo
             dict[c] = df
+        exit(1)
         return dict
 
     def checkIfNumberOnly(self,s):
