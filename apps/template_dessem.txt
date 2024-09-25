@@ -32,21 +32,21 @@ plotador temporal --titulo Custo_De_Operacao_SIN --json arquivo_json --sintese C
 
 <h1> Relatório de Submercados </h1>
 
-
+\info{SBM}
 
 \subpage{Geracoes}
 
 Geracao Térmica
-plotador temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed --labelx Estágios
+plotador temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1400 --altura 650 --tamanho 15 --labely MWmed --labelx Estágios
 
 Geracao Hidreletrica
-plotador temporal --titulo Geração_Hidrelétrica_SBM --json arquivo_json --sintese GHID_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed --labelx Estágios
+plotador temporal --titulo Geração_Hidrelétrica_SBM --json arquivo_json --sintese GHID_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1400 --altura 650 --tamanho 15 --labely MWmed --labelx Estágios
 
 \subpage{Energia Armazenada SBM}
-plotador temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed --labelx Estágios
+plotador temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1400 --altura 650 --tamanho 15 --labely MWmed --labelx Estágios
 
 \subpage{Custo Marginal SBM}
-plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labelx Estágios
+plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM_EST --argumentos ADD_SBMS --chave SBM --largura 1400 --altura 650 --tamanho 15 --labelx Estágios
 
 
 
@@ -58,5 +58,4 @@ plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_
 
 \subpage{Tempo Execucao}
 plotador tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20  
-plotador convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20 
 

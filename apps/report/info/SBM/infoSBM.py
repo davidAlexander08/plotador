@@ -1,5 +1,5 @@
 from apps.report.info.SBM.NEWAVE.infoSBMNewave import InfoSBMNewave
-
+from apps.report.info.SBM.DESSEM.infoSBMDessem import InfoSBMDessem
 
 class InfoSBM():
     def __init__(self, data, par_dados):
@@ -17,7 +17,7 @@ class InfoSBM():
                 #self.lista_text.append(InfoGeralEcoDecomp(data).text_html)
                 pass
             if(modelo == "DESSEM"):
-                #self.lista_text.append(InfoGeralEcoDessem(data).text_html)
+                self.lista_text.append(InfoSBMDessem(data).text_html)
                 pass
 
         self.text_html = "\n".join(self.lista_text)
