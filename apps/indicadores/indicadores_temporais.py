@@ -64,13 +64,15 @@ class IndicadoresTemporais(EcoIndicadores):
             for c in self.casos:
                 cod_arg = mapa_argumentos[c].loc[(mapa_argumentos[c][coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
                 eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
-                print(eco_mapa[c].iloc[0])
+                
             if(boxplot =="True"):
                 print("BOX ARG: ", eco_mapa)
                 mapa_temporal = eco_mapa
             else:
                 print("CEN ARG: ", self.__retorna_mapa_media_parquet(eco_mapa))
                 mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
+                for c in self.caso:
+                    print(mapa_temporal[c].iloc[0])
         
         exit(1)
         return mapa_temporal
