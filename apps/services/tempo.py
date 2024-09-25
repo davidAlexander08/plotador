@@ -43,7 +43,7 @@ class Tempo:
                 print(df_caso["caso"].iloc[0])
                 print(df_caso["modelo"].iloc[0])
                 print(df_caso["tempo"].sum()/60)
-                df_tempo = pd.DataFrame({"etapa":"Tempo Total", "tempo": df_caso["tempo"].sum()/60, "caso":df_caso["caso"].iloc[0], "caso":df_caso["modelo"].iloc[0]})
+                df_tempo = pd.DataFrame({"etapa":["Tempo Total"], "tempo": [df_caso["tempo"].sum()/60], "caso":[df_caso["caso"].iloc[0]], "caso":[df_caso["modelo"].iloc[0]]})
                 print(df_tempo)
                 temp.append(df_tempo)
             if(caso.modelo == "DESSEM"):
