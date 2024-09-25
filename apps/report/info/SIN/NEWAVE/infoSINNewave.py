@@ -35,24 +35,25 @@ class InfoSINNewave(Estruturas):
 
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet")):
             oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SIN")
-            earmi_first_per = oper_sin.loc[(oper_sin["variavel"] == "EARMI") & (oper_sin["estagio"] == 1) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].iloc[0]
-            earpf_i = oper_sin.loc[(oper_sin["variavel"] == "EARPI") & (oper_sin["estagio"] == 1) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].iloc[0]
+            oper_sin = oper.loc[(oper["caso"] == caso.nome) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0) ]
+            earmi_first_per = oper_sin.loc[(oper_sin["variavel"] == "EARMI") & (oper_sin["estagio"] == 1) ]["valor"].iloc[0]
+            earpf_i = oper_sin.loc[(oper_sin["variavel"] == "EARPI") & (oper_sin["estagio"] == 1)]["valor"].iloc[0]
             temp = temp.replace("EarmI", str(round(earmi_first_per,2)))
             temp = temp.replace("EarpI", str(earpf_i))
 
-            oper_sin = oper.loc[(oper["caso"] == caso.nome)]
+            
 
-            gt_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].iloc[0]
-            gh_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GHID") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].iloc[0]
-            earpf_2_mes = oper_sin.loc[(oper_sin["variavel"] == "EARPF") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].iloc[0]
+            gt_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) ]["valor"].iloc[0]
+            gh_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GHID") & (oper_sin["estagio"] == 2) ]["valor"].iloc[0]
+            earpf_2_mes = oper_sin.loc[(oper_sin["variavel"] == "EARPF") & (oper_sin["estagio"] == 2) ]["valor"].iloc[0]
 
             temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
             temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
             temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
 
-            gt_avg = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].mean()
-            gh_avg = oper_sin.loc[(oper_sin["variavel"] == "GHID") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].mean()
-            earpf_avg = oper_sin.loc[(oper_sin["variavel"] == "EARPF") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].mean()
+            gt_avg = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) ]["valor"].mean()
+            gh_avg = oper_sin.loc[(oper_sin["variavel"] == "GHID") & (oper_sin["estagio"] == 2) ]["valor"].mean()
+            earpf_avg = oper_sin.loc[(oper_sin["variavel"] == "EARPF") & (oper_sin["estagio"] == 2) ]["valor"].mean()
 
             temp = temp.replace("Media_GT", str(round(gt_avg,2)))
             temp = temp.replace("Media_GH", str(round(gh_avg,2)))
