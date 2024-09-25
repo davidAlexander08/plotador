@@ -33,7 +33,8 @@ class InfoExecucaoDessem(Estruturas):
         
         df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
         print(df_caso)
-        print(df_caso.loc[(df_caso["etapa"] == "      MILP")])
+        print(df_caso.loc[(df_caso["etapa"] == "PL.Int.Fix")])
+        print(df_caso.loc[(df_caso["etapa"] == "MILP")])
         tempo_MILP =        df_caso.loc[(df_caso["etapa"] == "MILP")]["tempo"].iloc[0]
         tempo_PL_INT_FIX =  df_caso.loc[(df_caso["etapa"] == "PL.Int.Fix")]["tempo"].iloc[0]
         tempo_Calc_CMO =    df_caso.loc[(df_caso["etapa"] == "PL.CalcCMO")]["tempo"].iloc[0]
