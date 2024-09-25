@@ -64,7 +64,7 @@ class IndicadoresTemporais(EcoIndicadores):
             print(coluna_filtro)
             for c in self.casos:
                 
-                cod_arg = mapa_argumentos[c].loc[(mapa_argumentos[c][coluna_filtro] == unidade.filtroArgumento)]
+                cod_arg = mapa_argumentos[c].loc[(mapa_argumentos[c][coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
                 print(cod_arg)                
                 eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == unidade.filtroArgumento]
             exit(1)
