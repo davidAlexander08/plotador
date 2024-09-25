@@ -63,7 +63,6 @@ plotador temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --si
 \info{Execucao}
 
 \subpage{Tempo Execucao}
-plotador tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20  --labelx Convergência
-
-plotador convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20  --labelx Iterações
+plotador tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20  
+plotador convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20 
 
