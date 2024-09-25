@@ -8,7 +8,7 @@ class Caso:
     calibração do CVaR e para geração de gráficos.
     """
 
-    def __init__(self, nome: str, caminho: str, cor: str, marcador: str, modelo:str, dash:str, tipo:str, patamar):
+    def __init__(self, nome: str, caminho: str, cor: str, marcador: str, modelo:str, dash:str, tipo:str, patamar = 0):
         self.nome = nome
         self.caminho = caminho
         self.cor = cor
