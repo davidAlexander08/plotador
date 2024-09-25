@@ -15,7 +15,7 @@ class InfoSBMDessem(Estruturas):
         lista_sbm_inv = list(mapa_sbm_inverso.keys())
         lista_argumentos = []
         if(argumentos is None):
-            lista_argumentos = lista_sbm
+            lista_argumentos = lista_sbm_inv
         else:
             for arg in argumentos:
                 if(arg in lista_sbm):
