@@ -27,15 +27,7 @@ class Report():
         path = __file__.split("/")
         path.pop()
         path.pop()
-        arquivo_template = ""
-        if(tipo == "Simples"):
-            arquivo_template = "/".join(path)+"/template_simples.txt" if self.txt is None else self.txt
-        elif(tipo == "Completo"):
-            arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
-        else:
-            print("Tipo definido errado: Simples ou Completo")
-            exit(1)
-        
+
 
         if(self.json is not None):
             data = Dados_json_caso(self.json)
@@ -72,6 +64,19 @@ class Report():
 
 
             self.eco_indicadores = EcoIndicadores(data.casos)
+
+        arquivo_template = ""
+        if(self.txt is None):
+            if(data.casos[0].modelo == "NEWAVE"):
+                arquivo_template = "/".join(path)+"/template_newave.txt" 
+            elif(data.casos[0].modelo == "DESSEM"):
+                arquivo_template = "/".join(path)+"/template_dessem.txt" 
+            else:
+                print("Tipo definido errado: Simples ou Completo")
+                exit(1)
+        else:
+            arquivo_template = self.txt
+        
 
         with open(arquivo_template, "r") as file:
             lines = file.readlines()
