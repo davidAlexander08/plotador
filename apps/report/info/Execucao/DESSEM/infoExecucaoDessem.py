@@ -32,13 +32,10 @@ class InfoExecucaoDessem(Estruturas):
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
         
         df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-        print(df_caso)
-        print(df_caso.loc[(df_caso["etapa"] == "PL.Int.Fix")])
-        print(df_caso.loc[(df_caso["etapa"] == "MILP")])
-        tempo_MILP =        df_caso.loc[(df_caso["etapa"] == "MILP")]["tempo"].iloc[0]
-        tempo_PL_INT_FIX =  df_caso.loc[(df_caso["etapa"] == "PL.Int.Fix")]["tempo"].iloc[0]
-        tempo_Calc_CMO =    df_caso.loc[(df_caso["etapa"] == "PL.CalcCMO")]["tempo"].iloc[0]
-        tempo_total =       df_caso["tempo"].sum()
+        tempo_MILP =        df_caso.loc[(df_caso["etapa"] == "MILP")]["tempo"].iloc[0]/60
+        tempo_PL_INT_FIX =  df_caso.loc[(df_caso["etapa"] == "PL.Int.Fix")]["tempo"].iloc[0]/60
+        tempo_Calc_CMO =    df_caso.loc[(df_caso["etapa"] == "PL.CalcCMO")]["tempo"].iloc[0]/60
+        tempo_total =       df_caso["tempo"].sum()/60
 
         temp = temp.replace("MILP (min)", str(round(tempo_MILP,2)))
         temp = temp.replace("PL_INT_FIX (min)", str(round(tempo_PL_INT_FIX,2)))
