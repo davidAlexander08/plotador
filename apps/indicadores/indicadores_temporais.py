@@ -57,7 +57,16 @@ class IndicadoresTemporais(EcoIndicadores):
                 print("CEN SIN: ", self.__retorna_mapa_media_parquet(eco_mapa))
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else:
-            for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == unidade.filtroArgumento]
+            df_argumentos = pd.read_parquet(unidade.sintese.espacial+".parquet", engine = "pyarrow")
+            print(df_argumentos)
+            exit(1)
+            for c in self.casos:
+                
+                
+                
+                
+                eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == unidade.filtroArgumento]
+
             if(boxplot =="True"):
                 print("BOX ARG: ", eco_mapa)
                 mapa_temporal = eco_mapa
