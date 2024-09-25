@@ -39,7 +39,7 @@ class EcoIndicadores:
         dict = {}
         for c in self.casos:
             variavel = sintese.split("_")[0]
-            if(len(sintese.split("_")) > 1):
+            if( (len(sintese.split("_")) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
                 if(self.checkIfNumberOnly(c.tipo)):
                     c.tipo = int(c.tipo)
                 else:
@@ -47,7 +47,7 @@ class EcoIndicadores:
 
             df = self.retorna_df(c, sintese)
 
-            if(len(sintese.split("_")) > 1):
+            if( (len(sintese.split("_")) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
                 if(self.checkIfNumberOnly(c.tipo)):
                     pass
                 else:

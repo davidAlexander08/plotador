@@ -47,48 +47,26 @@ class InfoSINNewave(Estruturas):
         temp = temp.replace("EarpI", str(earpf_i))
         #temp = temp.replace("VarmI", str(varm_i))
 
-        df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SIN_EST")
-        df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)]
-        df_gh = self.eco_indicadores.retorna_df_concatenado("GHID_SIN_EST")
-        df_gh_caso = df_gh.loc[(df_gh["caso"] == caso.nome)]
-        df_earpf = self.eco_indicadores.retorna_df_concatenado("EARPF_SIN_EST")
-        df_earpf_caso = df_earpf.loc[(df_earpf["caso"] == caso.nome)]
+        
+        oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SIN")
+        oper_sin = oper.loc[(oper["caso"] == caso.nome)]
 
-        print(df_gt_caso)
-        print(df_gh_caso)
-        print(df_earpf_caso)
-
-        gt_2_mes = df_gt_caso.loc[(df_gt_caso["estagio"] == 2) & (df_gt_caso["cenario"] == "mean")]["valor"].iloc[0]
-        gh_2_mes = df_gh_caso.loc[(df_gh_caso["estagio"] == 2) & (df_gh_caso["cenario"] == "mean")]["valor"].iloc[0]
-        earpf_2_mes = df_earpf_caso.loc[(df_earpf_caso["estagio"] == 2) & (df_earpf_caso["cenario"] == "mean")]["valor"].iloc[0]
-
-        print(round(gt_2_mes,2))
-        print(round(gh_2_mes,2))
-        print(round(earpf_2_mes,2))
+        gt_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].iloc[0]
+        gh_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GHID") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].iloc[0]
+        earpf_2_mes = oper_sin.loc[(oper_sin["variavel"] == "EARPF") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].iloc[0]
 
         temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
         temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
         temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
 
-        gt_avg = df_gt_caso.loc[(df_gt_caso["cenario"] == "mean")]["valor"].mean()
-        gh_avg = df_gh_caso.loc[(df_gh_caso["cenario"] == "mean")]["valor"].mean()
-        earpf_avg = df_earpf_caso.loc[(df_earpf_caso["cenario"] == "mean")]["valor"].mean()
-
-        print(round(gt_avg,2))
-        print(round(gh_avg,2))
-        print(round(earpf_avg,2))
+        gt_avg = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].mean()
+        gh_avg = oper_sin.loc[(oper_sin["variavel"] == "GHID") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].mean()
+        earpf_avg = oper_sin.loc[(oper_sin["variavel"] == "EARPF") & (oper_sin["estagio"] == 2) & (oper_sin["cenario"] == "mean") & (oper_sin["patamar"] == 0)]["valor"].mean()
 
         temp = temp.replace("Media_GT", str(round(gt_avg,2)))
         temp = temp.replace("Media_GH", str(round(gh_avg,2)))
         temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
 
-
-        #    <td>2_Mes_GT</td>
-        #    <td>2_Mes_GH</td>
-        #    <td>2_Mes_EARPF</td>
-        #    <td>Media_GT</td>
-        #    <td>Media_GH</td>
-        #    <td>Media_EARPF</td>
 
 
         return temp
