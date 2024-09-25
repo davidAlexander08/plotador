@@ -14,10 +14,10 @@ class InfoSBM():
             if(modelo == "NEWAVE"):
                 self.lista_text.append(InfoSBMNewave(data, par_dados).text_html)
             if(modelo == "DECOMP"):
-                #self.lista_text.append(InfoGeralEcoDecomp(data).text_html)
+                #self.lista_text.append(InfoGeralEcoDecomp(data, par_dados).text_html)
                 pass
             if(modelo == "DESSEM"):
-                self.lista_text.append(InfoSBMDessem(data).text_html)
+                self.lista_text.append(InfoSBMDessem(data, par_dados).text_html)
                 pass
 
         self.text_html = "\n".join(self.lista_text)
