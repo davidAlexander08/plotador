@@ -43,7 +43,7 @@ class InfoSINDessem(Estruturas):
         gh_1_dia = df_gh_caso["valor"].mean()
         temp = temp.replace("1_Dia_GH", str(round(gh_1_dia,2)))
 
-        gh_avg = df_gh_caso.loc[(df_gh_caso["cenario"] == "mean")]["valor"].mean()
+        gh_avg = df_gh_caso["valor"].mean()
         temp = temp.replace("Media_GH", str(round(gh_avg,2)))
         
         df_earmf = self.eco_indicadores.retorna_df_concatenado("EARMF_SIN_EST")
