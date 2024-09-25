@@ -22,7 +22,7 @@ class EcoIndicadores:
     #        df["valor"] = df["valor"]/1000
     #    return df
 
-    def __retorna_df(self, caso, sintese) -> pd.DataFrame:
+    def retorna_df(self, caso, sintese) -> pd.DataFrame:
         arq_sintese = join( caso.caminho, self.DIR_SINTESE, sintese+".parquet"  )
         check_file = os.path.isfile(arq_sintese)
         if(check_file) :
@@ -45,7 +45,7 @@ class EcoIndicadores:
                 else:
                     sintese = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
 
-            df = self.__retorna_df(c, sintese)
+            df = self.retorna_df(c, sintese)
 
             if(len(sintese.split("_")) > 1):
                 if(self.checkIfNumberOnly(c.tipo)):

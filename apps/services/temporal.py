@@ -113,9 +113,11 @@ class Temporal:
         if(self.sintese is None):
             print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
             exit(1)
-
         sts = Sintese(self.sintese)
 
+        meta_dados = self.eco_indicadores.retorna_df(data.casos[0], "METADADOS_OPERACAO")
+        print(meta_dados)
+        exit(1)
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")
