@@ -94,7 +94,8 @@ class Temporal:
 
         meta_dados = self.eco_indicadores.retorna_df(data.casos[0], "METADADOS_OPERACAO")
         df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)]
-        titulo_meta = df_chave["nome_longo_variavel"].iloc[0]
+        print(df_chave["nome_longo_variavel"])
+        titulo_meta = df_chave["nome_longo_variavel"]
         if(self.labely is None):
             self.labely = df_chave["unidade"].iloc[0]
             
