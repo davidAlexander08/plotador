@@ -51,36 +51,23 @@ class InfoSBMNewave(Estruturas):
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
         temp = temp.replace("Versao", data_pmo.versao_modelo)
         temp = temp.replace("Subm", arg)
-        
-        df_earpi = self.eco_indicadores.retorna_df_concatenado("EARPI_SBM_EST")
-        df_earpi_caso = df_earpi.loc[(df_earpi["caso"] == caso.nome) & (df_earpi["submercado"] == arg) ]
-        earpi = df_earpi_caso.loc[(df_earpi_caso["estagio"] == 1) & (df_earpi_caso["cenario"] == "mean")]["valor"].iloc[0]
 
-        df_earmi = self.eco_indicadores.retorna_df_concatenado("EARMI_SBM_EST")
-        df_earmi_caso = df_earmi.loc[(df_earmi["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]
-        earmi = df_earmi_caso.loc[(df_earmi_caso["estagio"] == 1) & (df_earmi_caso["cenario"] == "mean")]["valor"].iloc[0]
+        oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
+        codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
+        cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
+        oper_sbm = oper.loc[(oper["caso"] == caso.nome) & (oper["submercado"] == cod_sbm) ]
+
+        earpi = oper_sbm.loc[(oper_sbm["variavel"] == "EARPI") & (oper_sbm["estagio"] == 1) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
+        earmi = oper_sbm.loc[(oper_sbm["variavel"] == "EARMI") & (oper_sbm["estagio"] == 1) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
 
         temp = temp.replace("EarmI", str(round(earmi,2)))
         temp = temp.replace("EarpI", str(round(earpi,2)))
 
-        df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SBM_EST")
-        df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]
-        df_gh = self.eco_indicadores.retorna_df_concatenado("GHID_SBM_EST")
-        df_gh_caso = df_gh.loc[(df_gh["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]
-        df_earpf = self.eco_indicadores.retorna_df_concatenado("EARPF_SBM_EST")
-        df_earpf_caso = df_earpf.loc[(df_earpf["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]
 
-        df_cmo = self.eco_indicadores.retorna_df_concatenado("CMO_SBM_EST")
-        df_cmo_caso = df_cmo.loc[(df_cmo["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]
-
-        print(df_gt_caso)
-        print(df_gh_caso)
-        print(df_earpf_caso)
-
-        gt_2_mes = df_gt_caso.loc[(df_gt_caso["estagio"] == 2) & (df_gt_caso["cenario"] == "mean")]["valor"].iloc[0]
-        gh_2_mes = df_gh_caso.loc[(df_gh_caso["estagio"] == 2) & (df_gh_caso["cenario"] == "mean")]["valor"].iloc[0]
-        earpf_2_mes = df_earpf_caso.loc[(df_earpf_caso["estagio"] == 2) & (df_earpf_caso["cenario"] == "mean")]["valor"].iloc[0]
-        cmo_2_mes = df_cmo_caso.loc[(df_cmo_caso["estagio"] == 2) & (df_cmo_caso["cenario"] == "mean")]["valor"].iloc[0]
+        gt_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "GTER") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
+        gh_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "GHID") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
+        earpf_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "EARPF") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
+        cmo_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "CMO") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
 
         print(round(gt_2_mes,2))
         print(round(gh_2_mes,2))
@@ -92,10 +79,10 @@ class InfoSBMNewave(Estruturas):
         temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
         temp = temp.replace("2_Mes_CMO", str(round(cmo_2_mes,2)))
 
-        gt_avg = df_gt_caso.loc[(df_gt_caso["cenario"] == "mean")]["valor"].mean()
-        gh_avg = df_gh_caso.loc[(df_gh_caso["cenario"] == "mean")]["valor"].mean()
-        earpf_avg = df_earpf_caso.loc[(df_earpf_caso["cenario"] == "mean")]["valor"].mean()
-        cmo_avg = df_cmo_caso.loc[(df_cmo_caso["cenario"] == "mean")]["valor"].mean()
+        gt_avg = oper_sbm.loc[(oper_sbm["variavel"] == "GTER") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
+        gh_avg = oper_sbm.loc[(oper_sbm["variavel"] == "GHID") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
+        earpf_avg = oper_sbm.loc[(oper_sbm["variavel"] == "EARPF") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
+        cmo_avg = oper_sbm.loc[(oper_sbm["variavel"] == "CMO") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
 
         print(round(gt_avg,2))
         print(round(gh_avg,2))
