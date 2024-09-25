@@ -46,53 +46,47 @@ class InfoSBMNewave(Estruturas):
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
-        data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-        data_dger = Dger.read(caso.caminho+"/dger.dat")
-        data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
-        temp = temp.replace("Versao", data_pmo.versao_modelo)
         temp = temp.replace("Subm", arg)
+        
+        if(os.path.isfile(caso.caminho+"/pmo.dat")):
+            data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+            temp = temp.replace("Versao", data_pmo.versao_modelo)
+            
 
-        oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
-        codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
-        cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
-        oper_sbm = oper.loc[(oper["caso"] == caso.nome) & (oper["codigo_submercado"] == cod_sbm) ]
+        if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet")):
+            oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
+            codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
+            cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
+            oper_sbm = oper.loc[(oper["caso"] == caso.nome) & (oper["codigo_submercado"] == cod_sbm) ]
 
-        earpi = oper_sbm.loc[(oper_sbm["variavel"] == "EARPI") & (oper_sbm["estagio"] == 1) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
-        earmi = oper_sbm.loc[(oper_sbm["variavel"] == "EARMI") & (oper_sbm["estagio"] == 1) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
+            earpi = oper_sbm.loc[(oper_sbm["variavel"] == "EARPI") & (oper_sbm["estagio"] == 1) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
+            earmi = oper_sbm.loc[(oper_sbm["variavel"] == "EARMI") & (oper_sbm["estagio"] == 1) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
 
-        temp = temp.replace("EarmI", str(round(earmi,2)))
-        temp = temp.replace("EarpI", str(round(earpi,2)))
+            temp = temp.replace("EarmI", str(round(earmi,2)))
+            temp = temp.replace("EarpI", str(round(earpi,2)))
 
 
-        gt_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "GTER") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
-        gh_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "GHID") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
-        earpf_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "EARPF") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
-        cmo_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "CMO") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
+            gt_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "GTER") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
+            gh_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "GHID") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
+            earpf_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "EARPF") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
+            cmo_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "CMO") & (oper_sbm["estagio"] == 2) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
 
-        print(round(gt_2_mes,2))
-        print(round(gh_2_mes,2))
-        print(round(earpf_2_mes,2))
-        print(round(cmo_2_mes,2))
 
-        temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
-        temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
-        temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
-        temp = temp.replace("2_Mes_CMO", str(round(cmo_2_mes,2)))
+            temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
+            temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
+            temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
+            temp = temp.replace("2_Mes_CMO", str(round(cmo_2_mes,2)))
 
-        gt_avg = oper_sbm.loc[(oper_sbm["variavel"] == "GTER") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
-        gh_avg = oper_sbm.loc[(oper_sbm["variavel"] == "GHID") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
-        earpf_avg = oper_sbm.loc[(oper_sbm["variavel"] == "EARPF") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
-        cmo_avg = oper_sbm.loc[(oper_sbm["variavel"] == "CMO") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
+            gt_avg = oper_sbm.loc[(oper_sbm["variavel"] == "GTER") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
+            gh_avg = oper_sbm.loc[(oper_sbm["variavel"] == "GHID") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
+            earpf_avg = oper_sbm.loc[(oper_sbm["variavel"] == "EARPF") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
+            cmo_avg = oper_sbm.loc[(oper_sbm["variavel"] == "CMO") & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].mean()
 
-        print(round(gt_avg,2))
-        print(round(gh_avg,2))
-        print(round(earpf_avg,2))
-        print(round(cmo_avg,2))
 
-        temp = temp.replace("Media_GT", str(round(gt_avg,2)))
-        temp = temp.replace("Media_GH", str(round(gh_avg,2)))
-        temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
-        temp = temp.replace("Media_CMO", str(round(cmo_avg,2)))
+            temp = temp.replace("Media_GT", str(round(gt_avg,2)))
+            temp = temp.replace("Media_GH", str(round(gh_avg,2)))
+            temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
+            temp = temp.replace("Media_CMO", str(round(cmo_avg,2)))
 
 
         return temp
