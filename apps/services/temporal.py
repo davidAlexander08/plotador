@@ -117,7 +117,7 @@ class Temporal:
         print(self.sintese)
         print(self.grandeza)
         print(self.espacial)
-        print(data.casos[0].tipo)
+        print(data.casos[1].tipo)
 
         # if(not self.cenario):
         #    self.sintese = "ESTATISTICA_OPERACAO_"+sts.espacial
