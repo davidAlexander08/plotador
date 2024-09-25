@@ -43,7 +43,14 @@ class EcoIndicadores:
                     c.tipo = int(c.tipo)
                 else:
                     sintese = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
+
             df = self.__retorna_df(c, sintese)
+            
+            if(len(sintese.split("_")) > 1):
+                if(self.checkIfNumberOnly(c.tipo)):
+                    pass
+                else:
+                    df = df.loc[(df["variavel"] == sintese.split("_")[0])]
             df["caso"] = c.nome
             df["modelo"] = c.modelo
             dict[c] = df
