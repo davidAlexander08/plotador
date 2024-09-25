@@ -8,14 +8,12 @@ class Estruturas:
             <th>Caso</th>
             <th>Modelo</th>
             <th>Versao</th>
-            <th>EarmI</th>
-            <th>EarpI</th>
-            <th>2 Mes GT</th>
-            <th>2 Mes GH</th>
-            <th>2 Mes EARPF</th>
+            <th>1 Dia GT</th>
+            <th>1 Dia GH</th>
+            <th>1 Dia EARPF</th>
             <th>Média GT</th>
             <th>Média GH</th>
-            <th>Média EARPF</th>
+            <th>Média EARMF</th>
         </tr>
 """
 
@@ -25,14 +23,12 @@ class Estruturas:
             <td>Caso</td>
             <td>Modelo</td>
             <td>Versao</td>
-            <td>EarmI</td>
-            <td>EarpI</td>
-            <td>2_Mes_GT</td>
-            <td>2_Mes_GH</td>
-            <td>2_Mes_EARPF</td>
+            <td>1_Dia_GT</td>
+            <td>1_Dia_GH</td>
+            <td>1_Dia_EARMF</td>
             <td>Media_GT</td>
             <td>Media_GH</td>
-            <td>Media_EARPF</td>
+            <td>Media_EARMF</td>
         </tr>
 """
 
