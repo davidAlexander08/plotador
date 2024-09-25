@@ -112,6 +112,9 @@ class Temporal:
             exit(1)
 
         sts = Sintese(self.sintese)
+        print(sts.sintese)
+        print(sts.filtro)
+        exit(1)
         if(self.chave is None):
             arg = Argumento(None, None, "SIN")
             conj = ConjuntoUnidadeSintese(sts, arg , "estagios", data.limites, self.tamanho_texto)
