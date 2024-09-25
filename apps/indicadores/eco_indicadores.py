@@ -40,11 +40,9 @@ class EcoIndicadores:
         for c in self.casos:
             if(len(sintese.split("_")) > 1):
                 if(self.checkIfNumberOnly(c.tipo)):
-                    pass
+                    c.tipo = int(c.tipo)
                 else:
                     sintese = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
-            
-
             df = self.__retorna_df(c, sintese)
             df["caso"] = c.nome
             df["modelo"] = c.modelo

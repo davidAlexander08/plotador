@@ -1,6 +1,5 @@
 from typing import Dict
 
-
 class Sintese:
     """
     Classe base que representa uma sintese do estudo
@@ -13,10 +12,9 @@ class Sintese:
          
     def __init__(self, sts: str):
         self.__mapa_filtro = {
-            "SBM": "submercado",
-            "REE": "ree",
-            "UHE": "usina",
-            "BCA": "bacia",
+            "SBM": "codigo_submercado",
+            "REE": "codigo_ree",
+            "UHE": "codigo_usina",
             "SIN": None
         }
         self.sintese = sts  

@@ -33,35 +33,40 @@ class IndicadoresTemporais(EcoIndicadores):
                 dict[c] = df.reset_index(drop = True) 
         return dict
 
-    def __retorna_mapa_cenarios_parquet(self, mapa):
-        dict = {}
-        for c in self.casos:
-            df = mapa[c]
-            if(c.modelo == "NEWAVE" or c.modelo == "DECOMP"): 
-                dict[c] = df[df[["cenario"]].apply(lambda x: x[0].isdigit(), axis=1)].reset_index(drop = True)
-            if(c.modelo == "DESSEM"):   
-                print("Opcao Boxplot nao pode ser utilizada com modelo DESSEM")
-                exit(1)
-        return dict
+    #def __retorna_mapa_cenarios_parquet(self, mapa):
+    #    dict = {}
+    #    for c in self.casos:
+    #        df = mapa[c]
+    #        if(c.modelo == "NEWAVE" or c.modelo == "DECOMP"): 
+    #            dict[c] = df[df[["cenario"]].apply(lambda x: x[0].isdigit(), axis=1)].reset_index(drop = True)
+    #        if(c.modelo == "DESSEM"):   
+    #            print("Opcao Boxplot nao pode ser utilizada com modelo DESSEM")
+    #            exit(1)
+    #    return dict
 
 
     def retorna_mapaDF_cenario_medio_temporal(self, unidade, boxplot):
         eco_mapa = self.retornaMapaDF(unidade.sintese)
         print(eco_mapa)
-        exit(1)
-        #print(unidade.sintese)
+        
         mapa_temporal = {}
         if( (unidade.fitroColuna is None) & (unidade.filtroArgumento is None) ):
             if(boxplot =="True"):
-                return self.__retorna_mapa_cenarios_parquet(eco_mapa)
+                print("BOX SIN: ", eco_mapa)
+                return eco_mapa
             else:
+                print("CEN SIN: ", self.__retorna_mapa_media_parquet(eco_mapa))
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else:
             for c in self.casos: eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.fitroColuna] == unidade.filtroArgumento]
             if(boxplot =="True"):
+                print("BOX ARG: ", self.__retorna_mapa_cenarios_parquet(eco_mapa))
                 mapa_temporal = self.__retorna_mapa_cenarios_parquet(eco_mapa)
             else:
+                print("CEN ARG: ", self.__retorna_mapa_media_parquet(eco_mapa))
                 mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
+        
+        exit(1)
         return mapa_temporal
 
 
