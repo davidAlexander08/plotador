@@ -106,31 +106,33 @@ class Temporal:
             if(len(lista_argumentos) == 1 and self.titulo == " "): 
                 self.titulo = lista_argumentos[0]
 
+        #NOVIDADE
+        if(self.sintese is None):
+            print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
+            exit(1)
 
-        sinteses = data.sinteses if (self.sintese == "") else [Sintese(self.sintese)]
-        for sts in sinteses:
-            espacial = sts.sintese.split("_")[1] 
-            if(espacial == "SIN"):
-                arg = Argumento(None, None, "SIN")
-                conj = ConjuntoUnidadeSintese(sts,arg , "estagios", data.limites, self.tamanho_texto)
-                if(self.labely is not None):
-                    conj.legendaEixoY = self.labely
-                if(self.labelx is not None):
-                    conj.legendaEixoX = self.labelx
-                diretorio_saida_arg = diretorio_saida+"/"+arg.nome if outpath is None else outpath
-                os.makedirs(diretorio_saida_arg, exist_ok=True)
-                self.executa(conj,diretorio_saida_arg )
-            else:
-                for arg in data.args:
-                    if(espacial == arg.chave):
-                        conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, self.tamanho_texto)
-                        if(self.labely is not None):
-                            conj.legendaEixoY = self.labely
-                        if(self.labelx is not None):
-                            conj.legendaEixoX = self.labelx
-                        diretorio_saida_arg = diretorio_saida+"/"+arg.nome if outpath is None else outpath
-                        os.makedirs(diretorio_saida_arg, exist_ok=True)
-                        self.executa(conj,diretorio_saida_arg )
+        sts = Sintese(self.sintese)
+        if(self.chave is None):
+            arg = Argumento(None, None, "SIN")
+            conj = ConjuntoUnidadeSintese(sts, arg , "estagios", data.limites, self.tamanho_texto)
+            if(self.labely is not None):
+                conj.legendaEixoY = self.labely
+            if(self.labelx is not None):
+                conj.legendaEixoX = self.labelx
+            diretorio_saida_arg = diretorio_saida+"/"+arg.nome if outpath is None else outpath
+            os.makedirs(diretorio_saida_arg, exist_ok=True)
+            self.executa(conj,diretorio_saida_arg )
+        else:
+            for arg in data.args:
+                if(espacial == arg.chave):
+                    conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, self.tamanho_texto)
+                    if(self.labely is not None):
+                        conj.legendaEixoY = self.labely
+                    if(self.labelx is not None):
+                        conj.legendaEixoX = self.labelx
+                    diretorio_saida_arg = diretorio_saida+"/"+arg.nome if outpath is None else outpath
+                    os.makedirs(diretorio_saida_arg, exist_ok=True)
+                    self.executa(conj,diretorio_saida_arg )
                         
 
  
