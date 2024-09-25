@@ -4,7 +4,7 @@ from apps.indicadores.eco_indicadores import EcoIndicadores
 from inewave.newave import Pmo
 from inewave.newave import Dger
 from inewave.newave import Cvar
-
+import os
 
 class InfoSBMNewave(Estruturas):
     def __init__(self, data, par_dados):
@@ -47,7 +47,7 @@ class InfoSBMNewave(Estruturas):
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         temp = temp.replace("Subm", arg)
-        
+
         if(os.path.isfile(caso.caminho+"/pmo.dat")):
             data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
             temp = temp.replace("Versao", data_pmo.versao_modelo)
