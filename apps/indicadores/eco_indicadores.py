@@ -51,7 +51,7 @@ class EcoIndicadores:
             dict[c] = df
         return dict
 
-    def checkIfNumberOnly(self,string):
+    def checkIfNumberOnly(self,s):
         try:
             float(s)  # Check if string can be converted to a float
             return True
