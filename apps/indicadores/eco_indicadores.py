@@ -51,6 +51,7 @@ class EcoIndicadores:
                     pass
                 else:
                     df = df.loc[(df["variavel"] == sintese.split("_")[0])]
+                    print(df)
             df["caso"] = c.nome
             df["modelo"] = c.modelo
             dict[c] = df
