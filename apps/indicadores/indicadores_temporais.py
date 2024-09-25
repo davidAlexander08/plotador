@@ -60,7 +60,7 @@ class IndicadoresTemporais(EcoIndicadores):
             mapa_argumentos = self.retornaMapaDF(unidade.sintese.espacial)
             print(mapa_argumentos)
             
-            coluna_filtro = unidade.filtro.split("_")[1]
+            coluna_filtro = unidade.sintese.filtro.split("_")[1]
             print(coluna_filtro)
             for c in self.casos:
                 
