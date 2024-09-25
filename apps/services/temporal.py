@@ -114,6 +114,7 @@ class Temporal:
         sts = Sintese(self.sintese)
         print(sts.sintese)
         print(sts.grandeza)
+        print(sts.espacial)
         print(sts.filtro)
         exit(1)
         if(self.chave is None):
