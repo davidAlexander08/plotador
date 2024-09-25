@@ -7,8 +7,6 @@ class InfoSBMDessem(Estruturas):
     def __init__(self, data, par_dados):
         Estruturas.__init__(self)
         argumentos = par_dados[1]
-        print(argumentos)
-        exit(1)
         mapa_sbm = {"SUDESTE":"SE", "NORDESTE":"NE", "NORTE":"N", "SUL":"S"}
         mapa_sbm_inverso = {"SE":"SUDESTE", "NE":"NORDESTE", "N":"NORTE", "S":"SUL"}
         lista_sbm = list(mapa_sbm.keys())
