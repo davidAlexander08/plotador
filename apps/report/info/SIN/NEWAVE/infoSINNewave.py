@@ -37,11 +37,11 @@ class InfoSINNewave(Estruturas):
             oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SIN")
             oper_sin = oper.loc[(oper["caso"] == caso.nome) & (oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
 
-            if(df['variavel'].str.contains("EARMI", case=False, na=False).any()):
+            if(oper_sin['variavel'].str.contains("EARMI", case=False, na=False).any()):
                 earmi_first_per = oper_sin.loc[(oper_sin["variavel"] == "EARMI") & (oper_sin["estagio"] == 1) ]["valor"].iloc[0]
                 temp = temp.replace("EarmI", str(round(earmi_first_per,2)))
 
-            if(df['variavel'].str.contains("EARPI", case=False, na=False).any()):
+            if(oper_sin['variavel'].str.contains("EARPI", case=False, na=False).any()):
                 earpf_i = oper_sin.loc[(oper_sin["variavel"] == "EARPI") & (oper_sin["estagio"] == 1)]["valor"].iloc[0]
                 temp = temp.replace("EarpI", str(earpf_i))
 

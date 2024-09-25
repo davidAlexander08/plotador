@@ -59,11 +59,11 @@ class InfoSBMNewave(Estruturas):
             cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
             oper_sbm = oper.loc[(oper["caso"] == caso.nome) & (oper["codigo_submercado"] == cod_sbm) ]
 
-            if(df['variavel'].str.contains("EARPI", case=False, na=False).any()):
+            if(oper_sbm['variavel'].str.contains("EARPI", case=False, na=False).any()):
                 earpi = oper_sbm.loc[(oper_sbm["variavel"] == "EARPI") & (oper_sbm["estagio"] == 1) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
                 temp = temp.replace("EarpI", str(round(earpi,2)))
 
-            if(df['variavel'].str.contains("EARMI", case=False, na=False).any()):
+            if(oper_sbm['variavel'].str.contains("EARMI", case=False, na=False).any()):
                 earmi = oper_sbm.loc[(oper_sbm["variavel"] == "EARMI") & (oper_sbm["estagio"] == 1) & (oper_sbm["cenario"] == "mean") & (oper_sbm["patamar"] == 0)]["valor"].iloc[0]
                 temp = temp.replace("EarmI", str(round(earmi,2)))
             
