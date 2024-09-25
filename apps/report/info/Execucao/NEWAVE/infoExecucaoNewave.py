@@ -33,7 +33,7 @@ class InfoExecucaoNewave(Estruturas):
         tempo_inicial = df_caso.loc[(df_caso["etapa"] == "Calculos Iniciais")]["tempo"].iloc[0]/60
         tempo_politica = df_caso.loc[(df_caso["etapa"] == "Calculo da Politica")]["tempo"].iloc[0]/60
         tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
-        tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
+        tempo_total = df_caso["tempo"].sum()/60
 
         df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
         df_caso_conv = df_conv.loc[(df_conv["caso"] == caso.nome)]
