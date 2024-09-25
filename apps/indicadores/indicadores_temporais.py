@@ -35,7 +35,7 @@ class IndicadoresTemporais(EcoIndicadores):
 
     #def __retorna_mapa_cenarios_parquet(self, mapa):
     #    dict = {}
-    #    for c in self.casos:
+    #    for c in self.casos: 
     #        df = mapa[c]
     #        if(c.modelo == "NEWAVE" or c.modelo == "DECOMP"): 
     #            dict[c] = df[df[["cenario"]].apply(lambda x: x[0].isdigit(), axis=1)].reset_index(drop = True)
