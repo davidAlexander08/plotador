@@ -117,13 +117,6 @@ class Temporal:
         print(self.sintese)
         print(self.grandeza)
         print(self.espacial)
-        print(data.casos[1].tipo)
-
-        # if(not self.cenario):
-        #    self.sintese = "ESTATISTICA_OPERACAO_"+sts.espacial
-
-        print(self.sintese)
-        exit(1)
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")
