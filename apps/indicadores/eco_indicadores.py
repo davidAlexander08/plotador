@@ -50,8 +50,10 @@ class EcoIndicadores:
                 if(self.checkIfNumberOnly(c.tipo)):
                     pass
                 else:
+                    print(df["variavel"])
                     df = df.loc[(df["variavel"] == sintese.split("_")[0])]
                     print(df)
+                    exit(1)
             df["caso"] = c.nome
             df["modelo"] = c.modelo
             dict[c] = df
