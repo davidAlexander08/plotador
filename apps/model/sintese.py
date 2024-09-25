@@ -21,6 +21,7 @@ class Sintese:
         }
         self.sintese = sts  
         self.grandeza = sts.split("_")[0]
+        self.espacial = sts.split("_")[1] if len(sts.split("_")) > 1 else None
         self.filtro = self.retornaFiltro(sts) if len(sts.split("_")) > 1 else ""
 
 
