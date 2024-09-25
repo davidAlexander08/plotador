@@ -52,7 +52,7 @@ class InfoSINDessem(Estruturas):
         earmf_1_dia = df_earmf_caso.loc[(df_earmf_caso["estagio"] <= 48)]["valor"].mean()
         temp = temp.replace("1_Dia_EARMF", str(round(earmf_1_dia,2)))
         
-        earmf_avg = df_earpf_caso["valor"].mean()
+        earmf_avg = df_earmf_caso["valor"].mean()
         temp = temp.replace("Media_EARMF", str(round(earmf_avg,2)))
 
         return temp
