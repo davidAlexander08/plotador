@@ -63,10 +63,7 @@ class IndicadoresTemporais(EcoIndicadores):
             coluna_filtro = unidade.sintese.filtro.split("_")[1]
             for c in self.casos:
                 cod_arg = mapa_argumentos[c].loc[(mapa_argumentos[c][coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
-                              
                 eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
-            print(eco_mapa)  
-            exit(1)
             if(boxplot =="True"):
                 print("BOX ARG: ", eco_mapa)
                 mapa_temporal = eco_mapa
