@@ -116,7 +116,8 @@ class Temporal:
         sts = Sintese(self.sintese)
 
         meta_dados = self.eco_indicadores.retorna_df(data.casos[0], "METADADOS_OPERACAO")
-        print(meta_dados)
+        df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)]
+        print(df_chave)
         exit(1)
 
         if(self.argumentos is None):
