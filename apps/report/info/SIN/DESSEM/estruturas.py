@@ -10,7 +10,7 @@ class Estruturas:
             <th>Versao</th>
             <th>1 Dia GT</th>
             <th>1 Dia GH</th>
-            <th>1 Dia EARPF</th>
+            <th>1 Dia EARMF</th>
             <th>Média GT</th>
             <th>Média GH</th>
             <th>Média EARMF</th>
