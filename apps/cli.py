@@ -11,8 +11,8 @@ option_xinf = click.option("--xinf", default=0,  help="Ponto Inferior do Eixo X"
 option_xsup = click.option("--xsup", default=60, help="Ponto Superior do Eixo X")
 option_estagio = click.option( "--estagio",  default="",  help="Estagio Especifico para Plotar")
 option_cenario = click.option("--cenario",   default="mean",  help="Cenario Especifico para Plotar")
-option_patamar = click.option("--patamar",   default="0",  help="Patamar Especifico para Plotar")
 
+option_patamar = click.option("--patamar",   default="0",  help="Patamar Especifico para Plotar")
 option_sintese = click.option("--sintese",  default="",  help="Sintese Especifica a ser Plotada")
 option_argumentos = click.option("--argumentos",  default = None, help="Argumentos Especifico a ser plotado como SUDESTE, TRES MARIAS, etc...  Separados por virgula")
 option_chave = click.option("--chave",  default = None,  help="Chaves para o argumento: None, SBM, REE, UHE")
