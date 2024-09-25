@@ -129,7 +129,7 @@ class Temporal:
             self.executa(conj,diretorio_saida_arg )
         else:
             for arg in data.args:
-                if(espacial == arg.chave):
+                if(sts.espacial == arg.chave):
                     conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, self.tamanho_texto)
                     if(self.labely is not None):
                         conj.legendaEixoY = self.labely
