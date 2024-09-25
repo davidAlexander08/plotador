@@ -36,12 +36,12 @@ class Tempo:
         temp = []
         for caso in data.casos:
             df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-            df_caso["tempo"] = df_caso["tempo"] /(60)
+            df_caso["tempo"] = df_caso["tempo"]
             lista_color.append(caso.cor)
             if(caso.modelo == "NEWAVE" or caso.modelo == "DECOMP"):
                 #temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
                 print(df_caso)
-                temp.append(df_caso["tempo"].sum())
+                temp.append(df_caso["tempo"].sum()/60)
             if(caso.modelo == "DESSEM"):
                 #print(df_caso)
                 df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
