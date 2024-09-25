@@ -38,7 +38,11 @@ class EcoIndicadores:
     def retornaMapaDF(self, sintese):
         dict = {}
         for c in self.casos:
-            print(c.tipo)
+            if(self.checkIfNumberOnly(c.tipo)):
+                print("APENAS NUMEROS: ", c.tipo)
+            else:
+                print("APENAS LETRAS: ", c.tipo)
+            
             exit(1)
 
             df = self.__retorna_df(c, sintese)
@@ -47,7 +51,12 @@ class EcoIndicadores:
             dict[c] = df
         return dict
 
-
+    def checkIfNumberOnly(self,string):
+        try:
+            float(s)  # Check if string can be converted to a float
+            return True
+        except ValueError:
+            return False
 
     def exportar(self, df, diretorio_saida, nome_arquivo, imprimeIndex = False):
         Log.log().info("Gerando tabela "+nome_arquivo)
