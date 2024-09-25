@@ -42,7 +42,7 @@ class EcoIndicadores:
                 if(self.checkIfNumberOnly(c.tipo)):
                     pass
                 else:
-                    sintese = "ESTATISTICA_OPERACAO_"+sintese.split("_")[1]
+                    sintese = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
             
 
             df = self.__retorna_df(c, sintese)
