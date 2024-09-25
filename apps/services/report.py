@@ -150,7 +150,7 @@ class Report():
                                 submercados = "SE,S,NE,N" if data.casos[0].modelo != "NEWAVE" else "SUDESTE,SUL,NORDESTE,NORTE"
                                 cli_command = cli_command.replace("ADD_SBMS", submercados)
                             if(data.casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
-                                cli_command = cli_command + " --eixox dataInicio"
+                                cli_command = cli_command + " --eixox data_inicio"
                             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                             lista_commands_cli = cli_command.split()
                             print(lista_commands_cli)
