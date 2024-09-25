@@ -69,7 +69,7 @@ class IndicadoresTemporais(EcoIndicadores):
                 mapa_temporal = eco_mapa
             else:
                 print("CEN ARG: ", self.__retorna_mapa_media_parquet(eco_mapa))
-                print("CEN ARG: ", self.__retorna_mapa_media_parquet(eco_mapa).columns)
+                print("CEN ARG: ", self.__retorna_mapa_media_parquet(eco_mapa).columns())
                 mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
         
         exit(1)
