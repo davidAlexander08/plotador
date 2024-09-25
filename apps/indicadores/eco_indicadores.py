@@ -38,6 +38,7 @@ class EcoIndicadores:
     def retornaMapaDF(self, sintese):
         dict = {}
         for c in self.casos:
+            variavel = sintese.split("_")[0]
             if(len(sintese.split("_")) > 1):
                 if(self.checkIfNumberOnly(c.tipo)):
                     c.tipo = int(c.tipo)
@@ -51,7 +52,7 @@ class EcoIndicadores:
                     pass
                 else:
                     print(sintese.split("_")[0])
-                    df = df.loc[(df["variavel"] == sintese.split("_")[0])]
+                    df = df.loc[(df["variavel"] == variavel)]
                     print(df)
                     exit(1)
             df["caso"] = c.nome
