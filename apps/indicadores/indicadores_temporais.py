@@ -60,7 +60,7 @@ class IndicadoresTemporais(EcoIndicadores):
 
             for c in self.casos:
                 
-                df_argumentos = pd.read_parquet(c.caminho+"/"+unidade.sintese.espacial+".parquet", engine = "pyarrow")
+                df_argumentos = pd.read_parquet(c.caminho+"/sintese/"+unidade.sintese.espacial+".parquet", engine = "pyarrow")
                 print(df_argumentos)
                 exit(1)
                 
