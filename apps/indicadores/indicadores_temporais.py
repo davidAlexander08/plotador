@@ -57,12 +57,12 @@ class IndicadoresTemporais(EcoIndicadores):
                 print("CEN SIN: ", self.__retorna_mapa_media_parquet(eco_mapa))
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else:
-            df_argumentos = pd.read_parquet(unidade.sintese.espacial+".parquet", engine = "pyarrow")
-            print(df_argumentos)
-            exit(1)
+
             for c in self.casos:
                 
-                
+                df_argumentos = pd.read_parquet(c.caminho+"/"+unidade.sintese.espacial+".parquet", engine = "pyarrow")
+                print(df_argumentos)
+                exit(1)
                 
                 
                 eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == unidade.filtroArgumento]
