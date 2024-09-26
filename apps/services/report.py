@@ -28,8 +28,6 @@ class Report():
 
         if(self.json is not None):
             data = Dados_json_caso(self.json)
-            for caso in data.casos:
-                print(caso.caminho)
             self.eco_indicadores = EcoIndicadores(data.casos)
         if(self.txt is None and self.json is None):
             flag_diretorio = 0
@@ -63,6 +61,9 @@ class Report():
 
 
             self.eco_indicadores = EcoIndicadores(data.casos)
+
+        for caso in data.casos:
+            print(caso.caminho)
 
         arquivo_template = ""
         if(self.txt is None):
