@@ -29,6 +29,7 @@ class InfoSBMDessem(Estruturas):
 
         #self.lista_text.append(self.Tabela_Eco_Entrada)
         for arg in lista_argumentos:
+            self.lista_text.append("<h3>Dados "+arg+"</h3>")
             self.lista_text.append(self.Tabela_Eco_Entrada)
             for caso in data.casos:
                 if(caso.modelo == "DESSEM"):
