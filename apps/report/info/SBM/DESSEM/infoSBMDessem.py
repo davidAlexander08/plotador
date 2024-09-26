@@ -26,7 +26,7 @@ class InfoSBMDessem(Estruturas):
 
         self.eco_indicadores = EcoIndicadores(data.casos)
         self.lista_text = []
-        self.lista_text.append(self.Tabela_Eco_Entrada)
+        self.lista_text.append(self. )
         for caso in data.casos:
             if(caso.modelo == "DESSEM"):
                 for arg in lista_argumentos:
@@ -42,6 +42,7 @@ class InfoSBMDessem(Estruturas):
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
+        temp = temp.replace("Subm", arg)
 
         data_des_log = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
         temp = temp.replace("Versao", data_des_log.versao)
