@@ -85,7 +85,6 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
                 json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
 
             arquivo_json = "exemplo.json"
-    print(arquivo_json)
     from apps.services.report import Report
     Report(outpath, arquivo_json, txt, titulo, tipo)
 
