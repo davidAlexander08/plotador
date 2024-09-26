@@ -31,7 +31,7 @@ class Report():
 
         if(self.json is not None):
             data = Dados_json_caso(self.json)
-            print(data.casos[0].caminho)
+            print(data.casos[1].caminho)
             self.eco_indicadores = EcoIndicadores(data.casos)
         if(self.txt is None and self.json is None):
             flag_diretorio = 0
