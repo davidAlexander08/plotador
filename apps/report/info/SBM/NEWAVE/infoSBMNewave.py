@@ -4,7 +4,7 @@ from apps.indicadores.eco_indicadores import EcoIndicadores
 from inewave.newave import Pmo
 from inewave.newave import Dger
 from inewave.newave import Cvar
-
+import os
 
 class InfoSBMNewave(Estruturas):
     def __init__(self, data, par_dados):
@@ -46,66 +46,58 @@ class InfoSBMNewave(Estruturas):
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
-        data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-        data_dger = Dger.read(caso.caminho+"/dger.dat")
-        data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
-        temp = temp.replace("Versao", data_pmo.versao_modelo)
         temp = temp.replace("Subm", arg)
+
+        if(os.path.isfile(caso.caminho+"pmo.dat")):
+            data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+            temp = temp.replace("Versao", data_pmo.versao_modelo)
+
         
-        df_earpi = self.eco_indicadores.retorna_df_concatenado("EARPI_SBM_EST")
-        df_earpi_caso = df_earpi.loc[(df_earpi["caso"] == caso.nome) & (df_earpi["submercado"] == arg) ]
-        earpi = df_earpi_caso.loc[(df_earpi_caso["estagio"] == 1) & (df_earpi_caso["cenario"] == "mean")]["valor"].iloc[0]
+        if(os.path.isfile(caso.caminho+"/sintese/EARPI_SBM_EST.parquet.gzip")):
+            df_earpi = self.eco_indicadores.retorna_df_concatenado("EARPI_SBM_EST")
+            earpi = df_earpi.loc[(df_earpi["caso"] == caso.nome) & (df_earpi["submercado"] == arg) & (df_earpi_caso["estagio"] == 1) & (df_earpi_caso["cenario"] == "mean")]["valor"].iloc[0]
+            temp = temp.replace("EarpI", str(round(earpi,2)))
 
-        df_earmi = self.eco_indicadores.retorna_df_concatenado("EARMI_SBM_EST")
-        df_earmi_caso = df_earmi.loc[(df_earmi["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]
-        earmi = df_earmi_caso.loc[(df_earmi_caso["estagio"] == 1) & (df_earmi_caso["cenario"] == "mean")]["valor"].iloc[0]
+        if(os.path.isfile(caso.caminho+"/sintese/EARMI_SBM_EST.parquet.gzip")):
+            df_earmi = self.eco_indicadores.retorna_df_concatenado("EARMI_SBM_EST")
+            earmi = df_earmi.loc[(df_earmi["caso"] == caso.nome)& (df_earpi["submercado"] == arg) & (df_earmi_caso["estagio"] == 1) & (df_earmi_caso["cenario"] == "mean")]["valor"].iloc[0]
+            temp = temp.replace("EarmI", str(round(earmi,2)))
+        
+        if(os.path.isfile(caso.caminho+"/sintese/GTER_SBM_EST.parquet.gzip")):
+            df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SBM_EST")
+            df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)& (df_earpi["submercado"] == arg) & (df_gt_caso["cenario"] == "mean")]
+            gt_2_mes = df_gt_caso.loc[(df_gt_caso["estagio"] == 2) ]["valor"].iloc[0]
+            temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
 
-        temp = temp.replace("EarmI", str(round(earmi,2)))
-        temp = temp.replace("EarpI", str(round(earpi,2)))
+            gt_avg = df_gt_caso["valor"].mean()
+            temp = temp.replace("Media_GT", str(round(gt_avg,2)))
 
-        df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SBM_EST")
-        df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]
-        df_gh = self.eco_indicadores.retorna_df_concatenado("GHID_SBM_EST")
-        df_gh_caso = df_gh.loc[(df_gh["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]
-        df_earpf = self.eco_indicadores.retorna_df_concatenado("EARPF_SBM_EST")
-        df_earpf_caso = df_earpf.loc[(df_earpf["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]
+        if(os.path.isfile(caso.caminho+"/sintese/GHID_SBM_EST.parquet.gzip")):
+            df_gh = self.eco_indicadores.retorna_df_concatenado("GHID_SBM_EST")
+            df_gh_caso = df_gh.loc[(df_gh["caso"] == caso.nome)& (df_earpi["submercado"] == arg) & (df_gh_caso["cenario"] == "mean")]
+            gh_2_mes = df_gh_caso.loc[(df_gh_caso["estagio"] == 2) ]["valor"].iloc[0]
+            temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
 
-        df_cmo = self.eco_indicadores.retorna_df_concatenado("CMO_SBM_EST")
-        df_cmo_caso = df_cmo.loc[(df_cmo["caso"] == caso.nome)& (df_earpi["submercado"] == arg) ]
+            gh_avg = df_gh_caso["valor"].mean()
+            temp = temp.replace("Media_GH", str(round(gh_avg,2)))
 
-        print(df_gt_caso)
-        print(df_gh_caso)
-        print(df_earpf_caso)
+        if(os.path.isfile(caso.caminho+"/sintese/EARPF_SBM_EST.parquet.gzip")):
+            df_earpf = self.eco_indicadores.retorna_df_concatenado("EARPF_SBM_EST")
+            df_earpf_caso = df_earpf.loc[(df_earpf["caso"] == caso.nome)& (df_earpi["submercado"] == arg) & (df_earpf_caso["cenario"] == "mean")]
+            earpf_2_mes = df_earpf_caso.loc[(df_earpf_caso["estagio"] == 2) ]["valor"].iloc[0]
+            temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
 
-        gt_2_mes = df_gt_caso.loc[(df_gt_caso["estagio"] == 2) & (df_gt_caso["cenario"] == "mean")]["valor"].iloc[0]
-        gh_2_mes = df_gh_caso.loc[(df_gh_caso["estagio"] == 2) & (df_gh_caso["cenario"] == "mean")]["valor"].iloc[0]
-        earpf_2_mes = df_earpf_caso.loc[(df_earpf_caso["estagio"] == 2) & (df_earpf_caso["cenario"] == "mean")]["valor"].iloc[0]
-        cmo_2_mes = df_cmo_caso.loc[(df_cmo_caso["estagio"] == 2) & (df_cmo_caso["cenario"] == "mean")]["valor"].iloc[0]
+            earpf_avg = df_earpf_caso["valor"].mean()
+            temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
 
-        print(round(gt_2_mes,2))
-        print(round(gh_2_mes,2))
-        print(round(earpf_2_mes,2))
-        print(round(cmo_2_mes,2))
-
-        temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
-        temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
-        temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
-        temp = temp.replace("2_Mes_CMO", str(round(cmo_2_mes,2)))
-
-        gt_avg = df_gt_caso.loc[(df_gt_caso["cenario"] == "mean")]["valor"].mean()
-        gh_avg = df_gh_caso.loc[(df_gh_caso["cenario"] == "mean")]["valor"].mean()
-        earpf_avg = df_earpf_caso.loc[(df_earpf_caso["cenario"] == "mean")]["valor"].mean()
-        cmo_avg = df_cmo_caso.loc[(df_cmo_caso["cenario"] == "mean")]["valor"].mean()
-
-        print(round(gt_avg,2))
-        print(round(gh_avg,2))
-        print(round(earpf_avg,2))
-        print(round(cmo_avg,2))
-
-        temp = temp.replace("Media_GT", str(round(gt_avg,2)))
-        temp = temp.replace("Media_GH", str(round(gh_avg,2)))
-        temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
-        temp = temp.replace("Media_CMO", str(round(cmo_avg,2)))
+        if(os.path.isfile(caso.caminho+"/sintese/CMO_SBM_EST.parquet.gzip")):
+            df_cmo = self.eco_indicadores.retorna_df_concatenado("CMO_SBM_EST")
+            df_cmo_caso = df_cmo.loc[(df_cmo["caso"] == caso.nome)& (df_earpi["submercado"] == arg) & (df_cmo_caso["cenario"] == "mean")]
+            cmo_2_mes = df_cmo_caso.loc[(df_cmo_caso["estagio"] == 2) ]["valor"].iloc[0]
+            temp = temp.replace("2_Mes_CMO", str(round(cmo_2_mes,2)))
+            
+            cmo_avg = df_cmo_caso["valor"].mean()
+            temp = temp.replace("Media_CMO", str(round(cmo_avg,2)))
 
 
         return temp
