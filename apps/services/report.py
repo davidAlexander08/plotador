@@ -55,14 +55,9 @@ class Report():
                     raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
             with open("exemplo.json", 'w') as file:
                 json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
-
             self.json = "exemplo.json"
             data = Dados_json_caso(self.json)
-
-
             self.eco_indicadores = EcoIndicadores(data.casos)
-
-
 
         arquivo_template = ""
         if(self.txt is None):
@@ -75,9 +70,6 @@ class Report():
                 exit(1)
         else:
             arquivo_template = self.txt
-        for caso in data.casos:
-            print(caso.caminho)
-
         with open(arquivo_template, "r") as file:
             lines = file.readlines()
 
@@ -158,7 +150,7 @@ class Report():
                                 cli_command = cli_command + " --eixox dataInicio"
                             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                             lista_commands_cli = cli_command.split()
-                            print(lista_commands_cli)
+                            #print(lista_commands_cli)
                             caminho_saida = "report"
                             nome_arquivo  = "sem_nome"
                             extensao = ".png"
