@@ -62,8 +62,7 @@ class Report():
 
             self.eco_indicadores = EcoIndicadores(data.casos)
 
-        for caso in data.casos:
-            print(caso.caminho)
+
 
         arquivo_template = ""
         if(self.txt is None):
@@ -76,7 +75,8 @@ class Report():
                 exit(1)
         else:
             arquivo_template = self.txt
-        
+        for caso in data.casos:
+            print(caso.caminho)
 
         with open(arquivo_template, "r") as file:
             lines = file.readlines()
