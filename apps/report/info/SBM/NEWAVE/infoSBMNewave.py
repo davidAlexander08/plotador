@@ -60,12 +60,12 @@ class InfoSBMNewave(Estruturas):
 
         if(os.path.isfile(caso.caminho+"/sintese/EARMI_SBM_EST.parquet.gzip")):
             df_earmi = self.eco_indicadores.retorna_df_concatenado("EARMI_SBM_EST")
-            earmi = df_earmi.loc[(df_earmi["caso"] == caso.nome)& (df_earpi["submercado"] == arg) & (df_earmi["estagio"] == 1) & (df_earmi["cenario"] == "mean")]["valor"].iloc[0]
+            earmi = df_earmi.loc[(df_earmi["caso"] == caso.nome)& (df_earmi["submercado"] == arg) & (df_earmi["estagio"] == 1) & (df_earmi["cenario"] == "mean")]["valor"].iloc[0]
             temp = temp.replace("EarmI", str(round(earmi,2)))
         
         if(os.path.isfile(caso.caminho+"/sintese/GTER_SBM_EST.parquet.gzip")):
             df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SBM_EST")
-            df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)& (df_earpi["submercado"] == arg) & (df_gt_caso["cenario"] == "mean")]
+            df_gt_caso = df_gt.loc[(df_gt["caso"] == caso.nome)& (df_gt["submercado"] == arg) & (df_gt["cenario"] == "mean")]
             gt_2_mes = df_gt_caso.loc[(df_gt_caso["estagio"] == 2) ]["valor"].iloc[0]
             temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
 
@@ -74,7 +74,7 @@ class InfoSBMNewave(Estruturas):
 
         if(os.path.isfile(caso.caminho+"/sintese/GHID_SBM_EST.parquet.gzip")):
             df_gh = self.eco_indicadores.retorna_df_concatenado("GHID_SBM_EST")
-            df_gh_caso = df_gh.loc[(df_gh["caso"] == caso.nome)& (df_earpi["submercado"] == arg) & (df_gh["cenario"] == "mean")]
+            df_gh_caso = df_gh.loc[(df_gh["caso"] == caso.nome)& (df_gh["submercado"] == arg) & (df_gh["cenario"] == "mean")]
             gh_2_mes = df_gh_caso.loc[(df_gh_caso["estagio"] == 2) ]["valor"].iloc[0]
             temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
 
@@ -83,7 +83,7 @@ class InfoSBMNewave(Estruturas):
 
         if(os.path.isfile(caso.caminho+"/sintese/EARPF_SBM_EST.parquet.gzip")):
             df_earpf = self.eco_indicadores.retorna_df_concatenado("EARPF_SBM_EST")
-            df_earpf_caso = df_earpf.loc[(df_earpf["caso"] == caso.nome)& (df_earpi["submercado"] == arg) & (df_earpf["cenario"] == "mean")]
+            df_earpf_caso = df_earpf.loc[(df_earpf["caso"] == caso.nome)& (df_earpf["submercado"] == arg) & (df_earpf["cenario"] == "mean")]
             earpf_2_mes = df_earpf_caso.loc[(df_earpf_caso["estagio"] == 2) ]["valor"].iloc[0]
             temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
 
