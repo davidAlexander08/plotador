@@ -12,10 +12,7 @@ import json
 import subprocess
 import re
 import base64
-import os
-import subprocess
 import shutil
-import json
 
 class Report():
     def __init__(self,outpath, arq_json, txt, titulo, tipo):
@@ -31,7 +28,8 @@ class Report():
 
         if(self.json is not None):
             data = Dados_json_caso(self.json)
-            print(data.casos[3].caminho)
+            for caso in data.casos:
+                print(caso.caminho)
             self.eco_indicadores = EcoIndicadores(data.casos)
         if(self.txt is None and self.json is None):
             flag_diretorio = 0
