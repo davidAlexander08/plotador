@@ -24,7 +24,7 @@ class InfoSINDessem(Estruturas):
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
 
-        if(os.path.isfile(caso.caminho+"/DES_LOG_RELATO.dat")):
+        if(os.path.isfile(caso.caminho+"/DES_LOG_RELATO.DAT")):
             data_des_log = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
             temp = temp.replace("Versao", data_des_log.versao)
 
