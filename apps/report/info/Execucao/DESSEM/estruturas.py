@@ -12,6 +12,8 @@ class Estruturas:
             <th>PL_INT_FIX (min)</th>
             <th>Calc_CMO (Min)</th>
             <th>Total (min)</th>
+            <th>Status MILP</th>
+            <th>Status CalcCMO</th>
         </tr>
 """
 
@@ -25,6 +27,8 @@ class Estruturas:
             <td>PL_INT_FIX (min)</td>
             <td>Calc_CMO (Min)</td>
             <td>Total (min)</td>
+            <td>Status MILP</td>
+            <td>Status CalcCMO</td>
         </tr>
 """
 

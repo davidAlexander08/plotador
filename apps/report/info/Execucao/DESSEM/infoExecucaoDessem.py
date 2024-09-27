@@ -29,8 +29,10 @@ class InfoExecucaoDessem(Estruturas):
         #if(os.path.isfile(caso.caminho+"LOG_MATRIZ.DAT")):
         data_matriz = LogMatriz.read(caso.caminho+"/LOG_MATRIZ.DAT")
         df = data_matriz.tabela
-        print(df)
-        
+        flag_MILP = df.loc[(df["etapa"] == "MILP")]["status"].iloc[0]
+        flag_CMO = df.loc[(df["etapa"] == "PL.CalcCMO")]["status"].iloc[0]
+        temp = temp.replace("Status MILP", str(flag_MILP))
+        temp = temp.replace("Status CalcCMO", str(flag_CMO))
 
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
         
