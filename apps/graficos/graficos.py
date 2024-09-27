@@ -190,6 +190,7 @@ class Graficos:
         if(cronologico == "True"):
             for unity in mapa:
                 df = mapa[unity]
+                print(df)
                 listaGO = []
                 df = df.reset_index(drop = True)
                 listaGO.append(go.Scatter( 
