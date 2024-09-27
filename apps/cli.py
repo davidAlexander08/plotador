@@ -87,7 +87,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
 
             arquivo_json = "exemplo.json"
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt, titulo, tipo)
+    Report(outpath, arquivo_json, txt, titulo, tipo, cronologico)
 
 @click.command("temporal")
 @option_xinf
