@@ -15,7 +15,7 @@ import base64
 import shutil
 
 class Report():
-    def __init__(self,outpath, arq_json, txt, titulo, tipo):
+    def __init__(self,outpath, arq_json, txt, titulo, tipo, cronologico):
         #self.outpath = outpath
         self.json = arq_json
         print(self.json)
@@ -63,6 +63,9 @@ class Report():
         if(self.txt is None):
             if(data.casos[0].modelo == "NEWAVE"):
                 arquivo_template = "/".join(path)+"/template_newave.txt" 
+                
+            elif(data.casos[0].modelo == "DESSEM" and cronologico == "True"):
+                arquivo_template = "/".join(path)+"/template_dessem_cronologico.txt" 
             elif(data.casos[0].modelo == "DESSEM"):
                 arquivo_template = "/".join(path)+"/template_dessem.txt" 
             elif(data.casos[0].modelo == "DECOMP"):

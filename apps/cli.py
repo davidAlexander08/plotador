@@ -49,7 +49,8 @@ def cli():
 @option_titulo
 @option_modelo_report
 @option_automatico
-def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico):
+@option_cronologico
+def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico):
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
     contador = 0
     if(arquivo_json is None):
