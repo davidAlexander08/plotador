@@ -20,19 +20,16 @@ class InfoExecucaoDessem(Estruturas):
 
     def preenche_modelo_tabela_modelo(self,caso):
 
-
-
-
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         data_des_log = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
         temp = temp.replace("Versao", data_des_log.versao)
 
-        if(os.path.isfile(caso.caminho+"LOG_MATRIZ.DAT")):
-            data_matriz = LogMatriz.read(caso.caminho+"/LOG_MATRIZ.DAT")
-            df = data_matriz.tabela
-            print(df)
+        #if(os.path.isfile(caso.caminho+"LOG_MATRIZ.DAT")):
+        data_matriz = LogMatriz.read(caso.caminho+"/LOG_MATRIZ.DAT")
+        df = data_matriz.tabela
+        print(df)
         
 
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
