@@ -40,10 +40,10 @@ class InfoExecucaoNewave(Estruturas):
         h_tempo_sf =          0 if tempo_sf       < 60 else math.floor(tempo_sf/60)
         h_tempo_total =       0 if tempo_total    < 60 else math.floor(tempo_total/60)
 
-        min_tempo_inicial =     round(tempo_inicial,0)   if h_tempo_inicial  == 0 else  round(h_tempo_inicial*60 - tempo_inicial,0)
-        min_tempo_politica =    round(tempo_politica,0)  if h_tempo_politica == 0 else  round(h_tempo_politica*60 - tempo_politica,0)
-        min_tempo_sf =          round(tempo_sf,0)        if h_tempo_sf       == 0 else  round(h_tempo_sf*60 - tempo_sf,0)
-        min_tempo_total =       round(tempo_total,0)     if h_tempo_total    == 0 else  round(h_tempo_total*60 - tempo_total,0)
+        min_tempo_inicial =     round(tempo_inicial,0)   if h_tempo_inicial  == 0 else  round(tempo_inicial - h_tempo_inicial*60 ,0)
+        min_tempo_politica =    round(tempo_politica,0)  if h_tempo_politica == 0 else  round(tempo_politica - h_tempo_politica*60 ,0)
+        min_tempo_sf =          round(tempo_sf,0)        if h_tempo_sf       == 0 else  round(tempo_sf - h_tempo_sf*60 ,0)
+        min_tempo_total =       round(tempo_total,0)     if h_tempo_total    == 0 else  round(tempo_total - h_tempo_total*60 ,0)
 
         df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
         df_caso_conv = df_conv.loc[(df_conv["caso"] == caso.nome)]
