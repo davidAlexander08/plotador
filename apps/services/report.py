@@ -65,6 +65,8 @@ class Report():
                 arquivo_template = "/".join(path)+"/template_newave.txt" 
             elif(data.casos[0].modelo == "DESSEM"):
                 arquivo_template = "/".join(path)+"/template_dessem.txt" 
+            elif(data.casos[0].modelo == "DECOMP"):
+                arquivo_template = "/".join(path)+"/template_decomp.txt" 
             else:
                 print("Tipo definido errado: Simples ou Completo")
                 exit(1)
