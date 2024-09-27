@@ -2,7 +2,8 @@
 from apps.report.info.Execucao.DESSEM.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from idessem.dessem.des_log_relato import DesLogRelato
-
+from idessem.dessem.log_matriz import LogMatriz
+import os
 class InfoExecucaoDessem(Estruturas):
     def __init__(self, data):
         Estruturas.__init__(self)
@@ -28,6 +29,11 @@ class InfoExecucaoDessem(Estruturas):
         data_des_log = DesLogRelato.read(caso.caminho+"/DES_LOG_RELATO.DAT")
         temp = temp.replace("Versao", data_des_log.versao)
 
+        if(os.path.isfile(caso.caminho+"LOG_MATRIZ.DAT")):
+            data_matriz = LogMatriz.read(caso.caminho+"/LOG_MATRIZ.DAT")
+            df = data_matriz.tabela
+            print(df)
+        
 
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
         
