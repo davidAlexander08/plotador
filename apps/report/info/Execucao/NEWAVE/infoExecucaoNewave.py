@@ -53,9 +53,9 @@ class InfoExecucaoNewave(Estruturas):
         t_ultimo_pl =   df_caso_conv["tempo"].iloc[-1]/60
 
         temp = temp.replace("Calc Inicio (min)", str(h_tempo_inicial)+ " h " + str(min_tempo_inicial) + " min")
-        temp = temp.replace("Politica (min)", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min"))
-        temp = temp.replace("Sim. Final (Min)", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min"))
-        temp = temp.replace("Total (min)", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min"))
+        temp = temp.replace("Politica (min)", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min")
+        temp = temp.replace("Sim. Final (Min)", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min")
+        temp = temp.replace("Total (min)", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min")
         temp = temp.replace("Iter", str(round(iteracao,2)))
         temp = temp.replace("Zinf", str(round(zinf,2)))
         temp = temp.replace("Zsup", str(round(zsup,2)))
