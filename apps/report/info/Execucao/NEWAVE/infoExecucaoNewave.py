@@ -4,7 +4,7 @@ from apps.indicadores.eco_indicadores import EcoIndicadores
 from inewave.newave import Pmo
 from inewave.newave import Dger
 from inewave.newave import Cvar
-   
+import math
 
 class InfoExecucaoNewave(Estruturas):
     def __init__(self, data):
@@ -35,6 +35,16 @@ class InfoExecucaoNewave(Estruturas):
         tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
         tempo_total = df_caso.loc[(df_caso["etapa"] == "Tempo Total")]["tempo"].iloc[0]/60
 
+        h_tempo_inicial =     0 if tempo_inicial  < 60 else math.floor(tempo_inicial/60)
+        h_tempo_politica =    0 if tempo_politica < 60 else math.floor(tempo_politica/60)
+        h_tempo_sf =          0 if tempo_sf       < 60 else math.floor(tempo_sf/60)
+        h_tempo_total =       0 if tempo_total    < 60 else math.floor(tempo_total/60)
+
+        min_tempo_inicial =     round(tempo_inicial,0)   if h_tempo_inicial  == 0 else  round(h_tempo_inicial*60 - tempo_inicial,0)
+        min_tempo_politica =    round(tempo_politica,0)  if h_tempo_politica == 0 else  round(h_tempo_politica*60 - tempo_politica,0)
+        min_tempo_sf =          round(tempo_sf,0)        if h_tempo_sf       == 0 else  round(h_tempo_sf*60 - tempo_sf,0)
+        min_tempo_total =       round(tempo_total,0)     if h_tempo_total    == 0 else  round(h_tempo_total*60 - tempo_total,0)
+
         df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
         df_caso_conv = df_conv.loc[(df_conv["caso"] == caso.nome)]
         iteracao =      df_caso_conv["iter"].iloc[-1]
@@ -42,10 +52,10 @@ class InfoExecucaoNewave(Estruturas):
         zsup =          df_caso_conv["zsup"].iloc[-1]
         t_ultimo_pl =   df_caso_conv["tempo"].iloc[-1]/60
 
-        temp = temp.replace("Calc Inicio (min)", str(round(tempo_inicial,2)))
-        temp = temp.replace("Politica (min)", str(round(tempo_politica,2)))
-        temp = temp.replace("Sim. Final (Min)", str(round(tempo_sf,2)))
-        temp = temp.replace("Total (min)", str(round(tempo_total,2)))
+        temp = temp.replace("Calc Inicio (min)", str(h_tempo_inicial)+ " h " + str(min_tempo_inicial) + " min")
+        temp = temp.replace("Politica (min)", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min"))
+        temp = temp.replace("Sim. Final (Min)", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min"))
+        temp = temp.replace("Total (min)", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min"))
         temp = temp.replace("Iter", str(round(iteracao,2)))
         temp = temp.replace("Zinf", str(round(zinf,2)))
         temp = temp.replace("Zsup", str(round(zsup,2)))
