@@ -194,7 +194,7 @@ class Graficos:
                 listaGO = []
                 df = df.reset_index(drop = True)
                 print(df)
-                df = df.df(by='time')
+                df = df.sort_values(by=colx)
                 print(df)
                 listaGO.append(go.Scatter( 
                         x = df[colx],
