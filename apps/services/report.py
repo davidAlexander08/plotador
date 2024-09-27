@@ -65,6 +65,7 @@ class Report():
                 arquivo_template = "/".join(path)+"/template_newave.txt" 
                 
             elif(data.casos[0].modelo == "DESSEM" and cronologico == "True"):
+                print("ENTROU AQUI")
                 arquivo_template = "/".join(path)+"/template_dessem_cronologico.txt" 
             elif(data.casos[0].modelo == "DESSEM"):
                 arquivo_template = "/".join(path)+"/template_dessem.txt" 
