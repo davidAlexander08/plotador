@@ -190,9 +190,10 @@ class Graficos:
         if(cronologico == "True"):
             for unity in mapa:
                 df = mapa[unity]
-                df.to_csv("teste.csv")
+                #df.to_csv("teste.csv")
                 listaGO = []
                 df = df.reset_index(drop = True)
+                print(df)
                 listaGO.append(go.Scatter( 
                         x = df[colx],
                         y = df[coly],
