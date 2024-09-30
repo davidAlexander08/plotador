@@ -7,6 +7,7 @@ class Estruturas:
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
+            <th>Versao</th>
             <th>Politica (min)</th>
             <th>SF (min)</th>
             <th>Total (min)</th>
@@ -21,6 +22,7 @@ class Estruturas:
         <tr>
             <td>Caso</td>
             <td>Modelo</td>
+            <td>Versao</td>
             <td>tempo_politica</td>
             <td>tempo_sf</td>
             <td>tempo_total</td>

@@ -26,9 +26,12 @@ class InfoGeralOperNewave(Estruturas):
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+        temp = temp.replace("Versao", data_pmo.versao_modelo)
+        
         print(caso.caminho)
         data_dger = Dger.read(caso.caminho+"/dger.dat")
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
+
 
         df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
         tempo_inicial = df_caso.loc[(df_caso["etapa"] == "Calculos Iniciais")]["tempo"].iloc[0]/60

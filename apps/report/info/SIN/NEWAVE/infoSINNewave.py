@@ -27,19 +27,17 @@ class InfoSINNewave(Estruturas):
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
 
-        if(os.path.isfile(caso.caminho+"pmo.dat")):
-            data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-            temp = temp.replace("Versao", data_pmo.versao_modelo)
-
-            earm_max = data_pmo.energia_armazenada_maxima
-            earmi = data_pmo.energia_armazenada_inicial
-            
-            earm_max_first_per = earm_max.loc[(earm_max["configuracao"] == 1)]["valor_MWmes"].sum()
-            earmi_first_per = earmi["valor_MWmes"].sum()
-            temp = temp.replace("EarmI", str(round(earmi_first_per,2)))
-
-            earpf_i = round(earmi_first_per/earm_max_first_per,2)
-            temp = temp.replace("EarpI", str(earpf_i))
+        if(os.path.isfile(caso.caminho+"/sintese/EARMI_SIN_EST.parquet.gzip")):
+            df = self.eco_indicadores.retorna_df_concatenado("EARMI_SIN_EST")
+            df_caso = df.loc[(df["caso"] == caso.nome) & (df["cenario"] == "mean")]
+            valor = df_caso.loc[(df_caso["estagio"] == 1) ]["valor"].iloc[0]
+            temp = temp.replace("EarmI", str(round(valor,2)))
+        
+        if(os.path.isfile(caso.caminho+"/sintese/EARPI_SIN_EST.parquet.gzip")):
+            df = self.eco_indicadores.retorna_df_concatenado("EARPI_SIN_EST")
+            df_caso = df.loc[(df["caso"] == caso.nome) & (df["cenario"] == "mean")]
+            valor = df_caso.loc[(df_caso["estagio"] == 1) ]["valor"].iloc[0]
+            temp = temp.replace("EarpI", str(round(valor,2)))
 
         if(os.path.isfile(caso.caminho+"/sintese/GTER_SIN_EST.parquet.gzip")):
             df_gt = self.eco_indicadores.retorna_df_concatenado("GTER_SIN_EST")

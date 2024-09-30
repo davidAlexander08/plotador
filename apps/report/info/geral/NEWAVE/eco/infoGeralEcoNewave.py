@@ -28,10 +28,11 @@ class InfoGeralEcoNewave(Estruturas):
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
-        data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+
+        
         data_dger = Dger.read(caso.caminho+"/dger.dat")
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
-        temp = temp.replace("Versao", data_pmo.versao_modelo)
+        
         temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
         temp = temp.replace("Ano_I", str(data_dger.ano_inicio_estudo))
         temp = temp.replace("Anos_Pos", str(data_dger.num_anos_pos_estudo))

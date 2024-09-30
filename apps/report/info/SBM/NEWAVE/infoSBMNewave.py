@@ -48,10 +48,6 @@ class InfoSBMNewave(Estruturas):
         temp = temp.replace("Modelo", caso.modelo)
         temp = temp.replace("Subm", arg)
 
-        if(os.path.isfile(caso.caminho+"/pmo.dat")):
-            data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-            temp = temp.replace("Versao", data_pmo.versao_modelo)
-
         
         if(os.path.isfile(caso.caminho+"/sintese/EARPI_SBM_EST.parquet.gzip")):
             df_earpi = self.eco_indicadores.retorna_df_concatenado("EARPI_SBM_EST")
