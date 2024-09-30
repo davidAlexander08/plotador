@@ -48,7 +48,7 @@ class EcoIndicadores:
                     sintese_busca = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
             else:
                 sintese_busca = sintese
-            print(sintese_busca)
+            print("SINTESE BUSCA: ", sintese_busca)
             df = self.retorna_df(c, sintese_busca)
 
             if( (len(sintese.split("_")) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
