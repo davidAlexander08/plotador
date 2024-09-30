@@ -109,14 +109,12 @@ class Report():
                     elif("\info{") in line:
                         
                         nome_argumento_info = line.split("{")[1].split("}")[0]
-                        print("ENTROU AQUI " + nome_argumento_info)
                         args = nome_argumento_info.split("/")
                         chave = args[0]
                         argumentos = nome_argumento_info.split("/")[1].split(",") if(len(args) > 1) else None
                         par_dados = (chave, argumentos)
                         info = Info(data, par_dados)
                         html_file.write(info.text_html+"\n")
-                        print("SAIU DAQUI")
                     elif("\page{") in line:
                         if(flag_primeira_pagina == False):
                             html_file.write('</div>'+"\n")
@@ -142,7 +140,7 @@ class Report():
                             
                     elif("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
-                        print(f"Executing CLI command: {cli_command}")
+                        #print(f"Executing CLI command: {cli_command}")
                         if( (data.casos[0].modelo == "DECOMP" or data.casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
                             pass
                         else:
@@ -155,7 +153,7 @@ class Report():
                                 cli_command = cli_command + " --eixox data_inicio"
                             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                             lista_commands_cli = cli_command.split()
-                            print(lista_commands_cli)
+                            #print(lista_commands_cli)
                             caminho_saida = "report"
                             nome_arquivo  = "sem_nome"
                             extensao = ".png"
