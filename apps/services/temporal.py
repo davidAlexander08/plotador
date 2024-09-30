@@ -154,6 +154,7 @@ class Temporal:
         for unity in conjUnity.listaUnidades:
             #lista_data_frame = []
             df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
+            print(df_temporal)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
