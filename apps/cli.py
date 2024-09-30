@@ -18,7 +18,8 @@ option_chave = click.option("--chave",  default = None,  help="Chaves para o arg
 option_largura = click.option("--largura",  default="1500",   help="Sintese Especifica a ser Plotada") #VALOR INTERESSANTE PARA RELATORIOS E 1200
 option_altura = click.option( "--altura",   default="1200",   help="Sintese Especifica a ser Plotada") #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
 option_eixox = click.option( "--eixox",   default="estagio",   help="Eixo X, valores como estagio, dataInicio, dataFim")
-option_cronologico = click.option("--cronologico",   default="False",    help="Sintese Especifica a ser Plotada")
+option_cronologico = click.option("--cronologico",   default="False",    help="Ativa ou desativa opção cronologico do report automatico")
+option_conjunto = click.option("--conjunto",   default="False",    help="Ativa ou desativa se é um conjunto de dados do report automatico")
 option_labely = click.option("--labely",   default=None, help="Label Y para todos os graficos Plotados")
 option_labelx = click.option( "--labelx",   default=None,  help="Label X para todos os graficos Plotados")
 option_booltitulo = click.option("--booltitulo",   default="True", help="Ativa ou desativa o titulo de figuras")
@@ -51,45 +52,49 @@ def cli():
 @option_modelo_report
 @option_automatico
 @option_cronologico
-def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico):
+@option_conjunto
+def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico, conjunto):
     start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
     contador = 0
     if(arquivo_json is None):
         if(automatico == "True"):
-            flag_diretorio = 0
-            path = __file__.split("/")
-            path.pop()
-            path.pop()
-            arq_json_exemplo = "/".join(path)+"/apps/exemplo.json"
-            current_directory = os.getcwd()
-            novos_casos =[]
-            with open(arq_json_exemplo, "r") as file:
-                dados = json.load(file)
-                for item in os.listdir(current_directory):
-                    if(item != "resultados" and item != "report"):
-                        item_path = os.path.join(current_directory, item)
-                        if os.path.isdir(item_path):
-                            if(os.path.exists(item_path+"/sintese")):
-                                caminho = item_path
-                                nome = item
-                                cor = cores[contador]
-                                modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
-                                contador += 1
-                                novo_caso = {"nome":nome,
-                                            "caminho":caminho,
-                                            "cor":cor,
-                                            "modelo":modelo}
-                                novos_casos.append(novo_caso)
+            if(conjunto == "False"):
+                flag_diretorio = 0
+                path = __file__.split("/")
+                path.pop()
+                path.pop()
+                arq_json_exemplo = "/".join(path)+"/apps/exemplo.json"
+                current_directory = os.getcwd()
+                novos_casos =[]
+                with open(arq_json_exemplo, "r") as file:
+                    dados = json.load(file)
+                    for item in os.listdir(current_directory):
+                        if(item != "resultados" and item != "report"):
+                            item_path = os.path.join(current_directory, item)
+                            if os.path.isdir(item_path):
+                                if(os.path.exists(item_path+"/sintese")):
+                                    caminho = item_path
+                                    nome = item
+                                    cor = cores[contador]
+                                    modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
+                                    contador += 1
+                                    novo_caso = {"nome":nome,
+                                                "caminho":caminho,
+                                                "cor":cor,
+                                                "modelo":modelo}
+                                    novos_casos.append(novo_caso)
 
-                dados["casos"] = novos_casos
+                    dados["casos"] = novos_casos
 
-            with open("exemplo.json", 'w') as file:
-                json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
+                with open("exemplo.json", 'w') as file:
+                    json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
 
-            arquivo_json = "exemplo.json"
+                arquivo_json = "exemplo.json"
+            elif(conjunto == "True"):
+                pass
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt, titulo, tipo, cronologico)
+    Report(outpath, arquivo_json, txt, titulo, tipo, cronologico, conjunto)
     end_time = time.time()
     elapsed_time = end_time - start_time
     minutes = int(elapsed_time // 60)
