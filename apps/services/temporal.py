@@ -149,7 +149,7 @@ class Temporal:
                         
 
  
-    def executa(self, conjUnity, diretorio_saida_arg): 
+    def executa(self, conjUnity, diretorio_saida_arg):  
         mapa_temporal = {}
         print("ENTORU AQUI")
         for unity in conjUnity.listaUnidades:
