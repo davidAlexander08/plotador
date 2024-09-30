@@ -30,6 +30,7 @@ class InfoGeral(Estruturas):
                 ## TABELA ECO
                 self.lista_text.append("<h3>Eco Dados Entrada</h3>"+"\n")
                 if(modelo == "NEWAVE"):
+                    print("ENTROU NO ECO")
                     self.lista_text.append(InfoGeralEcoNewave(data).text_html)
                 if(modelo == "DECOMP"):
                     #self.lista_text.append(InfoGeralEcoDecomp(data).text_html)
@@ -37,11 +38,12 @@ class InfoGeral(Estruturas):
                 if(modelo == "DESSEM"):
                     self.lista_text.append(InfoGeralEcoDessem(data).text_html)
                     pass
-
+            
             if(par_dados[1] == "OPER" or par_dados[1] == None):
                 ##TABELA OPER
                 self.lista_text.append("<h3>Oper Dados</h3>"+"\n")
                 if(modelo == "NEWAVE"):
+                    print("ENTROU NO OPER")
                     self.lista_text.append(InfoGeralOperNewave(data).text_html)
                 if(modelo == "DECOMP"):
                     #self.lista_text.append(InfoGeralOperDecomp(data).text_html)
