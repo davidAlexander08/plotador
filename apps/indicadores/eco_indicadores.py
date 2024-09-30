@@ -44,9 +44,9 @@ class EcoIndicadores:
                 if(self.checkIfNumberOnly(c.tipo)):
                     c.tipo = int(c.tipo)
                 else:
-                    sintese = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
-            print(sintese)
-            df = self.retorna_df(c, sintese)
+                    sintese_busca = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
+            print(sintese_busca)
+            df = self.retorna_df(c, sintese_busca)
 
             if( (len(sintese.split("_")) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
                 if(self.checkIfNumberOnly(c.tipo)):
