@@ -7,7 +7,6 @@ class Estruturas:
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
-            <th>Versao</th>
             <th>Calc Inicio (min)</th>
             <th>Politica (min)</th>
             <th>Sim. Final (Min)</th>
@@ -24,7 +23,6 @@ class Estruturas:
         <tr>
             <td>Caso</td>
             <td>Modelo</td>
-            <td>Versao</td>
             <td>Calc Inicio (min)</td>
             <td>Politica (min)</td>
             <td>Sim. Final (Min)</td>

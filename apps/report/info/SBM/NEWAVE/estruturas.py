@@ -7,7 +7,6 @@ class Estruturas:
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
-            <th>Versao</th>
             <th>Subm</th>
             <th>EarmI</th>
             <th>EarpI</th>
@@ -27,7 +26,6 @@ class Estruturas:
         <tr>
             <td>Caso</td>
             <td>Modelo</td>
-            <td>Versao</td>
             <td>Subm</td>
             <td>EarmI</td>
             <td>EarpI</td>

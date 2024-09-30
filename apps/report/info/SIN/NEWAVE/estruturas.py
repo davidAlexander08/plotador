@@ -7,7 +7,6 @@ class Estruturas:
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
-            <th>Versao</th>
             <th>EarmI</th>
             <th>EarpI</th>
             <th>2 Mes GT</th>
@@ -24,7 +23,6 @@ class Estruturas:
         <tr>
             <td>Caso</td>
             <td>Modelo</td>
-            <td>Versao</td>
             <td>EarmI</td>
             <td>EarpI</td>
             <td>2_Mes_GT</td>

@@ -37,10 +37,6 @@ class InfoExecucaoNewave(Estruturas):
             temp = temp.replace("Sim. Final (Min)", str(round(tempo_sf,2)))
             temp = temp.replace("Total (min)", str(round(tempo_total,2)))
 
-        if(os.path.isfile(caso.caminho+"/pmo.dat")):
-            data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-            temp = temp.replace("Versao", data_pmo.versao_modelo)
-
 
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
             df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
