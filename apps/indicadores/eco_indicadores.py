@@ -51,14 +51,14 @@ class EcoIndicadores:
             else:
                 sintese_busca = sintese
             print("SINTESE BUSCA: ", sintese_busca)
-            df = self.retorna_df(c, sintese_busca)
+            df = self.retorna_df(c, sintese_busca).copy()
             if(flag_estatistica == 1):
                 df = df.loc[(df["variavel"] == variavel)].copy()                    
 
             print(df)
             df["caso"] = c.nome
             df["modelo"] = c.modelo
-            dict[c] = df_fim
+            dict[c] = df
         return dict
 
     def checkIfNumberOnly(self,s):
