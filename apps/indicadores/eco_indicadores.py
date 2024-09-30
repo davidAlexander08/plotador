@@ -50,7 +50,7 @@ class EcoIndicadores:
                     flag_estatistica = 1
             else:
                 sintese_busca = sintese
-            print("SINTESE BUSCA: ", sintese_busca)
+            print("SINTESE BUSCA: ", sintese_busca, "  flag_estatistica: ", flag_estatistica)
             df = self.retorna_df(c, sintese_busca).copy()
             if(flag_estatistica == 1):
                 df = df.loc[(df["variavel"] == variavel)].copy()                    
