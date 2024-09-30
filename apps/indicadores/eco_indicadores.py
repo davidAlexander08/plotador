@@ -55,12 +55,12 @@ class EcoIndicadores:
                 if(self.checkIfNumberOnly(c.tipo)):
                     pass
                 else:
-                    df = df.loc[(df["variavel"] == variavel)]
+                    df_fim = df.loc[(df["variavel"] == variavel)].copy()
 
-            print(df)
+            print(df_fim)
             df["caso"] = c.nome
             df["modelo"] = c.modelo
-            dict[c] = df
+            dict[c] = df_fim
         return dict
 
     def checkIfNumberOnly(self,s):
