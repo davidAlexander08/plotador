@@ -7,7 +7,6 @@ class Estruturas:
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
-            <th>Versao</th>
             <th>UHE</th>
             <th>VarmI</th>
         </tr>
@@ -18,7 +17,6 @@ class Estruturas:
         <tr>
             <td>Caso</td>
             <td>Modelo</td>
-            <td>Versao</td>
             <td>UHE</td>
             <td>VarmI</td>
         </tr>

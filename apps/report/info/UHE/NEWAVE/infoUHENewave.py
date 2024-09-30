@@ -32,10 +32,8 @@ class InfoUHENewave(Estruturas):
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
-        data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
         data_dger = Dger.read(caso.caminho+"/dger.dat")
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
-        temp = temp.replace("Versao", data_pmo.versao_modelo)
         temp = temp.replace("UHE", arg)
         print(arg)
         
