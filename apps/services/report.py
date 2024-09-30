@@ -107,6 +107,7 @@ class Report():
                         html_file.write(line.strip()+"\n")
 
                     elif("\info{") in line:
+                        print("ENTROU AQUI ", + nome_argumento_info)
                         nome_argumento_info = line.split("{")[1].split("}")[0]
                         args = nome_argumento_info.split("/")
                         chave = args[0]
@@ -114,7 +115,7 @@ class Report():
                         par_dados = (chave, argumentos)
                         info = Info(data, par_dados)
                         html_file.write(info.text_html+"\n")
-
+                        print("SAIU DAQUI")
                     elif("\page{") in line:
                         if(flag_primeira_pagina == False):
                             html_file.write('</div>'+"\n")

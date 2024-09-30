@@ -48,5 +48,5 @@ class InfoGeralEcoNewave(Estruturas):
 
         if(os.path.isfile(caso.caminho+"/cvar.dat")): 
             data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
-            temp = temp.replace("CVAR", str(data_cvar.valores_constantes[0])+"x"+str(data_cvar.valores_constantes[1]))
+            temp = temp.replace("CVAR", str(round(data_cvar.valores_constantes[0],0))+"x"+str(round(data_cvar.valores_constantes[1],0)))
         return temp
