@@ -151,6 +151,7 @@ class Temporal:
  
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
+        print("ENTORU AQUI")
         for unity in conjUnity.listaUnidades:
             #lista_data_frame = []
             df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
