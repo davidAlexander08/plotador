@@ -4,6 +4,7 @@ from apps.interface.dados_json_caso import Dados_json_caso
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.model.argumento import Argumento
 from apps.report.info.info import Info
+from apps.utils.log import Log
 import plotly.graph_objects as go
 import plotly.io as pio
 import pandas as pd
@@ -99,6 +100,7 @@ class Report():
             flag_primeira_pagina = True
             flag_primeira_subpagina = True
 
+            Log.log().info("-----------Gerando relatorio----------")
             for line in lines:
                 if line.strip():
                     if("###" in line):
@@ -107,7 +109,7 @@ class Report():
                         html_file.write(line.strip()+"\n")
 
                     elif("\info{") in line:
-                        
+                        Log.log().info("Gerando info " + line)
                         nome_argumento_info = line.split("{")[1].split("}")[0]
                         args = nome_argumento_info.split("/")
                         chave = args[0]
@@ -116,11 +118,13 @@ class Report():
                         info = Info(data, par_dados)
                         html_file.write(info.text_html+"\n")
                     elif("\page{") in line:
+                        
                         if(flag_primeira_pagina == False):
                             html_file.write('</div>'+"\n")
                         if(flag_primeira_subpagina == False):
                             html_file.write('</div>'+"\n")
                         nome_pagina = line.split("{")[1].split("}")[0]
+                        Log.log().info("Gerando pagina "+ nome_pagina)
                         pagina_ativa = "page active" if flag_primeira_pagina == True else "page"
                         html_file.write('<div id="'+nome_pagina+'" class="'+pagina_ativa+'">'+"\n")
                         flag_primeira_pagina = False
@@ -136,9 +140,11 @@ class Report():
                         
                         flag_primeira_subpagina = False
                         nome_sub_pagina = line.split("{")[1].split("}")[0]
+                        Log.log().info("-----------Gerando subpagina----------", nome_sub_pagina)
                         html_file.write('<div id="'+nome_sub_pagina+'" class="page">'+"\n")
                             
                     elif("plotador" in line):
+                        Log.log().info("-----------Gerando graficos----------")
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         #print(f"Executing CLI command: {cli_command}")
                         if( (data.casos[0].modelo == "DECOMP" or data.casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
@@ -185,6 +191,6 @@ class Report():
             with open("/".join(path)+"/report/script.txt", 'r', encoding='utf-8') as arquivo:
                 conteudo = arquivo.read()
                 html_file.write(conteudo)
-
-        print("Report saved as report.html")
+        Log.log().info("-----------Fim do Report----------")
+        #print("Report saved as report.html")
 
