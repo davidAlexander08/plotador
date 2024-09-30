@@ -29,11 +29,6 @@ class InfoGeralEcoNewave(Estruturas):
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
 
-        print("LENDO PMO.DAT")
-        if(os.path.isfile(caso.caminho+"/pmo.dat")):
-            data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-            temp = temp.replace("Versao", data_pmo.versao_modelo)
-
         print("LENDO DGER")
         if(os.path.isfile(caso.caminho+"/dger.dat")):  
             data_dger = Dger.read(caso.caminho+"/dger.dat")

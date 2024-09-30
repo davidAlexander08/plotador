@@ -25,13 +25,16 @@ class InfoGeralOperNewave(Estruturas):
         temp = self.template_Tabela_Operacao
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
+        print("LENDO PMO.DAT")
         if(os.path.isfile(caso.caminho+"/pmo.dat")):
             data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
             custo_total = data_pmo.custo_operacao_total
             desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
             temp = temp.replace("custo_total", str(custo_total))
             temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
-
+            temp = temp.replace("Versao", data_pmo.versao_modelo)
+            
+        print("LENDO TEMPO")
         if(os.path.isfile(caso.caminho+"/sintese/TEMPO.parquet")):
             df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
             df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
@@ -43,6 +46,7 @@ class InfoGeralOperNewave(Estruturas):
             temp = temp.replace("tempo_total", str(round(tempo_total, 2)))
             print(tempo_total)
 
+        print("LENDO CNVERGENCIA")
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
             iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
             zinf = data_pmo.convergencia["zinf"].iloc[-1]

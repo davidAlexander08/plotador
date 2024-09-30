@@ -9,7 +9,6 @@ class Estruturas:
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
-            <th>Versao</th>
             <th>Mes I</th>
             <th>Ano I</th>
             <th>Anos Pos</th>
@@ -28,7 +27,6 @@ class Estruturas:
         <tr>
             <td>Caso</td>
             <td>Modelo</td>
-            <td>Versao</td>
             <td>Mes_I</td>
             <td>Ano_I</td>
             <td>Anos_Pos</td>
