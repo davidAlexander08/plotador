@@ -37,10 +37,8 @@ class EcoIndicadores:
             
     def retornaMapaDF(self, sintese):
         dict = {}
-        for c in self.casos:
-            
-            variavel = sintese.split("_")[0]
-            print("variavel: ", variavel)
+        variavel = sintese.split("_")[0]
+        for c in self.casos:            
             if( (len(sintese.split("_")) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
                 if(self.checkIfNumberOnly(c.tipo)):
                     c.tipo = int(c.tipo)
