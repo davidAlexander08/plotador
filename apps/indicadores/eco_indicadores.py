@@ -39,6 +39,7 @@ class EcoIndicadores:
         dict = {}
         variavel = sintese.split("_")[0]
         print("variavel: ", variavel)
+        flag_estatistica = 0
         for c in self.casos:            
             if( (len(sintese.split("_")) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
                 if(self.checkIfNumberOnly(c.tipo)):
@@ -46,18 +47,15 @@ class EcoIndicadores:
                     sintese_busca = sintese
                 else:
                     sintese_busca = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
+                    flag_estatistica = 1
             else:
                 sintese_busca = sintese
             print("SINTESE BUSCA: ", sintese_busca)
             df = self.retorna_df(c, sintese_busca)
+            if(flag_estatistica == 1):
+                df = df.loc[(df["variavel"] == variavel)].copy()                    
 
-            if( (len(sintese.split("_")) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
-                if(self.checkIfNumberOnly(c.tipo)):
-                    pass
-                else:
-                    df_fim = df.loc[(df["variavel"] == variavel)].copy()
-
-            print(df_fim)
+            print(df)
             df["caso"] = c.nome
             df["modelo"] = c.modelo
             dict[c] = df_fim
