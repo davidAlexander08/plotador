@@ -122,7 +122,7 @@ class Temporal:
             print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
             exit(1)
         sts = Sintese(self.sintese)
-
+        print("ENTORU AQUI ANTERIOMENTE")
 
 
         if(self.argumentos is None):
