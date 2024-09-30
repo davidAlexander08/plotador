@@ -25,9 +25,18 @@ class InfoGeralOperNewave(Estruturas):
         temp = self.template_Tabela_Operacao
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
+        
         data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
         temp = temp.replace("Versao", data_pmo.versao_modelo)
-        
+        iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
+        zinf = data_pmo.convergencia["zinf"].iloc[-1]
+        custo_total = data_pmo.custo_operacao_total
+        desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
+        temp = temp.replace("iteracoes", str(iteracoes))
+        temp = temp.replace("zinf", str(zinf))
+        temp = temp.replace("custo_total", str(custo_total))
+        temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
+
         print(caso.caminho)
         data_dger = Dger.read(caso.caminho+"/dger.dat")
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
@@ -50,17 +59,11 @@ class InfoGeralOperNewave(Estruturas):
         min_tempo_total =       round(tempo_total,0)     if h_tempo_total    == 0 else  round(tempo_total - h_tempo_total*60 ,0)
 
 
-        iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
-        zinf = data_pmo.convergencia["zinf"].iloc[-1]
-        custo_total = data_pmo.custo_operacao_total
-        desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
+
 
         temp = temp.replace("tempo_politica", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min")
         temp = temp.replace("tempo_sf", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min")
         temp = temp.replace("tempo_total", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min")
-        temp = temp.replace("iteracoes", str(iteracoes))
-        temp = temp.replace("zinf", str(zinf))
-        temp = temp.replace("custo_total", str(custo_total))
-        temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
+
         return temp
 
