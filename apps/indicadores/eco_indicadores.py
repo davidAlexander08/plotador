@@ -38,7 +38,7 @@ class EcoIndicadores:
     def retornaMapaDF(self, sintese):
         dict = {}
         variavel = sintese.split("_")[0]
-        print("variavel: ", variavel)
+        #print("variavel: ", variavel)
         flag_estatistica = 0
         for c in self.casos:            
             if( (len(sintese.split("_")) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
@@ -50,12 +50,12 @@ class EcoIndicadores:
                     flag_estatistica = 1
             else:
                 sintese_busca = sintese
-            print("SINTESE BUSCA: ", sintese_busca, "  flag_estatistica: ", flag_estatistica)
+            #print("SINTESE BUSCA: ", sintese_busca, "  flag_estatistica: ", flag_estatistica)
             df = self.retorna_df(c, sintese_busca).copy()
             if(flag_estatistica == 1):
                 df = df.loc[(df["variavel"] == variavel)].copy()                    
 
-            print(df)
+            #print(df)
             df["caso"] = c.nome
             df["modelo"] = c.modelo
             dict[c] = df
