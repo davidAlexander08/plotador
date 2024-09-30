@@ -107,7 +107,7 @@ class Report():
                         html_file.write(line.strip()+"\n")
 
                     elif("\info{") in line:
-                        print("ENTROU AQUI ", + nome_argumento_info)
+                        print("ENTROU AQUI " + nome_argumento_info)
                         nome_argumento_info = line.split("{")[1].split("}")[0]
                         args = nome_argumento_info.split("/")
                         chave = args[0]
