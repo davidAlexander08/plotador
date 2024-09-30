@@ -29,7 +29,6 @@ class InfoGeralEcoNewave(Estruturas):
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
 
-        print("LENDO DGER")
         if(os.path.isfile(caso.caminho+"/dger.dat")):  
             data_dger = Dger.read(caso.caminho+"/dger.dat")
             temp = temp.replace("Mes_I", str(data_dger.mes_inicio_estudo))
@@ -43,7 +42,6 @@ class InfoGeralEcoNewave(Estruturas):
             tipo_sim_fin = "Ind" if data_dger.agregacao_simulacao_final == 1 else "Agr"
             temp = temp.replace("SF_Ind", tipo_sim_fin)
 
-        print("LENDO CVAR")
         if(os.path.isfile(caso.caminho+"/cvar.dat")): 
             data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
             temp = temp.replace("CVAR", str(round(data_cvar.valores_constantes[0],0))+"x"+str(round(data_cvar.valores_constantes[1],0)))

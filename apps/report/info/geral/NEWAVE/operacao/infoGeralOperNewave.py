@@ -34,7 +34,6 @@ class InfoGeralOperNewave(Estruturas):
         #    temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
         #    temp = temp.replace("Versao", data_pmo.versao_modelo)
             
-        print("LENDO TEMPO")
         if(os.path.isfile(caso.caminho+"/sintese/TEMPO.parquet")):
             df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
             df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
@@ -46,7 +45,6 @@ class InfoGeralOperNewave(Estruturas):
             temp = temp.replace("tempo_total", str(round(tempo_total, 2)))
             print(tempo_total)
 
-        print("LENDO CNVERGENCIA")
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
             iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
             zinf = data_pmo.convergencia["zinf"].iloc[-1]
