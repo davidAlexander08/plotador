@@ -92,7 +92,10 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
     Report(outpath, arquivo_json, txt, titulo, tipo, cronologico)
     end_time = time.time()
     elapsed_time = end_time - start_time
-    print(f"Report gerado em: {elapsed_time:.2f} segundos")
+    minutes = int(elapsed_time // 60)
+    seconds = int(elapsed_time % 60)
+
+    print(f"Time taken: {minutes} minutes and {seconds} seconds")
 
 @click.command("temporal")
 @option_xinf
