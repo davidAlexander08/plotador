@@ -47,7 +47,7 @@ class IndicadoresTemporais(EcoIndicadores):
 
     def retorna_mapaDF_cenario_medio_temporal(self, unidade, boxplot):
         eco_mapa = self.retornaMapaDF(unidade.sintese.sintese)
-        print("ECO MAPA: ", eco_mapa)
+        #print("ECO MAPA: ", eco_mapa)
         mapa_temporal = {}
         if( (unidade.sintese.filtro is None) & (unidade.filtroArgumento is None) ):
             if(boxplot =="True"):
@@ -67,6 +67,7 @@ class IndicadoresTemporais(EcoIndicadores):
                 mapa_temporal = eco_mapa
             else:
                 mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
+            print(mapa_argumentos)
         return mapa_temporal
 
 
