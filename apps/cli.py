@@ -6,6 +6,7 @@ from apps.utils.log import Log
 from pathlib import Path
 from apps.model.argumento import Argumento
 import pandas as pd
+import time
 
 option_xinf = click.option("--xinf", default=0,  help="Ponto Inferior do Eixo X")
 option_xsup = click.option("--xsup", default=60, help="Ponto Superior do Eixo X")
@@ -51,6 +52,7 @@ def cli():
 @option_automatico
 @option_cronologico
 def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico):
+    start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
     contador = 0
     if(arquivo_json is None):
@@ -88,6 +90,9 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
             arquivo_json = "exemplo.json"
     from apps.services.report import Report
     Report(outpath, arquivo_json, txt, titulo, tipo, cronologico)
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Report gerado em: {elapsed_time:.2f} segundos")
 
 @click.command("temporal")
 @option_xinf
