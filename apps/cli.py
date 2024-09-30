@@ -59,13 +59,12 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
     contador = 0
     if(arquivo_json is None):
         if(automatico == "True"):
+            path = __file__.split("/")
+            path.pop()
+            path.pop()
+            current_directory = os.getcwd()
             if(conjunto == "False"):
-                flag_diretorio = 0
-                path = __file__.split("/")
-                path.pop()
-                path.pop()
                 arq_json_exemplo = "/".join(path)+"/apps/exemplo.json"
-                current_directory = os.getcwd()
                 novos_casos =[]
                 with open(arq_json_exemplo, "r") as file:
                     dados = json.load(file)
@@ -89,10 +88,42 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
 
                 with open("exemplo.json", 'w') as file:
                     json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
-
                 arquivo_json = "exemplo.json"
+
             elif(conjunto == "True"):
-                pass
+                arq_json_exemplo = "/".join(path)+"/apps/exemplo_conj.json"
+                novos_conjuntos =[]
+                with open(arq_json_exemplo, "r") as file:
+                    dados = json.load(file)
+                    for item in os.listdir(current_directory):
+                        if(item != "resultados" and item != "report"):
+                            nome = item
+                            cor = cores[contador]
+                            novos_casos = []
+                            item_path = os.path.join(current_directory, item)
+                            for item_casos in os.listdir(item_path):
+                                if(item_casos != "resultados" and item_casos != "report"):
+                                    item_casos_path = os.path.join(current_directory, item_casos)
+                                    if os.path.isdir(item_casos_path):
+                                        if(os.path.exists(item_casos_path+"/sintese")):
+                                            caminho_caso = item_casos_path
+                                            nome_caso = item_casos
+                                            cor_caso = "black"
+                                            modelo_caso = pd.read_parquet(item_casos_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
+                                            novo_caso = {"nome":nome_caso,
+                                                        "caminho":caminho_caso,
+                                                        "cor":cor_caso,
+                                                        "modelo":modelo_caso}
+                                            novos_casos.append(novo_caso)
+                            novo_conjunto = {"nome_conj":nome,
+                                        "cor_conj":cor,
+                                        "casos":novos_casos}
+                    dados["conjuntos"] = novo_conjunto
+
+                with open("exemplo_conjunto.json", 'w') as file:
+                    json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
+                arquivo_json = "exemplo_conjunto.json"    
+    
     from apps.services.report import Report
     Report(outpath, arquivo_json, txt, titulo, tipo, cronologico, conjunto)
     end_time = time.time()

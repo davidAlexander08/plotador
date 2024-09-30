@@ -1,0 +1,31 @@
+{
+    "estudo": " ",
+    "nome_caso_referencia": "",
+    "conjuntos": [
+        {
+			"nome_conj":"", 
+			"cor_conj": "rgba(0, 0, 0, 1)",
+			"casos": [
+                {
+                    "nome": "",
+                    "caminho": "",
+                    "cor": "rgba(0, 0, 0, 1)",
+                    "modelo": ""
+                },
+                {
+                    "nome": "",
+                    "caminho": "",
+                    "cor": "rgba(0, 0, 0, 1)",
+                    "modelo": ""
+                }
+            ]
+        }
+    ],
+    "tamanho_texto":"25",
+    "grupo_parquet":"SBM",
+    "parquets":["GTER_SIN_EST", "GTER_SBM_EST", "GHID_SIN_EST","GHID_SBM_EST","CMO_SBM_EST"],
+    "argumentos":[
+		{"nome":"SBMs","chave":"SBM","args":["SUDESTE","NORDESTE","NORTE","SUL"]}
+    ]
+}
+
