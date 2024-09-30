@@ -140,11 +140,10 @@ class Report():
                         
                         flag_primeira_subpagina = False
                         nome_sub_pagina = line.split("{")[1].split("}")[0]
-                        Log.log().info("-----------Gerando subpagina----------", nome_sub_pagina)
+                        Log.log().info("Gerando subpagina"+ nome_sub_pagina)
                         html_file.write('<div id="'+nome_sub_pagina+'" class="page">'+"\n")
                             
                     elif("plotador" in line):
-                        Log.log().info("-----------Gerando graficos----------")
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         #print(f"Executing CLI command: {cli_command}")
                         if( (data.casos[0].modelo == "DECOMP" or data.casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
