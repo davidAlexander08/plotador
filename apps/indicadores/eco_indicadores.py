@@ -45,7 +45,7 @@ class EcoIndicadores:
                     c.tipo = int(c.tipo)
                 else:
                     sintese = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
-
+            print(sintese)
             df = self.retorna_df(c, sintese)
 
             if( (len(sintese.split("_")) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
