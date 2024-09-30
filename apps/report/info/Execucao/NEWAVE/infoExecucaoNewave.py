@@ -26,8 +26,6 @@ class InfoExecucaoNewave(Estruturas):
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
-        data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-        temp = temp.replace("Versao", data_pmo.versao_modelo)
 
         df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
         tempo_inicial = df_caso.loc[(df_caso["etapa"] == "Calculos Iniciais")]["tempo"].iloc[0]/60
