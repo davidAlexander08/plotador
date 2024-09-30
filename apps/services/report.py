@@ -18,7 +18,7 @@ class Report():
     def __init__(self,outpath, arq_json, txt, titulo, tipo, cronologico):
         #self.outpath = outpath
         self.json = arq_json
-        print(self.json)
+        print("Arquivo JSON: ", self.json)
         self.txt = txt
         self.titulo = titulo
         path = __file__.split("/")

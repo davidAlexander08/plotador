@@ -53,7 +53,6 @@ def cli():
 def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico):
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
     contador = 0
-    print(arquivo_json)
     if(arquivo_json is None):
         if(automatico == "True"):
             flag_diretorio = 0
