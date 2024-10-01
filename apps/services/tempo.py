@@ -34,7 +34,7 @@ class Tempo:
         print(df_temp)
         lista_color = []
         temp = []
-        for caso in data.casos:
+        for caso in data.conjuntoCasos[0].casos:
             df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
             df_caso["tempo"] = df_caso["tempo"] /(60)
             lista_color.append(caso.cor)

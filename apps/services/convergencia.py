@@ -23,8 +23,7 @@ class Convergencia:
         self.html = html
         self.titulo = titulo
         self.tamanho = int(tamanho) if tamanho is not None else 25
-        print(data.casos)
-        self.eco_indicadores = EcoIndicadores(data.casos)
+        self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/convergencia" if outpath is None else outpath
