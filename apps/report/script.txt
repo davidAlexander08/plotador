@@ -112,6 +112,20 @@
                 document.body.appendChild(downloadLink);
                 downloadLink.click();
             });
+
+            // Loop through each table and export it as an image
+            tables.forEach(function(table, index) {
+                html2canvas(table).then(function(canvas) {
+                    // Convert canvas to image
+                    var image = canvas.toDataURL('image/png');
+                    
+                    // Create a download link for each table image
+                    var downloadLink = document.createElement('a');
+                    downloadLink.href = image;
+                    downloadLink.download = 'table-' + (index + 1) + '.png';  // Unique file name for each table
+                    downloadLink.click();
+                });
+            });
         }
     </script>
 </body>
