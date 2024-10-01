@@ -104,13 +104,13 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                                 cor = cores[contador]
                                 contador += 1
                                 print("conjunto: ", item, " cor: ", cor)
+                                novos_casos = []   
                                 for item_casos in os.listdir(item_path):
-                                    novos_casos = []   
                                     if(item_casos != "resultados" and item_casos != "report"):
                                         item_casos_path = os.path.join(item_path, item_casos)
                                         if os.path.isdir(item_casos_path):
                                             if(os.path.exists(item_casos_path+"/sintese")):
-                                                print("caso: ", item_casos)
+                                                #print("caso: ", item_casos)
                                                 caminho_caso = item_casos_path
                                                 nome_caso = item_casos
                                                 cor_caso = "black"
@@ -120,10 +120,11 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                                                             "cor":cor_caso,
                                                             "modelo":modelo_caso}
                                                 novos_casos.append(novo_caso)
-                            novo_conjunto = {"nome_conj":nome,
-                                        "cor_conj":cor,
-                                        "casos":novos_casos}
-                            novos_conjuntos.append(novo_conjunto)
+                                print(novos_casos)
+                                novo_conjunto = {"nome_conj":nome,
+                                            "cor_conj":cor,
+                                            "casos":novos_casos}
+                                novos_conjuntos.append(novo_conjunto)
                     dados["conjuntos"] = novos_conjuntos
 
                 with open("exemplo_conj.json", 'w') as file:
