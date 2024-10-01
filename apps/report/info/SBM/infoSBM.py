@@ -4,7 +4,7 @@ from apps.report.info.SBM.DESSEM.infoSBMDessem import InfoSBMDessem
 class InfoSBM():
     def __init__(self, data, par_dados):
         set_modelos = set()
-        for caso in data.casos:
+        for caso in data.conjuntoCasos[0].casos:
             set_modelos.add(caso.modelo)
 
         self.lista_text = []

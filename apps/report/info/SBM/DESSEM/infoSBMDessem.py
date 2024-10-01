@@ -25,14 +25,14 @@ class InfoSBMDessem(Estruturas):
                     print("SUBMERCADO: ", arg, " NAO RECONHECIDO")
                     exit(1)
 
-        self.eco_indicadores = EcoIndicadores(data.casos)
+        self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
 
         #self.lista_text.append(self.Tabela_Eco_Entrada)
         for arg in lista_argumentos:
             self.lista_text.append("<h3>Dados "+arg+"</h3>")
             self.lista_text.append(self.Tabela_Eco_Entrada)
-            for caso in data.casos:
+            for caso in data.conjuntoCasos[0].casos:
                 if(caso.modelo == "DESSEM"):
                     temp = self.preenche_modelo_tabela_modelo(caso, arg)
                     self.lista_text.append(temp)

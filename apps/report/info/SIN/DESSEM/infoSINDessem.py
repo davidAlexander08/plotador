@@ -6,10 +6,10 @@ import os
 class InfoSINDessem(Estruturas):
     def __init__(self, data):
         Estruturas.__init__(self)
-        self.eco_indicadores = EcoIndicadores(data.casos)
+        self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
         self.lista_text.append(self.Tabela_Eco_Entrada)
-        for caso in data.casos:
+        for caso in data.conjuntoCasos[0].casos:
             if(caso.modelo == "DESSEM"):
                 temp = self.preenche_modelo_tabela_modelo(caso)
                 self.lista_text.append(temp)
