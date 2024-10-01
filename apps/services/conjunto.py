@@ -113,7 +113,7 @@ class Conjunto:
                 conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, self.tamanho_texto)
                 if(self.labelx is not None):
                     conj.legendaEixoX = self.labelx
-                diretorio_saida_arg = diretorio_saida+"/"+espacial
+                diretorio_saida_arg = diretorio_saida+"/"+espacial if outpath is None else outpath
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 #unity = UnidadeSintese(sts, args, "caso", data.limites, data.tamanho_texto)
                 self.executa(conj,diretorio_saida_arg )
@@ -123,7 +123,7 @@ class Conjunto:
                         conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, self.tamanho_texto) 
                         if(self.labelx is not None):
                             conj.legendaEixoX = self.labelx
-                        diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
+                        diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome if outpath is None else outpath
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
                         #unity = UnidadeSintese(sts, args, "caso", data.limites, data.tamanho_texto)
                         self.executa(conj,diretorio_saida_arg )
