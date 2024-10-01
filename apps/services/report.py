@@ -1,7 +1,6 @@
 
 
 from apps.interface.dados_json_caso import Dados_json_caso
-from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.model.argumento import Argumento
 from apps.report.info.info import Info
 import plotly.graph_objects as go
@@ -28,7 +27,6 @@ class Report():
 
         if(self.json is not None):
             data = Dados_json_caso(self.json)
-            self.eco_indicadores = EcoIndicadores(data.casos)
         if(self.txt is None and self.json is None):
             flag_diretorio = 0
             path = __file__.split("/")
@@ -57,7 +55,6 @@ class Report():
                 json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
             self.json = "exemplo.json"
             data = Dados_json_caso(self.json)
-            self.eco_indicadores = EcoIndicadores(data.casos)
 
         arquivo_template = ""
         if(self.txt is None):
