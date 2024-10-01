@@ -113,9 +113,8 @@
                 downloadLink.click();
             });
 
-            // Loop through each table and export it as an image
             tables.forEach(function(table, index) {
-                html2canvas(table).then(function(canvas) {
+                html2canvas(table, { scale: 2 }).then(function(canvas) {  // Increase the scale for better image quality
                     // Convert canvas to image
                     var image = canvas.toDataURL('image/png');
                     
