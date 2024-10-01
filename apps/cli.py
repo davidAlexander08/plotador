@@ -100,7 +100,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                             item_path = os.path.join(current_directory, item)
                             if(os.path.isdir(item_path)):
                                 for item_casos in os.listdir(item_path):
-                                    print(item_casos)
+                                    print("conjunto: ", item, " caso: ", item_casos)
                                     nome = item
                                     cor = cores[contador]
                                     novos_casos = []    
