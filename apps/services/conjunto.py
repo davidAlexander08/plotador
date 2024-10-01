@@ -22,7 +22,7 @@ import json
 class Conjunto:
 
 
-    def __init__(self, data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho):
+    def __init__(self, data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho, outpath):
         self.conjuntoCasos = data.conjuntoCasos
         self.xinf  = xinf
         self.xsup = xsup
@@ -43,7 +43,7 @@ class Conjunto:
         self.estudo = data.estudo
         self.nome_caso_referencia = ""
         # Gera saídas do estudo
-        diretorio_saida = f"resultados/{self.estudo}/conjunto" 
+        diretorio_saida = f"resultados/{self.estudo}/conjunto" if outpath is None else outpath
         self.graficosConjunto = GraficosConjunto(data.conjuntoCasos)
         os.makedirs(diretorio_saida, exist_ok=True)
 

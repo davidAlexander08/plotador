@@ -213,14 +213,15 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
 @option_ysup
 @option_labelx
 @option_tamanho
+@option_outpath
 @click.argument(
     "arquivo_json",
 )
-def analise_conjuntoCasos(arquivo_json, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho):
+def analise_conjuntoCasos(arquivo_json, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho, outpath):
     from apps.services.conjunto import Conjunto
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Conjunto(data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho)
+        Conjunto(data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho, outpath)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
