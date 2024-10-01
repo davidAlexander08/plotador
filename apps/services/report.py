@@ -149,15 +149,15 @@ class Report():
                     elif("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
                         print(f"Executing CLI command: {cli_command}")
-                        if( (data.conjuntoCasos.casos[0].modelo == "DECOMP" or data.conjuntoCasos.casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
+                        if( (data.conjuntoCasos[0].casos[0].modelo == "DECOMP" or data.conjuntoCasos[0].casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
                             pass
                         else:
                             if("arquivo_json" in cli_command):
                                 cli_command = cli_command.replace("arquivo_json", self.json)
                             if("ADD_SBMS" in cli_command):
-                                submercados = "SE,S,NE,N" if data.conjuntoCasos.casos[0].modelo != "NEWAVE" else "SUDESTE,SUL,NORDESTE,NORTE"
+                                submercados = "SE,S,NE,N" if data.conjuntoCasos[0].casos[0].modelo != "NEWAVE" else "SUDESTE,SUL,NORDESTE,NORTE"
                                 cli_command = cli_command.replace("ADD_SBMS", submercados)
-                            if(data.conjuntoCasos.casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
+                            if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
                                 cli_command = cli_command + " --eixox dataInicio"
                             cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                             lista_commands_cli = cli_command.split()
