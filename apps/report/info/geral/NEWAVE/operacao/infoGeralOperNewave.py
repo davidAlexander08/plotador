@@ -30,8 +30,8 @@ class InfoGeralOperNewave(Estruturas):
         versao = "" if data_pmo.versao_modelo is None else data_pmo.versao_modelo
         temp = temp.replace("Versao", versao)
 
-        custo_total = data_pmo.custo_operacao_total
-        desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
+        custo_total = 0 if data_pmo.custo_operacao_total is None else data_pmo.custo_operacao_total
+        desvio_custo = 0 if data_pmo.desvio_custo_operacao_total is None else data_pmo.desvio_custo_operacao_total*1.96
         temp = temp.replace("custo_total", str(custo_total))
         temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
 
