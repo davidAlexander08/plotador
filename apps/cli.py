@@ -121,9 +121,9 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                             novos_conjuntos.append(novo_conjunto)
                     dados["conjuntos"] = novos_conjuntos
 
-                with open("exemplo_conjunto.json", 'w') as file:
+                with open("exemplo_conj.json", 'w') as file:
                     json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
-                arquivo_json = "exemplo_conjunto.json"    
+                arquivo_json = "exemplo_conj.json"    
     
     from apps.services.report import Report
     Report(outpath, arquivo_json, txt, titulo, tipo, cronologico, conjunto)
