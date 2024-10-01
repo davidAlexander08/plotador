@@ -28,14 +28,20 @@ class InfoGeralOperNewave(Estruturas):
         
         data_pmo = Pmo.read(caso.caminho+"/simfinal.dat")
         temp = temp.replace("Versao", data_pmo.versao_modelo)
-        iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
-        zinf = data_pmo.convergencia["zinf"].iloc[-1]
+
         custo_total = data_pmo.custo_operacao_total
         desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
-        temp = temp.replace("iteracoes", str(iteracoes))
-        temp = temp.replace("zinf", str(zinf))
         temp = temp.replace("custo_total", str(custo_total))
         temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
+
+        df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
+        df_caso_conv = df_conv.loc[(df_conv["caso"] == caso.nome)]
+        iteracao =      df_caso_conv["iter"].iloc[-1]
+        zinf =          df_caso_conv["zinf"].iloc[-1]
+        temp = temp.replace("iteracoes", str(iteracao))
+        temp = temp.replace("zinf", str(zinf))
+
+
 
         print(caso.caminho)
         data_dger = Dger.read(caso.caminho+"/dger.dat")
