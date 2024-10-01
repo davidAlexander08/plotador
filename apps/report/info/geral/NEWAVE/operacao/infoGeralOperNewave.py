@@ -27,8 +27,8 @@ class InfoGeralOperNewave(Estruturas):
         temp = temp.replace("Modelo", caso.modelo)
         
         data_pmo = Pmo.read(caso.caminho+"/simfinal.dat")
-        print(data_pmo.versao_modelo)
-        temp = temp.replace("Versao", data_pmo.versao_modelo)
+        versao = "" if data_pmo.versao_modelo is None else data_pmo.versao_modelo
+        temp = temp.replace("Versao", versao)
 
         custo_total = data_pmo.custo_operacao_total
         desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
