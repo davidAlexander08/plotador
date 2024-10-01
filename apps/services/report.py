@@ -16,7 +16,7 @@ import base64
 import shutil
 
 class Report():
-    def __init__(self,outpath, arq_json, txt, titulo, tipo):
+    def __init__(self,outpath, arq_json, txt, titulo, tipo, html):
         #self.outpath = outpath
         self.json = arq_json
         print(self.json)
