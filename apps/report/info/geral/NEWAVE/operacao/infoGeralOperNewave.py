@@ -26,7 +26,7 @@ class InfoGeralOperNewave(Estruturas):
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         
-        data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
+        data_pmo = Pmo.read(caso.caminho+"/simfinal.dat")
         temp = temp.replace("Versao", data_pmo.versao_modelo)
         iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
         zinf = data_pmo.convergencia["zinf"].iloc[-1]
