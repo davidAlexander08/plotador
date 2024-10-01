@@ -46,7 +46,6 @@ class Conjunto:
         diretorio_saida = f"resultados/{self.estudo}/conjunto" if outpath is None else outpath
         self.graficosConjunto = GraficosConjunto(data.conjuntoCasos)
         os.makedirs(diretorio_saida, exist_ok=True)
-        print(diretorio_saida)
         self.subp_col = int(subplot.split(",")[0]) if subplot is not None else 4
         self.subp_lin = int(subplot.split(",")[1]) if subplot is not None else 3
         print(self.subp_col, " ", self.subp_lin)
