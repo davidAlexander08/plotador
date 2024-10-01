@@ -115,6 +115,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                                                 nome_caso = item_casos
                                                 cor_caso = "black"
                                                 modelo_caso = pd.read_parquet(item_casos_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
+                                                modelo = modelo_caso
                                                 novo_caso = {"nome":nome_caso,
                                                             "caminho":caminho_caso,
                                                             "cor":cor_caso,
@@ -123,6 +124,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                                 #print(novos_casos)
                                 novo_conjunto = {"nome_conj":nome,
                                             "cor_conj":cor,
+                                            "modelo": modelo,
                                             "casos":novos_casos}
                                 novos_conjuntos.append(novo_conjunto)
                     dados["conjuntos"] = novos_conjuntos

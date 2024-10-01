@@ -58,18 +58,24 @@ class Report():
 
         arquivo_template = ""
         if(self.txt is None):
-            if(data.casos[0].modelo == "NEWAVE"):
-                arquivo_template = "/".join(path)+"/template_newave.txt" 
-                
-            elif(data.casos[0].modelo == "DESSEM" and cronologico == "True"):
-                arquivo_template = "/".join(path)+"/template_dessem_cronologico.txt" 
-            elif(data.casos[0].modelo == "DESSEM"):
-                arquivo_template = "/".join(path)+"/template_dessem.txt" 
-            elif(data.casos[0].modelo == "DECOMP"):
-                arquivo_template = "/".join(path)+"/template_decomp.txt" 
+            if(conjunto =="False"):
+                if(data.casos[0].modelo == "NEWAVE"):
+                    arquivo_template = "/".join(path)+"/template_newave.txt" 
+                elif(data.casos[0].modelo == "DESSEM" and cronologico == "True"):
+                    arquivo_template = "/".join(path)+"/template_dessem_cronologico.txt" 
+                elif(data.casos[0].modelo == "DESSEM"):
+                    arquivo_template = "/".join(path)+"/template_dessem.txt" 
+                elif(data.casos[0].modelo == "DECOMP"):
+                    arquivo_template = "/".join(path)+"/template_decomp.txt" 
+                else:
+                    print("Tipo definido errado: Simples ou Completo")
+                    exit(1)
             else:
-                print("Tipo definido errado: Simples ou Completo")
-                exit(1)
+                if(data.conjunto[0].modelo == "DESSEM"):
+                    arquivo_template = "/".join(path)+"/template_newave.txt" 
+                else:
+                    print("Tipo definido errado: Simples ou Completo")
+                    exit(1)
         else:
             arquivo_template = self.txt
         with open(arquivo_template, "r") as file:
