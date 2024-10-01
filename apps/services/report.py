@@ -72,7 +72,7 @@ class Report():
                     exit(1)
             elif(conjunto == "True"):
                 if(data.conjuntoCasos[0].casos[0].modelo == "DESSEM"):
-                    arquivo_template = "/".join(path)+"/template_newave.txt" 
+                    arquivo_template = "/".join(path)+"/template_dessem_conjuntos.txt" 
                 else:
                     print("Tipo definido errado: Simples ou Completo")
                     exit(1)
