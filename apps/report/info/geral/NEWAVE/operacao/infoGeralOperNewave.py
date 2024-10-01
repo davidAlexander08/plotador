@@ -25,14 +25,16 @@ class InfoGeralOperNewave(Estruturas):
         temp = self.template_Tabela_Operacao
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
+        
         #print("LENDO PMO.DAT")
-        #if(os.path.isfile(caso.caminho+"/pmo.dat")):
-        #    data_pmo = Pmo.read(caso.caminho+"/pmo.dat")
-        #    custo_total = data_pmo.custo_operacao_total
-        #    desvio_custo = data_pmo.desvio_custo_operacao_total*1.96
-        #    temp = temp.replace("custo_total", str(custo_total))
-        #    temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
-        #    temp = temp.replace("Versao", data_pmo.versao_modelo)
+        if(os.path.isfile(caso.caminho+"/simfinal.dat")):
+            data_pmo = Pmo.read(caso.caminho+"/simfinal.dat")
+            versao = "" if data_pmo.versao_modelo is None else data_pmo.versao_modelo
+            custo_total = 0 if data_pmo.custo_operacao_total is None else data_pmo.custo_operacao_total
+            desvio_custo = 0 if data_pmo.desvio_custo_operacao_total is None else data_pmo.desvio_custo_operacao_total*1.96
+            temp = temp.replace("custo_total", str(custo_total))
+            temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
+            temp = temp.replace("Versao", versao)
             
         if(os.path.isfile(caso.caminho+"/sintese/TEMPO.parquet")):
             df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")

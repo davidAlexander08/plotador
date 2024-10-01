@@ -13,10 +13,7 @@ import json
 import subprocess
 import re
 import base64
-import os
-import subprocess
 import shutil
-import json
 
 class Report():
     def __init__(self,outpath, arq_json, txt, titulo, tipo):
@@ -140,7 +137,7 @@ class Report():
                         
                         flag_primeira_subpagina = False
                         nome_sub_pagina = line.split("{")[1].split("}")[0]
-                        Log.log().info("Gerando subpagina"+ nome_sub_pagina)
+                        Log.log().info("Gerando subpagina "+ nome_sub_pagina)
                         html_file.write('<div id="'+nome_sub_pagina+'" class="page">'+"\n")
                             
                     elif("plotador" in line):
