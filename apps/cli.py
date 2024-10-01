@@ -105,9 +105,9 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                                 for item_casos in os.listdir(item_path):
                                     novos_casos = []    
                                     if(item_casos != "resultados" and item_casos != "report"):
+                                        item_casos_path = os.path.join(current_directory, item_casos)
                                         if os.path.isdir(item_casos_path):
                                             if(os.path.exists(item_casos_path+"/sintese")):
-                                                item_casos_path = os.path.join(current_directory, item_casos)
                                                 print("conjunto: ", item, " caso: ", item_casos)
                                                 caminho_caso = item_casos_path
                                                 nome_caso = item_casos
