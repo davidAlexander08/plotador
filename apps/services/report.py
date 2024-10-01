@@ -59,13 +59,13 @@ class Report():
         arquivo_template = ""
         if(self.txt is None):
             if(conjunto =="False"):
-                if(data.conjuntoCasos.casos[0].modelo == "NEWAVE"):
+                if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE"):
                     arquivo_template = "/".join(path)+"/template_newave.txt" 
-                elif(data.conjuntoCasos.casos[0].modelo == "DESSEM" and cronologico == "True"):
+                elif(data.conjuntoCasos[0].casos[0].modelo == "DESSEM" and cronologico == "True"):
                     arquivo_template = "/".join(path)+"/template_dessem_cronologico.txt" 
-                elif(data.conjuntoCasos.casos[0].modelo == "DESSEM"):
+                elif(data.conjuntoCasos[0].casos[0].modelo == "DESSEM"):
                     arquivo_template = "/".join(path)+"/template_dessem.txt" 
-                elif(data.conjuntoCasos.casos[0].modelo == "DECOMP"):
+                elif(data.conjuntoCasos[0].casos[0].modelo == "DECOMP"):
                     arquivo_template = "/".join(path)+"/template_decomp.txt" 
                 else:
                     print("Tipo definido errado: Simples ou Completo")
