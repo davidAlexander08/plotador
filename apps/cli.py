@@ -118,7 +118,8 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                             novo_conjunto = {"nome_conj":nome,
                                         "cor_conj":cor,
                                         "casos":novos_casos}
-                    dados["conjuntos"] = novo_conjunto
+                            novos_conjuntos.append(novo_conjunto)
+                    dados["conjuntos"] = novos_conjuntos
 
                 with open("exemplo_conjunto.json", 'w') as file:
                     json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
