@@ -108,7 +108,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                                     novos_casos = []   
                                     print("Item basico: ", item_casos) 
                                     if(item_casos != "resultados" and item_casos != "report"):
-                                        item_casos_path = os.path.join(current_directory, item_casos)
+                                        item_casos_path = os.path.join(item_path, item_casos)
                                         print("ENTROU AQUI")
                                         if os.path.isdir(item_casos_path):
                                             print("CHEGOU AQUI")
