@@ -36,7 +36,7 @@ class Temporal:
             marcadores= [None,"circle","square", "diamond","x","cross"]
             dashes = ["dash", "dot"]
             novos_casos = [] 
-            for caso in data.casos:
+            for caso in data.conjuntoCasos[0].casos:
                 contador = 0
                 contador_marcadores = 0
                 for cen in self.cenario:
