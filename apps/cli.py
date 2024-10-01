@@ -97,11 +97,11 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                     dados = json.load(file)
                     for item in os.listdir(current_directory):
                         if(item != "resultados" and item != "report"):
-                            nome = item
-                            cor = cores[contador]
-                            novos_casos = []
                             item_path = os.path.join(current_directory, item)
                             for item_casos in os.listdir(item_path):
+                                nome = item
+                                cor = cores[contador]
+                                novos_casos = []    
                                 if(item_casos != "resultados" and item_casos != "report"):
                                     item_casos_path = os.path.join(current_directory, item_casos)
                                     if os.path.isdir(item_casos_path):
