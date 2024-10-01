@@ -86,8 +86,8 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
 #
                 #    dados["casos"] = novos_casos
 #
-                with open("exemplo_conj.json", 'w') as file:
-                    json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
+                #with open("exemplo_conj.json", 'w') as file:
+                #    json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
                 arquivo_json = "exemplo_conj.json"
                 arq_json_exemplo = "/".join(path)+"/apps/exemplo_conj.json"
                 novos_casos =[]
