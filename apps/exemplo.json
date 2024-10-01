@@ -1,12 +1,24 @@
 {
     "estudo": " ",
     "nome_caso_referencia": "",
-    "casos": [
+    "conjuntos": [
         {
-            "nome": "",
-            "caminho": "",
-            "cor": "rgba(0, 0, 0, 1)",
-            "modelo": ""
+			"nome_conj":"", 
+			"cor_conj": "rgba(0, 0, 0, 1)",
+			"casos": [
+                {
+                    "nome": "",
+                    "caminho": "",
+                    "cor": "rgba(0, 0, 0, 1)",
+                    "modelo": ""
+                },
+                {
+                    "nome": "",
+                    "caminho": "",
+                    "cor": "rgba(0, 0, 0, 1)",
+                    "modelo": ""
+                }
+            ]
         }
     ],
     "tamanho_texto":"25",

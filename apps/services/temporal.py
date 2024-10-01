@@ -27,7 +27,7 @@ class Temporal:
         self.eixox = eixox
         self.estagio = estagio
         self.y2 = y2
-        if(self.y2 == "True" and len(data.casos) > 2):
+        if(self.y2 == "True" and len(data.conjuntoCasos[0].casos) > 2):
             print("ERRO: Opcao y2 valida apenas para comparacao de duplas de casos")
             exit(1)
         self.cenario = [cenario] if cenario == "mean" else cenario.split(",")
@@ -56,9 +56,9 @@ class Temporal:
                     if(contador >= len(dashes)):
                         contador = 0
                         contador_marcadores += 1
-            data.casos = data.casos+novos_casos
+            data.conjuntoCasos[0].casos = data.conjuntoCasos[0].casos+novos_casos
         else:
-            for caso in data.casos:
+            for caso in data.conjuntoCasos[0].casos:
                 caso.tipo = self.cenario[0]
                 caso.dash = None
                 caso.marcador = None
@@ -79,8 +79,8 @@ class Temporal:
         self.csv = csv
         self.html = html
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
-        self.indicadores_temporais = IndicadoresTemporais(data.casos)
-        self.eco_indicadores = EcoIndicadores(data.casos)
+        self.indicadores_temporais = IndicadoresTemporais(data.conjuntoCasos[0].casos)
+        self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
 
