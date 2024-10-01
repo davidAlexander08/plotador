@@ -99,6 +99,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                         if(item != "resultados" and item != "report"):
                             item_path = os.path.join(current_directory, item)
                             if(os.path.isdir(item_path)):
+                                print("conjunto: ", item)
                                 nome = item
                                 cor = cores[contador]
                                 contador += 1
@@ -108,7 +109,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                                         item_casos_path = os.path.join(current_directory, item_casos)
                                         if os.path.isdir(item_casos_path):
                                             if(os.path.exists(item_casos_path+"/sintese")):
-                                                print("conjunto: ", item, " caso: ", item_casos)
+                                                print("caso: ", item_casos)
                                                 caminho_caso = item_casos_path
                                                 nome_caso = item_casos
                                                 cor_caso = "black"
