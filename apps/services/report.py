@@ -71,7 +71,7 @@ class Report():
                     print("Tipo definido errado: Simples ou Completo")
                     exit(1)
             else:
-                if(data.conjuntos[0].modelo == "DESSEM"):
+                if(data.conjuntoCasos[0].modelo == "DESSEM"):
                     arquivo_template = "/".join(path)+"/template_newave.txt" 
                 else:
                     print("Tipo definido errado: Simples ou Completo")
