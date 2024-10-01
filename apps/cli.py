@@ -103,7 +103,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                                 nome = item
                                 cor = cores[contador]
                                 contador += 1
-                                print("conjunto: ", item, " cor: ", cor)
+                                #print("conjunto: ", item, " cor: ", cor)
                                 novos_casos = []   
                                 for item_casos in os.listdir(item_path):
                                     if(item_casos != "resultados" and item_casos != "report"):
@@ -120,7 +120,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                                                             "cor":cor_caso,
                                                             "modelo":modelo_caso}
                                                 novos_casos.append(novo_caso)
-                                print(novos_casos)
+                                #print(novos_casos)
                                 novo_conjunto = {"nome_conj":nome,
                                             "cor_conj":cor,
                                             "casos":novos_casos}
