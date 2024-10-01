@@ -98,24 +98,25 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                     for item in os.listdir(current_directory):
                         if(item != "resultados" and item != "report"):
                             item_path = os.path.join(current_directory, item)
-                            for item_casos in os.listdir(item_path):
-                                print(item_casos)
-                                nome = item
-                                cor = cores[contador]
-                                novos_casos = []    
-                                if(item_casos != "resultados" and item_casos != "report"):
-                                    item_casos_path = os.path.join(current_directory, item_casos)
-                                    if os.path.isdir(item_casos_path):
-                                        if(os.path.exists(item_casos_path+"/sintese")):
-                                            caminho_caso = item_casos_path
-                                            nome_caso = item_casos
-                                            cor_caso = "black"
-                                            modelo_caso = pd.read_parquet(item_casos_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
-                                            novo_caso = {"nome":nome_caso,
-                                                        "caminho":caminho_caso,
-                                                        "cor":cor_caso,
-                                                        "modelo":modelo_caso}
-                                            novos_casos.append(novo_caso)
+                            if(os.path.isdir(item_path)):
+                                for item_casos in os.listdir(item_path):
+                                    print(item_casos)
+                                    nome = item
+                                    cor = cores[contador]
+                                    novos_casos = []    
+                                    if(item_casos != "resultados" and item_casos != "report"):
+                                        item_casos_path = os.path.join(current_directory, item_casos)
+                                        if os.path.isdir(item_casos_path):
+                                            if(os.path.exists(item_casos_path+"/sintese")):
+                                                caminho_caso = item_casos_path
+                                                nome_caso = item_casos
+                                                cor_caso = "black"
+                                                modelo_caso = pd.read_parquet(item_casos_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
+                                                novo_caso = {"nome":nome_caso,
+                                                            "caminho":caminho_caso,
+                                                            "cor":cor_caso,
+                                                            "modelo":modelo_caso}
+                                                novos_casos.append(novo_caso)
                             novo_conjunto = {"nome_conj":nome,
                                         "cor_conj":cor,
                                         "casos":novos_casos}
