@@ -83,6 +83,36 @@
                 loader.style.display = 'none';
             }
         });
+
+
+        // Attach event listener to the button
+        document.getElementById('downloadTables').addEventListener('click', exportEachTableToCSV);
+        function exportEachTableToCSV() {
+            var tables = document.querySelectorAll(".exportTable");
+
+            tables.forEach(function(table, index) {
+                var csv = [];
+                var rows = table.querySelectorAll("tr");
+
+                for (var i = 0; i < rows.length; i++) {
+                    var row = [], cols = rows[i].querySelectorAll("td, th");
+
+                    for (var j = 0; j < cols.length; j++)
+                        row.push('"' + cols[j].innerText + '"');
+                    
+                    csv.push(row.join(","));
+                }
+
+                // Create CSV file for each table and download
+                var csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+                var downloadLink = document.createElement("a");
+                downloadLink.download = 'table-' + (index + 1) + '.csv';  // Generate a unique file name for each table
+                downloadLink.href = window.URL.createObjectURL(csvFile);
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+            });
+        }
     </script>
 </body>
 </html>
