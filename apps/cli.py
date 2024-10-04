@@ -40,6 +40,7 @@ option_y2sup = click.option("--y2sup", default = None, help = "limite superior y
 option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y2.")
 option_modelo_report = click.option("--tipo", default = "Simples", help = "Report Simples (Sem UHE) ou Completo")
 option_automatico = click.option("--automatico", default = "False", help = "Report Simples (Sem UHE) ou Completo")
+
 @click.group()
 def cli():
     pass
@@ -53,7 +54,8 @@ def cli():
 @option_automatico
 @option_cronologico
 @option_conjunto
-def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico, conjunto):
+@option_html
+def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico, conjunto, html):
     start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
     contador = 0
@@ -158,7 +160,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                 arquivo_json = "exemplo_conj.json"    
     
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt, titulo, tipo, cronologico, conjunto)
+    Report(outpath, arquivo_json, txt, titulo, tipo, cronologico, conjunto, html)
     end_time = time.time()
     elapsed_time = end_time - start_time
     minutes = int(elapsed_time // 60)
