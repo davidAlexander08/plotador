@@ -34,7 +34,7 @@ class InfoGeralOperNewave(Estruturas):
         desvio_custo = 0 if data_pmo.desvio_custo_operacao_total is None else data_pmo.desvio_custo_operacao_total*1.96
         temp = temp.replace("custo_total", str(custo_total))
         temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
-
+        print(caso.nome)
         df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
         df_caso_conv = df_conv.loc[(df_conv["caso"] == caso.nome)]
         iteracao =      df_caso_conv["iter"].iloc[-1]
