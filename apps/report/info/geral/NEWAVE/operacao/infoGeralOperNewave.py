@@ -49,11 +49,13 @@ class InfoGeralOperNewave(Estruturas):
             print(tempo_total)
 
         print(caso.caminho+"/sintese/CONVERGENCIA.parquet")
-        df = pd.read_parquet(caso.caminho+"/sintese/CONVERGENCIA.parquet", engine = "pyarrow")
-        print(df)
+
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
-            iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
-            zinf = data_pmo.convergencia["zinf"].iloc[-1]
+            df_temp = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
+            df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+            print(df_caso)
+            iteracoes = df_caso["iteracao"].iloc[-1]
+            zinf = df_caso["zinf"].iloc[-1]
             temp = temp.replace("iteracoes", str(iteracoes))
             temp = temp.replace("zinf", str(zinf))
 
