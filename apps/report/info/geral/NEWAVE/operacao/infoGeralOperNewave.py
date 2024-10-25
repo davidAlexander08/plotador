@@ -5,6 +5,7 @@ from inewave.newave import Pmo
 from inewave.newave import Dger
 from inewave.newave import Cvar
 import os
+import pandas as pd
 
 class InfoGeralOperNewave(Estruturas):
     def __init__(self, data):
