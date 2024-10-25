@@ -6,7 +6,7 @@ from inewave.newave import Dger
 from inewave.newave import Cvar
 import os
 import pandas as pd
-
+import math 
 class InfoGeralOperNewave(Estruturas):
     def __init__(self, data):
         Estruturas.__init__(self)
