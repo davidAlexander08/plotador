@@ -47,6 +47,7 @@ class InfoGeralOperNewave(Estruturas):
             temp = temp.replace("tempo_total", str(round(tempo_total, 2)))
             print(tempo_total)
 
+        print(caso.caminho+"/sintese/CONVERGENCIA.parquet")
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
             iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
             zinf = data_pmo.convergencia["zinf"].iloc[-1]
