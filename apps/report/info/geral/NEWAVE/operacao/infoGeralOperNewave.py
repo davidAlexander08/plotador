@@ -43,9 +43,23 @@ class InfoGeralOperNewave(Estruturas):
             tempo_politica = df_caso.loc[(df_caso["etapa"] == "Calculo da Politica")]["tempo"].iloc[0]/60
             tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
             tempo_total = df_caso["tempo"].sum()/60
-            temp = temp.replace("tempo_politica", str(round(tempo_politica, 2)))
-            temp = temp.replace("tempo_sf", str(round(tempo_sf, 2)))
-            temp = temp.replace("tempo_total", str(round(tempo_total, 2)))
+
+            h_tempo_politica =    0 if tempo_politica < 60 else math.floor(tempo_politica/60)
+            h_tempo_sf =          0 if tempo_sf       < 60 else math.floor(tempo_sf/60)
+            h_tempo_total =       0 if tempo_total    < 60 else math.floor(tempo_total/60)
+
+            min_tempo_politica =    round(tempo_politica,0)  if h_tempo_politica == 0 else  round(tempo_politica - h_tempo_politica*60 ,0)
+            min_tempo_sf =          round(tempo_sf,0)        if h_tempo_sf       == 0 else  round(tempo_sf - h_tempo_sf*60 ,0)
+            min_tempo_total =       round(tempo_total,0)     if h_tempo_total    == 0 else  round(tempo_total - h_tempo_total*60 ,0)
+
+            #temp = temp.replace("tempo_politica", str(round(tempo_politica, 2)))
+            #temp = temp.replace("tempo_sf", str(round(tempo_sf, 2)))
+            #temp = temp.replace("tempo_total", str(round(tempo_total, 2)))
+
+
+            temp = temp.replace("tempo_politica", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min")
+            temp = temp.replace("tempo_sf", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min")
+            temp = temp.replace("tempo_total", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min")
 
 
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
