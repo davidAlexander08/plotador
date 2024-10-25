@@ -46,14 +46,11 @@ class InfoGeralOperNewave(Estruturas):
             temp = temp.replace("tempo_politica", str(round(tempo_politica, 2)))
             temp = temp.replace("tempo_sf", str(round(tempo_sf, 2)))
             temp = temp.replace("tempo_total", str(round(tempo_total, 2)))
-            print(tempo_total)
 
-        print(caso.caminho+"/sintese/CONVERGENCIA.parquet")
 
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
             df_temp = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
             df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-            print(df_caso)
             iteracoes = df_caso["iteracao"].iloc[-1]
             zinf = df_caso["zinf"].iloc[-1]
             temp = temp.replace("iteracoes", str(iteracoes))
