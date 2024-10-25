@@ -54,7 +54,7 @@ def cli():
 @option_automatico
 @option_html
 def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, html):
-    print("arquivo_json: ", arquivo_json)
+
     start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
     contador = 0
@@ -91,7 +91,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, html):
 
         arquivo_json = "exemplo.json"
 
-
+    print("arquivo_json: ", arquivo_json)
     from apps.services.report import Report
     Report(outpath, arquivo_json, txt, titulo, tipo, html)
     end_time = time.time()
