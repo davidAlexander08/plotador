@@ -58,7 +58,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, html):
     start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
     contador = 0
-    if(automatico == "True"):
+    if(automatico == "True" and arquivo_json is None):
         flag_diretorio = 0
         path = __file__.split("/")
         path.pop()
