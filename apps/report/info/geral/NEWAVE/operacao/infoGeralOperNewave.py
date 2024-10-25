@@ -48,6 +48,8 @@ class InfoGeralOperNewave(Estruturas):
             print(tempo_total)
 
         print(caso.caminho+"/sintese/CONVERGENCIA.parquet")
+        df = pd.read_parquet(caso.caminho+"/sintese/CONVERGENCIA.parquet", engine = "pyarrow")
+        print(df)
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
             iteracoes = data_pmo.convergencia["iteracao"].iloc[-1]
             zinf = data_pmo.convergencia["zinf"].iloc[-1]
