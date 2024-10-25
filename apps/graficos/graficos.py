@@ -213,6 +213,7 @@ class Graficos:
                             mode=modo,
                             marker=dict( symbol=c.marcador ),
                             name = c.nome,
+                            legendgroup=c.nome,
                             line = dict(color = c.cor, dash=c.dash),
                             showlegend=unity.arg.show))
                 if(eixo_y2 == "True"):

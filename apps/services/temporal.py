@@ -11,7 +11,7 @@ from apps.model.argumento import Argumento
 from apps.model.unidadeArgumental import UnidadeArgumental
 from apps.graficos.figura import Figura
 from apps.model.caso import Caso
-import os
+import os 
 import json
 
 class Temporal:
