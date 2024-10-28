@@ -190,11 +190,11 @@ class Report():
                                     with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
                                         base64_string = base64.b64encode(image_file.read()).decode('utf-8')
                                         html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
-                                                    #<img src="data:image/png;base64,INSERT_BASE64_ENCODED_STRING_HERE" alt="Centered Image" style="max-width: 100%; height: auto;">
+                                                #<img src="data:image/png;base64,INSERT_BASE64_ENCODED_STRING_HERE" alt="Centered Image" style="max-width: 100%; height: auto;">
                                 except IOError as e:
                                     # Handle other I/O errors (e.g., permission denied, etc.)
                                     print(f"An I/O error occurred: {e}")
-                        else:
+                    else:
                         html_file.write("<p>"+line.strip()+"</p>\n")
 
             html_file.write('</div>'+"\n")
