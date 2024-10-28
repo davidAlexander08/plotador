@@ -155,7 +155,9 @@ class Report():
                                 cli_command = cli_command + " --html True"
                             if(data.casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
                                 cli_command = cli_command + " --eixox data_inicio"
-                            cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
+                            try:
+                                cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
+                                print(f"Command Output: {cli_output}")                            
                             except subprocess.CalledProcessError as e:
                                 print(f"Command failed with exit status {e.returncode}")
                                 print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
