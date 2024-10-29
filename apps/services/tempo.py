@@ -31,7 +31,7 @@ class Tempo:
         os.makedirs(diretorio_saida, exist_ok=True)
         
         df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-        print(df_temp)
+        #print(df_temp)
         lista_color = []
         temp = []
         for caso in data.conjuntoCasos[0].casos:
@@ -40,11 +40,11 @@ class Tempo:
             lista_color.append(caso.cor)
             if(caso.modelo == "NEWAVE" or caso.modelo == "DECOMP"):
                 #temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
-                print(df_caso["caso"].iloc[0])
-                print(df_caso["modelo"].iloc[0])
-                print(df_caso["tempo"].sum()/60)
+                #print(df_caso["caso"].iloc[0])
+                #print(df_caso["modelo"].iloc[0])
+                #print(df_caso["tempo"].sum()/60)
                 df_tempo = pd.DataFrame({"etapa":["Tempo Total"], "tempo": [df_caso["tempo"].sum()/60], "caso":[df_caso["caso"].iloc[0]], "modelo":[df_caso["modelo"].iloc[0]]})
-                print(df_tempo)
+                #print(df_tempo)
                 temp.append(df_tempo)
             if(caso.modelo == "DESSEM"):
                 df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
