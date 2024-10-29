@@ -62,7 +62,7 @@ class Report():
         if(self.txt is None):
             if(conjunto =="False"):
                 if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE"):
-                    arquivo_template = "/".join(path)+"/template_newave.txt" 
+                    arquivo_template = "/".join(path)+"/template_simples.txt" 
                 elif(data.conjuntoCasos[0].casos[0].modelo == "DESSEM" and cronologico == "True"):
                     arquivo_template = "/".join(path)+"/template_dessem_cronologico.txt" 
                 elif(data.conjuntoCasos[0].casos[0].modelo == "DESSEM"):
