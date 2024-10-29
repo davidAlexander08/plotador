@@ -1,7 +1,6 @@
 
 
 from apps.interface.dados_json_caso import Dados_json_caso
-from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.model.argumento import Argumento
 from apps.report.info.info import Info
 from apps.utils.log import Log
@@ -26,21 +25,10 @@ class Report():
         path.pop()
         path.pop()
         arquivo_template = ""
-        if(tipo == "Simples"):
-            arquivo_template = "/".join(path)+"/template_simples.txt" if self.txt is None else self.txt
-        elif(tipo == "Completo"):
-            arquivo_template = "/".join(path)+"/template.txt" if self.txt is None else self.txt
-        else:
-            print("Tipo definido errado: Simples ou Completo")
-            exit(1)
         
 
         if(self.json is not None):
-            print(self.json)
             data = Dados_json_caso(self.json)
-            
-            #exit(1)
-            self.eco_indicadores = EcoIndicadores(data.casos)
         if(self.txt is None and self.json is None):
             flag_diretorio = 0
             path = __file__.split("/")
