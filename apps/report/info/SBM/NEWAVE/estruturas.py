@@ -3,7 +3,7 @@ class Estruturas:
 
         #TABELA DE INFORMACOES BASICAS
         self.Tabela_Eco_Entrada = """
-        <table>
+        <table class="exportTable">
         <tr>
             <th>Caso</th>
             <th>Modelo</th>

@@ -28,7 +28,7 @@ class Temporal:
         self.patamar = int(patamar)
         self.estagio = estagio
         self.y2 = y2
-        if(self.y2 == "True" and len(data.casos) > 2):
+        if(self.y2 == "True" and len(data.conjuntoCasos[0].casos) > 2):
             print("ERRO: Opcao y2 valida apenas para comparacao de duplas de casos")
             exit(1)
         self.cenario = [cenario] if cenario == "mean" else cenario.split(",")
@@ -37,7 +37,7 @@ class Temporal:
             marcadores= [None,"circle","square", "diamond","x","cross"]
             dashes = ["dash", "dot"]
             novos_casos = [] 
-            for caso in data.casos:
+            for caso in data.conjuntoCasos[0].casos:
                 contador = 0
                 contador_marcadores = 0
                 for cen in self.cenario:
@@ -57,9 +57,9 @@ class Temporal:
                     if(contador >= len(dashes)):
                         contador = 0
                         contador_marcadores += 1
-            data.casos = novos_casos
+            data.conjuntoCasos[0].casos = data.conjuntoCasos[0].casos+novos_casos
         else:
-            for caso in data.casos:
+            for caso in data.conjuntoCasos[0].casos:
                 caso.tipo = self.cenario[0]
                 caso.dash = None
                 caso.marcador = None
@@ -83,8 +83,8 @@ class Temporal:
         self.csv = csv
         self.html = html
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
-        self.indicadores_temporais = IndicadoresTemporais(data.casos)
-        self.eco_indicadores = EcoIndicadores(data.casos)
+        self.indicadores_temporais = IndicadoresTemporais(data.conjuntoCasos[0].casos)
+        self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
 
@@ -92,7 +92,7 @@ class Temporal:
         diretorio_saida = f"resultados/{self.estudo}/temporal" if outpath is None else outpath
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        meta_dados = self.eco_indicadores.retorna_df(data.casos[0], "METADADOS_OPERACAO")
+        meta_dados = self.eco_indicadores.retorna_df(data.conjuntoCasos[0].casos[0], "METADADOS_OPERACAO")
         df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)]
         print(df_chave["nome_longo_variavel"])
         titulo_meta = df_chave["nome_longo_variavel"]
@@ -149,13 +149,11 @@ class Temporal:
                         
 
  
-    def executa(self, conjUnity, diretorio_saida_arg):  
+    def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
-        print("ENTORU AQUI")
         for unity in conjUnity.listaUnidades:
             #lista_data_frame = []
             df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
-            print(df_temporal)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):

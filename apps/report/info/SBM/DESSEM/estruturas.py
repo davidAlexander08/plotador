@@ -8,6 +8,7 @@ class Estruturas:
             <th>Caso</th>
             <th>Modelo</th>
             <th>Versao</th>
+            <th>Subm</th>
             <th>1 Dia GT</th>
             <th>1 Dia GH</th>
             <th>1 Dia EARMF</th>
@@ -23,6 +24,7 @@ class Estruturas:
             <td>Caso</td>
             <td>Modelo</td>
             <td>Versao</td>
+            <td>Subm</td>
             <td>1_Dia_GT</td>
             <td>1_Dia_GH</td>
             <td>1_Dia_EARMF</td>

@@ -188,10 +188,13 @@ class Graficos:
         colx = "estagio" ) :
         mapaGO = {}
         if(cronologico == "True"):
+            colx = "dataInicio" if colx == "estagio" else colx
             for unity in mapa:
                 df = mapa[unity]
+                #df.to_csv("teste.csv")
                 listaGO = []
                 df = df.reset_index(drop = True)
+                df = df.sort_values(by=colx)
                 listaGO.append(go.Scatter( 
                         x = df[colx],
                         y = df[coly],

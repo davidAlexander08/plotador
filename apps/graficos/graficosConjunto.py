@@ -63,6 +63,8 @@ class GraficosConjunto:
             for unity in mapa:
                 df = mapa[unity]
                 listaGO = []
+                df = df.reset_index(drop = True)
+                df = df.sort_values(by=colx)
                 for conj in self.conjuntoCasos:
                     df_conj = df.loc[(df["conjunto"] == conj.nome)]
                     df = df.reset_index(drop = True)

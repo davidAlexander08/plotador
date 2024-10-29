@@ -8,12 +8,12 @@ class Estruturas:
             <th>Caso</th>
             <th>Modelo</th>
             <th>Versao</th>
-            <th>1 Dia GT</th>
-            <th>1 Dia GH</th>
-            <th>1 Dia EARMF</th>
-            <th>Média GT</th>
-            <th>Média GH</th>
-            <th>Média EARMF</th>
+            <th>MILP (min)</th>
+            <th>PL_INT_FIX (min)</th>
+            <th>Calc_CMO (Min)</th>
+            <th>Total (min)</th>
+            <th>Status MILP</th>
+            <th>Status CalcCMO</th>
         </tr>
 """
 
@@ -23,12 +23,12 @@ class Estruturas:
             <td>Caso</td>
             <td>Modelo</td>
             <td>Versao</td>
-            <td>1_Dia_GT</td>
-            <td>1_Dia_GH</td>
-            <td>1_Dia_EARMF</td>
-            <td>Media_GT</td>
-            <td>Media_GH</td>
-            <td>Media_EARMF</td>
+            <td>MILP (min)</td>
+            <td>PL_INT_FIX (min)</td>
+            <td>Calc_CMO (Min)</td>
+            <td>Total (min)</td>
+            <td>Status MILP</td>
+            <td>Status CalcCMO</td>
         </tr>
 """
 

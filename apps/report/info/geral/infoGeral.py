@@ -15,7 +15,7 @@ class InfoGeral(Estruturas):
         ## TABELA JSON
         self.lista_text.append("<h3>Informações Gerais do Estudo</h3>"+"\n")
         self.lista_text.append(self.Inicio_tabela)    
-        for caso in data.casos:
+        for caso in data.conjuntoCasos[0].casos:
             temp = self.template_tabela_caso
             temp = temp.replace("nome", caso.nome)
             temp = temp.replace("caminho", caso.caminho)
@@ -37,7 +37,7 @@ class InfoGeral(Estruturas):
                 if(modelo == "DESSEM"):
                     self.lista_text.append(InfoGeralEcoDessem(data).text_html)
                     pass
-            
+
             if(par_dados[1] == "OPER" or par_dados[1] == None):
                 ##TABELA OPER
                 self.lista_text.append("<h3>Oper Dados</h3>"+"\n")

@@ -23,7 +23,7 @@ class Tempo:
         self.html = html
         self.titulo = titulo
         self.tamanho = int(tamanho) if tamanho is not None else 25
-        self.eco_indicadores = EcoIndicadores(data.casos)
+        self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/tempo" if outpath is None else outpath
@@ -34,7 +34,7 @@ class Tempo:
         print(df_temp)
         lista_color = []
         temp = []
-        for caso in data.casos:
+        for caso in data.conjuntoCasos[0].casos:
             df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
             df_caso["tempo"] = df_caso["tempo"] /(60)
             lista_color.append(caso.cor)

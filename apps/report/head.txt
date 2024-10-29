@@ -167,6 +167,7 @@
             transition: background-color 0.3s, transform 0.2s;
             text-align: center;
             font-family: Verdana, sans-serif;
+            left: 300px;
         }
 
         #downloadAll:hover {
@@ -178,6 +179,33 @@
             background-color: #DAA520;
             transform: translateY(0);
         }
+
+        #downloadTables {
+            display: inline-block;
+            padding: 0px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #9A572D;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s;
+            text-align: center;
+            font-family: Verdana, sans-serif;
+            left: 480px;
+        }
+
+        #downloadTables:hover {
+            background-color: #DAA520;
+            transform: translateY(-2px);
+        }
+
+        #downloadTables:active {
+            background-color: #DAA520;
+            transform: translateY(0);
+        }
+
 
         #loader {
             position: fixed;
@@ -218,7 +246,7 @@
             padding: 5px;
             border-radius: 7px;
             position: fixed;
-            left: 480px;
+            left: 650px;
         }
         .top-bar button {
             background: #86897E;
@@ -227,7 +255,6 @@
             padding: 5px;
             border-radius: 7px;
             position: fixed;
-            left: 300px;
         }
         .content {
             margin-left: 210px;
@@ -240,6 +267,7 @@
 </style>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 
 </head>
@@ -252,6 +280,7 @@
     <div class="top-bar" id="top-bar">
         <div id="top-bar-title">Menu</div>
         <button id="downloadAll">Baixar Gráficos</button>
+        <button id="downloadTables">Baixar Tabelas</button>
         <select id="top-bar-menu" onchange="showTopBarPage(this.value)">
             <!-- Options will be updated dynamically -->
         </select>

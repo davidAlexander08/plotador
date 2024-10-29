@@ -22,7 +22,7 @@ import json
 class Conjunto:
 
 
-    def __init__(self, data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho):
+    def __init__(self, data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho, outpath):
         self.conjuntoCasos = data.conjuntoCasos
         self.xinf  = xinf
         self.xsup = xsup
@@ -43,10 +43,9 @@ class Conjunto:
         self.estudo = data.estudo
         self.nome_caso_referencia = ""
         # Gera saídas do estudo
-        diretorio_saida = f"resultados/{self.estudo}/conjunto" 
+        diretorio_saida = f"resultados/{self.estudo}/conjunto" if outpath is None else outpath
         self.graficosConjunto = GraficosConjunto(data.conjuntoCasos)
         os.makedirs(diretorio_saida, exist_ok=True)
-
         self.subp_col = int(subplot.split(",")[0]) if subplot is not None else 4
         self.subp_lin = int(subplot.split(",")[1]) if subplot is not None else 3
         print(self.subp_col, " ", self.subp_lin)
@@ -114,7 +113,7 @@ class Conjunto:
                 conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, self.tamanho_texto)
                 if(self.labelx is not None):
                     conj.legendaEixoX = self.labelx
-                diretorio_saida_arg = diretorio_saida+"/"+espacial
+                diretorio_saida_arg = diretorio_saida+"/"+espacial if outpath is None else outpath
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 #unity = UnidadeSintese(sts, args, "caso", data.limites, data.tamanho_texto)
                 self.executa(conj,diretorio_saida_arg )
@@ -124,7 +123,7 @@ class Conjunto:
                         conj = ConjuntoUnidadeSintese(sts,arg , "casos", data.limites, self.tamanho_texto) 
                         if(self.labelx is not None):
                             conj.legendaEixoX = self.labelx
-                        diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome
+                        diretorio_saida_arg = diretorio_saida+"/"+arg.chave+"/"+arg.nome if outpath is None else outpath
                         os.makedirs(diretorio_saida_arg, exist_ok=True)
                         #unity = UnidadeSintese(sts, args, "caso", data.limites, data.tamanho_texto)
                         self.executa(conj,diretorio_saida_arg )

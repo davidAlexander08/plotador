@@ -16,10 +16,10 @@ import base64
 import shutil
 
 class Report():
-    def __init__(self,outpath, arq_json, txt, titulo, tipo, html):
+    def __init__(self,outpath, arq_json, txt, titulo, tipo, cronologico, conjunto, html):
         #self.outpath = outpath
         self.json = arq_json
-        print(self.json)
+        print("Arquivo JSON: ", self.json)
         self.txt = txt
         self.titulo = titulo
         path = __file__.split("/")
@@ -67,13 +67,34 @@ class Report():
                     raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
             with open("exemplo.json", 'w') as file:
                 json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
-
             self.json = "exemplo.json"
             data = Dados_json_caso(self.json)
 
-
-            self.eco_indicadores = EcoIndicadores(data.casos)
-
+        arquivo_template = ""
+        if(self.txt is None):
+            if(conjunto =="False"):
+                if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE"):
+                    arquivo_template = "/".join(path)+"/template_newave.txt" 
+                elif(data.conjuntoCasos[0].casos[0].modelo == "DESSEM" and cronologico == "True"):
+                    arquivo_template = "/".join(path)+"/template_dessem_cronologico.txt" 
+                elif(data.conjuntoCasos[0].casos[0].modelo == "DESSEM"):
+                    arquivo_template = "/".join(path)+"/template_dessem.txt" 
+                elif(data.conjuntoCasos[0].casos[0].modelo == "DECOMP"):
+                    arquivo_template = "/".join(path)+"/template_decomp.txt" 
+                else:
+                    print("Tipo definido errado: Simples ou Completo")
+                    exit(1)
+            elif(conjunto == "True"):
+                if(data.conjuntoCasos[0].casos[0].modelo == "DESSEM"):
+                    arquivo_template = "/".join(path)+"/template_dessem_conjuntos.txt" 
+                else:
+                    print("Tipo definido errado: Simples ou Completo")
+                    exit(1)
+            else:
+                print("Tipo definido errado: Simples ou Completo")
+                exit(1)
+        else:
+            arquivo_template = self.txt
         with open(arquivo_template, "r") as file:
             lines = file.readlines()
 
@@ -117,6 +138,7 @@ class Report():
                         par_dados = (chave, argumentos)
                         info = Info(data, par_dados)
                         html_file.write(info.text_html+"\n")
+
                     elif("\page{") in line:
                         
                         if(flag_primeira_pagina == False):
@@ -145,15 +167,17 @@ class Report():
                             
                     elif("plotador" in line):
                         cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
-                        #print(f"Executing CLI command: {cli_command}")
-                        if( (data.casos[0].modelo == "DECOMP" or data.casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
+                        print(f"Executing CLI command: {cli_command}")
+                        if( (data.conjuntoCasos[0].casos[0].modelo == "DECOMP" or data.conjuntoCasos[0].casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
                             pass
                         else:
                             if("arquivo_json" in cli_command):
                                 cli_command = cli_command.replace("arquivo_json", self.json)
                             if("ADD_SBMS" in cli_command):
-                                submercados = "SE,S,NE,N" if data.casos[0].modelo != "NEWAVE" else "SUDESTE,SUL,NORDESTE,NORTE"
+                                submercados = "SE,S,NE,N" if data.conjuntoCasos[0].casos[0].modelo != "NEWAVE" else "SUDESTE,SUL,NORDESTE,NORTE"
                                 cli_command = cli_command.replace("ADD_SBMS", submercados)
+                            if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
+                                cli_command = cli_command + " --eixox dataInicio"
                             if(html == "True" and "html" not in cli_command):
                                 cli_command = cli_command + " --html True"
                             if(data.casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):

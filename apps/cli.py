@@ -20,7 +20,8 @@ option_chave = click.option("--chave",  default = None,  help="Chaves para o arg
 option_largura = click.option("--largura",  default="1500",   help="Sintese Especifica a ser Plotada") #VALOR INTERESSANTE PARA RELATORIOS E 1200
 option_altura = click.option( "--altura",   default="1200",   help="Sintese Especifica a ser Plotada") #VALOR INTERESSANTE PARA RELATORIOS E 375 e 550
 option_eixox = click.option( "--eixox",   default="estagio",   help="Eixo X, valores como estagio, dataInicio, dataFim")
-option_cronologico = click.option("--cronologico",   default="False",    help="Sintese Especifica a ser Plotada")
+option_cronologico = click.option("--cronologico",   default="False",    help="Ativa ou desativa opção cronologico do report automatico")
+option_conjunto = click.option("--conjunto",   default="False",    help="Ativa ou desativa se é um conjunto de dados do report automatico")
 option_labely = click.option("--labely",   default=None, help="Label Y para todos os graficos Plotados")
 option_labelx = click.option( "--labelx",   default=None,  help="Label X para todos os graficos Plotados")
 option_booltitulo = click.option("--booltitulo",   default="True", help="Ativa ou desativa o titulo de figuras")
@@ -41,6 +42,7 @@ option_y2sup = click.option("--y2sup", default = None, help = "limite superior y
 option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y2.")
 option_modelo_report = click.option("--tipo", default = "Simples", help = "Report Simples (Sem UHE) ou Completo")
 option_automatico = click.option("--automatico", default = "False", help = "Report Simples (Sem UHE) ou Completo")
+
 @click.group()
 def cli():
     pass
@@ -52,54 +54,122 @@ def cli():
 @option_titulo
 @option_modelo_report
 @option_automatico
+@option_cronologico
+@option_conjunto
 @option_html
-def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, html):
-
+def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico, conjunto, html):
     start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
     contador = 0
-    if(automatico == "True" and arquivo_json is None):
-        flag_diretorio = 0
-        path = __file__.split("/")
-        path.pop()
-        path.pop()
-        arq_json_exemplo = "/".join(path)+"/apps/exemplo.json"
-        current_directory = os.getcwd()
-        novos_casos =[]
-        with open(arq_json_exemplo, "r") as file:
-            dados = json.load(file)
-            for item in os.listdir(current_directory):
-                if(item != "resultados" and item != "report"):
-                    item_path = os.path.join(current_directory, item)
-                    if os.path.isdir(item_path):
-                        if(os.path.exists(item_path+"/sintese")):
-                            caminho = item_path
-                            nome = item
-                            cor = cores[contador]
-                            modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet", engine='pyarrow')["programa"].iloc[0]
-                            contador += 1
-                            novo_caso = {"nome":nome,
-                                         "caminho":caminho,
-                                         "cor":cor,
-                                         "modelo":modelo}
-                            novos_casos.append(novo_caso)
+    if(arquivo_json is None):
+        if(automatico == "True"):
+            path = __file__.split("/")
+            path.pop()
+            path.pop()
+            current_directory = os.getcwd()
+            if(conjunto == "False"):
+                #arq_json_exemplo = "/".join(path)+"/apps/exemplo.json"
+                #novos_casos =[]
+                #with open(arq_json_exemplo, "r") as file:
+                #    dados = json.load(file)
+                #    for item in os.listdir(current_directory):
+                #        if(item != "resultados" and item != "report"):
+                #            item_path = os.path.join(current_directory, item)
+                #            if os.path.isdir(item_path):
+                #                if(os.path.exists(item_path+"/sintese")):
+                #                    caminho = item_path
+                #                    nome = item
+                #                    cor = cores[contador]
+                #                    modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
+                #                    contador += 1
+                #                    novo_caso = {"nome":nome,
+                #                                "caminho":caminho,
+                #                                "cor":cor,
+                #                                "modelo":modelo}
+                #                    novos_casos.append(novo_caso)
+#
+                #    dados["casos"] = novos_casos
+#
+                #with open("exemplo_conj.json", 'w') as file:
+                #    json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
+                arquivo_json = "exemplo_conj.json"
+                arq_json_exemplo = "/".join(path)+"/apps/exemplo_conj.json"
+                novos_casos =[]
+                with open(arq_json_exemplo, "r") as file:
+                    dados = json.load(file)
+                    for item in os.listdir(current_directory):
+                        if(item != "resultados" and item != "report"):
+                            item_path = os.path.join(current_directory, item)
+                            if os.path.isdir(item_path):
+                                if(os.path.exists(item_path+"/sintese")):
+                                    caminho = item_path
+                                    nome = item
+                                    cor = cores[contador]
+                                    modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
+                                    contador += 1
+                                    novo_caso = {"nome":nome,
+                                                "caminho":caminho,
+                                                "cor":cor,
+                                                "modelo":modelo}
+                                    novos_casos.append(novo_caso)
+                    novo_conjunto = {"nome_conj":"",
+                                "cor_conj":"",
+                                "casos":novos_casos}
+                    dados["conjuntos"] = [novo_conjunto]
+                with open("exemplo_conj.json", 'w') as file:
+                    json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
+                arquivo_json = "exemplo_conj.json"
 
-            dados["casos"] = novos_casos
+            elif(conjunto == "True"):
+                arq_json_exemplo = "/".join(path)+"/apps/exemplo_conj.json"
+                novos_conjuntos =[]
+                with open(arq_json_exemplo, "r") as file:
+                    dados = json.load(file)
+                    for item in os.listdir(current_directory):
+                        if(item != "resultados" and item != "report"):
+                            item_path = os.path.join(current_directory, item)
+                            if(os.path.isdir(item_path)):
+                                
+                                nome = item
+                                cor = cores[contador]
+                                contador += 1
+                                #print("conjunto: ", item, " cor: ", cor)
+                                novos_casos = []   
+                                for item_casos in os.listdir(item_path):
+                                    if(item_casos != "resultados" and item_casos != "report"):
+                                        item_casos_path = os.path.join(item_path, item_casos)
+                                        if os.path.isdir(item_casos_path):
+                                            if(os.path.exists(item_casos_path+"/sintese")):
+                                                #print("caso: ", item_casos)
+                                                caminho_caso = item_casos_path
+                                                nome_caso = item_casos
+                                                cor_caso = "black"
+                                                modelo_caso = pd.read_parquet(item_casos_path+"/sintese/PROGRAMA.parquet.gzip", engine='pyarrow')["programa"].iloc[0]
+                                                novo_caso = {"nome":nome_caso,
+                                                            "caminho":caminho_caso,
+                                                            "cor":cor_caso,
+                                                            "modelo":modelo_caso}
+                                                novos_casos.append(novo_caso)
+                                #print(novos_casos)
+                                novo_conjunto = {"nome_conj":nome,
+                                            "cor_conj":cor,
+                                            "casos":novos_casos}
+                                novos_conjuntos.append(novo_conjunto)
+                    dados["conjuntos"] = novos_conjuntos
 
-        with open("exemplo.json", 'w') as file:
-            json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
-
-        arquivo_json = "exemplo.json"
-
-    print("arquivo_json: ", arquivo_json)
+                with open("exemplo_conj.json", 'w') as file:
+                    json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
+                arquivo_json = "exemplo_conj.json"    
+    
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt, titulo, tipo, html)
+    Report(outpath, arquivo_json, txt, titulo, tipo, cronologico, conjunto, html)
     end_time = time.time()
     elapsed_time = end_time - start_time
     minutes = int(elapsed_time // 60)
     seconds = int(elapsed_time % 60)
 
     print(f"Report Gerado em: {minutes} minutos e {seconds} segundos")
+
 @click.command("temporal")
 @option_xinf
 @option_xsup
@@ -174,14 +244,15 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
 @option_ysup
 @option_labelx
 @option_tamanho
+@option_outpath
 @click.argument(
     "arquivo_json",
 )
-def analise_conjuntoCasos(arquivo_json, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho):
+def analise_conjuntoCasos(arquivo_json, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho, outpath):
     from apps.services.conjunto import Conjunto
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Conjunto(data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho)
+        Conjunto(data, xinf, xsup, yinf, ysup,estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, titulo, subplot, labelx, tamanho, outpath)
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
