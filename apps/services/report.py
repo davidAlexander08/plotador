@@ -36,6 +36,7 @@ class Report():
         
 
         if(self.json is not None):
+            print(self.json)
             data = Dados_json_caso(self.json)
             print(data.casos)
             exit(1)
