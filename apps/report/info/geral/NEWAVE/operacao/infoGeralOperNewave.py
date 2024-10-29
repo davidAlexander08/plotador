@@ -60,7 +60,8 @@ class InfoGeralOperNewave(Estruturas):
             temp = temp.replace("tempo_politica", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min")
             temp = temp.replace("tempo_sf", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min")
             temp = temp.replace("tempo_total", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min")
-
+        else:
+            pass
 
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
             df_temp = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
