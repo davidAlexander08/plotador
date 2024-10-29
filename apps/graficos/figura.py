@@ -20,12 +20,12 @@ class Figura():
                 lim_sup = max(trace.y) if len(trace.y) is not 0 else 0
                 lim_inf = min(trace.y) if len(trace.y) is not 0 else 0
                 if(y2 == "True"):
-                    print("contador: ", contador)
-                    print("tamanho: ",len(mapaGO[unity]) )
+                    #print("contador: ", contador)
+                    #print("tamanho: ",len(mapaGO[unity]) )
                     if(contador == len(mapaGO[unity])):
                         self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col, secondary_y = True)
                         #self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying ="y", side = "right", range = [y2inf,y2sup], row = unity.arg.lin , col = unity.arg.col) 
-                        print(trace.y)
+                        #print(trace.y)
                     else:
                         self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col)
                 else:

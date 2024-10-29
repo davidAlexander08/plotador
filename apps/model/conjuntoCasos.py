@@ -11,7 +11,7 @@ class ConjuntoCasos:
     def __init__(self, nome: str, cor: str, dados):
         self.nome = nome
         self.cor = cor
-        print(dados)
+        #print(dados)
         self.casos = [Caso.from_dict(d) for d in dados]
 
     @classmethod
