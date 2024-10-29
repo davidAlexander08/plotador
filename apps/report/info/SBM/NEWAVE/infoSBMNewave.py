@@ -1,9 +1,6 @@
 
 from apps.report.info.SBM.NEWAVE.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
-from inewave.newave import Pmo
-from inewave.newave import Dger
-from inewave.newave import Cvar
 import os
 
 class InfoSBMNewave(Estruturas):

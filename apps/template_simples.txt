@@ -31,12 +31,11 @@ plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese
 \subpage{ENA}
 plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json --sintese ENAA_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
-W
 \page{Submercado}
 
 <h1> Relatório de Submercados </h1>
 
-\info{SBM}
+###\info{SBM}
 
 \subpage{Geracoes}
 
