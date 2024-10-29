@@ -37,6 +37,8 @@ class Report():
 
         if(self.json is not None):
             data = Dados_json_caso(self.json)
+            print(data)
+            exit(1)
             self.eco_indicadores = EcoIndicadores(data.casos)
         if(self.txt is None and self.json is None):
             flag_diretorio = 0
