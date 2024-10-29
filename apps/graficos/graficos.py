@@ -20,7 +20,7 @@ class Graficos:
     """
 
     def __init__(self, data):
-        self.casos = data.casos
+        self.casos = data.conjuntoCasos[0].casos
         self.estudo = data.estudo
         self.pre_defined_colors = [
             "#BA0F30",
