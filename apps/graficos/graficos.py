@@ -226,7 +226,7 @@ class Graficos:
                         df_caso_0 = df.loc[df["caso"] == lista_casos[0]].reset_index(drop=True)
                         df_caso_1 = df.loc[df["caso"] == lista_casos[1]].reset_index(drop=True)
                         df_valor = df_caso_0[coly] - df_caso_1[coly].reset_index(drop=True)
-                        print(df_valor)
+                        #print(df_valor)
                         listaGO.append(go.Bar( 
                                 x = df_caso_0[colx],
                                 y = df_valor,
@@ -252,7 +252,7 @@ class Graficos:
             for c in self.casos:
                 dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
                 dfY = dfY.reset_index(drop = False)
-                print(dfY)
+                #print(dfY)
                 listaGO.append(go.Box( 
                         x = list(map(str,dfY[colx].tolist())) ,
                         y =  dfY[coly].tolist(),

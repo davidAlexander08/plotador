@@ -31,7 +31,7 @@ class EcoIndicadores:
             return df
         else:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado") 
-            print(check_file)
+            #print(check_file)
             df_vazio = pd.DataFrame()
             return df_vazio
             

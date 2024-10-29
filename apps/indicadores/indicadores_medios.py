@@ -82,16 +82,14 @@ class IndicadoresMedios(EcoIndicadores):
     def retorna_mapa_std_parquet(self, mapa):
         dict = {}
         for c in self.casos:
-            print("len(mapa[c][valor].tolist(): ", len(mapa[c]["valor"].tolist()))
+            #print("len(mapa[c][valor].tolist(): ", len(mapa[c]["valor"].tolist()))
             valor =  (1.96*mapa[c]["valor"].std()/(np.sqrt(len(mapa[c]["valor"].tolist()))))
             #valor =  mapa[c]["valor"].std()
-            print("valor: ", valor)
             df = pd.DataFrame()
             df.at[c.nome, "valor"] = valor
             df.index = df.index.rename('caso')
             df = df.reset_index(drop=False)
             dict[c] = df
-        print(dict)
         return dict
 
 

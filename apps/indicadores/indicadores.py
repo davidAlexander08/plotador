@@ -1152,7 +1152,6 @@ class IndicadoresCalibracaoCVAR:
         df_completo = pd.concat(listaDF)
         df_completo = df_completo.reset_index(drop=True)
         self.__df_viol_incrementais_usinas_primeiro_ano_media_outros_anos = df_completo
-        print(df_completo)
         return 0
     
     

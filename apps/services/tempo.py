@@ -47,11 +47,9 @@ class Tempo:
                 print(df_tempo)
                 temp.append(df_tempo)
             if(caso.modelo == "DESSEM"):
-                #print(df_caso)
                 df = df_caso.groupby(['caso']).sum().drop(["etapa","modelo"],axis = 1).reset_index(drop=False)
                 temp.append(df)
         df = pd.concat(temp).reset_index(drop = True)
-        print(df)
 
         self.eco_indicadores.exportar(df, diretorio_saida,"Tempo"+self.estudo )
         titulo_tempo = "Tempo de processamento"+" "+self.estudo if self.titulo == " " else self.titulo.replace("_"," ")

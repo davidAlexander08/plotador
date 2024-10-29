@@ -32,7 +32,6 @@ class Temporal:
             print("ERRO: Opcao y2 valida apenas para comparacao de duplas de casos")
             exit(1)
         self.cenario = [cenario] if cenario == "mean" else cenario.split(",")
-        print(self.cenario) 
         if(len(self.cenario) > 1):
             marcadores= [None,"circle","square", "diamond","x","cross"]
             dashes = ["dash", "dot"]
@@ -94,7 +93,6 @@ class Temporal:
 
         meta_dados = self.eco_indicadores.retorna_df(data.conjuntoCasos[0].casos[0], "METADADOS_OPERACAO")
         df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)]
-        print(df_chave["nome_longo_variavel"])
         titulo_meta = df_chave["nome_longo_variavel"]
         if(self.labely is None):
             self.labely = df_chave["unidade"].iloc[0]
@@ -112,7 +110,6 @@ class Temporal:
             for arg in lista_argumentos:
                 list_arg.append(arg.replace("_"," "))
             lista_argumentos = list_arg
-            print(lista_argumentos)
             data.args = [Argumento(lista_argumentos, self.chave, "out")] 
             if(len(lista_argumentos) == 1 and self.titulo == " "): 
                 self.titulo = lista_argumentos[0]
@@ -122,8 +119,6 @@ class Temporal:
             print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
             exit(1)
         sts = Sintese(self.sintese)
-        print("ENTORU AQUI ANTERIOMENTE")
-
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")

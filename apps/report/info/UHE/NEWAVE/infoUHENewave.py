@@ -35,7 +35,6 @@ class InfoUHENewave(Estruturas):
         data_dger = Dger.read(caso.caminho+"/dger.dat")
         data_cvar = Cvar.read(caso.caminho+"/cvar.dat")
         temp = temp.replace("UHE", arg)
-        print(arg)
         
         #df_varmi = self.eco_indicadores.retorna_df_concatenado("VARMI_UHE_EST")
         #print(df_varmi)
