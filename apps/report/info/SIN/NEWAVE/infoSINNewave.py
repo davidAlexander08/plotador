@@ -41,9 +41,7 @@ class InfoSINNewave(Estruturas):
             if(oper_sin['variavel'].str.contains("EARPI", case=False, na=False).any()):
                 earpf_i = oper_sin.loc[(oper_sin["variavel"] == "EARPI") & (oper_sin["estagio"] == 1)]["valor"].iloc[0]
                 temp = temp.replace("EarpI", str(earpf_i))
-
             
-            print(oper_sin)
             if(oper_sin['variavel'].str.contains("GTER", case=False, na=False).any()):
                 gt_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) ]["valor"].iloc[0]
                 temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
