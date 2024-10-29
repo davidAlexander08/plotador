@@ -43,23 +43,24 @@ class InfoSINNewave(Estruturas):
                 temp = temp.replace("EarpI", str(earpf_i))
 
             
+            print(oper_sin)
+            if(oper_sin['variavel'].str.contains("GTER", case=False, na=False).any()):
+                gt_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) ]["valor"].iloc[0]
+                temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
+                gt_avg = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) ]["valor"].mean()
+                temp = temp.replace("Media_GT", str(round(gt_avg,2)))
 
-            gt_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) ]["valor"].iloc[0]
-            temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
+            if(oper_sin['variavel'].str.contains("GHID", case=False, na=False).any()):
+                gh_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GHID") & (oper_sin["estagio"] == 2) ]["valor"].iloc[0]
+                temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
+                gh_avg = oper_sin.loc[(oper_sin["variavel"] == "GHID") & (oper_sin["estagio"] == 2) ]["valor"].mean()
+                temp = temp.replace("Media_GH", str(round(gh_avg,2)))
 
-            gh_2_mes = oper_sin.loc[(oper_sin["variavel"] == "GHID") & (oper_sin["estagio"] == 2) ]["valor"].iloc[0]
-            temp = temp.replace("2_Mes_GH", str(round(gh_2_mes,2)))
+            if(oper_sin['variavel'].str.contains("EARPF", case=False, na=False).any()):
+                earpf_2_mes = oper_sin.loc[(oper_sin["variavel"] == "EARPF") & (oper_sin["estagio"] == 2) ]["valor"].iloc[0]
+                temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
 
-            earpf_2_mes = oper_sin.loc[(oper_sin["variavel"] == "EARPF") & (oper_sin["estagio"] == 2) ]["valor"].iloc[0]
-            temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
-
-            gt_avg = oper_sin.loc[(oper_sin["variavel"] == "GTER") & (oper_sin["estagio"] == 2) ]["valor"].mean()
-            temp = temp.replace("Media_GT", str(round(gt_avg,2)))
-
-            gh_avg = oper_sin.loc[(oper_sin["variavel"] == "GHID") & (oper_sin["estagio"] == 2) ]["valor"].mean()
-            temp = temp.replace("Media_GH", str(round(gh_avg,2)))
-
-            earpf_avg = oper_sin.loc[(oper_sin["variavel"] == "EARPF") & (oper_sin["estagio"] == 2) ]["valor"].mean()
-            temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
+                earpf_avg = oper_sin.loc[(oper_sin["variavel"] == "EARPF") & (oper_sin["estagio"] == 2) ]["valor"].mean()
+                temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
 
         return temp
