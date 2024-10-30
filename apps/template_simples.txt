@@ -9,13 +9,15 @@
 <h1>Relatório SIN</h1>
 Relatório com grandezas relacionadas ao estudo
 
-\info{SIN}
+
 
 ###Formula:
 ###Here is some LaTeX: \( E = mc^2 \)
 
 <h3> Custo Operativo SIN </h3>
 plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN --largura 1200 --altura 650 --tamanho 20 --labely MMR$
+
+\info{SIN}
 
 <h3> Parcelas Custos de Operação </h3>
 plotador_dev custos arquivo_json --largura 1200 --altura 650 --tamanho 20 --titulo Parcelas_Custos_Operacao

@@ -28,7 +28,8 @@ class Custos:
         self.altura = altura
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         print(self.tamanho_texto)
-        self.titulo = "Custos de Operacao Acima de 100 MiR$" if titulo == " " else titulo 
+        self.titulo = "Custos_de_Operacao_Acima_de_100_MiR$" if titulo == " " else titulo
+        self.titulo = self.titulo.replace("_", " ") 
         self.labely = "MiR$" if labely is None else labely 
         self.labelx = "Casos" if labelx is None else labelx 
         self.estudo = data.estudo
