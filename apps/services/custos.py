@@ -74,7 +74,7 @@ class Custos:
         }
         if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE"):
             df_custos = self.eco_indicadores.retorna_df_concatenado("CUSTOS")
-            set_grandezas = {}
+            set_grandezas = {1,2}
             for c in data.conjuntoCasos[0].casos:
                 df_custo_caso = df_custos.loc[(df_custos["caso"] == c.nome)]
                 print(df_custo_caso)
