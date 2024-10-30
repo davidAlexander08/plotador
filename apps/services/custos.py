@@ -118,7 +118,6 @@ class Custos:
             # Y-axis configuration (label and tick font)
             yaxis=dict(
                 range = [yinf,ysup],
-                autorange="max",
                 title=dict(
                     text=self.labely,
                     font=dict(size=self.tamanho_texto)
