@@ -27,7 +27,7 @@ class InfoSBMNewave(Estruturas):
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
 
-        for arg in ["SUDESTE"]:#lista_argumentos:
+        for arg in lista_argumentos:
             self.lista_text.append("<h3>Dados "+arg+"</h3>")
             self.lista_text.append(self.Tabela_Eco_Entrada)
             for caso in data.conjuntoCasos[0].casos:
@@ -50,9 +50,10 @@ class InfoSBMNewave(Estruturas):
 
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet")):
             print(caso.nome, arg)
-            
-            oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
-            codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
+            oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet",engine = "pyarrow")
+            #oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
+            #codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
+            codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
             cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
             oper_sbm = oper.loc[(oper["caso"] == caso.nome) & (oper["codigo_submercado"] == cod_sbm) & (oper["cenario"] == "mean") & (oper["patamar"] == 0)]
             first_month = oper_sbm.loc[(oper_sbm["estagio"] == 1)]
