@@ -26,8 +26,6 @@ class Custos:
     def __init__(self, data, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx):
         self.largura = largura
         self.altura = altura
-        self.yinf = yinf
-        self.ysup = ysup
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         print(self.tamanho_texto)
         self.titulo = "Custos de Operacao Acima de 100 MiR$" if titulo == " " else titulo 
@@ -96,7 +94,6 @@ class Custos:
                         text=[round(valor_esperado,0)],   showlegend=show, textfont=dict(size=14),))
                         
                         set_grandezas.add(dicionario[grandeza][1])
-                #fig.add_trace(go.Bar(name = c.nome+"VZMIN", marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
 
         fig.update_layout(
             barmode='stack', 
@@ -120,6 +117,8 @@ class Custos:
             
             # Y-axis configuration (label and tick font)
             yaxis=dict(
+                range = [yinf,ysup],
+                autorange="y",
                 title=dict(
                     text=self.labely,
                     font=dict(size=self.tamanho_texto)
