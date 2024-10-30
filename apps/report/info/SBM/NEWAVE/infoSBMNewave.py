@@ -56,7 +56,7 @@ class InfoSBMNewave(Estruturas):
             oper_sbm = oper.loc[(oper["caso"] == caso.nome) & (oper["codigo_submercado"] == cod_sbm) & (oper["cenario"] == "mean") & (oper["patamar"] == 0)]
             first_month = oper_sbm.loc[(oper_sbm["estagio"] == 1)]
             second_month = oper_sbm.loc[(oper_sbm["estagio"] == 2)]
-
+            print("INICIA SUBSTITUICAO")
             if(oper_sbm['variavel'].str.contains("EARPI", case=False, na=False).any()):
                 earpi = first_month.loc[(first_month["variavel"] == "EARPI") ]["valor"].iloc[0]
                 temp = temp.replace("EarpI", str(round(earpi,2)))
@@ -82,5 +82,5 @@ class InfoSBMNewave(Estruturas):
                 cmo_avg = oper_sbm.loc[(oper_sbm["variavel"] == "CMO") ]["valor"].mean()
                 temp = temp.replace("2_Mes_CMO", str(round(cmo_2_mes,2)))
                 temp = temp.replace("Media_CMO", str(round(cmo_avg,2)))
-
+            print("FIM SUBSTITUICAO")
         return temp
