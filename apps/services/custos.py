@@ -54,7 +54,7 @@ class Custos:
                         "VIOLACAO GHMINU":["darkturquoise","GHMINU"],
                         "VIOLACAO RETIRADA":["lightblue","RETIR"],
                         "VIOLACAO EMIS. GEE":["lime","GEE"],
-                        "CORTE GER. EOLICA":["darkyellow","EOLICA"],
+                        "CORTE GER. EOLICA":["lightyellow","EOLICA"],
                         "VIOL. DEFL. MAXIMA":["mediumblue","DEFL_MAX"],
                         "VIOL. TURB. MAXIMO":["navy","TUR_MAX"],
                         "VIOL. TURB. MINIMO":["royalblue","TUR_MIN"],
