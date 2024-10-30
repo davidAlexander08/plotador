@@ -98,14 +98,40 @@ class Custos:
                         set_grandezas.add(dicionario[grandeza][1])
                 #fig.add_trace(go.Bar(name = c.nome+"VZMIN", marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
 
-                fig.update_layout(barmode='stack', 
-                                xaxis_title=self.labelx, yaxis_title=self.labely, 
-                                title=dict(text=self.titulo,font=dict(size = self.tamanho_texto)),
-                                xaxis=dict(font=dict(size = self.tamanho_texto)),
-                                yaxis=dict(font=dict(size = self.tamanho_texto)),
-                                legend=dict(font=dict(size = self.tamanho_texto)),
+        fig.update_layout(
+            barmode='stack', 
+            xaxis_title=self.labelx, 
+            yaxis_title=self.labely, 
 
-                                )
+            # Title configuration
+            title=dict(
+                text=self.titulo,
+                font=dict(size=self.tamanho_texto)
+            ),
+            
+            # X-axis configuration (label and tick font)
+            xaxis=dict(
+                title=dict(
+                    text=self.labelx,
+                    font=dict(size=self.tamanho_texto)
+                ),
+                tickfont=dict(size=self.tamanho_texto)  # Font size for x-axis tick labels
+            ),
+            
+            # Y-axis configuration (label and tick font)
+            yaxis=dict(
+                title=dict(
+                    text=self.labely,
+                    font=dict(size=self.tamanho_texto)
+                ),
+                tickfont=dict(size=self.tamanho_texto)  # Font size for y-axis tick labels
+            ),
+            
+            # Legend configuration
+            legend=dict(
+                font=dict(size=self.tamanho_texto)
+            )
+        )
 
 
         fig.write_image( os.path.join(self.diretorio_saida, "teste.png"), width=largura,  height=altura)
