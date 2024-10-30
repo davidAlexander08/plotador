@@ -36,7 +36,7 @@ class Custos:
         self.estudo = data.estudo
         self.casos = data.conjuntoCasos[0]
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
-        self.diretorio_saida = f"resultados/{self.estudo}/casos"
+        self.diretorio_saida = f"resultados/{self.estudo}/casos"  if outpath is None else outpath
         os.makedirs(self.diretorio_saida, exist_ok=True)
 
         print(data.conjuntoCasos[0].casos[0].modelo)
@@ -134,10 +134,14 @@ class Custos:
         )
 
 
-        fig.write_image( os.path.join(self.diretorio_saida, "teste.png"), width=largura,  height=altura)
+        fig.write_image( os.path.join(self.diretorio_saida, "custos.png"), width=largura,  height=altura)
         
 
+        if(html =="True"):
+            fig.update_layout(width = int(largura), height = int(altura))
+            fig.write_html(os.path.join(self.diretorio_saida, "custos"+".html"))
 
+            
     #def filtra_data_frame(self, df):
     #    df_entrada = df.copy()
     #    if(self.series != None):
