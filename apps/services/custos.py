@@ -40,6 +40,7 @@ class Custos:
         fig = go.Figure()
         dicionario = {  "GERACAO TERMICA":["red","GT"],
                         "DEFICIT":["black","DEF"],
+                        "VERTIMENTO":["darkblue","VERT"],
                         "EXCESSO ENERGIA":["yellow","EXC"],
                         "VIOLACAO CAR":["aqua","CAR"],
                         "VIOLACAO SAR":["bisque","SAR"],
