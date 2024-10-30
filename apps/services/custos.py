@@ -44,7 +44,8 @@ class Custos:
                 df_custo_caso = df_custos.loc[(df_custos["caso"] == c.nome)]
                 print(df_custo_caso)
                 fig.add_trace(go.Bar(name = c.nome, marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "GERACAO TERMICA")]["valor_esperado"].iloc[0]] ))
-                
+                fig.add_trace(go.Bar(name = c.nome, marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
+
                 fig.update_layout(barmode='stack', title="Stacked Bar Chart of Geração Térmica vs Hidrelétrica",
                                 xaxis_title="casos", yaxis_title="Media Values")
 
