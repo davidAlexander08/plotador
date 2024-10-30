@@ -90,7 +90,7 @@ class Custos:
                         
                         fig.add_trace(go.Bar(name = dicionario[grandeza][1], marker_color=dicionario[grandeza][0], x = [c.nome], y = [valor_esperado] , 
 
-                        text=[round(valor_esperado,0)],   mode="text",showlegend=show, textfont=dict(size=12),))
+                        text=[round(valor_esperado,0)],   showlegend=show, textfont=dict(size=12),))
                         
                         set_grandezas.add(dicionario[grandeza][1])
                 #fig.add_trace(go.Bar(name = c.nome+"VZMIN", marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
