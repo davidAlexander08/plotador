@@ -88,12 +88,14 @@ class Custos:
                         else:
                             show = True
                         
-                        fig.add_trace(go.Bar(name = dicionario[grandeza][1], marker_color=dicionario[grandeza][0], x = [c.nome], y = [valor_esperado] , showlegend=show))
+                        fig.add_trace(go.Bar(name = dicionario[grandeza][1], marker_color=dicionario[grandeza][0], x = [c.nome], y = [valor_esperado] , showlegend=show, textfont=dict(size=12),))
+                        
                         set_grandezas.add(dicionario[grandeza][1])
                 #fig.add_trace(go.Bar(name = c.nome+"VZMIN", marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
 
                 fig.update_layout(barmode='stack', title="Stacked Bar Chart of Geração Térmica vs Hidrelétrica",
-                                xaxis_title="casos", yaxis_title="Media Values")
+                                xaxis_title="casos", yaxis_title="Media Values", legend=dict(title_font_family="Times New Roman", font=dict(size= tamanho) ) )
+
 
         fig.write_image( os.path.join(self.diretorio_saida, "teste.png"), width=largura,  height=altura)
         
