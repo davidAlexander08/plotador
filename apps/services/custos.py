@@ -100,8 +100,11 @@ class Custos:
 
                 fig.update_layout(barmode='stack', title=self.titulo,
                                 xaxis_title=self.labelx, yaxis_title=self.labely, 
-                                legend=dict(title_font_family="Times New Roman", 
-                                font=dict(size= self.tamanho_texto) ) 
+                                title=dict(font=dict(size = self.tamanho_texto)),
+                                xaxis=dict(font=dict(size = self.tamanho_texto)),
+                                yaxis=dict(font=dict(size = self.tamanho_texto)),
+                                legend=dict(font=dict(size = self.tamanho_texto)),
+
                                 )
 
 
