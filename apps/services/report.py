@@ -172,7 +172,7 @@ class Report():
                             if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
                                 cli_command = cli_command + " --eixox data_inicio"
                             try:
-                                print(f"Executing CLI command: {cli_command}")
+                                Log.log().info(f"Executing CLI command: {cli_command}")
                                 cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                                 print(f"Command Output: {cli_output}")                            
                             except subprocess.CalledProcessError as e:
