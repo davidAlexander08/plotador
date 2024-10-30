@@ -80,7 +80,9 @@ class Custos:
                 grandezas = df_custo_caso["parcela"].unique()
                 print(grandezas)
                 for grandeza in grandezas:
-                    fig.add_trace(go.Bar(name = c.nome+"_"+dicionario[grandeza][1], marker_color=dicionario[grandeza][0], x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == grandeza)]["valor_esperado"].iloc[0]] ))
+                    valor_esperado = df_custo_caso.loc[(df_custo_caso["parcela"] == grandeza)]["valor_esperado"].iloc[0]
+                    if(valor_esperado> 10):
+                        fig.add_trace(go.Bar(name = c.nome+"_"+dicionario[grandeza][1], marker_color=dicionario[grandeza][0], x = [c.nome], y = [valor_esperado] ))
                 #fig.add_trace(go.Bar(name = c.nome+"VZMIN", marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
 
                 fig.update_layout(barmode='stack', title="Stacked Bar Chart of Geração Térmica vs Hidrelétrica",
