@@ -228,7 +228,7 @@ class Graficos:
                                 mode="lines",
                                 marker=dict( symbol=None ),
                                 name = c.nome+"_limInf",
-                                legendgroup=c.nome+"_limInf",
+                                legendgroup=c.nome,
                                 line = dict(color = c.cor, dash="dash"),
                                 showlegend=False))
                     if(limsup == "True"):
@@ -238,7 +238,7 @@ class Graficos:
                                 mode="lines",
                                 marker=dict( symbol=None ),
                                 name = c.nome+"_limSup",
-                                legendgroup=c.nome+"_limSup",
+                                legendgroup=c.nome,
                                 line = dict(color = c.cor, dash="dot"),
                                 showlegend=False))
 
