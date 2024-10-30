@@ -65,8 +65,8 @@ plotador_dev temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json 
 
 \info{Execucao}
 
-\subpage{Tempo Execucao}
-plotador_dev tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 650 --tamanho 20
-
 plotador_dev convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20
+
+plotador_dev tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 750 --tamanho 20
+
 

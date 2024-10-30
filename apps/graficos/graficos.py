@@ -380,6 +380,35 @@ class Graficos:
         fig.update_yaxes(title_text=eixoY)
         fig.update_layout(font=dict(size= tamanho))
         fig.update_layout(title=titulo)
+        fig.update_layout(
+        title=dict(
+            text=titulo,
+            font=dict(size=self.tamanho_texto)
+        ),
+        
+        # X-axis configuration (label and tick font)
+        xaxis=dict(
+            title=dict(
+                text=eixoX,
+                font=dict(size=self.tamanho_texto)
+            ),
+            tickfont=dict(size=self.tamanho_texto)  # Font size for x-axis tick labels
+        ),
+        
+        # Y-axis configuration (label and tick font)
+        yaxis=dict(
+            title=dict(
+                text=eixoY,
+                font=dict(size=self.tamanho_texto)
+            ),
+            tickfont=dict(size=self.tamanho_texto)  # Font size for y-axis tick labels
+        ),
+        
+        # Legend configuration
+        legend=dict(
+            font=dict(size=self.tamanho_texto)
+        )
+        )
         return fig
 
 
