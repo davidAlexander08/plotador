@@ -32,14 +32,13 @@ class Custos:
 
         self.estudo = data.estudo
         self.casos = data.conjuntoCasos[0]
+        self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.diretorio_saida = f"resultados/{self.estudo}/casos"
         os.makedirs(self.diretorio_saida, exist_ok=True)
 
-        if(self.casos[0].modelo == "NEWAVE"):
-            #CUSTOS
+        if(data.conjuntoCasos[0].casos[0] == "NEWAVE"):
             df_custos = self.eco_indicadores.retorna_df_concatenado("CUSTOS")
             
-
         print(df_custos)
 
 
