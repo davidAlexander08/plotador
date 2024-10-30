@@ -167,7 +167,7 @@ class Report():
                             if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
                                 cli_command = cli_command + " --eixox data_inicio"
                             #if(html == "True" and "html" not in cli_command):
-                            if(html == None and "html" not in cli_command):
+                            if(html == None):
                                 cli_command = cli_command + " --html True"
                             if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
                                 cli_command = cli_command + " --eixox data_inicio"
