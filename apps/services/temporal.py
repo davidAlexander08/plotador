@@ -120,27 +120,17 @@ class Temporal:
             exit(1)
         sts = Sintese(self.sintese)
 
-        if(limInf == "True"):
-            dashes = ["dash", "dot"]
-            novos_casos = [] 
-            for caso in data.conjuntoCasos[0].casos:
-                novos_casos.append(Caso(caso.nome+"_limInf", caso.caminho, caso.cor, None, caso.modelo, "dash", caso.tipo, caso.patamar ))
-            data.conjuntoCasos[0].casos = data.conjuntoCasos[0].casos+novos_casos
-
-        if(limSup == "True"):
-            dashes = ["dash", "dot"]
-            novos_casos = [] 
-            for caso in data.conjuntoCasos[0].casos:
-                novos_casos.append(Caso(caso.nome+"_limSup", caso.caminho, caso.cor, None, caso.modelo, "dot", caso.tipo, caso.patamar ))
-            data.conjuntoCasos[0].casos = data.conjuntoCasos[0].casos+novos_casos
-
-
-
-
-
-
-
-
+        #if(limInf == "True"):
+        #    novos_casos = [] 
+        #    for caso in data.conjuntoCasos[0].casos:
+        #        novos_casos.append(Caso(caso.nome+"_limInf", caso.caminho, caso.cor, None, caso.modelo, "dash", caso.tipo, caso.patamar ))
+        #    data.conjuntoCasos[0].casos = data.conjuntoCasos[0].casos+novos_casos
+#
+        #if(limSup == "True"):
+        #    novos_casos = [] 
+        #    for caso in data.conjuntoCasos[0].casos:
+        #        novos_casos.append(Caso(caso.nome+"_limSup", caso.caminho, caso.cor, None, caso.modelo, "dot", caso.tipo, caso.patamar ))
+        #    data.conjuntoCasos[0].casos = data.conjuntoCasos[0].casos+novos_casos
 
 
         if(self.argumentos is None):
@@ -172,6 +162,7 @@ class Temporal:
         for unity in conjUnity.listaUnidades:
             #lista_data_frame = []
             df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
+            print(df_temporal)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
