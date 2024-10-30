@@ -59,7 +59,7 @@ def cli():
 @option_cronologico
 @option_conjunto
 @option_html
-def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico, conjunto, html = "True"):
+def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico, conjunto, html):
     start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple","darkgreen", "darkblue","royalblue","skyblue","gold"]
     contador = 0
