@@ -28,6 +28,7 @@ class Custos:
         self.altura = altura
         self.yinf = yinf
         self.ysup = ysup
+        print(tamanho)
         self.tamanho_texto = data.tamanho_texto if tamanho is None else tamanho
         self.titulo = "Custos de Operacao Acima de 100 MiR$" if titulo is None else titulo 
         self.labely = "MiR$" if labely is None else labely 
