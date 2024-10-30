@@ -65,7 +65,7 @@ class InfoSBMNewave(Estruturas):
 
             if(oper_sbm['variavel'].str.contains("GTER", case=False, na=False).any()):
                 gt_2_mes = oper_sbm.loc[(oper_sbm["variavel"] == "GTER") & (oper_sbm["estagio"] == 2) ]["valor"].iloc[0]
-                gt_avg = oper_sbm.loc[(oper_sbm["variavel"] == "GTER") & ]["valor"].mean()
+                gt_avg = oper_sbm.loc[(oper_sbm["variavel"] == "GTER") ]["valor"].mean()
                 temp = temp.replace("2_Mes_GT", str(round(gt_2_mes,2)))
                 temp = temp.replace("Media_GT", str(round(gt_avg,2)))
 
