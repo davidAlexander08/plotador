@@ -38,13 +38,47 @@ class Custos:
 
         print(data.conjuntoCasos[0].casos[0].modelo)
         fig = go.Figure()
+        dicionario = {  "GERACAO TERMICA":["red","GT"],
+                        "DEFICIT":["black","DEF"],
+                        "EXCESSO ENERGIA":["yellow","EXC"],
+                        "VIOLACAO CAR":["aqua","CAR"],
+                        "VIOLACAO SAR":["bisque","SAR"],
+                        "VIOL. OUTROS USOS":["brown","OUTROS"],
+                        "VIOLACAO EVMIN":["cyan","EVMIN"],
+                        "VIOLACAO VZMIN":["blue","VZMIN"],
+                        "INTERCAMBIO":["darksalmon","INTERC"],
+                        "VIOL. INTERC. MIN.":["gray","INTERC_MIN"],
+                        "VERT. FIO N. TURB.":["fuchsia","FIO_N_TURB"],
+                        "VIOLACAO GHMIN":["deepskyblue","GHMIN"],
+                        "VIOLACAO GHMINU":["darkturquoise","GHMINU"],
+                        "VIOLACAO RETIRADA":["lightblue","RETIR"],
+                        "VIOLACAO EMIS. GEE":["lime","GEE"],
+                        "CORTE GER. EOLICA":["darkyellow","EOLICA"],
+                        "VIOL. DEFL. MAXIMA":["mediumblue","DEFL_MAX"],
+                        "VIOL. TURB. MAXIMO":["navy","TUR_MAX"],
+                        "VIOL. TURB. MINIMO":["royalblue","TUR_MIN"],
+                        "VIOL.RLPP TURBMAX":["seagreen","RLPP_TURMAX"],
+                        "VIOL.RLPP DEFLMAX":["sienna","RLPP_DEFMAX"],
+                        "VIOL. RESTELETRICA":["orange","RESTR_ELET"],
+                        "VIOLACAO RHQ":["slateblue","RHQ"],
+                        "VIOLACAO RHV":["violet","RHV"],
+                        "TURBINAMENTO UHE":["yellowgreen","TURB_UHE"],
+                        "VERTIMENTO UHE":["tomato","VERT_UHE"],
+                        "VIOLACAO FPHA":["teal","FPHA"],
+                        "VIOL. EVAP. UHE":["tan","EVAP_UHE"],
+                        "DESVIO UHE":["peru","DESV_UHE"],
+                        "VIOL.LIM.EST.BOMB.":["lightgray","LIM_EST_BOMB"],
+        }
         if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE"):
             df_custos = self.eco_indicadores.retorna_df_concatenado("CUSTOS")
             for c in data.conjuntoCasos[0].casos:
                 df_custo_caso = df_custos.loc[(df_custos["caso"] == c.nome)]
                 print(df_custo_caso)
-                fig.add_trace(go.Bar(name = c.nome, marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "GERACAO TERMICA")]["valor_esperado"].iloc[0]] ))
-                fig.add_trace(go.Bar(name = c.nome, marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
+                grandezas = df_custo_caso["parcela"].unique()
+                print(grandezas)
+                for grandeza in grandezas:
+                    fig.add_trace(go.Bar(name = c.nome+"_"+dicionario[grandeza][1], marker_color=dicionario[grandeza][0], x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == grandeza)]["valor_esperado"].iloc[0]] ))
+                #fig.add_trace(go.Bar(name = c.nome+"VZMIN", marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
 
                 fig.update_layout(barmode='stack', title="Stacked Bar Chart of Geração Térmica vs Hidrelétrica",
                                 xaxis_title="casos", yaxis_title="Media Values")
