@@ -17,7 +17,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, limInf, limSup):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup):
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
@@ -120,13 +120,13 @@ class Temporal:
             exit(1)
         sts = Sintese(self.sintese)
 
-        #if(limInf == "True"):
+        #if(liminf == "True"):
         #    novos_casos = [] 
         #    for caso in data.conjuntoCasos[0].casos:
         #        novos_casos.append(Caso(caso.nome+"_limInf", caso.caminho, caso.cor, None, caso.modelo, "dash", caso.tipo, caso.patamar ))
         #    data.conjuntoCasos[0].casos = data.conjuntoCasos[0].casos+novos_casos
 #
-        #if(limSup == "True"):
+        #if(limsup == "True"):
         #    novos_casos = [] 
         #    for caso in data.conjuntoCasos[0].casos:
         #        novos_casos.append(Caso(caso.nome+"_limSup", caso.caminho, caso.cor, None, caso.modelo, "dot", caso.tipo, caso.patamar ))

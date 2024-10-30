@@ -29,8 +29,8 @@ option_titulo = click.option("--titulo",    default=" ", help="Nome do Titulo de
 option_showlegend = click.option("--showlegend",    default=" ", help="True default. False desativa legendas")
 option_yinf  = click.option("--yinf", default=None, help="Ponto Inferior do Eixo Y")
 option_ysup = click.option("--ysup", default=None, help="Ponto Superior do Eixo Y")
-option_limInf  = click.option("--limInf", default="True", help="Limite Inferior da Grandeza. Default True.")
-option_limSup = click.option("--limSup", default="True", help="Limite Superior da Grandeza. Default True")
+option_limInf  = click.option("--liminf", default="True", help="Limite Inferior da Grandeza. Default True.")
+option_limSup = click.option("--limsup", default="True", help="Limite Superior da Grandeza. Default True")
 option_tamanho = click.option("--tamanho", default=None, help="Tamanho da letra")
 option_json = click.option("--arquivo_json", "--json", default = None, help ="definicao do arquivo json. Caso nenhum, ele considera estar dentro da pasta do caso")
 option_subplot = click.option("--subplot", default = None, help ="definicao do numero de colunas e linhas do subplot separados por virgula")
@@ -179,7 +179,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
 @option_patamar
 @option_limInf
 @option_limSup
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, limInf, limSup):
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup):
     from apps.services.temporal import Temporal
     flag_diretorio = 0
     if(arquivo_json is None):
@@ -203,7 +203,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
             data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
-    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, limInf, limSup)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup)
 
 
 @click.command("conjunto")
