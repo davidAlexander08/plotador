@@ -80,9 +80,9 @@ class Custos:
             set_grandezas = {1,2}
             for c in data.conjuntoCasos[0].casos:
                 df_custo_caso = df_custos.loc[(df_custos["caso"] == c.nome)]
-                print(df_custo_caso)
+                #print(df_custo_caso)
                 grandezas = df_custo_caso["parcela"].unique()
-                print(grandezas)
+                #print(grandezas)
                 for grandeza in grandezas:
                     valor_esperado = df_custo_caso.loc[(df_custo_caso["parcela"] == grandeza)]["valor_esperado"].iloc[0]
                     if(valor_esperado> 100):
