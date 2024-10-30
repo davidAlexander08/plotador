@@ -55,7 +55,7 @@ class InfoSBMNewave(Estruturas):
             #codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
             codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
             cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
-            oper_sbm = oper.loc[(oper["caso"] == caso.nome) & (oper["codigo_submercado"] == cod_sbm) & (oper["cenario"] == "mean") & (oper["patamar"] == 0)]
+            oper_sbm = oper.loc[(oper["codigo_submercado"] == cod_sbm) & (oper["cenario"] == "mean") & (oper["patamar"] == 0)]
             first_month = oper_sbm.loc[(oper_sbm["estagio"] == 1)]
             second_month = oper_sbm.loc[(oper_sbm["estagio"] == 2)]
             
