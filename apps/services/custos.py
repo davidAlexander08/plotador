@@ -90,7 +90,7 @@ class Custos:
                         else:
                             show = True
                         
-                        fig.add_trace(go.Bar(name = dicionario[grandeza][1], marker_color=dicionario[grandeza][0], x = [c.nome], y = [valor_esperado] , 
+                        fig.add_trace(go.Bar(name = dicionario[grandeza][1], legendgroup=dicionario[grandeza][1], marker_color=dicionario[grandeza][0], x = [c.nome], y = [valor_esperado] , 
 
                         text=[round(valor_esperado,0)],   showlegend=show, textfont=dict(size=14),))
                         
