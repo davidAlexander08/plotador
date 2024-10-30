@@ -49,6 +49,7 @@ class InfoSBMNewave(Estruturas):
             
 
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet")):
+            print(caso.nome, arg)
             oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
             codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
             cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
