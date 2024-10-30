@@ -29,7 +29,8 @@ class Custos:
         self.yinf = yinf
         self.ysup = ysup
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
-        self.titulo = "Custos de Operacao Acima de 100 MiR$" if titulo is None else titulo 
+        print(self.tamanho_texto)
+        self.titulo = "Custos de Operacao Acima de 100 MiR$" if titulo == " " else titulo 
         self.labely = "MiR$" if labely is None else labely 
         self.labelx = "Casos" if labelx is None else labelx 
         self.estudo = data.estudo
@@ -98,7 +99,10 @@ class Custos:
                 #fig.add_trace(go.Bar(name = c.nome+"VZMIN", marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
 
                 fig.update_layout(barmode='stack', title=self.titulo,
-                                xaxis_title=self.labelx, yaxis_title=self.labely, legend=dict(title_font_family="Times New Roman", font=dict(size= self.tamanho_texto) ) )
+                                xaxis_title=self.labelx, yaxis_title=self.labely, 
+                                legend=dict(title_font_family="Times New Roman", 
+                                font=dict(size= self.tamanho_texto) ) 
+                                )
 
 
         fig.write_image( os.path.join(self.diretorio_saida, "teste.png"), width=largura,  height=altura)
