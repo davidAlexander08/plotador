@@ -318,6 +318,11 @@ def analise_nwlistcf(arquivo_json, xinf, xsup, largura, altura, eco, yinf, ysup,
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
+
+
+
+
+
 @click.command("tempo")
 @click.argument(
     "arquivo_json",
@@ -432,6 +437,27 @@ def analise_cenarios(arquivo_json):
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
 
+@click.command("custos")
+@click.argument(
+    "arquivo_json",
+)
+@option_largura
+@option_altura
+@option_yinf
+@option_ysup
+@option_html
+@option_outpath
+@option_titulo
+@option_tamanho
+def analise_custos(arquivo_json, largura, altura, yinf, ysup, html, outpath, titulo, tamanho):
+    from apps.services.custos import Custos
+    if os.path.isfile(arquivo_json):
+        data = Dados_json_caso(arquivo_json)
+        Custos(data, largura, altura, yinf, ysup, html, outpath, titulo, tamanho)          
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
+
 cli.add_command(analise_pareto)
 cli.add_command(eco)
 cli.add_command(realiza_report)
@@ -445,3 +471,4 @@ cli.add_command(analise_nwlistcf)
 cli.add_command(analise_tempo)
 cli.add_command(analise_cascatador)
 cli.add_command(analise_convergencia)
+cli.add_command(analise_custos)
