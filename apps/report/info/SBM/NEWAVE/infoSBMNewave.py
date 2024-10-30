@@ -35,7 +35,7 @@ class InfoSBMNewave(Estruturas):
                 if(caso.modelo == "NEWAVE"):
                     temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, arg)
                     self.lista_text.append(temp)
-        self.lista_text.append("</table>"+"\n")
+            self.lista_text.append("</table>"+"\n")
 
         self.text_html = "\n".join(self.lista_text)
 
@@ -50,7 +50,6 @@ class InfoSBMNewave(Estruturas):
             
 
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet")):
-            print(caso.nome, arg)
             oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet",engine = "pyarrow")
             #oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
             #codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
