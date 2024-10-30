@@ -33,10 +33,11 @@ class InfoSINNewave(Estruturas):
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet")):
             print(caso.nome)
             oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SIN")
+            print("INICIA SUBSTITUICAO")
             oper_sin = oper.loc[(oper["caso"] == caso.nome) & (oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
             first_month = oper_sin.loc[(oper_sin["estagio"] == 1) ]
             second_month = oper_sin.loc[(oper_sin["estagio"] == 2) ]
-            print("INICIA SUBSTITUICAO")
+            
             if(oper_sin['variavel'].str.contains("EARMI", case=False, na=False).any()):
                 earmi_first_per = first_month.loc[(first_month["variavel"] == "EARMI") ]["valor"].iloc[0]
                 temp = temp.replace("EarmI", str(round(earmi_first_per,2)))

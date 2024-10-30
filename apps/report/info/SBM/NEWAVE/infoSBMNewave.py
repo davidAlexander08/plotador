@@ -51,12 +51,13 @@ class InfoSBMNewave(Estruturas):
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet")):
             print(caso.nome, arg)
             oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
+            print("INICIA SUBSTITUICAO")
             codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
             cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
             oper_sbm = oper.loc[(oper["caso"] == caso.nome) & (oper["codigo_submercado"] == cod_sbm) & (oper["cenario"] == "mean") & (oper["patamar"] == 0)]
             first_month = oper_sbm.loc[(oper_sbm["estagio"] == 1)]
             second_month = oper_sbm.loc[(oper_sbm["estagio"] == 2)]
-            print("INICIA SUBSTITUICAO")
+            
             if(oper_sbm['variavel'].str.contains("EARPI", case=False, na=False).any()):
                 earpi = first_month.loc[(first_month["variavel"] == "EARPI") ]["valor"].iloc[0]
                 temp = temp.replace("EarpI", str(round(earpi,2)))
