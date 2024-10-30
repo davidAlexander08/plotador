@@ -26,7 +26,7 @@ class InfoSBMNewave(Estruturas):
                     exit(1)
 
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
-        self.indicadores_temporais = IndicadoresTemporais(data.conjuntoCasos[0].casos)
+        self.indicadores_temporais = IndicadoresTemporais(data.conjuntoCasos[0].casos, None)
         self.lista_text = []
 
         for arg in lista_argumentos:
