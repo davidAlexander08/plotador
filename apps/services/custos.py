@@ -132,12 +132,12 @@ class Custos:
         )
 
 
-        fig.write_image( os.path.join(self.diretorio_saida, "custos.png"), width=largura,  height=altura)
+        fig.write_image( os.path.join(self.diretorio_saida, self.titulo+".png"), width=largura,  height=altura)
         
 
         if(html =="True"):
             fig.update_layout(width = int(largura), height = int(altura))
-            fig.write_html(os.path.join(self.diretorio_saida, "custos"+".html"))
+            fig.write_html(os.path.join(self.diretorio_saida, self.titulo+".html"))
 
             
     #def filtra_data_frame(self, df):
