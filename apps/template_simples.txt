@@ -44,7 +44,7 @@ plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json 
 
 <h1> Relatório de Submercados </h1>
 
-###\info{SBM}
+\info{SBM}
 
 \subpage{Geracoes}
 
