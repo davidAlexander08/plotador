@@ -39,7 +39,7 @@ class Custos:
         if(data.conjuntoCasos[0].casos[0] == "NEWAVE"):
             df_custos = self.eco_indicadores.retorna_df_concatenado("CUSTOS")
             
-        print(df_custos)
+            print(df_custos)
 
 
     #def filtra_data_frame(self, df):
