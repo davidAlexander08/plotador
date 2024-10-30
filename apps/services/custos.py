@@ -99,9 +99,10 @@ class Custos:
                 #fig.add_trace(go.Bar(name = c.nome+"VZMIN", marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
 
                 fig.update_layout(barmode='stack', 
+                                xaxis_title=self.labelx, yaxis_title=self.labely, 
                                 title=dict(text=self.titulo,font=dict(size = self.tamanho_texto)),
-                                xaxis=dict(text=self.labelx,font=dict(size = self.tamanho_texto)),
-                                yaxis=dict(text=self.labely,font=dict(size = self.tamanho_texto)),
+                                xaxis=dict(font=dict(size = self.tamanho_texto)),
+                                yaxis=dict(font=dict(size = self.tamanho_texto)),
                                 legend=dict(font=dict(size = self.tamanho_texto)),
 
                                 )
