@@ -14,6 +14,12 @@ Relatório com grandezas relacionadas ao estudo
 ###Formula:
 ###Here is some LaTeX: \( E = mc^2 \)
 
+<h3> Custo Operativo SIN </h3>
+plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN --largura 1200 --altura 650 --tamanho 20 --labely MMR$
+
+<h3> Parcelas Custos de Operação </h3>
+plotador_dev custos arquivo_json --largura 1200 --altura 650 --tamanho 20
+
 \subpage{Geracao Termica}
 
 plotador_dev temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed
@@ -23,10 +29,6 @@ plotador_dev temporal --titulo Geração_Hidrelétrica_SIN --json arquivo_json -
 
 \subpage{Energia Armazenada}
 plotador_dev temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed
-
-\subpage{Custo Operacional}
-plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN --largura 1200 --altura 650 --tamanho 20 --labely MMR$
-
 
 \subpage{ENA}
 plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json --sintese ENAA_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed
