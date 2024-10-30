@@ -2,7 +2,7 @@
 from apps.report.info.SIN.NEWAVE.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
 import os
-
+import pandas as pd
 
 class InfoSINNewave(Estruturas):
     def __init__(self, data):
@@ -25,12 +25,9 @@ class InfoSINNewave(Estruturas):
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
-
-
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet")):            
-            print(caso.nome)
-            oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SIN")
-            oper_sin = oper.loc[(oper["caso"] == caso.nome) & (oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
+            oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet",engine = "pyarrow")
+            oper_sin = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
             first_month = oper_sin.loc[(oper_sin["estagio"] == 1) ]
             second_month = oper_sin.loc[(oper_sin["estagio"] == 2) ]
             
