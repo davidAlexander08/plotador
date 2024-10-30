@@ -1,6 +1,7 @@
 
 from apps.report.info.SBM.NEWAVE.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
+from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 import os
 
 class InfoSBMNewave(Estruturas):
@@ -25,6 +26,7 @@ class InfoSBMNewave(Estruturas):
                     exit(1)
 
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
+        self.indicadores_temporais = IndicadoresTemporais(data.conjuntoCasos[0].casos)
         self.lista_text = []
 
         for arg in lista_argumentos:
@@ -50,7 +52,8 @@ class InfoSBMNewave(Estruturas):
 
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet")):
             print(caso.nome, arg)
-            oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
+            
+            oper = self.indicadores_temporais.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
             print("INICIA SUBSTITUICAO")
             codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
             cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]

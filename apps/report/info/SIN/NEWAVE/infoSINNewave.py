@@ -1,9 +1,7 @@
 
 from apps.report.info.SIN.NEWAVE.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
-from inewave.newave import Pmo
-from inewave.newave import Dger
-from inewave.newave import Cvar
+from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 import os
 
 
@@ -11,6 +9,7 @@ class InfoSINNewave(Estruturas):
     def __init__(self, data):
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
+        self.indicadores_temporais = IndicadoresTemporais(data.conjuntoCasos[0].casos)
         self.lista_text = []
         self.lista_text.append(self.Tabela_Eco_Entrada)
         for caso in data.conjuntoCasos[0].casos:
@@ -32,7 +31,7 @@ class InfoSINNewave(Estruturas):
 
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet")):
             print(caso.nome)
-            oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SIN")
+            oper = self.indicadores_temporais.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SIN")
             print("INICIA SUBSTITUICAO")
             oper_sin = oper.loc[(oper["caso"] == caso.nome) & (oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
             first_month = oper_sin.loc[(oper_sin["estagio"] == 1) ]
