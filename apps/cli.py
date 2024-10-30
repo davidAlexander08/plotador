@@ -436,7 +436,7 @@ def analise_cenarios(arquivo_json):
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
-
+option_filtro_custo = click.option("--custo_minimo", default ="100", help = "Custo Minimo para ser Plotador no Gráfico")
 @click.command("custos")
 @click.argument(
     "arquivo_json",
@@ -451,11 +451,12 @@ def analise_cenarios(arquivo_json):
 @option_tamanho
 @option_labely
 @option_labelx
-def analise_custos(arquivo_json, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx):
+@option_filtro_custo
+def analise_custos(arquivo_json, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx, custo_minimo):
     from apps.services.custos import Custos
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Custos(data, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx)          
+        Custos(data, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx, custo_minimo)          
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 

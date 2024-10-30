@@ -23,7 +23,7 @@ import plotly.io as pio
 class Custos:
 
 
-    def __init__(self, data, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx):
+    def __init__(self, data, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx, custo_minimo):
         self.largura = largura
         self.altura = altura
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
@@ -83,7 +83,7 @@ class Custos:
                 #print(grandezas)
                 for grandeza in grandezas:
                     valor_esperado = df_custo_caso.loc[(df_custo_caso["parcela"] == grandeza)]["valor_esperado"].iloc[0]
-                    if(valor_esperado> 100):
+                    if(valor_esperado> int(custo_minimo)):
                         if(dicionario[grandeza][1] in set_grandezas):
                             show = False
                         else:
