@@ -1,7 +1,6 @@
 
 from apps.report.info.SIN.NEWAVE.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
-from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 import os
 
 
@@ -9,7 +8,6 @@ class InfoSINNewave(Estruturas):
     def __init__(self, data):
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
-        self.indicadores_temporais = IndicadoresTemporais(data.conjuntoCasos[0].casos, None)
         self.lista_text = []
         self.lista_text.append(self.Tabela_Eco_Entrada)
         for caso in data.conjuntoCasos[0].casos:
@@ -29,10 +27,9 @@ class InfoSINNewave(Estruturas):
         temp = temp.replace("Modelo", caso.modelo)
 
 
-        if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet")):
+        if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet")):            
             print(caso.nome)
-            oper = self.indicadores_temporais.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SIN")
-            print("INICIA SUBSTITUICAO")
+            oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SIN")
             oper_sin = oper.loc[(oper["caso"] == caso.nome) & (oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
             first_month = oper_sin.loc[(oper_sin["estagio"] == 1) ]
             second_month = oper_sin.loc[(oper_sin["estagio"] == 2) ]
@@ -56,5 +53,4 @@ class InfoSINNewave(Estruturas):
                 temp = temp.replace("2_Mes_EARPF", str(round(earpf_2_mes,2)))
                 earpf_avg = oper_sin.loc[(oper_sin["variavel"] == "EARPF")]["valor"].mean()
                 temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
-            print("FIM SUBSTITUICAO")
         return temp

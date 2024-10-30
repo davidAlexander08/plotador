@@ -1,7 +1,6 @@
 
 from apps.report.info.SBM.NEWAVE.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
-from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 import os
 
 class InfoSBMNewave(Estruturas):
@@ -26,10 +25,9 @@ class InfoSBMNewave(Estruturas):
                     exit(1)
 
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
-        self.indicadores_temporais = IndicadoresTemporais(data.conjuntoCasos[0].casos, None)
         self.lista_text = []
 
-        for arg in lista_argumentos:
+        for arg in ["SUDESTE"]:#lista_argumentos:
             self.lista_text.append("<h3>Dados "+arg+"</h3>")
             self.lista_text.append(self.Tabela_Eco_Entrada)
             for caso in data.conjuntoCasos[0].casos:
@@ -53,8 +51,7 @@ class InfoSBMNewave(Estruturas):
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet")):
             print(caso.nome, arg)
             
-            oper = self.indicadores_temporais.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
-            print("INICIA SUBSTITUICAO")
+            oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
             codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
             cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
             oper_sbm = oper.loc[(oper["caso"] == caso.nome) & (oper["codigo_submercado"] == cod_sbm) & (oper["cenario"] == "mean") & (oper["patamar"] == 0)]
@@ -86,5 +83,4 @@ class InfoSBMNewave(Estruturas):
                 cmo_avg = oper_sbm.loc[(oper_sbm["variavel"] == "CMO") ]["valor"].mean()
                 temp = temp.replace("2_Mes_CMO", str(round(cmo_2_mes,2)))
                 temp = temp.replace("Media_CMO", str(round(cmo_avg,2)))
-            print("FIM SUBSTITUICAO")
         return temp
