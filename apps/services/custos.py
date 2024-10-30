@@ -36,8 +36,8 @@ class Custos:
         self.diretorio_saida = f"resultados/{self.estudo}/casos"
         os.makedirs(self.diretorio_saida, exist_ok=True)
 
-        print(data.conjuntoCasos[0].casos[0])
-        if(data.conjuntoCasos[0].casos[0] == "NEWAVE"):
+        print(data.conjuntoCasos[0].casos[0].modelo)
+        if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE"):
             df_custos = self.eco_indicadores.retorna_df_concatenado("CUSTOS")
             
             print(df_custos)
