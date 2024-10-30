@@ -183,12 +183,14 @@ class Graficos:
         mapa,
         cronologico, 
         eixo_y2,
+        liminf,
+        limsup,
         coly = "valor",
         #colx = "estagio"
         colx = "estagio" ) :
         mapaGO = {}
         if(cronologico == "True"):
-            colx = "dataInicio" if colx == "estagio" else colx
+            colx = "data_inicio" if colx == "estagio" else colx
             for unity in mapa:
                 df = mapa[unity]
                 #df.to_csv("teste.csv")
@@ -219,6 +221,27 @@ class Graficos:
                             legendgroup=c.nome,
                             line = dict(color = c.cor, dash=c.dash),
                             showlegend=unity.arg.show))
+                    if(liminf == "True"):
+                        listaGO.append(go.Scatter( 
+                                x = dfY[colx],
+                                y = dfY["limite_inferior"],
+                                mode="lines",
+                                marker=dict( symbol=None ),
+                                name = c.nome+"_limInf",
+                                legendgroup=c.nome+"_limInf",
+                                line = dict(color = c.cor, dash="dash"),
+                                showlegend=True))
+                    if(limsup == "True"):
+                        listaGO.append(go.Scatter( 
+                                x = dfY[colx],
+                                y = dfY["limite_superior"],
+                                mode="lines",
+                                marker=dict( symbol=None ),
+                                name = c.nome+"_limSup",
+                                legendgroup=c.nome+"_limSup",
+                                line = dict(color = c.cor, dash="dot"),
+                                showlegend=True))
+
                 if(eixo_y2 == "True"):
                     for unity in mapa:  
                         df = mapa[unity]

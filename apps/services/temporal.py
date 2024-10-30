@@ -24,6 +24,8 @@ class Temporal:
         self.yinf = yinf
         self.y2sup = y2sup
         self.y2inf = y2inf
+        self.liminf = liminf
+        self.limsup = limsup
         self.eixox = eixox
         self.patamar = int(patamar)
         self.estagio = estagio
@@ -162,7 +164,6 @@ class Temporal:
         for unity in conjUnity.listaUnidades:
             #lista_data_frame = []
             df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
-            print(df_temporal.drop(["codigo_usina","codigo_ree","codigo_submercado"],axis=1))
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
@@ -175,7 +176,7 @@ class Temporal:
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
             titulo_padrao = "Boxplot Temporal "+conjUnity.titulo+self.estudo
         else:
-            mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico, eixo_y2 = self.y2)
+            mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico, eixo_y2 = self.y2, liminf = self.liminf, limsup = self.limsup)
             titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
 
 
