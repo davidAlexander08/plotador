@@ -74,6 +74,7 @@ class Custos:
         }
         if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE"):
             df_custos = self.eco_indicadores.retorna_df_concatenado("CUSTOS")
+            set_grandezas = {}
             for c in data.conjuntoCasos[0].casos:
                 df_custo_caso = df_custos.loc[(df_custos["caso"] == c.nome)]
                 print(df_custo_caso)
@@ -82,7 +83,13 @@ class Custos:
                 for grandeza in grandezas:
                     valor_esperado = df_custo_caso.loc[(df_custo_caso["parcela"] == grandeza)]["valor_esperado"].iloc[0]
                     if(valor_esperado> 10):
-                        fig.add_trace(go.Bar(name = dicionario[grandeza][1], marker_color=dicionario[grandeza][0], x = [c.nome], y = [valor_esperado] ))
+                        if(dicionario[grandeza][1] in set_grandezas):
+                            show = False
+                        else:
+                            show = True
+                        
+                        fig.add_trace(go.Bar(name = dicionario[grandeza][1], marker_color=dicionario[grandeza][0], x = [c.nome], y = [valor_esperado] , showlegend=show))
+                        set_grandezas.add(dicionario[grandeza][1])
                 #fig.add_trace(go.Bar(name = c.nome+"VZMIN", marker_color=c.cor, x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "VIOLACAO VZMIN")]["valor_esperado"].iloc[0]] ))
 
                 fig.update_layout(barmode='stack', title="Stacked Bar Chart of Geração Térmica vs Hidrelétrica",
