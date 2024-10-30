@@ -37,13 +37,18 @@ class Custos:
         os.makedirs(self.diretorio_saida, exist_ok=True)
 
         print(data.conjuntoCasos[0].casos[0].modelo)
+        fig = go.Figure()
         if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE"):
             df_custos = self.eco_indicadores.retorna_df_concatenado("CUSTOS")
             for c in data.conjuntoCasos[0].casos:
                 df_custo_caso = df_custos.loc[(df_custos["caso"] == c.nome)]
                 print(df_custo_caso)
+                fig.add_trace(go.Bar(name = "GERACAO TERMICA", x = [c.nome], y = [df_custo_caso.loc[(df_custo_caso["parcela"] == "GERACAO TERMICA")]["mean"]] ))
+                fig.update_layout(barmode='stack', title="Stacked Bar Chart of Geração Térmica vs Hidrelétrica",
+                                xaxis_title="casos", yaxis_title="Media Values")
 
-            print(df_custos)
+        fig.write_image( os.path.join(self.diretorio_saida, "teste.png"), width=largura,  height=altura)
+        
 
 
     #def filtra_data_frame(self, df):
