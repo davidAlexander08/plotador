@@ -449,11 +449,13 @@ def analise_cenarios(arquivo_json):
 @option_outpath
 @option_titulo
 @option_tamanho
-def analise_custos(arquivo_json, largura, altura, yinf, ysup, html, outpath, titulo, tamanho):
+@option_labely
+@option_labelx
+def analise_custos(arquivo_json, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx):
     from apps.services.custos import Custos
     if os.path.isfile(arquivo_json):
         data = Dados_json_caso(arquivo_json)
-        Custos(data, largura, altura, yinf, ysup, html, outpath, titulo, tamanho)          
+        Custos(data, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx)          
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
