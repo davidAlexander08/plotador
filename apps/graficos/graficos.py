@@ -230,7 +230,7 @@ class Graficos:
                                 name = c.nome+"_limInf",
                                 legendgroup=c.nome+"_limInf",
                                 line = dict(color = c.cor, dash="dash"),
-                                showlegend=True))
+                                showlegend=False))
                     if(limsup == "True"):
                         listaGO.append(go.Scatter( 
                                 x = dfY[colx],
@@ -240,7 +240,7 @@ class Graficos:
                                 name = c.nome+"_limSup",
                                 legendgroup=c.nome+"_limSup",
                                 line = dict(color = c.cor, dash="dot"),
-                                showlegend=True))
+                                showlegend=False))
 
                 if(eixo_y2 == "True"):
                     for unity in mapa:  
