@@ -52,7 +52,8 @@ class Graficos:
 
         if(html =="True"):
             figura.update_layout(width = int(W), height = int(H))
-            figura.write_html(os.path.join(diretorio_saida, nome_arquivo+".html"))
+            figura.write_html(os.path.join(diretorio_saida, nome_arquivo+".html"),
+                include_plotlyjs='cdn')
     
     
 
