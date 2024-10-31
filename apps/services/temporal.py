@@ -123,6 +123,7 @@ class Temporal:
             print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
             exit(1)
         self.sts = Sintese(self.sintese)
+        self.mapa_argumentos = self.eco_indicadores.retornaMapaDF(sts.espacial)
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")
@@ -210,11 +211,11 @@ class Temporal:
             else:
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else: 
-            mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)   
+            #mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)   
             coluna_filtro = unidade.sintese.filtro.split("_")[1]
             dicionario = {}
             for c in self.data.conjuntoCasos[0].casos:
-                df = mapa_argumentos[c]
+                df = self.mapa_argumentos[c]
                 cod_arg = df.loc[(df[coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
                 dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]                
             if(boxplot =="True"):

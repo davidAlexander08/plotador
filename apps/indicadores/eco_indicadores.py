@@ -16,11 +16,6 @@ class EcoIndicadores:
         
     def retorna_df_concatenado(self,sintese):
         return pd.concat(self.retornaMapaDF(sintese))
-        
-    #def stub(self,df,caso, sintese):  ## REGRAS ADICIONAIS QUE VARIAM POR MODELO
-    #    if (caso.modelo == "NEWAVE" and sintese == "VAGUA_UHE_EST"):
-    #        df["valor"] = df["valor"]/1000
-    #    return df
 
     def retorna_df(self, caso, sintese) -> pd.DataFrame:
         arq_sintese = join( caso.caminho, self.DIR_SINTESE, sintese+".parquet"  )
@@ -32,18 +27,7 @@ class EcoIndicadores:
             return df
         except:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
-            #exit(1)
 
-        #if(check_file) :
-        #    df = pd.read_parquet(arq_sintese)
-    #   #     df = self.stub(df, caso, sintese)
-        #    return df
-        #else:
-        #    raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado") 
-        #    exit(1)
-        #    #print(check_file)
-        #    df_vazio = pd.DataFrame()
-        #    return df_vazio
             
     def retornaMapaDF(self, sintese):
         print("iniciou retornaMapaDF")
