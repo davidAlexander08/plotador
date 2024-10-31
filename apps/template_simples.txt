@@ -58,6 +58,8 @@ plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sint
 
 \subpage{Custo Marginal SBM}
 plotador_dev temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20
+\subpage{ENA}
+plotador_dev temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
 
 \page{Execucao}
