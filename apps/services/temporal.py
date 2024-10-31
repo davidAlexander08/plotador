@@ -220,18 +220,11 @@ class Temporal:
             else:
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else: 
-            mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)
-            print(mapa_argumentos)
-            
+            mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)            
             coluna_filtro = unidade.sintese.filtro.split("_")[1]
             for c in self.data.conjuntoCasos[0].casos:
                 df = mapa_argumentos[c]
-                print(df)
-                print(coluna_filtro)
-                print(unidade.filtroArgumento)
-                print(unidade.sintese.filtro)
                 cod_arg = df.loc[(df[coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
-                print("cod_arg: ", cod_arg)
                 eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
                 
             if(boxplot =="True"):
