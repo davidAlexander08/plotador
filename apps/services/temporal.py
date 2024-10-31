@@ -152,7 +152,6 @@ class Temporal:
         mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese)
         print(mapa_eco)
         for unity in conjUnity.listaUnidades:
-            #df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
             print(df_temporal.drop(["codigo_ree", "codigo_submercado"],axis = 1))
             if(self.xsup < df_temporal["estagio"].max()):
@@ -160,9 +159,7 @@ class Temporal:
             if(self.xinf > df_temporal["estagio"].min()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] >= self.xinf)]
             mapa_temporal[unity] = df_temporal
-            #mapa_temporal[unity] = pd.concat(lista_data_frame)
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
-        print("PASSO 2")
         if(self.boxplot == "True"):
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
             titulo_padrao = "Boxplot Temporal "+conjUnity.titulo+self.estudo
@@ -170,8 +167,6 @@ class Temporal:
             mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico, eixo_y2 = self.y2, liminf = self.liminf, limsup = self.limsup)
             titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
 
-
-        
 
         tituloFigura = titulo_padrao if self.booltitulo == "True" else " "
         tituloFigura = titulo_padrao if self.titulo == " " else self.titulo.replace("_", " ")
@@ -215,21 +210,15 @@ class Temporal:
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else: 
             mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)   
-            print(unidade.filtroArgumento)    
-            print(mapa_argumentos)     
             coluna_filtro = unidade.sintese.filtro.split("_")[1]
             dicionario = {}
             for c in self.data.conjuntoCasos[0].casos:
                 df = mapa_argumentos[c]
                 cod_arg = df.loc[(df[coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
-                dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
-                #eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
-                
+                dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]                
             if(boxplot =="True"):
-                #mapa_temporal = eco_mapa
                 mapa_temporal = dicionario
             else:
-                #mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
                 mapa_temporal = self.__retorna_mapa_media_parquet(dicionario)
         return mapa_temporal
 
