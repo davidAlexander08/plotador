@@ -120,24 +120,11 @@ class Temporal:
         if(self.sintese is None):
             print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
             exit(1)
-        sts = Sintese(self.sintese)
-
-        #if(liminf == "True"):
-        #    novos_casos = [] 
-        #    for caso in data.conjuntoCasos[0].casos:
-        #        novos_casos.append(Caso(caso.nome+"_limInf", caso.caminho, caso.cor, None, caso.modelo, "dash", caso.tipo, caso.patamar ))
-        #    data.conjuntoCasos[0].casos = data.conjuntoCasos[0].casos+novos_casos
-#
-        #if(limsup == "True"):
-        #    novos_casos = [] 
-        #    for caso in data.conjuntoCasos[0].casos:
-        #        novos_casos.append(Caso(caso.nome+"_limSup", caso.caminho, caso.cor, None, caso.modelo, "dot", caso.tipo, caso.patamar ))
-        #    data.conjuntoCasos[0].casos = data.conjuntoCasos[0].casos+novos_casos
-
+        self.sts = Sintese(self.sintese)
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")
-            conj = ConjuntoUnidadeSintese(sts, arg , "estagios", data.limites, self.tamanho_texto)
+            conj = ConjuntoUnidadeSintese(self.sts, arg , "estagios", data.limites, self.tamanho_texto)
             if(self.labely is not None):
                 conj.legendaEixoY = self.labely
             if(self.labelx is not None):
@@ -147,8 +134,8 @@ class Temporal:
             self.executa(conj,diretorio_saida_arg )
         else:
             for arg in data.args:
-                if(sts.espacial == arg.chave):
-                    conj = ConjuntoUnidadeSintese(sts, arg, "estagios", data.limites, self.tamanho_texto)
+                if(self.sts.espacial == arg.chave):
+                    conj = ConjuntoUnidadeSintese(self.sts, arg, "estagios", data.limites, self.tamanho_texto)
                     if(self.labely is not None):
                         conj.legendaEixoY = self.labely
                     if(self.labelx is not None):
@@ -161,8 +148,8 @@ class Temporal:
  
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
-        print("PASSO 1")
-        print("lista_unidades: ", len(conjUnity.listaUnidades))
+        df_eco = self.eco_indicadores.retorna_df_concatenado(self.sts)
+        print(df_eco)
         for unity in conjUnity.listaUnidades:
             #lista_data_frame = []
             print("INICIOU retornar temporal")
