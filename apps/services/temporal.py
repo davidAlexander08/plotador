@@ -164,6 +164,7 @@ class Temporal:
         print("PASSO 1")
         for unity in conjUnity.listaUnidades:
             #lista_data_frame = []
+            print("INICIOU retornar temporal")
             df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
             print("Retornou Temporal")
             if(self.xsup < df_temporal["estagio"].max()):
