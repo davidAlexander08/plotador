@@ -95,7 +95,7 @@ class Temporal:
         os.makedirs(diretorio_saida, exist_ok=True)
 
         meta_dados = self.eco_indicadores.retorna_df(data.conjuntoCasos[0].casos[0], "METADADOS_OPERACAO")
-        df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)]
+        df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)] if "ESTATISTICA" not in self.sintese else meta_dados.loc[(meta_dados["chave"] == self.chave)] 
         titulo_meta = df_chave["nome_longo_variavel"]
         if(self.labely is None):
             self.labely = df_chave["unidade"].iloc[0]
