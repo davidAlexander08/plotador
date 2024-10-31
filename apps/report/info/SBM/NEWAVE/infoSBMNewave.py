@@ -28,7 +28,7 @@ class InfoSBMNewave(Estruturas):
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
 
-        for arg in lista_argumentos:
+        for arg in ["SUDESTE","NORDESTE"]:#lista_argumentos:
             self.lista_text.append("<h3>Dados "+arg+"</h3>")
             self.lista_text.append(self.Tabela_Eco_Entrada)
             for caso in data.conjuntoCasos[0].casos:
