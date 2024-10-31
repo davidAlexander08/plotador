@@ -123,7 +123,8 @@ class Temporal:
             print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
             exit(1)
         self.sts = Sintese(self.sintese)
-        self.mapa_argumentos = self.eco_indicadores.retornaMapaDF(self.sts.espacial)
+        if len(self.sintese.split("_")) > 1:
+            self.mapa_argumentos = self.eco_indicadores.retornaMapaDF(self.sts.espacial)
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")
