@@ -13,6 +13,7 @@ class Estruturas:
             <th>2 Mes EARPF</th>
             <th>Média GT</th>
             <th>Média EARPF</th>
+            <th>EARPF Ultimo Est</th>
         </tr>
 """
 
@@ -27,6 +28,7 @@ class Estruturas:
             <td>2_Mes_EARPF</td>
             <td>Media_GT</td>
             <td>Media_EARPF</td>
+            <td>EARPF Ultimo Est</td>
         </tr>
 """
 

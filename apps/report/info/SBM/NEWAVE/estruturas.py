@@ -16,6 +16,7 @@ class Estruturas:
             <th>Média GT</th>
             <th>Média EARPF</th>
             <th>Média CMO</th>
+            <th>EARPF Ultimo Est</th>
         </tr>
 """
 
@@ -33,6 +34,7 @@ class Estruturas:
             <td>Media_GT</td>
             <td>Media_EARPF</td>
             <td>Media_CMO</td>
+            <td>EARPF Ultimo Est</td>
         </tr>
 """
 

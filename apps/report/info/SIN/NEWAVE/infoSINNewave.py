@@ -38,6 +38,8 @@ class InfoSINNewave(Estruturas):
             if(oper_sin['variavel'].str.contains("EARPI", case=False, na=False).any()):
                 earpf_i = first_month.loc[(first_month["variavel"] == "EARPI")]["valor"].iloc[0]
                 temp = temp.replace("EarpI", str(earpf_i))
+                earpf_last = first_month.loc[(first_month["variavel"] == "EARPI")]["valor"].iloc[-1]
+                temp = temp.replace("EARPF Ultimo Est", str(earpf_last))
             
             if(oper_sin['variavel'].str.contains("GTER", case=False, na=False).any()):
                 gt_2_mes = second_month.loc[(second_month["variavel"] == "GTER") ]["valor"].iloc[0]
