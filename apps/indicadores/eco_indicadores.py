@@ -50,7 +50,7 @@ class EcoIndicadores:
         flag_estatistica = 0
         for c in self.casos:            
             #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
-            if( (len(sintese_parts) > 1) and (variavel not in ("ESTATISTICAS", "METADADOS") ):
+            if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
                 if(self.checkIfNumberOnly(c.tipo)):
                     c.tipo = int(c.tipo)
                     sintese_busca = sintese
