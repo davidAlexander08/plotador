@@ -29,6 +29,7 @@ class Temporal:
         self.eixox = eixox
         self.patamar = int(patamar)
         self.estagio = estagio
+        self.data = data
         self.y2 = y2
         if(self.y2 == "True" and len(data.conjuntoCasos[0].casos) > 2):
             print("ERRO: Opcao y2 valida apenas para comparacao de duplas de casos")
@@ -228,7 +229,8 @@ class Temporal:
     
     def __retorna_mapa_media_parquet(self, mapa):
         dict = {}
-        for c in self.casos:
+        for c in self.data.conjuntoCasos[0].casos:
+        #for c in self.casos:
             df = mapa[c]
             #print(df)
             if(c.modelo == "NEWAVE" or c.modelo == "DECOMP"):
@@ -248,7 +250,8 @@ class Temporal:
             mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)
             
             coluna_filtro = unidade.sintese.filtro.split("_")[1]
-            for c in self.casos:
+            for c in self.data.conjuntoCasos[0].casos:
+            #for c in self.casos:
                 cod_arg = mapa_argumentos[c].loc[(mapa_argumentos[c][coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
                 eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
                 
