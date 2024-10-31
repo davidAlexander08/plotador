@@ -25,10 +25,10 @@ class EcoIndicadores:
     def retorna_df(self, caso, sintese) -> pd.DataFrame:
         arq_sintese = join( caso.caminho, self.DIR_SINTESE, sintese+".parquet"  )
         #check_file = os.path.isfile(arq_sintese)
-        print("antes da leitura"+sintese+".parquet")
+        print("antes da leitura "+arq_sintese)
         try:
             df = pd.read_parquet(arq_sintese)
-            print("depois da leitura"+sintese+".parquet")
+            print("depois da leitura "+arq_sintese)
             return df
         except:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
