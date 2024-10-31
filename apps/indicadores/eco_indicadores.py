@@ -25,8 +25,10 @@ class EcoIndicadores:
     def retorna_df(self, caso, sintese) -> pd.DataFrame:
         arq_sintese = join( caso.caminho, self.DIR_SINTESE, sintese+".parquet"  )
         #check_file = os.path.isfile(arq_sintese)
+        print("antes da leitura")
         try:
             df = pd.read_parquet(arq_sintese)
+            print("depois da leitura")
             return df
         except:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
@@ -44,10 +46,12 @@ class EcoIndicadores:
         #    return df_vazio
             
     def retornaMapaDF(self, sintese):
+        print("iniciou retornaMapaDF")
         result_dict  = {}
         sintese_parts = sintese.split("_")
         variavel = sintese_parts[0]
         flag_estatistica = 0
+        print("antes dos casos")
         for c in self.casos:            
             #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
             if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
@@ -68,6 +72,7 @@ class EcoIndicadores:
             df["caso"] = c.nome
             df["modelo"] = c.modelo
             result_dict [c] = df
+        print("depois dos casos")
         return result_dict 
 
     def checkIfNumberOnly(self,s):
