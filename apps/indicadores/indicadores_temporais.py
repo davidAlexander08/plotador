@@ -33,18 +33,6 @@ class IndicadoresTemporais(EcoIndicadores):
                 dict[c] = df.reset_index(drop = True) 
         return dict
 
-    #def __retorna_mapa_cenarios_parquet(self, mapa):
-    #    dict = {}
-    #    for c in self.casos: 
-    #        df = mapa[c]
-    #        if(c.modelo == "NEWAVE" or c.modelo == "DECOMP"): 
-    #            dict[c] = df[df[["cenario"]].apply(lambda x: x[0].isdigit(), axis=1)].reset_index(drop = True)
-    #        if(c.modelo == "DESSEM"):   
-    #            print("Opcao Boxplot nao pode ser utilizada com modelo DESSEM")
-    #            exit(1)
-    #    return dict
-
-
     def retorna_mapaDF_cenario_medio_temporal(self, unidade, boxplot):
         eco_mapa = self.retornaMapaDF(unidade.sintese.sintese)
         mapa_temporal = {}
