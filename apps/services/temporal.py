@@ -152,7 +152,6 @@ class Temporal:
  
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
-        print("INICIOU EXECUTA")
         mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese)
         for unity in conjUnity.listaUnidades:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
@@ -162,14 +161,12 @@ class Temporal:
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] >= self.xinf)]
             mapa_temporal[unity] = df_temporal
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
-        print("ANTES DE PLOTAR O GRAFICO")
         if(self.boxplot == "True"):
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
             titulo_padrao = "Boxplot Temporal "+conjUnity.titulo+self.estudo
         else:
             mapaGO = self.graficos.gera_grafico_linha(mapa_temporal, colx = self.eixox, cronologico = self.cronologico, eixo_y2 = self.y2, liminf = self.liminf, limsup = self.limsup)
             titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
-        print("PLOTOU O GRAFICO")
 
         tituloFigura = titulo_padrao if self.booltitulo == "True" else " "
         tituloFigura = titulo_padrao if self.titulo == " " else self.titulo.replace("_", " ")
