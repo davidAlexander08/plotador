@@ -41,7 +41,7 @@ plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json 
 
 \info{SBM}
 
-\subpage{Geracoes}
+\subpage{Geracoes SBM}
 
 <h3> Geracao Térmica </h3>
 plotador_dev temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
@@ -58,7 +58,8 @@ plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sint
 
 \subpage{Custo Marginal SBM}
 plotador_dev temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20
-\subpage{ENA}
+
+\subpage{ENA SBM}
 plotador_dev temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
 
 
