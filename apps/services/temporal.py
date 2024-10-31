@@ -161,6 +161,7 @@ class Temporal:
  
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
+        print("PASSO 1")
         for unity in conjUnity.listaUnidades:
             #lista_data_frame = []
             df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
@@ -171,7 +172,7 @@ class Temporal:
             mapa_temporal[unity] = df_temporal
             #mapa_temporal[unity] = pd.concat(lista_data_frame)
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
-        
+        print("PASSO 2")
         if(self.boxplot == "True"):
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
             titulo_padrao = "Boxplot Temporal "+conjUnity.titulo+self.estudo
@@ -180,7 +181,7 @@ class Temporal:
             titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
 
 
-
+        print("PASSO 3")
         
 
         tituloFigura = titulo_padrao if self.booltitulo == "True" else " "
@@ -191,7 +192,7 @@ class Temporal:
             figura.fig.update_layout(showlegend= False)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, tituloFigura, self.html, self.largura, self.altura)
         
-        
+        print("PASSO 4")
         if(self.estagio != ""):
             mapaEst = {self.estagio:" Estagio "+str(self.estagio)} 
             
@@ -205,7 +206,7 @@ class Temporal:
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
 
-
+            print("PASSO 5")
             #unity = UnidadeSintese("EARPF_SIN_EST", None, "%", "Energia_Armazenada_Percentual_Final_SIN_CREF "+estudo)
             #df_unity = indicadores_temporais.retorna_df_concatenado(unity)
             #graficos.gera_graficos_linha_Newave_CREF(df_unity, indicadores_temporais.df_cref, "EARPF", unity.legendaEixoY, unity.titulo, None).write_image(
