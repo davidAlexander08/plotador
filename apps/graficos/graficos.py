@@ -54,7 +54,7 @@ class Graficos:
             figura.update_layout(width = int(W), height = int(H))
             figura.write_html(os.path.join(diretorio_saida, nome_arquivo+".html"),
                 include_plotlyjs='cdn',
-                config={"modeBarButtonsToAdd": ["drawopenpath", "drawline", "eraseshape", "sendDataToCloud"]})
+                config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
     
     
 

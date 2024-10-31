@@ -35,7 +35,7 @@ option_tamanho = click.option("--tamanho", default=None, help="Tamanho da letra"
 option_json = click.option("--arquivo_json", "--json", default = None, help ="definicao do arquivo json. Caso nenhum, ele considera estar dentro da pasta do caso")
 option_subplot = click.option("--subplot", default = None, help ="definicao do numero de colunas e linhas do subplot separados por virgula")
 option_boxplot = click.option("--boxplot", default = None, help = "Se True ativa a opcao boxplots, habilitando graficos boxplot")
-option_csv = click.option("--csv", default = "True", help = "Default True, se False nao imprime mais os csvs")
+option_csv = click.option("--csv", default = "False", help = "Default True, se False nao imprime mais os csvs")
 option_html = click.option("--html", default = None, help = "Default False, se True gera o html da figura")
 option_outpath = click.option("--outpath", default = None, help = "Muda o caminho de saida da figura e csv a serem gerados")
 option_txt = click.option("--txt", default = None, help ="definicao do arquivo txt. Caso nenhum, ele considera estar dentro da pasta do caso")
