@@ -218,15 +218,19 @@ class Temporal:
             print(unidade.filtroArgumento)    
             print(mapa_argumentos)     
             coluna_filtro = unidade.sintese.filtro.split("_")[1]
+            dicionario = {}
             for c in self.data.conjuntoCasos[0].casos:
                 df = mapa_argumentos[c]
                 cod_arg = df.loc[(df[coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
-                eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
+                dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
+                #eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
                 
             if(boxplot =="True"):
-                mapa_temporal = eco_mapa
+                #mapa_temporal = eco_mapa
+                mapa_temporal = dicionario
             else:
-                mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
+                #mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
+                mapa_temporal = self.__retorna_mapa_media_parquet(dicionario)
         return mapa_temporal
 
 
