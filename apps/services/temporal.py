@@ -149,7 +149,7 @@ class Temporal:
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
         mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese)
-        print(df_eco)
+        print(mapa_eco)
         for unity in conjUnity.listaUnidades:
             print("INICIOU retornar temporal")
             #df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
