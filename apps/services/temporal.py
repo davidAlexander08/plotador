@@ -154,7 +154,7 @@ class Temporal:
         for unity in conjUnity.listaUnidades:
             print("INICIOU retornar temporal")
             #df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
-            df_temporal = self.retorna_df_concatenado(mapa_eco, unity, self.boxplot)
+            df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(eco_mapa, unidade, boxplot))
             print("Retornou Temporal")
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
@@ -200,6 +200,61 @@ class Temporal:
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
 
             print("PASSO 5")
+
+    
+    def __retorna_mapa_media_parquet(self, mapa):
+        dict = {}
+        for c in self.data.conjuntoCasos[0].casos:
+            df = mapa[c]
+            if(c.modelo == "NEWAVE" or c.modelo == "DECOMP"):
+                dict[c] = df.loc[(df["cenario"] == c.tipo) & (df["patamar"] == c.patamar)].reset_index(drop = True)
+            if(c.modelo == "DESSEM"):   
+                dict[c] = df.reset_index(drop = True) 
+        return dict
+
+    def retorna_mapaDF_cenario_medio_temporal(self, eco_mapa, unidade, boxplot):
+        mapa_temporal = {}
+        if( (unidade.sintese.filtro is None) & (unidade.filtroArgumento is None) ):
+            if(boxplot =="True"):
+                return eco_mapa
+            else:
+                return self.__retorna_mapa_media_parquet(eco_mapa)
+        else: 
+            mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)
+            print(mapa_argumentos)
+            
+            coluna_filtro = unidade.sintese.filtro.split("_")[1]
+            for c in self.data.conjuntoCasos[0].casos:
+                df = mapa_argumentos[c]
+                print(df)
+                print(coluna_filtro)
+                print(unidade.filtroArgumento)
+                print(unidade.sintese.filtro)
+                cod_arg = df.loc[(df[coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
+                print("cod_arg: ", cod_arg)
+                eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
+                
+            if(boxplot =="True"):
+                mapa_temporal = eco_mapa
+            else:
+                mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
+        return mapa_temporal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             #unity = UnidadeSintese("EARPF_SIN_EST", None, "%", "Energia_Armazenada_Percentual_Final_SIN_CREF "+estudo)
             #df_unity = indicadores_temporais.retorna_df_concatenado(unity)
             #graficos.gera_graficos_linha_Newave_CREF(df_unity, indicadores_temporais.df_cref, "EARPF", unity.legendaEixoY, unity.titulo, None).write_image(
@@ -223,41 +278,3 @@ class Temporal:
             #    width=800,
             #    height=600
             #    )
-    
-    def retorna_df_concatenado(self, eco_mapa, unidade, boxplot):
-        return pd.concat(self.retorna_mapaDF_cenario_medio_temporal(eco_mapa, unidade, boxplot))
-    
-    def __retorna_mapa_media_parquet(self, mapa):
-        dict = {}
-        for c in self.data.conjuntoCasos[0].casos:
-        #for c in self.casos:
-            df = mapa[c]
-            #print(df)
-            if(c.modelo == "NEWAVE" or c.modelo == "DECOMP"):
-                dict[c] = df.loc[(df["cenario"] == c.tipo) & (df["patamar"] == c.patamar)].reset_index(drop = True)
-            if(c.modelo == "DESSEM"):   
-                dict[c] = df.reset_index(drop = True) 
-        return dict
-
-    def retorna_mapaDF_cenario_medio_temporal(self, eco_mapa, unidade, boxplot):
-        mapa_temporal = {}
-        if( (unidade.sintese.filtro is None) & (unidade.filtroArgumento is None) ):
-            if(boxplot =="True"):
-                return eco_mapa
-            else:
-                return self.__retorna_mapa_media_parquet(eco_mapa)
-        else: 
-            mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)
-            print(mapa_argumentos)
-            
-            coluna_filtro = unidade.sintese.filtro.split("_")[1]
-            for c in self.data.conjuntoCasos[0].casos:
-            #for c in self.casos:
-                cod_arg = mapa_argumentos[c].loc[(mapa_argumentos[c][coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
-                eco_mapa[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]
-                
-            if(boxplot =="True"):
-                mapa_temporal = eco_mapa
-            else:
-                mapa_temporal = self.__retorna_mapa_media_parquet(eco_mapa)
-        return mapa_temporal
