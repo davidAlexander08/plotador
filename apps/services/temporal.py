@@ -152,17 +152,14 @@ class Temporal:
         mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese)
         print(mapa_eco)
         for unity in conjUnity.listaUnidades:
-            print("INICIOU retornar temporal")
             #df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
-            print("Retornou Temporal")
+            print(df_temporal)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] >= self.xinf)]
-            print("Limitou os eixos")
             mapa_temporal[unity] = df_temporal
-            print("Guardou no mapa")
             #mapa_temporal[unity] = pd.concat(lista_data_frame)
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
         print("PASSO 2")
@@ -174,7 +171,6 @@ class Temporal:
             titulo_padrao = "Temporal "+conjUnity.titulo+self.estudo
 
 
-        print("PASSO 3")
         
 
         tituloFigura = titulo_padrao if self.booltitulo == "True" else " "
@@ -185,7 +181,6 @@ class Temporal:
             figura.fig.update_layout(showlegend= False)
         self.graficos.exportar(figura.fig, diretorio_saida_arg, tituloFigura, self.html, self.largura, self.altura)
         
-        print("PASSO 4")
         if(self.estagio != ""):
             mapaEst = {self.estagio:" Estagio "+str(self.estagio)} 
             
@@ -199,7 +194,6 @@ class Temporal:
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
 
-            print("PASSO 5")
 
     
     def __retorna_mapa_media_parquet(self, mapa):
