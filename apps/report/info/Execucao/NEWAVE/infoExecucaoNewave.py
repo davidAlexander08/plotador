@@ -44,10 +44,10 @@ class InfoExecucaoNewave(Estruturas):
             min_tempo_sf =          round(tempo_sf,0)        if h_tempo_sf       == 0 else  round(tempo_sf - h_tempo_sf*60 ,0)
             min_tempo_total =       round(tempo_total,0)     if h_tempo_total    == 0 else  round(tempo_total - h_tempo_total*60 ,0)
 
-            temp = temp.replace("Calc Inicio (min)", str(h_tempo_inicial)+ " h " + str(min_tempo_inicial) + " min")
-            temp = temp.replace("Politica (min)", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min")
-            temp = temp.replace("Sim. Final (Min)", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min")
-            temp = temp.replace("Total (min)", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min")
+            temp = temp.replace("Calc Inicio", str(h_tempo_inicial)+ " h " + str(min_tempo_inicial) + " min")
+            temp = temp.replace("Politica", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min")
+            temp = temp.replace("Sim. Final", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min")
+            temp = temp.replace("Total", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min")
 
             #temp = temp.replace("Calc Inicio (min)", str(round(tempo_inicial,2)))
             #temp = temp.replace("Politica (min)", str(round(tempo_politica,2)))

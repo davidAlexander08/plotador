@@ -7,10 +7,10 @@ class Estruturas:
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
-            <th>Calc Inicio (min)</th>
-            <th>Politica (min)</th>
-            <th>Sim. Final (Min)</th>
-            <th>Total (min)</th>
+            <th>Calc Inicio </th>
+            <th>Politica </th>
+            <th>Sim. Final</th>
+            <th>Total </th>
             <th>Iter</th>
             <th>Zinf</th>
             <th>Zsup</th>
@@ -23,10 +23,10 @@ class Estruturas:
         <tr>
             <td>Caso</td>
             <td>Modelo</td>
-            <td>Calc Inicio (min)</td>
-            <td>Politica (min)</td>
-            <td>Sim. Final (Min)</td>
-            <td>Total (min)</td>
+            <td>Calc Inicio</td>
+            <td>Politica</td>
+            <td>Sim. Final</td>
+            <td>Total</td>
             <td>Iter</td>
             <td>Zinf</td>
             <td>Zsup</td>
