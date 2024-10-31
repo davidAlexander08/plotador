@@ -214,7 +214,9 @@ class Temporal:
             else:
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else: 
-            mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)            
+            mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)   
+            print(unidade.filtroArgumento)    
+            print(mapa_argumentos)     
             coluna_filtro = unidade.sintese.filtro.split("_")[1]
             for c in self.data.conjuntoCasos[0].casos:
                 df = mapa_argumentos[c]
