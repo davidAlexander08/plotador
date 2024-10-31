@@ -27,7 +27,7 @@ class EcoIndicadores:
         #check_file = os.path.isfile(arq_sintese)
         print("antes da leitura "+arq_sintese)
         try:
-            df = pd.read_parquet(arq_sintese)
+            df = pd.read_parquet(arq_sintese, memory_map=True)
             print("depois da leitura "+arq_sintese)
             return df
         except:
