@@ -189,7 +189,7 @@ class Temporal:
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
 
-
+        print("FECHOU EXECUTA")
     
     def __retorna_mapa_media_parquet(self, mapa):
         dict = {}
