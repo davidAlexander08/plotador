@@ -148,7 +148,7 @@ class Temporal:
  
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
-        df_eco = self.eco_indicadores.retorna_df_concatenado(self.sts)
+        df_eco = self.eco_indicadores.retorna_df_concatenado(self.sts.sintese)
         print(df_eco)
         for unity in conjUnity.listaUnidades:
             #lista_data_frame = []
