@@ -150,10 +150,8 @@ class Temporal:
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
         mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese)
-        print(mapa_eco)
         for unity in conjUnity.listaUnidades:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
-            print(df_temporal.drop(["codigo_ree", "codigo_submercado"],axis = 1))
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
