@@ -154,7 +154,7 @@ class Temporal:
         for unity in conjUnity.listaUnidades:
             print("INICIOU retornar temporal")
             #df_temporal = self.indicadores_temporais.retorna_df_concatenado(unity, self.boxplot)
-            df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unidade, boxplot))
+            df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, boxplot))
             print("Retornou Temporal")
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
