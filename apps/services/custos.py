@@ -138,7 +138,9 @@ class Custos:
 
         if(html =="True"):
             fig.update_layout(width = int(largura), height = int(altura))
-            fig.write_html(os.path.join(self.diretorio_saida, self.titulo+".html"))
+            fig.write_html(os.path.join(self.diretorio_saida, self.titulo+".html"),
+                include_plotlyjs='cdn',
+                config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
 
             
     #def filtra_data_frame(self, df):
