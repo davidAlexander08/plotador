@@ -9,8 +9,8 @@ class Estruturas:
             <th>Modelo</th>
             <th>Versao</th>
             <th>Politica (min)</th>
-            <th>SF (min)</th>
-            <th>Total (min)</th>
+            <th>SF</th>
+            <th>Total</th>
             <th>Iter</th>
             <th>Zinf</th>
             <th>Custo Total</th>
