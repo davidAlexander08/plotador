@@ -162,6 +162,7 @@ class Temporal:
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {}
         print("PASSO 1")
+        print("lista_unidades: ", len(conjUnity.listaUnidades))
         for unity in conjUnity.listaUnidades:
             #lista_data_frame = []
             print("INICIOU retornar temporal")
