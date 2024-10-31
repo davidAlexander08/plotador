@@ -56,7 +56,7 @@ class Graficos:
                 include_plotlyjs='cdn',
                 config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
     
-        print("GEROU O HTML")
+        #print("GEROU O HTML")
 
     def gera_pareto_fast(
         self,

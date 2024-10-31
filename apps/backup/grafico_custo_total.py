@@ -12,8 +12,8 @@ for caso in casos:
 	data = Pmo.read(caso[0]+"/pmo.dat")
 	custo_total= data.custo_operacao_total
 	desvio = data.desvio_custo_operacao_total*1.96
-	print(custo_total)
-	print(desvio)
+	#print(custo_total)
+	#print(desvio)
 	fig.add_trace(go.Bar( y = [custo_total], x = [caso[1]], text=np.round(custo_total,0), textposition = "outside", error_y = dict(type="data", array=[desvio]), name = caso[1], marker_color = caso[2], showlegend = False))
 fig.update_layout(title=titulo+" Custo Total")
 fig.update_xaxes(title_text="Casos")

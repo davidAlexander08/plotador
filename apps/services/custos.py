@@ -27,7 +27,7 @@ class Custos:
         self.largura = largura
         self.altura = altura
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
-        print(self.tamanho_texto)
+        #print(self.tamanho_texto)
         self.titulo = "Custos_de_Operacao_Acima_de_100_MiR$" if titulo == " " else titulo
         self.titulo = self.titulo.replace("_", " ") 
         self.labely = "MiR$" if labely is None else labely 
@@ -38,7 +38,7 @@ class Custos:
         self.diretorio_saida = f"resultados/{self.estudo}/casos"  if outpath is None else outpath
         os.makedirs(self.diretorio_saida, exist_ok=True)
 
-        print(data.conjuntoCasos[0].casos[0].modelo)
+        #print(data.conjuntoCasos[0].casos[0].modelo)
         fig = go.Figure()
         dicionario = {  "GERACAO TERMICA":["red","GT"],
                         "DEFICIT":["black","DEF"],

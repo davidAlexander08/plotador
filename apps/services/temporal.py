@@ -89,7 +89,7 @@ class Temporal:
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
-        print("INICIO DO TEMPORAL")
+        #print("INICIO DO TEMPORAL")
 
         diretorio_saida = f"resultados/{self.estudo}/temporal" if outpath is None else outpath
         os.makedirs(diretorio_saida, exist_ok=True)
@@ -117,7 +117,7 @@ class Temporal:
             if(len(lista_argumentos) == 1 and self.titulo == " "): 
                 self.titulo = lista_argumentos[0]
 
-        print("ANTES DE DECLARAR SINTESE")
+        #print("ANTES DE DECLARAR SINTESE")
         #NOVIDADE
         if(self.sintese is None):
             print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
@@ -189,7 +189,7 @@ class Temporal:
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
 
-        print("FECHOU EXECUTA")
+        #print("FECHOU EXECUTA")
     
     def __retorna_mapa_media_parquet(self, mapa):
         dict = {}

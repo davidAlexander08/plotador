@@ -27,11 +27,11 @@ class Convergencia:
         self.graficos = Graficos(data)
         # Gera saídas do estudo
         diretorio_saida = f"resultados/{self.estudo}/convergencia" if outpath is None else outpath
-        print(diretorio_saida)
+        #print(diretorio_saida)
         os.makedirs(diretorio_saida, exist_ok=True)
         
         df_convergencia = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
-        print(df_convergencia)
+        #print(df_convergencia)
         self.eco_indicadores.exportar(df_convergencia, diretorio_saida,"Convergencia"+self.estudo )
         titulo_grafico = "Convergencia "+self.estudo if self.titulo == " " else self.titulo.replace("_"," ")
         lista = ["zinf"]

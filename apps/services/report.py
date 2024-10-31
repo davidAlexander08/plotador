@@ -18,7 +18,7 @@ class Report():
     def __init__(self,outpath, arq_json, txt, titulo, tipo, cronologico, conjunto, html):
         #self.outpath = outpath
         self.json = arq_json
-        print("Arquivo JSON: ", self.json)
+        #print("Arquivo JSON: ", self.json)
         self.txt = txt
         self.titulo = titulo
         path = __file__.split("/")
@@ -100,7 +100,7 @@ class Report():
             for line in lines:
                 if("\page{") in line:
                     nome_pagina = line.split("{")[1].split("}")[0]
-                    print(nome_pagina)
+                    #print(nome_pagina)
                     html_file.write('<li><a href="#" onclick="showSidebarPage(\''+nome_pagina+'\')">'+nome_pagina+'</a></li>'+"\n")
 
             html_file.write("</ul>"+"\n")
