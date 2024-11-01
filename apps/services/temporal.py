@@ -214,7 +214,11 @@ class Temporal:
             dicionario = {}
             for c in self.data.conjuntoCasos[0].casos:
                 df = self.mapa_argumentos[c]
-                cod_arg = df.loc[(df[coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
+                try:
+                    cod_arg = df.loc[(df[coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
+                except:
+                    print("Filtro: ", coluna_filtro)
+                    print("Não encontrado: ", unidade.filtroArgumento)
                 dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]                
             if(boxplot =="True"):
                 mapa_temporal = dicionario
