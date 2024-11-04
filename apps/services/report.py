@@ -3,6 +3,7 @@
 from apps.interface.dados_json_caso import Dados_json_caso
 from apps.model.argumento import Argumento
 from apps.report.info.info import Info
+from apps.utils.log import Log
 import plotly.graph_objects as go
 import plotly.io as pio
 import pandas as pd

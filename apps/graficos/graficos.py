@@ -2,7 +2,7 @@ from typing import List
 import pandas as pd
 
 from apps.model.caso import Caso
-from apps.utils.log import Log 
+from apps.utils.log import Log
 import os
 import plotly.graph_objects as go
 import plotly.io as pio
@@ -52,9 +52,11 @@ class Graficos:
 
         if(html =="True"):
             figura.update_layout(width = int(W), height = int(H))
-            figura.write_html(os.path.join(diretorio_saida, nome_arquivo+".html"))
+            figura.write_html(os.path.join(diretorio_saida, nome_arquivo+".html"),
+                include_plotlyjs='cdn',
+                config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
     
-    
+        #print("GEROU O HTML")
 
     def gera_pareto_fast(
         self,
@@ -225,7 +227,7 @@ class Graficos:
                         df_caso_0 = df.loc[df["caso"] == lista_casos[0]].reset_index(drop=True)
                         df_caso_1 = df.loc[df["caso"] == lista_casos[1]].reset_index(drop=True)
                         df_valor = df_caso_0[coly] - df_caso_1[coly].reset_index(drop=True)
-                        print(df_valor)
+                        #print(df_valor)
                         listaGO.append(go.Bar( 
                                 x = df_caso_0[colx],
                                 y = df_valor,
@@ -251,7 +253,7 @@ class Graficos:
             for c in self.casos:
                 dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
                 dfY = dfY.reset_index(drop = False)
-                print(dfY)
+                #print(dfY)
                 listaGO.append(go.Box( 
                         x = list(map(str,dfY[colx].tolist())) ,
                         y =  dfY[coly].tolist(),

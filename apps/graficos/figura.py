@@ -10,9 +10,9 @@ class Figura():
     def __init__(self, conjUnity , mapaGO, titulo, yinf = None,  ysup = None, y2 = "False", y2sup = None, y2inf = None):
         self.titulo = titulo
         if(y2 == "True"):
-                self.fig = make_subplots(specs=[[{"secondary_y": True}]], rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
+                self.fig = make_subplots(specs=[[{"secondary_y": True}]], rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
         else:
-                self.fig = make_subplots(rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
+                self.fig = make_subplots(rows=conjUnity.arg.max_lin, cols=conjUnity.arg.max_col, subplot_titles=(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "))
 
         for unity in conjUnity.listaUnidades:
             contador = 1
@@ -20,14 +20,12 @@ class Figura():
                 lim_sup = max(trace.y) if len(trace.y) is not 0 else 0
                 lim_inf = min(trace.y) if len(trace.y) is not 0 else 0
                 if(y2 == "True"):
-                    print("contador: ", contador)
-                    print("tamanho: ",len(mapaGO[unity]) )
+                    #print("contador: ", contador)
+                    #print("tamanho: ",len(mapaGO[unity]) )
                     if(contador == len(mapaGO[unity])):
                         self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col, secondary_y = True)
                         #self.fig.update_yaxes(title="Diff", secondary_y = True, overlaying ="y", side = "right", range = [y2inf,y2sup], row = unity.arg.lin , col = unity.arg.col) 
-
-                        print("ENTROU AQUI")
-                        print(trace.y)
+                        #print(trace.y)
                     else:
                         self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col)
                 else:

@@ -57,7 +57,7 @@ def cli():
 @option_html
 def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico, conjunto, html):
     start_time = time.time()
-    cores = ["black", "red", "blue", "yellow", "gray", "green","purple"]
+    cores = ["black", "red", "blue", "yellow", "gray", "green","purple","darkgreen", "darkblue","royalblue","skyblue","gold"]
     contador = 0
     if(arquivo_json is None):
         if(automatico == "True"):
@@ -452,6 +452,30 @@ def analise_cenarios(arquivo_json):
     else:
         raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
 
+option_filtro_custo = click.option("--custo_minimo", default ="100", help = "Custo Minimo para ser Plotador no Gráfico")
+@click.command("custos")
+@click.argument(
+    "arquivo_json",
+)
+@option_largura
+@option_altura
+@option_yinf
+@option_ysup
+@option_html
+@option_outpath
+@option_titulo
+@option_tamanho
+@option_labely
+@option_labelx
+@option_filtro_custo
+def analise_custos(arquivo_json, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx, custo_minimo):
+    from apps.services.custos import Custos
+    if os.path.isfile(arquivo_json):
+        data = Dados_json_caso(arquivo_json)
+        Custos(data, largura, altura, yinf, ysup, html, outpath, titulo, tamanho, labely, labelx, custo_minimo)          
+    else:
+        raise FileNotFoundError(f"Arquivo {arquivo_json} não encontrado.")
+
 
 cli.add_command(analise_pareto)
 cli.add_command(eco)
@@ -466,3 +490,4 @@ cli.add_command(analise_nwlistcf)
 cli.add_command(analise_tempo)
 cli.add_command(analise_cascatador)
 cli.add_command(analise_convergencia)
+cli.add_command(analise_custos)

@@ -11,7 +11,7 @@ from apps.model.argumento import Argumento
 from apps.model.unidadeArgumental import UnidadeArgumental
 from apps.graficos.figura import Figura
 from apps.model.caso import Caso
-import os
+import os 
 import json
 
 class Temporal:
@@ -26,6 +26,7 @@ class Temporal:
         self.y2inf = y2inf
         self.eixox = eixox
         self.estagio = estagio
+        self.data = data
         self.y2 = y2
         if(self.y2 == "True" and len(data.conjuntoCasos[0].casos) > 2):
             print("ERRO: Opcao y2 valida apenas para comparacao de duplas de casos")

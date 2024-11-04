@@ -3,7 +3,7 @@ class Estruturas:
 
 
         self.Tabela_Operacao = """
-        <table>
+        <table class="exportTable">
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
