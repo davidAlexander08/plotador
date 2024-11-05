@@ -46,8 +46,8 @@ class InfoGeralOperDecomp(Estruturas):
             gerao_term_med  = data_relato.relatorio_operacao_custos["geracao_termica"].mean()
             cmo_SE_1_est   = data_relato.relatorio_operacao_custos["cmo_SE"].iloc[0]
             cmo_NE_1_est   = data_relato.relatorio_operacao_custos["cmo_NE"].iloc[0]
-            cmo_SE_mean   = data_relato.relatorio_operacao_custos["cmo_SE"].mean()
-            cmo_NE_mean   = data_relato.relatorio_operacao_custos["cmo_NE"].mean()
+            #cmo_SE_mean   = data_relato.relatorio_operacao_custos["cmo_SE"].mean()
+            #cmo_NE_mean   = data_relato.relatorio_operacao_custos["cmo_NE"].mean()
 
             temp = temp.replace("Versao", "v")
             temp = temp.replace("Zinf",             str(ultimo_zinf                         )  )
@@ -59,10 +59,10 @@ class InfoGeralOperDecomp(Estruturas):
             temp = temp.replace("Iter",             str(ultima_iteracao                     )  )
             temp = temp.replace("Custo_P. (avg)",   str(round(custo_presente_med,2)         )  )
             temp = temp.replace("Custo_Fut. (avg)", str(round(custo_futuro_med  ,2)         )  )
-            temp = temp.replace("CMO_SE (avg)",     str(cmo_SE_1_est                        )  )
-            temp = temp.replace("CMO_NE (avg)",     str(cmo_NE_1_est                        )  )
+            #temp = temp.replace("CMO_SE (avg)",     str(cmo_SE_1_est                        )  )
+            #temp = temp.replace("CMO_NE (avg)",     str(cmo_NE_1_est                        )  )
             temp = temp.replace("CMO_SE (1 est)",   str(round(cmo_SE_mean       ,2)         )  )
-            temp = temp.replace("CMO_SE (1 est)",   str(round(cmo_NE_mean       ,2)         )  )
+            temp = temp.replace("CMO_NE (1 est)",   str(round(cmo_NE_mean       ,2)         )  )
             
         
             #<td>Zinf</td>

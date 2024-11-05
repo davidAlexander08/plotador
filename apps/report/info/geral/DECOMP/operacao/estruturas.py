@@ -15,8 +15,6 @@ class Estruturas:
             <th>Tempo</th>
             <th>Custo_P. (avg)</th>
             <th>Custo_Fut. (avg)</th>
-            <th>CMO_SE (avg)</th>
-            <th>CMO_NE (avg)</th>
             <th>CMO_SE (1 est)</th>
             <th>CMO_SE (1 est)</th>
         </tr>
@@ -34,8 +32,6 @@ class Estruturas:
             <td>Tempo</td>
             <td>Custo_P. (avg)</td>
             <td>Custo_Fut. (avg)</td>
-            <td>CMO_SE (avg)</td>
-            <td>CMO_NE (avg)</td>
             <td>CMO_SE (1 est)</td>
             <td>CMO_SE (1 est)</td>
         </tr>
