@@ -33,6 +33,7 @@ class InfoGeralOperDecomp(Estruturas):
             raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
 
         #print("LENDO PMO.DAT")
+        print(caso.caminho+"/relato."+extensao)
         if(os.path.isfile(caso.caminho+"/relato."+extensao)):
             data_relato = Relato.read(caso.caminho+"/relato."+extensao)
             
