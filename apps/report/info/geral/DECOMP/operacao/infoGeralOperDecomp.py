@@ -6,7 +6,7 @@ from idecomp.decomp.caso import Caso
 import os
 import pandas as pd
 import math 
-class InfoGeralOperNewave(Estruturas):
+class InfoGeralOperDecomp(Estruturas):
     def __init__(self, data):
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
