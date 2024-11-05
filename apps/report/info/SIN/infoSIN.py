@@ -1,6 +1,6 @@
 from apps.report.info.SIN.NEWAVE.infoSINNewave import InfoSINNewave
 from apps.report.info.SIN.DESSEM.infoSINDessem import InfoSINDessem
-
+from apps.report.info.SIN.DECOMP.infoSINDecomp import InfoSINDecomp
 class InfoSIN():
     def __init__(self, data, par_dados):
         set_modelos = set()
@@ -14,7 +14,7 @@ class InfoSIN():
             if(modelo == "NEWAVE"):
                 self.lista_text.append(InfoSINNewave(data).text_html)
             if(modelo == "DECOMP"):
-                #self.lista_text.append(InfoGeralEcoDecomp(data).text_html)
+                self.lista_text.append(InfoSINDecomp(data).text_html)
                 pass
             if(modelo == "DESSEM"):
                 self.lista_text.append(InfoSINDessem(data).text_html)
