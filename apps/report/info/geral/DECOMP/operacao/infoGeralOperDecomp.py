@@ -36,6 +36,8 @@ class InfoGeralOperDecomp(Estruturas):
             data_relato = Relato.read(caso.caminho+"/relato."+extensao)
             
             print(data_relato.convergencia)
+            print(data_relato.convergencia.columns)
+            print(data_relato.relatorio_operacao_custos.columns)
             print(data_relato.relatorio_operacao_custos)
             
 
