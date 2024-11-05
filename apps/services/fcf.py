@@ -2,7 +2,7 @@ from typing import Dict
 from apps.model.unidade import UnidadeSintese
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from apps.graficos.graficos import Graficos
-from apps.indicadores.indicadores_temporais import IndicadoresTemporais
+from apps.indicadores.indicadores_temporais import IndicadoresTemporais 
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
