@@ -60,7 +60,7 @@ class InfoGeralOperDecomp(Estruturas):
             temp = temp.replace("CMO_NE (avg)",     str(cmo_NE_1_est      )  )
             temp = temp.replace("CMO_SE (1 est)",   str(cmo_SE_mean       )  )
             temp = temp.replace("CMO_SE (1 est)",   str(cmo_NE_mean       )  )
-            )
+            
         
             #<td>Zinf</td>
             #<td>Zsup</td>
