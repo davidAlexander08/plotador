@@ -50,16 +50,16 @@ class InfoGeralOperDecomp(Estruturas):
             cmo_NE_mean   = data_relato.relatorio_operacao_custos["cmo_NE"].mean()
 
             temp = temp.replace("Versao", "v")
-            temp = temp.replace("Zinf",             str(ultimo_zinf       )  )
-            temp = temp.replace("Zsup",             str(ultimo_zsup       )  )
-            temp = temp.replace("Gap",              str(ultimo_gap        )  )
-            temp = temp.replace("Tempo",            str(ultimo_tempo      )  )
-            temp = temp.replace("Custo_P. (avg)",   str(custo_presente_med)  )
-            temp = temp.replace("Custo_Fut. (avg)", str(custo_futuro_med  )  )
-            temp = temp.replace("CMO_SE (avg)",     str(cmo_SE_1_est      )  )
-            temp = temp.replace("CMO_NE (avg)",     str(cmo_NE_1_est      )  )
-            temp = temp.replace("CMO_SE (1 est)",   str(cmo_SE_mean       )  )
-            temp = temp.replace("CMO_SE (1 est)",   str(cmo_NE_mean       )  )
+            temp = temp.replace("Zinf",             str(ultimo_zinf                         )  )
+            temp = temp.replace("Zsup",             str(ultimo_zsup                         )  )
+            temp = temp.replace("Gap",              str(ultimo_gap                          )  )
+            temp = temp.replace("Tempo",            str(ultimo_tempo                        )  )
+            temp = temp.replace("Custo_P. (avg)",   str(round(custo_presente_med,2)         )  )
+            temp = temp.replace("Custo_Fut. (avg)", str(round(custo_futuro_med  ,2)         )  )
+            temp = temp.replace("CMO_SE (avg)",     str(cmo_SE_1_est                        )  )
+            temp = temp.replace("CMO_NE (avg)",     str(round(cmo_NE_1_est                  )  )
+            temp = temp.replace("CMO_SE (1 est)",   str(round(cmo_SE_mean       ,2)         )  )
+            temp = temp.replace("CMO_SE (1 est)",   str(round(cmo_NE_mean       ,2)         )  )
             
         
             #<td>Zinf</td>
