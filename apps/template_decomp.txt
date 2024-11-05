@@ -1,0 +1,64 @@
+\page{Infos}
+
+\info{Estudo}
+
+\page{SIN}
+
+<h1>Relatório SIN</h1>
+Relatório com grandezas relacionadas ao estudo
+
+###Formula:
+###Here is some LaTeX: \( E = mc^2 \)
+
+<h3> Custo Operativo SIN </h3>
+plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN --largura 1200 --altura 650 --tamanho 20 --labely MMR$
+
+\info{SIN}
+<h3> Parcelas Custos de Operação </h3>
+plotador_dev custos arquivo_json --largura 1200 --altura 650 --tamanho 20 --titulo Parcelas_Custos_Operacao
+
+\subpage{Geracoes}
+
+<h3> Geracao Térmica </h3>
+plotador_dev temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+
+<h3> Geracao Hidreletrica </h3>
+plotador_dev temporal --titulo Geração_Hidrelétrica_SIN --json arquivo_json --sintese GHID_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+
+\subpage{Energia Armazenada}
+<h3> Energia Armazenada Percentual Final </h3>
+plotador_dev temporal --titulo Energia_Armazenada_Percentual_SIN --json arquivo_json --sintese EARPF_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+
+<h3> Energia Armazenada Final </h3>
+plotador_dev temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+
+\subpage{ENA}
+plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json --sintese ENAA_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+
+\page{Submercado}
+
+<h1> Relatório de Submercados </h1>
+
+\info{SBM}
+
+\subpage{Geracoes SBM}
+
+<h3> Geracao Térmica </h3>
+plotador_dev temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+
+<h3> Geracao Hidreletrica </h3>
+plotador_dev temporal --titulo Geração_Hidrelétrica_SBM --json arquivo_json --sintese GHID_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+
+\subpage{Energia Armazenada SBM}
+<h3> Energia Armazenada Percentual Final </h3>
+plotador_dev temporal --titulo Energia_Armazenada_Percentual_SBM --json arquivo_json --sintese EARPF_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+
+<h3> Energia Armazenada Final </h3>
+plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+
+\subpage{Custo Marginal SBM}
+plotador_dev temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20
+
+\subpage{ENA SBM}
+plotador_dev temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+
