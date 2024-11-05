@@ -39,6 +39,7 @@ class Report():
             #shutil.copy(arq_json_exemplo, current_directory+"/exemplo.json")
             with open(arq_json_exemplo, "r") as file:
                 dados = json.load(file)
+                print(dados)
                 dados["casos"][0]["estudo"] = "_default"
                 dados["casos"][0]["nome"] = " "
                 dados["casos"][0]["caminho"] = os.getcwd()
