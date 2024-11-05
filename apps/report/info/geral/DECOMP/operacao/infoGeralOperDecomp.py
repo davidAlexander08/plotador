@@ -31,9 +31,7 @@ class InfoGeralOperDecomp(Estruturas):
             extensao = f.readline().strip('\n')
         if extensao == "":
             raise FileNotFoundError(f"Arquivo caso.dat não encontrado.") 
-        print("extensao: ", extensao)
-        print(caso.caminho+"/relato."+extensao)
-        exit(1)
+
         if(os.path.isfile(caso.caminho+"/relato."+extensao)):
             data_relato = Relato.read(caso.caminho+"/relato."+extensao)
             
