@@ -18,9 +18,9 @@ class InfoSBMDecomp(Estruturas):
         else:
             for arg in argumentos:
                 if(arg in lista_sbm):
-                    lista_argumentos.append(arg)
+                    lista_argumentos.append(mapa_sbm[arg])
                 elif(arg in lista_sbm_inv):
-                    lista_argumentos.append(mapa_sbm_inverso[arg])
+                    lista_argumentos.append(arg)
                 else:
                     print("SUBMERCADO: ", arg, " NAO RECONHECIDO")
                     exit(1)
@@ -52,6 +52,7 @@ class InfoSBMDecomp(Estruturas):
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet")):
             oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet",engine = "pyarrow")
             codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
+            print(arg)
             cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
             oper_sbm = oper.loc[(oper["codigo_submercado"] == cod_sbm) & (oper["cenario"] == "mean") & (oper["patamar"] == 0)]
             first_month = oper_sbm.loc[(oper_sbm["estagio"] == 1)]
