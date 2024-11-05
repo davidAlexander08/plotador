@@ -6,6 +6,9 @@ from apps.report.info.geral.NEWAVE.operacao.infoGeralOperNewave import InfoGeral
 from apps.report.info.geral.DESSEM.eco.infoGeralEcoDessem import InfoGeralEcoDessem
 from apps.report.info.geral.DESSEM.operacao.infoGeralOperDessem import InfoGeralOperDessem
 
+
+from apps.report.info.geral.DECOMP.operacao.infoGeralOperDecomp import InfoGeralOperDecomp
+
 class InfoGeral(Estruturas):
     def __init__(self, data, par_dados):
         Estruturas.__init__(self)
