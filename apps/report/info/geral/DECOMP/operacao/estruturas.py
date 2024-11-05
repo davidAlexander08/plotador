@@ -8,27 +8,35 @@ class Estruturas:
             <th>Caso</th> 
             <th>Modelo</th>
             <th>Versao</th>
-            <th>Politica (min)</th>
-            <th>SF</th>
-            <th>Total</th>
-            <th>Iter</th>
             <th>Zinf</th>
-            <th>Custo Total</th>
-            <th>Desvio Custo</th>
+            <th>Zsup</th>
+            <th>Gap</th>
+            <th>Iter</th>
+            <th>Tempo</th>
+            <th>Custo_P. (avg)</th>
+            <th>Custo_Fut. (avg)</th>
+            <th>CMO_SE (avg)</th>
+            <th>CMO_NE (avg)</th>
+            <th>CMO_SE (1 est)</th>
+            <th>CMO_SE (1 est)</th>
         </tr>
     """      
 
         self.template_Tabela_Operacao = """
         <tr>
-            <td>Caso</td>
+            <td>Caso</td> 
             <td>Modelo</td>
             <td>Versao</td>
-            <td>tempo_politica</td>
-            <td>tempo_sf</td>
-            <td>tempo_total</td>
-            <td>iteracoes</td>
-            <td>zinf</td>
-            <td>custo_total</td>
-            <td>desvio_custo</td>
+            <td>Zinf</td>
+            <td>Zsup</td>
+            <td>Gap</td>
+            <td>Iter</td>
+            <td>Tempo</td>
+            <td>Custo_P. (avg)</td>
+            <td>Custo_Fut. (avg)</td>
+            <td>CMO_SE (avg)</td>
+            <td>CMO_NE (avg)</td>
+            <td>CMO_SE (1 est)</td>
+            <td>CMO_SE (1 est)</td>
         </tr>
     """     

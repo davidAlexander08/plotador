@@ -35,53 +35,83 @@ class InfoGeralOperDecomp(Estruturas):
         if(os.path.isfile(caso.caminho+"/relato."+extensao)):
             data_relato = Relato.read(caso.caminho+"/relato."+extensao)
             
-            print(data_relato.convergencia)
-            print(data_relato.convergencia.columns)
-            print(data_relato.relatorio_operacao_custos.columns)
-            print(data_relato.relatorio_operacao_custos)
+            ultima_iteracao = data_relato.convergencia["iteracao"].iloc[-1]
+            ultimo_zinf = data_relato.convergencia["zinf"].iloc[-1]
+            ultimo_zsup = data_relato.convergencia["zsup"].iloc[-1]
+            ultimo_gap = data_relato.convergencia["gap_percentual"].iloc[-1]
+            ultimo_tempo = data_relato.convergencia["tempo"].iloc[-1]
+
+            custo_presente_med = data_relato.relatorio_operacao_custos["custo_presente"].mean()
+            custo_futuro_med   = data_relato.relatorio_operacao_custos["custo_futuro"].mean()
+            gerao_term_med  = data_relato.relatorio_operacao_custos["geracao_termica"].mean()
+            cmo_SE_1_est   = data_relato.relatorio_operacao_custos["cmo_SE"].iloc[0]
+            cmo_NE_1_est   = data_relato.relatorio_operacao_custos["cmo_NE"].iloc[0]
+            cmo_SE_mean   = data_relato.relatorio_operacao_custos["cmo_SE"].mean()
+            cmo_NE_mean   = data_relato.relatorio_operacao_custos["cmo_NE"].mean()
+
+            temp = temp.replace("Versao", "v")
+            temp = temp.replace("Zinf", ultimo_zinf)
+            temp = temp.replace("Zsup", ultimo_zsup)
+            temp = temp.replace("Gap", ultimo_gap)
+            temp = temp.replace("Tempo", ultimo_tempo)
+            temp = temp.replace("Custo_P. (avg)", custo_presente_med)
+            temp = temp.replace("Custo_Fut. (avg)", custo_futuro_med)
+            temp = temp.replace("CMO_SE (avg)", cmo_SE_1_est)
+            temp = temp.replace("CMO_NE (avg)", cmo_NE_1_est)
+            temp = temp.replace("CMO_SE (1 est)", cmo_SE_mean)
+            temp = temp.replace("CMO_SE (1 est)", cmo_NE_mean)
             
+        
+            #<td>Zinf</td>
+            #<td>Zsup</td>
+            #<td>Gap</td>
+            #<td>Iter</td>
+            #<td>Tempo</td>
+            #<td>Custo_P. (avg)</td>
+            #<td>Custo_Fut. (avg)</td>
+            #<td>CMO_SE (avg)</td>
+            #<td>CMO_NE (avg)</td>
+            #<td>CMO_SE (1 est)</td>
+            #<td>CMO_SE (1 est)</td>
 
-            exit(1)
-            versao = "" if data_pmo.versao_modelo is None else data_pmo.versao_modelo
-            custo_total = 0 if data_pmo.custo_operacao_total is None else data_pmo.custo_operacao_total
-            desvio_custo = 0 if data_pmo.desvio_custo_operacao_total is None else data_pmo.desvio_custo_operacao_total*1.96
-            temp = temp.replace("custo_total", str(custo_total))
-            temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
-            temp = temp.replace("Versao", versao)
-            
-        if(os.path.isfile(caso.caminho+"/sintese/TEMPO.parquet")):
-            df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-            df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-            tempo_politica = df_caso.loc[(df_caso["etapa"] == "Calculo da Politica")]["tempo"].iloc[0]/60
-            tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
-            tempo_total = df_caso["tempo"].sum()/60
+            #print(data_relato.convergencia)
+            #print(data_relato.convergencia.columns)
+            #print(data_relato.relatorio_operacao_custos.columns)
+            #print(data_relato.relatorio_operacao_custos)
 
-            h_tempo_politica =    0 if tempo_politica < 60 else math.floor(tempo_politica/60)
-            h_tempo_sf =          0 if tempo_sf       < 60 else math.floor(tempo_sf/60)
-            h_tempo_total =       0 if tempo_total    < 60 else math.floor(tempo_total/60)
+       #if(os.path.isfile(caso.caminho+"/sintese/TEMPO.parquet")):
+       #    df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+       #    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+       #    tempo_politica = df_caso.loc[(df_caso["etapa"] == "Calculo da Politica")]["tempo"].iloc[0]/60
+       #    tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
+       #    tempo_total = df_caso["tempo"].sum()/60
 
-            min_tempo_politica =    round(tempo_politica,0)  if h_tempo_politica == 0 else  round(tempo_politica - h_tempo_politica*60 ,0)
-            min_tempo_sf =          round(tempo_sf,0)        if h_tempo_sf       == 0 else  round(tempo_sf - h_tempo_sf*60 ,0)
-            min_tempo_total =       round(tempo_total,0)     if h_tempo_total    == 0 else  round(tempo_total - h_tempo_total*60 ,0)
+       #    h_tempo_politica =    0 if tempo_politica < 60 else math.floor(tempo_politica/60)
+       #    h_tempo_sf =          0 if tempo_sf       < 60 else math.floor(tempo_sf/60)
+       #    h_tempo_total =       0 if tempo_total    < 60 else math.floor(tempo_total/60)
 
-            #temp = temp.replace("tempo_politica", str(round(tempo_politica, 2)))
-            #temp = temp.replace("tempo_sf", str(round(tempo_sf, 2)))
-            #temp = temp.replace("tempo_total", str(round(tempo_total, 2)))
+       #    min_tempo_politica =    round(tempo_politica,0)  if h_tempo_politica == 0 else  round(tempo_politica - h_tempo_politica*60 ,0)
+       #    min_tempo_sf =          round(tempo_sf,0)        if h_tempo_sf       == 0 else  round(tempo_sf - h_tempo_sf*60 ,0)
+       #    min_tempo_total =       round(tempo_total,0)     if h_tempo_total    == 0 else  round(tempo_total - h_tempo_total*60 ,0)
+
+       #    #temp = temp.replace("tempo_politica", str(round(tempo_politica, 2)))
+       #    #temp = temp.replace("tempo_sf", str(round(tempo_sf, 2)))
+       #    #temp = temp.replace("tempo_total", str(round(tempo_total, 2)))
 
 
-            temp = temp.replace("tempo_politica", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min")
-            temp = temp.replace("tempo_sf", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min")
-            temp = temp.replace("tempo_total", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min")
-        else:
-            pass
+       #    temp = temp.replace("tempo_politica", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min")
+       #    temp = temp.replace("tempo_sf", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min")
+       #    temp = temp.replace("tempo_total", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min")
+       #else:
+       #    pass
 
-        if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
-            df_temp = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
-            df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-            iteracoes = df_caso["iteracao"].iloc[-1]
-            zinf = df_caso["zinf"].iloc[-1]
-            temp = temp.replace("iteracoes", str(iteracoes))
-            temp = temp.replace("zinf", str(zinf))
+       #if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
+       #    df_temp = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
+       #    df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+       #    iteracoes = df_caso["iteracao"].iloc[-1]
+       #    zinf = df_caso["zinf"].iloc[-1]
+       #    temp = temp.replace("iteracoes", str(iteracoes))
+       #    temp = temp.replace("zinf", str(zinf))
 
 
 
