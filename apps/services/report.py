@@ -39,18 +39,17 @@ class Report():
             #shutil.copy(arq_json_exemplo, current_directory+"/exemplo.json")
             with open(arq_json_exemplo, "r") as file:
                 dados = json.load(file)
-                print(dados["conjuntos"][0]["casos"])
-                dados["conjuntos"]["casos"][0]["estudo"] = "_default"
-                dados["conjuntos"]["casos"][0]["nome"] = " "
-                dados["conjuntos"]["casos"][0]["caminho"] = os.getcwd()
+                dados["conjuntos"][0]["casos"][0]["estudo"] = "_default"
+                dados["conjuntos"][0]["casos"][0]["nome"] = " "
+                dados["conjuntos"][0]["casos"][0]["caminho"] = os.getcwd()
                 if os.path.isfile("dger.dat"):
-                    dados["conjuntos"]["casos"][0]["modelo"] = "NEWAVE"
+                    dados["conjuntos"][0]["casos"][0]["modelo"] = "NEWAVE"
                     dados["argumentos"][0]["args"] = ["SUDESTE","NORDESTE","NORTE","SUL"]
                 elif os.path.isfile("decomp.tim"):
-                    dados["conjuntos"]["casos"][0]["modelo"] = "DECOMP"
+                    dados["conjuntos"][0]["casos"][0]["modelo"] = "DECOMP"
                     dados["argumentos"][0]["args"] = ["SE","NE","N","S"]
                 elif os.path.isfile("entdados.dat"):
-                    dados["conjuntos"]["casos"][0]["modelo"] = "DESSEM"
+                    dados["conjuntos"][0]["casos"][0]["modelo"] = "DESSEM"
                     dados["argumentos"][0]["args"] = ["SE","NE","N","S"]
                 else: 
                     raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
