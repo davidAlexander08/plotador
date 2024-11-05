@@ -13,7 +13,7 @@ class InfoGeralOperDecomp(Estruturas):
         self.lista_text = []
         self.lista_text.append(self.Tabela_Operacao)
         for caso in data.conjuntoCasos[0].casos:
-            if(caso.modelo == "NEWAVE"):
+            if(caso.modelo == "DECOMP"):
                 temp = self.preenche_operacao(caso)
                 self.lista_text.append(temp)
         self.lista_text.append("</table>"+"\n")
