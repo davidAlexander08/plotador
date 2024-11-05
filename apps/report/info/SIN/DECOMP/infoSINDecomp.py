@@ -35,7 +35,7 @@ class InfoSINDecomp(Estruturas):
 
             if(oper_sin['variavel'].str.contains("EARPI", case=False, na=False).any()):
                 earpf_i = first_month.loc[(first_month["variavel"] == "EARPI")]["valor"].iloc[0]
-                temp = temp.replace("EarpI", str(earpf_i))
+                temp = temp.replace("EarpI", str(round(earpf_i,2)))
 
             
             if(oper_sin['variavel'].str.contains("GTER", case=False, na=False).any()):
@@ -50,5 +50,5 @@ class InfoSINDecomp(Estruturas):
                 earpf_avg = oper_sin.loc[(oper_sin["variavel"] == "EARPF")]["valor"].mean()
                 temp = temp.replace("Media_EARPF", str(round(earpf_avg,2)))
                 earpf_last = oper_sin.loc[(oper_sin["variavel"] == "EARPF")]["valor"].iloc[-1]
-                temp = temp.replace("EARPF Ultimo Est", str(earpf_last))
+                temp = temp.replace("EARPF Ultimo Est", str(round(earpf_last,2)))
         return temp
