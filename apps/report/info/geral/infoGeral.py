@@ -27,7 +27,7 @@ class InfoGeral(Estruturas):
             self.lista_text.append(temp)
             set_modelos.add(caso.modelo)
         self.lista_text.append("</table>"+"\n")
-        
+        print("PLOTANDO ECO")
         for modelo in set_modelos:
             if(par_dados[1] == "ECO" or par_dados[1] == None):
                 ## TABELA ECO
@@ -40,7 +40,8 @@ class InfoGeral(Estruturas):
                 if(modelo == "DESSEM"):
                     self.lista_text.append(InfoGeralEcoDessem(data).text_html)
                     pass
-
+            
+            print("PLOTANDO OPERACAO")
             if(par_dados[1] == "OPER" or par_dados[1] == None):
                 ##TABELA OPER
                 self.lista_text.append("<h3>Oper Dados</h3>"+"\n")
