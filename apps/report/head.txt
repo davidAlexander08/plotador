@@ -273,9 +273,10 @@
 </head>
 
 <body>
-    <div id="loader">
-        <span>ONS - A energia que potencializa a vida - Carregando Visualização - Gerência PEM</span>
-    </div>
+    /* <div id="loader"> */
+    
+    /*     <span>ONS - A energia que potencializa a vida - Carregando Visualização - Gerência PEM</span>  */
+    /* </div>  */
 
     <div class="top-bar" id="top-bar">
         <div id="top-bar-title">Menu</div>
