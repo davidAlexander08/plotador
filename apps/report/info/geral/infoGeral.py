@@ -48,6 +48,7 @@ class InfoGeral(Estruturas):
                 if(modelo == "NEWAVE"):
                     self.lista_text.append(InfoGeralOperNewave(data).text_html)
                 if(modelo == "DECOMP"):
+                    print("ENTROU DECOMP")
                     self.lista_text.append(InfoGeralOperDecomp(data).text_html)
                 if(modelo == "DESSEM"):
                     self.lista_text.append(InfoGeralOperDessem(data).text_html)
