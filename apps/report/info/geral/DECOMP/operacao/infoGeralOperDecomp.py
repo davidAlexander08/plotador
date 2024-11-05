@@ -1,5 +1,5 @@
 
-from apps.report.info.geral.NEWAVE.operacao.estruturas import Estruturas
+from apps.report.info.geral.DECOMP.operacao.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from idecomp.decomp.relato import Relato
 from idecomp.decomp.caso import Caso
