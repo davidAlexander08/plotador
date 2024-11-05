@@ -44,7 +44,7 @@ class InfoGeral(Estruturas):
                 if(modelo == "NEWAVE"):
                     self.lista_text.append(InfoGeralOperNewave(data).text_html)
                 if(modelo == "DECOMP"):
-                    #self.lista_text.append(InfoGeralOperDecomp(data).text_html)
+                    self.lista_text.append(InfoGeralOperDecomp(data).text_html)
                     pass
                 if(modelo == "DESSEM"):
                     self.lista_text.append(InfoGeralOperDessem(data).text_html)
