@@ -1,7 +1,7 @@
 
 from apps.report.info.geral.NEWAVE.operacao.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
-from inewave.decomp.relato import Relato
+from idecomp.decomp.relato import Relato
 from idecomp.decomp.caso import Caso
 import os
 import pandas as pd
