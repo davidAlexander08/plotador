@@ -17,7 +17,7 @@ class Argumento:
         lin = 1
         pTitulo = 0
         coord_max = (1,1)
-        print(listaNomes)
+        #print(listaNomes)
         if(listaNomes is not None): 
             if(len(listaNomes) ==  2): coord_max = (2,1)
             if(len(listaNomes) ==  3): coord_max = (2,2)
