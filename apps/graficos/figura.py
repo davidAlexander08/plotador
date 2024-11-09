@@ -29,6 +29,7 @@ class Figura():
                     else:
                         self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col)
                 else:
+                    print("linha: ", unity.arg.lin, " coluna: ", unity.arg.col )
                     self.fig.add_trace(trace, row = unity.arg.lin, col = unity.arg.col)
                 self.fig.update_yaxes(range=[yinf,ysup])
                 contador += 1
