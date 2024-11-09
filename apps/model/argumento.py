@@ -47,6 +47,7 @@ class Argumento:
             self.listaUArg = listaUArg
             self.max_col = coord_max[0]
             self.max_lin = coord_max[1]
+            print("max_col: ",self.max_col , " max_lin: ", self.max_lin)
         else:
             self.listaUArg = None
             self.max_col = 1
