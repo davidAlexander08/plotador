@@ -30,8 +30,17 @@ class InfoExecucaoDessem(Estruturas):
         data_matriz = LogMatriz.read(caso.caminho+"/LOG_MATRIZ.DAT")
         df = data_matriz.tabela
         print(df)
-        flag_MILP = df.loc[(df["tipo"] == "MILP")]["status"].iloc[0]
-        flag_CMO = df.loc[(df["tipo"] == "PL.CalcCMO")]["status"].iloc[0]
+        
+        filtered_df = df.loc[df["tipo"] == "MILP", "status"]
+
+        # Check if there is at least one match, then get the first "status" value if it exists
+
+        filtered_df = df.loc[(df["tipo"] == "MILP")]["status"]
+        flag_MILP = 0 if filtered_df.empty else filtered_df.iloc[0]
+
+        filtered_df = df.loc[(df["tipo"] == "PL.CalcCMO")]["status"]
+        flag_CMO = 0 if filtered_df.empty else filtered_df.iloc[0]
+        
         temp = temp.replace("Status MILP", str(flag_MILP))
         temp = temp.replace("Status CalcCMO", str(flag_CMO))
 
