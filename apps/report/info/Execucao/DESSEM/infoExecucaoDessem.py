@@ -29,6 +29,7 @@ class InfoExecucaoDessem(Estruturas):
         #if(os.path.isfile(caso.caminho+"LOG_MATRIZ.DAT")):
         data_matriz = LogMatriz.read(caso.caminho+"/LOG_MATRIZ.DAT")
         df = data_matriz.tabela
+        print(df)
         flag_MILP = df.loc[(df["tipo"] == "MILP")]["status"].iloc[0]
         flag_CMO = df.loc[(df["tipo"] == "PL.CalcCMO")]["status"].iloc[0]
         temp = temp.replace("Status MILP", str(flag_MILP))
