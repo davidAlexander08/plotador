@@ -16,8 +16,8 @@ class EcoIndicadores:
         AbstractIndicadores.__init__(self)
         self.mapa_arquivos = {
             "GTER_SIN":["gttotsin.out"],
-            "EARPF_SIN":["earmfsin.out"],
-            "EARMF_SIN":["earmfpsin.out"],
+            "EARPF_SIN":["earmfpsin.out"],
+            "EARMF_SIN":["earmfsin.out"],
             "GTER_SBM":["gttot001.out",
                         "gttot002.out",
                         "gttot003.out",
