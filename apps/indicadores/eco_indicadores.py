@@ -65,7 +65,7 @@ class EcoIndicadores:
                 df["caso"] = c.nome
                 df["modelo"] = c.modelo
                 result_dict [c] = df
-                print(df)
+                #print(df)
             else:                    
                 if(sintese in self.mapa_arquivos.keys()):
                     lista_arquivos = self.mapa_arquivos[sintese]
@@ -116,11 +116,11 @@ class EcoIndicadores:
                         else:
                             df["codigo_submercado"] = None
                         df["variavel"] = sintese.split("_")[0]
-                        print(df)
+                        #print(df)
                         lista_df.append(df.copy())
                     df_resultado = pd.concat(lista_df)
-                    print(df_resultado)    
-                    exit(1)
+                    #print(df_resultado)    
+                    #exit(1)
                     result_dict [c] = df_resultado
 
         return result_dict 
