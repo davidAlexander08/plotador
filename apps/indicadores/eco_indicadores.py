@@ -117,7 +117,7 @@ class EcoIndicadores:
                             df["codigo_submercado"] = None
                         df["variavel"] = sintese.split("_")[0]
                         print(df)
-                        lista_df.append(df)
+                        lista_df.append(df.copy())
                     df_resultado = pd.concat(lista_df, axis = 1)
                     print(df_resultado)    
                     exit(1)
