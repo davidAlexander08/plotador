@@ -60,6 +60,7 @@ class EcoIndicadores:
                 df["caso"] = c.nome
                 df["modelo"] = c.modelo
                 result_dict [c] = df
+                print(df)
             else:                    
                 if(sintese in self.mapa_arquivos.keys()):
                     try:
