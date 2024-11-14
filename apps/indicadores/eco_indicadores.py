@@ -80,9 +80,26 @@ class EcoIndicadores:
                     estagios = list(range(1, len(media_values) + 1))
                     print(estagios)
 
+
+                    dados_dger = Dger.read(c.caminho+"/dger.dat")
+                    ano_inicio = dados_dger.ano_inicio_estudo
+                    mes_inicio = dados_dger.mes_inicio_estudo
+                    start_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
+                    num_months = 72  # Change this to your desired number
+                    date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
+                    
+                    #end_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
+                    #date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
+
+                    df = pd.DataFrame({'Timestamp': date_range})
+                    print(df)
+
+
                     dicionario = {
                         "valor":media_values,
-                        "estagio":estagios
+                        "estagio":estagios,
+                        "data_inicio":date_range
+                        #"data_fim":
                     }
                     df = pd.DataFrame(dicionario)
                     df["cenario"] = "mean"
@@ -97,15 +114,7 @@ class EcoIndicadores:
                     df["variavel"] = sintese.split("_")[0]
                     print(df)
 
-                    dados_dger = Dger.read(c.caminho+"/dger.dat")
-                    ano_inicio = dados_dger.ano_inicio_estudo
-                    mes_inicio = dados_dger.mes_inicio_estudo
-                    start_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
-                    print(start_date)
-                    num_months = 72  # Change this to your desired number
-                    date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
-                    df = pd.DataFrame({'Timestamp': date_range})
-                    print(df)
+
 
 
 
