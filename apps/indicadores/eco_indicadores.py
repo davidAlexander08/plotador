@@ -63,44 +63,44 @@ class EcoIndicadores:
                 print(df)
             else:                    
                 if(sintese in self.mapa_arquivos.keys()):
-                    try:
-                        arquivo = self.mapa_arquivos[sintese]
-                        caminho_arquivo = c.caminho+"/"+arquivo
-                        media_values = []
-                        estagios = []
-                        with open(caminho_arquivo, 'r') as file:
-                            for line in file:
-                                inicio = line[0:10].split()
-                                if("MEDIA" in inicio):
-                                    temp = []
-                                    temp = [float(value) for value in line.split()[1:]]
-                                    temp.pop()
-                                    media_values = media_values + temp
-                        estagios = list(range(1, len(media_values) + 1))
-                        print(estagios)
+                    #try:
+                    arquivo = self.mapa_arquivos[sintese]
+                    caminho_arquivo = c.caminho+"/"+arquivo
+                    media_values = []
+                    estagios = []
+                    with open(caminho_arquivo, 'r') as file:
+                        for line in file:
+                            inicio = line[0:10].split()
+                            if("MEDIA" in inicio):
+                                temp = []
+                                temp = [float(value) for value in line.split()[1:]]
+                                temp.pop()
+                                media_values = media_values + temp
+                    estagios = list(range(1, len(media_values) + 1))
+                    print(estagios)
 
-                        dicionario = {
-                            "valor":media_values,
-                        }
-                        df = pd.dataFrame(dicionario)
-                        df["cenario"] = "mean"
-                        df["patamar"] = 0
-                        df["limite_superior"] = 0
-                        df["limite_inferior"] = 0
-                        df["caso"] = c.nome
-                        df["modelo"] = c.modelo
-                        df["codigo_usina"] = None
-                        df["codigo_ree"] = None
-                        df["codigo_submercado"] = None
+                    dicionario = {
+                        "valor":media_values,
+                    }
+                    df = pd.dataFrame(dicionario)
+                    df["cenario"] = "mean"
+                    df["patamar"] = 0
+                    df["limite_superior"] = 0
+                    df["limite_inferior"] = 0
+                    df["caso"] = c.nome
+                    df["modelo"] = c.modelo
+                    df["codigo_usina"] = None
+                    df["codigo_ree"] = None
+                    df["codigo_submercado"] = None
 
-                        print(df)
-                        exit(1)
-                        media_values = [float(value) for value in media_values]
-                        print(media_values)
+                    print(df)
+                    exit(1)
+                    media_values = [float(value) for value in media_values]
+                    print(media_values)
 
-                        exit(1)
-                    except Exception as e:  
-                        print("NAO EXISTE SINTESE: ", sintese, " NO CAMINHO: ", c.caminho)
+                    exit(1)
+                    #except Exception as e:  
+                    #    print("NAO EXISTE SINTESE: ", sintese, " NO CAMINHO: ", c.caminho)
 
 
         return result_dict 
