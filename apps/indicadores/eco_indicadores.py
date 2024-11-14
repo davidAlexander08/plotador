@@ -97,12 +97,13 @@ class EcoIndicadores:
 
                     print(df)
 
-
                     start_date = "2024-08-01"
                     num_months = 72  # Change this to your desired number
-                    date_range = pd.date_range(start=start_date, periods=num_months, freq='M')
+                    date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
                     df = pd.DataFrame({'Timestamp': date_range})
                     print(df)
+
+
 
                     exit(1)
                     media_values = [float(value) for value in media_values]
