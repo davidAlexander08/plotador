@@ -61,7 +61,7 @@ class EcoIndicadores:
                 df["modelo"] = c.modelo
                 result_dict [c] = df
             else:                    
-                if(sintese in mapa_arquivos.keys()):
+                if(sintese in self.mapa_arquivos.keys()):
                     arquivo = self.mapa_arquivos[sintese]
                     print("EXISTE")
                 else:
