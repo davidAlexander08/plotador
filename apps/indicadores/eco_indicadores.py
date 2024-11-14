@@ -6,6 +6,7 @@ import os
 from apps.model.caso import Caso 
 from apps.indicadores.abstractIndicadores import AbstractIndicadores
 import warnings
+from inewave.newave import Dger
 
 class EcoIndicadores:
 
@@ -94,10 +95,13 @@ class EcoIndicadores:
                     df["codigo_ree"] = None
                     df["codigo_submercado"] = None
                     df["variavel"] = sintese.split("_")[0]
-
                     print(df)
 
-                    start_date = "2024-08-01"
+                    dados_dger = Dger.read(c.caminho+"/dger.dat")
+                    ano_inicio = dados_dger.ano_inicio_estudo
+                    mes_inicio = dados_dger.mes_inicio_estudo
+                    start_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
+                    print(start_date)
                     num_months = 72  # Change this to your desired number
                     date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
                     df = pd.DataFrame({'Timestamp': date_range})
