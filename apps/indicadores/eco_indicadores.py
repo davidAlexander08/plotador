@@ -65,7 +65,16 @@ class EcoIndicadores:
                     try:
                         arquivo = self.mapa_arquivos[sintese]
                         caminho_arquivo = c.caminho+"/"+arquivo
-                        print(caminho_arquivo)
+                        media_values = []
+                        with open(caminho_arquivo, 'r') as file:
+                            for line in file:
+                                if line.startswith("MEDIA"):
+                                    media_values = line.split()[1:]
+                                    print(media_values)
+                                    exit(1)
+                        media_values = [float(value) for value in media_values]
+                        print(media_values)
+
                         exit(1)
                     except Exception as e:  
                         print("NAO EXISTE SINTESE: ", sintese, " NO CAMINHO: ", c.caminho)
