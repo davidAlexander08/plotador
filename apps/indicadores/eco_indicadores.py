@@ -38,7 +38,7 @@ class EcoIndicadores:
         variavel = sintese_parts[0]
         flag_estatistica = 0
         for c in self.casos:
-            if(os.path.isfile(caso.caminho+"/sintese/"+sintese+".parquet")):
+            if(os.path.isfile(c.caminho+"/sintese/"+sintese+".parquet")):
                 try:
                     #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
                     if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
