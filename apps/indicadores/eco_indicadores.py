@@ -22,14 +22,14 @@ class EcoIndicadores:
                         "gttot002.out",
                         "gttot003.out",
                         "gttot004.out"],
-            "EARPF_SBM":["eafm001.out",
+            "EARMF_SBM":["eafm001.out",
                         "eafm002.out",
                         "eafm003.out",
                         "eafm004.out"],
-            "EARMF_SBM":["earmfpm001.out",
-                        "gttot002.out",
-                        "gttot003.out",
-                        "gttot004.out"]
+            "EARPF_SBM":["earmfpm001.out",
+                        "earmfpm002.out",
+                        "earmfpm003.out",
+                        "earmfpm004.out"]
         }
         
     def retorna_df_concatenado(self,sintese):
