@@ -93,13 +93,12 @@ class EcoIndicadores:
                         df["codigo_ree"] = None
                         df["codigo_submercado"] = None
 
-                            print(media_values)
-                            print("tamanho: ", len(media_values))
-                            exit(1)
-                                #if line[]:
-                                #    media_values = line.split()[1:]
-                                #    print(media_values)
-                            exit(1)
+                        print(df)
+                        exit(1)
+                            #if line[]:
+                            #    media_values = line.split()[1:]
+                            #    print(media_values)
+                        exit(1)
                         media_values = [float(value) for value in media_values]
                         print(media_values)
 
