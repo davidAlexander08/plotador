@@ -7,7 +7,7 @@ from apps.model.caso import Caso
 from apps.indicadores.abstractIndicadores import AbstractIndicadores
 import warnings
 from inewave.newave import Dger
-
+import re
 class EcoIndicadores:
 
     def __init__(  self, casos: List[Caso] ):
@@ -119,7 +119,7 @@ class EcoIndicadores:
                         df["codigo_usina"] = None
                         df["codigo_ree"] = None
                         if(len(lista_arquivos) == 4):
-                            codigo_sbm = int(''.join(filter(str.isdigit, arquivo[-7:-4])))
+                            codigo_sbm = int(re.search(r'(\d+)\.out$', arquivo).group(1))
                             df["codigo_submercado"] = codigo_sbm
                         else:
                             df["codigo_submercado"] = None
