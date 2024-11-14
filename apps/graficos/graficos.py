@@ -210,7 +210,7 @@ class Graficos:
                 df = mapa[unity]
                 listaGO = []
                 lista_casos = df["caso"].unique()
-                flag_limInf = True
+                flag_limInf = True 
                 flag_limSup = True
                 for c in self.casos:
                     dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
