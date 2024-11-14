@@ -42,10 +42,10 @@ class EcoIndicadores:
         sintese_parts = sintese.split("_")
         variavel = sintese_parts[0]
         flag_estatistica = 0
-        print("SINTESE")
+        #print("SINTESE")
         for c in self.casos:
             if(os.path.isfile(c.caminho+"/sintese/"+sintese+".parquet")):
-                print("ENCNTROU")
+                #print("ENCNTROU")
                 #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
                 if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
                     if(self.checkIfNumberOnly(c.tipo)):
