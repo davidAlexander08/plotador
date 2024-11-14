@@ -40,8 +40,8 @@ class EcoIndicadores:
         print("SINTESE")
         for c in self.casos:
             if(os.path.isfile(c.caminho+"/sintese/"+sintese+".parquet")):
-                print("ENCNTROU")
                 try:
+                    print("ENCNTROU")
                     #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
                     if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
                         if(self.checkIfNumberOnly(c.tipo)):
