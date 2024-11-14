@@ -15,9 +15,13 @@ class EcoIndicadores:
         self.casos = casos
         AbstractIndicadores.__init__(self)
         self.mapa_arquivos = {
-            "GTER_SIN":"gttotsin.out",
-            "EARPF_SIN":"earmfsin.out",
-            "EARMF_SIN":"earmfpsin.out"
+            "GTER_SIN":["gttotsin.out"],
+            "EARPF_SIN":["earmfsin.out"],
+            "EARMF_SIN":["earmfpsin.out"]
+            "GTER_SBM":[("gttot001.out","SUDESTE"),
+                        ("gttot002.out","SUL"),
+                        ("gttot003.out","NORDESTE"),
+                        ("gttot004.out","NORTE")]
         }
         
     def retorna_df_concatenado(self,sintese):
@@ -64,58 +68,54 @@ class EcoIndicadores:
                 print(df)
             else:                    
                 if(sintese in self.mapa_arquivos.keys()):
-                    #try:
-                    arquivo = self.mapa_arquivos[sintese]
-                    caminho_arquivo = c.caminho+"/"+arquivo
-                    media_values = []
-                    estagios = []
-                    with open(caminho_arquivo, 'r') as file:
-                        for line in file:
-                            inicio = line[0:10].split()
-                            if("MEDIA" in inicio):
-                                temp = []
-                                temp = [float(value) for value in line.split()[1:]]
-                                temp.pop()
-                                media_values = media_values + temp
-                    
-                    dados_dger = Dger.read(c.caminho+"/dger.dat")
-                    ano_inicio = dados_dger.ano_inicio_estudo
-                    mes_inicio = dados_dger.mes_inicio_estudo
-                    start_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
+                    lista_arquivos = self.mapa_arquivos[sintese]
+                    lista_df = []
+                    for arquivo in lista_arquivos:
+                        caminho_arquivo = c.caminho+"/"+arquivo
+                        media_values = []
+                        estagios = []
+                        with open(caminho_arquivo, 'r') as file:
+                            for line in file:
+                                inicio = line[0:10].split()
+                                if("MEDIA" in inicio):
+                                    temp = []
+                                    temp = [float(value) for value in line.split()[1:]]
+                                    temp.pop()
+                                    media_values = media_values + temp
+                        dados_dger = Dger.read(c.caminho+"/dger.dat")
+                        ano_inicio = dados_dger.ano_inicio_estudo
+                        mes_inicio = dados_dger.mes_inicio_estudo
+                        start_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
+                        media_values  = media_values[mes_inicio-1:]
+                        estagios = list(range(1, len(media_values) + 1))
+                        num_months = len(media_values)  # Change this to your desired number
+                        date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
+                        
+                        #end_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
+                        #date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
 
-                    media_values  = media_values[mes_inicio-1:]
-                    estagios = list(range(1, len(media_values) + 1))
-                    #print(estagios)
-
-                    num_months = len(media_values)  # Change this to your desired number
-                    date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
-                    
-                    #end_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
-                    #date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
-
-                    df = pd.DataFrame({'Timestamp': date_range})
-                    #print(df)
-
-
-                    dicionario = {
-                        "valor":media_values,
-                        "estagio":estagios,
-                        "data_inicio":date_range
-                        #"data_fim":
-                    }
-                    df = pd.DataFrame(dicionario)
-                    df["cenario"] = "mean"
-                    df["patamar"] = 0
-                    df["limite_superior"] = 0
-                    df["limite_inferior"] = 0
-                    df["caso"] = c.nome
-                    df["modelo"] = c.modelo
-                    df["codigo_usina"] = None
-                    df["codigo_ree"] = None
-                    df["codigo_submercado"] = None
-                    df["variavel"] = sintese.split("_")[0]
-                    print(df)
-                    result_dict [c] = df
+                        df = pd.DataFrame({'Timestamp': date_range})
+                        dicionario = {
+                            "estagio":estagios,
+                            "data_inicio":date_range,
+                            "valor":media_values,
+                            "limite_superior":media_values,
+                            "limite_inferior":media_values,
+                            #"data_fim":
+                        }
+                        df = pd.DataFrame(dicionario)
+                        df["cenario"] = "mean"
+                        df["patamar"] = 0
+                        df["caso"] = c.nome
+                        df["modelo"] = c.modelo
+                        df["codigo_usina"] = None
+                        df["codigo_ree"] = None
+                        df["codigo_submercado"] = None
+                        df["variavel"] = sintese.split("_")[0]
+                        #print(df)
+                        lista_df.append(df)
+                    df_resultado = pd.concat(lista_df, axis = 1)    
+                    result_dict [c] = df_resultado
 
         return result_dict 
 
