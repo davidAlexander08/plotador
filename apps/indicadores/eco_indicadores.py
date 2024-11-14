@@ -85,7 +85,7 @@ class EcoIndicadores:
 
                     media_values  = media_values[mes_inicio-1:]
                     estagios = list(range(1, len(media_values) + 1))
-                    print(estagios)
+                    #print(estagios)
 
                     num_months = len(media_values)  # Change this to your desired number
                     date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
@@ -94,7 +94,7 @@ class EcoIndicadores:
                     #date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
 
                     df = pd.DataFrame({'Timestamp': date_range})
-                    print(df)
+                    #print(df)
 
 
                     dicionario = {
@@ -115,7 +115,7 @@ class EcoIndicadores:
                     df["codigo_submercado"] = None
                     df["variavel"] = sintese.split("_")[0]
                     print(df)
-
+                    result_dict [c] = df
 
         return result_dict 
 
