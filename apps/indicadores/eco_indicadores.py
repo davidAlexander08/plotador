@@ -2,7 +2,7 @@ from typing import List
 from os.path import join
 import pandas as pd
 from apps.utils.log import Log
-import os.path
+import os
 from apps.model.caso import Caso 
 from apps.indicadores.abstractIndicadores import AbstractIndicadores
 import warnings
@@ -40,33 +40,32 @@ class EcoIndicadores:
         print("SINTESE")
         for c in self.casos:
             if(os.path.isfile(c.caminho+"/sintese/"+sintese+".parquet")):
-                try:
-                    print("ENCNTROU")
-                    #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
-                    if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
-                        if(self.checkIfNumberOnly(c.tipo)):
-                            c.tipo = int(c.tipo)
-                            sintese_busca = sintese
-                        else:
-                            sintese_busca = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
-                            flag_estatistica = 1
-                    else:
+                print("ENCNTROU")
+                #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
+                if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
+                    if(self.checkIfNumberOnly(c.tipo)):
+                        c.tipo = int(c.tipo)
                         sintese_busca = sintese
-                    #df = self.retorna_df(c, sintese_busca).copy()
-                    df = self.retorna_df(c, sintese_busca)
-                    #if(flag_estatistica == 1):
-                    if(flag_estatistica):
-                        #df = df.loc[(df["variavel"] == variavel)].copy() 
-                        df = df.loc[(df["variavel"] == variavel)]                   
-                    df["caso"] = c.nome
-                    df["modelo"] = c.modelo
-                    result_dict [c] = df
-                except Exception as e:
-                    if(sintese in mapa_arquivos.keys()):
-                        arquivo = self.mapa_arquivos[sintese]
-                        print("EXISTE")
                     else:
-                        print("NAO EXISTE SINTESE: ", sintese)
+                        sintese_busca = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
+                        flag_estatistica = 1
+                else:
+                    sintese_busca = sintese
+                #df = self.retorna_df(c, sintese_busca).copy()
+                df = self.retorna_df(c, sintese_busca)
+                #if(flag_estatistica == 1):
+                if(flag_estatistica):
+                    #df = df.loc[(df["variavel"] == variavel)].copy() 
+                    df = df.loc[(df["variavel"] == variavel)]                   
+                df["caso"] = c.nome
+                df["modelo"] = c.modelo
+                result_dict [c] = df
+            else:                    
+                if(sintese in mapa_arquivos.keys()):
+                    arquivo = self.mapa_arquivos[sintese]
+                    print("EXISTE")
+                else:
+                    print("NAO EXISTE SINTESE: ", sintese)
 
 
         return result_dict 
