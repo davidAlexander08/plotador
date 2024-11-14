@@ -18,10 +18,10 @@ class EcoIndicadores:
             "GTER_SIN":["gttotsin.out"],
             "EARPF_SIN":["earmfsin.out"],
             "EARMF_SIN":["earmfpsin.out"],
-            "GTER_SBM":[("gttot001.out","SUDESTE"),
-                        ("gttot002.out","SUL"),
-                        ("gttot003.out","NORDESTE"),
-                        ("gttot004.out","NORTE")]
+            "GTER_SBM":["gttot001.out",
+                        "gttot002.out",
+                        "gttot003.out",
+                        "gttot004.out"]
         }
         
     def retorna_df_concatenado(self,sintese):
@@ -110,7 +110,11 @@ class EcoIndicadores:
                         df["modelo"] = c.modelo
                         df["codigo_usina"] = None
                         df["codigo_ree"] = None
-                        df["codigo_submercado"] = None
+                        if(len(lista_arquivos) == 4):
+                            codigo_sbm = int(''.join(filter(str.isdigit, arquivo[-7:-4])))
+                            print(codigo_sbm)
+                            df["codigo_submercado"] = codigo_sbm
+                            exit(1)
                         df["variavel"] = sintese.split("_")[0]
                         #print(df)
                         lista_df.append(df)
