@@ -117,18 +117,6 @@ class EcoIndicadores:
                     print(df)
 
 
-
-
-
-                    exit(1)
-                    media_values = [float(value) for value in media_values]
-                    print(media_values)
-
-                    exit(1)
-                    #except Exception as e:  
-                    #    print("NAO EXISTE SINTESE: ", sintese, " NO CAMINHO: ", c.caminho)
-
-
         return result_dict 
 
 
