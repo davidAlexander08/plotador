@@ -3,7 +3,7 @@ from os.path import join
 import pandas as pd
 from apps.utils.log import Log
 import os.path
-from apps.model.caso import Caso
+from apps.model.caso import Caso 
 from apps.indicadores.abstractIndicadores import AbstractIndicadores
 import warnings
 
@@ -13,6 +13,11 @@ class EcoIndicadores:
         warnings.simplefilter(action='ignore')
         self.casos = casos
         AbstractIndicadores.__init__(self)
+        self.mapa_arquivos = {
+            "GTER_SIN" :  "gttotsin.out"
+            "EARPF_SIN" : "earmfsin.out"
+            "EARMF_SIN" : "earmfpsin.out"
+        }
         
     def retorna_df_concatenado(self,sintese):
         return pd.concat(self.retornaMapaDF(sintese))
@@ -32,27 +37,39 @@ class EcoIndicadores:
         sintese_parts = sintese.split("_")
         variavel = sintese_parts[0]
         flag_estatistica = 0
-        for c in self.casos:            
-            #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
-            if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
-                if(self.checkIfNumberOnly(c.tipo)):
-                    c.tipo = int(c.tipo)
-                    sintese_busca = sintese
-                else:
-                    sintese_busca = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
-                    flag_estatistica = 1
-            else:
-                sintese_busca = sintese
-            #df = self.retorna_df(c, sintese_busca).copy()
-            df = self.retorna_df(c, sintese_busca)
-            #if(flag_estatistica == 1):
-            if(flag_estatistica):
-                #df = df.loc[(df["variavel"] == variavel)].copy() 
-                df = df.loc[(df["variavel"] == variavel)]                   
-            df["caso"] = c.nome
-            df["modelo"] = c.modelo
-            result_dict [c] = df
+        for c in self.casos:
+            if(os.path.isfile(caso.caminho+"/sintese/"+sintese+".parquet")):
+                try:
+                    #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
+                    if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
+                        if(self.checkIfNumberOnly(c.tipo)):
+                            c.tipo = int(c.tipo)
+                            sintese_busca = sintese
+                        else:
+                            sintese_busca = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
+                            flag_estatistica = 1
+                    else:
+                        sintese_busca = sintese
+                    #df = self.retorna_df(c, sintese_busca).copy()
+                    df = self.retorna_df(c, sintese_busca)
+                    #if(flag_estatistica == 1):
+                    if(flag_estatistica):
+                        #df = df.loc[(df["variavel"] == variavel)].copy() 
+                        df = df.loc[(df["variavel"] == variavel)]                   
+                    df["caso"] = c.nome
+                    df["modelo"] = c.modelo
+                    result_dict [c] = df
+                except Exception as e:
+                    if(sintese in mapa_arquivos.keys()):
+                        arquivo = self.mapa_arquivos[sintese]
+                        print("EXISTE")
+                    else:
+                        print("NAO EXISTE SINTESE: ", sintese)
+
+
         return result_dict 
+
+
 
     def checkIfNumberOnly(self,s):
         try:
