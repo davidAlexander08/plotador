@@ -68,7 +68,7 @@ class EcoIndicadores:
                         media_values = []
                         with open(caminho_arquivo, 'r') as file:
                             for line in file:
-                                if(line[0:10].split() == "MEDIA")
+                                if(line[0:10].split() == "MEDIA"):
                                     print(line)
                                 #if line[]:
                                 #    media_values = line.split()[1:]
