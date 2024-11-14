@@ -70,7 +70,8 @@ class EcoIndicadores:
                             for line in file:
                                 inicio = line[0:10].split()
                                 if("MEDIA" in inicio):
-                                    media_values = [float(value) for value in line.split()[1:]].pop()
+                                    media_values = [float(value) for value in line.split()[1:]]
+                                    media_values.pop()
                                     print(media_values)
                                     print(line)
                                     exit(1)
