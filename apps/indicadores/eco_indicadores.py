@@ -14,9 +14,9 @@ class EcoIndicadores:
         self.casos = casos
         AbstractIndicadores.__init__(self)
         self.mapa_arquivos = {
-            "GTER_SIN" :  "gttotsin.out"
-            "EARPF_SIN" : "earmfsin.out"
-            "EARMF_SIN" : "earmfpsin.out"
+            "GTER_SIN":"gttotsin.out",
+            "EARPF_SIN":"earmfsin.out",
+            "EARMF_SIN":"earmfpsin.out"
         }
         
     def retorna_df_concatenado(self,sintese):
