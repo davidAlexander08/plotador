@@ -82,7 +82,7 @@ class EcoIndicadores:
                     dicionario = {
                         "valor":media_values,
                     }
-                    df = pd.dataFrame(dicionario)
+                    df = pd.DataFrame(dicionario)
                     df["cenario"] = "mean"
                     df["patamar"] = 0
                     df["limite_superior"] = 0
