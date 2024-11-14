@@ -27,54 +27,54 @@ class InfoExecucaoNewave(Estruturas):
         temp = temp.replace("Modelo", caso.modelo)
 
         if(os.path.isfile(caso.caminho+"/sintese/TEMPO.parquet")):
-            df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
-            df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-            tempo_inicial = df_caso.loc[(df_caso["etapa"] == "Calculos Iniciais")]["tempo"].iloc[0]/60
-            tempo_politica = df_caso.loc[(df_caso["etapa"] == "Calculo da Politica")]["tempo"].iloc[0]/60
-            tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
-            tempo_total = df_caso["tempo"].sum()/60
+            try:
+                df_temp = self.eco_indicadores.retorna_df_concatenado("TEMPO")
+                df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+                tempo_inicial = df_caso.loc[(df_caso["etapa"] == "Calculos Iniciais")]["tempo"].iloc[0]/60
+                tempo_politica = df_caso.loc[(df_caso["etapa"] == "Calculo da Politica")]["tempo"].iloc[0]/60
+                tempo_sf = df_caso.loc[(df_caso["etapa"] == "Simulacao Final")]["tempo"].iloc[0]/60
+                tempo_total = df_caso["tempo"].sum()/60
 
-            h_tempo_inicial =    0 if tempo_inicial < 60 else math.floor(tempo_inicial/60)
-            h_tempo_politica =    0 if tempo_politica < 60 else math.floor(tempo_politica/60)
-            h_tempo_sf =          0 if tempo_sf       < 60 else math.floor(tempo_sf/60)
-            h_tempo_total =       0 if tempo_total    < 60 else math.floor(tempo_total/60)
+                h_tempo_inicial =    0 if tempo_inicial < 60 else math.floor(tempo_inicial/60)
+                h_tempo_politica =    0 if tempo_politica < 60 else math.floor(tempo_politica/60)
+                h_tempo_sf =          0 if tempo_sf       < 60 else math.floor(tempo_sf/60)
+                h_tempo_total =       0 if tempo_total    < 60 else math.floor(tempo_total/60)
 
-            min_tempo_inicial =    round(tempo_inicial,0)  if h_tempo_inicial == 0 else  round(tempo_inicial - h_tempo_inicial*60 ,0)
-            min_tempo_politica =    round(tempo_politica,0)  if h_tempo_politica == 0 else  round(tempo_politica - h_tempo_politica*60 ,0)
-            min_tempo_sf =          round(tempo_sf,0)        if h_tempo_sf       == 0 else  round(tempo_sf - h_tempo_sf*60 ,0)
-            min_tempo_total =       round(tempo_total,0)     if h_tempo_total    == 0 else  round(tempo_total - h_tempo_total*60 ,0)
+                min_tempo_inicial =    round(tempo_inicial,0)  if h_tempo_inicial == 0 else  round(tempo_inicial - h_tempo_inicial*60 ,0)
+                min_tempo_politica =    round(tempo_politica,0)  if h_tempo_politica == 0 else  round(tempo_politica - h_tempo_politica*60 ,0)
+                min_tempo_sf =          round(tempo_sf,0)        if h_tempo_sf       == 0 else  round(tempo_sf - h_tempo_sf*60 ,0)
+                min_tempo_total =       round(tempo_total,0)     if h_tempo_total    == 0 else  round(tempo_total - h_tempo_total*60 ,0)
 
-            temp = temp.replace("Calc Inicio", str(h_tempo_inicial)+ " h " + str(min_tempo_inicial) + " min")
-            temp = temp.replace("Politica", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min")
-            temp = temp.replace("Sim. Final", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min")
-            temp = temp.replace("Total", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min")
+                temp = temp.replace("Calc Inicio", str(h_tempo_inicial)+ " h " + str(min_tempo_inicial) + " min")
+                temp = temp.replace("Politica", str(h_tempo_politica)+ " h " + str(min_tempo_politica) + " min")
+                temp = temp.replace("Sim. Final", str(h_tempo_sf)+ " h " + str(min_tempo_sf) + " min")
+                temp = temp.replace("Total", str(h_tempo_total)+ " h " + str(min_tempo_total) + " min")
 
-            #temp = temp.replace("Calc Inicio (min)", str(round(tempo_inicial,2)))
-            #temp = temp.replace("Politica (min)", str(round(tempo_politica,2)))
-            #temp = temp.replace("Sim. Final (Min)", str(round(tempo_sf,2)))
-            #temp = temp.replace("Total (min)", str(round(tempo_total,2)))
+            except Exception as e:
+                print(f"TEMPO nao existe em: ", caso.caminho)
+                temp = temp.replace("Calc Inicio", "None")
+                temp = temp.replace("Politica", "None")
+                temp = temp.replace("Sim. Final", "None")
+                temp = temp.replace("Total", "None")
 
 
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
-            df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
-            df_caso_conv = df_conv.loc[(df_conv["caso"] == caso.nome)]
-            iteracao =      df_caso_conv["iteracao"].iloc[-1]
-            zinf =          df_caso_conv["zinf"].iloc[-1]
-            zsup =          df_caso_conv["zsup"].iloc[-1]
-            t_ultimo_pl =   df_caso_conv["tempo"].iloc[-1]/60
-            temp = temp.replace("Iter", str(round(iteracao,2)))
-            temp = temp.replace("Zinf", str(round(zinf,2)))
-            temp = temp.replace("Zsup", str(round(zsup,2)))
-            temp = temp.replace("Ultimo PL (min)", str(round(t_ultimo_pl,2)))
-
-        #    <td>Caso</td>
-        #    <td>Modelo</td>
-        #    <td>Versao</td>
-        #    <td>Dados Entrada (min)</td>
-        #    <td>Politica (min)</td>
-        #    <td>Sim. Final (Min)</td>
-        #    <td>Total (min)</td>
-        #    <td>Zinf</td>
-        #    <td>Zsup</td>
+            try:
+                df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
+                df_caso_conv = df_conv.loc[(df_conv["caso"] == caso.nome)]
+                iteracao =      df_caso_conv["iteracao"].iloc[-1]
+                zinf =          df_caso_conv["zinf"].iloc[-1]
+                zsup =          df_caso_conv["zsup"].iloc[-1]
+                t_ultimo_pl =   df_caso_conv["tempo"].iloc[-1]/60
+                temp = temp.replace("Iter", str(round(iteracao,2)))
+                temp = temp.replace("Zinf", str(round(zinf,2)))
+                temp = temp.replace("Zsup", str(round(zsup,2)))
+                temp = temp.replace("Ultimo PL (min)", str(round(t_ultimo_pl,2)))
+            except Exception as e:
+                print(f"CONVERGENCIA nao existe em: ", caso.caminho)
+                temp = temp.replace("Iter", "None")
+                temp = temp.replace("Zinf", "None")
+                temp = temp.replace("Zsup", "None")
+                temp = temp.replace("Ultimo PL (min)", "None")
 
         return temp
