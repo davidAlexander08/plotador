@@ -9,7 +9,7 @@ import pandas as pd
 import time
 
 option_xinf = click.option("--xinf", default=0,  help="Ponto Inferior do Eixo X")
-option_xsup = click.option("--xsup", default=60, help="Ponto Superior do Eixo X")
+option_xsup = click.option("--xsup", default=120, help="Ponto Superior do Eixo X")
 option_estagio = click.option( "--estagio",  default="",  help="Estagio Especifico para Plotar")
 option_cenario = click.option("--cenario",   default="mean",  help="Cenario Especifico para Plotar")
 
