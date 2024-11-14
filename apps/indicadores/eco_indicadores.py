@@ -75,6 +75,7 @@ class EcoIndicadores:
                                     temp.pop()
                                     media_values = media_values + temp
                             print(media_values)
+                            print("tamanho: ", len(media_values))
                             exit(1)
                                 #if line[]:
                                 #    media_values = line.split()[1:]
