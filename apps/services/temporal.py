@@ -219,6 +219,7 @@ class Temporal:
                 except:
                     print("Filtro: ", coluna_filtro)
                     print("Não encontrado: ", unidade.filtroArgumento)
+                print(c.caminho)
                 print(eco_mapa)
                 print(cod_arg)
                 print(unidade.sintese.filtro)
