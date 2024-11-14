@@ -118,7 +118,7 @@ class EcoIndicadores:
                         df["variavel"] = sintese.split("_")[0]
                         print(df)
                         lista_df.append(df.copy())
-                    df_resultado = pd.concat(lista_df, axis = 1)
+                    df_resultado = pd.concat(lista_df)
                     print(df_resultado)    
                     exit(1)
                     result_dict [c] = df_resultado
