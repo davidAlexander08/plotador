@@ -112,9 +112,7 @@ class EcoIndicadores:
                         df["codigo_ree"] = None
                         if(len(lista_arquivos) == 4):
                             codigo_sbm = int(''.join(filter(str.isdigit, arquivo[-7:-4])))
-                            print(codigo_sbm)
                             df["codigo_submercado"] = codigo_sbm
-                            exit(1)
                         df["variavel"] = sintese.split("_")[0]
                         #print(df)
                         lista_df.append(df)
