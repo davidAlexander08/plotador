@@ -38,7 +38,6 @@ class InfoGeralOperNewave(Estruturas):
             temp = temp.replace("desvio_custo", str(round(desvio_custo, 2)))
 
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):  
-
             df_conv = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
             df_caso_conv = df_conv.loc[(df_conv["caso"] == caso.nome)]
             iteracao =      df_caso_conv["iter"].iloc[-1]
