@@ -77,15 +77,17 @@ class EcoIndicadores:
                                 temp = [float(value) for value in line.split()[1:]]
                                 temp.pop()
                                 media_values = media_values + temp
-                    estagios = list(range(1, len(media_values) + 1))
-                    print(estagios)
-
-
+                    
                     dados_dger = Dger.read(c.caminho+"/dger.dat")
                     ano_inicio = dados_dger.ano_inicio_estudo
                     mes_inicio = dados_dger.mes_inicio_estudo
                     start_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
-                    num_months = 72  # Change this to your desired number
+
+                    media_values  = media_values[mes_inicio-1:]
+                    estagios = list(range(1, len(media_values) + 1))
+                    print(estagios)
+
+                    num_months = len(media_values)  # Change this to your desired number
                     date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
                     
                     #end_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
