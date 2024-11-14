@@ -62,10 +62,13 @@ class EcoIndicadores:
                 result_dict [c] = df
             else:                    
                 if(sintese in self.mapa_arquivos.keys()):
-                    arquivo = self.mapa_arquivos[sintese]
-                    print("EXISTE")
-                else:
-                    print("NAO EXISTE SINTESE: ", sintese)
+                    try:
+                        arquivo = self.mapa_arquivos[sintese]
+                        caminho_arquivo = c.caminho+"/"+arquivo
+                        print(caminho_arquivo)
+                        exit(1)
+                    except Exception as e:  
+                        print("NAO EXISTE SINTESE: ", sintese, " NO CAMINHO: ", c.caminho)
 
 
         return result_dict 
