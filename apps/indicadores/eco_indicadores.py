@@ -81,6 +81,7 @@ class EcoIndicadores:
 
                     dicionario = {
                         "valor":media_values,
+                        "estagio":estagios
                     }
                     df = pd.DataFrame(dicionario)
                     df["cenario"] = "mean"
@@ -92,6 +93,7 @@ class EcoIndicadores:
                     df["codigo_usina"] = None
                     df["codigo_ree"] = None
                     df["codigo_submercado"] = None
+                    df["variavel"] = sintese.split("_")[0]
 
                     print(df)
                     exit(1)
