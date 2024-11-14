@@ -65,13 +65,18 @@ class InfoGeralOperNewave(Estruturas):
                 
 
         if(os.path.isfile(caso.caminho+"/sintese/CONVERGENCIA.parquet")):
-            df_temp = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
-            df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
-            iteracoes = df_caso["iteracao"].iloc[-1]
-            zinf = df_caso["zinf"].iloc[-1]
-            temp = temp.replace("iteracoes", str(iteracoes))
-            temp = temp.replace("zinf", str(zinf))
+            try:
+                df_temp = self.eco_indicadores.retorna_df_concatenado("CONVERGENCIA")
+                df_caso = df_temp.loc[(df_temp["caso"] == caso.nome)]
+                iteracoes = df_caso["iteracao"].iloc[-1]
+                zinf = df_caso["zinf"].iloc[-1]
+                temp = temp.replace("iteracoes", str(iteracoes))
+                temp = temp.replace("zinf", str(zinf))
 
+            except Exception as e:
+                print(f"CONVERGENCIA nao existe em: ", caso.caminho)
+                temp = temp.replace("iteracoes", "None")
+                temp = temp.replace("zinf", "None")
 
 
 
