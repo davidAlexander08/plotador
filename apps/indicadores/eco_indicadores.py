@@ -120,6 +120,8 @@ class EcoIndicadores:
                         df["codigo_ree"] = None
                         if(len(lista_arquivos) == 4):
                             codigo_sbm = int(re.search(r'(\d+)\.out$', arquivo).group(1))
+                            print(codigo_sbm)
+                            exit(1)
                             df["codigo_submercado"] = codigo_sbm
                         else:
                             df["codigo_submercado"] = None
