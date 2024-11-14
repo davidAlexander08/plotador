@@ -17,7 +17,7 @@ class EcoIndicadores:
         self.mapa_arquivos = {
             "GTER_SIN":["gttotsin.out"],
             "EARPF_SIN":["earmfsin.out"],
-            "EARMF_SIN":["earmfpsin.out"]
+            "EARMF_SIN":["earmfpsin.out"],
             "GTER_SBM":[("gttot001.out","SUDESTE"),
                         ("gttot002.out","SUL"),
                         ("gttot003.out","NORDESTE"),
