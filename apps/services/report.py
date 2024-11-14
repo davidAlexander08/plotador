@@ -13,6 +13,7 @@ import subprocess
 import re
 import base64
 import shutil
+from pathlib import Path
 
 class Report():
     def __init__(self,outpath, arq_json, txt, titulo, tipo, cronologico, conjunto, html):
@@ -87,6 +88,7 @@ class Report():
             lines = file.readlines()
 
         titulo_html = "output.html" if self.titulo == " " else self.titulo
+        titulo_html = Path(self.json).stem + ".html"  if (self.titulo == " ") and (self.json is not None) else self.titulo
         with open(titulo_html, "w") as html_file:
             with open("/".join(path)+"/report/head.txt", 'r', encoding='utf-8') as arquivo:
                 conteudo = arquivo.read()

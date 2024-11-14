@@ -210,6 +210,8 @@ class Graficos:
                 df = mapa[unity]
                 listaGO = []
                 lista_casos = df["caso"].unique()
+                flag_limInf = True
+                flag_limSup = True
                 for c in self.casos:
                     dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
                     dfY = dfY.reset_index(drop = False)
@@ -230,9 +232,10 @@ class Graficos:
                                 mode="lines",
                                 marker=dict( symbol=None ),
                                 name = c.nome+"_limInf",
-                                legendgroup=c.nome,
+                                legendgroup="limInf",
                                 line = dict(color = c.cor, dash="dash"),
-                                showlegend=False))
+                                showlegend=flag_limInf))
+                                flag_limInf = False
                     if(limsup == "True"):
                         listaGO.append(go.Scatter( 
                                 x = dfY[colx],
@@ -240,9 +243,11 @@ class Graficos:
                                 mode="lines",
                                 marker=dict( symbol=None ),
                                 name = c.nome+"_limSup",
-                                legendgroup=c.nome,
+                                #legendgroup=c.nome,
+                                legendgroup="limSup",
                                 line = dict(color = c.cor, dash="dot"),
-                                showlegend=False))
+                                showlegend=flag_limSup))
+                                flag_limSup = False
 
                 if(eixo_y2 == "True"):
                     for unity in mapa:  
