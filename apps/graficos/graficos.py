@@ -206,12 +206,12 @@ class Graficos:
                         showlegend=unity.arg.show))
                 mapaGO[unity] = listaGO
         else:
+            flag_limInf = True 
+            flag_limSup = True
             for unity in mapa:  
                 df = mapa[unity]
                 listaGO = []
                 lista_casos = df["caso"].unique()
-                flag_limInf = True 
-                flag_limSup = True
                 for c in self.casos:
                     dfY = df.loc[df["caso"] == c.nome].reset_index(drop=True)
                     dfY = dfY.reset_index(drop = False)
@@ -232,6 +232,7 @@ class Graficos:
                                 mode="lines",
                                 marker=dict( symbol=None ),
                                 #name = c.nome+"_limInf",
+                                #legendgroup=c.nome,
                                 name = "limInf",
                                 legendgroup="limInf",
                                 line = dict(color = c.cor, dash="dash"),
@@ -244,8 +245,8 @@ class Graficos:
                                 mode="lines",
                                 marker=dict( symbol=None ),
                                 #name = c.nome+"_limSup",
-                                name = "limSup",
                                 #legendgroup=c.nome,
+                                name = "limSup",
                                 legendgroup="limSup",
                                 line = dict(color = c.cor, dash="dot"),
                                 showlegend=flag_limSup))
