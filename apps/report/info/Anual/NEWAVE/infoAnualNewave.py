@@ -8,7 +8,7 @@ class InfoAnualNewave(Estruturas):
     def __init__(self, data, par_dados):
         Estruturas.__init__(self)
         #AJUSTE DOS ANOS
-
+        unique_years = set()
         for caso in data.conjuntoCasos[0].casos:
             oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet",engine = "pyarrow")
             if(par_dados[3] == "True"):
@@ -20,7 +20,8 @@ class InfoAnualNewave(Estruturas):
                 df_caso = oper.loc[(oper["estagio"] <= periodos_estudo)]
 
             anos = df_caso["data_inicio"].dt.year.unique().tolist()
-            print(anos)
+            unique_years.update(anos)
+        print(unique_years)
             
         exit(1)
 
