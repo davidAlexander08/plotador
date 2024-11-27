@@ -173,7 +173,7 @@ class Report():
                                 cli_command = cli_command + " --html True"
                             if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
                                 cli_command = cli_command + " --eixox data_inicio"
-                            if(posnw == "True"):
+                            if(posnw == "True" and "temporal" in cli_command):
                                 cli_command = cli_command + " --posnw True"
                             try:
                                 Log.log().info(cli_command)
