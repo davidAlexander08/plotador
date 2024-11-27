@@ -27,6 +27,7 @@ class InfoValoresUnicosNewave(Estruturas):
         print(grandeza)
         tipo = grandeza.split("_")[0]
         espacial = grandeza.split("_")[1]
+        print("tipo: ", tipo, " espacial: ", espacial)
         estatistica = ""
         if(espacial == "SIN"):
             estatistica = "ESTATISTICAS_OPERACAO_SIN"
