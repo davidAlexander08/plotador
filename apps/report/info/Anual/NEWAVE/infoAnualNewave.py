@@ -10,7 +10,7 @@ class InfoAnualNewave(Estruturas):
 
         for caso in data.conjuntoCasos[0].casos:
             oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet",engine = "pyarrow")
-            anos = oper["data_inicio"]
+            anos = oper["data_inicio"].dt.year.unique().tolist()
             print(anos)
         exit(1)
 
