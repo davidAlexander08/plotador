@@ -11,9 +11,17 @@ class InfoAnualNewave(Estruturas):
 
         for caso in data.conjuntoCasos[0].casos:
             oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet",engine = "pyarrow")
-            anos = oper["data_inicio"].dt.year.unique().tolist()
+            if(par_dados[3] == "True"):
+                print(par_dados[3])
+                dados_dger = Dger.read(caso.caminho+"/dger.dat")
+                anos_estudo = dados_dger.num_anos_estudo
+                mes_inicial = dados_dger.mes_inicio_estudo
+                periodos_estudo = anos_estudo*12 - mes_inicial + 1
+                df_caso = df_caso.loc[(df_caso["estagio"] <= periodos_estudo)]
+
+            anos = df_caso["data_inicio"].dt.year.unique().tolist()
             print(anos)
-            print(par_dados[3])
+            
         exit(1)
 
 
