@@ -161,7 +161,7 @@ class Temporal:
             for caso in self.data.conjuntoCasos[0].casos:
                 print(caso.nome, " caminho: ", caso.caminho+"/dger.dat")
                 if(caso.modelo == "NEWAVE" and self.posnw == "True"):
-                    dados_dger = Dger.read(caso.caminho)
+                    dados_dger = Dger.read(caso.caminho+"/dger.dat")
                     
                     anos_estudo = dados_dger.num_anos_estudo
                     mes_inicial = dados_dger.mes_inicio_estudo
