@@ -9,7 +9,6 @@ class InfoValoresUnicosNewave(Estruturas):
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
-        print(par_dados[1] )
         grandeza = par_dados[2]
         argumentos = par_dados [1]
         for arg in argumentos:
@@ -33,12 +32,9 @@ class InfoValoresUnicosNewave(Estruturas):
         temp = temp.replace("Argumento", arg)
         temp = temp.replace("Grandeza", grandeza)
         
-        print(grandeza)
-        print(arg)
 
         tipo = grandeza.split("_")[0]
         espacial = grandeza.split("_")[1].strip()
-        print("tipo: ", tipo, " espacial: ", espacial)
         estatistica = ""
         if(espacial == "SIN"):
             estatistica = "ESTATISTICAS_OPERACAO_SIN"
@@ -75,10 +71,9 @@ class InfoValoresUnicosNewave(Estruturas):
                 media = oper_mean.loc[(oper_mean["variavel"] == tipo)]["valor"].mean()
 
                 temp = temp.replace("Inicial", str(round(primeiro_valor_grandeza,2)))
-                temp = temp.replace("2 Mes", str(round(ultimo_valor_grandeza,2)))
-                temp = temp.replace("Média Horiz", str(round(segundo_mes_valor,2)))
-                temp = temp.replace("Último", str(round(media,2)))
+                temp = temp.replace("2 Mes", str(round(segundo_mes_valor,2)))
+                temp = temp.replace("Média Horiz", str(round(media,2)))
+                temp = temp.replace("Último", str(round(ultimo_valor_grandeza,2)))
 
-                print(temp)
 
         return temp
