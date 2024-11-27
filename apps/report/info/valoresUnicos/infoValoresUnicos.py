@@ -3,6 +3,7 @@ from apps.report.info.valoresUnicos.NEWAVE.infoValoresUnicosNewave import InfoVa
 #from apps.report.info.SIN.DECOMP.infoSINDecomp import InfoSINDecomp
 class InfoValoresUnicos():
     def __init__(self, data, par_dados):
+        print(par_dados)
         set_modelos = set()
         for caso in data.conjuntoCasos[0].casos:
             set_modelos.add(caso.modelo)
