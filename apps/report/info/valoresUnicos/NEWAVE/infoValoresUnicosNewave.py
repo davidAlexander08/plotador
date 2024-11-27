@@ -10,12 +10,11 @@ class InfoValoresUnicosNewave(Estruturas):
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
         print(par_dados[1] )
-        if(par_dados[1] == [""]):
-            print("ENTROU AQUI")
-            exit(1)
         grandeza = par_dados[2]
         argumentos = par_dados [1]
         for arg in argumentos:
+            if(arg == ""):
+                arg = "SIN"
             self.lista_text.append("<h3>Dados "+arg+"</h3>")
             self.lista_text.append(self.Tabela_Eco_Entrada)
             for caso in data.conjuntoCasos[0].casos:
