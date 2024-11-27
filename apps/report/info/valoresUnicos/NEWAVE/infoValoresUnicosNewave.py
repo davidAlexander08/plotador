@@ -31,9 +31,9 @@ class InfoValoresUnicosNewave(Estruturas):
         estatistica = ""
         if(espacial == "SIN"):
             estatistica = "ESTATISTICAS_OPERACAO_SIN"
-        if(espacial == "SBM"):
+        elif(espacial == "SBM"):
             estatistica = "ESTATISTICAS_OPERACAO_SBM"
-        if(espacial == "UHE"):
+        elif(espacial == "UHE"):
             estatistica = "ESTATISTICAS_OPERACAO_UHE"
         else:
             print("GRANDEZA ESPACIAL DA ESTATISTICA NAO ENCOTRADA NA ROTINA infoValoresUnicosNewave.py")
