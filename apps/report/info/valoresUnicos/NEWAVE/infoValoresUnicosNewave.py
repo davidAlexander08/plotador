@@ -26,7 +26,7 @@ class InfoValoresUnicosNewave(Estruturas):
         temp = temp.replace("Modelo", caso.modelo)
         print(grandeza)
         tipo = grandeza.split("_")[0]
-        espacial = grandeza.split("_")[1]
+        espacial = grandeza.split("_")[1].strip()
         print("tipo: ", tipo, " espacial: ", espacial)
         estatistica = ""
         if(espacial == "SIN"):
