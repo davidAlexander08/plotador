@@ -31,6 +31,8 @@ class InfoAnualNewave(Estruturas):
         self.lista_text = []
         grandeza = par_dados[2]
         argumentos = par_dados [1]
+        posnw = par_dados[3]
+
         for arg in argumentos:
             if(arg == ""):
                 arg = "SIN"
@@ -40,7 +42,7 @@ class InfoAnualNewave(Estruturas):
 
             for caso in data.conjuntoCasos[0].casos:
                 if(caso.modelo == "NEWAVE"):
-                    temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, arg, grandeza)
+                    temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, arg, grandeza, posnw)
                     self.lista_text.append(temp)
             self.lista_text.append("</table>"+"\n")
 
@@ -81,7 +83,7 @@ class InfoAnualNewave(Estruturas):
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
             
-            if(par_dados[3] == "True"):
+            if(posnw == "True"):
                 dados_dger = Dger.read(caso.caminho+"/dger.dat")
                 anos_estudo = dados_dger.num_anos_estudo
                 mes_inicial = dados_dger.mes_inicio_estudo
