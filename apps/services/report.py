@@ -178,7 +178,7 @@ class Report():
                                 cli_command = cli_command + " --posnw True"
                             if("liminf" in cli_command and "temporal" in cli_command and liminf == "False"):
                                 cli_command = cli_command + " --liminf False"
-                            if("limsup" in cli_coomand and "temporal" in cli_command and limsup == "False"):
+                            if("limsup" in cli_command and "temporal" in cli_command and limsup == "False"):
                                 cli_command = cli_command + " --limsup False"
                             try:
                                 Log.log().info(cli_command)
