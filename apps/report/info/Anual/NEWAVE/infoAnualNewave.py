@@ -26,7 +26,7 @@ class InfoAnualNewave(Estruturas):
         tabela_eco_entrada = self.Tabela_Eco_Entrada
         print(tabela_eco_entrada)
         for year in unique_years:
-            tabela_eco_entrada += f'<th>{year}</th>'
+            tabela_eco_entrada += f'<th>{year}</th>\n'
         tabela_eco_entrada += f'</tr>'
 
         print(tabela_eco_entrada)
