@@ -87,8 +87,8 @@ class Report():
         with open(arquivo_template, "r") as file:
             lines = file.readlines()
 
-        titulo_html = "output.html" if self.titulo == " " else self.titulo
-        titulo_html = Path(self.json).stem + ".html"  if (self.titulo == " ") and (self.json is not None) else self.titulo
+        titulo_html = "output.html" if self.titulo == "output.html" else self.titulo
+        titulo_html = Path(self.json).stem + ".html"  if (self.titulo == "output.html") and (self.json is not None) else self.titulo
         with open(titulo_html, "w") as html_file:
             with open("/".join(path)+"/report/head.txt", 'r', encoding='utf-8') as arquivo:
                 conteudo = arquivo.read()
