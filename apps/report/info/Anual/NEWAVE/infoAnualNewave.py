@@ -23,13 +23,11 @@ class InfoAnualNewave(Estruturas):
             unique_years.update(anos)
         print(unique_years)
 
-        tabela_eco_entrada = self.Tabela_Eco_Entrada
-        print(tabela_eco_entrada)
+        print(self.Tabela_Eco_Entrada)
         for year in unique_years:
-            tabela_eco_entrada += f'<th>{year}</th>\n'
-        tabela_eco_entrada += f'</tr>'
-
-        print(tabela_eco_entrada)
+            self.Tabela_Eco_Entrada += f'<th>{year}</th>\n'
+        self.Tabela_Eco_Entrada += f'</tr>'
+        print(self.Tabela_Eco_Entrada)
         exit(1)
 
         self.lista_text = []
