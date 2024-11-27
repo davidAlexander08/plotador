@@ -17,11 +17,5 @@ class Estruturas:
             <td>Caso</td>
             <td>Modelo</td>
             <td>Argumento</td>
-            <td>Grandeza</td>
-            <td>Inicial</td>
-            <td>2 Mes</td>
-            <td>Último</td>
-            <td>Média Horiz</td>
-        </tr>
 """
 
