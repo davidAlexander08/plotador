@@ -61,7 +61,9 @@ def cli():
 @option_html
 @option_posnw
 @option_nomearquivo
-def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cronologico, conjunto, html, posnw):
+@option_limInf
+@option_limSup
+def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cronologico, conjunto, html, posnw, liminf, limsup):
     start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple","darkgreen", "darkblue","royalblue","skyblue","gold"]
     contador = 0
@@ -142,7 +144,7 @@ def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cr
                 arquivo_json = "exemplo_conj.json"    
     
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw)
+    Report(outpath, arquivo_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup)
     end_time = time.time()
     elapsed_time = end_time - start_time
     minutes = int(elapsed_time // 60)

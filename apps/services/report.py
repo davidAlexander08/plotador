@@ -16,7 +16,7 @@ import shutil
 from pathlib import Path
 
 class Report():
-    def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw):
+    def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup):
         #self.outpath = outpath
         self.json = arq_json
         #print("Arquivo JSON: ", self.json)
@@ -125,7 +125,8 @@ class Report():
                         args = nome_argumento_info.split("/")
                         chave = args[0]
                         argumentos = nome_argumento_info.split("/")[1].split(",") if(len(args) > 1) else None
-                        par_dados = (chave, argumentos)
+                        grandeza = nome_argumento_info.split("/")[2] if(len(args) > 2) else None
+                        par_dados = (chave, argumentos, grandeza)
                         info = Info(data, par_dados)
                         html_file.write(info.text_html+"\n")
 
@@ -175,6 +176,10 @@ class Report():
                                 cli_command = cli_command + " --eixox data_inicio"
                             if(posnw == "True" and "temporal" in cli_command):
                                 cli_command = cli_command + " --posnw True"
+                            if("liminf" in cli_coomand and "temporal" in cli_command and liminf == "False"):
+                                cli_command = cli_command + " --liminf False"
+                            if("limsup" in cli_coomand and "temporal" in cli_command and limsup == "False"):
+                                cli_command = cli_command + " --limsup False"
                             try:
                                 Log.log().info(cli_command)
                                 cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
