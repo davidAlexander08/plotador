@@ -44,6 +44,7 @@ option_y2sup = click.option("--y2sup", default = None, help = "limite superior y
 option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y2.")
 option_modelo_report = click.option("--tipo", default = "Simples", help = "Report Simples (Sem UHE) ou Completo")
 option_automatico = click.option("--automatico", default = "False", help = "Report Simples (Sem UHE) ou Completo")
+option_ignoraPos = click.option("--ignoraPos", default = "False", help = "Ignora o periodo POS caso exista")
 
 @click.group()
 def cli():
@@ -59,7 +60,8 @@ def cli():
 @option_cronologico
 @option_conjunto
 @option_html
-def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico, conjunto, html):
+@option_ignoraPos
+def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico, conjunto, html, option_ignoraPos):
     start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple","darkgreen", "darkblue","royalblue","skyblue","gold"]
     contador = 0
@@ -140,7 +142,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                 arquivo_json = "exemplo_conj.json"    
     
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt, titulo, tipo, cronologico, conjunto, html)
+    Report(outpath, arquivo_json, txt, titulo, tipo, cronologico, conjunto, html, option_ignoraPos)
     end_time = time.time()
     elapsed_time = end_time - start_time
     minutes = int(elapsed_time // 60)
@@ -179,7 +181,8 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
 @option_patamar
 @option_limInf
 @option_limSup
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup):
+@option_ignoraPos
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, option_ignoraPos):
     from apps.services.temporal import Temporal
     flag_diretorio = 0
     if(arquivo_json is None):
@@ -203,7 +206,7 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
             data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
-    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup)
+    Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, option_ignoraPos)
 
 
 @click.command("conjunto")

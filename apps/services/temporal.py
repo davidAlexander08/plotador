@@ -11,13 +11,14 @@ from apps.model.argumento import Argumento
 from apps.model.unidadeArgumental import UnidadeArgumental
 from apps.graficos.figura import Figura
 from apps.model.caso import Caso
+from inewave.newave import Dger
 import os 
 import json
 
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, option_ignoraPos):
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
@@ -31,6 +32,7 @@ class Temporal:
         self.estagio = estagio
         self.data = data
         self.y2 = y2
+        self.option_ignoraPos = option_ignoraPos
         if(self.y2 == "True" and len(data.conjuntoCasos[0].casos) > 2):
             print("ERRO: Opcao y2 valida apenas para comparacao de duplas de casos")
             exit(1)
@@ -155,10 +157,31 @@ class Temporal:
         mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese)
         for unity in conjUnity.listaUnidades:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
+
+            for caso in self.data.conjuntoCasos[0].casos:
+                if(caso.modelo == "NEWAVE" and self.option_ignoraPos == "True"):
+                    dados_dger = Dger.read(caso.caminho)
+                    
+                    anos_estudo = dados_dger.num_anos_estudo
+                    mes_inicial = dados_dger.mes_inicio_estudo
+                    print(df_temporal)
+
+                    print("n_anos_estudo: ", anos_estudo)
+                    print("mes_inicio_estudo: ", mes_inicial)
+                    print("numero_periodos: ", anos_estudo*12 - mes_inicial + 1)
+                    #FAZER UM LOC ATE O PERIODO MAXIMO
+                    exit(1)
+                    df_caso = df_temporal.loc[(df_temporal["caso"] == caso.nome)]
+                    
+                else:
+                    pass
+
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] >= self.xinf)]
+
+
             mapa_temporal[unity] = df_temporal
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
         if(self.boxplot == "True"):
