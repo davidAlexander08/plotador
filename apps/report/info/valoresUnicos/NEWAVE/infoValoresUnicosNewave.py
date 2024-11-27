@@ -10,7 +10,7 @@ class InfoValoresUnicosNewave(Estruturas):
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
         print(par_dados)
-        if(par_dados[1] == ""):
+        if(par_dados[1][0] == ""):
             par_dados[1] = ["SIN"]
         grandeza = par_dados[2]
         argumentos = par_dados [1]
