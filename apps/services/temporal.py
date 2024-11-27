@@ -158,25 +158,24 @@ class Temporal:
         for unity in conjUnity.listaUnidades:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
             print(self.data.conjuntoCasos[0].casos)
+            lista_temporal_temp = []
             for caso in self.data.conjuntoCasos[0].casos:
                 print(caso.nome, " caminho: ", caso.caminho+"/dger.dat")
+                df_caso = df_temporal.loc[(df_temporal["caso"] == caso.nome)]
                 if(caso.modelo == "NEWAVE" and self.posnw == "True"):
                     dados_dger = Dger.read(caso.caminho+"/dger.dat")
                     
                     anos_estudo = dados_dger.num_anos_estudo
                     mes_inicial = dados_dger.mes_inicio_estudo
+                    periodos_estudo = anos_estudo*12 - mes_inicial + 1
                     print(df_temporal)
 
                     print("n_anos_estudo: ", anos_estudo)
                     print("mes_inicio_estudo: ", mes_inicial)
-                    print("numero_periodos: ", anos_estudo*12 - mes_inicial + 1)
-                    #FAZER UM LOC ATE O PERIODO MAXIMO
-                    exit(1)
-                    df_caso = df_temporal.loc[(df_temporal["caso"] == caso.nome)]
-                    
-                else:
-                    pass
-
+                    print("numero_periodos: ", periodos_estudo)
+                    df_caso = df_caso.loc[(df_caso["estagio"] <= periodos_estudo)]
+                lista_temporal_temp.append(df_caso)
+                df_temporal = pd.concat(lista_temporal_temp)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
