@@ -29,7 +29,7 @@ class InfoAnualNewave(Estruturas):
             self.Tabela_Eco_Entrada += f'<th>{year}</th>\n'
             self.template_Tabela_Eco_Entrada += f'<td>{year}</td>\n'
         self.Tabela_Eco_Entrada += f'</tr> \n'
-        self.Tabela_Eco_Entrada += f'</tr> \n'
+        self.template_Tabela_Eco_Entrada += f'</tr> \n'
         print(self.Tabela_Eco_Entrada)
 
 
