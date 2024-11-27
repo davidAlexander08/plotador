@@ -10,21 +10,26 @@ class InfoValoresUnicosNewave(Estruturas):
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
         self.lista_text.append(self.Tabela_Eco_Entrada)
-        grandeza = par_dados[2]
+        
         for caso in data.conjuntoCasos[0].casos:
             if(caso.modelo == "NEWAVE"):
-                temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, grandeza)
+                temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, par_dados)
                 self.lista_text.append(temp)
         self.lista_text.append("</table>"+"\n")
 
         self.text_html = "\n".join(self.lista_text)
 
-    def preenche_modelo_tabela_modelo_NEWAVE(self,caso, grandeza):
+    def preenche_modelo_tabela_modelo_NEWAVE(self,caso, par_dados):
+        grandeza = par_dados[2]
+
+        argumentos = par_dados[1]
+        
 
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         print(grandeza)
+        print(argumentos)
         tipo = grandeza.split("_")[0]
         espacial = grandeza.split("_")[1].strip()
         print("tipo: ", tipo, " espacial: ", espacial)

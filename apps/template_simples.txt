@@ -65,7 +65,7 @@ plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sint
 <h3> SUDESTE </h3>
 plotador_dev temporal --titulo Custo_Marginal_Sudeste --json arquivo_json --sintese CMO_SBM --argumentos SUDESTE --chave SBM --largura 1200 --altura 650 --tamanho 20
 
-\info{ValoresUnicos/SUDESTE}
+\info{ValoresUnicos/SUDESTE/CMO_SBM}
 
 <h3> NORDESTE </h3>
 plotador_dev temporal --titulo Custo_Marginal_Nordeste --json arquivo_json --sintese CMO_SBM --argumentos NORDESTE --chave SBM --largura 1200 --altura 650 --tamanho 20
