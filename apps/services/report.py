@@ -176,14 +176,17 @@ class Report():
                                 cli_command = cli_command + " --eixox data_inicio"
                             if(posnw == "True" and "temporal" in cli_command):
                                 cli_command = cli_command + " --posnw True"
-                            if("liminf" in cli_command and "temporal" in cli_command and liminf == "True"):
-                                cli_command = cli_command + " --liminf True"
-                            else:
-                                cli_command = cli_command + " --liminf False"
-                            if("limsup" in cli_command and "temporal" in cli_command and limsup == "True"):
-                                cli_command = cli_command + " --limsup True"
-                            else:
-                                cli_command = cli_command + " --liminf False"
+
+                            if("temporal" in cli_command):
+                                if("liminf" in cli_command and liminf == "True"):
+                                    cli_command = cli_command + " --liminf True"
+                                else:
+                                    cli_command = cli_command + " --liminf False"
+
+                                if("limsup" in cli_command and limsup == "True"):
+                                    cli_command = cli_command + " --limsup True"
+                                else:
+                                    cli_command = cli_command + " --liminf False"
                             try:
                                 Log.log().info(cli_command)
                                 cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
