@@ -22,20 +22,13 @@ class InfoAnualNewave(Estruturas):
             anos = df_caso["data_inicio"].dt.year.unique().tolist()
             unique_years.update(anos)
         print(unique_years)
-
-        print(self.template_Tabela_Eco_Entrada)
-        print(self.Tabela_Eco_Entrada)
+        self.unique_years = unique_years
         for year in unique_years:
             self.Tabela_Eco_Entrada += f'<th>{year}</th>\n'
             self.template_Tabela_Eco_Entrada += f'<td>{year}</td>\n'
         self.Tabela_Eco_Entrada += f'</tr> \n'
         self.template_Tabela_Eco_Entrada += f'</tr> \n'
-        print(self.Tabela_Eco_Entrada)
 
-
-        print(self.template_Tabela_Eco_Entrada)
-
-        exit(1)
 
         self.lista_text = []
         grandeza = par_dados[2]
@@ -45,7 +38,7 @@ class InfoAnualNewave(Estruturas):
                 arg = "SIN"
             self.lista_text.append("<h3>Dados "+arg+"</h3>")
 
-            self.lista_text.append(tabela_eco_entrada)
+            self.lista_text.append(self.Tabela_Eco_Entrada)
 
             for caso in data.conjuntoCasos[0].casos:
                 if(caso.modelo == "NEWAVE"):
@@ -90,21 +83,27 @@ class InfoAnualNewave(Estruturas):
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
             
-            first_stage = oper_mean.loc[(oper_mean["estagio"] == 1) ]
-            second_month = oper_mean.loc[(oper_mean["estagio"] == 2) ]
-            last_stage_value = oper_mean["estagio"].unique()[-1]
-            last_stage = oper_mean.loc[(oper_mean["estagio"] == last_stage_value) ]
-            
-            if(oper_mean['variavel'].str.contains(tipo, case=False, na=False).any()):
-                primeiro_valor_grandeza = first_stage.loc[(first_stage["variavel"] == tipo)]["valor"].iloc[0]
-                ultimo_valor_grandeza =   last_stage.loc[(last_stage["variavel"] == tipo)]["valor"].iloc[-1]
-                segundo_mes_valor = second_month.loc[(second_month["variavel"] == tipo)]["valor"].iloc[0]
-                media = oper_mean.loc[(oper_mean["variavel"] == tipo)]["valor"].mean()
+            for year in self.unique_years:
+                print(year)
+                media_ano = oper_mean.loc[(oper_mean["data_inicio"].dt.year == year) ]
+                print(media_ano)
+            exit(1)
 
-                temp = temp.replace("Inicial", str(round(primeiro_valor_grandeza,2)))
-                temp = temp.replace("2 Mes", str(round(segundo_mes_valor,2)))
-                temp = temp.replace("Média Horiz", str(round(media,2)))
-                temp = temp.replace("Último", str(round(ultimo_valor_grandeza,2)))
+            #first_stage = oper_mean.loc[(oper_mean["estagio"] == 1) ]
+            #second_month = oper_mean.loc[(oper_mean["estagio"] == 2) ]
+            #last_stage_value = oper_mean["estagio"].unique()[-1]
+            #last_stage = oper_mean.loc[(oper_mean["estagio"] == last_stage_value) ]
+            #
+            #if(oper_mean['variavel'].str.contains(tipo, case=False, na=False).any()):
+            #    primeiro_valor_grandeza = first_stage.loc[(first_stage["variavel"] == tipo)]["valor"].iloc[0]
+            #    ultimo_valor_grandeza =   last_stage.loc[(last_stage["variavel"] == tipo)]["valor"].iloc[-1]
+            #    segundo_mes_valor = second_month.loc[(second_month["variavel"] == tipo)]["valor"].iloc[0]
+            #    media = oper_mean.loc[(oper_mean["variavel"] == tipo)]["valor"].mean()
+#
+            #    temp = temp.replace("Inicial", str(round(primeiro_valor_grandeza,2)))
+            #    temp = temp.replace("2 Mes", str(round(segundo_mes_valor,2)))
+            #    temp = temp.replace("Média Horiz", str(round(media,2)))
+            #    temp = temp.replace("Último", str(round(ultimo_valor_grandeza,2)))
 
 
         return temp

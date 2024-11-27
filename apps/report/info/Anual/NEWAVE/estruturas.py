@@ -17,5 +17,6 @@ class Estruturas:
             <td>Caso</td>
             <td>Modelo</td>
             <td>Argumento</td>
+            <td>Grandeza</td>
 """
 
