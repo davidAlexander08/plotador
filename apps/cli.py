@@ -45,7 +45,7 @@ option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y
 option_modelo_report = click.option("--tipo", default = "Simples", help = "Report Simples (Sem UHE) ou Completo")
 option_automatico = click.option("--automatico", default = "False", help = "Report Simples (Sem UHE) ou Completo")
 option_posnw = click.option("--posnw", default = "False", help = "Ignora o periodo POS caso exista")
-
+option_nomearquivo = click.option("--nomearquivo", default = "output.html", help = "Nome arquivo do Report")
 @click.group()
 def cli():
     pass
@@ -54,14 +54,14 @@ def cli():
 @option_outpath
 @option_json
 @option_txt
-@option_titulo
 @option_modelo_report
 @option_automatico
 @option_cronologico
 @option_conjunto
 @option_html
 @option_posnw
-def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronologico, conjunto, html, posnw):
+@option_nomearquivo
+def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cronologico, conjunto, html, posnw):
     start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple","darkgreen", "darkblue","royalblue","skyblue","gold"]
     contador = 0
@@ -142,7 +142,7 @@ def realiza_report(outpath, arquivo_json, txt, titulo, tipo, automatico, cronolo
                 arquivo_json = "exemplo_conj.json"    
     
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt, titulo, tipo, cronologico, conjunto, html, posnw)
+    Report(outpath, arquivo_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw)
     end_time = time.time()
     elapsed_time = end_time - start_time
     minutes = int(elapsed_time // 60)
