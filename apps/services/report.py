@@ -176,7 +176,7 @@ class Report():
                                 cli_command = cli_command + " --eixox data_inicio"
                             if(posnw == "True" and "temporal" in cli_command):
                                 cli_command = cli_command + " --posnw True"
-                            if("liminf" in cli_coomand and "temporal" in cli_command and liminf == "False"):
+                            if("liminf" in cli_command and "temporal" in cli_command and liminf == "False"):
                                 cli_command = cli_command + " --liminf False"
                             if("limsup" in cli_coomand and "temporal" in cli_command and limsup == "False"):
                                 cli_command = cli_command + " --limsup False"
