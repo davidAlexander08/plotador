@@ -58,4 +58,6 @@ class InfoValoresUnicosNewave(Estruturas):
                 temp = temp.replace("Média Horiz", str(round(segundo_mes_valor,2)))
                 temp = temp.replace("Último", str(round(media,2)))
 
+                print(temp)
+
         return temp
