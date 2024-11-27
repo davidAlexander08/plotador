@@ -84,27 +84,7 @@ class InfoAnualNewave(Estruturas):
                     oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
             
             for year in self.unique_years:
-                print(year)
-                media_ano = oper_mean.loc[(oper_mean["data_inicio"].dt.year == year) & (oper_mean["variavel"] == tipo)]
-                print(media_ano)
-                print(media_ano["valor"].mean())
-            exit(1)
-
-            #first_stage = oper_mean.loc[(oper_mean["estagio"] == 1) ]
-            #second_month = oper_mean.loc[(oper_mean["estagio"] == 2) ]
-            #last_stage_value = oper_mean["estagio"].unique()[-1]
-            #last_stage = oper_mean.loc[(oper_mean["estagio"] == last_stage_value) ]
-            #
-            #if(oper_mean['variavel'].str.contains(tipo, case=False, na=False).any()):
-            #    primeiro_valor_grandeza = first_stage.loc[(first_stage["variavel"] == tipo)]["valor"].iloc[0]
-            #    ultimo_valor_grandeza =   last_stage.loc[(last_stage["variavel"] == tipo)]["valor"].iloc[-1]
-            #    segundo_mes_valor = second_month.loc[(second_month["variavel"] == tipo)]["valor"].iloc[0]
-            #    media = oper_mean.loc[(oper_mean["variavel"] == tipo)]["valor"].mean()
-#
-            #    temp = temp.replace("Inicial", str(round(primeiro_valor_grandeza,2)))
-            #    temp = temp.replace("2 Mes", str(round(segundo_mes_valor,2)))
-            #    temp = temp.replace("Média Horiz", str(round(media,2)))
-            #    temp = temp.replace("Último", str(round(ultimo_valor_grandeza,2)))
-
+                media_ano = oper_mean.loc[(oper_mean["data_inicio"].dt.year == year) & (oper_mean["variavel"] == tipo)]["valor"].mean()
+                temp = temp.replace(str(year), str(round(media_ano,2)))
 
         return temp
