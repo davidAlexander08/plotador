@@ -44,7 +44,7 @@ option_y2sup = click.option("--y2sup", default = None, help = "limite superior y
 option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y2.")
 option_modelo_report = click.option("--tipo", default = "Simples", help = "Report Simples (Sem UHE) ou Completo")
 option_automatico = click.option("--automatico", default = "False", help = "Report Simples (Sem UHE) ou Completo")
-option_ignoraPos = click.option("--ignorapos", default = "False", help = "Ignora o periodo POS caso exista")
+option_ignoraPos = click.option("--posnw", default = "False", help = "Ignora o periodo POS caso exista")
 
 @click.group()
 def cli():

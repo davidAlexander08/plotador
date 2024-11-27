@@ -174,7 +174,7 @@ class Report():
                             if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
                                 cli_command = cli_command + " --eixox data_inicio"
                             if(option_ignoraPos == "True"):
-                                cli_command = cli_command + " --ignorapos True"
+                                cli_command = cli_command + " --posnw True"
                             try:
                                 Log.log().info(cli_command)
                                 cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
