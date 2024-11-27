@@ -17,7 +17,7 @@ class InfoAnualNewave(Estruturas):
                 anos_estudo = dados_dger.num_anos_estudo
                 mes_inicial = dados_dger.mes_inicio_estudo
                 periodos_estudo = anos_estudo*12 - mes_inicial + 1
-                df_caso = df_caso.loc[(df_caso["estagio"] <= periodos_estudo)]
+                df_caso = oper.loc[(oper["estagio"] <= periodos_estudo)]
 
             anos = df_caso["data_inicio"].dt.year.unique().tolist()
             print(anos)
