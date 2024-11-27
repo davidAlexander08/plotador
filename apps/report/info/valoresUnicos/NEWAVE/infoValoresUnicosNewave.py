@@ -9,7 +9,7 @@ class InfoValoresUnicosNewave(Estruturas):
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
-
+        print(par_dados)
         if(par_dados[1] == ""):
             par_dados[1] = ["SIN"]
         grandeza = par_dados[2]
@@ -30,6 +30,9 @@ class InfoValoresUnicosNewave(Estruturas):
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
+        temp = temp.replace("Argumento", arg)
+        temp = temp.replace("Grandeza", grandeza)
+        
         print(grandeza)
         print(arg)
 

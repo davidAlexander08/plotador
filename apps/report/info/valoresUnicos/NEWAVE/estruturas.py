@@ -7,10 +7,12 @@ class Estruturas:
         <tr>
             <th>Caso</th>
             <th>Modelo</th>
+            <th>Argumento</th>
+            <th>Grandeza</th>
             <th>Inicial</th>
             <th>2 Mes</th>
-            <th>Média Horiz</th>
             <th>Último</th>
+            <th>Média Horiz</th>
         </tr>
 """
 
@@ -19,10 +21,12 @@ class Estruturas:
         <tr>
             <td>Caso</td>
             <td>Modelo</td>
+            <td>Argumento</td>
+            <td>Grandeza</td>
             <td>Inicial</td>
             <td>2 Mes</td>
-            <td>Média Horiz</td>
             <td>Último</td>
+            <td>Média Horiz</td>
         </tr>
 """
 
