@@ -1,4 +1,4 @@
-from apps.report.info.SIN.NEWAVE.infoValoresUnicosNewave import InfoValoresUnicosNewave
+from apps.report.info.valoresUnicos.NEWAVE.infoValoresUnicosNewave import InfoValoresUnicosNewave
 #from apps.report.info.SIN.DESSEM.infoSINDessem import InfoSINDessem
 #from apps.report.info.SIN.DECOMP.infoSINDecomp import InfoSINDecomp
 class InfoValoresUnicos():
