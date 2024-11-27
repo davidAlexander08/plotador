@@ -22,9 +22,14 @@ class InfoAnualNewave(Estruturas):
             anos = df_caso["data_inicio"].dt.year.unique().tolist()
             unique_years.update(anos)
         print(unique_years)
-            
-        exit(1)
 
+        tabela_eco_entrada = self.Tabela_Eco_Entrada
+        print(tabela_eco_entrada)
+        for year in unique_years:
+            tabela_eco_entrada += "/n <th>"+str(year)+"</th>"
+
+        print(tabela_eco_entrada)
+        exit(1)
 
         self.lista_text = []
         grandeza = par_dados[2]
@@ -33,7 +38,9 @@ class InfoAnualNewave(Estruturas):
             if(arg == ""):
                 arg = "SIN"
             self.lista_text.append("<h3>Dados "+arg+"</h3>")
-            self.lista_text.append(self.Tabela_Eco_Entrada)
+
+            self.lista_text.append(tabela_eco_entrada)
+
             for caso in data.conjuntoCasos[0].casos:
                 if(caso.modelo == "NEWAVE"):
                     temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, arg, grandeza)

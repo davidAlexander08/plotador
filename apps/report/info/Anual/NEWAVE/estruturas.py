@@ -9,11 +9,6 @@ class Estruturas:
             <th>Modelo</th>
             <th>Argumento</th>
             <th>Grandeza</th>
-            <th>Inicial</th>
-            <th>2 Mes</th>
-            <th>Último</th>
-            <th>Média Horiz</th>
-        </tr>
 """
 
 
