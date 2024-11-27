@@ -162,19 +162,19 @@ class Temporal:
             for caso in self.data.conjuntoCasos[0].casos:
                 print(caso.nome, " caminho: ", caso.caminho+"/dger.dat")
                 df_caso = df_temporal.loc[(df_temporal["caso"] == caso.nome)]
+                print(df_caso)
                 if(caso.modelo == "NEWAVE" and self.posnw == "True"):
                     dados_dger = Dger.read(caso.caminho+"/dger.dat")
                     anos_estudo = dados_dger.num_anos_estudo
                     mes_inicial = dados_dger.mes_inicio_estudo
                     periodos_estudo = anos_estudo*12 - mes_inicial + 1
-                    print(df_caso)
                     print("n_anos_estudo: ", anos_estudo)
                     print("mes_inicio_estudo: ", mes_inicial)
                     print("numero_periodos: ", periodos_estudo)
                     df_caso = df_caso.loc[(df_caso["estagio"] <= periodos_estudo)]
-                    print(df_caso)
                 lista_temporal_temp.append(df_caso)
-                df_temporal = pd.concat(lista_temporal_temp)
+                print(df_caso)
+            df_temporal = pd.concat(lista_temporal_temp)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
