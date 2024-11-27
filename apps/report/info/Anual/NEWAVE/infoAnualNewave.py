@@ -1,5 +1,6 @@
 
 from apps.report.info.Anual.NEWAVE.estruturas import Estruturas
+from inewave.newave import Dger
 import os
 import pandas as pd
 
@@ -12,6 +13,7 @@ class InfoAnualNewave(Estruturas):
             oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet",engine = "pyarrow")
             anos = oper["data_inicio"].dt.year.unique().tolist()
             print(anos)
+            print(par_dados[3])
         exit(1)
 
 

@@ -126,7 +126,7 @@ class Report():
                         chave = args[0]
                         argumentos = nome_argumento_info.split("/")[1].split(",") if(len(args) > 1) else None
                         grandeza = nome_argumento_info.split("/")[2] if(len(args) > 2) else None
-                        par_dados = (chave, argumentos, grandeza)
+                        par_dados = (chave, argumentos, grandeza, posnw)
                         info = Info(data, par_dados)
                         html_file.write(info.text_html+"\n")
 
