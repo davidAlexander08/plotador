@@ -13,6 +13,7 @@ class InfoValoresUnicosNewave(Estruturas):
         if(par_dados[1] == ""):
             par_dados[1] = ["SIN"]
         grandeza = par_dados[2]
+        argumentos = par_dados [1]
         for arg in argumentos:
             self.lista_text.append("<h3>Dados "+arg+"</h3>")
             self.lista_text.append(self.Tabela_Eco_Entrada)
