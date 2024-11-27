@@ -157,7 +157,7 @@ class Temporal:
         mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese)
         for unity in conjUnity.listaUnidades:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
-            print("ENTROU AQUI")
+            print(self.data.conjuntoCasos[0].casos)
             for caso in self.data.conjuntoCasos[0].casos:
                 if(caso.modelo == "NEWAVE" and self.posnw == "True"):
                     dados_dger = Dger.read(caso.caminho)
