@@ -186,7 +186,7 @@ class Report():
                                 if("limsup" in cli_command and limsup == "True"):
                                     cli_command = cli_command + " --limsup True"
                                 else:
-                                    cli_command = cli_command + " --liminf False"
+                                    cli_command = cli_command + " --limsup False"
                             try:
                                 Log.log().info(cli_command)
                                 cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")

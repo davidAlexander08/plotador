@@ -12,7 +12,6 @@ class InfoAnualNewave(Estruturas):
         for caso in data.conjuntoCasos[0].casos:
             oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet",engine = "pyarrow")
             if(par_dados[3] == "True"):
-                print(par_dados[3])
                 dados_dger = Dger.read(caso.caminho+"/dger.dat")
                 anos_estudo = dados_dger.num_anos_estudo
                 mes_inicial = dados_dger.mes_inicio_estudo
@@ -21,7 +20,6 @@ class InfoAnualNewave(Estruturas):
 
             anos = df_caso["data_inicio"].dt.year.unique().tolist()
             unique_years.update(anos)
-        print(unique_years)
         self.unique_years = unique_years
         for year in unique_years:
             self.Tabela_Eco_Entrada += f'<th>{year}</th>\n'
@@ -83,6 +81,14 @@ class InfoAnualNewave(Estruturas):
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
             
+            if(par_dados[3] == "True"):
+                dados_dger = Dger.read(caso.caminho+"/dger.dat")
+                anos_estudo = dados_dger.num_anos_estudo
+                mes_inicial = dados_dger.mes_inicio_estudo
+                periodos_estudo = anos_estudo*12 - mes_inicial + 1
+                oper_mean = oper_mean.loc[(oper_mean["estagio"] <= periodos_estudo)]
+
+
             for year in self.unique_years:
                 media_ano = oper_mean.loc[(oper_mean["data_inicio"].dt.year == year) & (oper_mean["variavel"] == tipo)]["valor"].mean()
                 temp = temp.replace(str(year), str(round(media_ano,2)))
