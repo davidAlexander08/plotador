@@ -48,7 +48,7 @@ class InfoAnualNewave(Estruturas):
 
         self.text_html = "\n".join(self.lista_text)
 
-    def preenche_modelo_tabela_modelo_NEWAVE(self,caso, arg, grandeza):
+    def preenche_modelo_tabela_modelo_NEWAVE(self,caso, arg, grandeza, posnw):
 
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
