@@ -22,7 +22,7 @@ plotador_dev custos arquivo_json --largura 1200 --altura 650 --tamanho 20 --titu
 <h3> Geracao Térmica </h3>
 plotador_dev temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
 
-\info{ValoresUnicos}
+\info{ValoresUnicos//GTER_SIN}
 
 <h3> Geracao Hidreletrica </h3>
 plotador_dev temporal --titulo Geração_Hidrelétrica_SIN --json arquivo_json --sintese GHID_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed
