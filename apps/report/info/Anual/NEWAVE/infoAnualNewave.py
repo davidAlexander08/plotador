@@ -85,7 +85,7 @@ class InfoAnualNewave(Estruturas):
             
             for year in self.unique_years:
                 print(year)
-                media_ano = oper_mean.loc[(oper_mean["data_inicio"].dt.year == year) ]
+                media_ano = oper_mean.loc[(oper_mean["data_inicio"].dt.year == year) & (oper_mean["variavel"] == tipo)]
                 print(media_ano)
             exit(1)
 
