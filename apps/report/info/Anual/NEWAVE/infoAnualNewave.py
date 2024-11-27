@@ -9,7 +9,7 @@ class InfoAnualNewave(Estruturas):
         #AJUSTE DOS ANOS
 
         for caso in data.conjuntoCasos[0].casos:
-            oper = pd.read_parquet(caso.caminho+"/sintese/"+estatistica+".parquet",engine = "pyarrow")
+            oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SIN.parquet",engine = "pyarrow")
             anos = oper["data_inicio"]
             print(anos)
         exit(1)
