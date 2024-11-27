@@ -4,6 +4,8 @@ from apps.report.info.SBM.infoSBM import InfoSBM
 from apps.report.info.UHE.infoUHE import InfoUHE
 from apps.report.info.Execucao.infoExecucao import InfoExecucao
 from apps.report.info.valoresUnicos.infoValoresUnicos import InfoValoresUnicos
+from apps.report.info.Anual.infoAnual import InfoAnual
+
 class Info():
     def __init__(self, data, par_dados):
         self.text_html = None
@@ -24,6 +26,9 @@ class Info():
             self.text_html = info.text_html
         elif(par_dados[0] == "ValoresUnicos"):
             info = InfoValoresUnicos(data, par_dados)
+            self.text_html = info.text_html
+        elif(par_dados[0] == "ValoresAnuais"):
+            info = InfoAnual(data, par_dados)
             self.text_html = info.text_html
         else:
             print("NOME DO ARGUMENTO INFO NAO RECONHECIDO")
