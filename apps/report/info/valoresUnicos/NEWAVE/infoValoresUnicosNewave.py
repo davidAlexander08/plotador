@@ -9,27 +9,29 @@ class InfoValoresUnicosNewave(Estruturas):
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
-        self.lista_text.append(self.Tabela_Eco_Entrada)
-        
-        for caso in data.conjuntoCasos[0].casos:
-            if(caso.modelo == "NEWAVE"):
-                temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, par_dados)
-                self.lista_text.append(temp)
-        self.lista_text.append("</table>"+"\n")
+
+        if(par_dados[1] == ""):
+            par_dados[1] = ["SIN"]
+        grandeza = par_dados[2]
+        for arg in argumentos:
+            self.lista_text.append("<h3>Dados "+arg+"</h3>")
+            self.lista_text.append(self.Tabela_Eco_Entrada)
+            for caso in data.conjuntoCasos[0].casos:
+                if(caso.modelo == "NEWAVE"):
+                    temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, arg, grandeza)
+                    self.lista_text.append(temp)
+            self.lista_text.append("</table>"+"\n")
 
         self.text_html = "\n".join(self.lista_text)
 
-    def preenche_modelo_tabela_modelo_NEWAVE(self,caso, par_dados):
-        grandeza = par_dados[2]
-
-        argumentos = par_dados[1]
-        
+    def preenche_modelo_tabela_modelo_NEWAVE(self,caso, arg, grandeza):
 
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
         print(grandeza)
-        print(argumentos)
+        print(arg)
+
         tipo = grandeza.split("_")[0]
         espacial = grandeza.split("_")[1].strip()
         print("tipo: ", tipo, " espacial: ", espacial)
@@ -47,6 +49,16 @@ class InfoValoresUnicosNewave(Estruturas):
         if(os.path.isfile(caso.caminho+"/sintese/"+estatistica+ ".parquet")):            
             oper = pd.read_parquet(caso.caminho+"/sintese/"+estatistica+".parquet",engine = "pyarrow")
             oper_mean = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
+            if(arg != "SIN"):
+                if(espacial == "SBM"):
+                    codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
+                    cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
+                    oper_mean = oper_mean.loc[(oper_mean["codigo_submercado"] == cod_sbm) ]
+                if(espacial == "UHE"):
+                    codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
+                    cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
+                    oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
+            
             first_stage = oper_mean.loc[(oper_mean["estagio"] == 1) ]
             second_month = oper_mean.loc[(oper_mean["estagio"] == 2) ]
             last_stage_value = oper_mean["estagio"].unique()[-1]
