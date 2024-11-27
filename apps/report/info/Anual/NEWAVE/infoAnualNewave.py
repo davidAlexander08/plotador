@@ -22,14 +22,14 @@ class InfoAnualNewave(Estruturas):
             anos = df_caso["data_inicio"].dt.year.unique().tolist()
             unique_years.update(anos)
         print(unique_years)
-        
+
         print(self.template_Tabela_Eco_Entrada)
         print(self.Tabela_Eco_Entrada)
         for year in unique_years:
             self.Tabela_Eco_Entrada += f'<th>{year}</th>\n'
             self.template_Tabela_Eco_Entrada += f'<td>{year}</td>\n'
-        self.Tabela_Eco_Entrada += f'</tr>'
-        self.Tabela_Eco_Entrada += f'</tr>'
+        self.Tabela_Eco_Entrada += f'</tr> \n'
+        self.Tabela_Eco_Entrada += f'</tr> \n'
         print(self.Tabela_Eco_Entrada)
 
 
