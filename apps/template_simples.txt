@@ -57,6 +57,14 @@ plotador_dev temporal --titulo Energia_Armazenada_Percentual_SBM --json arquivo_
 plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
 
 \subpage{Custo Marginal SBM}
+
+<h3> SUDESTE </h3>
+plotador_dev temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM --argumentos SUDESTE --chave SBM --largura 1200 --altura 650 --tamanho 20
+
+<h3> NORDESTE </h3>
+plotador_dev temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM --argumentos NORDESTE --chave SBM --largura 1200 --altura 650 --tamanho 20
+
+<h3> Todos os Submercados </h3>
 plotador_dev temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM --argumentos ADD_SBMS --chave SBM --largura 1200 --altura 650 --tamanho 20
 
 \subpage{ENA SBM}
