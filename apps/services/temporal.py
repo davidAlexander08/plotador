@@ -157,23 +157,23 @@ class Temporal:
         mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese)
         for unity in conjUnity.listaUnidades:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
-            print(self.data.conjuntoCasos[0].casos)
+            #print(self.data.conjuntoCasos[0].casos)
             lista_temporal_temp = []
             for caso in self.data.conjuntoCasos[0].casos:
-                print(caso.nome, " caminho: ", caso.caminho+"/dger.dat")
+                #print(caso.nome, " caminho: ", caso.caminho+"/dger.dat")
                 df_caso = df_temporal.loc[(df_temporal["caso"] == caso.nome)]
-                print(df_caso)
+                #print(df_caso)
                 if(caso.modelo == "NEWAVE" and self.posnw == "True"):
                     dados_dger = Dger.read(caso.caminho+"/dger.dat")
                     anos_estudo = dados_dger.num_anos_estudo
                     mes_inicial = dados_dger.mes_inicio_estudo
                     periodos_estudo = anos_estudo*12 - mes_inicial + 1
-                    print("n_anos_estudo: ", anos_estudo)
-                    print("mes_inicio_estudo: ", mes_inicial)
-                    print("numero_periodos: ", periodos_estudo)
+                    #print("n_anos_estudo: ", anos_estudo)
+                    #print("mes_inicio_estudo: ", mes_inicial)
+                    #print("numero_periodos: ", periodos_estudo)
                     df_caso = df_caso.loc[(df_caso["estagio"] <= periodos_estudo)]
                 lista_temporal_temp.append(df_caso)
-                print(df_caso)
+                #print(df_caso)
             df_temporal = pd.concat(lista_temporal_temp)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
