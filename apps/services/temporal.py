@@ -159,7 +159,7 @@ class Temporal:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
             print(self.data.conjuntoCasos[0].casos)
             for caso in self.data.conjuntoCasos[0].casos:
-                print(caso.nome, " caminho: ", caso.caminho)
+                print(caso.nome, " caminho: ", caso.caminho+"/dger.dat")
                 if(caso.modelo == "NEWAVE" and self.posnw == "True"):
                     dados_dger = Dger.read(caso.caminho)
                     
