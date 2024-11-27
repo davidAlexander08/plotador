@@ -16,7 +16,7 @@ import shutil
 from pathlib import Path
 
 class Report():
-    def __init__(self,outpath, arq_json, txt, titulo, tipo, cronologico, conjunto, html, option_ignoraPos):
+    def __init__(self,outpath, arq_json, txt, titulo, tipo, cronologico, conjunto, html, posnw):
         #self.outpath = outpath
         self.json = arq_json
         #print("Arquivo JSON: ", self.json)
@@ -173,7 +173,7 @@ class Report():
                                 cli_command = cli_command + " --html True"
                             if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
                                 cli_command = cli_command + " --eixox data_inicio"
-                            if(option_ignoraPos == "True"):
+                            if(posnw == "True"):
                                 cli_command = cli_command + " --posnw True"
                             try:
                                 Log.log().info(cli_command)

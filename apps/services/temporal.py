@@ -18,7 +18,7 @@ import json
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, option_ignoraPos):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw):
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
@@ -32,7 +32,7 @@ class Temporal:
         self.estagio = estagio
         self.data = data
         self.y2 = y2
-        self.option_ignoraPos = option_ignoraPos
+        self.posnw = posnw
         if(self.y2 == "True" and len(data.conjuntoCasos[0].casos) > 2):
             print("ERRO: Opcao y2 valida apenas para comparacao de duplas de casos")
             exit(1)
@@ -159,7 +159,7 @@ class Temporal:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
 
             for caso in self.data.conjuntoCasos[0].casos:
-                if(caso.modelo == "NEWAVE" and self.option_ignoraPos == "True"):
+                if(caso.modelo == "NEWAVE" and self.posnw == "True"):
                     dados_dger = Dger.read(caso.caminho)
                     
                     anos_estudo = dados_dger.num_anos_estudo
