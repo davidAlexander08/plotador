@@ -11,7 +11,6 @@ class InfoValoresUnicosNewave(Estruturas):
         self.lista_text = []
         print(par_dados[1] )
         if(par_dados[1] == [""]):
-            par_dados[1] = ["SIN"]
             print("ENTROU AQUI")
             exit(1)
         grandeza = par_dados[2]
