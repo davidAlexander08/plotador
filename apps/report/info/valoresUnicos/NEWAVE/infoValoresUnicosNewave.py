@@ -24,7 +24,7 @@ class InfoValoresUnicosNewave(Estruturas):
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
-        
+        print(grandeza)
         tipo = grandeza.split("_")[0]
         espacial = grandeza.split("_")[1]
         estatistica = ""
