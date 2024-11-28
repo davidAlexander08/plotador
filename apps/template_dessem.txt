@@ -28,6 +28,28 @@ plotador temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese 
 plotador temporal --titulo Custo_De_Operacao_SIN --json arquivo_json --sintese COP_SIN_EST --largura 1200 --altura 650 --tamanho 20 --labely MMR$ --labelx Estágios
 
 
+
+\page{Sudeste}
+
+
+\info{SBM/SE}
+
+\subpage{Geracoes SE}
+
+Geracao Térmica
+plotador temporal --titulo Geração_Térmica_SE --json arquivo_json --sintese GTER_SBM_EST --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --labelx Estágios
+
+Geracao Hidreletrica
+plotador temporal --titulo Geração_Hidrelétrica_SE --json arquivo_json --sintese GHID_SBM_EST --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --labelx Estágios
+
+\subpage{Energia Armazenada SE}
+plotador temporal --titulo Energia_Armazenada_SE --json arquivo_json --sintese EARMF_SBM_EST --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --labelx Estágios
+
+\subpage{Custo Marginal SE}
+plotador temporal --titulo Custo_Marginal_SE --json arquivo_json --sintese CMO_SBM_EST --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labelx Estágios
+
+
+
 \page{Submercado}
 
 <h1> Relatório de Submercados </h1>
