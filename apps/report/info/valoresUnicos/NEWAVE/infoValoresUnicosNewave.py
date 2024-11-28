@@ -22,8 +22,10 @@ class InfoValoresUnicosNewave(Estruturas):
         for arg in argumentos:
             if(arg == ""):
                 arg = "SIN"
-            self.lista_text.append("<h3>Dados "+arg+"</h3>")
-            self.lista_text.append(self.Tabela_Eco_Entrada)
+            #self.lista_text.append("<h3>Dados "+arg+"</h3>")
+            temp = self.Tabela_Eco_Entrada
+            temp = temp.replace("Caso", arg)
+            self.lista_text.append(temp)
             for caso in data.conjuntoCasos[0].casos:
                 if(caso.modelo == "NEWAVE"):
                     temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, arg, grandeza, posnw)
