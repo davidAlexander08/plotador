@@ -38,24 +38,24 @@ plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json 
 \info{SBM/SUDESTE}
 
 \subpage{Geracao Termica SE}
-plotador_dev temporal --titulo Geração_Térmica_Sudeste --json arquivo_json --sintese GTER_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Geração_Térmica_Sudeste --json arquivo_json --sintese GTER_SBM --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \subpage{Geracao Hidreletrica SE}
 
-plotador_dev temporal --titulo Geração_Hidrelétrica_Sudeste --json arquivo_json --sintese GHID_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed
+plotador_dev temporal --titulo Geração_Hidrelétrica_Sudeste --json arquivo_json --sintese GHID_SBM --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed
 
 \subpage{Energia Armazenada SE}
-plotador_dev temporal --titulo Energia_Armazenada_Percentual_Sudeste --json arquivo_json --sintese EARPF_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Energia_Armazenada_Percentual_Sudeste --json arquivo_json --sintese EARPF_SBM --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 
 ###<h1> Energia Armazenada Final </h1>
-###plotador_dev temporal --titulo Energia_Armazenada_Sudeste --json arquivo_json --sintese EARMF_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
+###plotador_dev temporal --titulo Energia_Armazenada_Sudeste --json arquivo_json --sintese EARMF_SBM --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \subpage{Custo Marginal SE}
-plotador_dev temporal --titulo Custo_Marginal_Sudeste --json arquivo_json --sintese CMO_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15
+plotador_dev temporal --titulo Custo_Marginal_Sudeste --json arquivo_json --sintese CMO_SBM --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15
 
 \subpage{ENA SE}
-plotador_dev temporal --titulo Energia_Natural_Afluente_Sudeste --json arquivo_json --sintese ENAA_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed
+plotador_dev temporal --titulo Energia_Natural_Afluente_Sudeste --json arquivo_json --sintese ENAA_SBM --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed
 
 
 
