@@ -58,6 +58,7 @@ plotador_dev temporal --titulo Custo_Marginal_Sudeste --json arquivo_json --sint
 plotador_dev temporal --titulo Energia_Natural_Afluente_Sudeste --json arquivo_json --sintese ENAA_SBM --argumentos SE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed
 
 
+\page{Submercados}
 
 \info{SBM}
 
