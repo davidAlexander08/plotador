@@ -36,39 +36,39 @@ plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json 
 \info{ValoresAnuais//ENAA_SIN}
 
 
-\page{SE}
+\page{Sudeste}
 
 \info{SBM/SUDESTE}
 
 \subpage{Geracao Termica SE}
-plotador_dev temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 20 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Geração_Térmica_Sudeste --json arquivo_json --sintese GTER_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \info{ValoresUnicos/SUDESTE/GTER_SBM}
 \info{ValoresAnuais/SUDESTE/GTER_SBM}
 
 \subpage{Geracao Hidreletrica SE}
 
-plotador_dev temporal --titulo Geração_Hidrelétrica_SBM --json arquivo_json --sintese GHID_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Geração_Hidrelétrica_Sudeste --json arquivo_json --sintese GHID_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed
 \info{ValoresUnicos/SUDESTE/GHID_SBM}
 \info{ValoresAnuais/SUDESTE/GHID_SBM}
 
 \subpage{Energia Armazenada SE}
-plotador_dev temporal --titulo Energia_Armazenada_Percentual_SBM --json arquivo_json --sintese EARPF_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 20 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Energia_Armazenada_Percentual_Sudeste --json arquivo_json --sintese EARPF_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \info{ValoresUnicos/SUDESTE/EARPF_SBM}
 \info{ValoresAnuais/SUDESTE/EARPF_SBM}
 
 ###<h1> Energia Armazenada Final </h1>
-###plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 20 --labely MWmed --liminf True --limsup True
+###plotador_dev temporal --titulo Energia_Armazenada_Sudeste --json arquivo_json --sintese EARMF_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \subpage{Custo Marginal SE}
-plotador_dev temporal --titulo Custo_Marginal_Sudeste --json arquivo_json --sintese CMO_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 20
+plotador_dev temporal --titulo Custo_Marginal_Sudeste --json arquivo_json --sintese CMO_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15
 
 \info{ValoresUnicos/SUDESTE/CMO_SBM}
 \info{ValoresAnuais/SUDESTE/CMO_SBM}
 
 \subpage{ENA SE}
-plotador_dev temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Energia_Natural_Afluente_Sudeste --json arquivo_json --sintese ENAA_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed
 
 
 
@@ -80,49 +80,45 @@ plotador_dev temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json 
 
 \subpage{Geracao Termica SBM}
 
-plotador_dev temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM --argumentos ADD_SBMS --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \info{ValoresUnicos/SUDESTE,NORDESTE/GTER_SBM}
 \info{ValoresAnuais/SUDESTE,NORDESTE/GTER_SBM}
 
 \subpage{Geracao Hidreletrica SBM}
 
-plotador_dev temporal --titulo Geração_Hidrelétrica_SBM --json arquivo_json --sintese GHID_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Geração_Hidrelétrica_SBM --json arquivo_json --sintese GHID_SBM --argumentos ADD_SBMS --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed
 \info{ValoresUnicos/SUDESTE,NORDESTE/GHID_SBM}
 \info{ValoresAnuais/SUDESTE,NORDESTE/GHID_SBM}
 
 \subpage{Energia Armazenada SBM}
 <h1> Energia Armazenada Percentual Final </h1>
-plotador_dev temporal --titulo Energia_Armazenada_Percentual_SBM --json arquivo_json --sintese EARPF_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Energia_Armazenada_Percentual_SBM --json arquivo_json --sintese EARPF_SBM --argumentos ADD_SBMS --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \info{ValoresUnicos/SUDESTE,NORDESTE/EARPF_SBM}
 \info{ValoresAnuais/SUDESTE,NORDESTE/EARPF_SBM}
 
 ###<h1> Energia Armazenada Final </h1>
-###plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+###plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM --argumentos ADD_SBMS --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \subpage{Custo Marginal SBM}
 
-<h1> NORDESTE </h1>
-plotador_dev temporal --titulo Custo_Marginal_Nordeste --json arquivo_json --sintese CMO_SBM --argumentos NORDESTE --chave SBM --largura 1500 --altura 650 --tamanho 20
+plotador_dev temporal --titulo Custo_Marginal_Nordeste --json arquivo_json --sintese CMO_SBM --argumentos NORDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15
 
 \info{ValoresUnicos/NORDESTE/CMO_SBM}
 \info{ValoresAnuais/NORDESTE/CMO_SBM}
 
-<h1> Todos os Submercados </h1>
-plotador_dev temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 20
+plotador_dev temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 15
 
 \subpage{ENA SBM}
-<h1> Energia Natural Afluente </h1>
-plotador_dev temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 15 --labely MWmed
 
 
 
 \page{Usinas}
-<h3> Valor da Água Usinas</h3>
-plotador_dev temporal --titulo Valor_Agua --json arquivo_json --sintese VAGUA_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
-<h3> Defluência Usinas</h3>
 plotador_dev temporal --titulo Vazao_Defluente --json arquivo_json --sintese QDEF_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
+\subpage{VAGUA_UHE}
+plotador_dev temporal --titulo Valor_Agua --json arquivo_json --sintese VAGUA_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
 \subpage{QVER_UHE}
 plotador_dev temporal --titulo Vazao_Vertida --json arquivo_json --sintese QVER_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
 \subpage{QTUR_UHE}
@@ -137,5 +133,5 @@ plotador_dev temporal --titulo Volume_Armazenado --json arquivo_json --sintese V
 <h1> Relatório de Execução </h1>
 
 \info{Execucao}
-plotador_dev convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 20
-plotador_dev tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 750 --tamanho 20
+plotador_dev convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 15
+plotador_dev tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 750 --tamanho 15
