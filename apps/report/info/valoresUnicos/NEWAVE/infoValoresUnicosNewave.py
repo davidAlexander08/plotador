@@ -18,6 +18,7 @@ class InfoValoresUnicosNewave(Estruturas):
         self.lista_text = []
         grandeza = par_dados[2]
         argumentos = par_dados [1]
+        posnw = par_dados[3]
         for arg in argumentos:
             if(arg == ""):
                 arg = "SIN"
@@ -25,13 +26,13 @@ class InfoValoresUnicosNewave(Estruturas):
             self.lista_text.append(self.Tabela_Eco_Entrada)
             for caso in data.conjuntoCasos[0].casos:
                 if(caso.modelo == "NEWAVE"):
-                    temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, arg, grandeza)
+                    temp = self.preenche_modelo_tabela_modelo_NEWAVE(caso, arg, grandeza, posnw)
                     self.lista_text.append(temp)
             self.lista_text.append("</table>"+"\n")
 
         self.text_html = "\n".join(self.lista_text)
 
-    def preenche_modelo_tabela_modelo_NEWAVE(self,caso, arg, grandeza):
+    def preenche_modelo_tabela_modelo_NEWAVE(self,caso, arg, grandeza, posnw):
 
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
