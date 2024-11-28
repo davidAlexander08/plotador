@@ -1,11 +1,18 @@
 
 from apps.report.info.valoresUnicos.NEWAVE.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
+from inewave.newave import Dger
 import os
 import pandas as pd
 
+
+
 class InfoValoresUnicosNewave(Estruturas):
     def __init__(self, data, par_dados):
+        # Display all rows and columns
+        pd.set_option('display.max_rows', None)  # Show all rows
+        pd.set_option('display.max_columns', None)  # Show all column
+
         Estruturas.__init__(self)
         self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.lista_text = []
@@ -49,6 +56,14 @@ class InfoValoresUnicosNewave(Estruturas):
         if(os.path.isfile(caso.caminho+"/sintese/"+estatistica+ ".parquet")):            
             oper = pd.read_parquet(caso.caminho+"/sintese/"+estatistica+".parquet",engine = "pyarrow")
             oper_mean = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
+
+            if(posnw == "True"):
+                dados_dger = Dger.read(caso.caminho+"/dger.dat")
+                anos_estudo = dados_dger.num_anos_estudo
+                mes_inicial = dados_dger.mes_inicio_estudo
+                periodos_estudo = anos_estudo*12 - mes_inicial + 1
+                oper_mean = oper_mean.loc[(oper_mean["estagio"] <= periodos_estudo)]
+
             if(arg != "SIN"):
                 if(espacial == "SBM"):
                     codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
@@ -58,6 +73,8 @@ class InfoValoresUnicosNewave(Estruturas):
                     codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
+
+
             
             first_stage = oper_mean.loc[(oper_mean["estagio"] == 1) ]
             second_month = oper_mean.loc[(oper_mean["estagio"] == 2) ]
