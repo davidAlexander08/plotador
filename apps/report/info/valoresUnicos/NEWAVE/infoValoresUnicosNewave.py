@@ -63,9 +63,10 @@ class InfoValoresUnicosNewave(Estruturas):
             second_month = oper_mean.loc[(oper_mean["estagio"] == 2) ]
             last_stage_value = oper_mean["estagio"].unique()[-1]
             last_stage = oper_mean.loc[(oper_mean["estagio"] == last_stage_value) ]
-            print(last_stage)
+            #print(last_stage)
             if(oper_mean['variavel'].str.contains(tipo, case=False, na=False).any()):
                 primeiro_valor_grandeza = first_stage.loc[(first_stage["variavel"] == tipo)]["valor"].iloc[0]
+                print(last_stage.loc[(last_stage["variavel"] == tipo)])
                 ultimo_valor_grandeza =   last_stage.loc[(last_stage["variavel"] == tipo)]["valor"].iloc[-1]
                 segundo_mes_valor = second_month.loc[(second_month["variavel"] == tipo)]["valor"].iloc[0]
                 media = oper_mean.loc[(oper_mean["variavel"] == tipo)]["valor"].mean()
