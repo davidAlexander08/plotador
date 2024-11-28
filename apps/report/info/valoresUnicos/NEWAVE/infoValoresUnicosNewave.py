@@ -87,16 +87,16 @@ class InfoValoresUnicosNewave(Estruturas):
             if(oper_mean['variavel'].str.contains(tipo, case=False, na=False).any()):
                 primeiro_valor_grandeza = first_stage.loc[(first_stage["variavel"] == tipo)]["valor"].iloc[0]
                 try:
-                    ultimo_valor_grandeza =   last_stage.loc[(last_stage["variavel"] == tipo)]["valor"].iloc[-1]
+                    ultimo_valor_grandeza =   str(round(last_stage.loc[(last_stage["variavel"] == tipo)]["valor"].iloc[-1],2))
                 except Exception as e:
-                    ultimo_valor_grandeza = None
+                    ultimo_valor_grandeza = "N/A"
                 segundo_mes_valor = second_month.loc[(second_month["variavel"] == tipo)]["valor"].iloc[0]
                 media = oper_mean.loc[(oper_mean["variavel"] == tipo)]["valor"].mean()
 
                 temp = temp.replace("Inicial", str(round(primeiro_valor_grandeza,2)))
                 temp = temp.replace("2 Mes", str(round(segundo_mes_valor,2)))
                 temp = temp.replace("Média Horiz", str(round(media,2)))
-                temp = temp.replace("Último", str(round(ultimo_valor_grandeza,2)))
+                temp = temp.replace("Último", ultimo_valor_grandeza)
 
 
         return temp
