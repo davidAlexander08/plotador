@@ -35,6 +35,10 @@ plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json 
 \info{ValoresUnicos//ENAA_SIN}
 \info{ValoresAnuais//ENAA_SIN}
 
+\subpage{Vertimento}
+plotador_dev temporal --titulo Energia_Vertida_SIN --json arquivo_json --sintese EVER_SIN --largura 1600 --altura 400 --tamanho 15 --labely MWmed
+\info{ValoresUnicos//EVER_SIN}
+\info{ValoresAnuais//EVER_SIN}
 
 \page{Sudeste}
 
@@ -70,7 +74,11 @@ plotador_dev temporal --titulo Custo_Marginal_Sudeste --json arquivo_json --sint
 \subpage{ENA SE}
 plotador_dev temporal --titulo Energia_Natural_Afluente_Sudeste --json arquivo_json --sintese ENAA_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed
 
+\subpage{Vertimento SE}
+plotador_dev temporal --titulo Energia_Vertida_Sudeste --json arquivo_json --sintese EVER_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15
 
+\info{ValoresUnicos/SUDESTE/EVER_SBM}
+\info{ValoresAnuais/SUDESTE/EVER_SBM}
 
 \page{Submercado}
 
@@ -113,7 +121,11 @@ plotador_dev temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese 
 \subpage{ENA SBM}
 plotador_dev temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 15 --labely MWmed
 
+\subpage{Vertimento SBM}
+plotador_dev temporal --titulo Energia_Vertida_Sudeste --json arquivo_json --sintese EVER_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 15
 
+\info{ValoresUnicos/NORDESTE/EVER_SBM}
+\info{ValoresAnuais/NORDESTE/EVER_SBM}
 
 \page{Usinas}
 plotador_dev temporal --titulo Vazao_Defluente --json arquivo_json --sintese QDEF_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
