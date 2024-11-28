@@ -8,7 +8,7 @@ class InfoValoresUnicos():
             set_modelos.add(caso.modelo)
 
         self.lista_text = []
-        self.lista_text.append("<h2>Dados Únicos da Grandeza</h2>"+"\n")
+        self.lista_text.append("<h3>Dados Únicos da Grandeza</h3>"+"\n")
 
         for modelo in set_modelos:
             if(modelo == "NEWAVE"):

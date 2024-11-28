@@ -4,42 +4,34 @@
 
 \page{SIN}
 
-<h1>Relatório SIN</h1>
-Relatório com grandezas relacionadas ao estudo
-
 ###Formula:
 ###Here is some LaTeX: \( E = mc^2 \)
-
-<h2> Custo Operativo SIN </h2>
-plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN --largura 1500 --altura 400 --tamanho 20 --labely MMR$
-
+plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN --largura 1500 --altura 400 --tamanho 15 --labely MMR$
 \info{SIN}
-<h2> Parcelas Custos de Operação </h2>
-plotador_dev custos arquivo_json --largura 1500 --altura 400 --tamanho 20 --titulo Parcelas_Custos_Operacao
+plotador_dev custos arquivo_json --largura 1500 --altura 400 --tamanho 15 --titulo Parcelas_Custos_Operacao
 
 \subpage{Geracao Termica SIN}
 
-plotador_dev temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN --largura 1500 --altura 400 --tamanho 20 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN --largura 1500 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \info{ValoresUnicos//GTER_SIN}
 \info{ValoresAnuais//GTER_SIN}
 
 \subpage{Geracao Hidreletrica SIN}
-plotador_dev temporal --titulo Geração_Hidrelétrica_SIN --json arquivo_json --sintese GHID_SIN --largura 1500 --altura 400 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Geração_Hidrelétrica_SIN --json arquivo_json --sintese GHID_SIN --largura 1500 --altura 400 --tamanho 15 --labely MWmed
 \info{ValoresUnicos//GHID_SIN}
 \info{ValoresAnuais//GHID_SIN}
 
 \subpage{Energia Armazenada}
-<h1> Energia Armazenada Percentual Final </h1>
-plotador_dev temporal --titulo Energia_Armazenada_Percentual_SIN --json arquivo_json --sintese EARPF_SIN --largura 1500 --altura 400 --tamanho 20 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Energia_Armazenada_Percentual_SIN --json arquivo_json --sintese EARPF_SIN --largura 1500 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
 \info{ValoresUnicos//EARPF_SIN}
 \info{ValoresAnuais//EARPF_SIN}
 
 ###<h1> Energia Armazenada Final </h1>
-###plotador_dev temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN --largura 1500 --altura 400 --tamanho 20 --labely MWmed --liminf True --limsup True
+###plotador_dev temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN --largura 1500 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \subpage{ENA}
-plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json --sintese ENAA_SIN --largura 1500 --altura 400 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json --sintese ENAA_SIN --largura 1500 --altura 400 --tamanho 15 --labely MWmed
 \info{ValoresUnicos//ENAA_SIN}
 \info{ValoresAnuais//ENAA_SIN}
 
