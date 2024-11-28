@@ -174,10 +174,12 @@ class Report():
                                 cli_command = cli_command + " --html True"
                             if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
                                 cli_command = cli_command + " --eixox data_inicio"
-                            if(posnw == "True" and "temporal" in cli_command):
-                                cli_command = cli_command + " --posnw True"
 
                             if("temporal" in cli_command):
+                                if(posnw == "True"):
+                                    cli_command = cli_command + " --posnw True"
+                                else:
+                                    cli_command = cli_command + " --posnw False"
                                 if("liminf" in cli_command and liminf == "True"):
                                     cli_command = cli_command + " --liminf True"
                                 else:
