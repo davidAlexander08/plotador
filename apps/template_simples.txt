@@ -8,7 +8,7 @@
 ###Here is some LaTeX: \( E = mc^2 \)
 plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN --largura 1600 --altura 400 --tamanho 15 --labely MMR$
 \info{SIN}
-plotador_dev custos arquivo_json --largura 1600 --altura 400 --tamanho 15 --titulo Parcelas_Custos_Operacao
+plotador_dev custos arquivo_json --largura 1600 --altura 500 --tamanho 15 --titulo Parcelas_Custos_Operacao
 
 \subpage{Geracao Termica SIN}
 
@@ -133,5 +133,6 @@ plotador_dev temporal --titulo Volume_Armazenado --json arquivo_json --sintese V
 <h1> Relatório de Execução </h1>
 
 \info{Execucao}
-plotador_dev convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 15
 plotador_dev tempo arquivo_json --titulo Tempo_de_Execucao --largura 1200 --altura 750 --tamanho 15
+plotador_dev convergencia arquivo_json --titulo Convergencia --largura 1200 --altura 650 --tamanho 15
+
