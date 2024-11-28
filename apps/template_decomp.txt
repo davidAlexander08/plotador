@@ -11,33 +11,56 @@ Relatório com grandezas relacionadas ao estudo
 ###Here is some LaTeX: \( E = mc^2 \)
 
 <h3> Custo Operativo SIN </h3>
-plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN --largura 1200 --altura 650 --tamanho 20 --labely MMR$
+plotador_dev temporal --titulo Custo_Operativo_SIN --json arquivo_json --sintese COP_SIN --largura 1600 --altura 650 --tamanho 15 --labely MMR$
 
 \info{SIN}
-<h3> Parcelas Custos de Operação </h3>
-plotador_dev custos arquivo_json --largura 1200 --altura 650 --tamanho 20 --titulo Parcelas_Custos_Operacao
 
 \subpage{Geracoes}
-
 <h3> Geracao Térmica </h3>
-plotador_dev temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 <h3> Geracao Hidreletrica </h3>
-plotador_dev temporal --titulo Geração_Hidrelétrica_SIN --json arquivo_json --sintese GHID_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Geração_Hidrelétrica_SIN --json arquivo_json --sintese GHID_SIN --largura 1600 --altura 650 --tamanho 15 --labely MWmed
 
 \subpage{Energia Armazenada}
 <h3> Energia Armazenada Percentual Final </h3>
-plotador_dev temporal --titulo Energia_Armazenada_Percentual_SIN --json arquivo_json --sintese EARPF_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Energia_Armazenada_Percentual_SIN --json arquivo_json --sintese EARPF_SIN --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 <h3> Energia Armazenada Final </h3>
-plotador_dev temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed --liminf True --limsup True
+plotador_dev temporal --titulo Energia_Armazenada_SIN --json arquivo_json --sintese EARMF_SIN --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \subpage{ENA}
-plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json --sintese ENAA_SIN --largura 1200 --altura 650 --tamanho 20 --labely MWmed
+plotador_dev temporal --titulo Energia_Natural_Afluente_SIN --json arquivo_json --sintese ENAA_SIN --largura 1600 --altura 650 --tamanho 15 --labely MWmed
 
 \page{Submercado}
 
 <h1> Relatório de Submercados </h1>
+
+\page{Sudeste}
+
+\info{SBM/SUDESTE}
+
+\subpage{Geracao Termica SE}
+plotador_dev temporal --titulo Geração_Térmica_Sudeste --json arquivo_json --sintese GTER_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
+
+\subpage{Geracao Hidreletrica SE}
+
+plotador_dev temporal --titulo Geração_Hidrelétrica_Sudeste --json arquivo_json --sintese GHID_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed
+
+\subpage{Energia Armazenada SE}
+plotador_dev temporal --titulo Energia_Armazenada_Percentual_Sudeste --json arquivo_json --sintese EARPF_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
+
+
+###<h1> Energia Armazenada Final </h1>
+###plotador_dev temporal --titulo Energia_Armazenada_Sudeste --json arquivo_json --sintese EARMF_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
+
+\subpage{Custo Marginal SE}
+plotador_dev temporal --titulo Custo_Marginal_Sudeste --json arquivo_json --sintese CMO_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15
+
+\subpage{ENA SE}
+plotador_dev temporal --titulo Energia_Natural_Afluente_Sudeste --json arquivo_json --sintese ENAA_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed
+
+
 
 \info{SBM}
 
