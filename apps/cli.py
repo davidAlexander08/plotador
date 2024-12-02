@@ -36,7 +36,7 @@ option_json = click.option("--arquivo_json", "--json", default = None, help ="de
 option_subplot = click.option("--subplot", default = None, help ="definicao do numero de colunas e linhas do subplot separados por virgula")
 option_boxplot = click.option("--boxplot", default = None, help = "Se True ativa a opcao boxplots, habilitando graficos boxplot")
 option_csv = click.option("--csv", default = "False", help = "Default True, se False nao imprime mais os csvs")
-option_html = click.option("--html", default = None, help = "Default False, se True gera o html da figura")
+option_html = click.option("--html", default = None, help = "Default True, se False ignora o html da figura")
 option_outpath = click.option("--outpath", default = None, help = "Muda o caminho de saida da figura e csv a serem gerados")
 option_txt = click.option("--txt", default = None, help ="definicao do arquivo txt. Caso nenhum, ele considera estar dentro da pasta do caso")
 option_y2 = click.option("--y2", default = None, help = "adicao de um segundo eixo para comparacao de uma dupla de casos com barras de diferença entre eles.")
@@ -44,7 +44,7 @@ option_y2sup = click.option("--y2sup", default = None, help = "limite superior y
 option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y2.")
 option_modelo_report = click.option("--tipo", default = "Simples", help = "Report Simples (Sem UHE) ou Completo")
 option_automatico = click.option("--automatico", default = "False", help = "Report Simples (Sem UHE) ou Completo")
-option_posnw = click.option("--posnw", default = "True", help = "Ignora o periodo POS caso exista")
+option_posnw = click.option("--posnw", default = "True", help = "Default True, não gera POS. Caso False, gera o POS.")
 option_nomearquivo = click.option("--nomearquivo", default = "output.html", help = "Nome arquivo do Report")
 @click.group()
 def cli():
