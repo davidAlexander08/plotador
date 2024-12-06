@@ -201,6 +201,7 @@ class Graficos:
                         x = df[colx],
                         y = df[coly],
                         name = self.estudo,
+                        legendgroup = self.estudo,
                         showlegend=unity.arg.show))
                 mapaGO[unity] = listaGO
         else:
@@ -218,6 +219,7 @@ class Graficos:
                             mode=modo,
                             marker=dict( symbol=c.marcador ),
                             name = c.nome,
+                            legendgroup=c.nome,
                             line = dict(color = c.cor, dash=c.dash),
                             showlegend=unity.arg.show))
                 if(eixo_y2 == "True"):
@@ -236,6 +238,7 @@ class Graficos:
                                 #textposition ="outside",
                                 marker_color="gray",
                                 name = lista_casos[0]+"-"+lista_casos[1],
+                                legendgroup=lista_casos[0]+"-"+lista_casos[1],
                                 showlegend=True))
                 mapaGO[unity] = listaGO
         return mapaGO
