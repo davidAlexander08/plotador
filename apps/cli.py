@@ -44,7 +44,7 @@ option_y2sup = click.option("--y2sup", default = None, help = "limite superior y
 option_y2inf = click.option("--y2inf", default = None, help = "limite inferior y2.")
 option_modelo_report = click.option("--tipo", default = "Simples", help = "Report Simples (Sem UHE) ou Completo")
 option_automatico = click.option("--automatico", default = "False", help = "Report Simples (Sem UHE) ou Completo")
-option_posnw = click.option("--posnw", default = "True", help = "Default True, não gera POS. Caso False, gera o POS.")
+option_posnw = click.option("--posnw", default = "False", help = "Default True, não gera POS. Caso False, gera o POS.")
 option_nomearquivo = click.option("--nomearquivo", default = "output.html", help = "Nome arquivo do Report")
 @click.group()
 def cli():

@@ -60,7 +60,7 @@ class InfoValoresUnicosNewave(Estruturas):
             oper = pd.read_parquet(caso.caminho+"/sintese/"+estatistica+".parquet",engine = "pyarrow")
             oper_mean = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
 
-            if(posnw == "True"):
+            if(posnw == "False"):
                 dados_dger = Dger.read(caso.caminho+"/dger.dat")
                 anos_estudo = dados_dger.num_anos_estudo
                 mes_inicial = dados_dger.mes_inicio_estudo

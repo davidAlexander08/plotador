@@ -163,7 +163,7 @@ class Temporal:
                 #print(caso.nome, " caminho: ", caso.caminho+"/dger.dat")
                 df_caso = df_temporal.loc[(df_temporal["caso"] == caso.nome)]
                 #print(df_caso)
-                if(caso.modelo == "NEWAVE" and self.posnw == "True"):
+                if(caso.modelo == "NEWAVE" and self.posnw == "False"):
                     dados_dger = Dger.read(caso.caminho+"/dger.dat")
                     anos_estudo = dados_dger.num_anos_estudo
                     mes_inicial = dados_dger.mes_inicio_estudo

@@ -88,7 +88,7 @@ class InfoAnualNewave(Estruturas):
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
             
-            if(posnw == "True"):
+            if(posnw == "False"):
                 dados_dger = Dger.read(caso.caminho+"/dger.dat")
                 anos_estudo = dados_dger.num_anos_estudo
                 mes_inicial = dados_dger.mes_inicio_estudo

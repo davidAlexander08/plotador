@@ -5,7 +5,7 @@ from apps.report.info.UHE.infoUHE import InfoUHE
 from apps.report.info.Execucao.infoExecucao import InfoExecucao
 from apps.report.info.valoresUnicos.infoValoresUnicos import InfoValoresUnicos
 from apps.report.info.Anual.infoAnual import InfoAnual
-
+from apps.report.info.Cortes.infoCORTES import InfoCORTES
 class Info():
     def __init__(self, data, par_dados):
         self.text_html = None
@@ -29,6 +29,9 @@ class Info():
             self.text_html = info.text_html
         elif(par_dados[0] == "ValoresAnuais"):
             info = InfoAnual(data, par_dados)
+            self.text_html = info.text_html
+        elif(par_dados[0] == "CORTES"):
+            info = InfoCORTES(data, par_dados)
             self.text_html = info.text_html
         else:
             print("NOME DO ARGUMENTO INFO NAO RECONHECIDO")
