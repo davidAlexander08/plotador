@@ -40,9 +40,9 @@ class Tempo:
             lista_color.append(caso.cor)
             if(caso.modelo == "NEWAVE" or caso.modelo == "DECOMP"):
                 #temp.append(df_temp.loc[(df_temp["etapa"] == "Calculo da Politica") ])
-                #print(df_caso["caso"].iloc[0])
-                #print(df_caso["modelo"].iloc[0])
-                #print(df_caso["tempo"].sum()/60)
+                print(df_caso["caso"].iloc[0])
+                print(df_caso["modelo"].iloc[0])
+                print(df_caso["tempo"].sum()/60)
                 df_tempo = pd.DataFrame({"etapa":["Tempo Total"], "tempo": [df_caso["tempo"].sum()/60], "caso":[df_caso["caso"].iloc[0]], "modelo":[df_caso["modelo"].iloc[0]]})
                 #print(df_tempo)
                 temp.append(df_tempo)
