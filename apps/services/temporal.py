@@ -3,7 +3,6 @@ from typing import Dict
 from apps.model.unidade import UnidadeSintese
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from apps.graficos.graficos import Graficos
-from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
