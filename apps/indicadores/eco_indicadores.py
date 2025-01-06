@@ -65,6 +65,7 @@ class EcoIndicadores:
                 else:
                     sintese_busca = sintese
                 print(sintese_busca)
+                print("sintese: ", sintese)
                 exit(1)
                 #df = self.retorna_df(c, sintese_busca).copy()
                 df = self.retorna_df(c, sintese_busca)
