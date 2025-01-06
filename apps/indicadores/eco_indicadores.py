@@ -77,7 +77,7 @@ class EcoIndicadores:
                 df["modelo"] = c.modelo
                 result_dict [c] = df
                 #print(df)
-                print(sintese_busca)
+                #print(sintese_busca)
             else:                    
                 if(sintese in self.mapa_arquivos.keys()):
                     lista_arquivos = self.mapa_arquivos[sintese]

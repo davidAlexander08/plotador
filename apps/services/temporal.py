@@ -121,7 +121,7 @@ class Temporal:
 
         #print("ANTES DE DECLARAR SINTESE")
         #NOVIDADE
-        print("INICIO: ", self.sintese)
+        #print("INICIO: ", self.sintese)
         if(self.sintese is None):
             print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
             exit(1)
@@ -224,11 +224,21 @@ class Temporal:
                 dict[c] = df.reset_index(drop = True) 
         return dict
 
+    def __retorna_mapa_patamar(self, mapa):
+        dict = {}
+        for c in self.data.conjuntoCasos[0].casos:
+            df = mapa[c]
+            if(c.modelo == "NEWAVE" or c.modelo == "DECOMP"):
+                dict[c] = df.loc[(df["patamar"] == c.patamar)].reset_index(drop = True)
+            if(c.modelo == "DESSEM"):   
+                dict[c] = df.reset_index(drop = True) 
+        return dict
+
     def retorna_mapaDF_cenario_medio_temporal(self, eco_mapa, unidade, boxplot):
         mapa_temporal = {}
         if( (unidade.sintese.filtro is None) & (unidade.filtroArgumento is None) ):
             if(boxplot =="True"):
-                return eco_mapa
+                return self.__retorna_mapa_patamar(eco_mapa)
             else:
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else: 
@@ -248,7 +258,7 @@ class Temporal:
                 #print(unidade.sintese.filtro)
                 dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]                
             if(boxplot =="True"):
-                mapa_temporal = dicionario
+                mapa_temporal = self.__retorna_mapa_patamar(dicionario)
             else:
                 mapa_temporal = self.__retorna_mapa_media_parquet(dicionario)
         return mapa_temporal
