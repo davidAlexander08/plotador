@@ -3,6 +3,7 @@ from typing import Dict
 from apps.model.unidade import UnidadeSintese
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from apps.graficos.graficos import Graficos
+from apps.indicadores.indicadores_temporais import IndicadoresTemporais
 from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
@@ -120,6 +121,7 @@ class Temporal:
 
         #print("ANTES DE DECLARAR SINTESE")
         #NOVIDADE
+        print("INICIO: ", self.sintese)
         if(self.sintese is None):
             print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
             exit(1)
