@@ -45,7 +45,7 @@ class EcoIndicadores:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
 
             
-    def retornaMapaDF(self, sintese, boxplot):
+    def retornaMapaDF(self, sintese, boxplot= "False"):
         result_dict  = {}
         sintese_parts = sintese.split("_")
         variavel = sintese_parts[0]
@@ -76,6 +76,7 @@ class EcoIndicadores:
                 df["modelo"] = c.modelo
                 result_dict [c] = df
                 #print(df)
+                print(sintese_busca)
             else:                    
                 if(sintese in self.mapa_arquivos.keys()):
                     lista_arquivos = self.mapa_arquivos[sintese]
