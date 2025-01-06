@@ -66,6 +66,7 @@ class EcoIndicadores:
                     sintese_busca = sintese
                 if(boxplot == "True"):
                     sintese_busca = sintese
+                    flag_estatistica = 0
                 #df = self.retorna_df(c, sintese_busca).copy()
                 df = self.retorna_df(c, sintese_busca)
                 #if(flag_estatistica == 1):
