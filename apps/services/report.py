@@ -16,7 +16,7 @@ import shutil
 from pathlib import Path
 
 class Report():
-    def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup):
+    def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot):
         #self.outpath = outpath
         self.json = arq_json
         #print("Arquivo JSON: ", self.json)
