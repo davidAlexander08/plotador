@@ -64,6 +64,8 @@ class EcoIndicadores:
                         flag_estatistica = 1
                 else:
                     sintese_busca = sintese
+                print(sintese_busca)
+                exit(1)
                 #df = self.retorna_df(c, sintese_busca).copy()
                 df = self.retorna_df(c, sintese_busca)
                 #if(flag_estatistica == 1):
