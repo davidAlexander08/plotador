@@ -50,7 +50,6 @@ class EcoIndicadores:
         sintese_parts = sintese.split("_")
         variavel = sintese_parts[0]
         flag_estatistica = 0
-        print("sintese  s: ", sintese)
         #print("SINTESE")
         for c in self.casos:
             if(os.path.isfile(c.caminho+"/sintese/"+sintese+".parquet")):
@@ -65,7 +64,7 @@ class EcoIndicadores:
                         flag_estatistica = 1
                 else:
                     sintese_busca = sintese
-                print(sintese_busca)
+                print("sintese_busca: ", sintese_busca)
                 print("sintese: ", sintese)
                 #df = self.retorna_df(c, sintese_busca).copy()
                 df = self.retorna_df(c, sintese_busca)
