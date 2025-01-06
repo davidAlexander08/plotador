@@ -50,7 +50,7 @@ class EcoIndicadores:
         sintese_parts = sintese.split("_")
         variavel = sintese_parts[0]
         flag_estatistica = 0
-        print("sintese_parts: ", sintese_parts)
+        print("sintese: ", sintese)
         #print("SINTESE")
         for c in self.casos:
             if(os.path.isfile(c.caminho+"/sintese/"+sintese+".parquet")):
