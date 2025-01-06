@@ -153,7 +153,7 @@ class Temporal:
 
  
     def executa(self, conjUnity, diretorio_saida_arg): 
-        mapa_temporal = {}
+        mapa_temporal = {} 
         print("self.sts.sintese: ", self.sts.sintese)
         mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese)
         for unity in conjUnity.listaUnidades:
