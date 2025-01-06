@@ -63,7 +63,8 @@ def cli():
 @option_nomearquivo
 @option_limInf
 @option_limSup
-def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cronologico, conjunto, html, posnw, liminf, limsup):
+@option_boxplot
+def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cronologico, conjunto, html, posnw, liminf, limsup, boxplot):
     start_time = time.time()
     cores = ["black", "red", "blue", "yellow", "gray", "green","purple","darkgreen", "darkblue","royalblue","skyblue","gold"]
     contador = 0
@@ -144,7 +145,7 @@ def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cr
                 arquivo_json = "exemplo_conj.json"    
     
     from apps.services.report import Report
-    Report(outpath, arquivo_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup)
+    Report(outpath, arquivo_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot)
     end_time = time.time()
     elapsed_time = end_time - start_time
     minutes = int(elapsed_time // 60)

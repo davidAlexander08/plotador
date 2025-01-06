@@ -189,6 +189,12 @@ class Report():
                                     cli_command = cli_command + " --limsup True"
                                 else:
                                     cli_command = cli_command + " --limsup False"
+
+                                if("boxplot" in cli_command):
+                                    cli_command = cli_command + " --boxplot True"
+                                else:
+                                    cli_command = cli_command + " --boxplot False"
+                                    
                             try:
                                 Log.log().info(cli_command)
                                 cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
