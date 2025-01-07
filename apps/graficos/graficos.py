@@ -291,7 +291,8 @@ class Graficos:
                         y =  dfY[coly].tolist(),
                         name = c.nome,
                         line = dict(color = c.cor),
-                        boxpoints = False,
+                        #boxpoints = False,
+                        boxpoints='outliers',
                         showlegend=unity.arg.show))
             mapaGO[unity] = listaGO
         return mapaGO
