@@ -50,6 +50,7 @@ class MetaData:
             "CMO":    ("R$/MWh","Custo Marg."),
             "QTUR":    ("m3/s", "Vaz. Turb."),
             "QDEF":    ("m3/s", "Vaz. Defl."),
+            "VRET":    ("hm3", "Volume Retirada"),
             "QINC":    ("m3/s", "Vaz. Incr."),
             "QVER":    ("m3/s", "Vaz. Vert."),
             "QAFL":    ("m3/s", "Vaz. Afl."),
