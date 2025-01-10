@@ -145,6 +145,6 @@ plotador_dev temporal --titulo Volume_Armazenado --json arquivo_json --sintese V
 <h1> Relatório de Execução </h1>
 
 \info{Execucao}
-plotador_dev tempo arquivo_json --titulo Tempo_de_Execução --largura 1200 --altura 750 --tamanho 15
+###plotador_dev tempo arquivo_json --titulo Tempo_de_Execução --largura 1200 --altura 750 --tamanho 15
 plotador_dev convergencia arquivo_json --titulo Convergência --largura 1200 --altura 650 --tamanho 15
 
