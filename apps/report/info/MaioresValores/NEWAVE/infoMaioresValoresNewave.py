@@ -62,16 +62,11 @@ class InfoMaioresValoresNewave(Estruturas):
                 if(espacial == "UHE"):
                     codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
-                    #oper = oper.loc[(oper["codigo_usina"] == cod_usi) ]
-                    subset_df = parquet_file.read(columns=["usina", "valor"]).to_pandas()
-                    print(subset_df)
-                    filtered_subset = subset_df[subset_df["usina"] == cod_usi]
-                    largest_values = filtered_subset["valor"].nlargest(5)
-                    filters = [
-                        ("usina", "==", cod_usi),
-                        ("valor", "in", largest_values.tolist())
-                    ]
-                    filtered_data = pq.read_table(file_path, filters=filters).to_pandas()
+                    filtered_data = pd.read_parquet(
+                        file_path,
+                        filters=[("usina", "==", cod_usi)],
+                        engine="pyarrow"
+                    )
                     print(filtered_data)
             else:
                 None
