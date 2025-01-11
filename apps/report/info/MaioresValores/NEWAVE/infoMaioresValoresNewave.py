@@ -74,6 +74,7 @@ class InfoMaioresValoresNewave(Estruturas):
                     # Convert to pandas DataFrame
                     filtered_data_df = filtered_data.to_pandas()
                     print(filtered_data)
+                    exit(1)
             else:
                 None
             
