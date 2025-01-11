@@ -50,7 +50,7 @@ class InfoMaioresValoresNewave(Estruturas):
 
         tipo = grandeza.split("_")[0]
         espacial = grandeza.split("_")[1].strip()
-    
+        print("ANTES DE MORRER")
         if(os.path.isfile(caso.caminho+"/sintese/"+grandeza+ ".parquet")):            
             oper = pd.read_parquet(caso.caminho+"/sintese/"+grandeza+".parquet",engine = "pyarrow")
             if(arg != "SIN"):
@@ -69,12 +69,12 @@ class InfoMaioresValoresNewave(Estruturas):
                 mes_inicial = dados_dger.mes_inicio_estudo
                 periodos_estudo = anos_estudo*12 - mes_inicial + 1
                 oper = oper.loc[(oper["estagio"] <= periodos_estudo)]
-
+        print("MORREU")
             #SELECIONA 5 MAIORES VALORES 
             largest_values = oper['valor'].nlargest(5)
             print(largest_values)
-
             for valor in largest_values:
+                print("valor: ", valor)
                 df_valor = oper.loc[(oper["valor"] == valor)]
                 for index, row in df_valor.iterrows():
                     temp = temp.replace("Periodo", str(round(row["estagio"],2)))
