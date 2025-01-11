@@ -199,7 +199,7 @@ class Report():
                                 else:
                                     cli_command = cli_command + " --boxplot False"
 
-                                if("usinas" in cli_command):
+                                if(usinas is not None):
                                     cli_command = cli_command.replace("USINA", usinas)
                                     print("CLI COMMAND USINAS: ", cli_command)
                                     
