@@ -69,7 +69,7 @@ class InfoMaioresValoresNewave(Estruturas):
                 mes_inicial = dados_dger.mes_inicio_estudo
                 periodos_estudo = anos_estudo*12 - mes_inicial + 1
                 oper = oper.loc[(oper["estagio"] <= periodos_estudo)]
-        print("MORREU")
+            print("MORREU")
             #SELECIONA 5 MAIORES VALORES 
             largest_values = oper['valor'].nlargest(5)
             print(largest_values)
