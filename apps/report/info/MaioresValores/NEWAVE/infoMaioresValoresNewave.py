@@ -64,6 +64,7 @@ class InfoMaioresValoresNewave(Estruturas):
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     #oper = oper.loc[(oper["codigo_usina"] == cod_usi) ]
                     subset_df = parquet_file.read(columns=["usina", "valor"]).to_pandas()
+                    print(subset_df)
                     filtered_subset = subset_df[subset_df["usina"] == cod_usi]
                     largest_values = filtered_subset["valor"].nlargest(5)
                     filters = [
