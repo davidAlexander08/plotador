@@ -73,6 +73,8 @@ class InfoValoresUnicosNewave(Estruturas):
                     filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=[("codigo_usina", "==", cod_usi)])
                     oper_mean = filtered_data.to_pandas().reset_index(drop=True)
                     oper_mean = oper_mean.loc[(oper_mean["cenario"] == "mean") & (oper_mean["patamar"] == 0) ]
+                    print(oper_mean)
+                    exit(1)
             else:
                 oper = pd.read_parquet(caso.caminho+"/sintese/"+estatistica+".parquet",engine = "pyarrow")
                 oper_mean = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
