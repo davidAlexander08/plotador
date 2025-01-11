@@ -47,7 +47,6 @@ class InfoMaioresValoresNewave(Estruturas):
 
         tipo = grandeza.split("_")[0]
         espacial = grandeza.split("_")[1].strip()
-        print("grandeza: ", grandeza)
         if(os.path.isfile(caso.caminho+"/sintese/"+grandeza+ ".parquet")):           
             if(arg != "SIN"):
                 if(espacial == "SBM"):
