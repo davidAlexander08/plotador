@@ -66,7 +66,7 @@ class InfoMaioresValoresNewave(Estruturas):
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     # Apply filter for "usina"
                     # Apply filter while reading the Parquet file
-                    filters = [("usina", "==", cod_usi)]
+                    filters = [("codigo_usina", "==", cod_usi)]
 
                     # Read the table with the filter applied
                     filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=filters)
