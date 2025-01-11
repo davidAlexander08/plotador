@@ -4,22 +4,11 @@
 
 \page{Violação}
 
-\subpage{Violação FPHA}
 plotador_dev temporal --titulo Violacao_FPHA --json arquivo_json --sintese VFPHA_UHE --chave UHE --argumentos USINA --labely MWmed --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{MaioresValores/USINA/VFPHA_UHE}
 \info{MenoresValores/USINA/VFPHA_UHE}
 \info{ValoresUnicos/USINA/VFPHA_UHE}
 \info{ValoresAnuais/USINA/VFPHA_UHE}
-
-
-
-\subpage{Violação Retirada}
-plotador_dev temporal --titulo Violacao_FPHA --json arquivo_json --sintese VRET_UHE --chave UHE --argumentos USINA --labely MWmed --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
-\info{MaioresValores/USINA/VRET_UHE}
-\info{MenoresValores/USINA/VRET_UHE}
-\info{ValoresUnicos/USINA/VRET_UHE}
-\info{ValoresAnuais/USINA/VRET_UHE}
-
 
 \page{Hidrologia}
 
@@ -29,14 +18,14 @@ plotador_dev temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDE
 \info{MaioresValores/USINA/QDEF_UHE}
 \info{MenoresValores/USINA/QDEF_UHE}
 
-\subpage{Vazão Turbinada}
+\subpage{Vaz. Turbinada}
 plotador_dev temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{ValoresUnicos/USINA/QTUR_UHE}
 \info{ValoresAnuais/USINA/QTUR_UHE}
 \info{MaioresValores/USINA/QTUR_UHE}
 \info{MenoresValores/USINA/QTUR_UHE}
 
-\subpage{Vazão Vertida}
+\subpage{Vaz. Vertida}
 plotador_dev temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{ValoresUnicos/USINA/QVER_UHE}
 \info{ValoresAnuais/USINA/QVER_UHE}
@@ -44,7 +33,7 @@ plotador_dev temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER
 \info{MenoresValores/USINA/QVER_UHE}
 
 
-\subpage{Vazão Incremental}
+\subpage{Vaz. Incremental}
 plotador_dev temporal --titulo Vazão_Vertida --json arquivo_json --sintese QINC_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{ValoresUnicos/USINA/QVER_UHE}
 \info{ValoresAnuais/USINA/QVER_UHE}
