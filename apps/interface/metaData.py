@@ -73,5 +73,6 @@ class MetaData:
             "VAGUAI":  ("1000R$/hm3", "Valor Agua Incr."),
             "VVER":("hm3","Volume Vertido"),
             "TEMPO":("min","Tempo de Execucao"),
-            "MERL":("MW","Demanda Líquida")
+            "MERL":("MW","Demanda Líquida"),
+            "VFPHA":("MW","Violação FPHA")
         }
