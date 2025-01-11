@@ -7,8 +7,9 @@
 
 
 \page{Hidrologia}
-plotador_dev temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
 \info{MaioresValores/USINA/QDEF_UHE}
+plotador_dev temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
+
 \info{ValoresUnicos/USINA/QDEF_UHE}
 \info{ValoresAnuais/USINA/QDEF_UHE}
 
