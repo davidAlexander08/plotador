@@ -10,19 +10,19 @@
 \info{MaioresValores/USINA/QDEF_UHE}
 \info{ValoresUnicos/USINA/QDEF_UHE}
 \info{ValoresAnuais/USINA/QDEF_UHE}
-plotador_dev temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
+plotador_dev temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  --liminf True --limsup True
 
 
 
 
 \subpage{Vazão Turbinada}
-plotador_dev temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
+plotador_dev temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{ValoresUnicos/USINA/QTUR_UHE}
 \info{ValoresAnuais/USINA/QTUR_UHE}
 \info{MaioresValores/USINA/QTUR_UHE}
 
 \subpage{Vazão Vertida}
-plotador_dev temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
+plotador_dev temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{ValoresUnicos/USINA/QVER_UHE}
 \info{ValoresAnuais/USINA/QVER_UHE}
 \info{MaioresValores/USINA/QVER_UHE}
