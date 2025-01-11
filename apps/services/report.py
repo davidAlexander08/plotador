@@ -201,7 +201,6 @@ class Report():
 
                                 if(usinas is not None):
                                     cli_command = cli_command.replace("USINA", usinas)
-                                    print("CLI COMMAND USINAS: ", cli_command)
                                     
                             try:
                                 Log.log().info(cli_command)

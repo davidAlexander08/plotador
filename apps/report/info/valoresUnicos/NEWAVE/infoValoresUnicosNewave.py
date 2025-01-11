@@ -74,6 +74,7 @@ class InfoValoresUnicosNewave(Estruturas):
                     oper_mean = oper_mean.loc[(oper_mean["codigo_submercado"] == cod_sbm) ]
                 if(espacial == "UHE"):
                     codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
+                    print("codigos_usi: ", codigos_usi)
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
 
