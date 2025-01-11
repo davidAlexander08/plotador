@@ -26,6 +26,7 @@ class Report():
         path.pop()
         path.pop()
         arquivo_template = ""
+        print("usinas: ", usinas)
         
 
         if(self.json is not None):
