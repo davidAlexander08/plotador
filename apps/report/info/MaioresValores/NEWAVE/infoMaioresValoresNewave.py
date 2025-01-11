@@ -64,8 +64,14 @@ class InfoMaioresValoresNewave(Estruturas):
                     codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     # Apply filter for "usina"
-                    filtered_table = parquet_file.read(filters=[("usina", "==", cod_usi)])
-                    filtered_data = filtered_table.to_pandas()
+                    # Apply filter while reading the Parquet file
+                    filters = [("usina", "==", cod_usi)]
+
+                    # Read the table with the filter applied
+                    filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=filters)
+
+                    # Convert to pandas DataFrame
+                    filtered_data_df = filtered_data.to_pandas()
                     print(filtered_data)
             else:
                 None
