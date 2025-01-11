@@ -71,9 +71,12 @@ class InfoMaioresValoresNewave(Estruturas):
 
                     # Read the table with the filter applied
                     filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=filters)
-
                     # Convert to pandas DataFrame
                     filtered_data_df = filtered_data.to_pandas()
+
+                    # Print the filtered data
+                    print(filtered_data_df.head()) 
+                    # Convert to pandas DataFrame
                     print(filtered_data)
                     exit(1)
             else:
