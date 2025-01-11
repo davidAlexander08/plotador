@@ -81,9 +81,7 @@ class InfoMaioresValoresNewave(Estruturas):
             for index, row in largest_values_df.iterrows():
                 temp = temp.replace("Periodo", str(round(row["estagio"],2)))
                 temp = temp.replace("Cenario", str(round(row["cenario"],2)))
-                if "patamar" in row:
-                    temp = temp.replace("Patamar", str(round(row["patamar"], 2)))
-                else:
-                    temp = temp.replace("Patamar", "-")
+                temp = temp.replace("Patamar", str(round(row["patamar"], 2)))
                 temp = temp.replace("Valor", str(round(row["valor"],2)))
+                print(temp)
                 self.lista_text.append(temp)
