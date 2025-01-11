@@ -129,6 +129,8 @@ class Report():
                         args = nome_argumento_info.split("/")
                         chave = args[0]
                         argumentos = nome_argumento_info.split("/")[1].split(",") if(len(args) > 1) else None
+                        if(usinas is not None):
+                            argumentos = list(usinas.split(","))
                         grandeza = nome_argumento_info.split("/")[2] if(len(args) > 2) else None
                         par_dados = (chave, argumentos, grandeza, posnw)
                         info = Info(data, par_dados)
