@@ -201,6 +201,7 @@ class Report():
 
                                 if("usinas" in cli_command):
                                     cli_command = cli_command.replace("USINA", usinas)
+                                    print("CLI COMMAND USINAS: ", cli_command)
                                     
                             try:
                                 Log.log().info(cli_command)
