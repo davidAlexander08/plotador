@@ -42,11 +42,7 @@ class InfoMaioresValoresNewave(Estruturas):
 
     def preenche_modelo_tabela_modelo_NEWAVE(self,caso, arg, grandeza, posnw):
 
-        temp = self.template_Tabela_Eco_Entrada
-        temp = temp.replace("Caso", caso.nome)
-        temp = temp.replace("Modelo", caso.modelo)
-        temp = temp.replace("Argumento", arg)
-        temp = temp.replace("Grandeza", grandeza)
+
         
 
         tipo = grandeza.split("_")[0]
@@ -79,6 +75,11 @@ class InfoMaioresValoresNewave(Estruturas):
             largest_values_df = oper.nlargest(5, 'valor').reset_index(drop = True)
             print(largest_values_df)
             for index, row in largest_values_df.iterrows():
+                temp = self.template_Tabela_Eco_Entrada
+                temp = temp.replace("Caso", caso.nome)
+                temp = temp.replace("Modelo", caso.modelo)
+                temp = temp.replace("Argumento", arg)
+                temp = temp.replace("Grandeza", grandeza)
                 temp = temp.replace("Periodo", str(round(row["estagio"],2)))
                 temp = temp.replace("Cenario", str(round(row["cenario"],2)))
                 temp = temp.replace("Patamar", str(round(row["patamar"], 2)))
