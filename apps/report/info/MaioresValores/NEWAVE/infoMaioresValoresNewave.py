@@ -53,34 +53,22 @@ class InfoMaioresValoresNewave(Estruturas):
         espacial = grandeza.split("_")[1].strip()
         print("grandeza: ", grandeza)
         if(os.path.isfile(caso.caminho+"/sintese/"+grandeza+ ".parquet")):           
-            parquet_file = pq.ParquetFile(caso.caminho+"/sintese/"+grandeza+ ".parquet")
-            print(parquet_file.schema)
             if(arg != "SIN"):
                 if(espacial == "SBM"):
-                    #codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
-                    #cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
-                    #oper = oper.loc[(oper["codigo_submercado"] == cod_sbm) ]
-                    None
+                    codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
+                    cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
+                    filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=[("codigo_submercado", "==", cod_sbm)])
+                    oper = filtered_data.to_pandas().reset_index(drop=True)
                 if(espacial == "UHE"):
                     codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
-                    # Apply filter for "usina"
-                    # Apply filter while reading the Parquet file
-                    print("cod_usi: ", cod_usi)
-                    filters = [("codigo_usina", "==", cod_usi)]
+                    filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=[("codigo_usina", "==", cod_usi)])
+                    oper = filtered_data.to_pandas().reset_index(drop=True)
 
-                    # Read the table with the filter applied
-                    filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=filters)
-                    # Convert to pandas DataFrame
-                    filtered_data_df = filtered_data.to_pandas()
-                    filtered_data_df = filtered_data_df.reset_index(drop=True)
-                    # Print the filtered data
-                    # Convert to pandas DataFrame
-                    print(filtered_data_df)
-                    exit(1)
             else:
-                None
-            
+                filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet")
+                oper = filtered_data.to_pandas().reset_index(drop=True)
+                                
             if(posnw == "False"):
                 dados_dger = Dger.read(caso.caminho+"/dger.dat")
                 anos_estudo = dados_dger.num_anos_estudo
