@@ -16,7 +16,7 @@ import shutil
 from pathlib import Path
 
 class Report():
-    def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot):
+    def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot, usinas):
         #self.outpath = outpath
         self.json = arq_json
         #print("Arquivo JSON: ", self.json)
@@ -62,17 +62,20 @@ class Report():
         arquivo_template = ""
         if(self.txt is None):
             if(conjunto =="False"):
-                if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE"):
-                    arquivo_template = "/".join(path)+"/template_simples.txt" 
-                elif(data.conjuntoCasos[0].casos[0].modelo == "DESSEM" and cronologico == "True"):
-                    arquivo_template = "/".join(path)+"/template_dessem_cronologico.txt" 
-                elif(data.conjuntoCasos[0].casos[0].modelo == "DESSEM"):
-                    arquivo_template = "/".join(path)+"/template_dessem.txt" 
-                elif(data.conjuntoCasos[0].casos[0].modelo == "DECOMP"):
-                    arquivo_template = "/".join(path)+"/template_decomp.txt" 
+                if(usinas != None):
+                    arquivo_template = "/".join(path)+"/template_usina.txt" 
                 else:
-                    print("Tipo definido errado: Simples ou Completo")
-                    exit(1)
+                    if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE"):
+                        arquivo_template = "/".join(path)+"/template_simples.txt" 
+                    elif(data.conjuntoCasos[0].casos[0].modelo == "DESSEM" and cronologico == "True"):
+                        arquivo_template = "/".join(path)+"/template_dessem_cronologico.txt" 
+                    elif(data.conjuntoCasos[0].casos[0].modelo == "DESSEM"):
+                        arquivo_template = "/".join(path)+"/template_dessem.txt" 
+                    elif(data.conjuntoCasos[0].casos[0].modelo == "DECOMP"):
+                        arquivo_template = "/".join(path)+"/template_decomp.txt" 
+                    else:
+                        print("Tipo definido errado: Simples ou Completo")
+                        exit(1)
             elif(conjunto == "True"):
                 if(data.conjuntoCasos[0].casos[0].modelo == "DESSEM"):
                     arquivo_template = "/".join(path)+"/template_dessem_conjuntos.txt" 
@@ -194,6 +197,9 @@ class Report():
                                     cli_command = cli_command + " --boxplot True"
                                 else:
                                     cli_command = cli_command + " --boxplot False"
+
+                                if("usinas" in cli_command):
+                                    cli_command = cli_command.replace("USINA", usinas)
                                     
                             try:
                                 Log.log().info(cli_command)
