@@ -6,7 +6,7 @@ from apps.report.info.Execucao.infoExecucao import InfoExecucao
 from apps.report.info.valoresUnicos.infoValoresUnicos import InfoValoresUnicos
 from apps.report.info.Anual.infoAnual import InfoAnual
 from apps.report.info.MaioresValores.infoMaioresValores import InfoMaioresValores
-from apps.report.info.MaioresValores.infoMenoresValores import InfoMenoresValores
+from apps.report.info.MenoresValores.infoMenoresValores import InfoMenoresValores
 #from apps.report.info.Cortes.infoCORTES import InfoCORTES
 class Info():
     def __init__(self, data, par_dados):
