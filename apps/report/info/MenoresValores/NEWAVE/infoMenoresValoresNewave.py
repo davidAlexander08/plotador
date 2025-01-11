@@ -75,7 +75,7 @@ class InfoMenoresValoresNewave(Estruturas):
                 temp = temp.replace("Modelo", caso.modelo)
                 temp = temp.replace("Argumento", arg)
                 temp = temp.replace("Grandeza", grandeza)
-                temp = temp.replace("Periodo", str(round(row["data_inicio"],2)))
+                temp = temp.replace("Periodo", str(row["data_inicio"]))
                 temp = temp.replace("Cenario", str(round(row["cenario"],2)))
                 temp = temp.replace("Patamar", str(round(row["patamar"], 2)))
                 temp = temp.replace("Valor", str(round(row["valor"],2)))
