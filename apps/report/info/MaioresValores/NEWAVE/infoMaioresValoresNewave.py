@@ -77,6 +77,7 @@ class InfoMaioresValoresNewave(Estruturas):
                 oper = oper.loc[(oper["estagio"] <= periodos_estudo)]
             #SELECIONA 5 MAIORES VALORES 
             largest_values_df = oper.nlargest(5, 'valor').reset_index(drop = True)
+            print(largest_values_df)
             for index, row in largest_values_df.iterrows():
                 temp = temp.replace("Periodo", str(round(row["estagio"],2)))
                 temp = temp.replace("Cenario", str(round(row["cenario"],2)))
