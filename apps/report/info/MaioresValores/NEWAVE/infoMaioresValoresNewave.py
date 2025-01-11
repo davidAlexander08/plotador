@@ -54,6 +54,7 @@ class InfoMaioresValoresNewave(Estruturas):
         print("grandeza: ", grandeza)
         if(os.path.isfile(caso.caminho+"/sintese/"+grandeza+ ".parquet")):           
             parquet_file = pq.ParquetFile(caso.caminho+"/sintese/"+grandeza+ ".parquet")
+            print(parquet_file.schema)
             if(arg != "SIN"):
                 if(espacial == "SBM"):
                     #codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
