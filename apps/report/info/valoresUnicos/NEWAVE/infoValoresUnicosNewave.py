@@ -69,6 +69,8 @@ class InfoValoresUnicosNewave(Estruturas):
 
             if(arg != "SIN"):
                 if(espacial == "SBM"):
+                    oper = pd.read_parquet(caso.caminho+"/sintese/"+estatistica+".parquet",engine = "pyarrow")
+                    oper_mean = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
                     codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
                     cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
                     oper_mean = oper_mean.loc[(oper_mean["codigo_submercado"] == cod_sbm) ]
@@ -79,6 +81,9 @@ class InfoValoresUnicosNewave(Estruturas):
                     filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=[("codigo_usina", "==", cod_usi)])
                     oper_mean = filtered_data.to_pandas().reset_index(drop=True)
                     oper_mean = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
+            else:
+                oper = pd.read_parquet(caso.caminho+"/sintese/"+estatistica+".parquet",engine = "pyarrow")
+                oper_mean = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
 
             
             first_stage = oper_mean.loc[(oper_mean["estagio"] == 1) ]
