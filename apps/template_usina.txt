@@ -27,43 +27,6 @@ plotador_dev temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER
 \info{ValoresAnuais/USINA/QVER_UHE}
 \info{MaioresValores/USINA/QVER_UHE}
 
-\subpage{Vazão Incremental}
-plotador_dev temporal --titulo Vazão_Vertida --json arquivo_json --sintese QINC_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
-\info{ValoresUnicos/USINA/QVER_UHE}
-\info{ValoresAnuais/USINA/QVER_UHE}
-\info{MaioresValores/USINA/QVER_UHE}
-
-\subpage{Volume}
-plotador_dev temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --chave UHE --argumentos USINA --labely hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
-\info{ValoresUnicos/USINA/VARMF_UHE}
-\info{ValoresAnuais/USINA/VARMF_UHE}
-\info{MaioresValores/USINA/VARMF_UHE}
-
-
-\subpage{Violação FPHA}
-plotador_dev temporal --titulo Violacao_FPHA --json arquivo_json --sintese VFPHA_UHE --chave UHE --argumentos USINA --labely MWmed --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
-\info{MaioresValores/USINA/VFPHA_UHE}
-\info{ValoresUnicos/USINA/VFPHA_UHE}
-\info{ValoresAnuais/USINA/VFPHA_UHE}
-
-
-\subpage{Violação Retirada}
-plotador_dev temporal --titulo Violacao_FPHA --json arquivo_json --sintese VRET_UHE --chave UHE --argumentos USINA --labely MWmed --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
-\info{MaioresValores/USINA/VRET_UHE}
-\info{ValoresUnicos/USINA/VRET_UHE}
-\info{ValoresAnuais/USINA/VRET_UHE}
-
-\page{Valor Água}
-plotador_dev temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --chave UHE --argumentos USINA  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
-\info{ValoresUnicos/USINA/VAGUA_UHE}
-\info{ValoresAnuais/USINA/VAGUA_UHE}
-\info{MaioresValores/USINA/VAGUA_UHE}
-
-\page{Geração}
-plotador_dev temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --chave UHE --argumentos USINA --labely MWmes --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
-\info{ValoresUnicos/USINA/GHID_UHE}
-\info{ValoresAnuais/USINA/GHID_UHE}
-\info{MaioresValores/USINA/GHID_UHE}
 
 
 \page{Execucao}
