@@ -84,5 +84,5 @@ class InfoMaioresValoresNewave(Estruturas):
                     temp = temp.replace("Patamar", str(round(row["patamar"], 2)))
                 else:
                     temp = temp.replace("Patamar", "-")
-                temp = temp.replace("Valor", str(round(valor,2)))
+                temp = temp.replace("Valor", str(round(row["valor"],2)))
                 self.lista_text.append(temp)
