@@ -63,7 +63,7 @@ class InfoMaioresValoresNewave(Estruturas):
                     codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     filtered_data = pd.read_parquet(
-                        file_path,
+                        caso.caminho+"/sintese/"+grandeza+ ".parquet",
                         filters=[("usina", "==", cod_usi)],
                         engine="pyarrow"
                     )
