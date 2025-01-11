@@ -1,11 +1,11 @@
 
-from apps.report.info.MaioresValores.NEWAVE.estruturas import Estruturas
+from apps.report.info.MenoresValores.NEWAVE.estruturas import Estruturas
 from inewave.newave import Dger
 import os
 import pandas as pd
 import pyarrow.parquet as pq
 
-class InfoMaioresValoresNewave(Estruturas):
+class InfoMenoresValoresNewave(Estruturas):
     def __init__(self, data, par_dados):
         Estruturas.__init__(self)
         #AJUSTE DOS ANOS
@@ -68,7 +68,7 @@ class InfoMaioresValoresNewave(Estruturas):
                 periodos_estudo = anos_estudo*12 - mes_inicial + 1
                 oper = oper.loc[(oper["estagio"] <= periodos_estudo)]
             #SELECIONA 5 MAIORES VALORES 
-            largest_values_df = oper.nlargest(5, 'valor').reset_index(drop = True)
+            largest_values_df = oper.nsmallest(5, 'valor').reset_index(drop = True)
             for index, row in largest_values_df.iterrows():
                 temp = self.template_Tabela_Eco_Entrada
                 temp = temp.replace("Caso", caso.nome)

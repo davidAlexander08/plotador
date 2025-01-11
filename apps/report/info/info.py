@@ -6,6 +6,7 @@ from apps.report.info.Execucao.infoExecucao import InfoExecucao
 from apps.report.info.valoresUnicos.infoValoresUnicos import InfoValoresUnicos
 from apps.report.info.Anual.infoAnual import InfoAnual
 from apps.report.info.MaioresValores.infoMaioresValores import InfoMaioresValores
+from apps.report.info.MaioresValores.infoMenoresValores import InfoMenoresValores
 #from apps.report.info.Cortes.infoCORTES import InfoCORTES
 class Info():
     def __init__(self, data, par_dados):
@@ -33,6 +34,9 @@ class Info():
             self.text_html = info.text_html
         elif(par_dados[0] == "MaioresValores"):
             info = InfoMaioresValores(data, par_dados)
+            self.text_html = info.text_html
+        elif(par_dados[0] == "MenoresValores"):
+            info = InfoMenoresValores(data, par_dados)
             self.text_html = info.text_html
         elif(par_dados[0] == "CORTES"):
             #info = InfoCORTES(data, par_dados)
