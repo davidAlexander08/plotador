@@ -50,17 +50,29 @@ class InfoMaioresValoresNewave(Estruturas):
 
         tipo = grandeza.split("_")[0]
         espacial = grandeza.split("_")[1].strip()
-        if(os.path.isfile(caso.caminho+"/sintese/"+grandeza+ ".parquet")):            
-            oper = pd.read_parquet(caso.caminho+"/sintese/"+grandeza+".parquet",engine = "pyarrow")
+        if(os.path.isfile(caso.caminho+"/sintese/"+grandeza+ ".parquet")):           
+            parquet_file = pq.ParquetFile(caso.caminho+"/sintese/"+grandeza+ ".parquet")
             if(arg != "SIN"):
                 if(espacial == "SBM"):
-                    codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
-                    cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
-                    oper = oper.loc[(oper["codigo_submercado"] == cod_sbm) ]
+                    #codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
+                    #cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
+                    #oper = oper.loc[(oper["codigo_submercado"] == cod_sbm) ]
+                    None
                 if(espacial == "UHE"):
                     codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
-                    oper = oper.loc[(oper["codigo_usina"] == cod_usi) ]
+                    #oper = oper.loc[(oper["codigo_usina"] == cod_usi) ]
+                    subset_df = parquet_file.read(columns=["usina", "valor"]).to_pandas()
+                    filtered_subset = subset_df[subset_df["usina"] == cod_usi]
+                    largest_values = filtered_subset["valor"].nlargest(5)
+                    filters = [
+                        ("usina", "==", cod_usi),
+                        ("valor", "in", largest_values.tolist())
+                    ]
+                    filtered_data = pq.read_table(file_path, filters=filters).to_pandas()
+                    print(filtered_data)
+            else:
+                None
             
             if(posnw == "False"):
                 dados_dger = Dger.read(caso.caminho+"/dger.dat")
