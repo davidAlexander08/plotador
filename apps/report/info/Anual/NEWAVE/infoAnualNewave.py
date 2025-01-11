@@ -3,6 +3,7 @@ from apps.report.info.Anual.NEWAVE.estruturas import Estruturas
 from inewave.newave import Dger
 import os
 import pandas as pd
+import pyarrow.parquet as pq
 
 class InfoAnualNewave(Estruturas):
     def __init__(self, data, par_dados):

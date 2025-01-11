@@ -4,7 +4,7 @@ from apps.indicadores.eco_indicadores import EcoIndicadores
 from inewave.newave import Dger
 import os
 import pandas as pd
-
+import pyarrow.parquet as pq
 
 
 class InfoValoresUnicosNewave(Estruturas):
