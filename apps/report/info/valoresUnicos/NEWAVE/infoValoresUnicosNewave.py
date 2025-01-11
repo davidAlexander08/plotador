@@ -72,7 +72,11 @@ class InfoValoresUnicosNewave(Estruturas):
                     #oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
                     filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=[("codigo_usina", "==", cod_usi)])
                     oper_mean = filtered_data.to_pandas().reset_index(drop=True)
+                    print(oper_mean)
                     oper_mean = oper_mean.loc[(oper_mean["cenario"] == "mean") & (oper_mean["patamar"] == 0) ]
+                    
+                    print(cod_usi)
+                    print(grandeza)
                     print(oper_mean)
                     exit(1)
             else:
