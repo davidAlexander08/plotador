@@ -73,7 +73,6 @@ class InfoMaioresValoresNewave(Estruturas):
                 oper = oper.loc[(oper["estagio"] <= periodos_estudo)]
             #SELECIONA 5 MAIORES VALORES 
             largest_values_df = oper.nlargest(5, 'valor').reset_index(drop = True)
-            print(largest_values_df)
             for index, row in largest_values_df.iterrows():
                 temp = self.template_Tabela_Eco_Entrada
                 temp = temp.replace("Caso", caso.nome)
@@ -84,5 +83,4 @@ class InfoMaioresValoresNewave(Estruturas):
                 temp = temp.replace("Cenario", str(round(row["cenario"],2)))
                 temp = temp.replace("Patamar", str(round(row["patamar"], 2)))
                 temp = temp.replace("Valor", str(round(row["valor"],2)))
-                print(temp)
                 self.lista_text.append(temp)
