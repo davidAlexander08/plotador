@@ -270,7 +270,7 @@ class Temporal:
 
 
     def retorna_df(self, caso, sintese) -> pd.DataFrame:
-        arq_sintese = join( caso.caminho, self.DIR_SINTESE, sintese+".parquet"  )
+        arq_sintese = join( caso.caminho, "sintese", sintese+".parquet"  )
         #check_file = os.path.isfile(arq_sintese)
         try:
             df = pd.read_parquet(arq_sintese, engine = "pyarrow")
