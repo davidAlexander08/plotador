@@ -125,7 +125,7 @@ class Temporal:
         self.mapa_argumentos = {}
         if self.sts.espacial != "SIN":
             for caso in data.conjuntoCasos[0].casos:
-                arq_espacial = join( caso.caminho, "sintese", sintese_espacial+".parquet"  )
+                arq_espacial = join( caso.caminho, "sintese", self.sintese_espacial+".parquet"  )
                 try:
                     df = pd.read_parquet(arq_espacial, engine = "pyarrow")
                 except:
