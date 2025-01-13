@@ -58,7 +58,7 @@ class Temporal:
                         "earmfpm004.out"]
         }
 
-        
+
         if(self.y2 == "True" and len(data.conjuntoCasos[0].casos) > 2):
             print("ERRO: Opcao y2 valida apenas para comparacao de duplas de casos")
             exit(1)
@@ -329,7 +329,8 @@ class Temporal:
                 df["caso"] = c.nome
                 df["modelo"] = c.modelo
                 result_dict [c] = df
-            else:                    
+            else:        
+                print("NETORU AQUI")            
                 if(conjUnity.sintese.sintese in self.mapa_arquivos.keys()):
                     lista_arquivos = self.mapa_arquivos[conjUnity.sintese.sintese]
                     lista_df = []
