@@ -267,6 +267,8 @@ class Report():
                                     limsup = limsup, 
                                     posnw = posnw
                                     ).figure_export_report
+
+                                    self.figura_plotador_temporal.update_layout(width = int(self.largura_figura), height = int(self.altura_figura))
                                     html_plotly_temporal = pio.to_html(self.figura_plotador_temporal, 
                                     full_html=False,
                                     include_plotlyjs='cdn',  # Use CDN for Plotly.js
