@@ -28,7 +28,7 @@ class Cascatador(MetaData):
         self.indicadores_cenarios = IndicadoresCenarios(self.casos)
         diretorio_saida = f"resultados/{self.estudo}/cascatador"
         os.makedirs(diretorio_saida, exist_ok=True)
-        print(self.casos[0])
+        print(self.casos[0].caminho)
         exit(1)
         for c in self.casos:
             defluencia_usinas = self.eco_indicadores.retorna_df_concatenado("QDEF_UHE_EST")
