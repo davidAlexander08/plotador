@@ -268,11 +268,6 @@ class Temporal:
                 mapa_temporal = self.__retorna_mapa_media_parquet(dicionario)
         return mapa_temporal
 
-
-    def retorna_df(self, caso, sintese) -> pd.DataFrame:
-
-        
-
     #def retornaMapaDF(self, sintese, conjUnity, boxplot= "False"):
     def retornaMapaDF(self, sintese, casos, boxplot= "False"):
         result_dict  = {}
