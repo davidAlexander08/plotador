@@ -268,11 +268,17 @@ class Report():
                                     posnw = posnw
                                     ).figure_export_report
                                     print(self.figura_plotador_temporal)
-                                    html_plotly_temporal = pio.to_html(self.figura_plotador_temporal, full_html=False)
+                                    html_plotly_temporal = pio.to_html(self.figura_plotador_temporal, 
+                                    full_html=False,
+                                    include_plotlyjs='cdn',  # Use CDN for Plotly.js
+                                    config={
+                                        "modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"],  # Add custom toolbar buttons
+                                        "displaylogo": False  # Optionally hide the Plotly logo
+                                    }
+                                    )
                                     #self.figura_plotador_temporal.write_html(os.path.join(self.outpath_figura, "TESTE_ACELERATOR.html"),
                                     #    include_plotlyjs='cdn',
                                     #    config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
-
                                     #runner = CliRunner()
                                     #result = runner.invoke(analise_temporal, [
                                     #    '--json', self.json,
