@@ -284,8 +284,7 @@ class Temporal:
                     flag_estatistica = 0
                 arq_sintese = join( c.caminho, "sintese", sintese_busca+".parquet"  )
                 #try:
-                print(conjUnity.arg.listaNomes)
-                if(len(conjUnity.arg.listaNomes) == 0):
+                if(conjUnity.arg.listaNomes is None):
                     df = pd.read_parquet(arq_sintese, engine = "pyarrow")
                 else:
                     df_filtro = self.mapa_argumentos[c]
