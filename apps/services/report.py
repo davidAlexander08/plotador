@@ -207,29 +207,29 @@ class Report():
                                 print(comando)
                                 for cmd_element in comando:
                                     if("titulo" in cmd_element):
-                                        self.titulo_figura = cmd_element.split("titulo").strip()
+                                        self.titulo_figura = cmd_element.split("titulo")
                                         print(self.titulo_figura)
                                     if("sintese" in cmd_element):
-                                        self.sintese_figura = cmd_element.split("sintese").strip()
+                                        self.sintese_figura = cmd_element.split("sintese")
                                         print(self.sintese_figura)
                                     if("argumentos" in cmd_element):
-                                        self.lista_arg = cmd_element.split("argumentos").strip()
+                                        self.lista_arg = cmd_element.split("argumentos")
                                         self.lista_arg = self.argumentos_figura.split(",")
                                         print(self.titulo_figura)
                                     if("largura" in cmd_element):
-                                        self.largura_figura = cmd_element.split("largura").strip()
+                                        self.largura_figura = cmd_element.split("largura")
                                         print(self.largura_figura)
                                     if("altura" in cmd_element):
-                                        self.altura_figura = cmd_element.split("altura").strip()
+                                        self.altura_figura = cmd_element.split("altura")
                                         print(self.altura_figura)
                                     if("tamanho" in cmd_element):
-                                        self.tamanho_figura = cmd_element.split("tamanho").strip()
+                                        self.tamanho_figura = cmd_element.split("tamanho")
                                         print(self.tamanho_figura)
                                     if("labely" in cmd_element):
-                                        self.labely_figura = cmd_element.split("labely").strip()
+                                        self.labely_figura = cmd_element.split("labely")
                                         print(self.labely_figura)
                                     if("outpath" in cmd_element):
-                                        self.outpath_figura = cmd_element.split("outpath").strip()
+                                        self.outpath_figura = cmd_element.split("outpath")
                                         print(self.outpath_figura)
 
                                 if(usinas is not None):
