@@ -198,17 +198,47 @@ class Report():
                                 if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command):
                                     self.data_inicio = "data_inicio"
 
-                                if(usinas is not None):
-                                    cli_command = cli_command.replace("USINA", usinas)
-                                    self.lista_arg = usinas.split(",")
-                                else:
-                                    self.lista_arg = None
+
                                 self.flag_boxplot = "True" if boxplot != None else "False"
                                 self.html = "False" if html == None else "True"
 
                                 ##DEMENBRANDO COMANDO
                                 comando = cli_command.split("--")
                                 print(comando)
+                                for cmd_element in comando:
+                                    if("titulo" in cmd_element):
+                                        self.titulo_figura = cmd_element.split("titulo").strip()
+                                        print(self.titulo_figura)
+                                    if("sintese" in cmd_element):
+                                        self.sintese_figura = cmd_element.split("sintese").strip()
+                                        print(self.sintese_figura)
+                                    if("argumentos" in cmd_element):
+                                        self.lista_arg = cmd_element.split("argumentos").strip()
+                                        self.lista_arg = self.argumentos_figura.split(",")
+                                        print(self.titulo_figura)
+                                    if("largura" in cmd_element):
+                                        self.largura_figura = cmd_element.split("largura").strip()
+                                        print(self.largura_figura)
+                                    if("altura" in cmd_element):
+                                        self.altura_figura = cmd_element.split("altura").strip()
+                                        print(self.altura_figura)
+                                    if("tamanho" in cmd_element):
+                                        self.tamanho_figura = cmd_element.split("tamanho").strip()
+                                        print(self.tamanho_figura)
+                                    if("labely" in cmd_element):
+                                        self.labely_figura = cmd_element.split("labely").strip()
+                                        print(self.labely_figura)
+                                    if("outpath" in cmd_element):
+                                        self.outpath_figura = cmd_element.split("outpath").strip()
+                                        print(self.outpath_figura)
+
+                                if(usinas is not None):
+                                    cli_command = cli_command.replace("USINA", usinas)
+                                    self.lista_arg = usinas.split(",")
+                                else:
+                                    self.lista_arg = None
+
+
                                 exit(1)
                                 try:
                                     #Log.log().info(cli_command)
