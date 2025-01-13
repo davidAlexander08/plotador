@@ -287,7 +287,7 @@ class Temporal:
                     else:
                         df_filtro = self.mapa_argumentos[c]
                         print(df_filtro)
-                        cod_arg = df.loc[(df[unity.sintese.filtro.split("_")[1]] == unity.arg.nome)][unity.sintese.filtro].iloc[0]
+                        cod_arg = df_filtro.loc[(df_filtro[unity.sintese.filtro.split("_")[1]] == unity.arg.nome)][unity.sintese.filtro].iloc[0]
                         print(cod_arg)
                         exit(1)
                         #filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=[("codigo_usina", "==", cod_usi)])
