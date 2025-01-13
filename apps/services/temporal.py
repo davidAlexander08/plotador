@@ -233,10 +233,11 @@ class Temporal:
     def retorna_mapaDF_cenario_medio_temporal(self, eco_mapa, unidade, boxplot):
         mapa_temporal = {}
         if( (unidade.sintese.filtro is None) & (unidade.arg.nome is None) ):
-            if(boxplot =="True"):
-                return self.__retorna_mapa_patamar(eco_mapa)
-            else:
-                return self.__retorna_mapa_media_parquet(eco_mapa)
+            mapa_temporal = eco_mapa
+            #if(boxplot =="True"):
+            #    return self.__retorna_mapa_patamar(eco_mapa)
+            #else:
+            #    return self.__retorna_mapa_media_parquet(eco_mapa)
         else: 
             coluna_filtro = unidade.sintese.filtro.split("_")[1]
             dicionario = {}
@@ -248,19 +249,13 @@ class Temporal:
                     print("Filtro: ", coluna_filtro)
                     print("Não encontrado: ", unidade.arg.nome)
                     exit(1)
-                dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]                
-            if(boxplot =="True"):
-                mapa_temporal = self.__retorna_mapa_patamar(dicionario)
-            else:
-                mapa_temporal = self.__retorna_mapa_media_parquet(dicionario)
+                dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]    
+            mapa_temporal =   dicionario 
+            #if(boxplot =="True"):
+            #    mapa_temporal = self.__retorna_mapa_patamar(dicionario)
+            #else:
+            #    mapa_temporal = self.__retorna_mapa_media_parquet(dicionario)
         return mapa_temporal
-
-    #def retorna_mapaDF_cenario_medio_temporal(self, eco_mapa, unidade, boxplot):
-    #    if(boxplot =="True"):
-    #        return self.__retorna_mapa_patamar(eco_mapa)
-    #    else:
-    #        return self.__retorna_mapa_media_parquet(eco_mapa)
-
 
 
     def retornaMapaDF(self, conjUnity, casos, boxplot= "False"):
@@ -287,27 +282,28 @@ class Temporal:
                 if(conjUnity.arg.listaNomes is None):
                     df = pd.read_parquet(arq_sintese, engine = "pyarrow")
                     if(flag_estatistica):
-                        df = df.loc[(df["variavel"] == variavel)]  
+                        df = df.loc[(df["variavel"] == variavel) & (df["patamar"] == c.patamar) & (df["cenario"] == c.tipo)].reset_index(drop=True)
+                    else:
+                        df = df.loc[(df["patamar"] == c.patamar) & (df["cenario"] == c.tipo)].reset_index(drop=True)
                 else:
                     df_filtro = self.mapa_argumentos[c]
                     lista_argumentos = []
                     for argu in conjUnity.arg.listaNomes:
                         cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == argu)][conjUnity.sintese.filtro].iloc[0]
                         lista_argumentos.append(cod_arg)
-                    print(lista_argumentos)
                     if(flag_estatistica):
                         filtered_data = pq.read_table(arq_sintese, filters=[
                                                                             (conjUnity.sintese.filtro, "in", lista_argumentos),
                                                                             ("variavel", "==", variavel),
-                                                                            ("patamar", "==", c.patamar)])
+                                                                            ("patamar", "==", c.patamar),
+                                                                            ("cenario", "==", c.tipo)])
 
                         df = filtered_data.to_pandas().reset_index(drop=True)
-                        print("flag_estatistica: ", df)
                     else:
-                        filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos)])
+                        filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos),
+                                                                            ("patamar", "==", c.patamar),
+                                                                            ("cenario", "==", c.tipo)])
                         df = filtered_data.to_pandas().reset_index(drop=True)
-                        print(df)
-
                 df["caso"] = c.nome
                 df["modelo"] = c.modelo
                 result_dict [c] = df
