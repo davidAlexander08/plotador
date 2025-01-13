@@ -290,7 +290,7 @@ class Temporal:
                     df_filtro = self.mapa_argumentos[c]
                     lista_argumentos = []
                     for argu in conjUnity.arg.listaNomes:
-                        cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == argu)][unity.sintese.filtro].iloc[0]
+                        cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == argu)][conjUnity.sintese.filtro].iloc[0]
                         lista_argumentos.append(cod_arg)
                     print(lista_argumentos)
                     exit(1)
