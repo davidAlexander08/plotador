@@ -121,7 +121,7 @@ class Temporal:
             for arg in lista_argumentos:
                 list_arg.append(arg.replace("_"," "))
             lista_argumentos = list_arg
-            data.args = [Argumento(lista_argumentos, self.sintese.espacial, "out")] 
+            data.args = [Argumento(lista_argumentos, self.sintese_espacial, "out")] 
             if(len(lista_argumentos) == 1 and self.titulo == " "): 
                 self.titulo = lista_argumentos[0]
 
