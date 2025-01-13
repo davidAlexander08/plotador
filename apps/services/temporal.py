@@ -19,11 +19,12 @@ from apps.utils.log import Log
 import warnings
 import re
 import pyarrow.parquet as pq
-
+import time
 class Temporal:
 
 
     def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw, imprimeFigure= "False"):
+        start_time = time.time()
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
@@ -175,7 +176,12 @@ class Temporal:
                 diretorio_saida_arg = diretorio_saida+"/"+arg.nome if outpath is None else outpath
                 os.makedirs(diretorio_saida_arg, exist_ok=True)
                 self.executa(conj,diretorio_saida_arg )
-                        
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        minutes = int(elapsed_time // 60)
+        seconds = int(elapsed_time % 60)
+        milliseconds = int((elapsed_time % 1) * 1000)
+        print(f"Gráfico Gerado em: {minutes} minutos, {seconds} segundos e {milliseconds} milisegundos")
 
  
     def executa(self, conjUnity, diretorio_saida_arg): 

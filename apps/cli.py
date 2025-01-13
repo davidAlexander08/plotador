@@ -189,7 +189,6 @@ def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cr
 @option_posnw
 def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw):
     from apps.services.temporal import Temporal
-    start_time = time.time()
     flag_diretorio = 0
     if(arquivo_json is None):
         path = __file__.split("/")
@@ -213,12 +212,6 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
         else: 
             raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
     Temporal(data, xinf, xsup, estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw, "True")
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    minutes = int(elapsed_time // 60)
-    seconds = int(elapsed_time % 60)
-    milliseconds = int((elapsed_time % 1) * 1000)
-    print(f"Gráfico Gerado em: {minutes} minutos, {seconds} segundos e {milliseconds} milisegundos")
 
 @click.command("conjunto")
 @option_xinf

@@ -111,5 +111,5 @@ class InfoAnualNewave(Estruturas):
         minutes = int(elapsed_time // 60)
         seconds = int(elapsed_time % 60)
         milliseconds = int((elapsed_time % 1) * 1000)
-        print(f"Gráfico Gerado em: {minutes} minutos, {seconds} segundos e {milliseconds} milisegundos")
+        print(f"Tabela Gerada em: {minutes} minutos, {seconds} segundos e {milliseconds} milisegundos")
         return temp
