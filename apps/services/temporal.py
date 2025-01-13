@@ -108,7 +108,6 @@ class Temporal:
         titulo_meta = df_chave["nome_longo_variavel"]
         if(self.labely is None):
             self.labely = df_chave["unidade"].iloc[0]
-        print(df_chave)
         self.sintese_espacial = self.sintese.split("_")[1]
             
         if(self.argumentos is not None):
@@ -163,8 +162,6 @@ class Temporal:
         mapa_temporal = {} 
         #mapa_eco = self.retornaMapaDF(self.sts.sintese, self.data.conjuntoCasos[0].casos, self.boxplot)
         for unity in conjUnity.listaUnidades:
-            print("unity.sintese", unity.sintese.sintese)
-            print("unity.arg.nome", unity.arg.nome)
             mapa_eco = self.retornaMapaDF(unity, self.data.conjuntoCasos[0].casos, self.boxplot)
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
             lista_temporal_temp = []
@@ -248,8 +245,6 @@ class Temporal:
                 try:
                     cod_arg = df.loc[(df[coluna_filtro] == unidade.arg.nome)][unidade.sintese.filtro].iloc[0]
                 except:
-                    print("Filtro: ", coluna_filtro)
-                    print("Não encontrado: ", unidade.arg.nome)
                 dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]                
             if(boxplot =="True"):
                 mapa_temporal = self.__retorna_mapa_patamar(dicionario)
@@ -286,7 +281,6 @@ class Temporal:
                         df = pd.read_parquet(arq_sintese, engine = "pyarrow")
                     else:
                         df_filtro = self.mapa_argumentos[c]
-                        print(df_filtro)
                         cod_arg = df_filtro.loc[(df_filtro[unity.sintese.filtro.split("_")[1]] == unity.arg.nome)][unity.sintese.filtro].iloc[0]
                         filtered_data = pq.read_table(arq_sintese, filters=[(unity.sintese.filtro, "==", cod_arg)])
                         df = filtered_data.to_pandas().reset_index(drop=True)
@@ -348,11 +342,8 @@ class Temporal:
                         else:
                             df["codigo_submercado"] = None
                         df["variavel"] = unity.sintese.sintese.split("_")[0]
-                        #print(df)
                         lista_df.append(df.copy())
                     df_resultado = pd.concat(lista_df)
-                    #print(df_resultado)    
-                    #exit(1)
                     result_dict [c] = df_resultado
 
         return result_dict 
