@@ -206,23 +206,25 @@ class Report():
                                 comando = cli_command.split("--")
                                 print(comando)
                                 for cmd_element in comando:
-                                   
                                     self.titulo_figura = cmd_element.split("titulo")[1].strip()  if("titulo" in cmd_element) else " "
-                                    print(self.titulo_figura)
                                     self.sintese_figura = cmd_element.split("sintese")[1].strip() if("sintese" in cmd_element) else None
-                                    print(self.sintese_figura)
                                     self.lista_arg = cmd_element.split("argumentos")[1].strip().split(",") if("argumentos" in cmd_element) else None
-                                    print(self.titulo_figura)
                                     self.largura_figura = cmd_element.split("largura")[1].strip() if("largura" in cmd_element) else "1500"
-                                    print(self.largura_figura)
                                     self.altura_figura = cmd_element.split("altura")[1].strip() if("altura" in cmd_element) else "1200"
-                                    print(self.altura_figura)
                                     self.tamanho_figura = cmd_element.split("tamanho")[1].strip() if("tamanho" in cmd_element) else None
-                                    print(self.tamanho_figura)
                                     self.labely_figura = cmd_element.split("labely")[1].strip() if("labely" in cmd_element) else None
-                                    print(self.labely_figura)
                                     self.outpath_figura = cmd_element.split("outpath")[1].strip() if("outpath" in cmd_element) else None
-                                    print(self.outpath_figura)
+
+                                print(self.titulo_figura)
+                                print(self.sintese_figura)
+                                print(self.titulo_figura)
+                                print(self.largura_figura)
+                                print(self.altura_figura)
+                                print(self.tamanho_figura)
+                                print(self.labely_figura)
+                                print(self.outpath_figura)
+
+
 
                                 if(usinas is not None):
                                     cli_command = cli_command.replace("USINA", usinas)
