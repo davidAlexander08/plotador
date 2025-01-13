@@ -293,7 +293,7 @@ class Temporal:
                         cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == argu)][conjUnity.sintese.filtro].iloc[0]
                         lista_argumentos.append(cod_arg)
                     print(lista_argumentos)
-                    filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, in, lista_argumentos)])
+                    filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos)])
                     df = filtered_data.to_pandas().reset_index(drop=True)
                     print(df)
                     exit(1)
