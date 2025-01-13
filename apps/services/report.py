@@ -271,50 +271,49 @@ class Report():
                                     self.figura_plotador_temporal.write_html(os.path.join(self.outpath_figura, "TESTE_ACELERATOR.html"),
                                         include_plotlyjs='cdn',
                                         config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
-                                    exit(1)
 
-                                    runner = CliRunner()
-                                    result = runner.invoke(analise_temporal, [
-                                        '--json', self.json,
-                                        '--xinf', "0",
-                                        '--xsup', "120",
-                                        '--estagio', "",
-                                        '--cenario', "mean",
-                                        '--sintese', self.sintese_figura,
-                                        '--argumentos', self.lista_arg,
-                                        '--largura', self.largura_figura,
-                                        '--altura', self.altura_figura,
-                                        '--eixox', self.data_inicio,
-                                        '--cronologico', 'False',
-                                        '--labely', self.labely_figura,
-                                        '--booltitulo', 'True',
-                                        '--titulo', self.titulo_figura,
-                                        '--showlegend', " ",
-                                        '--labelx', None,
-                                        '--tamanho', self.tamanho_figura,
-                                        '--boxplot', self.flag_boxplot,
-                                        '--csv', 'False',
-                                        '--html', self.html,
-                                        '--outpath', self.outpath_figura,
-                                        '--yinf', None,
-                                        '--ysup', None,
-                                        '--y2', None,
-                                        '--y2sup', None,
-                                        '--y2inf', None,
-                                        '--patamar', "0",
-                                        '--liminf', liminf,
-                                        '--limsup', limsup,
-                                        '--posnw', posnw ])
-                                    # Check result output or errors
-                                    if result.exit_code == 0:
-                                        print("Command executed successfully!")
-                                        print(result.output)
-                                    else:
-                                        print("Command failed!")
-                                        print(result.output)
+                                    #runner = CliRunner()
+                                    #result = runner.invoke(analise_temporal, [
+                                    #    '--json', self.json,
+                                    #    '--xinf', "0",
+                                    #    '--xsup', "120",
+                                    #    '--estagio', "",
+                                    #    '--cenario', "mean",
+                                    #    '--sintese', self.sintese_figura,
+                                    #    '--argumentos', self.lista_arg,
+                                    #    '--largura', self.largura_figura,
+                                    #    '--altura', self.altura_figura,
+                                    #    '--eixox', self.data_inicio,
+                                    #    '--cronologico', 'False',
+                                    #    '--labely', self.labely_figura,
+                                    #    '--booltitulo', 'True',
+                                    #    '--titulo', self.titulo_figura,
+                                    #    '--showlegend', " ",
+                                    #    '--labelx', None,
+                                    #    '--tamanho', self.tamanho_figura,
+                                    #    '--boxplot', self.flag_boxplot,
+                                    #    '--csv', 'False',
+                                    #    '--html', self.html,
+                                    #    '--outpath', self.outpath_figura,
+                                    #    '--yinf', None,
+                                    #    '--ysup', None,
+                                    #    '--y2', None,
+                                    #    '--y2sup', None,
+                                    #    '--y2inf', None,
+                                    #    '--patamar', "0",
+                                    #    '--liminf', liminf,
+                                    #    '--limsup', limsup,
+                                    #    '--posnw', posnw ])
+                                    ## Check result output or errors
+                                    #if result.exit_code == 0:
+                                    #    print("Command executed successfully!")
+                                    #    print(result.output)
+                                    #else:
+                                    #    print("Command failed!")
+                                    #    print(result.output)
                                     print(f"Command Output: {cli_command}")                            
                                 except subprocess.CalledProcessError as e:
-                                    print(f"Command failed with exit status {e.returncode}")
+                                    #print(f"Command failed with exit status {e.returncode}")
                                     print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
                             else:
                                 try:
@@ -341,6 +340,8 @@ class Report():
 
                             if(extensao == ".html"):
                                 try:
+                                    print(cli_command)
+                                    exit(1)
                                     with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
                                         html_plotly = file.read()
                                         #html_file.write(nome_arquivo+"\n")
