@@ -3,7 +3,7 @@ from apps.report.info.SBM.NEWAVE.estruturas import Estruturas
 from apps.indicadores.eco_indicadores import EcoIndicadores
 import os
 import pandas as pd
-
+import pyarrow.parquet as pq
 class InfoSBMNewave(Estruturas):
     def __init__(self, data, par_dados):
         Estruturas.__init__(self)
