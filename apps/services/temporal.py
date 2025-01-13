@@ -132,7 +132,7 @@ class Temporal:
                     raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
                 df["caso"] = caso.nome
                 df["modelo"] = caso.modelo
-                self.mapa_argumentos[c] = df
+                self.mapa_argumentos[caso] = df
             #self.mapa_argumentos = self.retornaMapaDF(self.sintese_espacial, self.data.conjuntoCasos[0].casos)
 
 
