@@ -4,7 +4,7 @@ from inewave.newave import Dger
 import os
 import pandas as pd
 import pyarrow.parquet as pq
-
+import time
 class InfoAnualNewave(Estruturas):
     def __init__(self, data, par_dados):
         Estruturas.__init__(self)
@@ -55,7 +55,7 @@ class InfoAnualNewave(Estruturas):
         self.text_html = "\n".join(self.lista_text)
 
     def preenche_modelo_tabela_modelo_NEWAVE(self,caso, arg, grandeza, posnw):
-
+        start_time = time.time()
         temp = self.template_Tabela_Eco_Entrada
         temp = temp.replace("Caso", caso.nome)
         temp = temp.replace("Modelo", caso.modelo)
@@ -106,5 +106,10 @@ class InfoAnualNewave(Estruturas):
             for year in self.unique_years:
                 media_ano = oper_mean.loc[(oper_mean["data_inicio"].dt.year == year) & (oper_mean["variavel"] == tipo)]["valor"].mean()
                 temp = temp.replace(str(year), str(round(media_ano,2)))
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        minutes = int(elapsed_time // 60)
+        seconds = int(elapsed_time % 60)
 
+        print(f"Report Gerado em: {minutes} minutos e {seconds} segundos")
         return temp

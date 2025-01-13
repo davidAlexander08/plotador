@@ -265,7 +265,8 @@ class Report():
                                     patamar = "0", 
                                     liminf = liminf, 
                                     limsup = limsup, 
-                                    posnw = posnw
+                                    posnw = posnw,
+                                    imprimeFigure = "False"
                                     ).figure_export_report
 
                                     self.figura_plotador_temporal.update_layout(width = int(self.largura_figura), height = int(self.altura_figura))
