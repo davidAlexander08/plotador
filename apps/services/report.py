@@ -234,23 +234,8 @@ class Report():
                                 if(usinas is not None):
                                     self.lista_arg = usinas
                                 try:
-                                    
+
                                     data = Dados_json_caso(self.json)
-                                    if (flag_diretorio == 1):
-                                        data.estudo = "_default"
-                                        data.casos[0].nome = " "
-                                        data.casos[0].caminho = os.getcwd()
-                                        if os.path.isfile("dger.dat"):
-                                            data.casos[0].modelo = "NEWAVE"
-                                            data.args = [Argumento(["SUDESTE","NORDESTE","NORTE","SUL"], "SBM", "SBMs")]
-                                        elif os.path.isfile("decomp.tim"):
-                                            data.casos[0].modelo = "DECOMP"
-                                            data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
-                                        elif os.path.isfile("entdados.dat"):
-                                            data.casos[0].modelo = "DESSEM"
-                                            data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
-                                        else: 
-                                            raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
                                     self.figura_plotador_temporal = Temporal(data, 
                                     xinf = "0", 
                                     xsup = "120",
