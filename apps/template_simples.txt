@@ -2,22 +2,6 @@
 
 \info{Estudo}
 
-\page{Usinas SE}
-\figura{CASCATA_ITAIPU.png}
-\subpage{Vaz. Defl. SE}
-plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
-\subpage{VAGUA_UHE SE}
-plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU  --labely R$/hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
-\subpage{QVER_UHE SE}
-plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
-\subpage{QTUR_UHE SE}
-plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
-\subpage{GHID_UHE SE}
-plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely MWmes --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
-\subpage{VARMF_UHE SE}
-plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
-
-
 
 \page{SIN}
 
@@ -145,9 +129,25 @@ plotador temporal --titulo Energia_Vertida_Sudeste --json arquivo_json --sintese
 \info{ValoresAnuais/NORDESTE/EVER_SBM}
 
 
+\page{Usinas SE}
+\figura{CASCATA_ITAIPU.html}
+\subpage{Vaz. Defl. SE}
+plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
+\subpage{VAGUA_UHE SE}
+plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU  --labely R$/hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+\subpage{QVER_UHE SE}
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+\subpage{QTUR_UHE SE}
+plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+\subpage{GHID_UHE SE}
+plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely MWmes --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+\subpage{VARMF_UHE SE}
+plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
+
+
 
 \page{Usinas S}
-\figura{CASCATA_SUL.png}
+\figura{CASCATA_SUL.html}
 \subpage{Vaz. Defl. S}
 plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos G.B._MUNHOZ,MACHADINHO,PASSO_REAL,FOZ_CHAPECO --labely m3/s --labelx Estágios --largura 1500 --altura 650 --tamanho 15  --liminf True --limsup True
 \subpage{VAGUA_UHE S}
@@ -164,7 +164,7 @@ plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF
 
 
 \page{Usinas NE}
-\figura{CASCATA_NE.png}
+\figura{CASCATA_NE.html}
 \subpage{Vaz. Defl. NE}
 plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO --labely m3/s --labelx Estágios --largura 1500 --altura 650 --tamanho 15  --liminf True --limsup True
 \subpage{VAGUA_UHE NE}
@@ -179,7 +179,7 @@ plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese
 plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO --labely hm3 --labelx Estágios --largura 1500 --altura 650 --tamanho 15  --liminf True --limsup True
 
 \page{Usinas SE-N}
-\figura{CASCATA_TUCURUI.png}
+\figura{CASCATA_TUCURUI.html}
 \subpage{Vaz. Defl. SE-N}
 plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos SERRA_MESA,PEIXE_ANGIC,LAJEADO,TUCURUI --labely m3/s --labelx Estágios --largura 1500 --altura 650 --tamanho 15  --liminf True --limsup True
 \subpage{VAGUA_UHE SE-N}
