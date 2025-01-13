@@ -100,7 +100,13 @@ class Temporal:
         diretorio_saida = f"resultados/{self.estudo}/temporal" if outpath is None else outpath
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        meta_dados = self.retorna_df(data.conjuntoCasos[0].casos[0], "METADADOS_OPERACAO")
+        arq_meta_dados = join( data.conjuntoCasos[0].casos[0].caminho, "sintese", "METADADOS_OPERACAO"+".parquet"  )
+        try:
+            meta_dados = pd.read_parquet(arq_meta_dados, engine = "pyarrow")
+        except:
+            raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
+
+
         df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)] if "ESTATISTICA" not in self.sintese else meta_dados.loc[(meta_dados["chave"] == self.chave)] 
         titulo_meta = df_chave["nome_longo_variavel"]
         if(self.labely is None):
