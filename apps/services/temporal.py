@@ -23,7 +23,7 @@ import pyarrow.parquet as pq
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw, imprimeFigure= "False"):
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
@@ -38,6 +38,7 @@ class Temporal:
         self.data = data
         self.y2 = y2
         self.posnw = posnw
+        self.imprimeFigure = imprimeFigure
 
 
         self.mapa_arquivos = {
@@ -212,7 +213,9 @@ class Temporal:
         figura = Figura(conjUnity, mapaGO, tituloFigura, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
         if(self.showlegend == "False"):
             figura.fig.update_layout(showlegend= False)
-        self.graficos.exportar(figura.fig, diretorio_saida_arg, tituloFigura, self.html, self.largura, self.altura)
+        
+        if(self.imprimeFigure == "True"):
+            self.graficos.exportar(figura.fig, diretorio_saida_arg, tituloFigura, self.html, self.largura, self.altura)
         
         if(self.estagio != ""):
             mapaEst = {self.estagio:" Estagio "+str(self.estagio)} 
@@ -225,7 +228,8 @@ class Temporal:
                         
                 mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+" "+self.estudo)
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
-                self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
+                if(self.imprimeFigure == "True"):
+                    self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
 
 
         self.figure_export_report = figura.fig
