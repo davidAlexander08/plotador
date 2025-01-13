@@ -188,7 +188,7 @@ def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cr
 @option_limInf
 @option_limSup
 @option_posnw
-def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, chave, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw):
+def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argumentos, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, tamanho, boxplot, csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw):
     from apps.services.temporal import Temporal
     start_time = time.time()
     flag_diretorio = 0
