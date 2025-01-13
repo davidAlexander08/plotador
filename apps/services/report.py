@@ -90,7 +90,8 @@ class Report():
             lines = file.readlines()
 
         titulo_html = "output.html" if self.titulo == "output.html" else self.titulo
-        titulo_html = Path(self.json).stem + ".html"  if (self.titulo == "output.html") and (self.json is not None) else self.titulo
+        titulo_html = Path(self.json).stem + ".html"  if (self.titulo == "output.html") and (self.json is not None) else self.titulo+".html"
+        
         if not os.path.exists(titulo_html):
             os.makedirs(titulo_html)
             print(f"Folder '{titulo_html}' created!")
