@@ -164,9 +164,7 @@ class Temporal:
         mapa_eco = self.retornaMapaDF(self.sts.sintese, self.data.conjuntoCasos[0].casos , self.boxplot)
         for unity in conjUnity.listaUnidades:
             print("conjUnity.sintese", conjUnity.sintese)
-            print("conjUnity.arg", conjUnity.arg)
-            print(conjUnity.listaUnidades)
-            print(unity)
+            print("conjUnity.arg", conjUnity.arg.listaNomes)
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
             lista_temporal_temp = []
             for caso in self.data.conjuntoCasos[0].casos:
