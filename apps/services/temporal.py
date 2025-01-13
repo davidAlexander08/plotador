@@ -300,17 +300,14 @@ class Temporal:
                                                                             (conjUnity.sintese.filtro, "in", lista_argumentos),
                                                                             ("variavel", "==", variavel),
                                                                             ("patamar", "==", c.patamar)])
-                                                                            
+
                         df = filtered_data.to_pandas().reset_index(drop=True)
                         print("flag_estatistica: ", df)
                     else:
                         filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos)])
                         df = filtered_data.to_pandas().reset_index(drop=True)
                         print(df)
-                        exit(1)
-                #except:
-                #    raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
-                  
+
                 df["caso"] = c.nome
                 df["modelo"] = c.modelo
                 result_dict [c] = df
