@@ -132,7 +132,7 @@ class Cascatador(MetaData):
                 #texto = no.nome + "<br> QINC:"+str(int(qinc_0)) + "QAFL:"+str(qafl) + "<br> QTUR: " + str(qtur) + " QVER: "+ str(qver) + " QDEF:" + str(def_0) + "<br> QDEFM: " + str(int(vdef_min/2.63))
                 texto = no.nome
                 #lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[texto], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
-                lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=18), text =[texto], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
+                lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=15), text =[texto], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
                 
                 #self.add_scatter_graph(lista_traces, no, no.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est, vdef_min_usinas_mean_est)
                 self.add_scatter_graph(lista_traces, no, no.y, d_hidr)
@@ -192,7 +192,7 @@ class Cascatador(MetaData):
             texto = pai.nome
             simbolo = self.retorna_simbolo(pai, d_hidr)                                                                 #pai.text_position
             #lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[ texto ], textfont=dict( size=9), textposition= "top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
-            lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[ texto ], textfont=dict( size=18), textposition= "top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
+            lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[ texto ], textfont=dict( size=15), textposition= "top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
             lista_traces.append(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             lista_traces.append(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
             #self.add_scatter_graph(lista_traces, pai, pai.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est, vdef_min_usinas_mean_est)
