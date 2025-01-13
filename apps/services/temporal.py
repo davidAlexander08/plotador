@@ -287,9 +287,9 @@ class Temporal:
                     else:
                         df_filtro = self.mapa_argumentos[c]
                         print(df_filtro)
+                        cod_arg = df.loc[(df[unity.sintese.filtro.split("_")[1]] == unity.arg.nome)][unity.sintese.filtro].iloc[0]
+                        print(cod_arg)
                         exit(1)
-                        #codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
-                        #cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                         #filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=[("codigo_usina", "==", cod_usi)])
                         #oper = filtered_data.to_pandas().reset_index(drop=True)
                 except:
