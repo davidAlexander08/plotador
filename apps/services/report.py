@@ -185,14 +185,6 @@ class Report():
                                 cli_command = cli_command.replace("ADD_SBMS", submercados)
                             if(html == None):
                                 cli_command = cli_command + " --html True"
-
-
-                            try:
-                                Log.log().info(cli_command)
-                                cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
-                            except subprocess.CalledProcessError as e:
-                                print(f"Command failed with exit status {e.returncode}")
-                                print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
                             if("temporal" in cli_command):
                                 
                                 if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command):
@@ -248,13 +240,7 @@ class Report():
                                     self.lista_arg = None
 
                                 try:
-                                    #Log.log().info(cli_command)
-                                    #cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
-
-                                    # Create a CliRunner instance
                                     runner = CliRunner()
-
-                                    # Define the arguments you want to pass to the CLI command
                                     result = runner.invoke(analise_temporal, [
                                         '--json', self.json,
                                         '--xinf', "0",
@@ -294,6 +280,13 @@ class Report():
                                         print("Command failed!")
                                         print(result.output)
                                     #print(f"Command Output: {cli_command}")                            
+                                except subprocess.CalledProcessError as e:
+                                    print(f"Command failed with exit status {e.returncode}")
+                                    print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
+                            else:
+                                try:
+                                    Log.log().info(cli_command)
+                                    cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                                 except subprocess.CalledProcessError as e:
                                     print(f"Command failed with exit status {e.returncode}")
                                     print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
