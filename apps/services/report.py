@@ -17,9 +17,7 @@ from pathlib import Path
 
 class Report():
     def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot, usinas):
-        #self.outpath = outpath
         self.json = arq_json
-        #print("Arquivo JSON: ", self.json)
         self.txt = txt
         self.titulo = nomearquivo
         path = __file__.split("/")
@@ -163,7 +161,8 @@ class Report():
                         html_file.write('<div id="'+nome_sub_pagina+'" class="page">'+"\n")
                             
                     elif("plotador" in line):
-                        cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
+                        #cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
+                        cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath "+titulo_html
                         
                         if( (data.conjuntoCasos[0].casos[0].modelo == "DECOMP" or data.conjuntoCasos[0].casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
                             pass
@@ -213,7 +212,8 @@ class Report():
                                 print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
                             lista_commands_cli = cli_command.split()
                             #print(lista_commands_cli)
-                            caminho_saida = "report"
+                            #caminho_saida = "report"
+                            caminho_saida = titulo_html
                             nome_arquivo  = "sem_nome"
                             extensao = ".png"
                             contador = 0 
