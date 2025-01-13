@@ -132,7 +132,20 @@ class Report():
                         pass
                     elif("</h" in line):
                         html_file.write(line.strip()+"\n")
-
+                    elif("\figura{" in line):
+                        Log.log().info("Gerando " + line)
+                        nome_argumento_info = line.split("{")[1].split("}")[0]
+                        print(nome_argumento_info)
+                        exit(1)
+                        args = nome_argumento_info.split("/")
+                        chave = args[0]
+                        argumentos = nome_argumento_info.split("/")[1].split(",") if(len(args) > 1) else None
+                        if(usinas is not None):
+                            argumentos = list(usinas.split(","))
+                        grandeza = nome_argumento_info.split("/")[2] if(len(args) > 2) else None
+                        par_dados = (chave, argumentos, grandeza, posnw)
+                        info = Info(data, par_dados)
+                        html_file.write(info.text_html+"\n")
                     elif("\info{") in line:
                         Log.log().info("Gerando " + line)
                         nome_argumento_info = line.split("{")[1].split("}")[0]
