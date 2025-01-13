@@ -192,7 +192,6 @@ class Temporal:
         
             mapa_temporal[unity] = df_temporal
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
-        exit(1)
         if(self.boxplot == "True"):
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
             titulo_padrao = "Boxplot Temporal "+conjUnity.titulo+self.estudo
@@ -295,8 +294,6 @@ class Temporal:
                     df = pd.read_parquet(arq_sintese, engine = "pyarrow")
                 except:
                     raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
-
-
 
                 if(flag_estatistica):
                     df = df.loc[(df["variavel"] == variavel)]                   
