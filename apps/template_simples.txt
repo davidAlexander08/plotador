@@ -45,37 +45,37 @@ plotador temporal --titulo Energia_Vertida_SIN --json arquivo_json --sintese EVE
 \info{SBM/SUDESTE}
 
 \subpage{Geracao Termica SE}
-plotador temporal --titulo Geração_Térmica_Sudeste --json arquivo_json --sintese GTER_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
+plotador temporal --titulo Geração_Térmica_Sudeste --json arquivo_json --sintese GTER_SBM --argumentos SUDESTE --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \info{ValoresUnicos/SUDESTE/GTER_SBM}
 \info{ValoresAnuais/SUDESTE/GTER_SBM}
 
 \subpage{Geracao Hidreletrica SE}
 
-plotador temporal --titulo Geração_Hidrelétrica_Sudeste --json arquivo_json --sintese GHID_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed
+plotador temporal --titulo Geração_Hidrelétrica_Sudeste --json arquivo_json --sintese GHID_SBM --argumentos SUDESTE --largura 1600 --altura 400 --tamanho 15 --labely MWmed
 \info{ValoresUnicos/SUDESTE/GHID_SBM}
 \info{ValoresAnuais/SUDESTE/GHID_SBM}
 
 \subpage{Energia Armazenada SE}
-plotador temporal --titulo Energia_Armazenada_Percentual_Sudeste --json arquivo_json --sintese EARPF_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
+plotador temporal --titulo Energia_Armazenada_Percentual_Sudeste --json arquivo_json --sintese EARPF_SBM --argumentos SUDESTE --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \info{ValoresUnicos/SUDESTE/EARPF_SBM}
 \info{ValoresAnuais/SUDESTE/EARPF_SBM}
 
 ###<h1> Energia Armazenada Final </h1>
-###plotador_dev temporal --titulo Energia_Armazenada_Sudeste --json arquivo_json --sintese EARMF_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
+###plotador_dev temporal --titulo Energia_Armazenada_Sudeste --json arquivo_json --sintese EARMF_SBM --argumentos SUDESTE --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \subpage{Custo Marginal SE}
-plotador temporal --titulo Custo_Marginal_Sudeste --json arquivo_json --sintese CMO_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15
+plotador temporal --titulo Custo_Marginal_Sudeste --json arquivo_json --sintese CMO_SBM --argumentos SUDESTE --largura 1600 --altura 400 --tamanho 15
 
 \info{ValoresUnicos/SUDESTE/CMO_SBM}
 \info{ValoresAnuais/SUDESTE/CMO_SBM}
 
 \subpage{ENA SE}
-plotador temporal --titulo Energia_Natural_Afluente_Sudeste --json arquivo_json --sintese ENAA_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15 --labely MWmed
+plotador temporal --titulo Energia_Natural_Afluente_Sudeste --json arquivo_json --sintese ENAA_SBM --argumentos SUDESTE --largura 1600 --altura 400 --tamanho 15 --labely MWmed
 
 \subpage{Vertimento SE}
-plotador temporal --titulo Energia_Vertida_Sudeste --json arquivo_json --sintese EVER_SBM --argumentos SUDESTE --chave SBM --largura 1600 --altura 400 --tamanho 15
+plotador temporal --titulo Energia_Vertida_Sudeste --json arquivo_json --sintese EVER_SBM --argumentos SUDESTE --largura 1600 --altura 400 --tamanho 15
 
 \info{ValoresUnicos/SUDESTE/EVER_SBM}
 \info{ValoresAnuais/SUDESTE/EVER_SBM}
@@ -88,57 +88,57 @@ plotador temporal --titulo Energia_Vertida_Sudeste --json arquivo_json --sintese
 
 \subpage{Geracao Termica SBM}
 
-plotador temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM --argumentos ADD_SBMS --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
+plotador temporal --titulo Geração_Térmica_SBM --json arquivo_json --sintese GTER_SBM --argumentos ADD_SBMS --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \info{ValoresUnicos/NORDESTE/GTER_SBM}
 \info{ValoresAnuais/NORDESTE/GTER_SBM}
 
 \subpage{Geracao Hidreletrica SBM}
 
-plotador temporal --titulo Geração_Hidrelétrica_SBM --json arquivo_json --sintese GHID_SBM --argumentos ADD_SBMS --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed
+plotador temporal --titulo Geração_Hidrelétrica_SBM --json arquivo_json --sintese GHID_SBM --argumentos ADD_SBMS --largura 1600 --altura 650 --tamanho 15 --labely MWmed
 \info{ValoresUnicos/NORDESTE/GHID_SBM}
 \info{ValoresAnuais/NORDESTE/GHID_SBM}
 
 \subpage{Energia Armazenada SBM}
 <h1> Energia Armazenada Percentual Final </h1>
-plotador temporal --titulo Energia_Armazenada_Percentual_SBM --json arquivo_json --sintese EARPF_SBM --argumentos ADD_SBMS --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
+plotador temporal --titulo Energia_Armazenada_Percentual_SBM --json arquivo_json --sintese EARPF_SBM --argumentos ADD_SBMS --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \info{ValoresUnicos/NORDESTE/EARPF_SBM}
 \info{ValoresAnuais/NORDESTE/EARPF_SBM}
 
 ###<h1> Energia Armazenada Final </h1>
-###plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM --argumentos ADD_SBMS --chave SBM --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
+###plotador_dev temporal --titulo Energia_Armazenada_SBM --json arquivo_json --sintese EARMF_SBM --argumentos ADD_SBMS --largura 1600 --altura 650 --tamanho 15 --labely MWmed --liminf True --limsup True
 
 \subpage{Custo Marginal SBM}
 
-plotador temporal --titulo Custo_Marginal_Nordeste --json arquivo_json --sintese CMO_SBM --argumentos NORDESTE --chave SBM --largura 1600 --altura 650 --tamanho 15
+plotador temporal --titulo Custo_Marginal_Nordeste --json arquivo_json --sintese CMO_SBM --argumentos NORDESTE --largura 1600 --altura 650 --tamanho 15
 
 \info{ValoresUnicos/NORDESTE/CMO_SBM}
 \info{ValoresAnuais/NORDESTE/CMO_SBM}
 
-plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 15
+plotador temporal --titulo Custo_Marginal_SBM --json arquivo_json --sintese CMO_SBM --argumentos ADD_SBMS --largura 1500 --altura 650 --tamanho 15
 
 \subpage{ENA SBM}
-plotador temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 15 --labely MWmed
+plotador temporal --titulo Energia_Natural_Afluente_SBM --json arquivo_json --sintese ENAA_SBM --argumentos ADD_SBMS --largura 1500 --altura 650 --tamanho 15 --labely MWmed
 
 \subpage{Vertimento SBM}
-plotador temporal --titulo Energia_Vertida_Sudeste --json arquivo_json --sintese EVER_SBM --argumentos ADD_SBMS --chave SBM --largura 1500 --altura 650 --tamanho 15
+plotador temporal --titulo Energia_Vertida_Sudeste --json arquivo_json --sintese EVER_SBM --argumentos ADD_SBMS --largura 1500 --altura 650 --tamanho 15
 
 \info{ValoresUnicos/NORDESTE/EVER_SBM}
 \info{ValoresAnuais/NORDESTE/EVER_SBM}
 
 \page{Usinas}
-plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
+plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
 \subpage{VAGUA_UHE}
-plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
+plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
 \subpage{QVER_UHE}
-plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
 \subpage{QTUR_UHE}
-plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
+plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
 \subpage{GHID_UHE}
-plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely MWmes --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
+plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely MWmes --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
 \subpage{VARMF_UHE}
-plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --chave UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
+plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
 
 
 \page{Execucao}
