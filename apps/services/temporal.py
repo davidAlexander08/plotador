@@ -330,7 +330,6 @@ class Temporal:
                 df["modelo"] = c.modelo
                 result_dict [c] = df
             else:        
-                print("NETORU AQUI")            
                 if(conjUnity.sintese.sintese in self.mapa_arquivos.keys()):
                     lista_arquivos = self.mapa_arquivos[conjUnity.sintese.sintese]
                     lista_df = []

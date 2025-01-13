@@ -192,7 +192,7 @@ class Report():
 
 
                                 self.flag_boxplot = "True" if boxplot != None else "False"
-                                self.html = "False" if html == None else "True"
+                                self.html = "True" if html == None else "False"
 
                                 ##DEMENBRANDO COMANDO
                                 comando = cli_command.split("--")
