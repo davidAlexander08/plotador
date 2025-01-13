@@ -157,11 +157,11 @@ class Cascatador(MetaData):
                     config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
 
 
-                exit(1)
-                usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
-                print(usinas_mar)
-            print(d_usi)
-            exit(1)
+            #    exit(1)
+            #    usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
+            #    print(usinas_mar)
+            #print(d_usi)
+            #exit(1)
 
     def retorna_simbolo(self, no, d_hidr):
         row = d_hidr.loc[d_hidr["nome_usina"] == no.nome]
