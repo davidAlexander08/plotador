@@ -290,9 +290,11 @@ class Temporal:
                     df_filtro = self.mapa_argumentos[c]
                     lista_argumentos = []
                     for argu in conjUnity.arg.listaNomes:
-                        print(argu)
+                        cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == argu)][unity.sintese.filtro].iloc[0]
+                        lista_argumentos.append(cod_arg)
+                    print(lista_argumentos)
                     exit(1)
-                    #cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == conjUnity.arg.nome)][unity.sintese.filtro].iloc[0]
+                    #
                     #filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "==", cod_arg)])
                     #df = filtered_data.to_pandas().reset_index(drop=True)
                 #except:
