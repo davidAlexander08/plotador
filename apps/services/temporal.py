@@ -165,9 +165,7 @@ class Temporal:
         for unity in conjUnity.listaUnidades:
             print("unity.sintese", unity.sintese)
             print("unity.arg", unity.arg)
-            print("unity.arg", unity.arg.listaNomes)
-            print("unity.filtroArgumento", unity.filtroArgumento)
-            print("unity.filtroArgumento", unity.filtroArgumento)
+            print("unity.arg.nome", unity.arg.nome)
             #mapa_eco = self.retornaMapaDF(self.sts.sintese, self.data.conjuntoCasos[0].casos , unity, self.boxplot)
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
             lista_temporal_temp = []
@@ -248,7 +246,7 @@ class Temporal:
 
     def retorna_mapaDF_cenario_medio_temporal(self, eco_mapa, unidade, boxplot):
         mapa_temporal = {}
-        if( (unidade.sintese.filtro is None) & (unidade.filtroArgumento is None) ):
+        if( (unidade.sintese.filtro is None) & (unidade.arg.nome is None) ):
             if(boxplot =="True"):
                 return self.__retorna_mapa_patamar(eco_mapa)
             else:
@@ -259,10 +257,10 @@ class Temporal:
             for c in self.data.conjuntoCasos[0].casos:
                 df = self.mapa_argumentos[c]
                 try:
-                    cod_arg = df.loc[(df[coluna_filtro] == unidade.filtroArgumento)][unidade.sintese.filtro].iloc[0]
+                    cod_arg = df.loc[(df[coluna_filtro] == unidade.arg.nome)][unidade.sintese.filtro].iloc[0]
                 except:
                     print("Filtro: ", coluna_filtro)
-                    print("Não encontrado: ", unidade.filtroArgumento)
+                    print("Não encontrado: ", unidade.arg.nome)
                 #print(c.caminho)
                 #print(eco_mapa)
                 #print(cod_arg)

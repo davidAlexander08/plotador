@@ -4,7 +4,7 @@ from apps.interface.metaData import MetaData
 from apps.model.unidade import UnidadeSintese
 from apps.model.unidadeArgumental import UnidadeArgumental
 class ConjuntoUnidadeSintese (MetaData):  
-
+ 
     def __init__(self, sintese, arg, legendaEixoX, limites = False, tamanho_texto = 11):
         MetaData.__init__(self)
         self.arg = arg
