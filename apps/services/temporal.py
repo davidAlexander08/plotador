@@ -270,24 +270,8 @@ class Temporal:
 
 
     def retorna_df(self, caso, sintese) -> pd.DataFrame:
-        arq_sintese = join( caso.caminho, "sintese", sintese+".parquet"  )
-        #check_file = os.path.isfile(arq_sintese)
-        try:
-            df = pd.read_parquet(arq_sintese, engine = "pyarrow")
-            return df
-        except:
-            raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
-            
-    #def retorna_df_pq(self, caso, sintese, conjUnity) -> pd.DataFrame:
-    #    arq_sintese = join( caso.caminho, self.DIR_SINTESE, sintese+".parquet"  )
-    #    #check_file = os.path.isfile(arq_sintese)
-    #    try:
-    #        df = pd.read_parquet(arq_sintese, engine = "pyarrow")
-    #        #df = pq.read_table(arq_sintese, filters=[("codigo_usina", "==", cod_usi)])
-    #        #df = df.to_pandas().reset_index(drop=True)
-    #        return df
-    #    except:
-    #        raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
+
+        
 
     #def retornaMapaDF(self, sintese, conjUnity, boxplot= "False"):
     def retornaMapaDF(self, sintese, casos, boxplot= "False"):
@@ -309,9 +293,13 @@ class Temporal:
                 if(boxplot == "True"):
                     sintese_busca = sintese
                     flag_estatistica = 0
-                #df = self.retorna_df(c, sintese_busca).copy()
-                df = self.retorna_df(c, sintese_busca)
-                #df = self.retorna_df_pq(c, sintese_busca, conjUnity)
+                arq_sintese = join( c.caminho, "sintese", sintese_busca+".parquet"  )
+                try:
+                    df = pd.read_parquet(arq_sintese, engine = "pyarrow")
+                except:
+                    raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
+
+
 
                 if(flag_estatistica):
                     df = df.loc[(df["variavel"] == variavel)]                   
