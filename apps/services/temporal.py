@@ -133,7 +133,6 @@ class Temporal:
                 df["caso"] = caso.nome
                 df["modelo"] = caso.modelo
                 self.mapa_argumentos[caso] = df
-            #self.mapa_argumentos = self.retornaMapaDF(self.sintese_espacial, self.data.conjuntoCasos[0].casos)
 
 
 
@@ -162,11 +161,11 @@ class Temporal:
  
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {} 
-        #mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese, conjUnity, self.boxplot)
         mapa_eco = self.retornaMapaDF(self.sts.sintese, self.data.conjuntoCasos[0].casos , self.boxplot)
         for unity in conjUnity.listaUnidades:
+            print(conjUnity.listaUnidades)
+            print(unity)
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
-            #print(self.data.conjuntoCasos[0].casos)
             lista_temporal_temp = []
             for caso in self.data.conjuntoCasos[0].casos:
                 #print(caso.nome, " caminho: ", caso.caminho+"/dger.dat")
@@ -189,9 +188,10 @@ class Temporal:
             if(self.xinf > df_temporal["estagio"].min()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] >= self.xinf)]
 
-
+        
             mapa_temporal[unity] = df_temporal
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
+        exit(1)
         if(self.boxplot == "True"):
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
             titulo_padrao = "Boxplot Temporal "+conjUnity.titulo+self.estudo
@@ -250,7 +250,6 @@ class Temporal:
             else:
                 return self.__retorna_mapa_media_parquet(eco_mapa)
         else: 
-            #mapa_argumentos = self.eco_indicadores.retornaMapaDF(unidade.sintese.espacial)   
             coluna_filtro = unidade.sintese.filtro.split("_")[1]
             dicionario = {}
             for c in self.data.conjuntoCasos[0].casos:
@@ -271,7 +270,6 @@ class Temporal:
                 mapa_temporal = self.__retorna_mapa_media_parquet(dicionario)
         return mapa_temporal
 
-    #def retornaMapaDF(self, sintese, conjUnity, boxplot= "False"):
     def retornaMapaDF(self, sintese, casos, boxplot= "False"):
         result_dict  = {}
         sintese_parts = sintese.split("_")
