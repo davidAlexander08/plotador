@@ -140,7 +140,7 @@ class Report():
                         path.pop()
                         arq_image = "/".join(path)+"/report/figuras/"+nome_argumento_info
                         print(arq_image)
-                        print("nome_argumento_info.split(".")[1]: ", nome_argumento_info.split(".")[1])
+                        print("nome_argumento_info.split(.)[1]: ", nome_argumento_info.split(".")[1])
                         if(nome_argumento_info.split(".")[1] == "png"):
                             with open(arq_image, "rb") as image_file: 
                                 base64_string = base64.b64encode(image_file.read()).decode('utf-8')
