@@ -131,7 +131,7 @@ class Temporal:
             exit(1)
         self.sts = Sintese(self.sintese)
         if self.sts.espacial != "SIN":
-            self.mapa_argumentos = self.retornaMapaDF(self.sts.espacial)
+            self.mapa_argumentos = self.retornaMapaDF(self.sts.espacial, self.data.conjuntoCasos[0].casos)
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")
@@ -160,7 +160,7 @@ class Temporal:
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {} 
         #mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese, conjUnity, self.boxplot)
-        mapa_eco = self.retornaMapaDF(self.sts.sintese, self.boxplot)
+        mapa_eco = self.retornaMapaDF(self.sts.sintese, self.boxplot, self.data.conjuntoCasos[0].casos)
         for unity in conjUnity.listaUnidades:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
             #print(self.data.conjuntoCasos[0].casos)
@@ -290,16 +290,13 @@ class Temporal:
     #        raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
 
     #def retornaMapaDF(self, sintese, conjUnity, boxplot= "False"):
-    def retornaMapaDF(self, sintese, boxplot= "False"):
+    def retornaMapaDF(self, sintese, boxplot= "False", casos):
         result_dict  = {}
         sintese_parts = sintese.split("_")
         variavel = sintese_parts[0]
         flag_estatistica = 0
-        #print("SINTESE")
-        for c in self.casos:
+        for c in casos:
             if(os.path.isfile(c.caminho+"/sintese/"+sintese+".parquet")):
-                #print("ENCNTROU")
-                #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
                 if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
                     if(self.checkIfNumberOnly(c.tipo)):
                         c.tipo = int(c.tipo)
@@ -316,15 +313,11 @@ class Temporal:
                 df = self.retorna_df(c, sintese_busca)
                 #df = self.retorna_df_pq(c, sintese_busca, conjUnity)
 
-                #if(flag_estatistica == 1):
                 if(flag_estatistica):
-                    #df = df.loc[(df["variavel"] == variavel)].copy() 
                     df = df.loc[(df["variavel"] == variavel)]                   
                 df["caso"] = c.nome
                 df["modelo"] = c.modelo
                 result_dict [c] = df
-                #print(df)
-                #print(sintese_busca)
             else:                    
                 if(sintese in self.mapa_arquivos.keys()):
                     lista_arquivos = self.mapa_arquivos[sintese]
