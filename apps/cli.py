@@ -163,7 +163,6 @@ def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cr
 @option_cenario
 @option_sintese
 @option_argumentos
-@option_chave
 @option_largura
 @option_altura
 @option_eixox
