@@ -268,7 +268,7 @@ class Report():
                                     posnw = posnw
                                     ).figure_export_report
                                     print(self.figura_plotador_temporal)
-                                    figura.write_html(os.path.join(self.outpath_figura, "TESTE_ACELERATOR.html"),
+                                    self.figura_plotador_temporal.write_html(os.path.join(self.outpath_figura, "TESTE_ACELERATOR.html"),
                                         include_plotlyjs='cdn',
                                         config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
                                     exit(1)
