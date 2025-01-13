@@ -4,7 +4,7 @@
 
 \page{Violação}
 
-plotador temporal --titulo Violacao_FPHA --json arquivo_json --sintese VFPHA_UHE --chave UHE --argumentos USINA --labely MWmed --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
+plotador temporal --titulo Violacao_FPHA --json arquivo_json --sintese VFPHA_UHE --argumentos USINA --labely MWmed --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{MaioresValores/USINA/VFPHA_UHE}
 \info{MenoresValores/USINA/VFPHA_UHE}
 \info{ValoresUnicos/USINA/VFPHA_UHE}
@@ -12,21 +12,21 @@ plotador temporal --titulo Violacao_FPHA --json arquivo_json --sintese VFPHA_UHE
 
 \page{Hidrologia}
 
-plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  --liminf True --limsup True
+plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  --liminf True --limsup True
 \info{ValoresUnicos/USINA/QDEF_UHE}
 \info{ValoresAnuais/USINA/QDEF_UHE}
 \info{MaioresValores/USINA/QDEF_UHE}
 \info{MenoresValores/USINA/QDEF_UHE}
 
 \subpage{Vaz. Turbinada}
-plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
+plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{ValoresUnicos/USINA/QTUR_UHE}
 \info{ValoresAnuais/USINA/QTUR_UHE}
 \info{MaioresValores/USINA/QTUR_UHE}
 \info{MenoresValores/USINA/QTUR_UHE}
 
 \subpage{Vaz. Vertida}
-plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{ValoresUnicos/USINA/QVER_UHE}
 \info{ValoresAnuais/USINA/QVER_UHE}
 \info{MaioresValores/USINA/QVER_UHE}
@@ -34,14 +34,14 @@ plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE
 
 
 \subpage{Vaz. Incremental}
-plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QINC_UHE --chave UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QINC_UHE --argumentos USINA --labely m3/s --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{ValoresUnicos/USINA/QVER_UHE}
 \info{ValoresAnuais/USINA/QVER_UHE}
 \info{MaioresValores/USINA/QVER_UHE}
 \info{MenoresValores/USINA/QVER_UHE}
 
 \subpage{Volume}
-plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --chave UHE --argumentos USINA --labely hm3 --labelx Estágios --largura 1600 --altura 400 --tamanho 15  --liminf True --limsup True
+plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos USINA --labely hm3 --labelx Estágios --largura 1600 --altura 400 --tamanho 15  --liminf True --limsup True
 \info{ValoresUnicos/USINA/VARMF_UHE}
 \info{ValoresAnuais/USINA/VARMF_UHE}
 \info{MaioresValores/USINA/VARMF_UHE}
@@ -50,14 +50,14 @@ plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF
 
 
 \page{Valor Água}
-plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --chave UHE --argumentos USINA  --labely R$/hm3 --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
+plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos USINA  --labely R$/hm3 --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{ValoresUnicos/USINA/VAGUA_UHE}
 \info{ValoresAnuais/USINA/VAGUA_UHE}
 \info{MaioresValores/USINA/VAGUA_UHE}
 \info{MenoresValores/USINA/VAGUA_UHE}
 
 \page{Geração}
-plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --chave UHE --argumentos USINA --labely MWmes --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
+plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos USINA --labely MWmes --labelx Estágios --largura 1600 --altura 400 --tamanho 15  
 \info{ValoresUnicos/USINA/GHID_UHE}
 \info{ValoresAnuais/USINA/GHID_UHE}
 \info{MaioresValores/USINA/GHID_UHE}
