@@ -16,6 +16,7 @@ import shutil
 from pathlib import Path
 from apps.cli import analise_temporal
 from click.testing import CliRunner
+from apps.services.temporal import Temporal
 
 class Report():
     def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot, usinas):
@@ -233,6 +234,57 @@ class Report():
                                 if(usinas is not None):
                                     self.lista_arg = usinas
                                 try:
+                                    
+                                    data = Dados_json_caso(self.json)
+                                    if (flag_diretorio == 1):
+                                        data.estudo = "_default"
+                                        data.casos[0].nome = " "
+                                        data.casos[0].caminho = os.getcwd()
+                                        if os.path.isfile("dger.dat"):
+                                            data.casos[0].modelo = "NEWAVE"
+                                            data.args = [Argumento(["SUDESTE","NORDESTE","NORTE","SUL"], "SBM", "SBMs")]
+                                        elif os.path.isfile("decomp.tim"):
+                                            data.casos[0].modelo = "DECOMP"
+                                            data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
+                                        elif os.path.isfile("entdados.dat"):
+                                            data.casos[0].modelo = "DESSEM"
+                                            data.args = [Argumento(["SE","NE","N","S"], "SBM", "SBMs")]
+                                        else: 
+                                            raise FileNotFoundError(f"NAO SE ENCONTRA NA PASTA DE UM CASO OU ARQUIVO JSON NAO EXISTE.")
+                                    self.figura_plotador_temporal = Temporal(data, 
+                                    xinf = "0", 
+                                    xsup = "120",
+                                    estagio = "", 
+                                    cenario = "mean", 
+                                    sintese = self.sintese_figura, 
+                                    largura =self.largura, 
+                                    altura = self.altura, 
+                                    eixox = self.data_inicio, 
+                                    cronologico = "False", 
+                                    labely = self.labely_figura, 
+                                    booltitulo = "True", 
+                                    titulo = self.titulo_figura, 
+                                    showlegend = " ", 
+                                    labelx = None, 
+                                    argumentos = self.lista_arg, 
+                                    tamanho = self.tamanho_figura, 
+                                    boxplot = self.flag_boxplot,
+                                    csv = "False", 
+                                    html = self.html, 
+                                    outpath = self.outpath_figura, 
+                                    ysup = None, 
+                                    yinf = None, 
+                                    y2 = None, 
+                                    y2sup = None, 
+                                    y2inf = None, 
+                                    patamar = "0", 
+                                    liminf = liminf, 
+                                    limsup = limsup, 
+                                    posnw = posnw
+                                    ).figura_plotador_temporal
+                                    print(self.figura_plotador_temporal)
+                                    exit(1)
+
                                     runner = CliRunner()
                                     result = runner.invoke(analise_temporal, [
                                         '--json', self.json,
