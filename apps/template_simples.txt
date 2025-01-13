@@ -2,6 +2,23 @@
 
 \info{Estudo}
 
+\page{Usinas SE}
+\figura{CASCATA_ITAIPU.png}
+\subpage{Vaz. Defl. SE}
+plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
+\subpage{VAGUA_UHE SE}
+plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU  --labely R$/hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+\subpage{QVER_UHE SE}
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+\subpage{QTUR_UHE SE}
+plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+\subpage{GHID_UHE SE}
+plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely MWmes --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+\subpage{VARMF_UHE SE}
+plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
+
+
+
 \page{SIN}
 
 ###Formula:
@@ -127,20 +144,6 @@ plotador temporal --titulo Energia_Vertida_Sudeste --json arquivo_json --sintese
 \info{ValoresUnicos/NORDESTE/EVER_SBM}
 \info{ValoresAnuais/NORDESTE/EVER_SBM}
 
-\page{Usinas SE}
-\figura{CASCATA_ITAIPU.png}
-\subpage{Vaz. Defl. SE}
-plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
-\subpage{VAGUA_UHE SE}
-plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU  --labely R$/hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
-\subpage{QVER_UHE SE}
-plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
-\subpage{QTUR_UHE SE}
-plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
-\subpage{GHID_UHE SE}
-plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely MWmes --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
-\subpage{VARMF_UHE SE}
-plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
 
 
 \page{Usinas S}

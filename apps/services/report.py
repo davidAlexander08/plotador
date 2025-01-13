@@ -132,7 +132,7 @@ class Report():
                         pass
                     elif("</h" in line):
                         html_file.write(line.strip()+"\n")
-                    elif("\figura{" in line):
+                    elif("figura{" in line):
                         Log.log().info("Gerando " + line)
                         nome_argumento_info = line.split("{")[1].split("}")[0]
                         print(nome_argumento_info)
