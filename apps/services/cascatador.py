@@ -29,28 +29,24 @@ class Cascatador(MetaData):
         diretorio_saida = f"resultados/{self.estudo}/cascatador"
         os.makedirs(diretorio_saida, exist_ok=True)
         print(self.casos[0].caminho)
-        exit(1)
         for c in self.casos:
-            defluencia_usinas = self.eco_indicadores.retorna_df_concatenado("QDEF_UHE_EST")
-            defluencia_usinas_mean = defluencia_usinas.loc[defluencia_usinas["cenario"] == "mean"].round(0)
-
-            qincr_usinas = self.eco_indicadores.retorna_df_concatenado("QINC_UHE_EST")
-            qincr_usinas_mean = qincr_usinas.loc[qincr_usinas["cenario"] == "mean"].round(0)
-
-            qafl_usinas = self.eco_indicadores.retorna_df_concatenado("QAFL_UHE_EST")
-            qafl_usinas_mean = qafl_usinas.loc[qafl_usinas["cenario"] == "mean"].round(0)
-
-            qtur_usinas = self.eco_indicadores.retorna_df_concatenado("QTUR_UHE_EST")
-            qtur_usinas_mean = qtur_usinas.loc[qtur_usinas["cenario"] == "mean"].round(0)
-
-            qver_usinas = self.eco_indicadores.retorna_df_concatenado("QVER_UHE_EST")
-            qver_usinas_mean = qver_usinas.loc[qver_usinas["cenario"] == "mean"].round(0)
-
-            vdef_min_usinas = self.eco_indicadores.retorna_df_concatenado("VDEFMIN_UHE_EST")
-            vdef_min_usinas_mean = vdef_min_usinas.loc[vdef_min_usinas["cenario"] == "mean"].round(0)
-
-
-
+            #defluencia_usinas = self.eco_indicadores.retorna_df_concatenado("QDEF_UHE_EST")
+            #defluencia_usinas_mean = defluencia_usinas.loc[defluencia_usinas["cenario"] == "mean"].round(0)
+#
+            #qincr_usinas = self.eco_indicadores.retorna_df_concatenado("QINC_UHE_EST")
+            #qincr_usinas_mean = qincr_usinas.loc[qincr_usinas["cenario"] == "mean"].round(0)
+#
+            #qafl_usinas = self.eco_indicadores.retorna_df_concatenado("QAFL_UHE_EST")
+            #qafl_usinas_mean = qafl_usinas.loc[qafl_usinas["cenario"] == "mean"].round(0)
+#
+            #qtur_usinas = self.eco_indicadores.retorna_df_concatenado("QTUR_UHE_EST")
+            #qtur_usinas_mean = qtur_usinas.loc[qtur_usinas["cenario"] == "mean"].round(0)
+#
+            #qver_usinas = self.eco_indicadores.retorna_df_concatenado("QVER_UHE_EST")
+            #qver_usinas_mean = qver_usinas.loc[qver_usinas["cenario"] == "mean"].round(0)
+#
+            #vdef_min_usinas = self.eco_indicadores.retorna_df_concatenado("VDEFMIN_UHE_EST")
+            #vdef_min_usinas_mean = vdef_min_usinas.loc[vdef_min_usinas["cenario"] == "mean"].round(0)
 
             arquivo_hidr = c.caminho+"/hidr.dat"
             d_hidr = Hidr.read(arquivo_hidr).cadastro
@@ -113,13 +109,13 @@ class Cascatador(MetaData):
             estagios = defluencia_usinas_mean["estagio"].unique()
             est_1 = [estagios[0]]
             for est in est_1:#estagios:
-                defluencia_usinas_mean_est = defluencia_usinas_mean.loc[defluencia_usinas_mean["estagio"] == est]
-                qincr_usinas_mean_est = qincr_usinas_mean.loc[qincr_usinas_mean["estagio"] == est]
-                qafl_usinas_mean_est = qafl_usinas_mean.loc[qafl_usinas_mean["estagio"] == est]
-
-                qver_usinas_mean_est = qver_usinas_mean.loc[qver_usinas_mean["estagio"] == est]
-                qtur_usinas_mean_est = qtur_usinas_mean.loc[qtur_usinas_mean["estagio"] == est]
-                vdef_min_usinas_mean_est = vdef_min_usinas_mean.loc[vdef_min_usinas_mean["estagio"] == est]
+                #defluencia_usinas_mean_est = defluencia_usinas_mean.loc[defluencia_usinas_mean["estagio"] == est]
+                #qincr_usinas_mean_est = qincr_usinas_mean.loc[qincr_usinas_mean["estagio"] == est]
+                #qafl_usinas_mean_est = qafl_usinas_mean.loc[qafl_usinas_mean["estagio"] == est]
+#
+                #qver_usinas_mean_est = qver_usinas_mean.loc[qver_usinas_mean["estagio"] == est]
+                #qtur_usinas_mean_est = qtur_usinas_mean.loc[qtur_usinas_mean["estagio"] == est]
+                #vdef_min_usinas_mean_est = vdef_min_usinas_mean.loc[vdef_min_usinas_mean["estagio"] == est]
 
                 
                 #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
@@ -129,16 +125,17 @@ class Cascatador(MetaData):
                     lista_traces = []
 
                     simbolo = self.retorna_simbolo(no, d_hidr)
-                    def_0 = defluencia_usinas_mean_est.loc[(defluencia_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
-                    qinc_0 =  qincr_usinas_mean_est.loc[(qincr_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
-                    qafl = qafl_usinas_mean_est.loc[(qafl_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
-                    qtur = qtur_usinas_mean_est.loc[(qtur_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
-                    qver = qver_usinas_mean_est.loc[(qver_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
-                    vdef_min = vdef_min_usinas_mean_est.loc[(vdef_min_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
+                    #def_0 = defluencia_usinas_mean_est.loc[(defluencia_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
+                    #qinc_0 =  qincr_usinas_mean_est.loc[(qincr_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
+                    #qafl = qafl_usinas_mean_est.loc[(qafl_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
+                    #qtur = qtur_usinas_mean_est.loc[(qtur_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
+                    #qver = qver_usinas_mean_est.loc[(qver_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
+                    #vdef_min = vdef_min_usinas_mean_est.loc[(vdef_min_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
                     texto = no.nome + "<br> QINC:"+str(int(qinc_0)) + "QAFL:"+str(qafl) + "<br> QTUR: " + str(qtur) + " QVER: "+ str(qver) + " QDEF:" + str(def_0) + "<br> QDEFM: " + str(int(vdef_min/2.63))
                     lista_traces.append(go.Scatter(x = [no.x], y = [no.y], textfont=dict( size=13), text =[texto], textposition="bottom center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
                     
-                    self.add_scatter_graph(lista_traces, no, no.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est, vdef_min_usinas_mean_est)
+                    #self.add_scatter_graph(lista_traces, no, no.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est, vdef_min_usinas_mean_est)
+                    self.add_scatter_graph(lista_traces, no, no.y, d_hidr)
                     for elemento in lista_traces:
                         fig.add_trace(elemento)
                     fig.update_layout(title="Cascata", showlegend = False)
@@ -176,24 +173,25 @@ class Cascatador(MetaData):
             else:
                 return "circle"
 
-    def add_scatter_graph(self,lista_traces ,no, nivel, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est, vdef_min_usinas_mean_est):
+    #def add_scatter_graph(self,lista_traces ,no, nivel, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est, vdef_min_usinas_mean_est):
+    def add_scatter_graph(self,lista_traces ,no, nivel, d_hidr):
         pais = no.getPais()
         nivel += 1
         contador = 0
         for pai in pais:
             self.define_x(no, pais)
             #if(nivel < 5):
-            deflu = defluencia_usinas_mean_est.loc[(defluencia_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
-            qinc =  qincr_usinas_mean_est.loc[(qincr_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
-            qafl = qafl_usinas_mean_est.loc[(qafl_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
-            qtur = qtur_usinas_mean_est.loc[(qtur_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
-            qver = qver_usinas_mean_est.loc[(qver_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
-            vdef_min = vdef_min_usinas_mean_est.loc[(vdef_min_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
+            #deflu = defluencia_usinas_mean_est.loc[(defluencia_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
+            #qinc =  qincr_usinas_mean_est.loc[(qincr_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
+            #qafl = qafl_usinas_mean_est.loc[(qafl_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
+            #qtur = qtur_usinas_mean_est.loc[(qtur_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
+            #qver = qver_usinas_mean_est.loc[(qver_usinas_mean_est["usina"] == pai.nome)]["valor"].iloc[0]
+            #vdef_min = vdef_min_usinas_mean_est.loc[(vdef_min_usinas_mean_est["usina"] == no.nome)]["valor"].iloc[0]
 
-            texto = pai.nome + "<br> QI:"+str(int(qinc)) + " QA:"+str(int(qafl)) + "<br>QT:"+ str(int(qtur)) + " QV:"+ str(int(qver)) + " <br> QD:" + str(int(deflu)) + " QDM:" + str(int(vdef_min/2.63))
-
+            #texto = pai.nome + "<br> QI:"+str(int(qinc)) + " QA:"+str(int(qafl)) + "<br>QT:"+ str(int(qtur)) + " QV:"+ str(int(qver)) + " <br> QD:" + str(int(deflu)) + " QDM:" + str(int(vdef_min/2.63))
             simbolo = self.retorna_simbolo(pai, d_hidr)                                                                 #pai.text_position
-            lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[ texto ], textfont=dict( size=9), textposition= "top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
+            #lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], text=[ texto ], textfont=dict( size=9), textposition= "top center", mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
+            lista_traces.append(go.Scatter(x = [pai.x], y = [pai.y], mode = "markers+text", marker_color="rgba(0,0,255,1.0)" , marker=dict(symbol=simbolo, size=20)))
             lista_traces.append(go.Scatter(x = [pai.x, pai.x], y = [no.y, pai.y], mode = "lines",  line=dict(color='blue')))
             lista_traces.append(go.Scatter(x = [no.x, pai.x], y = [no.y, no.y], mode = "lines", line=dict(color='blue')))
             self.add_scatter_graph(lista_traces, pai, pai.y, d_hidr, defluencia_usinas_mean_est, qincr_usinas_mean_est, qafl_usinas_mean_est, qtur_usinas_mean_est, qver_usinas_mean_est, vdef_min_usinas_mean_est)
