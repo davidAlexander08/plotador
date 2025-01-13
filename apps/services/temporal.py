@@ -13,6 +13,12 @@ from apps.model.caso import Caso
 from inewave.newave import Dger
 import os 
 import json
+from typing import List
+from os.path import join
+from apps.utils.log import Log
+import warnings
+import re
+import pyarrow.parquet as pq
 
 class Temporal:
 
