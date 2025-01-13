@@ -286,6 +286,8 @@ class Temporal:
                 #try:
                 if(conjUnity.arg.listaNomes is None):
                     df = pd.read_parquet(arq_sintese, engine = "pyarrow")
+                    if(flag_estatistica):
+                        df = df.loc[(df["variavel"] == variavel)]  
                 else:
                     df_filtro = self.mapa_argumentos[c]
                     lista_argumentos = []
@@ -293,15 +295,20 @@ class Temporal:
                         cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == argu)][conjUnity.sintese.filtro].iloc[0]
                         lista_argumentos.append(cod_arg)
                     print(lista_argumentos)
-                    filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos)])
-                    df = filtered_data.to_pandas().reset_index(drop=True)
-                    print(df)
-                    exit(1)
+                    if(flag_estatistica):
+                        filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos)])
+                        df = filtered_data.to_pandas().reset_index(drop=True)
+                        print("flag_estatistica: ", df)
+                        df = df.loc[(df["variavel"] == variavel)]   
+                        print("flag_estatistica variavel: ", df)
+                    else:
+                        filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos)])
+                        df = filtered_data.to_pandas().reset_index(drop=True)
+                        print(df)
+                        exit(1)
                 #except:
                 #    raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
-
-                if(flag_estatistica):
-                    df = df.loc[(df["variavel"] == variavel)]                   
+                  
                 df["caso"] = c.nome
                 df["modelo"] = c.modelo
                 result_dict [c] = df
