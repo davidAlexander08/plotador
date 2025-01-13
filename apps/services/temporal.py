@@ -111,15 +111,9 @@ class Temporal:
         titulo_meta = df_chave["nome_longo_variavel"]
         if(self.labely is None):
             self.labely = df_chave["unidade"].iloc[0]
+        print(df_chave)
             
-
-        if(self.argumentos is not None and self.chave is None):
-            print("FALTA DECLARAR A CHAVE DO ARGUMENTO")
-            exit(1)
-        if(self.chave is not None and self.argumentos is None):
-            print("FALTA DECLARAR O ARGUMENTO DO ARGUMENTO")
-            exit(1)
-        if(self.chave is not None and self.argumentos is not None):
+        if(self.argumentos is not None):
             lista_argumentos = self.argumentos.split(",")
             list_arg = []
             for arg in lista_argumentos:
