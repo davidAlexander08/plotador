@@ -4,7 +4,6 @@ from apps.model.unidade import UnidadeSintese
 from apps.model.conjuntoUnidade import ConjuntoUnidadeSintese
 from apps.graficos.graficos import Graficos
 from apps.indicadores.indicadores_temporais import IndicadoresTemporais
-from apps.indicadores.eco_indicadores import EcoIndicadores
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
 from apps.model.argumento import Argumento
@@ -88,7 +87,6 @@ class Temporal:
         self.html = html
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         self.indicadores_temporais = IndicadoresTemporais(data.conjuntoCasos[0].casos)
-        self.eco_indicadores = EcoIndicadores(data.conjuntoCasos[0].casos)
         self.graficos = Graficos(data)
         # Gera saídas do estudo
         #print("INICIO DO TEMPORAL")
@@ -96,7 +94,7 @@ class Temporal:
         diretorio_saida = f"resultados/{self.estudo}/temporal" if outpath is None else outpath
         os.makedirs(diretorio_saida, exist_ok=True)
 
-        meta_dados = self.eco_indicadores.retorna_df(data.conjuntoCasos[0].casos[0], "METADADOS_OPERACAO")
+        meta_dados = self.retorna_df(data.conjuntoCasos[0].casos[0], "METADADOS_OPERACAO")
         df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)] if "ESTATISTICA" not in self.sintese else meta_dados.loc[(meta_dados["chave"] == self.chave)] 
         titulo_meta = df_chave["nome_longo_variavel"]
         if(self.labely is None):
@@ -127,7 +125,7 @@ class Temporal:
             exit(1)
         self.sts = Sintese(self.sintese)
         if self.sts.espacial != "SIN":
-            self.mapa_argumentos = self.eco_indicadores.retornaMapaDF(self.sts.espacial)
+            self.mapa_argumentos = self.retornaMapaDF(self.sts.espacial)
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")
@@ -156,7 +154,7 @@ class Temporal:
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {} 
         #mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese, conjUnity, self.boxplot)
-        mapa_eco = self.eco_indicadores.retornaMapaDF(self.sts.sintese, self.boxplot)
+        mapa_eco = self.retornaMapaDF(self.sts.sintese, self.boxplot)
         for unity in conjUnity.listaUnidades:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
             #print(self.data.conjuntoCasos[0].casos)
@@ -265,40 +263,117 @@ class Temporal:
         return mapa_temporal
 
 
+    def retorna_df(self, caso, sintese) -> pd.DataFrame:
+        arq_sintese = join( caso.caminho, self.DIR_SINTESE, sintese+".parquet"  )
+        #check_file = os.path.isfile(arq_sintese)
+        try:
+            df = pd.read_parquet(arq_sintese, engine = "pyarrow")
+            return df
+        except:
+            raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
+            
+    #def retorna_df_pq(self, caso, sintese, conjUnity) -> pd.DataFrame:
+    #    arq_sintese = join( caso.caminho, self.DIR_SINTESE, sintese+".parquet"  )
+    #    #check_file = os.path.isfile(arq_sintese)
+    #    try:
+    #        df = pd.read_parquet(arq_sintese, engine = "pyarrow")
+    #        #df = pq.read_table(arq_sintese, filters=[("codigo_usina", "==", cod_usi)])
+    #        #df = df.to_pandas().reset_index(drop=True)
+    #        return df
+    #    except:
+    #        raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
 
+    #def retornaMapaDF(self, sintese, conjUnity, boxplot= "False"):
+    def retornaMapaDF(self, sintese, boxplot= "False"):
+        result_dict  = {}
+        sintese_parts = sintese.split("_")
+        variavel = sintese_parts[0]
+        flag_estatistica = 0
+        #print("SINTESE")
+        for c in self.casos:
+            if(os.path.isfile(c.caminho+"/sintese/"+sintese+".parquet")):
+                #print("ENCNTROU")
+                #if( (len(sintese_parts) > 1) and (variavel != "ESTATISTICAS") and (variavel != "METADADOS") ):
+                if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
+                    if(self.checkIfNumberOnly(c.tipo)):
+                        c.tipo = int(c.tipo)
+                        sintese_busca = sintese
+                    else:
+                        sintese_busca = "ESTATISTICAS_OPERACAO_"+sintese.split("_")[1]
+                        flag_estatistica = 1
+                else:
+                    sintese_busca = sintese
+                if(boxplot == "True"):
+                    sintese_busca = sintese
+                    flag_estatistica = 0
+                #df = self.retorna_df(c, sintese_busca).copy()
+                df = self.retorna_df(c, sintese_busca)
+                #df = self.retorna_df_pq(c, sintese_busca, conjUnity)
 
+                #if(flag_estatistica == 1):
+                if(flag_estatistica):
+                    #df = df.loc[(df["variavel"] == variavel)].copy() 
+                    df = df.loc[(df["variavel"] == variavel)]                   
+                df["caso"] = c.nome
+                df["modelo"] = c.modelo
+                result_dict [c] = df
+                #print(df)
+                #print(sintese_busca)
+            else:                    
+                if(sintese in self.mapa_arquivos.keys()):
+                    lista_arquivos = self.mapa_arquivos[sintese]
+                    lista_df = []
+                    for arquivo in lista_arquivos:
+                        caminho_arquivo = c.caminho+"/"+arquivo
+                        media_values = []
+                        estagios = []
+                        with open(caminho_arquivo, 'r') as file:
+                            for line in file:
+                                inicio = line[0:10].split()
+                                if("MEDIA" in inicio):
+                                    temp = []
+                                    temp = [float(value) for value in line.split()[1:]]
+                                    temp.pop()
+                                    media_values = media_values + temp
+                        dados_dger = Dger.read(c.caminho+"/dger.dat")
+                        ano_inicio = dados_dger.ano_inicio_estudo
+                        mes_inicio = dados_dger.mes_inicio_estudo
+                        start_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
+                        media_values  = media_values[mes_inicio-1:]
+                        estagios = list(range(1, len(media_values) + 1))
+                        num_months = len(media_values)  # Change this to your desired number
+                        date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
+                        
+                        #end_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
+                        #date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
 
+                        df = pd.DataFrame({'Timestamp': date_range})
+                        dicionario = {
+                            "estagio":estagios,
+                            "data_inicio":date_range,
+                            "valor":media_values,
+                            "limite_superior":media_values,
+                            "limite_inferior":media_values,
+                            #"data_fim":
+                        }
+                        df = pd.DataFrame(dicionario)
+                        df["cenario"] = "mean"
+                        df["patamar"] = 0
+                        df["caso"] = c.nome
+                        df["modelo"] = c.modelo
+                        df["codigo_usina"] = None
+                        df["codigo_ree"] = None
+                        if(len(lista_arquivos) == 4):
+                            codigo_sbm = int(re.search(r'(\d+)\.out$', arquivo).group(1))
+                            df["codigo_submercado"] = codigo_sbm
+                        else:
+                            df["codigo_submercado"] = None
+                        df["variavel"] = sintese.split("_")[0]
+                        #print(df)
+                        lista_df.append(df.copy())
+                    df_resultado = pd.concat(lista_df)
+                    #print(df_resultado)    
+                    #exit(1)
+                    result_dict [c] = df_resultado
 
-
-
-
-
-
-
-
-
-
-
-            #unity = UnidadeSintese("EARPF_SIN_EST", None, "%", "Energia_Armazenada_Percentual_Final_SIN_CREF "+estudo)
-            #df_unity = indicadores_temporais.retorna_df_concatenado(unity)
-            #graficos.gera_graficos_linha_Newave_CREF(df_unity, indicadores_temporais.df_cref, "EARPF", unity.legendaEixoY, unity.titulo, None).write_image(
-            #    os.path.join(diretorio_saida, "SIN_EARPF_CREF"+estudo+".png"),
-            #    width=800,
-            #    height=600
-            #    )
-            #graficos.gera_graficos_linha_Newave_CREF(df_unity, indicadores_temporais.df_cref, "EARPF", unity.legendaEixoY, unity.titulo+"_2024", "2024").write_image(
-            #    os.path.join(diretorio_saida, "SIN_EARPF_CREF_2024"+estudo+".png"),
-            #    width=800,
-            #    height=600
-            #    )
-            #graficos.gera_graficos_linha_Newave_CREF(df_unity, indicadores_temporais.df_cref, "EARPF", unity.legendaEixoY, unity.titulo+"_Ano_Vigente", "ADEQUA").write_image(
-            #    os.path.join(diretorio_saida, "SIN_EARPF_CREF_AnoCaso"+estudo+".png"),
-            #    width=800,
-            #    height=600
-            #    )
-            #df_EARPF_mean_p10_p90 = indicadores_temporais.gera_df_mean_p10_p90("EARPF_SIN_EST")
-            #graficos.gera_graficos_linha_mean_p10_p90_CREF(df_EARPF_mean_p10_p90,indicadores_temporais.df_cref, "EARPF", "%", "Energia Armazenada Cenarios CREF"+estudo, None ).write_image(
-            #    os.path.join(diretorio_saida, "Energia_Armazenada_Media_P10_P90_"+estudo+".png"),
-            #    width=800,
-            #    height=600
-            #    )
+        return result_dict 
