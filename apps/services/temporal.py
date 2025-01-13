@@ -283,20 +283,20 @@ class Temporal:
                     sintese_busca = conjUnity.sintese.sintese
                     flag_estatistica = 0
                 arq_sintese = join( c.caminho, "sintese", sintese_busca+".parquet"  )
-                try:
-                    if(conjUnity.arg.nome is None):
-                        df = pd.read_parquet(arq_sintese, engine = "pyarrow")
-                    else:
-                        df_filtro = self.mapa_argumentos[c]
-                        lista_argumentos = []
-                        for argu in conjUnity.arg.listaNomes:
-                            print(argu)
-                        exit(1)
-                        #cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == conjUnity.arg.nome)][unity.sintese.filtro].iloc[0]
-                        #filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "==", cod_arg)])
-                        #df = filtered_data.to_pandas().reset_index(drop=True)
-                except:
-                    raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
+                #try:
+                if(conjUnity.arg.nome is None):
+                    df = pd.read_parquet(arq_sintese, engine = "pyarrow")
+                else:
+                    df_filtro = self.mapa_argumentos[c]
+                    lista_argumentos = []
+                    for argu in conjUnity.arg.listaNomes:
+                        print(argu)
+                    exit(1)
+                    #cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == conjUnity.arg.nome)][unity.sintese.filtro].iloc[0]
+                    #filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "==", cod_arg)])
+                    #df = filtered_data.to_pandas().reset_index(drop=True)
+                #except:
+                #    raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
 
                 if(flag_estatistica):
                     df = df.loc[(df["variavel"] == variavel)]                   
