@@ -93,8 +93,6 @@ class Temporal:
         self.tamanho_texto = data.tamanho_texto if tamanho is None else int(tamanho)
         self.indicadores_temporais = IndicadoresTemporais(data.conjuntoCasos[0].casos)
         self.graficos = Graficos(data)
-        # Gera saídas do estudo
-        #print("INICIO DO TEMPORAL")
 
         diretorio_saida = f"resultados/{self.estudo}/temporal" if outpath is None else outpath
         os.makedirs(diretorio_saida, exist_ok=True)
@@ -112,7 +110,6 @@ class Temporal:
             self.labely = df_chave["unidade"].iloc[0]
         print(df_chave)
         self.sintese_espacial = self.sintese.split("_")[1]
-        print(self.sintese_espacial)
             
         if(self.argumentos is not None):
             lista_argumentos = self.argumentos.split(",")
@@ -124,15 +121,21 @@ class Temporal:
             if(len(lista_argumentos) == 1 and self.titulo == " "): 
                 self.titulo = lista_argumentos[0]
 
-        #print("ANTES DE DECLARAR SINTESE")
-        #NOVIDADE
-        #print("INICIO: ", self.sintese)
-        if(self.sintese is None):
-            print("POR FAVOR DECLARAR UMA SINTESE COM O ARGUMENTO --sintese")
-            exit(1)
         self.sts = Sintese(self.sintese)
+        self.mapa_argumentos = {}
         if self.sts.espacial != "SIN":
-            self.mapa_argumentos = self.retornaMapaDF(self.sts.espacial, self.data.conjuntoCasos[0].casos)
+            for caso in data.conjuntoCasos[0].casos:
+                arq_espacial = join( caso.caminho, "sintese", sintese_espacial+".parquet"  )
+                try:
+                    df = pd.read_parquet(arq_espacial, engine = "pyarrow")
+                except:
+                    raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
+                df["caso"] = caso.nome
+                df["modelo"] = caso.modelo
+                self.mapa_argumentos[c] = df
+            #self.mapa_argumentos = self.retornaMapaDF(self.sintese_espacial, self.data.conjuntoCasos[0].casos)
+
+
 
         if(self.argumentos is None):
             arg = Argumento(None, None, "SIN")
