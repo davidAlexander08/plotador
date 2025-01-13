@@ -261,7 +261,7 @@ class Report():
                                         '--xsup', "120",
                                         '--estagio', "",
                                         '--cenario', "mean",
-                                        '--sintese', "QDEF_UHE",
+                                        '--sintese', self.sintese_figura,
                                         '--argumentos', self.lista_arg,
                                         '--largura', "1500",
                                         '--altura', "1200",
