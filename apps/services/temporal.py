@@ -288,9 +288,11 @@ class Temporal:
                         df_filtro = self.mapa_argumentos[c]
                         print(df_filtro)
                         cod_arg = df_filtro.loc[(df_filtro[unity.sintese.filtro.split("_")[1]] == unity.arg.nome)][unity.sintese.filtro].iloc[0]
-                        print(cod_arg)
+                        print(unity.sintese.filtro.split("_")[1])
+                        print(unity.arg.nome)
+                        print(unity.sintese.filtro)
                         exit(1)
-                        #filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=[("codigo_usina", "==", cod_usi)])
+                        filtered_data = pq.read_table(arq_sintese, filters=[("codigo_usina", "==", cod_arg)])
                         #oper = filtered_data.to_pandas().reset_index(drop=True)
                 except:
                     raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
