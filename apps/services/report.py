@@ -279,7 +279,7 @@ class Report():
                                     else:
                                         print("Command failed!")
                                         print(result.output)
-                                    #print(f"Command Output: {cli_command}")                            
+                                    print(f"Command Output: {cli_command}")                            
                                 except subprocess.CalledProcessError as e:
                                     print(f"Command failed with exit status {e.returncode}")
                                     print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
