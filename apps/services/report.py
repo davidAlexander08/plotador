@@ -268,9 +268,10 @@ class Report():
                                     posnw = posnw
                                     ).figure_export_report
                                     print(self.figura_plotador_temporal)
-                                    self.figura_plotador_temporal.write_html(os.path.join(self.outpath_figura, "TESTE_ACELERATOR.html"),
-                                        include_plotlyjs='cdn',
-                                        config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
+                                    html_plotly_temporal = pio.to_html(self.figura_plotador_temporal, full_html=False)
+                                    #self.figura_plotador_temporal.write_html(os.path.join(self.outpath_figura, "TESTE_ACELERATOR.html"),
+                                    #    include_plotlyjs='cdn',
+                                    #    config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
 
                                     #runner = CliRunner()
                                     #result = runner.invoke(analise_temporal, [
@@ -342,10 +343,13 @@ class Report():
                                 try:
                                     print(cli_command)
                                     exit(1)
-                                    with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
-                                        html_plotly = file.read()
-                                        #html_file.write(nome_arquivo+"\n")
-                                        html_file.write(html_plotly+"\n")
+                                    if("temporal" in cli_command):
+                                        html_file.write(html_plotly_temporal+"\n")
+                                    else:
+                                        with open(caminho_saida+"/"+nome_arquivo+extensao, "r") as file:
+                                            html_plotly = file.read()
+                                            #html_file.write(nome_arquivo+"\n")
+                                            html_file.write(html_plotly+"\n")
                                 except IOError as e:
                                     # Handle other I/O errors (e.g., permission denied, etc.)
                                     print(f"An I/O error occurred: {e}")
