@@ -127,18 +127,74 @@ plotador temporal --titulo Energia_Vertida_Sudeste --json arquivo_json --sintese
 \info{ValoresUnicos/NORDESTE/EVER_SBM}
 \info{ValoresAnuais/NORDESTE/EVER_SBM}
 
-\page{Usinas}
-plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
-\subpage{VAGUA_UHE}
-plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
-\subpage{QVER_UHE}
-plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
-\subpage{QTUR_UHE}
-plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
-\subpage{GHID_UHE}
-plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely MWmes --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
-\subpage{VARMF_UHE}
-plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,JUPIA,P._PRIMAVERA,ITAIPU,CAPIVARA,G.B._MUNHOZ,MACHADINHO,PASSO_REAL,TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO,SERRA_MESA,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
+\page{Usinas SE}
+plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
+\subpage{VAGUA_UHE SE}
+plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
+\subpage{QVER_UHE SE}
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
+\subpage{QTUR_UHE SE}
+plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
+\subpage{GHID_UHE SE}
+plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely MWmes --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  
+\subpage{VARMF_UHE SE}
+plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely hm3 --labelx Estágios --largura 1700 --altura 1500 --tamanho 15  --liminf True --limsup True
+
+
+\page{Usinas S}
+plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos G.B._MUNHOZ,MACHADINHO,PASSO_REAL,FOZ_CHAPECO --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  --liminf True --limsup True
+\subpage{VAGUA_UHE S}
+plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos G.B._MUNHOZ,MACHADINHO,PASSO_REAL,FOZ_CHAPECO  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{QVER_UHE S}
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos G.B._MUNHOZ,MACHADINHO,PASSO_REAL,FOZ_CHAPECO --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{QTUR_UHE S}
+plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos G.B._MUNHOZ,MACHADINHO,PASSO_REAL,FOZ_CHAPECO --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{GHID_UHE S}
+plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos G.B._MUNHOZ,MACHADINHO,PASSO_REAL,FOZ_CHAPECO --labely MWmes --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{VARMF_UHE S}
+plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos G.B._MUNHOZ,MACHADINHO,PASSO_REAL,FOZ_CHAPECO --labely hm3 --labelx Estágios --largura 1700 --altura 650 --tamanho 15  --liminf True --limsup True
+
+
+
+\page{Usinas NE}
+plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  --liminf True --limsup True
+\subpage{VAGUA_UHE NE}
+plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{QVER_UHE NE}
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{QTUR_UHE NE}
+plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{GHID_UHE NE}
+plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO --labely MWmes --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{VARMF_UHE NE}
+plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,XINGO --labely hm3 --labelx Estágios --largura 1700 --altura 650 --tamanho 15  --liminf True --limsup True
+
+\page{Usinas SE-N}
+plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos SERRA_MESA,PEIXE_ANGIC,LAJEADO,TUCURUI --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  --liminf True --limsup True
+\subpage{VAGUA_UHE SE-N}
+plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos SERRA_MESA,PEIXE_ANGIC,LAJEADO,TUCURUI  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{QVER_UHE SE-N}
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos SERRA_MESA,PEIXE_ANGIC,LAJEADO,TUCURUI --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{QTUR_UHE SE-N}
+plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos SERRA_MESA,PEIXE_ANGIC,LAJEADO,TUCURUI --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{GHID_UHE SE-N}
+plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos SERRA_MESA,PEIXE_ANGIC,LAJEADO,TUCURUI --labely MWmes --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{VARMF_UHE SE-N}
+plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos SERRA_MESA,PEIXE_ANGIC,LAJEADO,TUCURUI --labely hm3 --labelx Estágios --largura 1700 --altura 650 --tamanho 15  --liminf True --limsup True
+
+
+\page{Usinas N}
+plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  --liminf True --limsup True
+\subpage{VAGUA_UHE N}
+plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE  --labely R$/hm3 --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{QVER_UHE N}
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{QTUR_UHE N}
+plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{GHID_UHE N}
+plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely MWmes --labelx Estágios --largura 1700 --altura 650 --tamanho 15  
+\subpage{VARMF_UHE N}
+plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely hm3 --labelx Estágios --largura 1700 --altura 650 --tamanho 15  --liminf True --limsup True
 
 
 \page{Execucao}
