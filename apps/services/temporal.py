@@ -298,7 +298,9 @@ class Temporal:
                     if(flag_estatistica):
                         filtered_data = pq.read_table(arq_sintese, filters=[
                                                                             (conjUnity.sintese.filtro, "in", lista_argumentos),
-                                                                            ("variavel", "==", variavel)])
+                                                                            ("variavel", "==", variavel),
+                                                                            ("patamar", "==", c.patamar)])
+                                                                            
                         df = filtered_data.to_pandas().reset_index(drop=True)
                         print("flag_estatistica: ", df)
                     else:
