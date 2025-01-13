@@ -139,8 +139,6 @@ class Report():
                         path.pop()
                         path.pop()
                         arq_image = "/".join(path)+"/report/figuras/"+nome_argumento_info
-                        print(arq_image)
-                        print("nome_argumento_info.split(.)[1]: ", nome_argumento_info.split(".")[1])
                         if(nome_argumento_info.split(".")[1] == "png"):
                             with open(arq_image, "rb") as image_file: 
                                 base64_string = base64.b64encode(image_file.read()).decode('utf-8')
@@ -215,7 +213,6 @@ class Report():
 
                                 ##DEMENBRANDO COMANDO
                                 comando = cli_command.split("--")
-                                #print(comando)
                                 self.titulo_figura  = " "
                                 self.sintese_figura = None
                                 self.lista_arg      = None 
@@ -228,27 +225,20 @@ class Report():
                                 for cmd_element in comando:
                                     if("titulo" in cmd_element):
                                         self.titulo_figura = cmd_element.split("titulo")[1].strip()
-                                        #print(self.titulo_figura)
                                     if("sintese" in cmd_element):
                                         self.sintese_figura = cmd_element.split("sintese")[1].strip()
-                                        #print(self.sintese_figura)
                                     if("argumentos" in cmd_element):
                                         self.lista_arg = cmd_element.split("argumentos")[1].strip()
                                     if("largura" in cmd_element):
                                         self.largura_figura = cmd_element.split("largura")[1].strip()
-                                        #print(self.largura_figura)
                                     if("altura" in cmd_element):
                                         self.altura_figura = cmd_element.split("altura")[1].strip()
-                                        #print(self.altura_figura)
                                     if("tamanho" in cmd_element):
                                         self.tamanho_figura = cmd_element.split("tamanho")[1].strip()
-                                        #print(self.tamanho_figura)
                                     if("labely" in cmd_element):
                                         self.labely_figura = cmd_element.split("labely")[1].strip()
-                                        #print(self.labely_figura)
                                     if("outpath" in cmd_element):
                                         self.outpath_figura = cmd_element.split("outpath")[1].strip()
-                                        #print(self.outpath_figura)
                                 if(usinas is not None):
                                     self.lista_arg = usinas
                                 try:
@@ -338,7 +328,7 @@ class Report():
                                     #else:
                                     #    print("Command failed!")
                                     #    print(result.output)
-                                    print(f"Command Output: {cli_command}")                            
+                                    #print(f"Command Output: {cli_command}")                            
                                 except subprocess.CalledProcessError as e:
                                     #print(f"Command failed with exit status {e.returncode}")
                                     print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
