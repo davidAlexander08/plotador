@@ -247,8 +247,6 @@ class Report():
                                 else:
                                     self.lista_arg = None
 
-
-                                exit(1)
                                 try:
                                     #Log.log().info(cli_command)
                                     #cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
