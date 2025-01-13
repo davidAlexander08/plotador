@@ -183,90 +183,83 @@ class Report():
                             if("ADD_SBMS" in cli_command):
                                 submercados = "SE,S,NE,N" if data.conjuntoCasos[0].casos[0].modelo != "NEWAVE" else "SUDESTE,SUL,NORDESTE,NORTE"
                                 cli_command = cli_command.replace("ADD_SBMS", submercados)
-                            if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
-                                cli_command = cli_command + " --eixox data_inicio"
-                            #if(html == "True" and "html" not in cli_command):
                             if(html == None):
                                 cli_command = cli_command + " --html True"
-                            if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command and "temporal" in cli_command):
-                                cli_command = cli_command + " --eixox data_inicio"
-
-                            if("temporal" in cli_command):
-                                #fig_report = Temporal(data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw).figure_export_report
-                                #print(fig_report)
-                                if(posnw == "True"):
-                                    cli_command = cli_command + " --posnw True"
-                                else:
-                                    cli_command = cli_command + " --posnw False"
-                                if("liminf" in cli_command and liminf == "True"):
-                                    cli_command = cli_command + " --liminf True"
-                                else:
-                                    cli_command = cli_command + " --liminf False"
-
-                                if("limsup" in cli_command and limsup == "True"):
-                                    cli_command = cli_command + " --limsup True"
-                                else:
-                                    cli_command = cli_command + " --limsup False"
-
-                                if("boxplot" in cli_command):
-                                    cli_command = cli_command + " --boxplot True"
-                                else:
-                                    cli_command = cli_command + " --boxplot False"
-
-                                if(usinas is not None):
-                                    cli_command = cli_command.replace("USINA", usinas)
 
 
                             try:
-                                #Log.log().info(cli_command)
-                                #cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
-
-                                # Create a CliRunner instance
-                                runner = CliRunner()
-
-                                # Define the arguments you want to pass to the CLI command
-                                result = runner.invoke(analise_temporal, [
-                                    '--json', self.json,
-                                    '--xinf', "0",
-                                    '--xsup', "120",
-                                    '--estagio', "",
-                                    '--cenario', "mean",
-                                    '--sintese', "QDEF_UHE",
-                                    '--argumentos', "PIMENTAL",
-                                    '--largura', "1500",
-                                    '--altura', "1200",
-                                    '--eixox', "estagio",
-                                    '--cronologico', 'False',
-                                    '--labely', None,
-                                    '--booltitulo', 'True',
-                                    '--titulo', " ",
-                                    '--showlegend', " ",
-                                    '--labelx', None,
-                                    '--tamanho', None,
-                                    '--boxplot', None,
-                                    '--csv', 'False',
-                                    '--html', None,
-                                    '--outpath', None,
-                                    '--yinf', None,
-                                    '--ysup', None,
-                                    '--y2', None,
-                                    '--y2sup', None,
-                                    '--y2inf', None,
-                                    '--patamar', "0",
-                                    '--liminf', "False",
-                                    '--limsup', "False",
-                                    '--posnw', "False" ])
-                                # Check result output or errors
-                                if result.exit_code == 0:
-                                    print("Command executed successfully!")
-                                    print(result.output)
-                                else:
-                                    print("Command failed!")
-                                    print(result.output)
-                                print(f"Command Output: {cli_command}")                            
+                                Log.log().info(cli_command)
+                                cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
                             except subprocess.CalledProcessError as e:
                                 print(f"Command failed with exit status {e.returncode}")
                                 print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
+                            if("temporal" in cli_command):
+                                
+                                if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command):
+                                    self.data_inicio = "data_inicio"
+
+                                if(usinas is not None):
+                                    cli_command = cli_command.replace("USINA", usinas)
+                                    self.lista_arg = usinas.split(",")
+                                else:
+                                    self.lista_arg = None
+                                self.flag_boxplot = "True" if boxplot != None else "False"
+                                self.html = "False" if html == None else "True"
+
+                                ##DEMENBRANDO COMANDO
+                                comando = cli_command.split("--")
+                                print(comando)
+                                exit(1)
+                                try:
+                                    #Log.log().info(cli_command)
+                                    #cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
+
+                                    # Create a CliRunner instance
+                                    runner = CliRunner()
+
+                                    # Define the arguments you want to pass to the CLI command
+                                    result = runner.invoke(analise_temporal, [
+                                        '--json', self.json,
+                                        '--xinf', "0",
+                                        '--xsup', "120",
+                                        '--estagio', "",
+                                        '--cenario', "mean",
+                                        '--sintese', "QDEF_UHE",
+                                        '--argumentos', self.lista_arg,
+                                        '--largura', "1500",
+                                        '--altura', "1200",
+                                        '--eixox', self.data_inicio,
+                                        '--cronologico', 'False',
+                                        '--labely', None,
+                                        '--booltitulo', 'True',
+                                        '--titulo', " ",
+                                        '--showlegend', " ",
+                                        '--labelx', None,
+                                        '--tamanho', None,
+                                        '--boxplot', self.flag_boxplot,
+                                        '--csv', 'False',
+                                        '--html', self.html,
+                                        '--outpath', None,
+                                        '--yinf', None,
+                                        '--ysup', None,
+                                        '--y2', None,
+                                        '--y2sup', None,
+                                        '--y2inf', None,
+                                        '--patamar', "0",
+                                        '--liminf', liminf,
+                                        '--limsup', limsup,
+                                        '--posnw', posnw ])
+                                    # Check result output or errors
+                                    if result.exit_code == 0:
+                                        print("Command executed successfully!")
+                                        print(result.output)
+                                    else:
+                                        print("Command failed!")
+                                        print(result.output)
+                                    print(f"Command Output: {cli_command}")                            
+                                except subprocess.CalledProcessError as e:
+                                    print(f"Command failed with exit status {e.returncode}")
+                                    print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
                             lista_commands_cli = cli_command.split()
                             #print(lista_commands_cli)
                             #caminho_saida = "report"
