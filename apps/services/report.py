@@ -91,7 +91,9 @@ class Report():
 
         titulo_html = "output.html" if self.titulo == "output.html" else self.titulo
         titulo_html = Path(self.json).stem + ".html"  if (self.titulo == "output.html") and (self.json is not None) else self.titulo+".html"
-        
+        nome_pasta_saida = titulo_html.split(".html")[0]
+        print(nome_pasta_saida)
+        exit(1)
         if not os.path.exists(titulo_html):
             os.makedirs(titulo_html)
             print(f"Folder '{titulo_html}' created!")
