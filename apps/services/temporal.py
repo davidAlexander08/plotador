@@ -38,6 +38,27 @@ class Temporal:
         self.data = data
         self.y2 = y2
         self.posnw = posnw
+
+
+        self.mapa_arquivos = {
+            "GTER_SIN":["gttotsin.out"],
+            "EARPF_SIN":["earmfpsin.out"],
+            "EARMF_SIN":["earmfsin.out"],
+            "GTER_SBM":["gttot001.out",
+                        "gttot002.out",
+                        "gttot003.out",
+                        "gttot004.out"],
+            "EARMF_SBM":["earmfm001.out",
+                        "earmfm002.out",
+                        "earmfm003.out",
+                        "earmfm004.out"],
+            "EARPF_SBM":["earmfpm001.out",
+                        "earmfpm002.out",
+                        "earmfpm003.out",
+                        "earmfpm004.out"]
+        }
+
+        
         if(self.y2 == "True" and len(data.conjuntoCasos[0].casos) > 2):
             print("ERRO: Opcao y2 valida apenas para comparacao de duplas de casos")
             exit(1)
