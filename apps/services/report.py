@@ -253,8 +253,8 @@ class Report():
                                     '--y2sup', None,
                                     '--y2inf', None,
                                     '--patamar', "0",
-                                    '--limInf', "False",
-                                    '--limSup', "False",
+                                    '--liminf', "False",
+                                    '--limsup', "False",
                                     '--posnw', "False" ])
                                 # Check result output or errors
                                 if result.exit_code == 0:
