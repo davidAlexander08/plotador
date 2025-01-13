@@ -169,27 +169,19 @@ class Temporal:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
             lista_temporal_temp = []
             for caso in self.data.conjuntoCasos[0].casos:
-                #print(caso.nome, " caminho: ", caso.caminho+"/dger.dat")
                 df_caso = df_temporal.loc[(df_temporal["caso"] == caso.nome)]
-                #print(df_caso)
                 if(caso.modelo == "NEWAVE" and self.posnw == "False"):
                     dados_dger = Dger.read(caso.caminho+"/dger.dat")
                     anos_estudo = dados_dger.num_anos_estudo
                     mes_inicial = dados_dger.mes_inicio_estudo
                     periodos_estudo = anos_estudo*12 - mes_inicial + 1
-                    #print("n_anos_estudo: ", anos_estudo)
-                    #print("mes_inicio_estudo: ", mes_inicial)
-                    #print("numero_periodos: ", periodos_estudo)
                     df_caso = df_caso.loc[(df_caso["estagio"] <= periodos_estudo)]
                 lista_temporal_temp.append(df_caso)
-                #print(df_caso)
             df_temporal = pd.concat(lista_temporal_temp)
             if(self.xsup < df_temporal["estagio"].max()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] <= self.xsup)]
             if(self.xinf > df_temporal["estagio"].min()):
                 df_temporal = df_temporal.loc[(df_temporal["estagio"] >= self.xinf)]
-
-        
             mapa_temporal[unity] = df_temporal
             if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
         if(self.boxplot == "True"):
@@ -220,7 +212,6 @@ class Temporal:
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
 
-        #print("FECHOU EXECUTA")
     
     def __retorna_mapa_media_parquet(self, mapa):
         dict = {}
@@ -291,7 +282,16 @@ class Temporal:
                     flag_estatistica = 0
                 arq_sintese = join( c.caminho, "sintese", sintese_busca+".parquet"  )
                 try:
-                    df = pd.read_parquet(arq_sintese, engine = "pyarrow")
+                    if(unity.arg.nome is None):
+                        df = pd.read_parquet(arq_sintese, engine = "pyarrow")
+                    else:
+                        df_filtro = self.mapa_argumentos[c]
+                        print(df)
+                        exit(1)
+                        #codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
+                        #cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
+                        #filtered_data = pq.read_table(caso.caminho+"/sintese/"+grandeza+ ".parquet", filters=[("codigo_usina", "==", cod_usi)])
+                        #oper = filtered_data.to_pandas().reset_index(drop=True)
                 except:
                     raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
 
