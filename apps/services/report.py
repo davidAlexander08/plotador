@@ -256,7 +256,13 @@ class Report():
                                     '--limInf', "False",
                                     '--limSup', "False",
                                     '--posnw', "False" ])
-
+                                # Check result output or errors
+                                if result.exit_code == 0:
+                                    print("Command executed successfully!")
+                                    print(result.output)
+                                else:
+                                    print("Command failed!")
+                                    print(result.output)
                                 print(f"Command Output: {cli_command}")                            
                             except subprocess.CalledProcessError as e:
                                 print(f"Command failed with exit status {e.returncode}")
