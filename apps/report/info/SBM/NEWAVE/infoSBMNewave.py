@@ -50,12 +50,20 @@ class InfoSBMNewave(Estruturas):
             
 
         if(os.path.isfile(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet")):
-            oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet",engine = "pyarrow")
+
+
+            
             #oper = self.eco_indicadores.retorna_df_concatenado("ESTATISTICAS_OPERACAO_SBM")
             #codigos_sbm = self.eco_indicadores.retorna_df_concatenado("SBM")
+
+            estatistica_path = f"{caso.caminho}/sintese/ESTATISTICAS_OPERACAO_SBM.parquet"
             codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
             cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
-            oper_sbm = oper.loc[(oper["codigo_submercado"] == cod_sbm) & (oper["cenario"] == "mean") & (oper["patamar"] == 0)]
+
+            filters = [("cenario", "==", "mean"), ("patamar", "==", 0), ("codigo_submercado", "==", cod_sbm)]
+            oper_sbm = pq.read_table(estatistica_path, filters=filters).to_pandas().reset_index(drop=True)
+            #oper = pd.read_parquet(caso.caminho+"/sintese/ESTATISTICAS_OPERACAO_SBM.parquet",engine = "pyarrow")
+            #oper_sbm = oper.loc[(oper["codigo_submercado"] == cod_sbm) & (oper["cenario"] == "mean") & (oper["patamar"] == 0)]
             first_month = oper_sbm.loc[(oper_sbm["estagio"] == 1)]
             second_month = oper_sbm.loc[(oper_sbm["estagio"] == 2)]
             
