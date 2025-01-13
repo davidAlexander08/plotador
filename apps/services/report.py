@@ -140,13 +140,16 @@ class Report():
                         path.pop()
                         arq_image = "/".join(path)+"/report/figuras/"+nome_argumento_info
                         print(arq_image)
-                        #with open(arq_image, "rb") as image_file: 
-                        #    base64_string = base64.b64encode(image_file.read()).decode('utf-8')
-                        #    html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
-                        with open(arq_image, "r") as file:
-                            html_plotly = file.read()
-                            #html_file.write(nome_arquivo+"\n")
-                            html_file.write(html_plotly+"\n")
+                        print("nome_argumento_info.split(".")[1]: ", nome_argumento_info.split(".")[1])
+                        if(nome_argumento_info.split(".")[1] == "png"):
+                            with open(arq_image, "rb") as image_file: 
+                                base64_string = base64.b64encode(image_file.read()).decode('utf-8')
+                                html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
+                        if(nome_argumento_info.split(".")[1] == "html")
+                            with open(arq_image, "r") as file:
+                                html_plotly = file.read()
+                                #html_file.write(nome_arquivo+"\n")
+                                html_file.write(html_plotly+"\n")
 
                     elif("\info{") in line:
                         Log.log().info("Gerando " + line)
