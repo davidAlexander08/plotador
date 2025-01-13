@@ -117,8 +117,8 @@ class Cascatador(MetaData):
             #qtur_usinas_mean_est = qtur_usinas_mean.loc[qtur_usinas_mean["estagio"] == est]
             #vdef_min_usinas_mean_est = vdef_min_usinas_mean.loc[vdef_min_usinas_mean["estagio"] == est]
             #no_mar = mapa_codigo_nos[lista_cod_mar[0]]
-            lista_teste = [lista_cod_mar[0]]
-            for no in lista_teste:#lista_cod_mar:
+            #lista_teste = [lista_cod_mar[0]]
+            for no in lista_cod_mar:#lista_cod_mar:
                 fig = go.Figure()
                 lista_traces = []
 
