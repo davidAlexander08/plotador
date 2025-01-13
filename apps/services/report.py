@@ -238,7 +238,8 @@ class Report():
                                     self.lista_arg = usinas.split(",")
                                 else:
                                     self.lista_arg = None
-
+                                print(self.sintese_figura)
+                                print(self.lista_arg)
                                 try:
                                     runner = CliRunner()
                                     result = runner.invoke(analise_temporal, [
