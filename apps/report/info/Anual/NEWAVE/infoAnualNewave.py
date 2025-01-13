@@ -88,10 +88,10 @@ class InfoAnualNewave(Estruturas):
                     codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
                     #oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
-
-                    filtered_data = pq.read_table(caso.caminho+"/sintese/"+estatistica+ ".parquet", filters=[("codigo_usina", "==", cod_usi)])
+                    filtered_data = pq.read_table(caso.caminho+"/sintese/"+estatistica+ ".parquet", filters=[("codigo_usina", "==", cod_usi),
+                                                                                                             ("cenario", "==", "mean"),
+                                                                                                             ("patamar", "==", 0)])
                     oper_mean = filtered_data.to_pandas().reset_index(drop=True)
-                    oper_mean = oper_mean.loc[(oper_mean["cenario"] == "mean") & (oper_mean["patamar"] == 0) ]
             else:
                 oper = pd.read_parquet(caso.caminho+"/sintese/"+estatistica+".parquet",engine = "pyarrow")
                 oper_mean = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
