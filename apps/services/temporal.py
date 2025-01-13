@@ -119,7 +119,7 @@ class Temporal:
             for arg in lista_argumentos:
                 list_arg.append(arg.replace("_"," "))
             lista_argumentos = list_arg
-            data.args = [Argumento(lista_argumentos, self.chave, "out")] 
+            data.args = [Argumento(lista_argumentos, self.sintese.espacial, "out")] 
             if(len(lista_argumentos) == 1 and self.titulo == " "): 
                 self.titulo = lista_argumentos[0]
 
@@ -145,15 +145,14 @@ class Temporal:
             self.executa(conj,diretorio_saida_arg )
         else:
             for arg in data.args:
-                if(self.sts.espacial == arg.chave):
-                    conj = ConjuntoUnidadeSintese(self.sts, arg, "estagios", data.limites, self.tamanho_texto)
-                    if(self.labely is not None):
-                        conj.legendaEixoY = self.labely
-                    if(self.labelx is not None):
-                        conj.legendaEixoX = self.labelx
-                    diretorio_saida_arg = diretorio_saida+"/"+arg.nome if outpath is None else outpath
-                    os.makedirs(diretorio_saida_arg, exist_ok=True)
-                    self.executa(conj,diretorio_saida_arg )
+                conj = ConjuntoUnidadeSintese(self.sts, arg, "estagios", data.limites, self.tamanho_texto)
+                if(self.labely is not None):
+                    conj.legendaEixoY = self.labely
+                if(self.labelx is not None):
+                    conj.legendaEixoX = self.labelx
+                diretorio_saida_arg = diretorio_saida+"/"+arg.nome if outpath is None else outpath
+                os.makedirs(diretorio_saida_arg, exist_ok=True)
+                self.executa(conj,diretorio_saida_arg )
                         
 
  
