@@ -1,6 +1,5 @@
 from typing import Dict
 from apps.model.unidade import UnidadeSintese
-from apps.graficos.graficos import Graficos
 from apps.indicadores.indicadores_cenarios import IndicadoresCenarios
 from apps.model.caso import Caso
 from apps.model.sintese import Sintese
@@ -28,7 +27,6 @@ class Cascatador(MetaData):
         self.casos = data.casos
         self.indicadores_cenarios = IndicadoresCenarios(self.casos)
         self.eco_indicadores = EcoIndicadores(self.casos)
-        self.graficos = Graficos(self.casos)
         diretorio_saida = f"resultados/{self.estudo}/cascatador"
         os.makedirs(diretorio_saida, exist_ok=True)
         for c in self.casos:
@@ -159,7 +157,14 @@ class Cascatador(MetaData):
                             maximo = elemento.x[0]*1.1
                     fig.update_xaxes(range = [minimo,maximo])
 
-                    self.graficos.exportar(fig, diretorio_saida, no.nome+" cascata"+self.estudo, W = 1500, H = 1200)
+                    fig.update_layout(width = int(1500), height = int(1200))
+                    fig.write_image(
+                        os.path.join(diretorio_saida, no.nome+" cascata"+self.estudo+".png"))
+                    fig.write_html(os.path.join(diretorio_saida, no.nome+" cascata"+self.estudo+".html"),
+                        include_plotlyjs='cdn',
+                        config={"modeBarButtonsToAdd": ["drawline", "eraseshape", "sendDataToCloud"]})
+
+
                 exit(1)
                 usinas_mar = d_usi.loc[d_usi["codigo_usina_jusante"] == 0]
                 print(usinas_mar)
