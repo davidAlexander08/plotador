@@ -236,8 +236,6 @@ class Report():
                                 if(usinas is not None):
                                     cli_command = cli_command.replace("USINA", usinas)
                                     self.lista_arg = usinas.split(",")
-                                else:
-                                    self.lista_arg = None
                                 print(self.sintese_figura)
                                 print(self.lista_arg)
                                 try:
