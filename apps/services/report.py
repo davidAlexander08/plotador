@@ -91,6 +91,14 @@ class Report():
 
         titulo_html = "output.html" if self.titulo == "output.html" else self.titulo
         titulo_html = Path(self.json).stem + ".html"  if (self.titulo == "output.html") and (self.json is not None) else self.titulo
+        if not os.path.exists(titulo_html):
+            os.makedirs(titulo_html)
+            print(f"Folder '{titulo_html}' created!")
+        else:
+            print(f"Folder '{titulo_html}' already exists!")
+
+
+
         with open(titulo_html, "w") as html_file:
             with open("/".join(path)+"/report/head.txt", 'r', encoding='utf-8') as arquivo:
                 conteudo = arquivo.read()
