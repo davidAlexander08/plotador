@@ -232,7 +232,7 @@ class Report():
                                     '--estagio', "",
                                     '--cenario', "mean",
                                     '--sintese', "QDEF_UHE",
-                                    '--argumentos', None,
+                                    '--argumentos', "PIMENTAL",
                                     '--largura', "1500",
                                     '--altura', "1200",
                                     '--eixox', "estagio",
