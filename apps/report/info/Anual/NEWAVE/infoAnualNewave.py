@@ -76,6 +76,9 @@ class InfoAnualNewave(Estruturas):
             print("GRANDEZA ESPACIAL DA ESTATISTICA NAO ENCOTRADA NA ROTINA infoValoresUnicosNewave.py")
             exit(1)
 
+        estatistica_path = f"{caso.caminho}/sintese/{estatistica}.parquet"
+
+        filters = [("cenario", "==", "mean"), ("patamar", "==", 0)]
         if(os.path.isfile(caso.caminho+"/sintese/"+estatistica+ ".parquet")):            
             if(arg != "SIN"):
                 if(espacial == "SBM"):
@@ -83,19 +86,15 @@ class InfoAnualNewave(Estruturas):
                     oper_mean = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
                     codigos_sbm = pd.read_parquet(caso.caminho+"/sintese/SBM.parquet",engine = "pyarrow")
                     cod_sbm = codigos_sbm.loc[(codigos_sbm["submercado"] == arg)]["codigo_submercado"].iloc[0]
-                    oper_mean = oper_mean.loc[(oper_mean["codigo_submercado"] == cod_sbm) ]
+                    filters.append(("codigo_submercado", "==", cod_sbm))
                 if(espacial == "UHE"):
                     codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
                     cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
-                    #oper_mean = oper_mean.loc[(oper_mean["codigo_usina"] == cod_usi) ]
-                    filtered_data = pq.read_table(caso.caminho+"/sintese/"+estatistica+ ".parquet", filters=[("codigo_usina", "==", cod_usi),
-                                                                                                             ("cenario", "==", "mean"),
-                                                                                                             ("patamar", "==", 0)])
-                    oper_mean = filtered_data.to_pandas().reset_index(drop=True)
-            else:
-                oper = pd.read_parquet(caso.caminho+"/sintese/"+estatistica+".parquet",engine = "pyarrow")
-                oper_mean = oper.loc[(oper["cenario"] == "mean") & (oper["patamar"] == 0) ]
-            
+                    filters.append(("codigo_usina", "==", cod_usi))
+            oper_mean = pq.read_table(estatistica_path, filters=filters).to_pandas().reset_index(drop=True)
+
+
+
             if(posnw == "False"):
                 dados_dger = Dger.read(caso.caminho+"/dger.dat")
                 anos_estudo = dados_dger.num_anos_estudo

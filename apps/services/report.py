@@ -230,11 +230,8 @@ class Report():
                                     if("outpath" in cmd_element):
                                         self.outpath_figura = cmd_element.split("outpath")[1].strip()
                                         #print(self.outpath_figura)
-
                                 if(usinas is not None):
                                     self.lista_arg = usinas
-                                print(self.sintese_figura)
-                                print(self.lista_arg)
                                 try:
                                     runner = CliRunner()
                                     result = runner.invoke(analise_temporal, [
