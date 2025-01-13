@@ -266,7 +266,7 @@ class Report():
                                     liminf = liminf, 
                                     limsup = limsup, 
                                     posnw = posnw
-                                    ).figura_plotador_temporal
+                                    ).figure_export_report
                                     print(self.figura_plotador_temporal)
                                     exit(1)
 
