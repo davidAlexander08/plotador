@@ -92,13 +92,11 @@ class Report():
         titulo_html = "output.html" if self.titulo == "output.html" else self.titulo
         titulo_html = Path(self.json).stem + ".html"  if (self.titulo == "output.html") and (self.json is not None) else self.titulo+".html"
         nome_pasta_saida = titulo_html.split(".html")[0]
-        print(nome_pasta_saida)
-        exit(1)
-        if not os.path.exists(titulo_html):
-            os.makedirs(titulo_html)
-            print(f"Folder '{titulo_html}' created!")
+        if not os.path.exists(nome_pasta_saida):
+            os.makedirs(nome_pasta_saida)
+            print(f"Folder '{nome_pasta_saida}' created!")
         else:
-            print(f"Folder '{titulo_html}' already exists!")
+            print(f"Folder '{nome_pasta_saida}' already exists!")
 
 
 
@@ -173,7 +171,7 @@ class Report():
                             
                     elif("plotador" in line):
                         #cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath report"
-                        cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath "+titulo_html
+                        cli_command = line.strip() if "--outpath" in line else  line.strip()+" --outpath "+nome_pasta_saida
                         
                         if( (data.conjuntoCasos[0].casos[0].modelo == "DECOMP" or data.conjuntoCasos[0].casos[0].modelo == "DESSEM") and "convergencia" in cli_command):
                             pass
@@ -224,7 +222,7 @@ class Report():
                             lista_commands_cli = cli_command.split()
                             #print(lista_commands_cli)
                             #caminho_saida = "report"
-                            caminho_saida = titulo_html
+                            caminho_saida = nome_pasta_saida
                             nome_arquivo  = "sem_nome"
                             extensao = ".png"
                             contador = 0 
