@@ -23,7 +23,7 @@ import pyarrow.parquet as pq
 class Temporal:
 
 
-    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, chave, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw):
+    def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw):
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
@@ -78,7 +78,6 @@ class Temporal:
         
         self.sintese = sintese
         self.argumentos  = argumentos
-        self.chave = chave
         self.largura = largura
         self.altura = altura
         self.cronologico = cronologico
