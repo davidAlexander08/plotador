@@ -245,6 +245,9 @@ class Temporal:
                 try:
                     cod_arg = df.loc[(df[coluna_filtro] == unidade.arg.nome)][unidade.sintese.filtro].iloc[0]
                 except:
+                    print("Filtro: ", coluna_filtro)
+                    print("Não encontrado: ", unidade.arg.nome)
+                    exit(1)
                 dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]                
             if(boxplot =="True"):
                 mapa_temporal = self.__retorna_mapa_patamar(dicionario)
