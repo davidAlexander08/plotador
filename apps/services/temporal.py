@@ -286,7 +286,7 @@ class Temporal:
                         df = pd.read_parquet(arq_sintese, engine = "pyarrow")
                     else:
                         df_filtro = self.mapa_argumentos[c]
-                        print(df)
+                        print(df_filtro)
                         exit(1)
                         #codigos_usi = pd.read_parquet(caso.caminho+"/sintese/UHE.parquet",engine = "pyarrow")
                         #cod_usi = codigos_usi.loc[(codigos_usi["usina"] == arg)]["codigo_usina"].iloc[0]
