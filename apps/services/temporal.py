@@ -239,7 +239,8 @@ class Temporal:
         minutes = int(elapsed_time // 60)
         seconds = int(elapsed_time % 60)
         milliseconds = int((elapsed_time % 1) * 1000)
-        print(f"Gráfico {figura.titulo} Gerado em: {minutes} minutos, {seconds} segundos e {milliseconds} milisegundos")
+        Log.log().info(f"Gráfico {figura.titulo} Gerado em: {minutes} minutos, {seconds} segundos e {milliseconds} milisegundos")
+        #print(f"Gráfico {figura.titulo} Gerado em: {minutes} minutos, {seconds} segundos e {milliseconds} milisegundos")
         
     
     def __retorna_mapa_media_parquet(self, mapa):
