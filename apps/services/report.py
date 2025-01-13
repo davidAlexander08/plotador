@@ -267,7 +267,6 @@ class Report():
                                     limsup = limsup, 
                                     posnw = posnw
                                     ).figure_export_report
-                                    print(self.figura_plotador_temporal)
                                     html_plotly_temporal = pio.to_html(self.figura_plotador_temporal, 
                                     full_html=False,
                                     include_plotlyjs='cdn',  # Use CDN for Plotly.js
@@ -347,8 +346,8 @@ class Report():
 
                             if(extensao == ".html"):
                                 try:
-                                    print(cli_command)
-                                    exit(1)
+                                    #print(cli_command)
+                                    #exit(1)
                                     if("temporal" in cli_command):
                                         html_file.write(html_plotly_temporal+"\n")
                                     else:
