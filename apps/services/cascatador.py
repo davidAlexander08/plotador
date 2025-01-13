@@ -26,16 +26,11 @@ class Cascatador(MetaData):
         self.estudo = data.estudo
         self.casos = data.casos
         self.indicadores_cenarios = IndicadoresCenarios(self.casos)
-        self.eco_indicadores = EcoIndicadores(self.casos)
         diretorio_saida = f"resultados/{self.estudo}/cascatador"
         os.makedirs(diretorio_saida, exist_ok=True)
+        print(self.casos[0])
+        exit(1)
         for c in self.casos:
-
-            #arquivo_vazmin = c.caminho+"/modif.dat"
-            #d_vazmin = Modif.read(arquivo_vazmin, df = True).vazmin
-            #print(d_vazmin)
-            #exit(1)
-
             defluencia_usinas = self.eco_indicadores.retorna_df_concatenado("QDEF_UHE_EST")
             defluencia_usinas_mean = defluencia_usinas.loc[defluencia_usinas["cenario"] == "mean"].round(0)
 
