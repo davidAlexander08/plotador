@@ -14,6 +14,8 @@ import re
 import base64
 import shutil
 from pathlib import Path
+from apps.cli import analise_temporal
+from click.testing import CliRunner
 
 class Report():
     def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot, usinas):
@@ -190,6 +192,8 @@ class Report():
                                 cli_command = cli_command + " --eixox data_inicio"
 
                             if("temporal" in cli_command):
+                                #fig_report = Temporal(data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw).figure_export_report
+                                #print(fig_report)
                                 if(posnw == "True"):
                                     cli_command = cli_command + " --posnw True"
                                 else:
@@ -211,11 +215,49 @@ class Report():
 
                                 if(usinas is not None):
                                     cli_command = cli_command.replace("USINA", usinas)
-                                    
+
+
                             try:
-                                Log.log().info(cli_command)
-                                cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
-                                print(f"Command Output: {cli_output}")                            
+                                #Log.log().info(cli_command)
+                                #cli_output = subprocess.check_output(cli_command, shell=True).decode("utf-8")
+
+                                # Create a CliRunner instance
+                                runner = CliRunner()
+
+                                # Define the arguments you want to pass to the CLI command
+                                result = runner.invoke(analise_temporal, [
+                                    '--arquivo-json', self.json,
+                                    '--xinf', "0",
+                                    '--xsup', "120",
+                                    '--estagio', "",
+                                    '--cenario', "mean",
+                                    '--sintese', "QDEF_UHE",
+                                    '--argumentos', None,
+                                    '--largura', "1500",
+                                    '--altura', "1200",
+                                    '--eixox', "estagio",
+                                    '--cronologico', 'False',
+                                    '--labely', None,
+                                    '--booltitulo', 'True',
+                                    '--titulo', " ",
+                                    '--showlegend', " ",
+                                    '--labelx', None,
+                                    '--tamanho', None,
+                                    '--boxplot', None,
+                                    '--csv', 'False',
+                                    '--html', None,
+                                    '--outpath', None,
+                                    '--yinf', None,
+                                    '--ysup', None,
+                                    '--y2', None,
+                                    '--y2sup', None,
+                                    '--y2inf', None,
+                                    '--patamar', "0",
+                                    '--limInf', "False",
+                                    '--limSup', "False",
+                                    '--posnw', "False" ])
+
+                                print(f"Command Output: {cli_command}")                            
                             except subprocess.CalledProcessError as e:
                                 print(f"Command failed with exit status {e.returncode}")
                                 print(f"Error Output: {e.output.decode('utf-8') if e.output else 'No output'}")
@@ -246,7 +288,7 @@ class Report():
                                     print(f"An I/O error occurred: {e}")
                             else:
                                 try:
-                                    with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file:
+                                    with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file: 
                                         base64_string = base64.b64encode(image_file.read()).decode('utf-8')
                                         html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
                                                 #<img src="data:image/png;base64,INSERT_BASE64_ENCODED_STRING_HERE" alt="Centered Image" style="max-width: 100%; height: auto;">
