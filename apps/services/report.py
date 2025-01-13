@@ -237,8 +237,8 @@ class Report():
 
                                     data = Dados_json_caso(self.json)
                                     self.figura_plotador_temporal = Temporal(data, 
-                                    xinf = "0", 
-                                    xsup = "120",
+                                    xinf = 0, 
+                                    xsup = 120,
                                     estagio = "", 
                                     cenario = "mean", 
                                     sintese = self.sintese_figura, 
