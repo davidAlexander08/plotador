@@ -226,7 +226,7 @@ class Report():
 
                                 # Define the arguments you want to pass to the CLI command
                                 result = runner.invoke(analise_temporal, [
-                                    '--arquivo-json', self.json,
+                                    '--json', self.json,
                                     '--xinf', "0",
                                     '--xsup', "120",
                                     '--estagio', "",
