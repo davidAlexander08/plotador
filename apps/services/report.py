@@ -206,31 +206,23 @@ class Report():
                                 comando = cli_command.split("--")
                                 print(comando)
                                 for cmd_element in comando:
-                                    if("titulo" in cmd_element):
-                                        self.titulo_figura = cmd_element.split("titulo")[1].strip()
-                                        print(self.titulo_figura)
-                                    if("sintese" in cmd_element):
-                                        self.sintese_figura = cmd_element.split("sintese")[1].strip()
-                                        print(self.sintese_figura)
-                                    if("argumentos" in cmd_element):
-                                        self.lista_arg = cmd_element.split("argumentos")[1].strip()
-                                        self.lista_arg = self.argumentos_figura.split(",")
-                                        print(self.titulo_figura)
-                                    if("largura" in cmd_element):
-                                        self.largura_figura = cmd_element.split("largura")[1].strip()
-                                        print(self.largura_figura)
-                                    if("altura" in cmd_element):
-                                        self.altura_figura = cmd_element.split("altura")[1].strip()
-                                        print(self.altura_figura)
-                                    if("tamanho" in cmd_element):
-                                        self.tamanho_figura = cmd_element.split("tamanho")[1].strip()
-                                        print(self.tamanho_figura)
-                                    if("labely" in cmd_element):
-                                        self.labely_figura = cmd_element.split("labely")[1].strip()
-                                        print(self.labely_figura)
-                                    if("outpath" in cmd_element):
-                                        self.outpath_figura = cmd_element.split("outpath")[1].strip()
-                                        print(self.outpath_figura)
+                                   
+                                    self.titulo_figura = cmd_element.split("titulo")[1].strip()  if("titulo" in cmd_element) else " "
+                                    print(self.titulo_figura)
+                                    self.sintese_figura = cmd_element.split("sintese")[1].strip() if("sintese" in cmd_element) else None
+                                    print(self.sintese_figura)
+                                    self.lista_arg = cmd_element.split("argumentos")[1].strip().split(",") if("argumentos" in cmd_element) else None
+                                    print(self.titulo_figura)
+                                    self.largura_figura = cmd_element.split("largura")[1].strip() if("largura" in cmd_element) else "1500"
+                                    print(self.largura_figura)
+                                    self.altura_figura = cmd_element.split("altura")[1].strip() if("altura" in cmd_element) else "1200"
+                                    print(self.altura_figura)
+                                    self.tamanho_figura = cmd_element.split("tamanho")[1].strip() if("tamanho" in cmd_element) else None
+                                    print(self.tamanho_figura)
+                                    self.labely_figura = cmd_element.split("labely")[1].strip() if("labely" in cmd_element) else None
+                                    print(self.labely_figura)
+                                    self.outpath_figura = cmd_element.split("outpath")[1].strip() if("outpath" in cmd_element) else None
+                                    print(self.outpath_figura)
 
                                 if(usinas is not None):
                                     cli_command = cli_command.replace("USINA", usinas)
@@ -254,22 +246,22 @@ class Report():
                                         '--xsup', "120",
                                         '--estagio', "",
                                         '--cenario', "mean",
-                                        '--sintese', "QDEF_UHE",
+                                        '--sintese', self.sintese_figura,
                                         '--argumentos', self.lista_arg,
-                                        '--largura', "1500",
-                                        '--altura', "1200",
+                                        '--largura', self.largura_figura,
+                                        '--altura', self.altura_figura,
                                         '--eixox', self.data_inicio,
                                         '--cronologico', 'False',
-                                        '--labely', None,
+                                        '--labely', self.labely_figura,
                                         '--booltitulo', 'True',
-                                        '--titulo', " ",
+                                        '--titulo', self.titulo_figura,
                                         '--showlegend', " ",
                                         '--labelx', None,
-                                        '--tamanho', None,
+                                        '--tamanho', self.tamanho_figura,
                                         '--boxplot', self.flag_boxplot,
                                         '--csv', 'False',
                                         '--html', self.html,
-                                        '--outpath', None,
+                                        '--outpath', self.outpath_figura,
                                         '--yinf', None,
                                         '--ysup', None,
                                         '--y2', None,
