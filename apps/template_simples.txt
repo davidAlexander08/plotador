@@ -148,7 +148,7 @@ plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF
 
 \page{Usinas S}
 ###\figura{CASCATA_SUL.html}
-\figura{CASCATA_S_DiagramaONS.html}
+\figura{CASCATA_S_DiagramaONS.png}
 \subpage{Vaz. Defl. S}
 plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos G.B._MUNHOZ,MACHADINHO,PASSO_REAL,FOZ_CHAPECO --labely m3/s --labelx Estágios --largura 1500 --altura 650 --tamanho 15  --liminf True --limsup True
 \subpage{VAGUA_UHE S}
@@ -196,7 +196,7 @@ plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF
 
 
 \page{Usinas N}
-\figura{CASCATA_N_DiagramaONS.html}
+\figura{CASCATA_N_DiagramaONS.png}
 plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1500 --altura 650 --tamanho 15  --liminf True --limsup True
 \subpage{VAGUA_UHE N}
 plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE  --labely R$/hm3 --labelx Estágios --largura 1500 --altura 650 --tamanho 15  
