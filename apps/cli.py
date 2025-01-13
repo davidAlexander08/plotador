@@ -217,8 +217,8 @@ def analise_temporal(arquivo_json, xinf, xsup, estagio, cenario, sintese, argume
     elapsed_time = end_time - start_time
     minutes = int(elapsed_time // 60)
     seconds = int(elapsed_time % 60)
-
-    print(f"Gráfico Gerado em: {minutes} minutos e {seconds} segundos")
+    milliseconds = int((elapsed_time % 1) * 1000)
+    print(f"Gráfico Gerado em: {minutes} minutos, {seconds} segundos e {milliseconds} milisegundos")
 
 @click.command("conjunto")
 @option_xinf
