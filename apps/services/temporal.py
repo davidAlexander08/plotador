@@ -296,11 +296,11 @@ class Temporal:
                         lista_argumentos.append(cod_arg)
                     print(lista_argumentos)
                     if(flag_estatistica):
-                        filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos)])
+                        filtered_data = pq.read_table(arq_sintese, filters=[
+                                                                            (conjUnity.sintese.filtro, "in", lista_argumentos),
+                                                                            ("variavel", "==", variavel)])
                         df = filtered_data.to_pandas().reset_index(drop=True)
                         print("flag_estatistica: ", df)
-                        df = df.loc[(df["variavel"] == variavel)]   
-                        print("flag_estatistica variavel: ", df)
                     else:
                         filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos)])
                         df = filtered_data.to_pandas().reset_index(drop=True)
