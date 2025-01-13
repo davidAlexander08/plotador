@@ -205,26 +205,41 @@ class Report():
                                 ##DEMENBRANDO COMANDO
                                 comando = cli_command.split("--")
                                 print(comando)
+                                self.titulo_figura  = " "
+                                self.sintese_figura = None
+                                self.lista_arg      = None 
+                                self.largura_figura = "1500"
+                                self.altura_figura  = "1200"
+                                self.tamanho_figura = None
+                                self.labely_figura  = None
+                                self.outpath_figura = None
+
                                 for cmd_element in comando:
-                                    self.titulo_figura = cmd_element.split("titulo")[1].strip()  if("titulo" in cmd_element) else " "
-                                    self.sintese_figura = cmd_element.split("sintese")[1].strip() if("sintese" in cmd_element) else None
-                                    self.lista_arg = cmd_element.split("argumentos")[1].strip().split(",") if("argumentos" in cmd_element) else None
-                                    self.largura_figura = cmd_element.split("largura")[1].strip() if("largura" in cmd_element) else "1500"
-                                    self.altura_figura = cmd_element.split("altura")[1].strip() if("altura" in cmd_element) else "1200"
-                                    self.tamanho_figura = cmd_element.split("tamanho")[1].strip() if("tamanho" in cmd_element) else None
-                                    self.labely_figura = cmd_element.split("labely")[1].strip() if("labely" in cmd_element) else None
-                                    self.outpath_figura = cmd_element.split("outpath")[1].strip() if("outpath" in cmd_element) else None
-
-                                print(self.titulo_figura)
-                                print(self.sintese_figura)
-                                print(self.titulo_figura)
-                                print(self.largura_figura)
-                                print(self.altura_figura)
-                                print(self.tamanho_figura)
-                                print(self.labely_figura)
-                                print(self.outpath_figura)
-
-
+                                    if("titulo" in cmd_element):
+                                        self.titulo_figura = cmd_element.split("titulo")[1].strip()
+                                        print(self.titulo_figura)
+                                    if("sintese" in cmd_element):
+                                        self.sintese_figura = cmd_element.split("sintese")[1].strip()
+                                        print(self.sintese_figura)
+                                    if("argumentos" in cmd_element):
+                                        self.lista_arg = cmd_element.split("argumentos")[1].strip()
+                                        self.lista_arg = self.lista_arg.split(",")
+                                        print(self.lista_arg)
+                                    if("largura" in cmd_element):
+                                        self.largura_figura = cmd_element.split("largura")[1].strip()
+                                        print(self.largura_figura)
+                                    if("altura" in cmd_element):
+                                        self.altura_figura = cmd_element.split("altura")[1].strip()
+                                        print(self.altura_figura)
+                                    if("tamanho" in cmd_element):
+                                        self.tamanho_figura = cmd_element.split("tamanho")[1].strip()
+                                        print(self.tamanho_figura)
+                                    if("labely" in cmd_element):
+                                        self.labely_figura = cmd_element.split("labely")[1].strip()
+                                        print(self.labely_figura)
+                                    if("outpath" in cmd_element):
+                                        self.outpath_figura = cmd_element.split("outpath")[1].strip()
+                                        print(self.outpath_figura)
 
                                 if(usinas is not None):
                                     cli_command = cli_command.replace("USINA", usinas)
@@ -248,22 +263,22 @@ class Report():
                                         '--xsup', "120",
                                         '--estagio', "",
                                         '--cenario', "mean",
-                                        '--sintese', self.sintese_figura,
+                                        '--sintese', "QDEF_UHE",
                                         '--argumentos', self.lista_arg,
-                                        '--largura', self.largura_figura,
-                                        '--altura', self.altura_figura,
+                                        '--largura', "1500",
+                                        '--altura', "1200",
                                         '--eixox', self.data_inicio,
                                         '--cronologico', 'False',
-                                        '--labely', self.labely_figura,
+                                        '--labely', None,
                                         '--booltitulo', 'True',
                                         '--titulo', self.titulo_figura,
                                         '--showlegend', " ",
                                         '--labelx', None,
-                                        '--tamanho', self.tamanho_figura,
+                                        '--tamanho', None,
                                         '--boxplot', self.flag_boxplot,
                                         '--csv', 'False',
                                         '--html', self.html,
-                                        '--outpath', self.outpath_figura,
+                                        '--outpath', None,
                                         '--yinf', None,
                                         '--ysup', None,
                                         '--y2', None,
