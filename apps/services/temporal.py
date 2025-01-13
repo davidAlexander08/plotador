@@ -112,6 +112,8 @@ class Temporal:
         if(self.labely is None):
             self.labely = df_chave["unidade"].iloc[0]
         print(df_chave)
+
+        print(self.sintese)
             
         if(self.argumentos is not None):
             lista_argumentos = self.argumentos.split(",")
