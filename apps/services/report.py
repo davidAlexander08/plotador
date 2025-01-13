@@ -135,13 +135,12 @@ class Report():
                     elif("figura{" in line):
                         Log.log().info("Gerando " + line)
                         nome_argumento_info = line.split("{")[1].split("}")[0]
-                        print(nome_argumento_info)
                         path = __file__.split("/")
                         path.pop()
                         path.pop()
-                        print(path)
-                        exit(1)
-                        with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file: 
+                        arq_image = "/".join(path)+"/report/figuras/"+nome_argumento_info
+                        print(arq_image)
+                        with open(arq_image, "rb") as image_file: 
                             base64_string = base64.b64encode(image_file.read()).decode('utf-8')
                             html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
 
