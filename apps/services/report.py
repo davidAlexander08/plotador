@@ -136,16 +136,16 @@ class Report():
                         Log.log().info("Gerando " + line)
                         nome_argumento_info = line.split("{")[1].split("}")[0]
                         print(nome_argumento_info)
+                        path = __file__.split("/")
+                        path.pop()
+                        path.pop()
+                        print(path)
                         exit(1)
-                        args = nome_argumento_info.split("/")
-                        chave = args[0]
-                        argumentos = nome_argumento_info.split("/")[1].split(",") if(len(args) > 1) else None
-                        if(usinas is not None):
-                            argumentos = list(usinas.split(","))
-                        grandeza = nome_argumento_info.split("/")[2] if(len(args) > 2) else None
-                        par_dados = (chave, argumentos, grandeza, posnw)
-                        info = Info(data, par_dados)
-                        html_file.write(info.text_html+"\n")
+                        with open(caminho_saida+"/"+nome_arquivo+extensao, "rb") as image_file: 
+                            base64_string = base64.b64encode(image_file.read()).decode('utf-8')
+                            html_file.write('<img src="data:image/png;base64,'+base64_string+'" alt="Centered Image" style="max-width: 100%; height: auto;">'+"\n")
+
+
                     elif("\info{") in line:
                         Log.log().info("Gerando " + line)
                         nome_argumento_info = line.split("{")[1].split("}")[0]
