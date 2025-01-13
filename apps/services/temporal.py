@@ -102,8 +102,6 @@ class Temporal:
             meta_dados = pd.read_parquet(arq_meta_dados, engine = "pyarrow")
         except:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
-
-
         df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)] if "ESTATISTICA" not in self.sintese else meta_dados.loc[(meta_dados["chave"] == self.sintese.espacial)] 
         titulo_meta = df_chave["nome_longo_variavel"]
         if(self.labely is None):
@@ -160,7 +158,6 @@ class Temporal:
  
     def executa(self, conjUnity, diretorio_saida_arg): 
         mapa_temporal = {} 
-        #mapa_eco = self.retornaMapaDF(self.sts.sintese, self.data.conjuntoCasos[0].casos, self.boxplot)
         mapa_eco = self.retornaMapaDF(conjUnity, self.data.conjuntoCasos[0].casos, self.boxplot)
         for unity in conjUnity.listaUnidades:
             df_temporal = pd.concat(self.retorna_mapaDF_cenario_medio_temporal(mapa_eco, unity, self.boxplot))
@@ -209,7 +206,7 @@ class Temporal:
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
 
-                
+
         self.figure_export_report = figura.fig
 
         
@@ -312,8 +309,8 @@ class Temporal:
                 df["modelo"] = c.modelo
                 result_dict [c] = df
             else:                    
-                if(unity.sintese.sintese in self.mapa_arquivos.keys()):
-                    lista_arquivos = self.mapa_arquivos[unity.sintese.sintese]
+                if(conjUnity.sintese.sintese in self.mapa_arquivos.keys()):
+                    lista_arquivos = self.mapa_arquivos[conjUnity.sintese.sintese]
                     lista_df = []
                     for arquivo in lista_arquivos:
                         caminho_arquivo = c.caminho+"/"+arquivo
@@ -360,7 +357,7 @@ class Temporal:
                             df["codigo_submercado"] = codigo_sbm
                         else:
                             df["codigo_submercado"] = None
-                        df["variavel"] = unity.sintese.sintese.split("_")[0]
+                        df["variavel"] = conjUnity.sintese.sintese.split("_")[0]
                         lista_df.append(df.copy())
                     df_resultado = pd.concat(lista_df)
                     result_dict [c] = df_resultado
