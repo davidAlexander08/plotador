@@ -376,3 +376,10 @@ class Temporal:
                     result_dict [c] = df_resultado
 
         return result_dict 
+
+    def checkIfNumberOnly(self,s):
+        try:
+            float(s)  # Check if string can be converted to a float
+            return True
+        except ValueError:
+            return False
