@@ -230,6 +230,31 @@ class Temporal:
                 dict[c] = df.reset_index(drop = True) 
         return dict
 
+    #def retorna_mapaDF_cenario_medio_temporal(self, eco_mapa, unidade, boxplot):
+    #    mapa_temporal = {}
+    #    if( (unidade.sintese.filtro is None) & (unidade.arg.nome is None) ):
+    #        if(boxplot =="True"):
+    #            return self.__retorna_mapa_patamar(eco_mapa)
+    #        else:
+    #            return self.__retorna_mapa_media_parquet(eco_mapa)
+    #    else: 
+    #        coluna_filtro = unidade.sintese.filtro.split("_")[1]
+    #        dicionario = {}
+    #        for c in self.data.conjuntoCasos[0].casos:
+    #            df = self.mapa_argumentos[c]
+    #            try:
+    #                cod_arg = df.loc[(df[coluna_filtro] == unidade.arg.nome)][unidade.sintese.filtro].iloc[0]
+    #            except:
+    #                print("Filtro: ", coluna_filtro)
+    #                print("Não encontrado: ", unidade.arg.nome)
+    #                exit(1)
+    #            dicionario[c] = eco_mapa[c].loc[eco_mapa[c][unidade.sintese.filtro] == cod_arg]                
+    #        if(boxplot =="True"):
+    #            mapa_temporal = self.__retorna_mapa_patamar(dicionario)
+    #        else:
+    #            mapa_temporal = self.__retorna_mapa_media_parquet(dicionario)
+    #    return mapa_temporal
+#
     def retorna_mapaDF_cenario_medio_temporal(self, eco_mapa, unidade, boxplot):
         mapa_temporal = {}
         if( (unidade.sintese.filtro is None) & (unidade.arg.nome is None) ):
@@ -254,8 +279,6 @@ class Temporal:
             else:
                 mapa_temporal = self.__retorna_mapa_media_parquet(dicionario)
         return mapa_temporal
-
-
 
 
 
