@@ -24,7 +24,7 @@ class Temporal:
 
 
     def __init__(self, data, xinf, xsup,estagio, cenario, sintese, largura, altura, eixox, cronologico, labely, booltitulo, titulo, showlegend, labelx, argumentos, tamanho, boxplot,csv, html, outpath, ysup, yinf, y2, y2sup, y2inf, patamar, liminf, limsup, posnw, imprimeFigure= "False"):
-        start_time = time.time()
+        self.start_time = time.time()
         self.xinf  = xinf
         self.xsup = xsup
         self.ysup = ysup
@@ -235,7 +235,7 @@ class Temporal:
 
         self.figure_export_report = figura.fig
         end_time = time.time()
-        elapsed_time = end_time - start_time
+        elapsed_time = end_time - self.start_time
         minutes = int(elapsed_time // 60)
         seconds = int(elapsed_time % 60)
         milliseconds = int((elapsed_time % 1) * 1000)
