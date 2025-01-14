@@ -41,6 +41,11 @@ plotador temporal --titulo Energia_Vertida_SIN --json arquivo_json --sintese EVE
 \info{ValoresUnicos//EVER_SIN}
 \info{ValoresAnuais//EVER_SIN}
 
+\subpage{Mercado Liquido}
+plotador temporal --titulo Demanda_Liquida_SIN --json arquivo_json --sintese MERL_SIN --largura 1600 --altura 400 --tamanho 15 --labely MWmed
+\info{ValoresUnicos//MERL_SIN}
+\info{ValoresAnuais//MERL_SIN}
+
 \page{Sudeste}
 
 \info{SBM/SUDESTE}
