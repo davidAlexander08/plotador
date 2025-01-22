@@ -17,6 +17,12 @@ class Sintese:
             "UHE": "codigo_usina",
             "SIN": None
         }
+        
+        if(sts.split("-")[0] == "VIOLMIN"):
+            self.violMin = True
+            sts = sts.split("-")[1]
+        else:
+            self.violMin = False
         self.sintese = sts  
         self.grandeza = sts.split("_")[0]
         self.espacial = sts.split("_")[1] if len(sts.split("_")) > 1 else None
