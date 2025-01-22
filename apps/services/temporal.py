@@ -346,8 +346,6 @@ class Temporal:
                 if(conjUnity.sintese.violMin):
                     df["valor"] = df["limite_inferior"] - df["valor"] 
                     df.loc[df["valor"] < 0, "valor"] = 0
-                df.to_csv("teste.csv")
-                exit(1)
                 result_dict [c] = df
             else:        
                 if(conjUnity.sintese.sintese in self.mapa_arquivos.keys()):
