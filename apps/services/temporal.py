@@ -342,13 +342,11 @@ class Temporal:
                         df = filtered_data.to_pandas().reset_index(drop=True)
                 df["caso"] = c.nome
                 df["modelo"] = c.modelo
+                
+                if(conjUnity.sintese.violMin):
+                    df["valor"] = df["limite_inferior"] - df["valor"] 
+                    df.loc[df["valor"] > 0, "valor"] = 0
                 result_dict [c] = df
-                print(df)
-                #if(conjUnity.sintese.violMin):
-
-                print(conjUnity.sintese.sintese)
-                print()
-                exit(1)
             else:        
                 if(conjUnity.sintese.sintese in self.mapa_arquivos.keys()):
                     lista_arquivos = self.mapa_arquivos[conjUnity.sintese.sintese]
