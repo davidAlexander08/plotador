@@ -127,7 +127,7 @@ class Temporal:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
         df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)] if "ESTATISTICA" not in self.sintese else meta_dados.loc[(meta_dados["chave"] == self.sintese.split("_")[1])] 
         print(df_chave)
-        print(self.sintese.split("_"))
+        print(self.sintese.split("_")[1])
         titulo_meta = df_chave["nome_longo_variavel"]
         if(self.labely is None):
             self.labely = df_chave["unidade"].iloc[0] 
