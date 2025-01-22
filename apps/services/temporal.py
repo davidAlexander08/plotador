@@ -127,7 +127,7 @@ class Temporal:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
         print(self.sintese.split("-"))
         print(meta_dados)
-        if(self.sintese.split("-")[0] == VIOLMIN):
+        if(self.sintese.split("-")[0] == "VIOLMIN"):
             df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese.split("-")[1])] if "ESTATISTICA" not in self.sintese else meta_dados.loc[(meta_dados["chave"] == self.sintese.split("_")[1])] 
         else:
             df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)] if "ESTATISTICA" not in self.sintese else meta_dados.loc[(meta_dados["chave"] == self.sintese.split("_")[1])] 
