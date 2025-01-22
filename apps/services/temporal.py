@@ -343,8 +343,11 @@ class Temporal:
                 df["caso"] = c.nome
                 df["modelo"] = c.modelo
                 result_dict [c] = df
+                print(df)
+                #if(conjUnity.sintese.violMin):
+
                 print(conjUnity.sintese.sintese)
-                print(conjUnity.sintese.violMin)
+                print()
                 exit(1)
             else:        
                 if(conjUnity.sintese.sintese in self.mapa_arquivos.keys()):
