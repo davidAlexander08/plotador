@@ -125,6 +125,7 @@ class Temporal:
             meta_dados = pd.read_parquet(arq_meta_dados, engine = "pyarrow")
         except:
             raise FileNotFoundError(f"Arquivo {arq_sintese} não encontrado. Caminho pode estar errado.")
+            print(self.sintese)
         df_chave = meta_dados.loc[(meta_dados["chave"] == self.sintese)] if "ESTATISTICA" not in self.sintese else meta_dados.loc[(meta_dados["chave"] == self.sintese.split("_")[1])] 
         print(df_chave)
         print(self.sintese.split("_")[1])
