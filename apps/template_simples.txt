@@ -186,19 +186,19 @@ plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF
 \page{Usinas NE}
 \figura{CASCATA_NE.html}
 \subpage{Vaz. Defl. NE}
-plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,COMP_PAF-MOX,XINGO,ITAPEBI,P._CAVALO,B._ESPERANCA --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
+plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,COMP_PAF-MOX,XINGO --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
 \subpage{Valor Agua NE}
-plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO,ITAPEBI,P._CAVALO,B._ESPERANCA  --labely R$/hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+plotador temporal --titulo Valor_Água --json arquivo_json --sintese VAGUA_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO  --labely R$/hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
 \subpage{Vaz. Vert. NE}
-plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO,ITAPEBI,P._CAVALO,B._ESPERANCA --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+plotador temporal --titulo Vazão_Vertida --json arquivo_json --sintese QVER_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
 \subpage{Vaz. Turb. NE}
-plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO,ITAPEBI,P._CAVALO,B._ESPERANCA --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+plotador temporal --titulo Vazão_Turbinada --json arquivo_json --sintese QTUR_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
 \subpage{Ger. Hid. NE}
-plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO,ITAPEBI,P._CAVALO,B._ESPERANCA --labely MWmes --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
+plotador temporal --titulo Geração_Hidrelétrica --json arquivo_json --sintese GHID_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO --labely MWmes --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  
 \subpage{Vol. Arm. Fim NE}
-plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO,ITAPEBI,P._CAVALO,B._ESPERANCA --labely hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
-\subpage{Viol. DefMin}
-plotador temporal --titulo Viol_DeflMin --json arquivo_json --sintese VIOLMIN-QDEF_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO,ITAPEBI,P._CAVALO,B._ESPERANCA --labely hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
+plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO --labely hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
+###\subpage{Viol. DefMin}
+###plotador temporal --titulo Viol_DeflMin --json arquivo_json --sintese VIOLMIN-QDEF_UHE --argumentos TRES_MARIAS,SOBRADINHO,COMP_PAF-MOX,XINGO --labely hm3 --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
 
 \page{Usinas N}
 \figura{CASCATA_N_DiagramaONS.png}
