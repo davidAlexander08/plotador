@@ -300,6 +300,7 @@ class Temporal:
         variavel = sintese_parts[0]
         flag_estatistica = 0
         for c in casos:
+            print(conjUnity.sintese.sintese+".parquet")
             if(os.path.isfile(c.caminho+"/sintese/"+conjUnity.sintese.sintese+".parquet")):
                 if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
                     if(self.checkIfNumberOnly(c.tipo)):
