@@ -300,106 +300,106 @@ class Temporal:
         variavel = sintese_parts[0]
         flag_estatistica = 0
         for c in casos:
-            if(os.path.isfile(c.caminho+"/sintese/"+conjUnity.sintese.sintese+".parquet")):
-                if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
-                    if(self.checkIfNumberOnly(c.tipo)):
-                        c.tipo = int(c.tipo)
-                        sintese_busca = conjUnity.sintese.sintese
-                    else:
-                        sintese_busca = "ESTATISTICAS_OPERACAO_"+conjUnity.sintese.sintese.split("_")[1]
-                        flag_estatistica = 1
-                else:
+            #if(os.path.isfile(c.caminho+"/sintese/"+conjUnity.sintese.sintese+".parquet")):
+            if len(sintese_parts) > 1 and variavel not in ("ESTATISTICAS", "METADADOS") :
+                if(self.checkIfNumberOnly(c.tipo)):
+                    c.tipo = int(c.tipo)
                     sintese_busca = conjUnity.sintese.sintese
-                if(boxplot == "True"):
-                    sintese_busca = conjUnity.sintese.sintese
-                    flag_estatistica = 0
-                arq_sintese = join( c.caminho, "sintese", sintese_busca+".parquet"  )
-                #try:
-                if(conjUnity.arg.listaNomes is None):
-                    df = pd.read_parquet(arq_sintese, engine = "pyarrow")
-                    if(flag_estatistica):
-                        df = df.loc[(df["variavel"] == variavel) & (df["patamar"] == c.patamar) & (df["cenario"] == c.tipo)].reset_index(drop=True)
-                    else:
-                        df = df.loc[(df["patamar"] == c.patamar) & (df["cenario"] == c.tipo)].reset_index(drop=True)
                 else:
-                    df_filtro = self.mapa_argumentos[c]
-                    lista_argumentos = []
-                    for argu in conjUnity.arg.listaNomes:
-                        cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == argu)][conjUnity.sintese.filtro].iloc[0]
-                        lista_argumentos.append(cod_arg)
-                    if(flag_estatistica):
-                        filtered_data = pq.read_table(arq_sintese, filters=[
-                                                                            (conjUnity.sintese.filtro, "in", lista_argumentos),
-                                                                            ("variavel", "==", variavel),
-                                                                            ("patamar", "==", c.patamar),
-                                                                            ("cenario", "==", c.tipo)])
+                    sintese_busca = "ESTATISTICAS_OPERACAO_"+conjUnity.sintese.sintese.split("_")[1]
+                    flag_estatistica = 1
+            else:
+                sintese_busca = conjUnity.sintese.sintese
+            if(boxplot == "True"):
+                sintese_busca = conjUnity.sintese.sintese
+                flag_estatistica = 0
+            arq_sintese = join( c.caminho, "sintese", sintese_busca+".parquet"  )
+            #try:
+            if(conjUnity.arg.listaNomes is None):
+                df = pd.read_parquet(arq_sintese, engine = "pyarrow")
+                if(flag_estatistica):
+                    df = df.loc[(df["variavel"] == variavel) & (df["patamar"] == c.patamar) & (df["cenario"] == c.tipo)].reset_index(drop=True)
+                else:
+                    df = df.loc[(df["patamar"] == c.patamar) & (df["cenario"] == c.tipo)].reset_index(drop=True)
+            else:
+                df_filtro = self.mapa_argumentos[c]
+                lista_argumentos = []
+                for argu in conjUnity.arg.listaNomes:
+                    cod_arg = df_filtro.loc[(df_filtro[conjUnity.sintese.filtro.split("_")[1]] == argu)][conjUnity.sintese.filtro].iloc[0]
+                    lista_argumentos.append(cod_arg)
+                if(flag_estatistica):
+                    filtered_data = pq.read_table(arq_sintese, filters=[
+                                                                        (conjUnity.sintese.filtro, "in", lista_argumentos),
+                                                                        ("variavel", "==", variavel),
+                                                                        ("patamar", "==", c.patamar),
+                                                                        ("cenario", "==", c.tipo)])
 
-                        df = filtered_data.to_pandas().reset_index(drop=True)
-                    else:
-                        filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos),
-                                                                            ("patamar", "==", c.patamar),
-                                                                            ("cenario", "==", c.tipo)])
-                        df = filtered_data.to_pandas().reset_index(drop=True)
-                df["caso"] = c.nome
-                df["modelo"] = c.modelo
-                
-                if(conjUnity.sintese.violMin):
-                    df["valor"] = df["limite_inferior"] - df["valor"] 
-                    df.loc[df["valor"] < 0, "valor"] = 0
-                result_dict [c] = df
-            else:        
-                if(conjUnity.sintese.sintese in self.mapa_arquivos.keys()):
-                    lista_arquivos = self.mapa_arquivos[conjUnity.sintese.sintese]
-                    lista_df = []
-                    for arquivo in lista_arquivos:
-                        caminho_arquivo = c.caminho+"/"+arquivo
-                        media_values = []
-                        estagios = []
-                        with open(caminho_arquivo, 'r') as file:
-                            for line in file:
-                                inicio = line[0:10].split()
-                                if("MEDIA" in inicio):
-                                    temp = []
-                                    temp = [float(value) for value in line.split()[1:]]
-                                    temp.pop()
-                                    media_values = media_values + temp
-                        dados_dger = Dger.read(c.caminho+"/dger.dat")
-                        ano_inicio = dados_dger.ano_inicio_estudo
-                        mes_inicio = dados_dger.mes_inicio_estudo
-                        start_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
-                        media_values  = media_values[mes_inicio-1:]
-                        estagios = list(range(1, len(media_values) + 1))
-                        num_months = len(media_values)  # Change this to your desired number
-                        date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
-                        
-                        #end_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
-                        #date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
-
-                        df = pd.DataFrame({'Timestamp': date_range})
-                        dicionario = {
-                            "estagio":estagios,
-                            "data_inicio":date_range,
-                            "valor":media_values,
-                            "limite_superior":media_values,
-                            "limite_inferior":media_values,
-                            #"data_fim":
-                        }
-                        df = pd.DataFrame(dicionario)
-                        df["cenario"] = "mean"
-                        df["patamar"] = 0
-                        df["caso"] = c.nome
-                        df["modelo"] = c.modelo
-                        df["codigo_usina"] = None
-                        df["codigo_ree"] = None
-                        if(len(lista_arquivos) == 4):
-                            codigo_sbm = int(re.search(r'(\d+)\.out$', arquivo).group(1))
-                            df["codigo_submercado"] = codigo_sbm
-                        else:
-                            df["codigo_submercado"] = None
-                        df["variavel"] = conjUnity.sintese.sintese.split("_")[0]
-                        lista_df.append(df.copy())
-                    df_resultado = pd.concat(lista_df)
-                    result_dict [c] = df_resultado
+                    df = filtered_data.to_pandas().reset_index(drop=True)
+                else:
+                    filtered_data = pq.read_table(arq_sintese, filters=[(conjUnity.sintese.filtro, "in", lista_argumentos),
+                                                                        ("patamar", "==", c.patamar),
+                                                                        ("cenario", "==", c.tipo)])
+                    df = filtered_data.to_pandas().reset_index(drop=True)
+            df["caso"] = c.nome
+            df["modelo"] = c.modelo
+            
+            if(conjUnity.sintese.violMin):
+                df["valor"] = df["limite_inferior"] - df["valor"] 
+                df.loc[df["valor"] < 0, "valor"] = 0
+            result_dict [c] = df
+            #else:        
+            #    if(conjUnity.sintese.sintese in self.mapa_arquivos.keys()):
+            #        lista_arquivos = self.mapa_arquivos[conjUnity.sintese.sintese]
+            #        lista_df = []
+            #        for arquivo in lista_arquivos:
+            #            caminho_arquivo = c.caminho+"/"+arquivo
+            #            media_values = []
+            #            estagios = []
+            #            with open(caminho_arquivo, 'r') as file:
+            #                for line in file:
+            #                    inicio = line[0:10].split()
+            #                    if("MEDIA" in inicio):
+            #                        temp = []
+            #                        temp = [float(value) for value in line.split()[1:]]
+            #                        temp.pop()
+            #                        media_values = media_values + temp
+            #            dados_dger = Dger.read(c.caminho+"/dger.dat")
+            #            ano_inicio = dados_dger.ano_inicio_estudo
+            #            mes_inicio = dados_dger.mes_inicio_estudo
+            #            start_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
+            #            media_values  = media_values[mes_inicio-1:]
+            #            estagios = list(range(1, len(media_values) + 1))
+            #            num_months = len(media_values)  # Change this to your desired number
+            #            date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
+            #            
+            #            #end_date = str(ano_inicio)+"-"+str(mes_inicio)+"-01"
+            #            #date_range = pd.date_range(start=start_date, periods=num_months, freq='MS', tz='UTC')
+            #           
+            #            df = pd.DataFrame({'Timestamp': date_range})
+            #            dicionario = {
+            #                "estagio":estagios,
+            #                "data_inicio":date_range,
+            #                "valor":media_values,
+            #                "limite_superior":media_values,
+            #                "limite_inferior":media_values,
+            #                #"data_fim":
+            #            }
+            #            df = pd.DataFrame(dicionario)
+            #            df["cenario"] = "mean"
+            #            df["patamar"] = 0
+            #            df["caso"] = c.nome
+            #            df["modelo"] = c.modelo
+            #            df["codigo_usina"] = None
+            #            df["codigo_ree"] = None
+            #            if(len(lista_arquivos) == 4):
+            #                codigo_sbm = int(re.search(r'(\d+)\.out$', arquivo).group(1))
+            #                df["codigo_submercado"] = codigo_sbm
+            #            else:
+            #                df["codigo_submercado"] = None
+            #            df["variavel"] = conjUnity.sintese.sintese.split("_")[0]
+            #            lista_df.append(df.copy())
+            #        df_resultado = pd.concat(lista_df)
+            #        result_dict [c] = df_resultado
 
         return result_dict 
 
