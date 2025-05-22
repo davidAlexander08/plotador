@@ -150,6 +150,8 @@ plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF
 
 \page{Usinas SE}
 \figura{CASCATA_ITAIPU.html}
+\subpage{Vaz. Incr. SE}
+plotador temporal --titulo Vazão_Incremental --json arquivo_json --sintese QINC_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
 \subpage{Vaz. Defl. SE}
 plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos NOVA_PONTE,EMBORCACAO,SAO_SIMAO,FURNAS,MARIMBONDO,A._VERMELHA,I._SOLTEIRA,TRES_IRMAOS,JUPIA,P._PRIMAVERA,CAPIVARA,ITAIPU --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
 \subpage{Valor Agua SE}
@@ -168,6 +170,8 @@ plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF
 \page{Usinas S}
 ###\figura{CASCATA_SUL.html}
 \figura{CASCATA_S_DiagramaONS.png}
+\subpage{Vaz. Incr. S}
+plotador temporal --titulo Vazão_Incremental --json arquivo_json --sintese QINC_UHE --argumentos G.B._MUNHOZ,MACHADINHO,PASSO_REAL,FOZ_CHAPECO --labely m3/s --labelx Estágios --largura 1500 --altura 650 --tamanho 15  --liminf True --limsup True
 \subpage{Vaz. Defl. S}
 plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos G.B._MUNHOZ,MACHADINHO,PASSO_REAL,FOZ_CHAPECO --labely m3/s --labelx Estágios --largura 1500 --altura 650 --tamanho 15  --liminf True --limsup True
 \subpage{Valor Agua S}
@@ -185,6 +189,8 @@ plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF
 
 \page{Usinas NE}
 \figura{CASCATA_NE.html}
+\subpage{Vaz. Incr. NE}
+plotador temporal --titulo Vazão_Incremental --json arquivo_json --sintese QINC_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,COMP_PAF-MOX,XINGO --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
 \subpage{Vaz. Defl. NE}
 plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos TRES_MARIAS,SOBRADINHO,ITAPARICA,COMP_PAF-MOX,XINGO --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
 \subpage{Valor Agua NE}
@@ -203,6 +209,8 @@ plotador temporal --titulo Volume_Armazenado --json arquivo_json --sintese VARMF
 \page{Usinas N}
 \figura{CASCATA_N_DiagramaONS.png}
 \figura{CASCATA_TUCURUI.html}
+\subpage{Vaz. Incr. N}
+plotador temporal --titulo Vazão_Incremental --json arquivo_json --sintese QINC_UHE --argumentos SERRA_MESA,PEIXE_ANGIC,LAJEADO,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
 \subpage{Vaz. Defl. N}
 plotador temporal --titulo Vazão_Deflunte --json arquivo_json --sintese QDEF_UHE --argumentos SERRA_MESA,PEIXE_ANGIC,LAJEADO,TUCURUI,JIRAU,STO_ANTONIO,PIMENTAL,BELO_MONTE --labely m3/s --labelx Estágios --largura 1500 --altura 1200 --tamanho 15  --liminf True --limsup True
 \subpage{Valor Agua N}
