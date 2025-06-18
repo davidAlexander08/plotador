@@ -39,37 +39,10 @@ class Dados_json_caso(MetaData):
         else:
             self.limites = False
 
-        grupo_parquet = dados["grupo_parquet"] if "grupo_parquet" in dados else ""
-
-        #print(dados)
-        if("parquets" in dados):
-            lista_sinteses = []
-            for sintese in dados["parquets"]:
-                lista_sinteses.append(Sintese(sintese))
-            sts = lista_sinteses
-        else:
-            sts = ""
         
-        #sts = [Sintese.from_dict(d) for d in dados["parquets"]] if "parquets" in dados else ""
-        self.sinteses = self.mapa_sinteses[grupo_parquet.replace(" ", "")] if sts == "" else sts
-
-        #VERIFICA SE EXISTE ARGUMENTO DO ARQUIVO
-        argum = [Argumento.from_dict(d) for d in dados["argumentos"]] if "argumentos" in dados else ""
-
         #VERIFICA SE EXISTE ARGUMENTO DO ARQUIVO EXTERNO
         caminho_externo = dados["arquivo_externo"] if "arquivo_externo" in dados else None
         if(caminho_externo is not None):
             with open(caminho_externo, "r") as cam:
                 dados_externo = json.load(cam)
                 argum = [Argumento.from_dict(d) for d in dados_externo["argumentos"]] if "argumentos" in dados_externo else ""
-
-
-        #DEFINE SE UTILIZA ARGUMENTOS DEFINIDOS OU DEFAULT
-        self.args = self.mapa_argumentos[grupo_parquet.replace(" ", "")] if argum == "" else argum
-        #print(self.args[0].nome)
-
-        if(grupo_parquet == "" and sts == ""):
-            self.sinteses = self.mapa_sinteses["TODOS"]
-        
-        if(grupo_parquet == "" and argum == ""):
-            self.args = self.mapa_argumentos["TODOS"]
