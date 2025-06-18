@@ -76,9 +76,11 @@ def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cr
         path = __file__.split("/")
         path.pop()
         path.pop()
-        print(path)
-        exit(1)
+
         current_directory = os.getcwd()
+        print(path)
+        print(current_directory)
+        exit(1)
         if(conjunto == "False"):
             arquivo_json = "exemplo_conj.json"
             arq_json_exemplo = "/".join(path)+"/apps/exemplo_conj.json"
