@@ -19,7 +19,7 @@ from click.testing import CliRunner
 from apps.services.temporal import Temporal
 
 class Report():
-    def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot, usinas,csv):
+    def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot, usinas):
         self.json = arq_json
         self.txt = txt
         self.titulo = nomearquivo
