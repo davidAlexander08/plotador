@@ -19,7 +19,7 @@ from click.testing import CliRunner
 from apps.services.temporal import Temporal
 
 class Report():
-    def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot, usinas):
+    def __init__(self,outpath, arq_json, txt, nomearquivo, tipo, cronologico, conjunto, html, posnw, liminf, limsup, boxplot, usinas,csv):
         self.json = arq_json
         self.txt = txt
         self.titulo = nomearquivo
@@ -202,8 +202,9 @@ class Report():
                                 cli_command = cli_command.replace("ADD_SBMS", submercados)
                             if(html == None):
                                 cli_command = cli_command + " --html True"
+                            if(csv == "True"):
+                                cli_command = cli_command + " --csv True"
                             if("temporal" in cli_command):
-                                
                                 if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command):
                                     self.data_inicio = "data_inicio"
 
