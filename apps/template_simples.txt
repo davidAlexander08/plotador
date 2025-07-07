@@ -13,7 +13,7 @@ plotador custos arquivo_json --largura 1600 --altura 600 --tamanho 15 --titulo P
 
 \subpage{Geracao Termica SIN}
 
-plotador temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True
+plotador temporal --titulo Geração_Térmica_SIN --json arquivo_json --sintese GTER_SIN --largura 1600 --altura 400 --tamanho 15 --labely MWmed --liminf True --limsup True --csv True
 
 \info{ValoresUnicos//GTER_SIN}
 \info{ValoresAnuais//GTER_SIN}

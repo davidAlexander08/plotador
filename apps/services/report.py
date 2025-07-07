@@ -202,8 +202,8 @@ class Report():
                                 cli_command = cli_command.replace("ADD_SBMS", submercados)
                             if(html == None):
                                 cli_command = cli_command + " --html True"
-                            if(csv == "True"):
-                                cli_command = cli_command + " --csv True"
+                            #if(csv == "True"):
+                            #    cli_command = cli_command + " --csv True"
                             if("temporal" in cli_command):
                                 if(data.conjuntoCasos[0].casos[0].modelo == "NEWAVE" and "--eixox" not in cli_command):
                                     self.data_inicio = "data_inicio"
