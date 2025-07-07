@@ -184,7 +184,7 @@ class Temporal:
 
 
             mapa_temporal[unity] = df_temporal
-            if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
+            if(self.csv == "True"): self.exportar_csv(mapa_temporal[unity], diretorio_saida_arg,  "Temporal "+conjUnity.titulo+unity.titulo+self.estudo)
         if(self.boxplot == "True"):
             mapaGO = self.graficos.gera_grafico_boxplot(mapa_temporal, colx = self.eixox)
             titulo_padrao = "Boxplot Temporal "+conjUnity.titulo+self.estudo
@@ -207,8 +207,8 @@ class Temporal:
                 mapa_estagio = {}
                 for unity in conjUnity.listaUnidades:
                     mapa_estagio[unity] = mapa_temporal[unity].loc[mapa_temporal[unity]["estagio"] == int(est)]
-                    if(self.csv == "True"): self.indicadores_temporais.exportar(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+"_"+unity.titulo+"_"+conjUnity.sintese.sintese+" "+self.estudo)
-                        
+                    if(self.csv == "True"): self.exportar_csv(mapa_estagio[unity], diretorio_saida_arg,  mapaEst[est]+"_"+unity.titulo+"_"+conjUnity.sintese.sintese+" "+self.estudo)
+
                 mapaGO = self.graficos.gera_grafico_barra(conjUnity, mapa_estagio, mapaEst[est]+conjUnity.titulo+" "+self.estudo)
                 figura = Figura(conjUnity, mapaGO, mapaEst[est]+conjUnity.sintese.sintese+" "+self.estudo, self.yinf, self.ysup, self.y2, self.y2sup, self.y2inf)
                 self.graficos.exportar(figura.fig, diretorio_saida_arg, figura.titulo, self.html, self.largura, self.altura) 
@@ -302,3 +302,9 @@ class Temporal:
             #    width=800,
             #    height=600
             #    )
+
+    def exportar_csv(self, df, diretorio_saida, nome_arquivo, imprimeIndex = False):
+        Log.log().info("Gerando tabela "+nome_arquivo)
+        df.to_csv( os.path.join(diretorio_saida, 
+                                nome_arquivo+".csv"), 
+                  index= imprimeIndex )
