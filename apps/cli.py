@@ -89,9 +89,23 @@ def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cr
                 dados = json.load(file)
 
                 if(os.path.exists("dger.dat")):
-                    print("ENTROU AQUI")
+                    if os.path.isdir(current_directory):
+                        if(os.path.exists(current_directory+"/sintese")):
+                            caminho = current_directory
+                            nome = item
+                            cor = cores[contador]
+                            modelo = pd.read_parquet(current_directory+"/sintese/PROGRAMA.parquet", engine='pyarrow')["programa"].iloc[0]
+                            contador += 1
+                            novo_caso = {"nome":nome,
+                                        "caminho":caminho,
+                                        "cor":cor,
+                                        "modelo":modelo}
+                            novos_casos.append(novo_caso)
+                    novo_conjunto = {"nome_conj":"",
+                                "cor_conj":"",
+                                "casos":novos_casos}
+                    dados["conjuntos"] = [novo_conjunto]
                 else:
-
                     for item in os.listdir(current_directory):
                         if(item != "resultados" and item != "report"):
                             item_path = os.path.join(current_directory, item)
