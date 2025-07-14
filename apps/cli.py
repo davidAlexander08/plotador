@@ -92,7 +92,7 @@ def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cr
                     if os.path.isdir(current_directory):
                         if(os.path.exists(current_directory+"/sintese")):
                             caminho = current_directory
-                            nome = item
+                            nome = current_directory.split("/")[-1]
                             cor = cores[contador]
                             modelo = pd.read_parquet(current_directory+"/sintese/PROGRAMA.parquet", engine='pyarrow')["programa"].iloc[0]
                             contador += 1
