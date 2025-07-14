@@ -87,25 +87,30 @@ def realiza_report(outpath, arquivo_json, txt, nomearquivo, tipo, automatico, cr
             novos_casos =[]
             with open(arq_json_exemplo, "r") as file:
                 dados = json.load(file)
-                for item in os.listdir(current_directory):
-                    if(item != "resultados" and item != "report"):
-                        item_path = os.path.join(current_directory, item)
-                        if os.path.isdir(item_path):
-                            if(os.path.exists(item_path+"/sintese")):
-                                caminho = item_path
-                                nome = item
-                                cor = cores[contador]
-                                modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet", engine='pyarrow')["programa"].iloc[0]
-                                contador += 1
-                                novo_caso = {"nome":nome,
-                                            "caminho":caminho,
-                                            "cor":cor,
-                                            "modelo":modelo}
-                                novos_casos.append(novo_caso)
-                novo_conjunto = {"nome_conj":"",
-                            "cor_conj":"",
-                            "casos":novos_casos}
-                dados["conjuntos"] = [novo_conjunto]
+
+                if(os.path.exists("dger.dat")):
+                    print("ENTROU AQUI")
+                else:
+
+                    for item in os.listdir(current_directory):
+                        if(item != "resultados" and item != "report"):
+                            item_path = os.path.join(current_directory, item)
+                            if os.path.isdir(item_path):
+                                if(os.path.exists(item_path+"/sintese")):
+                                    caminho = item_path
+                                    nome = item
+                                    cor = cores[contador]
+                                    modelo = pd.read_parquet(item_path+"/sintese/PROGRAMA.parquet", engine='pyarrow')["programa"].iloc[0]
+                                    contador += 1
+                                    novo_caso = {"nome":nome,
+                                                "caminho":caminho,
+                                                "cor":cor,
+                                                "modelo":modelo}
+                                    novos_casos.append(novo_caso)
+                    novo_conjunto = {"nome_conj":"",
+                                "cor_conj":"",
+                                "casos":novos_casos}
+                    dados["conjuntos"] = [novo_conjunto]
             with open("exemplo_conj.json", 'w') as file:
                 json.dump(dados, file, indent=4)  # Write the updated dictionary back to the JSON file with indentation for readability
             arquivo_json = "exemplo_conj.json"
